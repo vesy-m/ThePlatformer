@@ -1,5 +1,7 @@
 #include <SFML/Window.hpp>
+#include <GL/glew.h>
 #include <SFML/OpenGL.hpp>
+
 
 int main()
 {
@@ -8,6 +10,13 @@ int main()
     window.setVerticalSyncEnabled(true);
 
     // load resources, initialize the OpenGL states, ...
+	GLenum err = glewInit();
+	if (GLEW_OK != err)
+	{
+		/* Problem: glewInit failed, something is seriously wrong. */
+		fprintf(stderr, "Error: %s\n", glewGetErrorString(err));
+	}
+	fprintf(stdout, "Status: Using GLEW %s\n", glewGetString(GLEW_VERSION));
 
     // run the main loop
     bool running = true;
