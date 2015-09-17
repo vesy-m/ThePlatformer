@@ -15,6 +15,7 @@ int main()
 	{
 		/* Problem: glewInit failed, something is seriously wrong. */
 		fprintf(stderr, "Error: %s\n", glewGetErrorString(err));
+		return (1);
 	}
 	fprintf(stdout, "Status: Using GLEW %s\n", glewGetString(GLEW_VERSION));
 
@@ -49,5 +50,5 @@ int main()
 
     // release resources...
 
-    return 0;
+    return (0);
 }
