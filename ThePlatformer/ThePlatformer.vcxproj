@@ -155,6 +155,16 @@ copy /Y "$(ProjectDir)\lib\glew-1.13.0\bin\*" "$(OutDir)\"</Command>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="GameEngine.cpp" />
+    <ClCompile Include="GameObject.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GameEngine.h" />
+    <ClInclude Include="GameObject.h" />
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="ThePlatformer.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

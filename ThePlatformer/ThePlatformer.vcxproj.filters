@@ -13,10 +13,44 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="GameEngineCore">
+      <UniqueIdentifier>{7a63f459-4246-42a1-a2af-3dc11d55cd6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameComponents">
+      <UniqueIdentifier>{d22332c5-ff7e-44f1-abb7-d6501d1ffbd9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngineCore\Header">
+      <UniqueIdentifier>{77919274-5713-4005-9986-e0b06b500570}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngineCore\Source">
+      <UniqueIdentifier>{37eeee5d-b2dd-48a9-9847-de4f6da4c07d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="GameEngine.cpp">
+      <Filter>GameEngineCore\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>GameEngineCore\Source</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="resource.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine.h">
+      <Filter>GameEngineCore\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>GameEngineCore\Header</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="ThePlatformer.rc">
+      <Filter>Fichiers de ressources</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>
