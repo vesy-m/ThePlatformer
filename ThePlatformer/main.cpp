@@ -1,10 +1,20 @@
 #include <SFML/Window.hpp>
 #include <GL/glew.h>
 #include <SFML/OpenGL.hpp>
-
+#include "GameEngine.h"
+#include "WindowInputSytem.h"
 
 int main()
 {
+	GameEngine::Core core = GameEngine::Core();
+	WindowInputSytem *winInput = new WindowInputSytem();
+	winInput->Init();
+	core.Add((System *)winInput);
+
+	core.MainLoop();
+
+
+/*
     // create the window
     sf::Window window(sf::VideoMode(800, 600), "OpenGL", sf::Style::Default, sf::ContextSettings(32));
     window.setVerticalSyncEnabled(true);
@@ -13,7 +23,7 @@ int main()
 	GLenum err = glewInit();
 	if (GLEW_OK != err)
 	{
-		/* Problem: glewInit failed, something is seriously wrong. */
+		// Problem: glewInit failed, something is seriously wrong. 
 		fprintf(stderr, "Error: %s\n", glewGetErrorString(err));
 		return (1);
 	}
@@ -49,6 +59,6 @@ int main()
     }
 
     // release resources...
-
+*/
     return (0);
 }
