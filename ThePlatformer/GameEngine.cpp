@@ -1,31 +1,28 @@
 #include <iostream>
 #include "GameEngine.h"
+#include "System.h"
 
 namespace GameEngine {
 	Core::Core() {
-
+		this->m_systems = std::vector<System *>();
 	}
 
 	Core::~Core() {
 
 	}
 	
-	void Core::loop() {
-		while (1) {
+	void Core::Update(float dt) {
+		//for (unsigned i = 0; i < this->m_systems.size(); ++i)
+		//	this->m_systems[i].Update(dt, ObjectFactory->GetObjectList());
+	}
+
+	void Core::MainLoop(void) {
+		while (42) {
+			this->Update(0);
 		}
 	}
 
-	void Core::registerObject(GameObject *obj) {
-		this->_objectList.push_back(obj);
-	}
-
-	void Core::destroyObject(GameObject *obj) {
-		auto it = this->_objectList.begin();
-		for (it = it; it != this->_objectList.end(); ++it) {
-			if (*it == obj) {
-				this->_objectList.erase(it);
-				return;
-			}
-		}
+	void Core::Add(System *sys) {
+		this->m_systems.push_back(sys);
 	}
 }

@@ -25,6 +25,30 @@
     <Filter Include="GameEngineCore\Source">
       <UniqueIdentifier>{37eeee5d-b2dd-48a9-9847-de4f6da4c07d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameComponents\Header">
+      <UniqueIdentifier>{c51a4240-7a79-434f-8957-3566185fdd75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameComponents\Source">
+      <UniqueIdentifier>{c49d665b-26f2-44e9-9d88-da3fc64294f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects">
+      <UniqueIdentifier>{25abd664-fe15-45ff-859f-4e07f2e4324e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Header">
+      <UniqueIdentifier>{fe8f4016-b9dc-4c01-a26c-2b536d5701a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Source">
+      <UniqueIdentifier>{a87dc0af-5043-4e9a-81d2-2a15976fb7c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameSystems">
+      <UniqueIdentifier>{b69a1a46-4488-4b07-99b3-9a91bd5a53b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameSystems\Header">
+      <UniqueIdentifier>{19851b43-b9c7-4282-b7db-4ad796773fdd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameSystems\Source">
+      <UniqueIdentifier>{3362ce75-9d6f-4294-b90e-c79e0a7595d3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -36,6 +60,33 @@
     <ClCompile Include="GameObject.cpp">
       <Filter>GameEngineCore\Source</Filter>
     </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>GameObjects\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseGameObject.cpp">
+      <Filter>GameObjects\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseComponent.cpp">
+      <Filter>GameComponents\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsSystem.cpp">
+      <Filter>GameSystems\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsSystem.cpp">
+      <Filter>GameSystems\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="WindowInputSytem.cpp">
+      <Filter>GameSystems\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioSystem.cpp">
+      <Filter>GameSystems\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectFactory.cpp">
+      <Filter>GameSystems\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteComponent.cpp">
+      <Filter>GameComponents\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -46,6 +97,36 @@
     </ClInclude>
     <ClInclude Include="GameObject.h">
       <Filter>GameEngineCore\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>GameObjects\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseGameObject.h">
+      <Filter>GameObjects\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseComponent.h">
+      <Filter>GameComponents\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsSystem.h">
+      <Filter>GameSystems\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsSystem.h">
+      <Filter>GameSystems\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="WindowInputSytem.h">
+      <Filter>GameSystems\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioSystem.h">
+      <Filter>GameSystems\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectFactory.h">
+      <Filter>GameSystems\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="System.h">
+      <Filter>GameSystems\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteComponent.h">
+      <Filter>GameComponents\Header</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
