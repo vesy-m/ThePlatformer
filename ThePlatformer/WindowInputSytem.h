@@ -11,7 +11,7 @@ namespace GameSystems {
 		WindowInputSytem();
 		~WindowInputSytem();
 		void Update(float dt, std::list<GameObjects::BaseGameObject*>&);
-		void Init(void);
+		void Init(std::list<GameObjects::BaseGameObject*>& listObjects);
 		void SendMessage();
 	};
 }

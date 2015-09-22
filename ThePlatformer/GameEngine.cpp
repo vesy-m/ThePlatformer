@@ -13,7 +13,7 @@ namespace GameEngine {
 	
 	void Core::Init(void) {
 		for each (GameSystems::System* system in this->m_systems)
-			system->Init();
+			system->Init(this->m_objects);
 	}
 
 	void Core::Update(float dt) {

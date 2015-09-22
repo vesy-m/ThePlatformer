@@ -11,7 +11,7 @@ namespace GameSystems
 	{
 	public:
 		virtual void Update(float dt, std::list<GameObjects::BaseGameObject*>&) = 0;
-		virtual void Init(void) = 0;
+		virtual void Init(std::list<GameObjects::BaseGameObject*>&) = 0;
 		virtual void SendMessage() = 0;
 		virtual ~System() {}
 	};

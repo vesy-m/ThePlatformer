@@ -4,19 +4,23 @@
 
 #include <vector>
 #include "BaseComponent.h"
+#include <algorithm>
+namespace GameComponents {
+	enum COMPONENT_TYPE;
+	class BaseComponent;
+}
 
 namespace GameObjects {
-	class BaseComponent;
 
 	class BaseGameObject
 	{
 	public:
 		BaseGameObject();
 		~BaseGameObject();
-		std::vector<BaseComponent*> getComponents(std::string key);
-
+		std::vector<GameComponents::BaseComponent*> getComponents(GameComponents::COMPONENT_TYPE type);
+		void attachComponent(GameComponents::BaseComponent*);
 	private:
-		std::vector<BaseComponent*> componentsList;
+		std::vector<GameComponents::BaseComponent*> componentsList;
 	};
 }
 

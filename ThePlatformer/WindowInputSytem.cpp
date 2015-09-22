@@ -14,13 +14,24 @@ namespace GameSystems {
 	{
 		for each (GameObjects::BaseGameObject* object in listObjects)
 		{
-			std::vector<GameObjects::BaseComponent*> componentList = object->getComponents("WINDOW");
+			std::vector<GameComponents::BaseComponent*> componentList = object->getComponents(GameComponents::COMPONENT_TYPE::WINDOW);
+			for each (GameComponents::BaseComponent* component in componentList)
+			{
+				component->Update();
+			}
 		}
 	}
 
-	void WindowInputSytem::Init(void)
+	void WindowInputSytem::Init(std::list<GameObjects::BaseGameObject*>& listObjects)
 	{
-
+		for each (GameObjects::BaseGameObject* object in listObjects)
+		{
+			std::vector<GameComponents::BaseComponent*> componentList = object->getComponents(GameComponents::COMPONENT_TYPE::WINDOW);
+			for each (GameComponents::BaseComponent* component in componentList)
+			{
+				component->Init();
+			}
+		}
 	}
 	void WindowInputSytem::SendMessage()
 	{

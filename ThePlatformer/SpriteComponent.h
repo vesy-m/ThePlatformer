@@ -3,8 +3,8 @@
 #define _SPRITECOMPONENT_H_
 
 #include "BaseGameObject.h"
-namespace GameObjects {
-	class SpriteComponent : BaseGameObject
+namespace GameComponents {
+	class SpriteComponent : BaseComponent
 	{
 	public:
 		SpriteComponent();

@@ -165,6 +165,7 @@ copy /Y "$(ProjectDir)\lib\glew-1.13.0\bin\*" "$(OutDir)\"</Command>
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="SpriteComponent.cpp" />
     <ClCompile Include="WindowInputSytem.cpp" />
+    <ClCompile Include="WindowsComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AudioSystem.h" />
@@ -179,6 +180,7 @@ copy /Y "$(ProjectDir)\lib\glew-1.13.0\bin\*" "$(OutDir)\"</Command>
     <ClInclude Include="SpriteComponent.h" />
     <ClInclude Include="System.h" />
     <ClInclude Include="WindowInputSytem.h" />
+    <ClInclude Include="WindowsComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="ThePlatformer.rc" />

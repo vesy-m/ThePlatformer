@@ -1,6 +1,6 @@
 #include "SpriteComponent.h"
 
-namespace GameObjects {
+namespace GameComponents {
 	SpriteComponent::SpriteComponent()
 	{
 	}
