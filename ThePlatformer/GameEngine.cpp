@@ -7,11 +7,15 @@ namespace GameEngine {
 	}
 
 	Core::~Core() {
-		auto it = this->m_systems.begin();
-		for (it = it; it != this->m_systems.end(); ++it)
+		for (auto it = this->m_systems.begin(); it != this->m_systems.end(); ++it)
 			delete *it;
 	}
 	
+	void Core::Init(void) {
+		for each (GameSystems::System* system in this->m_systems)
+			system->Init();
+	}
+
 	void Core::Update(float dt) {
 		//for (unsigned ínt i = 0; i < this->m_systems.size(); ++i)
 		//	this->m_systems[i].Update(dt, ObjectFactory->GetObjectList());
@@ -19,8 +23,13 @@ namespace GameEngine {
 
 	void Core::MainLoop(void) {
 		while (42) {
-			this->Update(0);
+			for each (GameSystems::System *system in this->m_systems)
+				system->Update(DT, this->m_objects);
 		}
+	}
+
+	void Core::Add(GameObjects::BaseGameObject *object) {
+		this->m_objects.push_back(object);
 	}
 
 	void Core::Add(GameSystems::System *sys) {

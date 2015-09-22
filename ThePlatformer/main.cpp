@@ -8,11 +8,9 @@ int main()
 {
 	GameEngine::Core core = GameEngine::Core();
 	GameSystems::WindowInputSytem *winInput = new GameSystems::WindowInputSytem();
-	winInput->Init();
 	core.Add((GameSystems::System *)winInput);
-
+	core.Init();
 	core.MainLoop();
-
 
 /*
     // create the window

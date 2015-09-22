@@ -3,14 +3,14 @@
 #define _SYSTEM_H_
 
 #include "BaseGameObject.h"
-#include <vector>
+#include <list>
 
 namespace GameSystems
 {
 	class System
 	{
 	public:
-		virtual void Update(float dt, std::vector<GameObjects::BaseGameObject>) = 0;
+		virtual void Update(float dt, std::list<GameObjects::BaseGameObject*>&) = 0;
 		virtual void Init(void) = 0;
 		virtual void SendMessage() = 0;
 		virtual ~System() {}
