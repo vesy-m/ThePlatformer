@@ -1,29 +1,29 @@
 #include "WindowInputSytem.h"
 
-
-
-WindowInputSytem::WindowInputSytem()
-{
-}
-
-
-WindowInputSytem::~WindowInputSytem()
-{
-}
-
-void WindowInputSytem::Update(float dt, std::vector<BaseGameObject> listObjects)
-{
-	for each (BaseGameObject object in listObjects)
+namespace GameSystems {
+	WindowInputSytem::WindowInputSytem()
 	{
-		std::vector<BaseComponent*> componentList = object.getComponents("WINDOW");
 	}
-}
 
-void WindowInputSytem::Init(void) 
-{
 
-}
-void WindowInputSytem::SendMessage()
-{
+	WindowInputSytem::~WindowInputSytem()
+	{
+	}
 
+	void WindowInputSytem::Update(float dt, std::vector<GameObjects::BaseGameObject> listObjects)
+	{
+		for each (GameObjects::BaseGameObject object in listObjects)
+		{
+			std::vector<GameObjects::BaseComponent*> componentList = object.getComponents("WINDOW");
+		}
+	}
+
+	void WindowInputSytem::Init(void)
+	{
+
+	}
+	void WindowInputSytem::SendMessage()
+	{
+
+	}
 }

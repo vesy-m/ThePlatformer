@@ -5,15 +5,17 @@
 #include <vector>
 #include "BaseGameObject.h"
 
-class ObjectFactory
-{
-public:
-	ObjectFactory();
-	~ObjectFactory();
+namespace GameSystems {
+	class ObjectFactory
+	{
+	public:
+		ObjectFactory();
+		~ObjectFactory();
 
 
-private:
-	std::vector<BaseGameObject> listGameObject;
-};
+	private:
+		std::vector<GameObjects::BaseGameObject> listGameObject;
+	};
+}
 
 #endif // !_OBJECTFACTORY_H_

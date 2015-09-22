@@ -1,8 +1,10 @@
 #pragma once
-class Player
-{
-public:
-	Player();
-	~Player();
-};
 
+namespace GameObjects {
+	class Player
+	{
+	public:
+		Player();
+		~Player();
+	};
+}

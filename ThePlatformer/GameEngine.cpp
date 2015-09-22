@@ -4,15 +4,16 @@
 
 namespace GameEngine {
 	Core::Core() {
-		this->m_systems = std::vector<System *>();
 	}
 
 	Core::~Core() {
-
+		auto it = this->m_systems.begin();
+		for (it = it; it != this->m_systems.end(); ++it)
+			delete *it;
 	}
 	
 	void Core::Update(float dt) {
-		//for (unsigned i = 0; i < this->m_systems.size(); ++i)
+		//for (unsigned ínt i = 0; i < this->m_systems.size(); ++i)
 		//	this->m_systems[i].Update(dt, ObjectFactory->GetObjectList());
 	}
 
@@ -22,7 +23,7 @@ namespace GameEngine {
 		}
 	}
 
-	void Core::Add(System *sys) {
+	void Core::Add(GameSystems::System *sys) {
 		this->m_systems.push_back(sys);
 	}
 }

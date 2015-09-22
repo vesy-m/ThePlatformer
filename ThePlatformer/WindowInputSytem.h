@@ -4,15 +4,18 @@
 
 #include "System.h"
 
-class WindowInputSytem : System
-{
-public:
-	WindowInputSytem();
-	~WindowInputSytem();
-	void Update(float dt, std::vector<BaseGameObject>);
-	void Init(void);
-	void SendMessage();
+namespace GameSystems {
+	class WindowInputSytem : public System
+	{
+	public:
+		WindowInputSytem();
+		~WindowInputSytem();
+		void Update(float dt, std::vector<GameObjects::BaseGameObject>);
+		void Init(void);
+		void SendMessage();
 
-};
+	};
+}
+
 
 #endif // !_WINDOWINPUTSYSTEM_H_

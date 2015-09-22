@@ -4,11 +4,13 @@
 
 #include "System.h"
 
-class GraphicsSystem : System
-{
-public:
-	GraphicsSystem();
-	~GraphicsSystem();
-};
+namespace GameSystems {
+	class GraphicsSystem : public System
+	{
+	public:
+		GraphicsSystem();
+		~GraphicsSystem();
+	};
+}
 
 #endif // !_GRAPHICSSYSTEM_H_

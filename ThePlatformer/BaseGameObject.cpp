@@ -1,16 +1,18 @@
 #include "BaseGameObject.h"
 
-BaseGameObject::BaseGameObject()
-{
-	this->componentsList = std::vector<BaseComponent*>();
-	std::cout << "plop" << std::endl;
-}
+namespace GameObjects {
+	BaseGameObject::BaseGameObject()
+	{
+		this->componentsList = std::vector<BaseComponent*>();
+		std::cout << "plop" << std::endl;
+	}
 
-BaseGameObject::~BaseGameObject()
-{
-}
+	BaseGameObject::~BaseGameObject()
+	{
+	}
 
-std::vector<BaseComponent*> BaseGameObject::getComponents(std::string key)
-{
-	return this->componentsList;
+	std::vector<BaseComponent*> BaseGameObject::getComponents(std::string key)
+	{
+		return this->componentsList;
+	}
 }

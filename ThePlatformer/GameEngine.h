@@ -2,7 +2,7 @@
 #ifndef __GAMEENGINE_H_
 #define __GAMEENGINE_H_
 
-#include <vector>
+#include <list>
 #include "System.h"
 
 namespace GameEngine {
@@ -12,9 +12,9 @@ namespace GameEngine {
 		virtual ~Core();
 		void Update(float dt);
 		void MainLoop(void);
-		void Add(System *sys);
+		void Add(GameSystems::System *sys);
 	private:
-		std::vector<System *> m_systems;
+		std::list<GameSystems::System *> m_systems;
 	};
 }
 

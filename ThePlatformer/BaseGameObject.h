@@ -4,17 +4,21 @@
 
 #include <vector>
 #include "BaseComponent.h"
-class BaseComponent;
 
-class BaseGameObject
-{
-public:
-	BaseGameObject();
-	~BaseGameObject();
-	std::vector<BaseComponent*> getComponents(std::string key);
+namespace GameObjects {
+	class BaseComponent;
 
-private:
-	std::vector<BaseComponent*> componentsList;
-};
+	class BaseGameObject
+	{
+	public:
+		BaseGameObject();
+		~BaseGameObject();
+		std::vector<BaseComponent*> getComponents(std::string key);
+
+	private:
+		std::vector<BaseComponent*> componentsList;
+	};
+}
+
 
 #endif // !_BASEGAMEOBJECT_H_

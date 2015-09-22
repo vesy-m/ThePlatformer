@@ -4,11 +4,13 @@
 
 #include "System.h"
 
-class AudioSystem : System
-{
-public:
-	AudioSystem();
-	~AudioSystem();
-};
+namespace GameSystems {
+	class AudioSystem : public System
+	{
+	public:
+		AudioSystem();
+		~AudioSystem();
+	};
+}
 
 #endif // !_AUDIOSYSTEM_H_
