@@ -3,6 +3,8 @@
 #define _WINDOWINPUTSYSTEM_H_
 
 #include "System.h"
+#include <SFML/Window.hpp>
+#include <SFML/OpenGL.hpp>
 
 namespace GameSystems {
 	class WindowInputSytem : public System
@@ -10,9 +12,11 @@ namespace GameSystems {
 	public:
 		WindowInputSytem();
 		~WindowInputSytem();
-		void Update(float dt, std::list<GameObjects::BaseGameObject*>&);
+		int Update(float dt, std::list<GameObjects::BaseGameObject*>&);
 		void Init(std::list<GameObjects::BaseGameObject*>& listObjects);
 		void SendMessage();
+	private:
+		sf::Window *window;
 	};
 }
 #endif // !_WINDOWINPUTSYSTEM_H_

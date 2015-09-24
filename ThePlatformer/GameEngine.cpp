@@ -23,8 +23,11 @@ namespace GameEngine {
 
 	void Core::MainLoop(void) {
 		while (42) {
-			for each (GameSystems::System *system in this->m_systems)
-				system->Update(DT, this->m_objects);
+			for each (GameSystems::System *system in this->m_systems) {
+				if (system->Update(DT, this->m_objects) == 1) {
+					return;
+				}
+			}
 		}
 	}
 

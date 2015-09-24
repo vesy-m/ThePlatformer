@@ -3,17 +3,12 @@
 #include <SFML/OpenGL.hpp>
 #include "GameEngine.h"
 #include "WindowInputSytem.h"
-#include "WindowsComponent.h"
 
 int main()
 {
 	GameEngine::Core core = GameEngine::Core();
 	GameSystems::WindowInputSytem *winInput = new GameSystems::WindowInputSytem();
 	core.Add((GameSystems::System *)winInput);
-	GameObjects::BaseGameObject *win = new GameObjects::BaseGameObject();
-	GameComponents::WindowsComponent *compWin = new GameComponents::WindowsComponent();
-	win->attachComponent((GameComponents::BaseComponent *)compWin);
-	core.Add(win);
 	core.Init();
 	core.MainLoop();
 
