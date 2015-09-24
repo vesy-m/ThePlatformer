@@ -42,14 +42,14 @@ namespace GameSystems {
 	{
 		this->window = new sf::Window(sf::VideoMode(800, 600), "OpenGL", sf::Style::Default, sf::ContextSettings(32));
 		window->setVerticalSyncEnabled(true);
-		//for each (GameObjects::BaseGameObject* object in listObjects)
-		//{
-		//	std::vector<GameComponents::BaseComponent*> componentList = object->getComponents(GameComponents::COMPONENT_TYPE::WINDOW);
-		//	for each (GameComponents::BaseComponent* component in componentList)
-		//	{
-		//		component->Init();
-		//	}
-		//}
+		for each (GameObjects::BaseGameObject* object in listObjects)
+		{
+			std::vector<GameComponents::BaseComponent*> componentList = object->getComponents(GameComponents::COMPONENT_TYPE::WINDOW);
+			for each (GameComponents::BaseComponent* component in componentList)
+			{
+				component->Init();
+			}
+		}
 	}
 
 	//have to receive message in case of change in window like size...

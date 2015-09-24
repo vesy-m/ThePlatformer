@@ -10,7 +10,7 @@ int main()
 	GameEngine::Core core = GameEngine::Core();
 	GameSystems::WindowInputSytem *winInput = new GameSystems::WindowInputSytem();
 	GameObjects::BaseGameObject *object = new GameObjects::BaseGameObject();
-	GameComponents::InputComponent *inputComp = new GameComponents::InputComponent(GameComponents::COMPONENT_TYPE::WINDOW);
+	GameComponents::InputComponent *inputComp = new GameComponents::InputComponent();
 	object->attachComponent((GameComponents::BaseComponent *)inputComp);
 	core.Add(object);
 	core.Add((GameSystems::System *)winInput);
