@@ -27,4 +27,12 @@ namespace GameObjects {
 	{
 		this->componentsList.push_back(component);
 	}
+	void BaseGameObject::setX(int x)
+	{
+		this->x = x;
+	}
+	int BaseGameObject::getX()
+	{
+		return this->x;
+	}
 }
