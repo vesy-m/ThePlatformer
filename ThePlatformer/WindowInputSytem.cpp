@@ -12,14 +12,6 @@ namespace GameSystems {
 	
 	int WindowInputSytem::Update(float dt, std::list<GameObjects::BaseGameObject*>& listObjects)
 	{
-		//for each (GameObjects::BaseGameObject* object in listObjects)
-		//{
-		//	std::vector<GameComponents::BaseComponent*> componentList = object->getComponents(GameComponents::COMPONENT_TYPE::WINDOW);
-		//	for each (GameComponents::BaseComponent* component in componentList)
-		//	{
-		//		component->Update();
-		//	}
-		//}
 		sf::Event event;
 		while (window->pollEvent(event))
 		{
@@ -34,6 +26,14 @@ namespace GameSystems {
 				glViewport(0, 0, event.size.width, event.size.height);
 			}
 		}
+		for each (GameObjects::BaseGameObject* object in listObjects)
+		{
+			std::vector<GameComponents::BaseComponent*> componentList = object->getComponents(GameComponents::COMPONENT_TYPE::WINDOW);
+			for each (GameComponents::BaseComponent* component in componentList)
+			{
+				component->Update();
+			}
+		}
 		window->display();
 		return 0;
 	}
@@ -42,14 +42,14 @@ namespace GameSystems {
 	{
 		this->window = new sf::Window(sf::VideoMode(800, 600), "OpenGL", sf::Style::Default, sf::ContextSettings(32));
 		window->setVerticalSyncEnabled(true);
-		//for each (GameObjects::BaseGameObject* object in listObjects)
-		//{
-		//	std::vector<GameComponents::BaseComponent*> componentList = object->getComponents(GameComponents::COMPONENT_TYPE::WINDOW);
-		//	for each (GameComponents::BaseComponent* component in componentList)
-		//	{
-		//		component->Init();
-		//	}
-		//}
+		for each (GameObjects::BaseGameObject* object in listObjects)
+		{
+			std::vector<GameComponents::BaseComponent*> componentList = object->getComponents(GameComponents::COMPONENT_TYPE::WINDOW);
+			for each (GameComponents::BaseComponent* component in componentList)
+			{
+				component->Init();
+			}
+		}
 	}
 
 	//have to receive message in case of change in window like size...

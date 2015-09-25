@@ -5,6 +5,7 @@
 #include "WindowInputSytem.h"
 #include "GraphicsSystem.h"
 #include "SpriteComponent.h"
+#include "InputComponent.h"
 
 
 //#include <glm/fwd.hpp>
@@ -27,13 +28,18 @@
 //	glm::mat4 View = glm::rotate(ViewRotateX, Orientation.x, Up);
 //	glm::mat4 Model = glm::mat4(1.0f);
 //	return Projection * View * Model;
-//}
+//}
+
 
 
 int main()
 {
 	GameEngine::Core core = GameEngine::Core();
 	GameSystems::WindowInputSytem *winInput = new GameSystems::WindowInputSytem();
+	GameObjects::BaseGameObject *object = new GameObjects::BaseGameObject();
+	GameComponents::InputComponent *inputComp = new GameComponents::InputComponent();
+	object->attachComponent((GameComponents::BaseComponent *)inputComp);
+	core.Add(object);
 	GameSystems::GraphicsSystem *graphics = new GameSystems::GraphicsSystem();
 	GameObjects::BaseGameObject *mario = new GameObjects::BaseGameObject();
 	GameComponents::SpriteComponent *spriteComp = new GameComponents::SpriteComponent();
