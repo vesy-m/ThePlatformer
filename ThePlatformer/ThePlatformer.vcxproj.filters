@@ -28,9 +28,6 @@
     <Filter Include="GameComponents\Header">
       <UniqueIdentifier>{c51a4240-7a79-434f-8957-3566185fdd75}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameComponents\Source">
-      <UniqueIdentifier>{c49d665b-26f2-44e9-9d88-da3fc64294f3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameObjects">
       <UniqueIdentifier>{25abd664-fe15-45ff-859f-4e07f2e4324e}</UniqueIdentifier>
     </Filter>
@@ -48,6 +45,9 @@
     </Filter>
     <Filter Include="GameSystems\Source">
       <UniqueIdentifier>{3362ce75-9d6f-4294-b90e-c79e0a7595d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameComponents\Source">
+      <UniqueIdentifier>{c49d665b-26f2-44e9-9d88-da3fc64294f3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -84,7 +84,7 @@
     <ClCompile Include="SpriteComponent.cpp">
       <Filter>GameComponents\Source</Filter>
     </ClCompile>
-    <ClCompile Include="WindowsComponent.cpp">
+    <ClCompile Include="InputComponent.cpp">
       <Filter>GameComponents\Source</Filter>
     </ClCompile>
   </ItemGroup>
@@ -125,7 +125,7 @@
     <ClInclude Include="SpriteComponent.h">
       <Filter>GameComponents\Header</Filter>
     </ClInclude>
-    <ClInclude Include="WindowsComponent.h">
+    <ClInclude Include="InputComponent.h">
       <Filter>GameComponents\Header</Filter>
     </ClInclude>
   </ItemGroup>
