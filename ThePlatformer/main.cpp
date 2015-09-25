@@ -36,14 +36,17 @@ int main()
 {
 	GameEngine::Core core = GameEngine::Core();
 	GameSystems::WindowInputSytem *winInput = new GameSystems::WindowInputSytem();
-	GameObjects::BaseGameObject *object = new GameObjects::BaseGameObject();
-	GameComponents::InputComponent *inputComp = new GameComponents::InputComponent(object);
-	object->attachComponent((GameComponents::BaseComponent *)inputComp);
-	core.Add(object);
-	GameSystems::GraphicsSystem *graphics = new GameSystems::GraphicsSystem();
+
 	GameObjects::BaseGameObject *mario = new GameObjects::BaseGameObject();
-	GameComponents::SpriteComponent *spriteComp = new GameComponents::SpriteComponent();
+
+	GameComponents::InputComponent *inputComp = new GameComponents::InputComponent(mario);
+	mario->attachComponent((GameComponents::BaseComponent *)inputComp);
+
+	GameSystems::GraphicsSystem *graphics = new GameSystems::GraphicsSystem();
+
+	GameComponents::SpriteComponent *spriteComp = new GameComponents::SpriteComponent(mario);
 	mario->attachComponent((GameComponents::BaseComponent *)spriteComp);
+
 	core.Add(mario);
 	core.Add((GameSystems::System *)winInput);
 	core.Add((GameSystems::System *)graphics);

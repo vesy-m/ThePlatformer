@@ -21,7 +21,7 @@ namespace GameComponents {
 	class InputComponent : BaseComponent
 	{
 	public:
-		InputComponent(GameObjects::BaseGameObject *composition);
+		InputComponent(GameObjects::BaseGameObject *);
 		~InputComponent();
 
 		COMPONENT_TYPE getType();
@@ -31,7 +31,7 @@ namespace GameComponents {
 		void setMouseButton(INPUT_TYPE inputType, sf::Mouse::Button button);
 
 	private:
-		GameObjects::BaseGameObject *composition;
+		const COMPONENT_TYPE componentType = WINDOW;
 		std::map<INPUT_TYPE, sf::Keyboard::Key> keyboardMap;
 		std::map<INPUT_TYPE, sf::Mouse::Button> mouseMap;
 	};

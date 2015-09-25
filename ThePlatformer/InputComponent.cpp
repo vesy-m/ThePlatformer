@@ -2,7 +2,7 @@
 
 namespace GameComponents {
 
-	InputComponent::InputComponent(GameObjects::BaseGameObject *composition) : BaseComponent()
+	InputComponent::InputComponent(GameObjects::BaseGameObject *object) : BaseComponent(object)
 	{
 	}
 
@@ -12,7 +12,7 @@ namespace GameComponents {
 
 	COMPONENT_TYPE InputComponent::getType()
 	{
-		return COMPONENT_TYPE::WINDOW;
+		return this->componentType;
 	}
 
 	void InputComponent::Update()
@@ -22,10 +22,12 @@ namespace GameComponents {
 			if (sf::Keyboard::isKeyPressed(it->second) && it->first == LEFT)
 			{
 				std::cout << "LEFT" << std::endl;
+				this->composition->setX(this->composition->getX() - 1);
 			}
 			if (sf::Keyboard::isKeyPressed(it->second) && it->first == RIGHT)
 			{
 				std::cout << "RIGHT" << std::endl;
+				this->composition->setX(this->composition->getX() + 1);
 			}
 			if (sf::Keyboard::isKeyPressed(it->second) && it->first == JUMP)
 			{
