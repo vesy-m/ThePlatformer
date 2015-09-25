@@ -3,7 +3,34 @@
 #include <SFML/OpenGL.hpp>
 #include "GameEngine.h"
 #include "WindowInputSytem.h"
+#include "GraphicsSystem.h"
+#include "SpriteComponent.h"
 #include "InputComponent.h"
+
+
+//#include <glm/fwd.hpp>
+//// Source file
+//#include <glm/glm.hpp>
+//// Include GLM core features
+//#include <glm/vec3.hpp>
+//#include <glm/vec4.hpp>
+//#include <glm/mat4x4.hpp>
+//// Include GLM extensions
+//#include <glm/gtc/matrix_transform.hpp>
+//glm::mat4 transform(
+//	glm::vec2 const & Orientation,
+//	glm::vec3 const & Translate,
+//	glm::vec3 const & Up)
+//{
+//	glm::mat4 Projection = glm::perspective(45.0f, 4.0f / 3.0f, 0.1f, 100.0f);
+//	glm::mat4 ViewTranslate = glm::translate(glm::mat4(1.0f), Translate);
+//	glm::mat4 ViewRotateX = glm::rotate(ViewTranslate, Orientation.y, Up);
+//	glm::mat4 View = glm::rotate(ViewRotateX, Orientation.x, Up);
+//	glm::mat4 Model = glm::mat4(1.0f);
+//	return Projection * View * Model;
+//}
+
+
 
 int main()
 {
@@ -13,7 +40,13 @@ int main()
 	GameComponents::InputComponent *inputComp = new GameComponents::InputComponent();
 	object->attachComponent((GameComponents::BaseComponent *)inputComp);
 	core.Add(object);
+	GameSystems::GraphicsSystem *graphics = new GameSystems::GraphicsSystem();
+	GameObjects::BaseGameObject *mario = new GameObjects::BaseGameObject();
+	GameComponents::SpriteComponent *spriteComp = new GameComponents::SpriteComponent();
+	mario->attachComponent((GameComponents::BaseComponent *)spriteComp);
+	core.Add(mario);
 	core.Add((GameSystems::System *)winInput);
+	core.Add((GameSystems::System *)graphics);
 	core.Init();
 	core.MainLoop();
 
