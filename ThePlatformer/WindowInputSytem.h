@@ -10,7 +10,7 @@ namespace GameSystems {
 	public:
 		WindowInputSytem();
 		~WindowInputSytem();
-		void Update(float dt, std::list<GameObjects::BaseGameObject*>&);
+		int Update(float dt, std::list<GameObjects::BaseGameObject*>&);
 		void Init(std::list<GameObjects::BaseGameObject*>& listObjects);
 		void SendMessage();
 	};

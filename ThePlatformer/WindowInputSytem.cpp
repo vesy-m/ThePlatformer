@@ -10,7 +10,7 @@ namespace GameSystems {
 	{
 	}
 	
-	void WindowInputSytem::Update(float dt, std::list<GameObjects::BaseGameObject*>& listObjects)
+	int WindowInputSytem::Update(float dt, std::list<GameObjects::BaseGameObject*>& listObjects)
 	{
 		for each (GameObjects::BaseGameObject* object in listObjects)
 		{
@@ -20,6 +20,7 @@ namespace GameSystems {
 				component->Update();
 			}
 		}
+		return (Code::Success);
 	}
 
 	void WindowInputSytem::Init(std::list<GameObjects::BaseGameObject*>& listObjects)
