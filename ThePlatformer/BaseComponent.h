@@ -12,7 +12,8 @@ namespace GameComponents {
 	{
 		WINDOW,
 		SPRITE,
-		LOGIC
+		LOGIC,
+		PHYSIC
 	};
 
 	class BaseComponent

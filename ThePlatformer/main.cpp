@@ -37,7 +37,7 @@ int main()
 	GameEngine::Core core = GameEngine::Core();
 	GameSystems::WindowInputSytem *winInput = new GameSystems::WindowInputSytem();
 	GameObjects::BaseGameObject *object = new GameObjects::BaseGameObject();
-	GameComponents::InputComponent *inputComp = new GameComponents::InputComponent();
+	GameComponents::InputComponent *inputComp = new GameComponents::InputComponent(object);
 	object->attachComponent((GameComponents::BaseComponent *)inputComp);
 	core.Add(object);
 	GameSystems::GraphicsSystem *graphics = new GameSystems::GraphicsSystem();

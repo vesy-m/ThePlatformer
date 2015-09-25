@@ -2,7 +2,7 @@
 
 namespace GameComponents {
 
-	InputComponent::InputComponent()
+	InputComponent::InputComponent(GameObjects::BaseGameObject *composition) : BaseComponent()
 	{
 	}
 
@@ -12,7 +12,7 @@ namespace GameComponents {
 
 	COMPONENT_TYPE InputComponent::getType()
 	{
-		return this->componentType;
+		return COMPONENT_TYPE::WINDOW;
 	}
 
 	void InputComponent::Update()
