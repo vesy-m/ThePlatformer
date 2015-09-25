@@ -10,6 +10,9 @@ namespace GameSystems {
 	public:
 		GraphicsSystem();
 		~GraphicsSystem();
+		int Update(float dt, std::list<GameObjects::BaseGameObject*>&);
+		void Init(std::list<GameObjects::BaseGameObject*>& listObjects);
+		void SendMessage();
 	};
 }
 

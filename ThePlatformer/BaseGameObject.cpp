@@ -17,7 +17,7 @@ namespace GameObjects {
 		for (size_t i = 0; i < this->componentsList.size(); i++)
 		{
 			GameComponents::BaseComponent* elem = this->componentsList.at(i);
-			if (elem->getType() == GameComponents::COMPONENT_TYPE::WINDOW) {
+			if (elem->getType() == type) {
 				newVect.push_back(elem);
 			}
 		}
