@@ -1,4 +1,5 @@
 #include <iostream>
+#include <chrono>
 #include "GameEngine.h"
 #include "System.h"
 
@@ -22,6 +23,8 @@ namespace GameEngine {
 	}
 
 	void Core::MainLoop(void) {
+		
+
 		while (42) {
 			for each (GameSystems::System *system in this->m_systems) {
 				if (system->Update(DT, this->m_objects) == 1) {

@@ -128,6 +128,9 @@
     <ClInclude Include="InputComponent.h">
       <Filter>GameComponents\Header</Filter>
     </ClInclude>
+    <ClInclude Include="TIme.h">
+      <Filter>GameEngineCore\Header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="ThePlatformer.rc">
