@@ -12,18 +12,20 @@ namespace GameComponents {
 	{
 		WINDOW,
 		SPRITE,
-		LOGIC
+		LOGIC,
+		PHYSIC
 	};
 
 	class BaseComponent
 	{
 	public:
 		BaseComponent();
+		BaseComponent(GameObjects::BaseGameObject *);
 		~BaseComponent();
 		virtual COMPONENT_TYPE getType() = 0;
 		virtual void Update() = 0;
 		virtual void Init() = 0;
-	private:
+	protected:
 		GameObjects::BaseGameObject *composition;
 	};
 }

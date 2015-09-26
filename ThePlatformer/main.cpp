@@ -4,6 +4,8 @@
 #include "GameEngine.h"
 #include "WindowInputSytem.h"
 #include "GraphicsSystem.h"
+#include "PhysicsSystem.h"
+#include "BodyComponent.h"
 #include "SpriteComponent.h"
 #include "InputComponent.h"
 
@@ -36,16 +38,25 @@ int main()
 {
 	GameEngine::Core core = GameEngine::Core();
 	GameSystems::WindowInputSytem *winInput = new GameSystems::WindowInputSytem();
-	GameObjects::BaseGameObject *object = new GameObjects::BaseGameObject();
-	GameComponents::InputComponent *inputComp = new GameComponents::InputComponent();
-	object->attachComponent((GameComponents::BaseComponent *)inputComp);
-	core.Add(object);
-	GameSystems::GraphicsSystem *graphics = new GameSystems::GraphicsSystem();
+
 	GameObjects::BaseGameObject *mario = new GameObjects::BaseGameObject();
-	GameComponents::SpriteComponent *spriteComp = new GameComponents::SpriteComponent();
+
+	GameComponents::InputComponent *inputComp = new GameComponents::InputComponent(mario);
+	mario->attachComponent((GameComponents::BaseComponent *)inputComp);
+
+	GameSystems::GraphicsSystem *graphics = new GameSystems::GraphicsSystem();
+
+	GameComponents::SpriteComponent *spriteComp = new GameComponents::SpriteComponent(mario);
 	mario->attachComponent((GameComponents::BaseComponent *)spriteComp);
+
+	GameSystems::PhysicsSystem *physics = new GameSystems::PhysicsSystem();
+
+	GameComponents::BodyComponent *bodyComp = new GameComponents::BodyComponent(mario);
+	mario->attachComponent((GameComponents::BaseComponent *)bodyComp);
+
 	core.Add(mario);
 	core.Add((GameSystems::System *)winInput);
+	core.Add((GameSystems::System *)physics);
 	core.Add((GameSystems::System *)graphics);
 	core.Init();
 	core.MainLoop();

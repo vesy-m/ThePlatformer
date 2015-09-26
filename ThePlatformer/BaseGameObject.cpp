@@ -27,4 +27,20 @@ namespace GameObjects {
 	{
 		this->componentsList.push_back(component);
 	}
+	void BaseGameObject::setX(int x)
+	{
+		this->x = x;
+	}
+	int BaseGameObject::getX()
+	{
+		return this->x;
+	}
+	void BaseGameObject::setY(int y)
+	{
+		this->y = y;
+	}
+	int BaseGameObject::getY()
+	{
+		return this->y;
+	}
 }

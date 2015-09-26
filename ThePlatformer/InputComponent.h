@@ -21,7 +21,7 @@ namespace GameComponents {
 	class InputComponent : BaseComponent
 	{
 	public:
-		InputComponent();
+		InputComponent(GameObjects::BaseGameObject *);
 		~InputComponent();
 
 		COMPONENT_TYPE getType();
