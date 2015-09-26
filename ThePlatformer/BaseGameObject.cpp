@@ -35,4 +35,12 @@ namespace GameObjects {
 	{
 		return this->x;
 	}
+	void BaseGameObject::setY(int y)
+	{
+		this->y = y;
+	}
+	int BaseGameObject::getY()
+	{
+		return this->y;
+	}
 }

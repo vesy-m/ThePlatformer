@@ -76,8 +76,10 @@ namespace GameComponents {
 		GLint width = 50;
 
 		GLint posX = this->composition->getX();
-		GLint posY = 100;
+		GLint posY = this->composition->getY();
 
+		if (posY > 600)
+			this->composition->setY(0);
 
 		if (prevX < posX) {
 			glBegin(GL_QUADS);
