@@ -25,6 +25,11 @@ namespace GameComponents {
 		return true;
 	}
 
+	bool BoxCollider::Collide(CircleCollider * other)
+	{
+		return false;
+	}
+
 	CircleCollider::CircleCollider()
 	{}
 
@@ -36,6 +41,11 @@ namespace GameComponents {
 
 	CircleCollider::~CircleCollider()
 	{}
+
+	bool CircleCollider::Collide(BoxCollider * other)
+	{
+		return false;
+	}
 
 	bool CircleCollider::Collide(CircleCollider *other)
 	{

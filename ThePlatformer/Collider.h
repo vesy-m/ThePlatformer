@@ -6,6 +6,8 @@
 #include <glm/glm.hpp>
 
 namespace GameComponents {
+	class CircleCollider;
+
 	class BoxCollider : BaseComponent
 	{
 	public:
