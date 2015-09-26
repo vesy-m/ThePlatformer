@@ -96,6 +96,9 @@
     <ClCompile Include="SpriteSheet.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="Collider.cpp">
+      <Filter>GameComponents\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -148,6 +151,9 @@
     </ClInclude>
     <ClInclude Include="SpriteSheet.h">
       <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider.h">
+      <Filter>GameComponents\Header</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

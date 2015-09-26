@@ -4,6 +4,8 @@
 #include "GameEngine.h"
 #include "WindowInputSytem.h"
 #include "GraphicsSystem.h"
+#include "PhysicsSystem.h"
+#include "BodyComponent.h"
 #include "SpriteComponent.h"
 #include "InputComponent.h"
 #include "SpriteSheet.h"
@@ -48,8 +50,14 @@ int main()
 	GameComponents::SpriteComponent *spriteComp = new GameComponents::SpriteComponent(mario);
 	mario->attachComponent((GameComponents::BaseComponent *)spriteComp);
 
+	GameSystems::PhysicsSystem *physics = new GameSystems::PhysicsSystem();
+
+	GameComponents::BodyComponent *bodyComp = new GameComponents::BodyComponent(mario);
+	mario->attachComponent((GameComponents::BaseComponent *)bodyComp);
+
 	core.Add(mario);
 	core.Add((GameSystems::System *)winInput);
+	core.Add((GameSystems::System *)physics);
 	core.Add((GameSystems::System *)graphics);
 	core.Init();
 	core.MainLoop();

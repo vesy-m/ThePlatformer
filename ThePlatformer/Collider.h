@@ -3,41 +3,36 @@
 #define _COLLIDER_H_
 
 #include "BaseGameObject.h"
+#include <glm/glm.hpp>
+
 namespace GameComponents {
-	class Vector2
-	{
-	public:
-		Vector2();
-		Vector2(float x, float y);
-		~Vector2();
-
-	private:
-		float m_x;
-		float m_y;
-	};
-
 	class BoxCollider : BaseComponent
 	{
 	public:
 		BoxCollider();
-		BoxCollider(Vector2 min, Vector2 max);
+		// min is the top-left corner, max is the bottom-right corner
+		BoxCollider(glm::vec2 min, glm::vec2 max);
 		~BoxCollider();
+		bool Collide(BoxCollider *other);
+		bool Collide(CircleCollider *other);
 
 	private:
-		Vector2 m_min;
-		Vector2 m_max;
+		glm::vec2 min;
+		glm::vec2 max;
 	};
 
-	class CircleCollider
+	class CircleCollider : BaseComponent
 	{
 	public:
 		CircleCollider();
-		CircleCollider(float radius, Vector2 pos);
+		CircleCollider(float radius, glm::vec2 pos);
 		~CircleCollider();
+		bool Collide(BoxCollider *other);
+		bool Collide(CircleCollider *other);
 
 	private:
-		float m_radius;
-		Vector2 m_pos;
+		float radius;
+		glm::vec2 pos;
 	};
 }
 
