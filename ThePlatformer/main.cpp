@@ -6,7 +6,7 @@
 #include "GraphicsSystem.h"
 #include "SpriteComponent.h"
 #include "InputComponent.h"
-
+#include "SpriteSheet.h"
 
 //#include <glm/fwd.hpp>
 //// Source file
@@ -34,6 +34,7 @@
 
 int main()
 {
+	
 	GameEngine::Core core = GameEngine::Core();
 	GameSystems::WindowInputSytem *winInput = new GameSystems::WindowInputSytem();
 
@@ -52,6 +53,7 @@ int main()
 	core.Add((GameSystems::System *)graphics);
 	core.Init();
 	core.MainLoop();
+
 
 /*
     // create the window

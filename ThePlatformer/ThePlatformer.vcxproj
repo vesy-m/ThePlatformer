@@ -161,6 +161,7 @@ copy /Y "$(ProjectDir)\lib\glew-1.13.0\bin\*" "$(OutDir)\"</Command>
     <ClCompile Include="AudioSystem.cpp" />
     <ClCompile Include="BaseComponent.cpp" />
     <ClCompile Include="BaseGameObject.cpp" />
+    <ClCompile Include="gason.cpp" />
     <ClCompile Include="GraphicsSystem.cpp" />
     <ClCompile Include="InputComponent.cpp" />
     <ClCompile Include="main.cpp" />
@@ -168,7 +169,9 @@ copy /Y "$(ProjectDir)\lib\glew-1.13.0\bin\*" "$(OutDir)\"</Command>
     <ClCompile Include="ObjectFactory.cpp" />
     <ClCompile Include="PhysicsSystem.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="SpriteAnimation.cpp" />
     <ClCompile Include="SpriteComponent.cpp" />
+    <ClCompile Include="SpriteSheet.cpp" />
     <ClCompile Include="WindowInputSytem.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -176,7 +179,10 @@ copy /Y "$(ProjectDir)\lib\glew-1.13.0\bin\*" "$(OutDir)\"</Command>
     <ClInclude Include="BaseComponent.h" />
     <ClInclude Include="BaseGameObject.h" />
     <ClInclude Include="GameEngine.h" />
+    <ClInclude Include="gason.h" />
     <ClInclude Include="GraphicsSystem.h" />
+    <ClInclude Include="SpriteAnimation.h" />
+    <ClInclude Include="SpriteSheet.h" />
     <ClInclude Include="TIme.h" />
     <ClInclude Include="InputComponent.h" />
     <ClInclude Include="ObjectFactory.h" />

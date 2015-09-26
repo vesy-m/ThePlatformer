@@ -72,31 +72,47 @@ namespace GameComponents {
 		glPushAttrib(GL_DEPTH_BUFFER_BIT | GL_LIGHTING_BIT);
 		glEnable(GL_TEXTURE_2D);
 
-		GLint height = 50;
-		GLint width = 50;
 
 		GLint posX = this->composition->getX();
 		GLint posY = 100;
 
+		
+		sheet.widthPixel;
+		SpriteAnimation anim = sheet.anims["walk"];
 
-		if (prevX < posX) {
-			glBegin(GL_QUADS);
-				glTexCoord2i(0, 1);	glVertex2i(posX, posY);
-				glTexCoord2i(1, 1); glVertex2i(posX + width, posY);
-				glTexCoord2i(1, 0); glVertex2i(posX + width, posY + height);
-				glTexCoord2i(0, 0);	glVertex2i(posX, posY + height);
-			glEnd();
+
+
+		GLint height = anim.listFrame[currentFrame][3] - anim.listFrame[currentFrame][2];
+		GLint width = anim.listFrame[currentFrame][1] - anim.listFrame[currentFrame][0];
+		//std::cout << anim.listFrame[currentFrame][0] << std::endl;
+		float xmin = (float)(anim.listFrame[currentFrame][0]) / (float)sheet.widthPixel;
+		float xmax = (float)(anim.listFrame[currentFrame][1]) / (float)sheet.widthPixel;
+		float ymin = (float)(sheet.heightPixel - anim.listFrame[currentFrame][3]) / (float)sheet.heightPixel;
+		float ymax = (float)(sheet.heightPixel - anim.listFrame[currentFrame][2]) / (float)sheet.heightPixel;
+		//std::cout << xmin << " " << xmax << " " << ymin << " " << ymax << std::endl;
+		//if (prevX < posX) {
+		if (counter > 4) {
+			currentFrame = (currentFrame + 1) % anim.listFrame.size();
+			counter = 0;
 		}
-		else {
-			glBegin(GL_QUADS);
-				glTexCoord2i(0, 1);	glVertex2i(posX + width, posY);
-				glTexCoord2i(1, 1); glVertex2i(posX, posY);
-				glTexCoord2i(1, 0); glVertex2i(posX, posY + height);
-				glTexCoord2i(0, 0);	glVertex2i(posX + width, posY + height);
-			glEnd();
-		}
+		glBegin(GL_QUADS);
+			glTexCoord2f(xmin, ymax);	glVertex2i(posX, posY);
+			glTexCoord2f(xmax, ymax); glVertex2i(posX + width, posY);
+			glTexCoord2f(xmax, ymin); glVertex2i(posX + width, posY + height);
+			glTexCoord2f(xmin, ymin);	glVertex2i(posX, posY + height);
+		glEnd();
+		//}
+		//else {
+		//	glBegin(GL_QUADS);
+		//		glTexCoord2i(0, 1);	glVertex2i(posX + width, posY);
+		//		glTexCoord2i(1, 1); glVertex2i(posX, posY);
+		//		glTexCoord2i(1, 0); glVertex2i(posX, posY + height);
+		//		glTexCoord2i(0, 0);	glVertex2i(posX + width, posY + height);
+		//	glEnd();
+		//}
 
 		prevX = posX;
+		counter++;
 	}
 
 	void SpriteComponent::Init()
@@ -171,7 +187,9 @@ namespace GameComponents {
 		glLoadIdentity();
 		glPushMatrix();
 
-		texture = loadTexture("mario.png");
+		std::string fileName = std::string("desc-megaman.json");
+		sheet = SpriteSheet(fileName);
+		//texture = loadTexture("mario.png");
 	}
 
 	GLuint SpriteComponent::loadTexture(const std::string filename)
@@ -194,9 +212,9 @@ namespace GameComponents {
 		if (!success) {
 			std::cout << "file charged" << std::endl;
 		}
-
-
 		ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE);
+
+
 		/* Create and load textures to OpenGL */
 		glGenTextures(1, &texture); /* Texture name generation */
 		glBindTexture(GL_TEXTURE_2D, texture);

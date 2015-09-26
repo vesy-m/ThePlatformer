@@ -87,6 +87,15 @@
     <ClCompile Include="InputComponent.cpp">
       <Filter>GameComponents\Source</Filter>
     </ClCompile>
+    <ClCompile Include="gason.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteAnimation.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteSheet.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -130,6 +139,15 @@
     </ClInclude>
     <ClInclude Include="TIme.h">
       <Filter>GameEngineCore\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="gason.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteAnimation.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteSheet.h">
+      <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -12,6 +12,7 @@
 #include <glm/fwd.hpp>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include "SpriteSheet.h"
 
 #define TEXTURE_LOAD_ERROR 0
 
@@ -28,7 +29,10 @@ namespace GameComponents {
 	private:
 		const COMPONENT_TYPE type = COMPONENT_TYPE::SPRITE;
 		GLuint texture;
+		SpriteSheet sheet;
 		int prevX = 0;
+		int currentFrame = 0;
+		int counter = 0;
 
 	};
 }
