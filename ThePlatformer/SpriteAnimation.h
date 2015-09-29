@@ -12,7 +12,7 @@
 class SpriteAnimation
 {
 public:
-	SpriteAnimation(JsonValue animInfos);
+	SpriteAnimation(JsonValue &animInfos);
 	SpriteAnimation();
 	~SpriteAnimation();
 	std::string getName();

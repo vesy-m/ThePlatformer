@@ -1,7 +1,7 @@
 #include "SpriteAnimation.h"
 
 
-SpriteAnimation::SpriteAnimation(JsonValue animInfos)
+SpriteAnimation::SpriteAnimation(JsonValue &animInfos)
 {
 	listFrame = std::vector<std::vector<int>>();
 	int ymin;
