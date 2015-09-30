@@ -25,7 +25,7 @@ namespace GameObjects {
 		int getY();
 	private:
 		std::vector<GameComponents::BaseComponent*> componentsList;
-		int x = 400;
+		int x = 0;
 		int y = 0;
 	};
 }

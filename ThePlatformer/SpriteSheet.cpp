@@ -52,9 +52,6 @@ char	*SpriteSheet::readfile(std::string & jsonfileName)
 double SpriteSheet::sum_and_print(JsonValue o) {
 	double sum = 0;
 	switch (o.getTag()) {
-		case JSON_STRING:
-			printf("\"%s\"\n", o.toString());
-			break;
 		case JSON_OBJECT:
 			for (auto i : o) {
 				printf("%s = ", i->key);
@@ -65,8 +62,10 @@ double SpriteSheet::sum_and_print(JsonValue o) {
 					loadTexture(i->value.toString());
 				}
 				if (std::string("anim").compare(i->key) == 0) {
-					SpriteAnimation anim = SpriteAnimation(i->value);
-					this->anims[anim.getName()] = anim;
+					for (auto an : i->value) {
+						SpriteAnimation anim = SpriteAnimation(an->value);
+						this->anims[anim.getName()] = anim;
+					}
 				}
 			
 			}

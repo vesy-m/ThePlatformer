@@ -1,8 +1,10 @@
 #include "SpriteComponent.h"
 
 namespace GameComponents {
-	SpriteComponent::SpriteComponent(GameObjects::BaseGameObject *object) : BaseComponent(object)
+	SpriteComponent::SpriteComponent(GameObjects::BaseGameObject *object, std::string &fileName, FILE_TYPE fileType) : BaseComponent(object)
 	{
+		_fileName = fileName;
+		_fileType = fileType;
 	}
 
 	SpriteComponent::~SpriteComponent()
@@ -66,40 +68,53 @@ namespace GameComponents {
 
 
 
-		
-
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		glPushAttrib(GL_DEPTH_BUFFER_BIT | GL_LIGHTING_BIT);
-		glEnable(GL_TEXTURE_2D);
-
-
+		float xmin = 0;
+		float xmax = 1;
+		float ymin = 0;
+		float ymax = 1;
 		GLint posX = this->composition->getX();
 		GLint posY = this->composition->getY();
-
-		
-		sheet.widthPixel;
-		SpriteAnimation anim = sheet.anims["walk"];
+		GLint width = 50;
+		GLint height = 50;
 
 
+		if (_fileType == FILE_TYPE::JSON) {
 
-		GLint height = anim.listFrame[currentFrame][3] - anim.listFrame[currentFrame][2];
-		GLint width = anim.listFrame[currentFrame][1] - anim.listFrame[currentFrame][0];
-		//std::cout << anim.listFrame[currentFrame][0] << std::endl;
-		float xmin = (float)(anim.listFrame[currentFrame][0]) / (float)sheet.widthPixel;
-		float xmax = (float)(anim.listFrame[currentFrame][1]) / (float)sheet.widthPixel;
-		float ymin = (float)(sheet.heightPixel - anim.listFrame[currentFrame][3]) / (float)sheet.heightPixel;
-		float ymax = (float)(sheet.heightPixel - anim.listFrame[currentFrame][2]) / (float)sheet.heightPixel;
-		//std::cout << xmin << " " << xmax << " " << ymin << " " << ymax << std::endl;
-		//if (prevX < posX) {
-		if (counter > 4) {
-			currentFrame = (currentFrame + 1) % anim.listFrame.size();
-			counter = 0;
+
+			sheet.widthPixel;
+			SpriteAnimation anim = sheet.anims["walk"];
+
+			height = anim.listFrame[currentFrame][3] - anim.listFrame[currentFrame][2];
+			width = anim.listFrame[currentFrame][1] - anim.listFrame[currentFrame][0];
+			//width *= 4;
+			//height *= 4;
+
+			posX = this->composition->getX() - (width / 2);
+			posY = this->composition->getY();
+			//std::cout << anim.listFrame[currentFrame][0] << std::endl;
+			xmin = (float)(anim.listFrame[currentFrame][0]) / (float)sheet.widthPixel;
+			xmax = (float)(anim.listFrame[currentFrame][1]) / (float)sheet.widthPixel;
+			ymin = (float)(sheet.heightPixel - anim.listFrame[currentFrame][3]) / (float)sheet.heightPixel;
+			ymax = (float)(sheet.heightPixel - anim.listFrame[currentFrame][2]) / (float)sheet.heightPixel;
+			//std::cout << xmin << " " << xmax << " " << ymin << " " << ymax << std::endl;
+			//if (prevX < posX) {
+			if (counter > anim.time) {
+				currentFrame = (currentFrame + 1) % anim.listFrame.size();
+				counter = 0;
+			}
+			glBindTexture(GL_TEXTURE_2D, sheet.textureSpriteSheetID);
 		}
+		else {
+			width = _width;
+			height = _height;
+			glBindTexture(GL_TEXTURE_2D, texture);
+		}
+
 		glBegin(GL_QUADS);
-			glTexCoord2f(xmin, ymax);	glVertex2i(posX, posY);
+			glTexCoord2f(xmin, ymax); glVertex2i(posX, posY);
 			glTexCoord2f(xmax, ymax); glVertex2i(posX + width, posY);
 			glTexCoord2f(xmax, ymin); glVertex2i(posX + width, posY + height);
-			glTexCoord2f(xmin, ymin);	glVertex2i(posX, posY + height);
+			glTexCoord2f(xmin, ymin); glVertex2i(posX, posY + height);
 		glEnd();
 		//}
 		//else {
@@ -110,9 +125,10 @@ namespace GameComponents {
 		//		glTexCoord2i(0, 0);	glVertex2i(posX + width, posY + height);
 		//	glEnd();
 		//}
-
-		prevX = posX;
-		counter++;
+		if (_fileType == FILE_TYPE::JSON) {
+			prevX = posX;
+			counter++;
+		}
 	}
 
 	void SpriteComponent::Init()
@@ -187,9 +203,13 @@ namespace GameComponents {
 		glLoadIdentity();
 		glPushMatrix();
 
-		std::string fileName = std::string("desc-megaman.json");
-		sheet = SpriteSheet(fileName);
-		//texture = loadTexture("mario.png");
+		if (_fileType == FILE_TYPE::JSON) {
+			std::string fileName = std::string(_fileName);
+			sheet = SpriteSheet(fileName);
+		}
+		else {
+			texture = loadTexture(_fileName);
+		}
 	}
 
 	GLuint SpriteComponent::loadTexture(const std::string filename)
@@ -224,7 +244,8 @@ namespace GameComponents {
 			0, GL_RGBA, GL_UNSIGNED_BYTE,
 			ilGetData());
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-
+		_width = ilGetInteger(IL_IMAGE_WIDTH);
+		_height = ilGetInteger(IL_IMAGE_HEIGHT);
 		return texture;
 	}
 }
