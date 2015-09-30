@@ -74,7 +74,7 @@ namespace GameComponents {
 
 
 		GLint posX = this->composition->getX();
-		GLint posY = 100;
+		GLint posY = this->composition->getY();
 
 		
 		sheet.widthPixel;
