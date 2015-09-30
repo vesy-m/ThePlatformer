@@ -10,7 +10,7 @@ namespace GameSystems {
 	{
 	}
 
-	int PhysicsSystem::Update(float dt, std::list<GameObjects::BaseGameObject*>& listObjects)
+	int PhysicsSystem::Update(double dt, std::list<GameObjects::BaseGameObject*>& listObjects)
 	{
 		for each (GameObjects::BaseGameObject* object in listObjects)
 		{

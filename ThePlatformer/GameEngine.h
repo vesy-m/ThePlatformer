@@ -4,8 +4,9 @@
 
 #include <list>
 #include "System.h"
+#include "TimeManager.h"
 
-#define DT 42
+#define FRAME_PER_SECOND 60
 
 namespace GameEngine {
 	class Core {
@@ -18,8 +19,9 @@ namespace GameEngine {
 		void Add(GameObjects::BaseGameObject*);
 		void Add(GameSystems::System *sys);
 	private:
+		TimeManager								*m_manager;
 		std::list<GameObjects::BaseGameObject*> m_objects;
-		std::list<GameSystems::System *> m_systems;
+		std::list<GameSystems::System *>		m_systems;
 	};
 }
 

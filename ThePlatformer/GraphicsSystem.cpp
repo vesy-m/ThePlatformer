@@ -10,7 +10,7 @@ namespace GameSystems {
 	{
 	}
 
-	int GraphicsSystem::Update(float dt, std::list<GameObjects::BaseGameObject*>& listObjects)
+	int GraphicsSystem::Update(double dt, std::list<GameObjects::BaseGameObject*>& listObjects)
 	{
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

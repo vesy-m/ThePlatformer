@@ -1,5 +1,7 @@
 #include <iostream>
 #include <chrono>
+#include <ctime>
+#include <iomanip>
 #include "GameEngine.h"
 #include "System.h"
 
@@ -8,11 +10,13 @@ namespace GameEngine {
 	}
 
 	Core::~Core() {
+		delete this->m_manager;
 		for (auto it = this->m_systems.begin(); it != this->m_systems.end(); ++it)
 			delete *it;
 	}
 	
 	void Core::Init(void) {
+		this->m_manager = new TimeManager("../log_file.txt");
 		for each (GameSystems::System* system in this->m_systems)
 			system->Init(this->m_objects);
 	}
@@ -24,13 +28,14 @@ namespace GameEngine {
 
 	void Core::MainLoop(void) {
 		
-
 		while (42) {
+			this->m_manager->StartTimer();
 			for each (GameSystems::System *system in this->m_systems) {
-				if (system->Update(DT, this->m_objects) == 1) {
+				if (system->Update(this->m_manager->GetLastTime(), this->m_objects) == 1) {
 					return;
 				}
 			}
+			this->m_manager->WaitFPS(FRAME_PER_SECOND);
 		}
 	}
 
