@@ -59,7 +59,8 @@ double SpriteSheet::sum_and_print(JsonValue o) {
 					this->name = i->value.toString();
 				}
 				if (std::string("file").compare(i->key) == 0) {
-					loadTexture(i->value.toString());
+					this->texture = TextureManager::getInstance().getTexture(i->value.toString());
+					//loadTexture(i->value.toString());
 				}
 				if (std::string("anim").compare(i->key) == 0) {
 					for (auto an : i->value) {
@@ -72,40 +73,4 @@ double SpriteSheet::sum_and_print(JsonValue o) {
 			break;
 	}
 	return sum;
-}
-
-void SpriteSheet::loadTexture(const std::string filename)
-{
-	ILboolean success;
-	unsigned int imageID;
-
-	// init DevIL. This needs to be done only once per application
-	ilInit();
-	// generate an image name
-	ilGenImages(1, &imageID);
-	// bind it
-	ilBindImage(imageID);
-	// match image origin to OpenGL’s
-	ilEnable(IL_ORIGIN_SET);
-	ilOriginFunc(IL_ORIGIN_LOWER_LEFT);
-	// load  the image
-	success = ilLoadImage((ILstring)filename.c_str());
-	// check to see if everything went OK
-	if (!success) {
-		std::cout << "file charged" << std::endl;
-	}
-	ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE);
-
-
-	/* Create and load textures to OpenGL */
-	glGenTextures(1, &textureSpriteSheetID); /* Texture name generation */
-	glBindTexture(GL_TEXTURE_2D, textureSpriteSheetID);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA,
-		ilGetInteger(IL_IMAGE_WIDTH),
-		ilGetInteger(IL_IMAGE_HEIGHT),
-		0, GL_RGBA, GL_UNSIGNED_BYTE,
-		ilGetData());
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	widthPixel = ilGetInteger(IL_IMAGE_WIDTH);
-	heightPixel = ilGetInteger(IL_IMAGE_HEIGHT);
 }

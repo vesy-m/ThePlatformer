@@ -9,7 +9,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include <il.h>
+#include "TextureManager.h"
 
 class SpriteSheet
 {
@@ -19,12 +19,9 @@ public:
 	~SpriteSheet();
 	char * readfile(std::string & jsonfileName);
 	double sum_and_print(JsonValue o);
-	void loadTexture(const std::string filename);
 
-	GLuint textureSpriteSheetID;
-	int widthPixel;
-	int heightPixel;
-	std::string name;
+	Texture			*texture;
+	std::string		name;
 	std::map<std::string, SpriteAnimation> anims;
 
 };

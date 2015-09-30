@@ -18,56 +18,6 @@ namespace GameComponents {
 
 	void SpriteComponent::Update()
 	{
-		/*
-		glMatrixMode(GL_PROJECTION);
-		glLoadIdentity();
-		// fov, aspect, near, far 
-		gluPerspective(60, 1, 1, 10);
-		gluLookAt(0, 0, -2, 
-			0, 0, 2,
-			0, 1, 0); 
-		glMatrixMode(GL_MODELVIEW);
-		glLoadIdentity();
-
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		glPushAttrib(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		glEnable(GL_TEXTURE_2D);
-
-		glBegin(GL_QUADS);
-		glNormal3f(0.0, 0.0, 1.0);
-		glTexCoord2d(1, 1); glVertex3f(0.0, 0.0, 0.0);
-		glTexCoord2d(1, 0); glVertex3f(0.0, 1.0, 0.0);
-		glTexCoord2d(0, 0); glVertex3f(1.0, 1.0, 0.0);
-		glTexCoord2d(0, 1); glVertex3f(1.0, 0.0, 0.0);
-		glEnd();
-
-		glDisable(GL_TEXTURE_2D);
-		glPopAttrib();
-
-		glFlush();*/
-
-
-
-
-		/*
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		glColor3f(1.0f, 1.0f, 1.0f);
-		glBegin(GL_QUADS);
-		glTexCoord2i(0, ilGetInteger(IL_IMAGE_HEIGHT));
-		glVertex2i(0, 0);
-		glTexCoord2i(ilGetInteger(IL_IMAGE_WIDTH), ilGetInteger(IL_IMAGE_HEIGHT));
-		glVertex2i(ilGetInteger(IL_IMAGE_WIDTH), 0);
-		glTexCoord2i(ilGetInteger(IL_IMAGE_WIDTH), 0);
-		glVertex2i(ilGetInteger(IL_IMAGE_WIDTH), ilGetInteger(IL_IMAGE_HEIGHT));
-		glTexCoord2i(0, 0);
-		glVertex2i(0, ilGetInteger(IL_IMAGE_HEIGHT));
-		glEnd();
-		glFlush();*/
-
-
-
-
 		float xmin = 0;
 		float xmax = 1;
 		float ymin = 0;
@@ -80,8 +30,6 @@ namespace GameComponents {
 
 		if (_fileType == FILE_TYPE::JSON) {
 
-
-			sheet.widthPixel;
 			SpriteAnimation anim = sheet.anims["walk"];
 
 			height = anim.listFrame[currentFrame][3] - anim.listFrame[currentFrame][2];
@@ -92,17 +40,17 @@ namespace GameComponents {
 			posX = this->composition->getX() - (width / 2);
 			posY = this->composition->getY();
 			//std::cout << anim.listFrame[currentFrame][0] << std::endl;
-			xmin = (float)(anim.listFrame[currentFrame][0]) / (float)sheet.widthPixel;
-			xmax = (float)(anim.listFrame[currentFrame][1]) / (float)sheet.widthPixel;
-			ymin = (float)(sheet.heightPixel - anim.listFrame[currentFrame][3]) / (float)sheet.heightPixel;
-			ymax = (float)(sheet.heightPixel - anim.listFrame[currentFrame][2]) / (float)sheet.heightPixel;
+			xmin = (float)(anim.listFrame[currentFrame][0]) / (float)sheet.texture->getWidth();
+			xmax = (float)(anim.listFrame[currentFrame][1]) / (float)sheet.texture->getWidth();
+			ymin = (float)(sheet.texture->getHeight() - anim.listFrame[currentFrame][3]) / (float)sheet.texture->getHeight();
+			ymax = (float)(sheet.texture->getHeight() - anim.listFrame[currentFrame][2]) / (float)sheet.texture->getHeight();
 			//std::cout << xmin << " " << xmax << " " << ymin << " " << ymax << std::endl;
 			//if (prevX < posX) {
 			if (counter > anim.time) {
 				currentFrame = (currentFrame + 1) % anim.listFrame.size();
 				counter = 0;
 			}
-			glBindTexture(GL_TEXTURE_2D, sheet.textureSpriteSheetID);
+			glBindTexture(GL_TEXTURE_2D, sheet.texture->getId());
 		}
 		else {
 			width = _width;
@@ -133,62 +81,6 @@ namespace GameComponents {
 
 	void SpriteComponent::Init()
 	{
-
-		//GLenum err = glewInit();
-		//if (GLEW_OK != err)
-		//{
-		//	std::cout << "fail glew" << std::endl;
-		//}
-
-		//glClearColor(0.0, 0.0, 0.0, 0.0);
-
-		//GLint iViewport[4];
-
-		//glGetIntegerv(GL_VIEWPORT, iViewport);
-		//glMatrixMode(GL_PROJECTION);
-		//glPushMatrix();
-		//glLoadIdentity();
-		//glOrtho(iViewport[0], iViewport[0] + iViewport[2], iViewport[1] + iViewport[3], iViewport[1], -1, 1);
-		//glMatrixMode(GL_MODELVIEW);
-		//glPushMatrix();
-		//glLoadIdentity();
-
-		//glPushAttrib(GL_DEPTH_BUFFER_BIT | GL_LIGHTING_BIT);
-
-		//if (!glewIsSupported("GL_EXT_texture_rectangle"))
-		//{
-
-		//	printf("ERROR: Texture rectangles not supported on this video card!");
-
-		//	Sleep(2000);
-
-		//	exit(-1);
-
-		//}
-		//glDisable(GL_LIGHTING);
-		//glDisable(GL_DITHER);
-		//glDisable(GL_BLEND);
-		//glDisable(GL_DEPTH_TEST);
-
-
-
-
-		//WORK
-
-
-		//glShadeModel(GL_SMOOTH);
-		//glEnable(GL_LIGHTING);
-		//glEnable(GL_LIGHT0);
-		//glEnable(GL_DEPTH_TEST);
-		//GLfloat tab1float[] = { 2.0, 2.0, 2.0, 0.0 };
-		//GLfloat tab2float[] = { 1.0, 1.0, 1.0, 0.0 };
-		//glLightfv(GL_LIGHT0, GL_POSITION, tab1float);
-		//glLightfv(GL_LIGHT0, GL_AMBIENT, tab2float);
-
-
-		//glm::mat4 projection = glm::ortho(0, 800, 600, 0);
-
-
 		GLint iViewport[4];
 
 		glGetIntegerv(GL_VIEWPORT, iViewport);
