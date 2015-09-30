@@ -12,7 +12,7 @@ namespace GameSystems {
 	public:
 		WindowInputSytem();
 		~WindowInputSytem();
-		int Update(float dt, std::list<GameObjects::BaseGameObject*>&);
+		int Update(double dt, std::list<GameObjects::BaseGameObject*>&);
 		void Init(std::list<GameObjects::BaseGameObject*>& listObjects);
 		void SendMessage();
 	private:

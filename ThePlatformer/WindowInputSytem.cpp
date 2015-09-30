@@ -10,16 +10,13 @@ namespace GameSystems {
 	{
 	}
 	
-	int WindowInputSytem::Update(float dt, std::list<GameObjects::BaseGameObject*>& listObjects)
+	int WindowInputSytem::Update(double dt, std::list<GameObjects::BaseGameObject*>& listObjects)
 	{
 		sf::Event event;
 		while (window->pollEvent(event))
 		{
 			if (event.type == sf::Event::Closed)
-			{
-				// end the program
 				return 1;
-			}
 			else if (event.type == sf::Event::Resized)
 			{
 				// adjust the viewport when the window is resized
@@ -41,7 +38,7 @@ namespace GameSystems {
 	void WindowInputSytem::Init(std::list<GameObjects::BaseGameObject*>& listObjects)
 	{
 		this->window = new sf::Window(sf::VideoMode(800, 600), "OpenGL", sf::Style::Default, sf::ContextSettings(32));
-		window->setVerticalSyncEnabled(true);
+		window->setVerticalSyncEnabled(false);
 		for each (GameObjects::BaseGameObject* object in listObjects)
 		{
 			std::vector<GameComponents::BaseComponent*> componentList = object->getComponents(GameComponents::COMPONENT_TYPE::WINDOW);
