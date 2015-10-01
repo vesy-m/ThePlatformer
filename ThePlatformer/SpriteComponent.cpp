@@ -104,6 +104,10 @@ namespace GameComponents {
 		}
 	}
 
+	void SpriteComponent::sendMessage(Message *message)
+	{
+	}
+
 	GLuint SpriteComponent::loadTexture(const std::string filename)
 	{
 		ILboolean success;

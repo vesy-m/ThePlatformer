@@ -4,6 +4,7 @@
 
 #include <vector>
 #include "BaseComponent.h"
+#include "Message.h"
 #include <algorithm>
 namespace GameComponents {
 	enum COMPONENT_TYPE;
@@ -19,6 +20,7 @@ namespace GameObjects {
 		~BaseGameObject();
 		std::vector<GameComponents::BaseComponent*> getComponents(GameComponents::COMPONENT_TYPE type);
 		void attachComponent(GameComponents::BaseComponent*);
+		void SendMessage(Message*);
 		void setX(int x);
 		int getX();
 		void setY(int y);

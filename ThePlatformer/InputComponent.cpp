@@ -22,15 +22,18 @@ namespace GameComponents {
 			if (sf::Keyboard::isKeyPressed(it->second) && it->first == LEFT)
 			{
 				std::cout << "LEFT" << std::endl;
-				this->composition->setX(this->composition->getX() - 1);
+				this->composition->setX(this->composition->getX() - 3);
 			}
 			if (sf::Keyboard::isKeyPressed(it->second) && it->first == RIGHT)
 			{
 				std::cout << "RIGHT" << std::endl;
-				this->composition->setX(this->composition->getX() + 1);
+				this->composition->setX(this->composition->getX() + 3);
 			}
+
 			if (sf::Keyboard::isKeyPressed(it->second) && it->first == JUMP)
 			{
+				Message *message = new Message(Message::JUMP);
+				this->composition->SendMessage(message);
 				std::cout << "JUMP" << std::endl;
 			}
 		}
@@ -56,6 +59,10 @@ namespace GameComponents {
 
 		this->mouseMap.emplace(FIRE, sf::Mouse::Left);
 		this->mouseMap.emplace(SPECIAL, sf::Mouse::Right);
+	}
+
+	void InputComponent::sendMessage(Message*)
+	{
 	}
 
 	void InputComponent::setKeyboardKey(INPUT_TYPE inputType, sf::Keyboard::Key key)

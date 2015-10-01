@@ -7,14 +7,8 @@
 #include <GL/glew.h>
 #include <SFML/OpenGL.hpp>
 #include <il.h>
-#include <cstdio>
 #include <string>
-#include <glm/fwd.hpp>
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
 #include "SpriteSheet.h"
-
-#define TEXTURE_LOAD_ERROR 0
 
 namespace GameComponents {
 	enum FILE_TYPE
@@ -31,6 +25,7 @@ namespace GameComponents {
 		COMPONENT_TYPE getType();
 		void Update();
 		void Init();
+		void sendMessage(Message*);
 		GLuint loadTexture(const std::string filename);
 	private:
 		const COMPONENT_TYPE type = COMPONENT_TYPE::SPRITE;
