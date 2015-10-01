@@ -8,11 +8,28 @@ namespace GameComponents {
 		revertY = false;
 		currentFrame = 0;
 		counter = 0;
-		currentAnim = "default";
+		currentAnim = "walk";
 	}
 
 	SpriteComponent::~SpriteComponent()
 	{
+	}
+
+	void SpriteComponent::sendMessage(Message *message)
+	{
+		switch (message->id)
+		{
+			case Message::LEFT:
+				revertX = true;
+				break;
+			case Message::RIGHT:
+				revertX = false;
+				break;
+			case Message::JUMP:
+				break;
+			default:
+				break;
+		}
 	}
 
 	COMPONENT_TYPE SpriteComponent::getType()

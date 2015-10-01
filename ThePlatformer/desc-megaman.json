@@ -11,6 +11,15 @@
 				[2, 34]
 	        ]
     	},
+		{
+    		"name":"jump",
+	        "time": 1,
+	        "ymin": 0,
+	        "ymax": 45,
+	        "images": [
+				[176, 214]
+	        ]
+    	},
     	{
     		"name": "walk", 
 	        "time": 5,
