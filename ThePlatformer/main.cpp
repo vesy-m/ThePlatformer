@@ -50,7 +50,7 @@ int main()
 
 	//background
 	GameObjects::BaseGameObject *background = new GameObjects::BaseGameObject();
-	GameComponents::SpriteComponent *backSprite = new GameComponents::SpriteComponent(background, std::string("forest.png"), GameComponents::FILE_TYPE::PNG);
+	GameComponents::SpriteComponent *backSprite = new GameComponents::SpriteComponent(background, std::string("forest.png"));
 	background->attachComponent((GameComponents::BaseComponent *)backSprite);
 	background->setX(0);
 	background->setY(0);
@@ -60,7 +60,7 @@ int main()
 	GameObjects::BaseGameObject *mario = new GameObjects::BaseGameObject();
 
 	GameComponents::InputComponent *inputComp = new GameComponents::InputComponent(mario);
-	GameComponents::SpriteComponent *spriteComp = new GameComponents::SpriteComponent(mario, std::string("desc-megaman.json"), GameComponents::FILE_TYPE::JSON);
+	GameComponents::SpriteComponent *spriteComp = new GameComponents::SpriteComponent(mario, std::string("desc-megaman.json"));
 	GameComponents::BodyComponent *bodyComp = new GameComponents::BodyComponent(mario);
 
 	mario->setX(150);
@@ -75,7 +75,7 @@ int main()
 	GameObjects::BaseGameObject *mario2 = new GameObjects::BaseGameObject();
 
 	GameComponents::InputComponent *inputComp2 = new GameComponents::InputComponent(mario2);
-	GameComponents::SpriteComponent *spriteComp2 = new GameComponents::SpriteComponent(mario2, std::string("desc-metalslug.json"), GameComponents::FILE_TYPE::JSON);
+	GameComponents::SpriteComponent *spriteComp2 = new GameComponents::SpriteComponent(mario2, std::string("desc-metalslug.json"));
 //	GameComponents::BodyComponent *bodyComp2 = new GameComponents::BodyComponent(mario2);
 
 	mario2->setX(100);

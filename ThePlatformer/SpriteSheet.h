@@ -15,13 +15,18 @@ class SpriteSheet
 {
 public:
 	SpriteSheet(std::string &jsonfileName);
-	SpriteSheet();
 	~SpriteSheet();
-	char * readfile(std::string & jsonfileName);
-	double sum_and_print(JsonValue o);
-
+	std::string getExtension(const std::string & filename);
+	int		parseSheetFile(JsonValue o);
+	int		loadAndParseJsonFile(const std::string &filename);
+	char	*readfile(const std::string & jsonfileName);
+	int		loadPngFile(const std::string &filename);
+	bool	isAnimated();
+	const SpriteAnimation & getAnim(const std::string & animName);
+	Texture	*getTexture();
+private:
 	Texture			*texture;
-	std::string		name;
+	bool			animated;
 	std::map<std::string, SpriteAnimation> anims;
 
 };

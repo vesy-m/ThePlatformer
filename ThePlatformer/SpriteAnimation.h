@@ -16,9 +16,15 @@ public:
 	SpriteAnimation();
 	~SpriteAnimation();
 	std::string getName();
-
+	int getSpriteXmin(int numFrame);
+	int getSpriteXmax(int numFrame);
+	int getSpriteYmin(int numFrame);
+	int getSpriteYmax(int numFrame);
+	int getTime();
+	int getSizeListFrame();
+private:
 	int time;
 	std::string name;
-	std::vector<std::vector<int>> listFrame;
+	std::vector<std::vector<int>> listCoordSpriteByFrame;
 };
 
