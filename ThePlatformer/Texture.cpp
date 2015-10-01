@@ -1,8 +1,9 @@
 #include "Texture.h"
 
 
-Texture::Texture(GLuint &textureId, unsigned int width, unsigned int height)
+Texture::Texture(const std::string& filename, GLuint &textureId, unsigned int width, unsigned int height)
 {
+	this->filename = filename;
 	this->textureId = textureId;
 	this->width = width;
 	this->height = height;
@@ -25,4 +26,9 @@ unsigned int Texture::getWidth()
 unsigned int Texture::getHeight()
 {
 	return this->height;
+}
+
+const std::string & Texture::getFilename()
+{
+	return this->filename;
 }

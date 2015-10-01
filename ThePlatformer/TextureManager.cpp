@@ -39,7 +39,7 @@ void				TextureManager::loadTexture(const std::string &filename)
 		ilGetData());
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	//this->textureMap[filename] = Texture(textureId, ilGetInteger(IL_IMAGE_WIDTH), ilGetInteger(IL_IMAGE_HEIGHT));
-	this->textureMap.insert(std::pair<std::string, Texture>(filename, Texture(textureId, ilGetInteger(IL_IMAGE_WIDTH), ilGetInteger(IL_IMAGE_HEIGHT))));
+	this->textureMap.insert(std::pair<std::string, Texture>(filename, Texture(filename, textureId, ilGetInteger(IL_IMAGE_WIDTH), ilGetInteger(IL_IMAGE_HEIGHT))));
 }
 
 Texture		*TextureManager::getTexture(const std::string & filename)

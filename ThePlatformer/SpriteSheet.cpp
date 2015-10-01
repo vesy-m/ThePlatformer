@@ -1,23 +1,18 @@
 #include "SpriteSheet.h"
 
 
-SpriteSheet::SpriteSheet(std::string & jsonfileName)
+SpriteSheet::SpriteSheet(std::string & filename)
 {
-	char	*jsonFile = readfile(jsonfileName);
-	char *endptr;
-	JsonValue value;
-	JsonAllocator allocator;
-	int status = jsonParse(jsonFile, &endptr, &value, allocator);
-	if (status != JSON_OK) {
-		fprintf(stderr, "%s at %zd\n", jsonStrError(status), endptr - jsonFile);
-		exit(EXIT_FAILURE);
+	std::string extension = getExtension(filename);
+	if (std::string("json").compare(extension) == 0) {
+		animated = true;
+		loadAndParseJsonFile(filename);
 	}
-	double sum = sum_and_print(value);
-	printf("sum of all numbers: %g\n", sum);
-}
+	else if (std::string("png").compare(extension) == 0) {
+		animated = false;
+		loadPngFile(filename);
+	}
 
-SpriteSheet::SpriteSheet()
-{
 }
 
 SpriteSheet::~SpriteSheet()
@@ -26,11 +21,15 @@ SpriteSheet::~SpriteSheet()
 }
 
 
-char	*SpriteSheet::readfile(std::string & jsonfileName)
+std::string SpriteSheet::getExtension(const std::string& filename) {
+	return filename.substr(filename.find_last_of(".") + 1);
+}
+
+char	*SpriteSheet::readfile(const std::string & fileName)
 {
 	std::string line;
 	std::stringstream cacheFile = std::stringstream();
-	std::ifstream myfile(jsonfileName);
+	std::ifstream myfile(fileName);
 	if (myfile.is_open())
 	{
 		while (getline(myfile, line))
@@ -49,18 +48,13 @@ char	*SpriteSheet::readfile(std::string & jsonfileName)
 }
 
 
-double SpriteSheet::sum_and_print(JsonValue o) {
-	double sum = 0;
+int			SpriteSheet::parseSheetFile(JsonValue o) {
 	switch (o.getTag()) {
 		case JSON_OBJECT:
 			for (auto i : o) {
 				printf("%s = ", i->key);
-				if (std::string("name").compare(i->key) == 0) {
-					this->name = i->value.toString();
-				}
 				if (std::string("file").compare(i->key) == 0) {
 					this->texture = TextureManager::getInstance().getTexture(i->value.toString());
-					//loadTexture(i->value.toString());
 				}
 				if (std::string("anim").compare(i->key) == 0) {
 					for (auto an : i->value) {
@@ -72,5 +66,40 @@ double SpriteSheet::sum_and_print(JsonValue o) {
 			}
 			break;
 	}
-	return sum;
+	return 0;
+}
+
+int			SpriteSheet::loadAndParseJsonFile(const std::string & filename)
+{
+	char	*jsonFile = readfile(filename);
+	char	*endptr;
+	JsonValue value;
+	JsonAllocator allocator;
+	int status = jsonParse(jsonFile, &endptr, &value, allocator);
+	if (status != JSON_OK) {
+		fprintf(stderr, "%s at %zd\n", jsonStrError(status), endptr - jsonFile);
+		exit(EXIT_FAILURE);
+	}
+	parseSheetFile(value);
+	return 0;
+}
+
+int			SpriteSheet::loadPngFile(const std::string & filename)
+{
+	this->texture = TextureManager::getInstance().getTexture(filename);
+	return 0;
+}
+
+bool		SpriteSheet::isAnimated()
+{
+	return animated;
+}
+
+const SpriteAnimation &SpriteSheet::getAnim(const std::string & animName) {
+	return this->anims[animName];
+}
+
+Texture		*SpriteSheet::getTexture()
+{
+	return this->texture;
 }
