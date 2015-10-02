@@ -192,7 +192,6 @@ copy /Y "$(ProjectDir)\lib\glew-1.13.0\bin\*" "$(OutDir)\"</Command>
     <ClInclude Include="SpriteSheet.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TextureManager.h" />
-    <ClInclude Include="TIme.h" />
     <ClInclude Include="InputComponent.h" />
     <ClInclude Include="ObjectFactory.h" />
     <ClInclude Include="PhysicsSystem.h" />

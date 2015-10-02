@@ -49,10 +49,20 @@ int main()
 
 	//background
 	GameObjects::BaseGameObject *background = new GameObjects::BaseGameObject();
-	GameComponents::SpriteComponent *backSprite = new GameComponents::SpriteComponent(background, std::string("forest.png"), GameComponents::FILE_TYPE::PNG);
+	GameComponents::SpriteComponent *backSprite = new GameComponents::SpriteComponent(background, std::string("mario_background.png"), GameComponents::FILE_TYPE::PNG);
 	background->attachComponent((GameComponents::BaseComponent *)backSprite);
-	
+	background->setX(0);
+	background->setY(0);
 	core.Add(background);
+
+	//platform
+	GameObjects::BaseGameObject *platform = new GameObjects::BaseGameObject();
+	GameComponents::SpriteComponent *platformSprite = new GameComponents::SpriteComponent(platform, std::string("mario_platform.png"), GameComponents::FILE_TYPE::PNG);
+	platform->setX(250);
+	platform->setY(600);
+	platform->attachComponent((GameComponents::BaseComponent *)platformSprite);
+
+	core.Add(platform);
 
 	//player
 	GameObjects::BaseGameObject *mario = new GameObjects::BaseGameObject();
@@ -68,72 +78,25 @@ int main()
 
 	core.Add(mario);
 
-	//player 2 
-	GameObjects::BaseGameObject *mario2 = new GameObjects::BaseGameObject();
-
-	GameComponents::InputComponent *inputComp2 = new GameComponents::InputComponent(mario2);
-	GameComponents::SpriteComponent *spriteComp2 = new GameComponents::SpriteComponent(mario2, std::string("desc-metalslug.json"), GameComponents::FILE_TYPE::JSON);
-//	GameComponents::BodyComponent *bodyComp2 = new GameComponents::BodyComponent(mario2);
-
-	mario2->setX(100);
-	mario2->setY(100);
-	mario2->attachComponent((GameComponents::BaseComponent *)inputComp2);
-	mario2->attachComponent((GameComponents::BaseComponent *)spriteComp2);
-//	mario2->attachComponent((GameComponents::BaseComponent *)bodyComp2);
-
-	core.Add(mario2);
+//	//player 2 
+//	GameObjects::BaseGameObject *mario2 = new GameObjects::BaseGameObject();
+//
+//	GameComponents::InputComponent *inputComp2 = new GameComponents::InputComponent(mario2);
+//	GameComponents::SpriteComponent *spriteComp2 = new GameComponents::SpriteComponent(mario2, std::string("desc-metalslug.json"), GameComponents::FILE_TYPE::JSON);
+////	GameComponents::BodyComponent *bodyComp2 = new GameComponents::BodyComponent(mario2);
+//
+//	mario2->setX(100);
+//	mario2->setY(100);
+//	mario2->attachComponent((GameComponents::BaseComponent *)inputComp2);
+//	mario2->attachComponent((GameComponents::BaseComponent *)spriteComp2);
+////	mario2->attachComponent((GameComponents::BaseComponent *)bodyComp2);
+//
+//	core.Add(mario2);
 
 
 	//start
 	core.Init();
 	core.MainLoop();
 
-
-/*
-    // create the window
-    sf::Window window(sf::VideoMode(800, 600), "OpenGL", sf::Style::Default, sf::ContextSettings(32));
-    window.setVerticalSyncEnabled(true);
-
-    // load resources, initialize the OpenGL states, ...
-	GLenum err = glewInit();
-	if (GLEW_OK != err)
-	{
-		// Problem: glewInit failed, something is seriously wrong. 
-		fprintf(stderr, "Error: %s\n", glewGetErrorString(err));
-		return (1);
-	}
-	fprintf(stdout, "Status: Using GLEW %s\n", glewGetString(GLEW_VERSION));
-
-    // run the main loop
-    bool running = true;
-    while (running)
-    {
-        // handle events
-        sf::Event event;
-        while (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-            {
-                // end the program
-                running = false;
-            }
-            else if (event.type == sf::Event::Resized)
-            {
-                // adjust the viewport when the window is resized
-				glViewport(0, 0, event.size.width, event.size.height);
-            }
-        }
-
-        // clear the buffers
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-        // draw...
-
-        // end the current frame (internally swaps the front and back buffers)
-        window.display();
-    }
-
-    // release resources...
-*/
     return (0);
 }

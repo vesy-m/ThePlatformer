@@ -152,9 +152,6 @@
     <ClInclude Include="InputComponent.h">
       <Filter>GameComponents\Header</Filter>
     </ClInclude>
-    <ClInclude Include="TIme.h">
-      <Filter>GameEngineCore\Header</Filter>
-    </ClInclude>
     <ClInclude Include="gason.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
