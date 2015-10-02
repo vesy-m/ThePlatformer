@@ -3,7 +3,7 @@
 
 SpriteAnimation::SpriteAnimation(JsonValue &animInfos)
 {
-	listFrame = std::vector<std::vector<int>>();
+	listCoordSpriteByFrame = std::vector<std::vector<int>>();
 	int ymin;
 	int ymax;
 	switch (animInfos.getTag()) {
@@ -34,7 +34,7 @@ SpriteAnimation::SpriteAnimation(JsonValue &animInfos)
 						vec.push_back(ymax);
 						std::copy(vec.begin(), vec.end(),
 							std::ostream_iterator<int>(std::cout, " "));
-						listFrame.push_back(vec);
+						listCoordSpriteByFrame.push_back(vec);
 					}
 				}
 
@@ -54,4 +54,34 @@ SpriteAnimation::~SpriteAnimation()
 std::string SpriteAnimation::getName()
 {
 	return this->name;
+}
+
+int SpriteAnimation::getSpriteXmin(int numFrame)
+{
+	return this->listCoordSpriteByFrame[numFrame][0];
+}
+
+int SpriteAnimation::getSpriteXmax(int numFrame)
+{
+	return this->listCoordSpriteByFrame[numFrame][1];
+}
+
+int SpriteAnimation::getSpriteYmin(int numFrame)
+{
+	return this->listCoordSpriteByFrame[numFrame][2];
+}
+
+int SpriteAnimation::getSpriteYmax(int numFrame)
+{
+	return this->listCoordSpriteByFrame[numFrame][3];
+}
+
+int SpriteAnimation::getTime()
+{
+	return this->time;
+}
+
+int SpriteAnimation::getSizeListFrame()
+{
+	return this->listCoordSpriteByFrame.size();
 }

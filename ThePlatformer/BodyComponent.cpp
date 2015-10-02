@@ -18,17 +18,34 @@ namespace GameComponents {
 
 	void BodyComponent::Update()
 	{
-		Integrate(0.3);
+		Integrate(0.3f);
 	}
 
 	void BodyComponent::Init()
 	{
 		position = glm::vec2(composition->getX(), composition->getY());
-		velocity = glm::vec2(0.0, 0.0);
-		acceleration = 0;
-		mass = 1;
-		gravity = 9.80;
-		forces = 0;
+		velocity = glm::vec2(0, 0);
+		acceleration = glm::vec2(0, 0);
+		mass = 20;
+		gravity = glm::vec2(0, 9.8);
+		forces = glm::vec2(0, 0);
+		onGround = false;
+	}
+
+	void BodyComponent::sendMessage(Message *message)
+	{
+		switch (message->id)
+		{
+		case Message::JUMP:
+			if (forces == (gravity / (1.0f / mass)) * (-1.0f))
+			{
+				forces = glm::vec2(0, -40.0f);
+				velocity = glm::vec2(0, -40.0f);
+				onGround = false;
+			}
+		default:
+			break;
+		}
 	}
 
 	void BodyComponent::Integrate(float dt)
@@ -36,37 +53,57 @@ namespace GameComponents {
 		position.x = composition->getX();
 		position.y = composition->getY();
 
-		double temp = acceleration * dt;
+		glm::vec2 newForces = (forces * (1.0f / mass));
 
-		position = glm::vec2(position.x /*+ (velocity.x * dt)*/, position.y + (dt * ((velocity.y + temp) / 2)));
+		acceleration = newForces + gravity;
+		velocity += acceleration * dt;
 
-		/*pos = pos + dt*(vel + temp / 2);
-		vel = vel + temp;*/
+		
 
+		std::cout << position.x << " " << position.y << "       " << velocity.x << " " << velocity.y << "           " << acceleration.x << " " << acceleration.y << std::endl;
 
-		//position = glm::vec2(position.x /*+ (velocity.x * dt)*/, position.y + (velocity.y * dt));
+		if (position.y > 500 && onGround == false)
+		{
+			std::cout << "plop" << std::endl;
+			acceleration = glm::vec2(0, 0);
+			velocity = glm::vec2(0, 0);
+			forces = (gravity / (1.0f / mass)) * (-1.0f);
+			position.y = 499;
+			onGround = true;
+
+		}
+		if (onGround == false) {
+			forces = forces + gravity;
+		}
+
+		//if (onGround == false)
+			position += velocity * dt;
+
+		
 
 		composition->setX(position.x);
 		composition->setY(position.y);
 
-		if (position.y < 550)
-		{
-		
-			acceleration = (forces * mass) + gravity;
-			velocity = glm::vec2(velocity.x + temp, velocity.y + temp);
-		}
-		else
-		{
-			acceleration = (forces * mass);
-			velocity.x = 0;
-			velocity.y = 0;
-		}
-
-
-		//if (velocity.x < 300 && velocity.y < 300)
-			//velocity = glm::vec2(velocity.x + (acceleration * dt), velocity.y + (acceleration * dt));
 
 	}
+
+	void BodyComponent::AddForce(float x, float y)
+	{
+		forces.x += x;
+		forces.y += y;
+	}
+
+	void BodyComponent::AddVelocity(float x, float y)
+	{
+		velocity.x += x;
+		velocity.y += y;
+	}
+
+
+
+
+
+		//position = glm::vec2(position.x /*+ (velocity.x * dt)*/, position.y + (dt * ((velocity + temp) / 2)));
 
 	void BodyComponent::setPositionX(int x)
 	{

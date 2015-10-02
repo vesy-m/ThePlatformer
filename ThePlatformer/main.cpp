@@ -1,4 +1,5 @@
 #include <SFML/Window.hpp>
+#include <SFML/Audio/Music.hpp>
 #include <GL/glew.h>
 #include <SFML/OpenGL.hpp>
 #include "GameEngine.h"
@@ -49,50 +50,47 @@ int main()
 
 	//background
 	GameObjects::BaseGameObject *background = new GameObjects::BaseGameObject();
-	GameComponents::SpriteComponent *backSprite = new GameComponents::SpriteComponent(background, std::string("mario_background.png"), GameComponents::FILE_TYPE::PNG);
+	GameComponents::SpriteComponent *backSprite = new GameComponents::SpriteComponent(background, std::string("forest.png"));
 	background->attachComponent((GameComponents::BaseComponent *)backSprite);
 	background->setX(0);
 	background->setY(0);
 	core.Add(background);
 
-	//platform
-	GameObjects::BaseGameObject *platform = new GameObjects::BaseGameObject();
-	GameComponents::SpriteComponent *platformSprite = new GameComponents::SpriteComponent(platform, std::string("mario_platform.png"), GameComponents::FILE_TYPE::PNG);
-	platform->setX(250);
-	platform->setY(600);
-	platform->attachComponent((GameComponents::BaseComponent *)platformSprite);
-
-	core.Add(platform);
-
 	//player
 	GameObjects::BaseGameObject *mario = new GameObjects::BaseGameObject();
 
 	GameComponents::InputComponent *inputComp = new GameComponents::InputComponent(mario);
-	GameComponents::SpriteComponent *spriteComp = new GameComponents::SpriteComponent(mario, std::string("desc-megaman.json"), GameComponents::FILE_TYPE::JSON);
+	GameComponents::SpriteComponent *spriteComp = new GameComponents::SpriteComponent(mario, std::string("desc-megaman.json"));
 	GameComponents::BodyComponent *bodyComp = new GameComponents::BodyComponent(mario);
 
-	mario->setX(400);
+	mario->setX(150);
+	mario->setY(400);
 	mario->attachComponent((GameComponents::BaseComponent *)inputComp);
 	mario->attachComponent((GameComponents::BaseComponent *)spriteComp);
 	mario->attachComponent((GameComponents::BaseComponent *)bodyComp);
 
 	core.Add(mario);
 
-//	//player 2 
-//	GameObjects::BaseGameObject *mario2 = new GameObjects::BaseGameObject();
-//
-//	GameComponents::InputComponent *inputComp2 = new GameComponents::InputComponent(mario2);
-//	GameComponents::SpriteComponent *spriteComp2 = new GameComponents::SpriteComponent(mario2, std::string("desc-metalslug.json"), GameComponents::FILE_TYPE::JSON);
-////	GameComponents::BodyComponent *bodyComp2 = new GameComponents::BodyComponent(mario2);
-//
-//	mario2->setX(100);
-//	mario2->setY(100);
-//	mario2->attachComponent((GameComponents::BaseComponent *)inputComp2);
-//	mario2->attachComponent((GameComponents::BaseComponent *)spriteComp2);
-////	mario2->attachComponent((GameComponents::BaseComponent *)bodyComp2);
-//
-//	core.Add(mario2);
+	//player 2 
+	GameObjects::BaseGameObject *mario2 = new GameObjects::BaseGameObject();
 
+	GameComponents::InputComponent *inputComp2 = new GameComponents::InputComponent(mario2);
+	GameComponents::SpriteComponent *spriteComp2 = new GameComponents::SpriteComponent(mario2, std::string("desc-metalslug.json"));
+//	GameComponents::BodyComponent *bodyComp2 = new GameComponents::BodyComponent(mario2);
+
+	mario2->setX(100);
+	mario2->setY(100);
+	//mario2->attachComponent((GameComponents::BaseComponent *)inputComp2);
+	mario2->attachComponent((GameComponents::BaseComponent *)spriteComp2);
+//	mario2->attachComponent((GameComponents::BaseComponent *)bodyComp2);
+
+	core.Add(mario2);
+
+
+	/*sf::Music music;
+	if (!music.openFromFile("dr_wily_stage.ogg"))
+		return -1;
+	music.play();*/
 
 	//start
 	core.Init();
