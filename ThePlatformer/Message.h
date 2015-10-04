@@ -11,6 +11,7 @@ public:
 		LEFT = 1,
 		RIGHT = 2,
 		COLLISION = 3,
+		DEBUGVECTOR = 4,
 	};
 
 	Message();
