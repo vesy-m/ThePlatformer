@@ -9,7 +9,10 @@ public:
 	{
 		JUMP = 0,
 		LEFT = 1,
-		RIGHT = 2
+		RIGHT = 2,
+		DEFAULT = 3,
+		DEBUGVECTOR = 4
+
 	};
 
 	Message(MessageId);

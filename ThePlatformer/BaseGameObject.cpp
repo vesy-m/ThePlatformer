@@ -4,6 +4,10 @@ namespace GameObjects {
 	BaseGameObject::BaseGameObject()
 	{
 		this->componentsList = std::vector<GameComponents::BaseComponent*>();
+		x = 0;
+		y = 0;
+		height = 0;
+		width = 0;
 	}
 
 	BaseGameObject::~BaseGameObject()
@@ -56,5 +60,22 @@ namespace GameObjects {
 	int BaseGameObject::getY()
 	{
 		return this->y;
+	}
+	int BaseGameObject::getHeight()
+	{
+		return this->height;
+	}
+
+	int BaseGameObject::getWidth()
+	{
+		return this->width;
+	}
+	void BaseGameObject::setHeight(int height)
+	{
+		this->height = height;
+	}
+	void BaseGameObject::setWidth(int width)
+	{
+		this->width = width;
 	}
 }

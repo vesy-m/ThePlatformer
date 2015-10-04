@@ -13,7 +13,6 @@
 
 int main()
 {
-	
 	GameEngine::Core core = GameEngine::Core();
 	//systems
 	GameSystems::WindowInputSytem *winInput = new GameSystems::WindowInputSytem();

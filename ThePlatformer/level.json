@@ -10,7 +10,12 @@
       "name" : "megaman",
       "x" : 150,
       "y" : 500,
-      "sprite" : "desc-megaman.json"
+      "height" : 42,
+      "width" : 30,
+      "sprite" : "desc-megaman.json",
+      "input" : true,
+      "body" : true,
+      "vector" : true
     }
   ]
 }

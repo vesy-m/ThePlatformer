@@ -4,6 +4,7 @@
 
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Mouse.hpp>
+#include <SFML\Window.hpp>
 #include <map>
 #include "BaseGameObject.h"
 
@@ -26,6 +27,7 @@ namespace GameComponents {
 
 		COMPONENT_TYPE getType();
 		void Update();
+		void UpdateInputState(sf::Event);
 		void Init();
 		void sendMessage(Message*);
 		void setKeyboardKey(INPUT_TYPE inputType, sf::Keyboard::Key key);
@@ -33,6 +35,7 @@ namespace GameComponents {
 
 	private:
 		const COMPONENT_TYPE componentType = WINDOW;
+		std::map<INPUT_TYPE, bool> inputState;
 		std::map<INPUT_TYPE, sf::Keyboard::Key> keyboardMap;
 		std::map<INPUT_TYPE, sf::Mouse::Button> mouseMap;
 	};

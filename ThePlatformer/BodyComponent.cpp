@@ -83,6 +83,8 @@ namespace GameComponents {
 
 		composition->setX(position.x);
 		composition->setY(position.y);
+		vectorMessage *vec = new vectorMessage(Message::DEBUGVECTOR, velocity);
+		this->composition->SendMessage((Message *)vec);
 
 
 	}
