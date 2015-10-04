@@ -49,6 +49,15 @@
     <Filter Include="GameComponents\Source">
       <UniqueIdentifier>{c49d665b-26f2-44e9-9d88-da3fc64294f3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameMessages">
+      <UniqueIdentifier>{d340447b-5d63-46c1-9d71-96df58423dfa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameMessages\Source">
+      <UniqueIdentifier>{817ede3c-3151-4a3a-8b66-3a2fc1455be2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameMessages\Header">
+      <UniqueIdentifier>{fe3149a4-64ba-45c4-8b0a-efbf7c139c13}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -112,7 +121,7 @@
       <Filter>GameEngineCore\Source</Filter>
     </ClCompile>
     <ClCompile Include="Message.cpp">
-      <Filter>Fichiers sources</Filter>
+      <Filter>GameMessages\Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -180,7 +189,7 @@
       <Filter>GameEngineCore\Header</Filter>
     </ClInclude>
     <ClInclude Include="Message.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+      <Filter>GameMessages\Header</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

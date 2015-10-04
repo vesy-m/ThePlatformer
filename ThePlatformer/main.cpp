@@ -72,19 +72,19 @@ int main()
 	core.Add(mario);
 
 	//player 2 
-	GameObjects::BaseGameObject *mario2 = new GameObjects::BaseGameObject();
+	//GameObjects::BaseGameObject *mario2 = new GameObjects::BaseGameObject();
 
-	GameComponents::InputComponent *inputComp2 = new GameComponents::InputComponent(mario2);
-	GameComponents::SpriteComponent *spriteComp2 = new GameComponents::SpriteComponent(mario2, std::string("desc-metalslug.json"));
+	//GameComponents::InputComponent *inputComp2 = new GameComponents::InputComponent(mario2);
+	//GameComponents::SpriteComponent *spriteComp2 = new GameComponents::SpriteComponent(mario2, std::string("desc-metalslug.json"));
 //	GameComponents::BodyComponent *bodyComp2 = new GameComponents::BodyComponent(mario2);
 
-	mario2->setX(100);
-	mario2->setY(100);
+	//mario2->setX(100);
+	//mario2->setY(100);
 	//mario2->attachComponent((GameComponents::BaseComponent *)inputComp2);
-	mario2->attachComponent((GameComponents::BaseComponent *)spriteComp2);
+	//mario2->attachComponent((GameComponents::BaseComponent *)spriteComp2);
 //	mario2->attachComponent((GameComponents::BaseComponent *)bodyComp2);
 
-	core.Add(mario2);
+	//core.Add(mario2);
 
 
 	/*sf::Music music;
