@@ -26,6 +26,10 @@ namespace GameComponents {
 	{
 	}
 
+	void BoxCollider::sendMessage(Message *message)
+	{
+	}
+
 	bool BoxCollider::Collide(BoxCollider *other)
 	{
 		// Exit with no intersection if found separated along an axis
@@ -68,6 +72,10 @@ namespace GameComponents {
 	{
 	}
 
+	void CircleCollider::sendMessage(Message *message)
+	{
+	}
+
 	bool CircleCollider::Collide(BoxCollider * other)
 	{
 		return false;
@@ -80,15 +88,9 @@ namespace GameComponents {
 		return r < pow((this->pos.x + other->pos.x), 2) + pow((this->pos.y + other->pos.y), 2);
 	}
 
-	HexagonCollider::HexagonCollider()
-	{
-	
-	}
 
-	HexagonCollider::HexagonCollider(float width, float height)
+	HexagonCollider::HexagonCollider(GameObjects::BaseGameObject *object) : BaseComponent(object)
 	{
-		this->width = width;
-		this->height = height;
 	}
 
 	HexagonCollider::~HexagonCollider()
@@ -101,9 +103,50 @@ namespace GameComponents {
 
 	void HexagonCollider::Update()
 	{
+		bool isCollide = false;
+		glm::vec2 velocity = glm::vec2(0, 0);
+		glm::vec2 pos = glm::vec2(this->composition->getX(), this->composition->getY());
+		//pour tout les objects avec un collider
+		//optimiser selon l'eloignement
+		BoxCollider *other = new BoxCollider(glm::vec2(100, 480), glm::vec2(150, 510));
+		if (this->CollideTop(other))
+		{
+			isCollide = true;
+			velocity += glm::vec2(0, 1);
+			pos = glm::vec2(pos.x, other->max.y + 1);
+		}
+		if (this->CollideDown(other))
+		{
+			isCollide = true;
+			velocity += glm::vec2(0, 1);
+			pos = glm::vec2(pos.x, other->min.y - 1);
+		}
+		if (this->CollideTopLeft(other) || this->CollideDownLeft(other))
+		{
+			isCollide = true;
+			velocity += glm::vec2(1, 0);
+			pos = glm::vec2(other->max.x + 1, pos.y);
+		}
+		if (this->CollideTopRight(other) || this->CollideDownRight(other))
+		{
+			isCollide = true;
+			velocity += glm::vec2(1, 0);
+			pos = glm::vec2(other->min.x - 1, pos.y);
+		}
+
+		if (isCollide)
+		{
+			std::cout << "JE SUIS EN TRAIN DE COLLIDER PARCE QUE C'EST COOOOL !!!" << std::endl;
+			CollisionMessage *msg = new CollisionMessage(pos, velocity);
+			this->composition->SendMessage((Message*)msg);
+		}
 	}
 
 	void HexagonCollider::Init()
+	{
+	}
+
+	void HexagonCollider::sendMessage(Message *message)
 	{
 	}
 
@@ -114,27 +157,27 @@ namespace GameComponents {
 
 	bool HexagonCollider::CollideDown(BoxCollider *other)
 	{
-		return (this->composition->getY() + this->height <= other->min.y);
+		return (this->composition->getY() + this->composition->getHeight() <= other->min.y);
 	}
 
 	bool HexagonCollider::CollideTopLeft(BoxCollider *other)
 	{
-		return ((this->composition->getX() <= other->min.x) || (this->composition->getY() + (this->height / 5) >= other->max.y));
+		return ((this->composition->getX() <= other->min.x) || (this->composition->getY() + (this->composition->getHeight() / 5) >= other->max.y));
 	}
 
 	bool HexagonCollider::CollideTopRight(BoxCollider *other)
 	{
-		return ((this->composition->getX() + this->width <= other->max.x) || (this->composition->getY() + (this->height / 5) >= other->max.y));
+		return ((this->composition->getX() + this->composition->getWidth() <= other->max.x) || (this->composition->getY() + (this->composition->getHeight() / 5) >= other->max.y));
 	}
 
 	bool HexagonCollider::CollideDownLeft(BoxCollider *other)
 	{
-		return ((this->composition->getX() <= other->min.x) || (this->composition->getY() + this->height - this->height / 5 <= other->min.y));
+		return ((this->composition->getX() <= other->min.x) || (this->composition->getY() + this->composition->getHeight() - this->composition->getHeight() / 5 <= other->min.y));
 	}
 
 	bool HexagonCollider::CollideDownRight(BoxCollider *other)
 	{
-		return ((this->composition->getX() + this->width <= other->max.x) || (this->composition->getY() + this->height - this->height / 5 <= other->min.y));
+		return ((this->composition->getX() + this->composition->getWidth() <= other->max.x) || (this->composition->getY() + this->composition->getHeight() - this->composition->getHeight() / 5 <= other->min.y));
 	}
 
 	CollisionMessage::CollisionMessage(glm::vec2 pos, glm::vec2 velocity)

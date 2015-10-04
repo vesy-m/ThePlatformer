@@ -11,6 +11,7 @@
 #include "InputComponent.h"
 #include "SpriteSheet.h"
 #include "VectorDebugComponent.h"
+#include "Collider.h"
 
 //#include <glm/fwd.hpp>
 //// Source file
@@ -64,6 +65,7 @@ int main()
 	GameComponents::SpriteComponent *spriteComp = new GameComponents::SpriteComponent(mario, std::string("desc-megaman.json"));
 	GameComponents::BodyComponent *bodyComp = new GameComponents::BodyComponent(mario);
 	GameComponents::VectorDebugComponent *vectorComp = new GameComponents::VectorDebugComponent(mario);
+	GameComponents::HexagonCollider *colliderComp = new GameComponents::HexagonCollider(mario);
 
 	mario->setX(150);
 	mario->setY(400);
@@ -73,6 +75,7 @@ int main()
 	mario->attachComponent((GameComponents::BaseComponent *)spriteComp);
 	mario->attachComponent((GameComponents::BaseComponent *)bodyComp);
 	mario->attachComponent((GameComponents::BaseComponent *)vectorComp);
+	mario->attachComponent((GameComponents::BaseComponent *)colliderComp);
 
 	core.Add(mario);
 

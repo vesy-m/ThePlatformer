@@ -20,6 +20,7 @@ namespace GameComponents {
 		COMPONENT_TYPE getType();
 		void Update();
 		void Init();
+		void sendMessage(Message*);
 
 		bool Collide(BoxCollider *other);
 		bool Collide(CircleCollider *other);
@@ -39,6 +40,7 @@ namespace GameComponents {
 		COMPONENT_TYPE getType();
 		void Update();
 		void Init();
+		void sendMessage(Message*);
 
 		bool Collide(BoxCollider *other);
 		bool Collide(CircleCollider *other);
@@ -51,13 +53,13 @@ namespace GameComponents {
 	class HexagonCollider : BaseComponent
 	{
 	public:
-		HexagonCollider();
-		HexagonCollider(float width, float height);
+		HexagonCollider(GameObjects::BaseGameObject *);
 		~HexagonCollider();
 
 		COMPONENT_TYPE getType();
 		void Update();
 		void Init();
+		void sendMessage(Message*);
 
 		bool CollideTop(BoxCollider *other);
 		bool CollideDown(BoxCollider *other);
@@ -67,9 +69,6 @@ namespace GameComponents {
 		bool CollideDownRight(BoxCollider *other);
 
 	private:
-		float width;
-		float height;
-
 		glm::vec2 top;
 		glm::vec2 down;
 		glm::vec2 top_left;
