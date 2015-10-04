@@ -7,11 +7,15 @@ public:
 
 	enum MessageId
 	{
-		JUMP = 0,
-		LEFT = 1,
-		RIGHT = 2,
-		DEFAULT = 3,
-		DEBUGVECTOR = 4
+		JUMP,
+		JUMP_RELEASED,
+		LEFT,
+		LEFT_RELEASED,
+		RIGHT,
+		RIGHT_RELEASED,
+		DEFAULT,
+		DEBUGVECTOR,
+
 
 	};
 

@@ -57,6 +57,7 @@ namespace GameSystems {
 	{
 		this->window = new sf::Window(sf::VideoMode(1360, 768), "OpenGL", sf::Style::Default, sf::ContextSettings(32));
 		window->setVerticalSyncEnabled(false);
+		window->setKeyRepeatEnabled(true);
 		for each (GameObjects::BaseGameObject* object in listObjects)
 		{
 			std::vector<GameComponents::BaseComponent*> componentList = object->getComponents(GameComponents::COMPONENT_TYPE::WINDOW);

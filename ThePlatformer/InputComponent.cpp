@@ -19,21 +19,21 @@ namespace GameComponents {
 	{
 		for (std::map<INPUT_TYPE, bool>::iterator it = this->inputState.begin(); it != this->inputState.end(); ++it)
 		{
-			if (it->first == LEFT && it->second == true)
+			if (it->first == INPUT_TYPE::LEFT && it->second == true)
 			{
 				std::cout << "LEFT" << std::endl;
 				this->composition->SendMessage(new Message(Message::LEFT));
-				this->composition->setX(this->composition->getX() - 3);
+				//this->composition->setX(this->composition->getX() - 3);
 			}
-			if (it->first == RIGHT && it->second == true)
+			if (it->first == INPUT_TYPE::RIGHT && it->second == true)
 			{
 				std::cout << "RIGHT" << std::endl;
 				this->composition->SendMessage(new Message(Message::RIGHT));
-				this->composition->setX(this->composition->getX() + 3);
+				//this->composition->setX(this->composition->getX() + 3);
 
 			}
 
-			if (it->first == JUMP && it->second == true)
+			if (it->first == INPUT_TYPE::JUMP && it->second == true)
 			{
 				this->composition->SendMessage(new Message(Message::JUMP));
 				std::cout << "JUMP" << std::endl;
@@ -54,10 +54,23 @@ namespace GameComponents {
 			}
 			else if(event.type == sf::Event::KeyReleased)
 			{
-				if (event.key.code == it->second /*sf::Keyboard::isKeyPressed(it->second)*/)
+				if (event.key.code == it->second)
 				{
-					inputState.at(it->first) = false;
-					this->composition->SendMessage(new Message(Message::DEFAULT));
+					if (it->first != INPUT_TYPE::JUMP)
+						inputState.at(it->first) = false;
+					switch (it->first)
+					{
+						case INPUT_TYPE::LEFT:
+							this->composition->SendMessage(new Message(Message::LEFT_RELEASED));
+							break;
+
+						case INPUT_TYPE::RIGHT:
+							this->composition->SendMessage(new Message(Message::RIGHT_RELEASED));
+							break;
+
+						default:
+							break;
+					}
 				}
 			}
 		}
@@ -89,8 +102,16 @@ namespace GameComponents {
 		this->mouseMap.emplace(SPECIAL, sf::Mouse::Right);
 	}
 
-	void InputComponent::sendMessage(Message*)
+	void InputComponent::sendMessage(Message* message)
 	{
+		switch (message->id)
+		{
+		case Message::JUMP_RELEASED:
+			inputState.at(INPUT_TYPE::JUMP) = false;
+			break;
+		default:
+			break;
+		}
 	}
 
 	void InputComponent::setKeyboardKey(INPUT_TYPE inputType, sf::Keyboard::Key key)

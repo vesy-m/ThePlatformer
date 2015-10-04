@@ -39,7 +39,9 @@ namespace GameComponents {
 					currentAnim = "jump";
 				}
 				break;
-			case Message::DEFAULT:
+			case Message::LEFT_RELEASED:
+			case Message::JUMP_RELEASED:
+			case Message::RIGHT_RELEASED:
 				if (std::string("default").compare(currentAnim) != 0) {
 					currentFrame = 0;
 					currentAnim = "default";
