@@ -15,6 +15,7 @@ public:
 		RIGHT_RELEASED,
 		DEFAULT,
 		DEBUGVECTOR,
+		COLLISION,
 
 
 	};
