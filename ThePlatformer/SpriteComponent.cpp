@@ -78,8 +78,8 @@ namespace GameComponents {
 			height = anim.getSpriteYmax(currentFrame) - anim.getSpriteYmin(currentFrame);
 			width = anim.getSpriteXmax(currentFrame) - anim.getSpriteXmin(currentFrame);
 
-			// center the x position
-			posX = this->composition->getX() - (width / 2);
+			// center the x position for each sprite in function of it width
+			posX = this->composition->getX() + (this->composition->getWidth() / 2) - (width / 2) ;
 			posY = this->composition->getY();
 				
 			xmin = (float)(anim.getSpriteXmin(currentFrame)) / (float)texture->getWidth();
