@@ -1,4 +1,5 @@
 #include <SFML/Window.hpp>
+#include <SFML/Audio/Music.hpp>
 #include <GL/glew.h>
 #include <SFML/OpenGL.hpp>
 #include "GameEngine.h"
@@ -51,7 +52,8 @@ int main()
 	GameObjects::BaseGameObject *background = new GameObjects::BaseGameObject();
 	GameComponents::SpriteComponent *backSprite = new GameComponents::SpriteComponent(background, std::string("forest.png"));
 	background->attachComponent((GameComponents::BaseComponent *)backSprite);
-	
+	background->setX(0);
+	background->setY(0);
 	core.Add(background);
 
 	//player
@@ -61,7 +63,8 @@ int main()
 	GameComponents::SpriteComponent *spriteComp = new GameComponents::SpriteComponent(mario, std::string("desc-megaman.json"));
 	GameComponents::BodyComponent *bodyComp = new GameComponents::BodyComponent(mario);
 
-	mario->setX(400);
+	mario->setX(150);
+	mario->setY(400);
 	mario->attachComponent((GameComponents::BaseComponent *)inputComp);
 	mario->attachComponent((GameComponents::BaseComponent *)spriteComp);
 	mario->attachComponent((GameComponents::BaseComponent *)bodyComp);
@@ -77,63 +80,21 @@ int main()
 
 	mario2->setX(100);
 	mario2->setY(100);
-	mario2->attachComponent((GameComponents::BaseComponent *)inputComp2);
+	//mario2->attachComponent((GameComponents::BaseComponent *)inputComp2);
 	mario2->attachComponent((GameComponents::BaseComponent *)spriteComp2);
 //	mario2->attachComponent((GameComponents::BaseComponent *)bodyComp2);
 
 	core.Add(mario2);
 
 
+	/*sf::Music music;
+	if (!music.openFromFile("dr_wily_stage.ogg"))
+		return -1;
+	music.play();*/
+
 	//start
 	core.Init();
 	core.MainLoop();
 
-
-/*
-    // create the window
-    sf::Window window(sf::VideoMode(800, 600), "OpenGL", sf::Style::Default, sf::ContextSettings(32));
-    window.setVerticalSyncEnabled(true);
-
-    // load resources, initialize the OpenGL states, ...
-	GLenum err = glewInit();
-	if (GLEW_OK != err)
-	{
-		// Problem: glewInit failed, something is seriously wrong. 
-		fprintf(stderr, "Error: %s\n", glewGetErrorString(err));
-		return (1);
-	}
-	fprintf(stdout, "Status: Using GLEW %s\n", glewGetString(GLEW_VERSION));
-
-    // run the main loop
-    bool running = true;
-    while (running)
-    {
-        // handle events
-        sf::Event event;
-        while (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-            {
-                // end the program
-                running = false;
-            }
-            else if (event.type == sf::Event::Resized)
-            {
-                // adjust the viewport when the window is resized
-				glViewport(0, 0, event.size.width, event.size.height);
-            }
-        }
-
-        // clear the buffers
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-        // draw...
-
-        // end the current frame (internally swaps the front and back buffers)
-        window.display();
-    }
-
-    // release resources...
-*/
     return (0);
 }

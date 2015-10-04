@@ -37,7 +37,7 @@ namespace GameSystems {
 
 	void WindowInputSytem::Init(std::list<GameObjects::BaseGameObject*>& listObjects)
 	{
-		this->window = new sf::Window(sf::VideoMode(800, 600), "OpenGL", sf::Style::Default, sf::ContextSettings(32));
+		this->window = new sf::Window(sf::VideoMode(1360, 768), "OpenGL", sf::Style::Default, sf::ContextSettings(32));
 		window->setVerticalSyncEnabled(false);
 		for each (GameObjects::BaseGameObject* object in listObjects)
 		{

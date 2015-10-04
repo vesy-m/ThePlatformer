@@ -111,6 +111,9 @@
     <ClCompile Include="TimeManager.cpp">
       <Filter>GameEngineCore\Source</Filter>
     </ClCompile>
+    <ClCompile Include="Message.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
     <ClCompile Include="VectorDebugComponent.cpp">
       <Filter>GameComponents\Source</Filter>
     </ClCompile>
@@ -155,9 +158,6 @@
     <ClInclude Include="InputComponent.h">
       <Filter>GameComponents\Header</Filter>
     </ClInclude>
-    <ClInclude Include="TIme.h">
-      <Filter>GameEngineCore\Header</Filter>
-    </ClInclude>
     <ClInclude Include="gason.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
@@ -181,6 +181,9 @@
     </ClInclude>
     <ClInclude Include="TimeManager.h">
       <Filter>GameEngineCore\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Message.h">
+      <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="VectorDebugComponent.h">
       <Filter>GameComponents\Header</Filter>

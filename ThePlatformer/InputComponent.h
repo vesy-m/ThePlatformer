@@ -27,6 +27,7 @@ namespace GameComponents {
 		COMPONENT_TYPE getType();
 		void Update();
 		void Init();
+		void sendMessage(Message*);
 		void setKeyboardKey(INPUT_TYPE inputType, sf::Keyboard::Key key);
 		void setMouseButton(INPUT_TYPE inputType, sf::Mouse::Button button);
 

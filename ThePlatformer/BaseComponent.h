@@ -4,6 +4,8 @@
 
 #include <iostream>
 #include "BaseGameObject.h"
+#include "Message.h"
+
 namespace GameObjects {
 	class BaseGameObject;
 }
@@ -26,6 +28,7 @@ namespace GameComponents {
 		virtual COMPONENT_TYPE getType() = 0;
 		virtual void Update() = 0;
 		virtual void Init() = 0;
+		virtual void sendMessage(Message*) = 0;
 	protected:
 		GameObjects::BaseGameObject *composition;
 	};
