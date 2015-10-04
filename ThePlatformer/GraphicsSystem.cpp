@@ -15,12 +15,20 @@ namespace GameSystems {
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glPushAttrib(GL_DEPTH_BUFFER_BIT | GL_LIGHTING_BIT);
-		glEnable(GL_TEXTURE_2D);
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		glColor3f(1.0f, 1.0f, 1.0f);
 		for each (GameObjects::BaseGameObject* object in listObjects)
 		{
 			std::vector<GameComponents::BaseComponent*> componentList = object->getComponents(GameComponents::COMPONENT_TYPE::SPRITE);
+			for each (GameComponents::BaseComponent* component in componentList)
+			{
+				component->Update();
+			}
+		}
+		for each (GameObjects::BaseGameObject* object in listObjects)
+		{
+			std::vector<GameComponents::BaseComponent*> componentList = object->getComponents(GameComponents::COMPONENT_TYPE::DEBUGVECTOR);
 			for each (GameComponents::BaseComponent* component in componentList)
 			{
 				component->Update();
@@ -34,6 +42,14 @@ namespace GameSystems {
 		for each (GameObjects::BaseGameObject* object in listObjects)
 		{
 			std::vector<GameComponents::BaseComponent*> componentList = object->getComponents(GameComponents::COMPONENT_TYPE::SPRITE);
+			for each (GameComponents::BaseComponent* component in componentList)
+			{
+				component->Init();
+			}
+		}
+		for each (GameObjects::BaseGameObject* object in listObjects)
+		{
+			std::vector<GameComponents::BaseComponent*> componentList = object->getComponents(GameComponents::COMPONENT_TYPE::DEBUGVECTOR);
 			for each (GameComponents::BaseComponent* component in componentList)
 			{
 				component->Init();

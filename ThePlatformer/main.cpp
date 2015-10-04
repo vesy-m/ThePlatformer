@@ -10,6 +10,7 @@
 #include "SpriteComponent.h"
 #include "InputComponent.h"
 #include "SpriteSheet.h"
+#include "VectorDebugComponent.h"
 
 //#include <glm/fwd.hpp>
 //// Source file
@@ -62,12 +63,16 @@ int main()
 	GameComponents::InputComponent *inputComp = new GameComponents::InputComponent(mario);
 	GameComponents::SpriteComponent *spriteComp = new GameComponents::SpriteComponent(mario, std::string("desc-megaman.json"));
 	GameComponents::BodyComponent *bodyComp = new GameComponents::BodyComponent(mario);
+	GameComponents::VectorDebugComponent *vectorComp = new GameComponents::VectorDebugComponent(mario);
 
 	mario->setX(150);
 	mario->setY(400);
+	mario->setHeight(42);
+	mario->setWidth(30);
 	mario->attachComponent((GameComponents::BaseComponent *)inputComp);
 	mario->attachComponent((GameComponents::BaseComponent *)spriteComp);
 	mario->attachComponent((GameComponents::BaseComponent *)bodyComp);
+	mario->attachComponent((GameComponents::BaseComponent *)vectorComp);
 
 	core.Add(mario);
 

@@ -49,6 +49,8 @@ namespace GameComponents {
 		GLint width = texture->getWidth();
 		GLint height = texture->getHeight();
 
+		glEnable(GL_TEXTURE_2D);
+
 		if (sheet->isAnimated()) {
 			SpriteAnimation anim = sheet->getAnim(this->currentAnim);
 
@@ -95,6 +97,8 @@ namespace GameComponents {
 			glTexCoord2f(xmax, ymin); glVertex2i(pointXWidth, pointYHeight);
 			glTexCoord2f(xmin, ymin); glVertex2i(pointX, pointYHeight);
 		glEnd();
+
+		glDisable(GL_TEXTURE_2D);
 	}
 
 	void SpriteComponent::Init()
