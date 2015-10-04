@@ -177,6 +177,7 @@ copy /Y "$(ProjectDir)\lib\glew-1.13.0\bin\*" "$(OutDir)\"</Command>
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="TimeManager.cpp" />
+    <ClCompile Include="VectorDebugComponent.cpp" />
     <ClCompile Include="WindowInputSytem.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -201,6 +202,7 @@ copy /Y "$(ProjectDir)\lib\glew-1.13.0\bin\*" "$(OutDir)\"</Command>
     <ClInclude Include="SpriteComponent.h" />
     <ClInclude Include="System.h" />
     <ClInclude Include="TimeManager.h" />
+    <ClInclude Include="VectorDebugComponent.h" />
     <ClInclude Include="WindowInputSytem.h" />
   </ItemGroup>
   <ItemGroup>

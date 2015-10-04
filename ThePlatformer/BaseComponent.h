@@ -13,7 +13,8 @@ namespace GameComponents {
 		WINDOW,
 		SPRITE,
 		LOGIC,
-		PHYSIC
+		PHYSIC,
+		DEBUGVECTOR
 	};
 
 	class BaseComponent

@@ -111,6 +111,9 @@
     <ClCompile Include="TimeManager.cpp">
       <Filter>GameEngineCore\Source</Filter>
     </ClCompile>
+    <ClCompile Include="VectorDebugComponent.cpp">
+      <Filter>GameComponents\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -178,6 +181,9 @@
     </ClInclude>
     <ClInclude Include="TimeManager.h">
       <Filter>GameEngineCore\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="VectorDebugComponent.h">
+      <Filter>GameComponents\Header</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
