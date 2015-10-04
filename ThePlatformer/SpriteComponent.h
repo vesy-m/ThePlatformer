@@ -21,7 +21,7 @@ namespace GameComponents {
 	class SpriteComponent : BaseComponent
 	{
 	public:
-		SpriteComponent(GameObjects::BaseGameObject *, std::string &fileName);
+		SpriteComponent(GameObjects::BaseGameObject *, const std::string &fileName);
 		~SpriteComponent();
 		COMPONENT_TYPE getType();
 		void Update();

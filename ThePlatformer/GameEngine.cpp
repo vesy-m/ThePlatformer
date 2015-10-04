@@ -4,6 +4,8 @@
 #include <iomanip>
 #include "GameEngine.h"
 #include "System.h"
+#include "JSONParser.h"
+#include "ObjectFactory.h"
 
 namespace GameEngine {
 	Core::Core() {
@@ -15,6 +17,11 @@ namespace GameEngine {
 			delete *it;
 	}
 	
+	void Core::LoadLevelFile(const std::string &filename) {
+		GameSystems::JSONParser fileParser(filename);
+		GameSystems::ObjectFactory::buildLevel(fileParser.getJSONValue(), this->m_objects);
+	}
+
 	void Core::Init(void) {
 		this->m_manager = new TimeManager("../log_file.txt");
 		for each (GameSystems::System* system in this->m_systems)

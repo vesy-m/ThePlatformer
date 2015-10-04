@@ -1,7 +1,8 @@
+#include "JSONParser.h"
 #include "SpriteSheet.h"
 
 
-SpriteSheet::SpriteSheet(std::string & filename)
+SpriteSheet::SpriteSheet(const std::string & filename)
 {
 	std::string extension = getExtension(filename);
 	if (std::string("json").compare(extension) == 0) {
@@ -20,33 +21,9 @@ SpriteSheet::~SpriteSheet()
 
 }
 
-
 std::string SpriteSheet::getExtension(const std::string& filename) {
 	return filename.substr(filename.find_last_of(".") + 1);
 }
-
-char	*SpriteSheet::readfile(const std::string & fileName)
-{
-	std::string line;
-	std::stringstream cacheFile = std::stringstream();
-	std::ifstream myfile(fileName);
-	if (myfile.is_open())
-	{
-		while (getline(myfile, line))
-		{
-			cacheFile << line << '\n';
-		}
-		myfile.close();
-	}
-	else {
-		std::cout << "Unable to open file";
-	}
-	std::string tmp = cacheFile.str();
-	char *cstr = new char[tmp.length() + 1];
-	strcpy_s(cstr, tmp.length() + 1, tmp.c_str());
-	return cstr;
-}
-
 
 int			SpriteSheet::parseSheetFile(JsonValue o) {
 	switch (o.getTag()) {
@@ -69,18 +46,10 @@ int			SpriteSheet::parseSheetFile(JsonValue o) {
 	return 0;
 }
 
-int			SpriteSheet::loadAndParseJsonFile(const std::string & filename)
+int			SpriteSheet::loadAndParseJsonFile(const std::string &filename)
 {
-	char	*jsonFile = readfile(filename);
-	char	*endptr;
-	JsonValue value;
-	JsonAllocator allocator;
-	int status = jsonParse(jsonFile, &endptr, &value, allocator);
-	if (status != JSON_OK) {
-		fprintf(stderr, "%s at %zd\n", jsonStrError(status), endptr - jsonFile);
-		exit(EXIT_FAILURE);
-	}
-	parseSheetFile(value);
+	GameSystems::JSONParser parser(filename);
+	parseSheetFile(parser.getJSONValue());
 	return 0;
 }
 

@@ -14,12 +14,11 @@
 class SpriteSheet
 {
 public:
-	SpriteSheet(std::string &jsonfileName);
+	SpriteSheet(const std::string &jsonfileName);
 	~SpriteSheet();
 	std::string getExtension(const std::string & filename);
 	int		parseSheetFile(JsonValue o);
 	int		loadAndParseJsonFile(const std::string &filename);
-	char	*readfile(const std::string & jsonfileName);
 	int		loadPngFile(const std::string &filename);
 	bool	isAnimated();
 	const SpriteAnimation & getAnim(const std::string & animName);

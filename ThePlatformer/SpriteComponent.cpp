@@ -1,7 +1,7 @@
 #include "SpriteComponent.h"
 
 namespace GameComponents {
-	SpriteComponent::SpriteComponent(GameObjects::BaseGameObject *object, std::string &fileName) : BaseComponent(object)
+	SpriteComponent::SpriteComponent(GameObjects::BaseGameObject *object, const std::string &fileName) : BaseComponent(object)
 	{
 		_fileName = fileName;
 		revertX = false;
