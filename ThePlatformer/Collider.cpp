@@ -180,9 +180,8 @@ namespace GameComponents {
 		return ((this->composition->getX() + this->composition->getWidth() <= other->max.x) || (this->composition->getY() + this->composition->getHeight() - this->composition->getHeight() / 5 <= other->min.y));
 	}
 
-	CollisionMessage::CollisionMessage(glm::vec2 pos, glm::vec2 velocity)
+	CollisionMessage::CollisionMessage(glm::vec2 pos, glm::vec2 velocity) : Message(COLLISION)
 	{
-		this->id = COLLISION;
 		this->pos = pos;
 		this->velocity = velocity;
 	}

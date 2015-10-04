@@ -39,10 +39,23 @@ namespace GameComponents {
 		case Message::JUMP:
 			if (forces == (gravity / (1.0f / mass)) * (-1.0f))
 			{
-				forces = glm::vec2(0, -40.0f);
-				velocity = glm::vec2(0, -40.0f);
+				forces.y = -50.0f;
+				velocity.y = -50.0f;
 				onGround = false;
 			}
+			break;
+		case Message::RIGHT:
+			velocity.x = 20.0f;
+			break;
+		case Message::LEFT:
+			velocity.x = -20.0f;
+			break;
+		case Message::RIGHT_RELEASED:
+			velocity.x -= 20.0f;
+			break;
+		case Message::LEFT_RELEASED:
+			velocity.x -= -20.0f;
+			break;
 		default:
 			break;
 		}
@@ -70,7 +83,7 @@ namespace GameComponents {
 			forces = (gravity / (1.0f / mass)) * (-1.0f);
 			position.y = 499;
 			onGround = true;
-
+			this->composition->SendMessage(new Message(Message::JUMP_RELEASED));
 		}
 		if (onGround == false) {
 			forces = forces + gravity;
