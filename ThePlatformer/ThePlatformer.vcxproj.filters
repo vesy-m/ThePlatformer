@@ -123,14 +123,14 @@
     <ClCompile Include="Message.cpp">
       <Filter>GameMessages\Source</Filter>
     </ClCompile>
-    <ClCompile Include="vectorMessage.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
     <ClCompile Include="JSONParser.cpp">
       <Filter>GameEngineCore\Source</Filter>
     </ClCompile>
     <ClCompile Include="Collider.cpp">
       <Filter>GameComponents\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="VectorMessage.cpp">
+      <Filter>GameMessages\Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -200,14 +200,14 @@
     <ClInclude Include="Message.h">
       <Filter>GameMessages\Header</Filter>
     </ClInclude>
-    <ClInclude Include="vectorMessage.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
     <ClInclude Include="JSONParser.h">
       <Filter>GameEngineCore\Header</Filter>
     </ClInclude>
     <ClInclude Include="Collider.h">
       <Filter>GameComponents\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="VectorMessage.h">
+      <Filter>GameMessages\Header</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

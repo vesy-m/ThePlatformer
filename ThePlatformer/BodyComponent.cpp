@@ -30,6 +30,8 @@ namespace GameComponents {
 		gravity = glm::vec2(0, 9.8);
 		forces = glm::vec2(0, 0);
 		onGround = false;
+		lastCollisionVelocity = glm::vec2(0, 0);
+		isColliding = false;
 	}
 
 	void BodyComponent::sendMessage(Message *message)
@@ -45,19 +47,38 @@ namespace GameComponents {
 			}
 			break;
 		case Message::RIGHT:
-			velocity.x = 20.0f;
+			//if (!isColliding && lastCollisionVelocity.x <= 0)
+				velocity.x = 20.0f;
+			//else
+				isColliding = false;
 			break;
 		case Message::LEFT:
-			velocity.x = -20.0f;
+			//if (!isColliding && lastCollisionVelocity.x >= 0)
+				velocity.x = -20.0f;
+			//else
+				isColliding = false;
 			break;
 		case Message::RIGHT_RELEASED:
-			velocity.x -= 20.0f;
+			if (!isColliding || lastCollisionVelocity.x > 0)
+				velocity.x -= 20.0f;
 			break;
 		case Message::LEFT_RELEASED:
-			velocity.x -= -20.0f;
+			if (!isColliding || lastCollisionVelocity.x < 0)
+				velocity.x -= -20.0f;
 			break;
-		default:
+		case Message::COLLISION:
+			GameComponents::CollisionMessage *collision = (GameComponents::CollisionMessage *)message;
+			lastCollisionVelocity = velocity;
+			if (collision->velocity.x == 1)
+				velocity.x = 0;
+			else if (collision->velocity.y == 1)
+				velocity.y = 0;
+			position = collision->pos;
+			composition->setX(position.x);
+			composition->setY(position.y);
+			isColliding = true;
 			break;
+
 		}
 	}
 
@@ -96,7 +117,7 @@ namespace GameComponents {
 
 		composition->setX(position.x);
 		composition->setY(position.y);
-		vectorMessage *vec = new vectorMessage(Message::DEBUGVECTOR, velocity);
+		VectorMessage *vec = new VectorMessage(Message::DEBUGVECTOR, velocity);
 		this->composition->SendMessage((Message *)vec);
 
 

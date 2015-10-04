@@ -8,6 +8,7 @@ namespace GameSystems {
 
 	WindowInputSytem::~WindowInputSytem()
 	{
+
 	}
 	
 	int WindowInputSytem::Update(double dt, std::list<GameObjects::BaseGameObject*>& listObjects)

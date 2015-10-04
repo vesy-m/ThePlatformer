@@ -23,10 +23,11 @@ int main()
 	core.Add((GameSystems::System *)physics);
 	core.Add((GameSystems::System *)graphics);
 	core.LoadLevelFile("level.json");
-	/*sf::Music music;
+	sf::Music music;
 	if (!music.openFromFile("dr_wily_stage.ogg"))
 		return -1;
-	music.play();*/
+	music.setVolume(10);
+	music.play();
 
 	//start
 	core.Init();

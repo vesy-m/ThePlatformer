@@ -2,11 +2,11 @@
 #include "Message.h"
 #include "glm/glm.hpp"
 
-class vectorMessage : Message
+class VectorMessage : Message
 {
 public:
-	vectorMessage(MessageId, glm::vec2 vector);
-	~vectorMessage();
+	VectorMessage(MessageId, glm::vec2 vector);
+	~VectorMessage();
 	glm::vec2 vector;
 };
 

@@ -16,7 +16,7 @@ namespace GameComponents {
 		switch (message->id)
 		{
 			case Message::DEBUGVECTOR:
-				this->velocity = ((vectorMessage *)message)->vector;
+				this->velocity = ((VectorMessage *)message)->vector;
 				break;
 			default:
 				break;

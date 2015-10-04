@@ -11,12 +11,13 @@
       "name" : "megaman",
       "x" : 150,
       "y" : 500,
-      "depth" : 3,
+      "depth" : 1,
       "height" : 42,
       "width" : 30,
       "sprite" : "desc-megaman.json",
       "input" : true,
       "body" : true,
+	  "hexacollider" : true,
       "vector" : true
     }
   ]

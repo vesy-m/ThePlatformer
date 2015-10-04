@@ -3,6 +3,7 @@
 #include "ObjectFactory.h"
 #include "InputComponent.h"
 #include "BodyComponent.h"
+#include "Collider.h"
 #include "VectorDebugComponent.h"
 
 namespace GameSystems {
@@ -32,6 +33,10 @@ namespace GameSystems {
 			else if (std::string(it->key) == "body") {
 				auto body = new GameComponents::BodyComponent(ret);
 				ret->attachComponent((GameComponents::BaseComponent*) body);
+			}
+			else if (std::string(it->key) == "hexacollider") {
+				auto vector = new GameComponents::HexagonCollider(ret);
+				ret->attachComponent((GameComponents::BaseComponent*) vector);
 			}
 			else if (std::string(it->key) == "input") {
 				auto input = new GameComponents::InputComponent(ret);

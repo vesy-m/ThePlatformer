@@ -1,13 +1,13 @@
-#include "vectorMessage.h"
+#include "VectorMessage.h"
 
 
 
-vectorMessage::vectorMessage(MessageId id, glm::vec2 vector) : Message(id)
+VectorMessage::VectorMessage(MessageId id, glm::vec2 vector) : Message(id)
 {
 	this->vector = vector;
 }
 
 
-vectorMessage::~vectorMessage()
+VectorMessage::~VectorMessage()
 {
 }

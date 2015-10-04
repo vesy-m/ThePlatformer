@@ -2,7 +2,8 @@
 #include "BaseGameObject.h"
 
 #include <glm/glm.hpp>
-#include "vectorMessage.h"
+#include "Collider.h"
+#include "VectorMessage.h"
 
 namespace GameComponents {
 	class BodyComponent : BaseComponent
@@ -28,11 +29,14 @@ namespace GameComponents {
 	private:
 		glm::vec2 position;
 		glm::vec2 velocity;
+
 		glm::vec2 acceleration;
 		float mass;
 		glm::vec2 gravity;
 		glm::vec2 forces;
 		bool onGround;
+		glm::vec2 lastCollisionVelocity;
+		bool isColliding;
 	};
 }
 
