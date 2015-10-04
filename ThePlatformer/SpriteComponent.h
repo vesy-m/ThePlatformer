@@ -26,7 +26,6 @@ namespace GameComponents {
 		COMPONENT_TYPE getType();
 		void Update();
 		void Init();
-		void viewportReload();
 		void sendMessage(Message*);
 	private:
 		const COMPONENT_TYPE type = COMPONENT_TYPE::SPRITE;

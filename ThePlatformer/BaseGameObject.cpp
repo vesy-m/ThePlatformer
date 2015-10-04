@@ -9,6 +9,8 @@ namespace GameObjects {
 		height = 0;
 		width = 0;
 		depth = 0;
+		rotate = 0;
+		scale = 1;
 	}
 
 	BaseGameObject::~BaseGameObject()
@@ -81,10 +83,26 @@ namespace GameObjects {
 	}
 	void BaseGameObject::setHeight(int height)
 	{
-		this->height = height;
+		this->height = height * scale;
 	}
 	void BaseGameObject::setWidth(int width)
 	{
-		this->width = width;
+		this->width = width * scale;
+	}
+	void BaseGameObject::setScale(float scale)
+	{
+		this->scale = scale;
+	}
+	float BaseGameObject::getScale()
+	{
+		return this->scale;
+	}
+	void BaseGameObject::setRotate(int rotate)
+	{
+		this->rotate = rotate;
+	}
+	int BaseGameObject::getRotate()
+	{
+		return this->rotate;
 	}
 }
