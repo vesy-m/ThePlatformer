@@ -2,6 +2,7 @@
 #include "BaseGameObject.h"
 
 #include <glm/glm.hpp>
+#include "vectorMessage.h"
 
 namespace GameComponents {
 	class BodyComponent : BaseComponent
