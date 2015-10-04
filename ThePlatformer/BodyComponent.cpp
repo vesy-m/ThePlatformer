@@ -96,13 +96,13 @@ namespace GameComponents {
 
 		std::cout << position.x << " " << position.y << "       " << velocity.x << " " << velocity.y << "           " << acceleration.x << " " << acceleration.y << std::endl;
 
-		if (position.y > 500 && onGround == false)
+		if (position.y > 620 && onGround == false)
 		{
 			std::cout << "plop" << std::endl;
 			acceleration = glm::vec2(0, 0);
 			velocity = glm::vec2(0, 0);
 			forces = (gravity / (1.0f / mass)) * (-1.0f);
-			position.y = 499;
+			position.y = 619;
 			onGround = true;
 			this->composition->SendMessage(new Message(Message::JUMP_RELEASED));
 		}

@@ -31,6 +31,10 @@ namespace GameObjects {
 		int getDepth();
 		void setHeight(int height);
 		void setWidth(int width);
+		void setScale(float scale);
+		float getScale();
+		void setRotate(int rotate);
+		int getRotate();
 	private:
 		std::vector<GameComponents::BaseComponent*> componentsList;
 		int x;
@@ -38,6 +42,8 @@ namespace GameObjects {
 		int height;
 		int width;
 		int depth;
+		float scale;
+		int rotate;
 	};
 }
 

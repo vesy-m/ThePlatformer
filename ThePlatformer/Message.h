@@ -16,8 +16,6 @@ public:
 		DEFAULT,
 		DEBUGVECTOR,
 		COLLISION
-
-
 	};
 
 	Message(MessageId);

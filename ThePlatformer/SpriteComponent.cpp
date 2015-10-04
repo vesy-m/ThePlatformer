@@ -63,11 +63,11 @@ namespace GameComponents {
 		float xmax = 1;
 		float ymin = 0;
 		float ymax = 1;
-		GLint posX = this->composition->getX();
-		GLint posY = this->composition->getY();
 		Texture *texture = sheet->getTexture();
 		GLint width = texture->getWidth();
 		GLint height = texture->getHeight();
+		GLint posX = this->composition->getX() + (this->composition->getWidth() / 2);
+		GLint posY = this->composition->getY() + (this->composition->getHeight() / 2);
 
 		glEnable(GL_TEXTURE_2D);
 
@@ -77,10 +77,6 @@ namespace GameComponents {
 			// get height and width of the sprite of the currentFrame
 			height = anim.getSpriteYmax(currentFrame) - anim.getSpriteYmin(currentFrame);
 			width = anim.getSpriteXmax(currentFrame) - anim.getSpriteXmin(currentFrame);
-
-			// center the x position
-			posX = this->composition->getX() - (width / 2);
-			posY = this->composition->getY();
 				
 			xmin = (float)(anim.getSpriteXmin(currentFrame)) / (float)texture->getWidth();
 			xmax = (float)(anim.getSpriteXmax(currentFrame)) / (float)texture->getWidth();
@@ -97,50 +93,47 @@ namespace GameComponents {
 		}
 		glBindTexture(GL_TEXTURE_2D, texture->getId());
 
-		
-		int pointX = posX;
-		int pointXWidth = posX + width;
+		int pointX = -(width / 2);
+		int pointXWidth = (width / 2);
 		if (this->revertX) {
 			pointX += width;
 			pointXWidth -= width;
 		}
-		int pointY = posY;
-		int pointYHeight = posY + height;
+		int pointY = -(height / 2);
+		int pointYHeight = (height / 2);
 		if (this->revertY) {
 			pointY += height;
 			pointYHeight -= height;
 		}
 
+		pointX *= this->composition->getScale();
+		pointXWidth *= this->composition->getScale();
+		pointY *= this->composition->getScale();
+		pointYHeight *= this->composition->getScale();
+
+		glTranslated(posX, posY, 0);
+		glRotated(this->composition->getRotate(), 0, 0, 1);
 		glBegin(GL_QUADS);
 			glTexCoord2f(xmin, ymax); glVertex2i(pointX, pointY);
 			glTexCoord2f(xmax, ymax); glVertex2i(pointXWidth, pointY);
 			glTexCoord2f(xmax, ymin); glVertex2i(pointXWidth, pointYHeight);
 			glTexCoord2f(xmin, ymin); glVertex2i(pointX, pointYHeight);
 		glEnd();
+		glRotatef(-this->composition->getRotate(), 0, 0, 1);
+		glTranslated(-posX, -posY, 0);
 
 		glDisable(GL_TEXTURE_2D);
 	}
 
 	void SpriteComponent::Init()
 	{
-		viewportReload();
-
 		this->sheet = new SpriteSheet(this->_fileName);
-	}
-
-	void SpriteComponent::viewportReload() {
-		GLint iViewport[4];
-
-		glGetIntegerv(GL_VIEWPORT, iViewport);
-		std::cout << iViewport[0] << " " << iViewport[0] + iViewport[2] << " " << iViewport[1] + iViewport[3] << " " << iViewport[1] << std::endl;
-
-		glMatrixMode(GL_PROJECTION);
-		glLoadIdentity();
-		glOrtho(iViewport[0], iViewport[0] + iViewport[2], iViewport[1] + iViewport[3], iViewport[1], -1, 1);
-		glPushMatrix();
-
-		glMatrixMode(GL_MODELVIEW);
-		glLoadIdentity();
-		glPushMatrix();
+		Texture *texture = sheet->getTexture();
+		GLint width = texture->getWidth();
+		GLint height = texture->getHeight();
+		if (this->composition->getWidth() == 0 && this->composition->getHeight() == 0) {
+			this->composition->setWidth(width);
+			this->composition->setHeight(height);
+		}
 	}
 }

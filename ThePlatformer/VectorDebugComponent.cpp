@@ -30,10 +30,10 @@ namespace GameComponents {
 
 	void VectorDebugComponent::Update()
 	{
-		float x = this->composition->getX();
-		float y = this->composition->getY();
-		float height = this->composition->getHeight();
-		float width = this->composition->getWidth();
+		float x = (float)this->composition->getX();
+		float y = (float)this->composition->getY();
+		float height = (float)this->composition->getHeight();
+		float width = (float)this->composition->getWidth();
 		float centerX = x + width / 2;
 		float centerY = y + height / 2;
 

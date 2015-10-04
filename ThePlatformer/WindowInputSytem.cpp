@@ -56,7 +56,7 @@ namespace GameSystems {
 
 	void WindowInputSytem::Init(std::list<GameObjects::BaseGameObject*>& listObjects)
 	{
-		this->window = new sf::Window(sf::VideoMode(1360, 768), "OpenGL", sf::Style::Default, sf::ContextSettings(32));
+		this->window = new sf::Window(sf::VideoMode(1280, 720), "OpenGL", sf::Style::Default, sf::ContextSettings(32));
 		window->setVerticalSyncEnabled(false);
 		window->setKeyRepeatEnabled(true);
 		for each (GameObjects::BaseGameObject* object in listObjects)

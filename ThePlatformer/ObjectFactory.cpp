@@ -24,6 +24,8 @@ namespace GameSystems {
 			if (std::string(it->key) == "x") ret->setX(it->value.toNumber());
 			else if (std::string(it->key) == "y") ret->setY(it->value.toNumber());
 			else if (std::string(it->key) == "depth") ret->setDepth(it->value.toNumber());
+			else if (std::string(it->key) == "scale") ret->setScale(it->value.toNumber());
+			else if (std::string(it->key) == "rotate") ret->setRotate(it->value.toNumber());
 			else if (std::string(it->key) == "width") ret->setWidth(it->value.toNumber());
 			else if (std::string(it->key) == "height") ret->setHeight(it->value.toNumber());
 			else if (std::string(it->key) == "sprite") {

@@ -108,7 +108,7 @@ namespace GameComponents {
 		glm::vec2 pos = glm::vec2(this->composition->getX(), this->composition->getY());
 		//pour tout les objects avec un collider
 		//optimiser selon l'eloignement
-		BoxCollider *other = new BoxCollider(glm::vec2(100, 480), glm::vec2(130, 510));
+		/*BoxCollider *other = new BoxCollider(glm::vec2(100, 480), glm::vec2(130, 510));
 		if (this->CollideTop(other))
 		{
 			isCollide = true;
@@ -132,7 +132,7 @@ namespace GameComponents {
 			isCollide = true;
 			velocity += glm::vec2(1, 0);
 			pos = glm::vec2(other->min.x + 5, pos.y);
-		}
+		}*/
 
 		if (isCollide)
 		{
