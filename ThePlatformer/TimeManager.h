@@ -9,7 +9,7 @@ namespace GameEngine {
 	public:
 		TimeManager(const std::string&);
 		void	StartTimer(void);
-		double	GetCurrentTime(void);
+		double	GetCurrentTimer(void);
 		double  GetLastTime(void);
 		void	WaitFPS(unsigned short);
 		~TimeManager();

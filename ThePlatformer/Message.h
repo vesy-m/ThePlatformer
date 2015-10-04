@@ -10,8 +10,9 @@ public:
 		JUMP = 0,
 		LEFT = 1,
 		RIGHT = 2,
-		COLLISION = 3,
-		DEBUGVECTOR = 4,
+		DEFAULT = 3,
+		COLLISION = 4,
+		DEBUGVECTOR = 5,
 	};
 
 	Message();

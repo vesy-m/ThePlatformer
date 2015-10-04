@@ -1,0 +1,21 @@
+{
+  "objects" : [
+    {
+      "name" : "background",
+      "x" : 0,
+      "y" : 0,
+      "sprite" : "forest.png"
+    },
+    {
+      "name" : "megaman",
+      "x" : 150,
+      "y" : 500,
+      "height" : 42,
+      "width" : 30,
+      "sprite" : "desc-megaman.json",
+      "input" : true,
+      "body" : true,
+      "vector" : true
+    }
+  ]
+}

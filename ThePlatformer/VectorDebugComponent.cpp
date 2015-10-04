@@ -74,20 +74,19 @@ namespace GameComponents {
 		glEnd();
 
 		//velocity
-		glLineWidth(2);
+		glLineWidth(3);
 		glBegin(GL_LINES);
-			glColor3f(0, 0.0, 1.0);
+			glColor3f(1.0, 0.0, 0.0);
 			glVertex2f(centerX, centerY);
-			glColor3f(0, 0.0, 1.0);
+			glColor3f(1.0, 0.0, 0.0);
 			glVertex2f(centerX + velocity.x, centerY + velocity.y);
 		glEnd();
-
 	}
 
 
 	void VectorDebugComponent::Init()
 	{
-		velocity = glm::vec2(20, -20);
+		velocity = glm::vec2(0, 0);
 	}
 
 }

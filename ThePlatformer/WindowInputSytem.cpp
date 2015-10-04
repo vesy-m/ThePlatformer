@@ -13,6 +13,9 @@ namespace GameSystems {
 	int WindowInputSytem::Update(double dt, std::list<GameObjects::BaseGameObject*>& listObjects)
 	{
 		sf::Event event;
+
+
+
 		while (window->pollEvent(event))
 		{
 			if (event.type == sf::Event::Closed)
@@ -22,7 +25,22 @@ namespace GameSystems {
 				// adjust the viewport when the window is resized
 				glViewport(0, 0, event.size.width, event.size.height);
 			}
+
+			//std::list<GameObjects::BaseGameObject*>::iterator firstObject = listObjects.begin();
+			//firstObject++;
+			//GameComponents::BaseComponent* firstComponent = (*firstObject)->getComponents(GameComponents::COMPONENT_TYPE::WINDOW).at(0);
+			//((GameComponents::InputComponent *)firstComponent)->UpdateInputState(event);
+
+			for each (GameObjects::BaseGameObject* object in listObjects)
+			{
+				std::vector<GameComponents::BaseComponent*> componentList = object->getComponents(GameComponents::COMPONENT_TYPE::WINDOW);
+				for each (GameComponents::BaseComponent* component in componentList)
+				{
+					((GameComponents::InputComponent *)component)->UpdateInputState(event);
+				}
+			}
 		}
+
 		for each (GameObjects::BaseGameObject* object in listObjects)
 		{
 			std::vector<GameComponents::BaseComponent*> componentList = object->getComponents(GameComponents::COMPONENT_TYPE::WINDOW);

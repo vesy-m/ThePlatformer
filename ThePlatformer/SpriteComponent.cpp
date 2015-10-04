@@ -1,14 +1,14 @@
 #include "SpriteComponent.h"
 
 namespace GameComponents {
-	SpriteComponent::SpriteComponent(GameObjects::BaseGameObject *object, std::string &fileName) : BaseComponent(object)
+	SpriteComponent::SpriteComponent(GameObjects::BaseGameObject *object, const std::string &fileName) : BaseComponent(object)
 	{
 		_fileName = fileName;
 		revertX = false;
 		revertY = false;
 		currentFrame = 0;
 		counter = 0;
-		currentAnim = "walk";
+		currentAnim = "default";
 	}
 
 	SpriteComponent::~SpriteComponent()
@@ -20,12 +20,30 @@ namespace GameComponents {
 		switch (message->id)
 		{
 			case Message::LEFT:
-				revertX = true;
+				if (std::string("walk").compare(currentAnim) != 0 || revertX != true) {
+					currentFrame = 0;
+					currentAnim = "walk";
+					revertX = true;
+				}
 				break;
 			case Message::RIGHT:
-				revertX = false;
+				if (std::string("walk").compare(currentAnim) != 0 || revertX != false) {
+					currentFrame = 0;
+					currentAnim = "walk";
+					revertX = false;
+				}
 				break;
 			case Message::JUMP:
+				if (std::string("jump").compare(currentAnim) != 0) {
+					currentFrame = 0;
+					currentAnim = "jump";
+				}
+				break;
+			case Message::DEFAULT:
+				if (std::string("default").compare(currentAnim) != 0) {
+					currentFrame = 0;
+					currentAnim = "default";
+				}
 				break;
 			default:
 				break;

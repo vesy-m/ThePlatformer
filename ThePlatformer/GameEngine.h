@@ -17,7 +17,8 @@ namespace GameEngine {
 		void Update(float dt);
 		void MainLoop(void);
 		void Add(GameObjects::BaseGameObject*);
-		void Add(GameSystems::System *sys);
+		void Add(GameSystems::System*);
+		void LoadLevelFile(const std::string&);
 	private:
 		TimeManager								*m_manager;
 		std::list<GameObjects::BaseGameObject*> m_objects;
