@@ -10,13 +10,23 @@ namespace GameSystems {
 	class ObjectFactory
 	{
 	public:
-		ObjectFactory();
+		static ObjectFactory& getInstance()
+		{
+			static ObjectFactory    instance;
+			return instance;
+		}
 		~ObjectFactory();
-		static GameObjects::BaseGameObject *parseObject(JsonValue&);
-		static void buildLevel(JsonValue&, std::list<GameObjects::BaseGameObject*>&);
 
+		GameObjects::BaseGameObject *parseObject(JsonValue&);
+		void buildLevel(JsonValue&);
+		std::list<GameObjects::BaseGameObject *> &getObjects();
 	private:
-		std::vector<GameObjects::BaseGameObject> listGameObject;
+		ObjectFactory();
+		ObjectFactory(ObjectFactory const&) = delete;
+		void operator=(ObjectFactory const&) = delete;
+
+		void putObjectDepthOrdered(GameObjects::BaseGameObject * obj);
+		std::list<GameObjects::BaseGameObject *> listGameObject;
 	};
 }
 

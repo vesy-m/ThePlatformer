@@ -30,12 +30,12 @@ namespace GameComponents {
 
 	void VectorDebugComponent::Update()
 	{
-		int x = this->composition->getX();
-		int y = this->composition->getY();
-		int height = this->composition->getHeight();
-		int width = this->composition->getWidth();
-		int centerX = x + width / 2;
-		int centerY = y + height / 2;
+		float x = this->composition->getX();
+		float y = this->composition->getY();
+		float height = this->composition->getHeight();
+		float width = this->composition->getWidth();
+		float centerX = x + width / 2;
+		float centerY = y + height / 2;
 
 		// top
 		glLineWidth(1);

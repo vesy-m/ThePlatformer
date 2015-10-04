@@ -19,13 +19,13 @@ namespace GameEngine {
 	
 	void Core::LoadLevelFile(const std::string &filename) {
 		GameSystems::JSONParser fileParser(filename);
-		GameSystems::ObjectFactory::buildLevel(fileParser.getJSONValue(), this->m_objects);
+		GameSystems::ObjectFactory::getInstance().buildLevel(fileParser.getJSONValue());
 	}
 
 	void Core::Init(void) {
 		this->m_manager = new TimeManager("../log_file.txt");
 		for each (GameSystems::System* system in this->m_systems)
-			system->Init(this->m_objects);
+			system->Init(GameSystems::ObjectFactory::getInstance().getObjects());
 	}
 
 	void Core::Update(float dt) {
@@ -38,16 +38,12 @@ namespace GameEngine {
 		while (42) {
 			this->m_manager->StartTimer();
 			for each (GameSystems::System *system in this->m_systems) {
-				if (system->Update(this->m_manager->GetLastTime(), this->m_objects) == 1) {
+				if (system->Update(this->m_manager->GetLastTime(), GameSystems::ObjectFactory::getInstance().getObjects()) == 1) {
 					return;
 				}
 			}
 			this->m_manager->WaitFPS(FRAME_PER_SECOND);
 		}
-	}
-
-	void Core::Add(GameObjects::BaseGameObject *object) {
-		this->m_objects.push_back(object);
 	}
 
 	void Core::Add(GameSystems::System *sys) {

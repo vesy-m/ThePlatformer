@@ -22,6 +22,7 @@ namespace GameSystems {
 		for (auto it : value) {
 			if (std::string(it->key) == "x") ret->setX(it->value.toNumber());
 			else if (std::string(it->key) == "y") ret->setY(it->value.toNumber());
+			else if (std::string(it->key) == "depth") ret->setDepth(it->value.toNumber());
 			else if (std::string(it->key) == "width") ret->setWidth(it->value.toNumber());
 			else if (std::string(it->key) == "height") ret->setHeight(it->value.toNumber());
 			else if (std::string(it->key) == "sprite") {
@@ -44,7 +45,7 @@ namespace GameSystems {
 		return (ret);
 	}
 
-	void ObjectFactory::buildLevel(JsonValue &value, std::list<GameObjects::BaseGameObject*> &list) {
+	void ObjectFactory::buildLevel(JsonValue &value) {
 		assert(value.getTag() == JSON_OBJECT);
 		for (auto i : value) {
 			if (std::string(i->key) == "objects") {
@@ -52,9 +53,28 @@ namespace GameSystems {
 				assert(arr.getTag() == JSON_ARRAY);
 				for (auto j : arr) {
 					auto obj = parseObject(j->value);
-					if (obj != NULL) list.push_back(obj);
+					if (obj != NULL) putObjectDepthOrdered(obj);
 				}
 			}
 		}
+	}
+
+	void ObjectFactory::putObjectDepthOrdered(GameObjects::BaseGameObject * obj) {
+		int depth = obj->getDepth();
+		int size = this->listGameObject.size();
+		
+
+		for (std::list<GameObjects::BaseGameObject *>::iterator it = this->listGameObject.begin(); it != this->listGameObject.end(); ++it) {
+			if ((*it)->getDepth() <= depth) {
+				this->listGameObject.insert(it, obj);
+				return;
+			}
+		}
+		this->listGameObject.push_back(obj);
+	}
+
+	std::list<GameObjects::BaseGameObject *> &ObjectFactory::getObjects()
+	{
+		return this->listGameObject;
 	}
 }

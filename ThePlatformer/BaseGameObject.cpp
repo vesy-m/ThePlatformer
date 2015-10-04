@@ -8,6 +8,7 @@ namespace GameObjects {
 		y = 0;
 		height = 0;
 		width = 0;
+		depth = 0;
 	}
 
 	BaseGameObject::~BaseGameObject()
@@ -69,6 +70,14 @@ namespace GameObjects {
 	int BaseGameObject::getWidth()
 	{
 		return this->width;
+	}
+	void BaseGameObject::setDepth(int depth)
+	{
+		this->depth = depth;
+	}
+	int BaseGameObject::getDepth()
+	{
+		return this->depth;
 	}
 	void BaseGameObject::setHeight(int height)
 	{

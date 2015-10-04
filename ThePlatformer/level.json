@@ -4,12 +4,14 @@
       "name" : "background",
       "x" : 0,
       "y" : 0,
+      "depth" : 5,
       "sprite" : "forest.png"
     },
     {
       "name" : "megaman",
       "x" : 150,
       "y" : 500,
+      "depth" : 3,
       "height" : 42,
       "width" : 30,
       "sprite" : "desc-megaman.json",

@@ -27,6 +27,8 @@ namespace GameObjects {
 		int getY();
 		int getHeight();
 		int getWidth();
+		void setDepth(int depth);
+		int getDepth();
 		void setHeight(int height);
 		void setWidth(int width);
 	private:
@@ -35,6 +37,7 @@ namespace GameObjects {
 		int y;
 		int height;
 		int width;
+		int depth;
 	};
 }
 
