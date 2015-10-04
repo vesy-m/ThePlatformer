@@ -9,9 +9,11 @@ public:
 	{
 		JUMP = 0,
 		LEFT = 1,
-		RIGHT = 2
+		RIGHT = 2,
+		COLLISION = 3,
 	};
 
+	Message();
 	Message(MessageId);
 	~Message();
 
