@@ -25,10 +25,16 @@ namespace GameObjects {
 		int getX();
 		void setY(int y);
 		int getY();
+		int getHeight();
+		int getWidth();
+		void setHeight(int height);
+		void setWidth(int width);
 	private:
 		std::vector<GameComponents::BaseComponent*> componentsList;
-		int x = 0;
-		int y = 0;
+		int x;
+		int y;
+		int height;
+		int width;
 	};
 }
 
