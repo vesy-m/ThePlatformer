@@ -1,13 +1,11 @@
 #include "Collider.h"
 
 namespace GameComponents {
-	BoxCollider::BoxCollider()
-	{}
 
-	BoxCollider::BoxCollider(glm::vec2 min, glm::vec2 max)
+	BoxCollider::BoxCollider(GameObjects::BaseGameObject *object) : BaseComponent(object)
 	{
-		this->min = min;
-		this->max = max;
+		this->min = glm::vec2(this->composition->getX(), this->composition->getY());
+		this->max = glm::vec2(this->composition->getX() + this->composition->getWidth(), this->composition->getY() + this->composition->getHeight());
 	}
 
 	BoxCollider::~BoxCollider()
@@ -15,7 +13,7 @@ namespace GameComponents {
 
 	COMPONENT_TYPE BoxCollider::getType()
 	{
-		return COMPONENT_TYPE::PHYSIC;
+		return COMPONENT_TYPE::COLLIDER;
 	}
 
 	void BoxCollider::Update()
@@ -61,7 +59,7 @@ namespace GameComponents {
 
 	COMPONENT_TYPE CircleCollider::getType()
 	{
-		return COMPONENT_TYPE::PHYSIC;
+		return COMPONENT_TYPE::COLLIDER;
 	}
 
 	void CircleCollider::Update()
@@ -98,7 +96,7 @@ namespace GameComponents {
 
 	COMPONENT_TYPE HexagonCollider::getType()
 	{
-		return COMPONENT_TYPE::PHYSIC;
+		return COMPONENT_TYPE::COLLIDER;
 	}
 
 	void HexagonCollider::Update()
@@ -108,37 +106,45 @@ namespace GameComponents {
 		glm::vec2 pos = glm::vec2(this->composition->getX(), this->composition->getY());
 		//pour tout les objects avec un collider
 		//optimiser selon l'eloignement
-		/*BoxCollider *other = new BoxCollider(glm::vec2(100, 480), glm::vec2(130, 510));
-		if (this->CollideTop(other))
+		//BoxCollider *other = new BoxCollider(glm::vec2(200, 450), glm::vec2(250, 500));
+		for each(GameObjects::BaseGameObject* object in GameSystems::ObjectFactory::getInstance().getObjects())
 		{
-			isCollide = true;
-			velocity += glm::vec2(0, 1);
-			pos = glm::vec2(pos.x, other->max.y + 1);
-		}
-		if (this->CollideDown(other))
-		{
-			isCollide = true;
-			velocity += glm::vec2(0, 1);
-			pos = glm::vec2(pos.x, other->min.y - 1);
-		}
-		if (this->CollideTopLeft(other) || this->CollideDownLeft(other))
-		{
-			isCollide = true;
-			velocity += glm::vec2(1, 0);
-			pos = glm::vec2(other->max.x - 5, pos.y);
-		}
-		if (this->CollideTopRight(other) || this->CollideDownRight(other))
-		{
-			isCollide = true;
-			velocity += glm::vec2(1, 0);
-			pos = glm::vec2(other->min.x + 5, pos.y);
-		}*/
+			if (!object->getComponents(GameComponents::COMPONENT_TYPE::COLLIDER).empty())
+			{
+				if (object->getComponents(GameComponents::COMPONENT_TYPE::COLLIDER)[0] == this)
+					continue;
+				BoxCollider *other = (BoxCollider*)object->getComponents(GameComponents::COMPONENT_TYPE::COLLIDER)[0];
+				if (this->CollideTop(other))
+				{
+					isCollide = true;
+					velocity += glm::vec2(0, 1);
+					pos = glm::vec2(pos.x, other->max.y + 1);
+				}
+				if (this->CollideDown(other))
+				{
+					isCollide = true;
+					velocity += glm::vec2(0, 1);
+					pos = glm::vec2(pos.x, other->min.y - 1);
+				}
+				if (this->CollideTopLeft(other) || this->CollideDownLeft(other))
+				{
+					isCollide = true;
+					velocity += glm::vec2(1, 0);
+					pos = glm::vec2(other->max.x - 5, pos.y);
+				}
+				if (this->CollideTopRight(other) || this->CollideDownRight(other))
+				{
+					isCollide = true;
+					velocity += glm::vec2(1, 0);
+					pos = glm::vec2(other->min.x + 5, pos.y);
+				}
 
-		if (isCollide)
-		{
-			std::cout << "JE SUIS EN TRAIN DE COLLIDER PARCE QUE C'EST COOOOL !!!" << std::endl;
-			CollisionMessage *msg = new CollisionMessage(pos, velocity);
-			this->composition->SendMessage((Message*)msg);
+				if (isCollide)
+				{
+					CollisionMessage *msg = new CollisionMessage(pos, velocity);
+					this->composition->SendMessage((Message*)msg);
+				}
+			}
 		}
 	}
 
@@ -152,32 +158,32 @@ namespace GameComponents {
 
 	bool HexagonCollider::CollideTop(BoxCollider *other)
 	{
-		return (this->composition->getY() >= other->max.y);
+		return ((this->composition->getY() <= other->max.y && this->composition->getY() >= other->min.y) && (this->composition->getX() >= other->min.x && this->composition->getX() <= other->max.x));
 	}
 
 	bool HexagonCollider::CollideDown(BoxCollider *other)
 	{
-		return (this->composition->getY() + this->composition->getHeight() <= other->min.y);
+		return ((this->composition->getY() + this->composition->getHeight() >= other->min.y && this->composition->getY() + this->composition->getHeight() <= other->max.y) && (this->composition->getX() >= other->min.x && this->composition->getX() <= other->max.x));
 	}
 
 	bool HexagonCollider::CollideTopLeft(BoxCollider *other)
 	{
-		return ((this->composition->getX() <= other->min.x) || (this->composition->getY() + (this->composition->getHeight() / 5) >= other->max.y));
+		return ((this->composition->getX() >= other->min.x && this->composition->getX() <= other->max.x) && (this->composition->getY() + (this->composition->getHeight() / 5) <= other->max.y && this->composition->getY() + (this->composition->getHeight() / 5) >= other->min.y));
 	}
 
 	bool HexagonCollider::CollideTopRight(BoxCollider *other)
 	{
-		return ((this->composition->getX() + this->composition->getWidth() <= other->max.x) || (this->composition->getY() + (this->composition->getHeight() / 5) >= other->max.y));
+		return ((this->composition->getX() + this->composition->getWidth() <= other->max.x && this->composition->getX() + this->composition->getWidth() >= other->min.x) && (this->composition->getY() + (this->composition->getHeight() / 5) <= other->max.y && this->composition->getY() + (this->composition->getHeight() / 5) >= other->min.y));
 	}
 
 	bool HexagonCollider::CollideDownLeft(BoxCollider *other)
 	{
-		return ((this->composition->getX() <= other->min.x) || (this->composition->getY() + this->composition->getHeight() - this->composition->getHeight() / 5 <= other->min.y));
+		return ((this->composition->getX() >= other->min.x && this->composition->getX() <= other->max.x) && (this->composition->getY() + this->composition->getHeight() - this->composition->getHeight() / 5 <= other->max.y && this->composition->getY() + this->composition->getHeight() - this->composition->getHeight() / 5 >= other->min.y));
 	}
 
 	bool HexagonCollider::CollideDownRight(BoxCollider *other)
 	{
-		return ((this->composition->getX() + this->composition->getWidth() <= other->max.x) || (this->composition->getY() + this->composition->getHeight() - this->composition->getHeight() / 5 <= other->min.y));
+		return ((this->composition->getX() + this->composition->getWidth() <= other->max.x && this->composition->getX() + this->composition->getWidth() >= other->min.x) && (this->composition->getY() + this->composition->getHeight() - this->composition->getHeight() / 5 >= other->min.y && this->composition->getY() + this->composition->getHeight() - this->composition->getHeight() / 5 <= other->max.y));
 	}
 
 	CollisionMessage::CollisionMessage(glm::vec2 pos, glm::vec2 velocity) : Message(COLLISION)

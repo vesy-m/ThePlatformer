@@ -16,6 +16,7 @@ namespace GameComponents {
 		SPRITE,
 		LOGIC,
 		PHYSIC,
+		COLLIDER,
 		DEBUGVECTOR
 	};
 
@@ -29,7 +30,7 @@ namespace GameComponents {
 		virtual void Update() = 0;
 		virtual void Init() = 0;
 		virtual void sendMessage(Message*) = 0;
-	protected:
+	public:
 		GameObjects::BaseGameObject *composition;
 	};
 }

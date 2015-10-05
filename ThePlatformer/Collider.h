@@ -3,16 +3,17 @@
 #define _COLLIDER_H_
 
 #include "BaseGameObject.h"
+#include "ObjectFactory.h"
 #include <glm/glm.hpp>
 
 namespace GameComponents {
 	class CircleCollider;
 	class CollisionMessage;
 
-	class BoxCollider : BaseComponent
+	class BoxCollider : public BaseComponent
 	{
 	public:
-		BoxCollider();
+		BoxCollider(GameObjects::BaseGameObject *);
 		// min is the top-left corner, max is the bottom-right corner
 		BoxCollider(glm::vec2 min, glm::vec2 max);
 		~BoxCollider();

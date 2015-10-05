@@ -20,7 +20,7 @@
       "scale": 0.2,
       "depth" : 3,
       "sprite" : "platforme1.png",
-      "vector" : true
+      "vector": true
     },
     {
       "name" : "platforme2",
@@ -29,7 +29,10 @@
       "scale": 0.2,
       "depth" : 3,
       "sprite" : "platforme1.png",
-      "vector" : true
+      "vector": true,
+      "height" : 142,
+      "width" : 527,
+      "boxcollider" : true
     },
     {
       "name" : "platforme3",

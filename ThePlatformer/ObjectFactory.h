@@ -5,6 +5,7 @@
 #include <vector>
 #include <list>
 #include "BaseGameObject.h"
+#include "gason.h"
 
 namespace GameSystems {
 	class ObjectFactory

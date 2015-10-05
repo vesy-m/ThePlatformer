@@ -40,6 +40,10 @@ namespace GameSystems {
 				auto vector = new GameComponents::HexagonCollider(ret);
 				ret->attachComponent((GameComponents::BaseComponent*) vector);
 			}
+			else if (std::string(it->key) == "boxcollider") {
+				auto vector = new GameComponents::BoxCollider(ret);
+				ret->attachComponent((GameComponents::BaseComponent*) vector);
+			}
 			else if (std::string(it->key) == "input") {
 				auto input = new GameComponents::InputComponent(ret);
 				ret->attachComponent((GameComponents::BaseComponent*) input);
