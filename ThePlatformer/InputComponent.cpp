@@ -21,22 +21,25 @@ namespace GameComponents {
 		{
 			if (it->first == INPUT_TYPE::LEFT && it->second == true)
 			{
-				std::cout << "LEFT" << std::endl;
+				//std::cout << "LEFT" << std::endl;
 				this->composition->SendMessage(new Message(Message::LEFT));
-				//this->composition->setX(this->composition->getX() - 3);
 			}
 			if (it->first == INPUT_TYPE::RIGHT && it->second == true)
 			{
-				std::cout << "RIGHT" << std::endl;
+				//std::cout << "RIGHT" << std::endl;
 				this->composition->SendMessage(new Message(Message::RIGHT));
-				//this->composition->setX(this->composition->getX() + 3);
-
 			}
 
 			if (it->first == INPUT_TYPE::JUMP && it->second == true)
 			{
 				this->composition->SendMessage(new Message(Message::JUMP));
-				std::cout << "JUMP" << std::endl;
+				//std::cout << "JUMP" << std::endl;
+			}
+			if (it->first == INPUT_TYPE::DEBUG && it->second == true)
+			{
+				this->composition->SendMessage(new Message(Message::SHOW_DEBUG));
+				//std::cout << "DEBUG" << std::endl;
+				it->second = false;
 			}
 		}
 	}
@@ -47,7 +50,7 @@ namespace GameComponents {
 		{
 			if(event.type == sf::Event::KeyPressed)
 			{
-				if (event.key.code == it->second /*sf::Keyboard::isKeyPressed(it->second)*/)
+				if (event.key.code == it->second)
 				{
 					inputState.at(it->first) = true;
 				}
@@ -56,8 +59,7 @@ namespace GameComponents {
 			{
 				if (event.key.code == it->second)
 				{
-					if (it->first != INPUT_TYPE::JUMP)
-						inputState.at(it->first) = false;
+					inputState.at(it->first) = false;
 					switch (it->first)
 					{
 						case INPUT_TYPE::LEFT:
@@ -74,18 +76,6 @@ namespace GameComponents {
 				}
 			}
 		}
-
-		//for (std::map<INPUT_TYPE, sf::Mouse::Button>::iterator it = this->mouseMap.begin(); it != this->mouseMap.end(); ++it)
-		//{
-		//	if (sf::Mouse::isButtonPressed(it->second) && it->first == FIRE)
-		//	{
-		//		std::cout << "FIRE" << std::endl;
-		//	}
-		//	if (sf::Mouse::isButtonPressed(it->second) && it->first == SPECIAL)
-		//	{
-		//		std::cout << "SPECIAL" << std::endl;
-		//	}
-		//}
 	}
 
 	void InputComponent::Init()
@@ -93,10 +83,14 @@ namespace GameComponents {
 		this->keyboardMap.emplace(LEFT, sf::Keyboard::Q);
 		this->keyboardMap.emplace(RIGHT, sf::Keyboard::D);
 		this->keyboardMap.emplace(JUMP, sf::Keyboard::Space);
+		this->keyboardMap.emplace(DEBUG, sf::Keyboard::F5);
+
 
 		this->inputState.emplace(LEFT, false);
 		this->inputState.emplace(RIGHT, false);
 		this->inputState.emplace(JUMP, false);
+		this->inputState.emplace(DEBUG, false);
+
 
 		this->mouseMap.emplace(FIRE, sf::Mouse::Left);
 		this->mouseMap.emplace(SPECIAL, sf::Mouse::Right);

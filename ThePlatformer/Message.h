@@ -15,7 +15,9 @@ public:
 		RIGHT_RELEASED,
 		DEFAULT,
 		DEBUGVECTOR,
-		COLLISION
+		SHOW_DEBUG,
+		COLLISION,
+		NO_COLLISION
 	};
 
 	Message(MessageId);

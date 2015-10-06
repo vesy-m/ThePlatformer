@@ -16,7 +16,8 @@ namespace GameComponents {
 		RIGHT,
 		JUMP,
 		FIRE,
-		SPECIAL
+		SPECIAL,
+		DEBUG
 	};
 
 	class InputComponent : BaseComponent

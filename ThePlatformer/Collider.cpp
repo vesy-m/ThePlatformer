@@ -124,15 +124,15 @@ namespace GameComponents {
 				{
 					isCollide = true;
 					velocity += glm::vec2(0, 1);
-					pos = glm::vec2(pos.x, other->min.y - 1);
+					pos = glm::vec2(pos.x, other->min.y - 40);
 				}
-				if (this->CollideTopLeft(other) || this->CollideDownLeft(other))
+				if (this->CollideTopLeft(other) && this->CollideDownLeft(other))
 				{
 					isCollide = true;
 					velocity += glm::vec2(1, 0);
 					pos = glm::vec2(other->max.x - 5, pos.y);
 				}
-				if (this->CollideTopRight(other) || this->CollideDownRight(other))
+				if (this->CollideTopRight(other) && this->CollideDownRight(other))
 				{
 					isCollide = true;
 					velocity += glm::vec2(1, 0);
@@ -145,6 +145,10 @@ namespace GameComponents {
 					this->composition->SendMessage((Message*)msg);
 				}
 			}
+		}
+		if (isCollide == false)
+		{
+			this->composition->SendMessage(new Message(Message::NO_COLLISION));
 		}
 	}
 

@@ -47,15 +47,11 @@ namespace GameComponents {
 			}
 			break;
 		case Message::RIGHT:
-			//if (!isColliding && lastCollisionVelocity.x <= 0)
 				velocity.x = 20.0f;
-			//else
 				isColliding = false;
 			break;
 		case Message::LEFT:
-			//if (!isColliding && lastCollisionVelocity.x >= 0)
 				velocity.x = -20.0f;
-			//else
 				isColliding = false;
 			break;
 		case Message::RIGHT_RELEASED:
@@ -66,19 +62,37 @@ namespace GameComponents {
 			if (!isColliding || lastCollisionVelocity.x < 0)
 				velocity.x -= -20.0f;
 			break;
+		case Message::NO_COLLISION:
+			forces.y = 0;
+			onGround = false;
+			break;
 		case Message::COLLISION:
 			GameComponents::CollisionMessage *collision = (GameComponents::CollisionMessage *)message;
 			lastCollisionVelocity = velocity;
+			float res = (forces.y * (1.0f / mass)) + gravity.y;
 			if (collision->velocity.x == 1)
 				velocity.x = 0;
-			else if (collision->velocity.y == 1)
+			if (collision->velocity.y == 1)
+			{
+				
+				if (forces.y > 0)
+				{
+					forces = (gravity / (1.0f / mass)) * (-1.0f);
+					if (!onGround)
+						this->composition->SendMessage(new Message(Message::JUMP_RELEASED));
+					onGround = true;
+				}
+				else if (res < 0)
+				{
+					forces.y = 0;
+				}
 				velocity.y = 0;
+			}
 			position = collision->pos;
 			composition->setX(position.x);
 			composition->setY(position.y);
 			isColliding = true;
 			break;
-
 		}
 	}
 
@@ -94,26 +108,13 @@ namespace GameComponents {
 
 		
 
-		std::cout << position.x << " " << position.y << "       " << velocity.x << " " << velocity.y << "           " << acceleration.x << " " << acceleration.y << std::endl;
+		//std::cout << position.x << " " << position.y << "       " << velocity.x << " " << velocity.y << "           " << acceleration.x << " " << acceleration.y << std::endl;
 
-		if (position.y > 620 && onGround == false)
-		{
-			std::cout << "plop" << std::endl;
-			acceleration = glm::vec2(0, 0);
-			velocity = glm::vec2(0, 0);
-			forces = (gravity / (1.0f / mass)) * (-1.0f);
-			position.y = 619;
-			onGround = true;
-			this->composition->SendMessage(new Message(Message::JUMP_RELEASED));
-		}
 		if (onGround == false) {
 			forces = forces + gravity;
 		}
 
-		//if (onGround == false)
-			position += velocity * dt;
-
-		
+		position += velocity * dt;
 
 		composition->setX(position.x);
 		composition->setY(position.y);

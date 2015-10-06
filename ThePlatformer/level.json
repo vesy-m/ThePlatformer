@@ -2,7 +2,7 @@
   "objects" : [
     {
       "name" : "megaman",
-      "x" : 150,
+      "x" : 300,
       "y" : 500,
       "depth" : 1,
       "height" : 42,
@@ -19,8 +19,11 @@
       "y" : 450,
       "scale": 0.2,
       "depth" : 3,
+	  "height" : 142,
+      "width" : 527,
       "sprite" : "platforme1.png",
-      "vector": true
+      "vector": true,
+	  "boxcollider" : true
     },
     {
       "name" : "platforme2",
@@ -40,8 +43,11 @@
       "y" : 550,
       "scale": 0.2,
       "depth" : 3,
+	  "height" : 142,
+      "width" : 527,
       "sprite" : "platforme1.png",
-      "vector" : true
+      "vector" : true,
+	  "boxcollider" : true
     },
     {
       "name" : "ground",
@@ -49,8 +55,11 @@
       "y" : 650,
       "scale": 0.7,
       "depth" : 3,
+	  "height" : 140,
+      "width" : 1920,
       "sprite" : "ground.png",
-      "vector" : true
+      "vector" : true,
+	  "boxcollider" : true
     },
   ]
 }
