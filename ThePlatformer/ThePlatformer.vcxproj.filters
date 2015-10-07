@@ -132,6 +132,9 @@
     <ClCompile Include="VectorMessage.cpp">
       <Filter>GameMessages\Source</Filter>
     </ClCompile>
+    <ClCompile Include="debugManager.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -208,6 +211,9 @@
     </ClInclude>
     <ClInclude Include="VectorMessage.h">
       <Filter>GameMessages\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="debugManager.h">
+      <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

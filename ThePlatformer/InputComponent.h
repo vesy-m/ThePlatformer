@@ -7,6 +7,7 @@
 #include <SFML\Window.hpp>
 #include <map>
 #include "BaseGameObject.h"
+#include "debugManager.h"
 
 namespace GameComponents {
 

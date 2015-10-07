@@ -5,6 +5,7 @@
 #include <SFML/OpenGL.hpp>
 #include <glm/glm.hpp>
 #include "vectorMessage.h"
+#include "debugManager.h"
 
 namespace GameComponents {
 

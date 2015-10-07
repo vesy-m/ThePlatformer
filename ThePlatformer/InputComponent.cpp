@@ -37,7 +37,13 @@ namespace GameComponents {
 			}
 			if (it->first == INPUT_TYPE::DEBUG && it->second == true)
 			{
-				this->composition->SendMessage(new Message(Message::SHOW_DEBUG));
+				//this->composition->SendMessage(new Message(Message::SHOW_DEBUG));
+				if (debugManager::getInstance().isActivateGraphic()) {
+					debugManager::getInstance().disableGraphic();
+				}
+				else {
+					debugManager::getInstance().activateGraphic();
+				}
 				//std::cout << "DEBUG" << std::endl;
 				it->second = false;
 			}
