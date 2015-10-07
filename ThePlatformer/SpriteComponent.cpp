@@ -76,6 +76,10 @@ namespace GameComponents {
 		GLint posX = this->composition->getX() + (this->composition->getWidth() / 2);
 		GLint posY = this->composition->getY() + (this->composition->getHeight() / 2);
 
+		if (!std::string("sun").compare(this->composition->getName())) {
+			this->composition->setRotate((this->composition->getRotate() + 1) % 360);
+		}
+
 		glEnable(GL_TEXTURE_2D);
 
 		if (sheet->isAnimated()) {
