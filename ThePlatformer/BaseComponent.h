@@ -17,7 +17,8 @@ namespace GameComponents {
 		LOGIC,
 		PHYSIC,
 		COLLIDER,
-		DEBUGVECTOR
+		DEBUGVECTOR,
+		TEXT
 	};
 
 	class BaseComponent
