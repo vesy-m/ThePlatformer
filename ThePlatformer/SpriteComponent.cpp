@@ -20,28 +20,35 @@ namespace GameComponents {
 		switch (message->id)
 		{
 			case Message::LEFT:
-				if ((std::string("walk").compare(currentAnim) != 0 && std::string("jump").compare(currentAnim) != 0) || revertX != true) {
+				if ((std::string("walk").compare(currentAnim) != 0 || revertX != true) && std::string("jump").compare(currentAnim) != 0) {
 					currentFrame = 0;
 					currentAnim = "walk";
 					revertX = true;
 				}
+				if (revertX != true)
+				{
+					revertX = true;
+				}
 				break;
 			case Message::RIGHT:
-				if ((std::string("walk").compare(currentAnim) != 0 && std::string("jump").compare(currentAnim) != 0) || revertX != false) {
+				if ((std::string("walk").compare(currentAnim) != 0 || revertX != false) && std::string("jump").compare(currentAnim) != 0) {
 					currentFrame = 0;
 					currentAnim = "walk";
 					revertX = false;
 				}
+				if (revertX != false)
+				{
+					revertX = false;
+				}
 				break;
+			case Message::JUMP_ANIMATION:
 			case Message::JUMP:
 				if (std::string("jump").compare(currentAnim) != 0) {
 					currentFrame = 0;
 					currentAnim = "jump";
 				}
 				break;
-			case Message::LEFT_RELEASED:
-			case Message::JUMP_RELEASED:
-			case Message::RIGHT_RELEASED:
+			case Message::STAND_ANIMATION:
 				if (std::string("default").compare(currentAnim) != 0) {
 					currentFrame = 0;
 					currentAnim = "default";

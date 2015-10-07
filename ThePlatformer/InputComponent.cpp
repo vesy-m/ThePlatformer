@@ -19,12 +19,12 @@ namespace GameComponents {
 	{
 		for (std::map<INPUT_TYPE, bool>::iterator it = this->inputState.begin(); it != this->inputState.end(); ++it)
 		{
-			if (it->first == INPUT_TYPE::LEFT && it->second == true)
+			if (it->first == INPUT_TYPE::LEFT && it->second == true && this->inputState.at(INPUT_TYPE::RIGHT) == false)
 			{
 				//std::cout << "LEFT" << std::endl;
 				this->composition->SendMessage(new Message(Message::LEFT));
 			}
-			if (it->first == INPUT_TYPE::RIGHT && it->second == true)
+			if (it->first == INPUT_TYPE::RIGHT && it->second == true && this->inputState.at(INPUT_TYPE::LEFT) == false)
 			{
 				//std::cout << "RIGHT" << std::endl;
 				this->composition->SendMessage(new Message(Message::RIGHT));
