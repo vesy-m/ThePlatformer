@@ -4,6 +4,8 @@ debugManager::debugManager()
 {
 	debugText = false;
 	debugGraphic = true;
+	rotateNum = -1;
+	scaleNum = 0.1;
 }
 
 debugManager::~debugManager()

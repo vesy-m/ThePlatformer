@@ -21,7 +21,9 @@ public:
 		DEBUGVECTOR,
 		SHOW_DEBUG,
 		COLLISION,
-		NO_COLLISION
+		NO_COLLISION,
+		ROTATE_LEFT,
+		ROTATE_RIGHT
 	};
 
 	Message(MessageId);

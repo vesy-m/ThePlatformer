@@ -47,6 +47,14 @@ namespace GameComponents {
 				//std::cout << "DEBUG" << std::endl;
 				it->second = false;
 			}
+			if (it->first == INPUT_TYPE::ROTATE_LEFT && it->second == true)
+			{
+				this->composition->SendMessage(new Message(Message::ROTATE_LEFT));
+			}
+			if (it->first == INPUT_TYPE::ROTATE_RIGHT && it->second == true)
+			{
+				this->composition->SendMessage(new Message(Message::ROTATE_RIGHT));
+			}
 		}
 	}
 
@@ -90,12 +98,17 @@ namespace GameComponents {
 		this->keyboardMap.emplace(RIGHT, sf::Keyboard::D);
 		this->keyboardMap.emplace(JUMP, sf::Keyboard::Space);
 		this->keyboardMap.emplace(DEBUG, sf::Keyboard::F5);
+		this->keyboardMap.emplace(ROTATE_LEFT, sf::Keyboard::L);
+		this->keyboardMap.emplace(ROTATE_RIGHT, sf::Keyboard::M);
 
 
 		this->inputState.emplace(LEFT, false);
 		this->inputState.emplace(RIGHT, false);
 		this->inputState.emplace(JUMP, false);
 		this->inputState.emplace(DEBUG, false);
+		this->inputState.emplace(ROTATE_LEFT, false);
+		this->inputState.emplace(ROTATE_RIGHT, false);
+
 
 
 		this->mouseMap.emplace(FIRE, sf::Mouse::Left);

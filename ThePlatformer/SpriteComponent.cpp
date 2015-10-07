@@ -1,5 +1,5 @@
 #include "SpriteComponent.h"
-
+#include "debugManager.h"
 namespace GameComponents {
 	SpriteComponent::SpriteComponent(GameObjects::BaseGameObject *object, const std::string &fileName) : BaseComponent(object)
 	{
@@ -9,6 +9,7 @@ namespace GameComponents {
 		currentFrame = 0;
 		counter = 0;
 		currentAnim = "default";
+		rotateNum = -1;
 	}
 
 	SpriteComponent::~SpriteComponent()
@@ -54,6 +55,12 @@ namespace GameComponents {
 					currentAnim = "default";
 				}
 				break;
+			case Message::ROTATE_LEFT:
+				debugManager::getInstance().rotateNum = -1;
+				break;
+			case Message::ROTATE_RIGHT:
+				debugManager::getInstance().rotateNum = 1;
+				break;
 			default:
 				break;
 		}
@@ -77,7 +84,15 @@ namespace GameComponents {
 		GLint posY = this->composition->getY() + (this->composition->getHeight() / 2);
 
 		if (!std::string("sun").compare(this->composition->getName())) {
-			this->composition->setRotate((this->composition->getRotate() + 1) % 360);
+			this->composition->setRotate((this->composition->getRotate() + debugManager::getInstance().rotateNum) % 360);
+			float newScale = this->composition->getScale();
+			if (newScale > 2.0) {
+				debugManager::getInstance().scaleNum = -0.01;
+			}
+			else if (newScale <= 1.0) {
+				debugManager::getInstance().scaleNum = 0.01;
+			}
+			this->composition->setScale(newScale + debugManager::getInstance().scaleNum);
 		}
 
 		glEnable(GL_TEXTURE_2D);

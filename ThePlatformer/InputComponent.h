@@ -18,7 +18,9 @@ namespace GameComponents {
 		JUMP,
 		FIRE,
 		SPECIAL,
-		DEBUG
+		DEBUG,
+		ROTATE_RIGHT,
+		ROTATE_LEFT,
 	};
 
 	class InputComponent : BaseComponent

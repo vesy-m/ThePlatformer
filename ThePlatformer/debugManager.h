@@ -24,6 +24,8 @@ public:
 	void activateGraphic();
 	void displayDebug(const std::string &, DEBUG_TYPE);
 	void disableGraphic();
+	int rotateNum;
+	float scaleNum;
 
 private:
 	debugManager();
