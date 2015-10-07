@@ -1,4 +1,5 @@
 #include "GraphicsSystem.h"
+#include "TextComponent.h"
 
 namespace GameSystems {
 	GraphicsSystem::GraphicsSystem()
@@ -43,6 +44,14 @@ namespace GameSystems {
 				component->Update();
 			}
 		}
+		for each (GameObjects::BaseGameObject* object in listObjects)
+		{
+			std::vector<GameComponents::BaseComponent*> componentList = object->getComponents(GameComponents::COMPONENT_TYPE::TEXT);
+			for each (GameComponents::BaseComponent* component in componentList)
+			{
+				((GameComponents::TextComponent*)component)->Update(dt);
+			}
+		}
 		return 0;
 	}
 
@@ -60,6 +69,14 @@ namespace GameSystems {
 		for each (GameObjects::BaseGameObject* object in listObjects)
 		{
 			std::vector<GameComponents::BaseComponent*> componentList = object->getComponents(GameComponents::COMPONENT_TYPE::DEBUGVECTOR);
+			for each (GameComponents::BaseComponent* component in componentList)
+			{
+				component->Init();
+			}
+		}
+		for each (GameObjects::BaseGameObject* object in listObjects)
+		{
+			std::vector<GameComponents::BaseComponent*> componentList = object->getComponents(GameComponents::COMPONENT_TYPE::TEXT);
 			for each (GameComponents::BaseComponent* component in componentList)
 			{
 				component->Init();

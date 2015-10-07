@@ -5,6 +5,7 @@
 #include "BodyComponent.h"
 #include "Collider.h"
 #include "VectorDebugComponent.h"
+#include "TextComponent.h"
 
 namespace GameSystems {
 	ObjectFactory::ObjectFactory()
@@ -32,6 +33,10 @@ namespace GameSystems {
 			else if (std::string(it->key) == "sprite") {
 				auto sprite = new GameComponents::SpriteComponent(ret, it->value.toString());
 				ret->attachComponent((GameComponents::BaseComponent*)sprite);
+			}
+			else if (std::string(it->key) == "fps") {
+				auto fps = new GameComponents::TextComponent(ret);
+				ret->attachComponent((GameComponents::BaseComponent*)fps);
 			}
 			else if (std::string(it->key) == "body") {
 				auto body = new GameComponents::BodyComponent(ret);
