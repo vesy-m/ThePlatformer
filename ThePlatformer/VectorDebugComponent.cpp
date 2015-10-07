@@ -39,7 +39,7 @@ namespace GameComponents {
 		float width = (float)this->composition->getWidth();
 		float centerX = x + width / 2;
 		float centerY = y + height / 2;
-
+		showDebug = true;
 		// top
 		if (showDebug)
 		{
