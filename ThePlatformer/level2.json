@@ -2,7 +2,7 @@
   "objects" : [
     {
       "name" : "megaman",
-      "x" : 300,
+      "x" : 330,
       "y" : 500,
       "depth" : 2,
       "height" : 42,
