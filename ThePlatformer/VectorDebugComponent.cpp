@@ -18,9 +18,9 @@ namespace GameComponents {
 			case Message::DEBUGVECTOR:
 				this->velocity = ((VectorMessage *)message)->vector;
 				break;
-			case Message::SHOW_DEBUG:
+		/*	case Message::SHOW_DEBUG:
 				showDebug = !showDebug;
-				break;
+				break;*/
 			default:
 				break;
 		}
@@ -39,54 +39,55 @@ namespace GameComponents {
 		float width = (float)this->composition->getWidth();
 		float centerX = x + width / 2;
 		float centerY = y + height / 2;
-		showDebug = true;
-		// top
-		if (showDebug)
+
+		if (!debugManager::getInstance().isActivateGraphic())
 		{
-			glLineWidth(1);
-			glBegin(GL_LINES);
-				glColor3f(1.0, 0.0, 0.0);
-				glVertex2f(x, y);
-				glColor3f(1.0, 0.0, 0.0);
-				glVertex2f(x + width, y);
-			glEnd();
-		
-			//left
-			glLineWidth(1);
-			glBegin(GL_LINES);
-				glColor3f(1.0, 0.0, 0.0);
-				glVertex2f(x, y);
-				glColor3f(1.0, 0.0, 0.0);
-				glVertex2f(x, y + height);
-			glEnd();
-
-			//right
-			glLineWidth(1);
-			glBegin(GL_LINES);
-				glColor3f(1.0, 0.0, 0.0);
-				glVertex2f(x + width, y);
-				glColor3f(1.0, 0.0, 0.0);
-				glVertex2f(x + width, y + height);
-			glEnd();
-
-			//bottom
-			glLineWidth(1);
-			glBegin(GL_LINES);
-				glColor3f(1.0, 0.0, 0.0);
-				glVertex2f(x, y + height);
-				glColor3f(1.0, 0.0, 0.0);
-				glVertex2f(x + width, y + height);
-			glEnd();
-
-			//velocity
-			glLineWidth(3);
-			glBegin(GL_LINES);
-				glColor3f(1.0, 0.0, 0.0);
-				glVertex2f(centerX, centerY);
-				glColor3f(1.0, 0.0, 0.0);
-				glVertex2f(centerX + velocity.x, centerY + velocity.y);
-			glEnd();
+			return;
 		}
+		// top
+		glLineWidth(1);
+		glBegin(GL_LINES);
+			glColor3f(1.0, 0.0, 0.0);
+			glVertex2f(x, y);
+			glColor3f(1.0, 0.0, 0.0);
+			glVertex2f(x + width, y);
+		glEnd();
+		
+		//left
+		glLineWidth(1);
+		glBegin(GL_LINES);
+			glColor3f(1.0, 0.0, 0.0);
+			glVertex2f(x, y);
+			glColor3f(1.0, 0.0, 0.0);
+			glVertex2f(x, y + height);
+		glEnd();
+
+		//right
+		glLineWidth(1);
+		glBegin(GL_LINES);
+			glColor3f(1.0, 0.0, 0.0);
+			glVertex2f(x + width, y);
+			glColor3f(1.0, 0.0, 0.0);
+			glVertex2f(x + width, y + height);
+		glEnd();
+
+		//bottom
+		glLineWidth(1);
+		glBegin(GL_LINES);
+			glColor3f(1.0, 0.0, 0.0);
+			glVertex2f(x, y + height);
+			glColor3f(1.0, 0.0, 0.0);
+			glVertex2f(x + width, y + height);
+		glEnd();
+
+		//velocity
+		glLineWidth(3);
+		glBegin(GL_LINES);
+			glColor3f(1.0, 0.0, 0.0);
+			glVertex2f(centerX, centerY);
+			glColor3f(1.0, 0.0, 0.0);
+			glVertex2f(centerX + velocity.x, centerY + velocity.y);
+		glEnd();
 	}
 
 

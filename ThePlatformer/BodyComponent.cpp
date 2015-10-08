@@ -47,22 +47,32 @@ namespace GameComponents {
 			}
 			break;
 		case Message::RIGHT:
-				velocity.x = 20.0f;
-				isColliding = false;
+			//if (onGround == true)
+				//this->composition->SendMessage(new Message(Message::RIGHT_ANIMATION));
+			velocity.x = 20.0f;
+			isColliding = false;
 			break;
 		case Message::LEFT:
-				velocity.x = -20.0f;
-				isColliding = false;
+			//if (onGround == true)
+				//this->composition->SendMessage(new Message(Message::LEFT_ANIMATION));
+			velocity.x = -20.0f;
+			isColliding = false;
 			break;
 		case Message::RIGHT_RELEASED:
 			if (!isColliding || lastCollisionVelocity.x > 0)
 				velocity.x -= 20.0f;
+			if(onGround == true)
+				this->composition->SendMessage(new Message(Message::STAND_ANIMATION));
 			break;
 		case Message::LEFT_RELEASED:
 			if (!isColliding || lastCollisionVelocity.x < 0)
 				velocity.x -= -20.0f;
+			if (onGround == true)
+				this->composition->SendMessage(new Message(Message::STAND_ANIMATION));
 			break;
 		case Message::NO_COLLISION:
+			if (onGround == true)
+				this->composition->SendMessage(new Message(Message::JUMP_ANIMATION));
 			forces.y = 0;
 			onGround = false;
 			break;
@@ -79,7 +89,7 @@ namespace GameComponents {
 				{
 					forces = (gravity / (1.0f / mass)) * (-1.0f);
 					if (!onGround)
-						this->composition->SendMessage(new Message(Message::JUMP_RELEASED));
+						this->composition->SendMessage(new Message(Message::STAND_ANIMATION));
 					onGround = true;
 				}
 				else if (res < 0)

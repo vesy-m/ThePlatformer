@@ -19,12 +19,12 @@ namespace GameComponents {
 	{
 		for (std::map<INPUT_TYPE, bool>::iterator it = this->inputState.begin(); it != this->inputState.end(); ++it)
 		{
-			if (it->first == INPUT_TYPE::LEFT && it->second == true)
+			if (it->first == INPUT_TYPE::LEFT && it->second == true && this->inputState.at(INPUT_TYPE::RIGHT) == false)
 			{
 				//std::cout << "LEFT" << std::endl;
 				this->composition->SendMessage(new Message(Message::LEFT));
 			}
-			if (it->first == INPUT_TYPE::RIGHT && it->second == true)
+			if (it->first == INPUT_TYPE::RIGHT && it->second == true && this->inputState.at(INPUT_TYPE::LEFT) == false)
 			{
 				//std::cout << "RIGHT" << std::endl;
 				this->composition->SendMessage(new Message(Message::RIGHT));
@@ -37,9 +37,23 @@ namespace GameComponents {
 			}
 			if (it->first == INPUT_TYPE::DEBUG && it->second == true)
 			{
-				this->composition->SendMessage(new Message(Message::SHOW_DEBUG));
+				//this->composition->SendMessage(new Message(Message::SHOW_DEBUG));
+				if (debugManager::getInstance().isActivateGraphic()) {
+					debugManager::getInstance().disableGraphic();
+				}
+				else {
+					debugManager::getInstance().activateGraphic();
+				}
 				//std::cout << "DEBUG" << std::endl;
 				it->second = false;
+			}
+			if (it->first == INPUT_TYPE::ROTATE_LEFT && it->second == true)
+			{
+				this->composition->SendMessage(new Message(Message::ROTATE_LEFT));
+			}
+			if (it->first == INPUT_TYPE::ROTATE_RIGHT && it->second == true)
+			{
+				this->composition->SendMessage(new Message(Message::ROTATE_RIGHT));
 			}
 		}
 	}
@@ -84,12 +98,17 @@ namespace GameComponents {
 		this->keyboardMap.emplace(RIGHT, sf::Keyboard::D);
 		this->keyboardMap.emplace(JUMP, sf::Keyboard::Space);
 		this->keyboardMap.emplace(DEBUG, sf::Keyboard::F5);
+		this->keyboardMap.emplace(ROTATE_LEFT, sf::Keyboard::L);
+		this->keyboardMap.emplace(ROTATE_RIGHT, sf::Keyboard::M);
 
 
 		this->inputState.emplace(LEFT, false);
 		this->inputState.emplace(RIGHT, false);
 		this->inputState.emplace(JUMP, false);
 		this->inputState.emplace(DEBUG, false);
+		this->inputState.emplace(ROTATE_LEFT, false);
+		this->inputState.emplace(ROTATE_RIGHT, false);
+
 
 
 		this->mouseMap.emplace(FIRE, sf::Mouse::Left);

@@ -36,6 +36,7 @@ namespace GameComponents {
 		int counter;
 		std::string currentAnim;
 		std::string _fileName;
+		int rotateNum;
 
 	};
 }

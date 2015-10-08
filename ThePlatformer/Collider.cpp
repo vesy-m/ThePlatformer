@@ -124,7 +124,7 @@ namespace GameComponents {
 				{
 					isCollide = true;
 					velocity += glm::vec2(0, 1);
-					pos = glm::vec2(pos.x, other->min.y - 40);
+					pos = glm::vec2(pos.x, other->min.y - 42);
 				}
 				if (this->CollideTopLeft(other) && this->CollideDownLeft(other))
 				{

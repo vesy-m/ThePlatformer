@@ -1,5 +1,5 @@
 #include "SpriteComponent.h"
-
+#include "debugManager.h"
 namespace GameComponents {
 	SpriteComponent::SpriteComponent(GameObjects::BaseGameObject *object, const std::string &fileName) : BaseComponent(object)
 	{
@@ -9,6 +9,7 @@ namespace GameComponents {
 		currentFrame = 0;
 		counter = 0;
 		currentAnim = "default";
+		rotateNum = -1;
 	}
 
 	SpriteComponent::~SpriteComponent()
@@ -20,32 +21,45 @@ namespace GameComponents {
 		switch (message->id)
 		{
 			case Message::LEFT:
-				if ((std::string("walk").compare(currentAnim) != 0 && std::string("jump").compare(currentAnim) != 0) || revertX != true) {
+				if ((std::string("walk").compare(currentAnim) != 0 || revertX != true) && std::string("jump").compare(currentAnim) != 0) {
 					currentFrame = 0;
 					currentAnim = "walk";
 					revertX = true;
 				}
+				if (revertX != true)
+				{
+					revertX = true;
+				}
 				break;
 			case Message::RIGHT:
-				if ((std::string("walk").compare(currentAnim) != 0 && std::string("jump").compare(currentAnim) != 0) || revertX != false) {
+				if ((std::string("walk").compare(currentAnim) != 0 || revertX != false) && std::string("jump").compare(currentAnim) != 0) {
 					currentFrame = 0;
 					currentAnim = "walk";
 					revertX = false;
 				}
+				if (revertX != false)
+				{
+					revertX = false;
+				}
 				break;
+			case Message::JUMP_ANIMATION:
 			case Message::JUMP:
 				if (std::string("jump").compare(currentAnim) != 0) {
 					currentFrame = 0;
 					currentAnim = "jump";
 				}
 				break;
-			case Message::LEFT_RELEASED:
-			case Message::JUMP_RELEASED:
-			case Message::RIGHT_RELEASED:
+			case Message::STAND_ANIMATION:
 				if (std::string("default").compare(currentAnim) != 0) {
 					currentFrame = 0;
 					currentAnim = "default";
 				}
+				break;
+			case Message::ROTATE_LEFT:
+				debugManager::getInstance().rotateNum = -1;
+				break;
+			case Message::ROTATE_RIGHT:
+				debugManager::getInstance().rotateNum = 1;
 				break;
 			default:
 				break;
@@ -68,6 +82,18 @@ namespace GameComponents {
 		GLint height = texture->getHeight();
 		GLint posX = this->composition->getX() + (this->composition->getWidth() / 2);
 		GLint posY = this->composition->getY() + (this->composition->getHeight() / 2);
+
+		if (!std::string("sun").compare(this->composition->getName())) {
+			this->composition->setRotate((this->composition->getRotate() + debugManager::getInstance().rotateNum) % 360);
+			float newScale = this->composition->getScale();
+			if (newScale > 2.0) {
+				debugManager::getInstance().scaleNum = -0.01;
+			}
+			else if (newScale <= 1.0) {
+				debugManager::getInstance().scaleNum = 0.01;
+			}
+			this->composition->setScale(newScale + debugManager::getInstance().scaleNum);
+		}
 
 		glEnable(GL_TEXTURE_2D);
 

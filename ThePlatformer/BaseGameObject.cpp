@@ -108,4 +108,12 @@ namespace GameObjects {
 	{
 		return this->rotate;
 	}
+	void BaseGameObject::setName(std::string name)
+	{
+		this->name = name;
+	}
+	std::string BaseGameObject::getName()
+	{
+		return name;
+	}
 }
