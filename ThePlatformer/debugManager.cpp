@@ -5,7 +5,7 @@ debugManager::debugManager()
 	debugText = false;
 	debugGraphic = false;
 	rotateNum = -1;
-	scaleNum = 0.1;
+	scaleNum = 0.1f;
 }
 
 debugManager::~debugManager()

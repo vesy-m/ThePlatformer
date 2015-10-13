@@ -62,17 +62,17 @@ namespace GameComponents {
 			if (!isColliding || lastCollisionVelocity.x > 0)
 				velocity.x -= 20.0f;
 			if(onGround == true)
-				this->composition->SendMessage(new Message(Message::STAND_ANIMATION));
+				this->composition->sendMessage(new Message(Message::STAND_ANIMATION));
 			break;
 		case Message::LEFT_RELEASED:
 			if (!isColliding || lastCollisionVelocity.x < 0)
 				velocity.x -= -20.0f;
 			if (onGround == true)
-				this->composition->SendMessage(new Message(Message::STAND_ANIMATION));
+				this->composition->sendMessage(new Message(Message::STAND_ANIMATION));
 			break;
 		case Message::NO_COLLISION:
 			if (onGround == true)
-				this->composition->SendMessage(new Message(Message::JUMP_ANIMATION));
+				this->composition->sendMessage(new Message(Message::JUMP_ANIMATION));
 			forces.y = 0;
 			onGround = false;
 			break;
@@ -89,7 +89,7 @@ namespace GameComponents {
 				{
 					forces = (gravity / (1.0f / mass)) * (-1.0f);
 					if (!onGround)
-						this->composition->SendMessage(new Message(Message::STAND_ANIMATION));
+						this->composition->sendMessage(new Message(Message::STAND_ANIMATION));
 					onGround = true;
 				}
 				else if (res < 0)
@@ -99,8 +99,8 @@ namespace GameComponents {
 				velocity.y = 0;
 			}
 			position = collision->pos;
-			composition->setX(position.x);
-			composition->setY(position.y);
+			composition->setX((int)position.x);
+			composition->setY((int)position.y);
 			isColliding = true;
 			break;
 		}
@@ -129,7 +129,7 @@ namespace GameComponents {
 		composition->setX(position.x);
 		composition->setY(position.y);
 		VectorMessage *vec = new VectorMessage(Message::DEBUGVECTOR, velocity);
-		this->composition->SendMessage((Message *)vec);
+		this->composition->sendMessage((Message *)vec);
 
 
 	}

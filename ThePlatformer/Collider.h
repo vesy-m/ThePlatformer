@@ -21,7 +21,8 @@ namespace GameComponents {
 		COMPONENT_TYPE getType();
 		void Update();
 		void Init();
-		void sendMessage(Message*);
+
+		void sendMessage(Message * message);
 
 		bool Collide(BoxCollider *other);
 		bool Collide(CircleCollider *other);
@@ -55,12 +56,12 @@ namespace GameComponents {
 	{
 	public:
 		HexagonCollider(GameObjects::BaseGameObject *);
+		void sendMessage(Message *);
 		~HexagonCollider();
 
 		COMPONENT_TYPE getType();
 		void Update();
 		void Init();
-		void sendMessage(Message*);
 
 		bool CollideTop(BoxCollider *other);
 		bool CollideDown(BoxCollider *other);

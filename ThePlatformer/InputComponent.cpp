@@ -22,22 +22,22 @@ namespace GameComponents {
 			if (it->first == INPUT_TYPE::LEFT && it->second == true && this->inputState.at(INPUT_TYPE::RIGHT) == false)
 			{
 				//std::cout << "LEFT" << std::endl;
-				this->composition->SendMessage(new Message(Message::LEFT));
+				this->composition->sendMessage(new Message(Message::LEFT));
 			}
 			if (it->first == INPUT_TYPE::RIGHT && it->second == true && this->inputState.at(INPUT_TYPE::LEFT) == false)
 			{
 				//std::cout << "RIGHT" << std::endl;
-				this->composition->SendMessage(new Message(Message::RIGHT));
+				this->composition->sendMessage(new Message(Message::RIGHT));
 			}
 
 			if (it->first == INPUT_TYPE::JUMP && it->second == true)
 			{
-				this->composition->SendMessage(new Message(Message::JUMP));
+				this->composition->sendMessage(new Message(Message::JUMP));
 				//std::cout << "JUMP" << std::endl;
 			}
 			if (it->first == INPUT_TYPE::DEBUG && it->second == true)
 			{
-				//this->composition->SendMessage(new Message(Message::SHOW_DEBUG));
+				//this->composition->sendMessage(new Message(Message::SHOW_DEBUG));
 				if (debugManager::getInstance().isActivateGraphic()) {
 					debugManager::getInstance().disableGraphic();
 				}
@@ -49,11 +49,11 @@ namespace GameComponents {
 			}
 			if (it->first == INPUT_TYPE::ROTATE_LEFT && it->second == true)
 			{
-				this->composition->SendMessage(new Message(Message::ROTATE_LEFT));
+				this->composition->sendMessage(new Message(Message::ROTATE_LEFT));
 			}
 			if (it->first == INPUT_TYPE::ROTATE_RIGHT && it->second == true)
 			{
-				this->composition->SendMessage(new Message(Message::ROTATE_RIGHT));
+				this->composition->sendMessage(new Message(Message::ROTATE_RIGHT));
 			}
 		}
 	}
@@ -77,11 +77,11 @@ namespace GameComponents {
 					switch (it->first)
 					{
 						case INPUT_TYPE::LEFT:
-							this->composition->SendMessage(new Message(Message::LEFT_RELEASED));
+							this->composition->sendMessage(new Message(Message::LEFT_RELEASED));
 							break;
 
 						case INPUT_TYPE::RIGHT:
-							this->composition->SendMessage(new Message(Message::RIGHT_RELEASED));
+							this->composition->sendMessage(new Message(Message::RIGHT_RELEASED));
 							break;
 
 						default:

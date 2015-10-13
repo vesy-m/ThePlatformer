@@ -91,6 +91,10 @@ namespace GameComponents {
 	{
 	}
 
+	void HexagonCollider::sendMessage(Message*) {
+
+	}
+
 	HexagonCollider::~HexagonCollider()
 	{}
 
@@ -142,21 +146,17 @@ namespace GameComponents {
 				if (isCollide)
 				{
 					CollisionMessage *msg = new CollisionMessage(pos, velocity);
-					this->composition->SendMessage((Message*)msg);
+					this->composition->sendMessage((Message*)msg);
 				}
 			}
 		}
 		if (isCollide == false)
 		{
-			this->composition->SendMessage(new Message(Message::NO_COLLISION));
+			this->composition->sendMessage(new Message(Message::NO_COLLISION));
 		}
 	}
 
 	void HexagonCollider::Init()
-	{
-	}
-
-	void HexagonCollider::sendMessage(Message *message)
 	{
 	}
 

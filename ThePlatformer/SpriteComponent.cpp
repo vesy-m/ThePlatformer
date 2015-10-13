@@ -87,10 +87,10 @@ namespace GameComponents {
 			this->composition->setRotate((this->composition->getRotate() + debugManager::getInstance().rotateNum) % 360);
 			float newScale = this->composition->getScale();
 			if (newScale > 2.0) {
-				debugManager::getInstance().scaleNum = -0.01;
+				debugManager::getInstance().scaleNum = -0.01f;
 			}
 			else if (newScale <= 1.0) {
-				debugManager::getInstance().scaleNum = 0.01;
+				debugManager::getInstance().scaleNum = 0.01f;
 			}
 			this->composition->setScale(newScale + debugManager::getInstance().scaleNum);
 		}
@@ -132,10 +132,10 @@ namespace GameComponents {
 			pointYHeight -= height;
 		}
 
-		pointX *= this->composition->getScale();
-		pointXWidth *= this->composition->getScale();
-		pointY *= this->composition->getScale();
-		pointYHeight *= this->composition->getScale();
+		pointX = pointX * this->composition->getScale();
+		pointXWidth = pointXWidth * this->composition->getScale();
+		pointY = pointY * this->composition->getScale();
+		pointYHeight = pointYHeight * this->composition->getScale();
 
 		glTranslated(posX, posY, 0);
 		glRotated(this->composition->getRotate(), 0, 0, 1);
@@ -145,7 +145,7 @@ namespace GameComponents {
 			glTexCoord2f(xmax, ymin); glVertex2i(pointXWidth, pointYHeight);
 			glTexCoord2f(xmin, ymin); glVertex2i(pointX, pointYHeight);
 		glEnd();
-		glRotatef(-this->composition->getRotate(), 0, 0, 1);
+		glRotatef((GLfloat)-this->composition->getRotate(), 0.0, 0.0, 1.0);
 		glTranslated(-posX, -posY, 0);
 
 		glDisable(GL_TEXTURE_2D);
