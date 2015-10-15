@@ -37,10 +37,17 @@ namespace GameComponents {
 		}
 
 		glEnable(GL_TEXTURE_2D);
+		static int time_to_display = 250;
+		static int old_fps = 60;
 
-		int fps = (int)(1000.0 / dt);
+		time_to_display -= dt;
+		if (time_to_display <= 0) {
+			time_to_display = 250;
+			old_fps = (int)(1000.0 / dt);
+		}
+		
 		std::stringstream ss = std::stringstream();
-		ss << fps;
+		ss << old_fps;
 		std::string text = std::string("FPS : " + ss.str());
 
 		glBindTexture(GL_TEXTURE_2D, texture->getId());

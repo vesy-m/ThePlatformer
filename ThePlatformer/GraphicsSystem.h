@@ -17,5 +17,4 @@ namespace GameSystems {
 		void SendMessage();
 	};
 }
-
 #endif // !_GRAPHICSSYSTEM_H_

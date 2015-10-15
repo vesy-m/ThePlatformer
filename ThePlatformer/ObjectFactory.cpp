@@ -77,6 +77,7 @@ namespace GameSystems {
 	}
 
 	void ObjectFactory::putObjectDepthOrdered(GameObjects::BaseGameObject * obj) {
+		assert(obj != NULL);
 		int depth = obj->getDepth();
 		int size = this->listGameObject.size();
 		
