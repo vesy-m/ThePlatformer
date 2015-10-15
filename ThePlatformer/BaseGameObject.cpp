@@ -35,7 +35,7 @@ namespace GameObjects {
 		this->componentsList.push_back(component);
 	}
 
-	void BaseGameObject::SendMessage(Message *message)
+	void BaseGameObject::sendMessage(Message *message)
 	{
 		for (size_t i = 0; i < this->componentsList.size(); i++) {
 			//std::cout << this->componentsList.at(i)->getType() << std::endl;

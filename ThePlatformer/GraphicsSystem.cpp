@@ -20,12 +20,12 @@ namespace GameSystems {
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		GLint iViewport[4];
 		glGetIntegerv(GL_VIEWPORT, iViewport);
-		glColor3f((1.0 / 255.0 * 104.0), (1.0 / 255.0 * 185.0), (1.0 / 255.0 * 228.0));
+		glColor3f((GLfloat)(1.0 / 255.0 * 104.0), (GLfloat)(1.0 / 255.0 * 185.0), (GLfloat)(1.0 / 255.0 * 228.0));
 		glBegin(GL_QUADS);
-			glVertex2f(iViewport[0], iViewport[1]);
-			glVertex2f(iViewport[0], iViewport[1] + iViewport[3]);
-			glVertex2f(iViewport[0] + iViewport[2], iViewport[1] + iViewport[3]);
-			glVertex2f(iViewport[0] + iViewport[2], iViewport[1]);
+			glVertex2i(iViewport[0], iViewport[1]);
+			glVertex2i(iViewport[0], iViewport[1] + iViewport[3]);
+			glVertex2i(iViewport[0] + iViewport[2], iViewport[1] + iViewport[3]);
+			glVertex2i(iViewport[0] + iViewport[2], iViewport[1]);
 		glEnd();
 		glColor3f(1.0f, 1.0f, 1.0f);
 		for each (GameObjects::BaseGameObject* object in listObjects)

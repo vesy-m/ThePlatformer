@@ -6,6 +6,7 @@
 #include <list>
 #include "BaseGameObject.h"
 #include "gason.h"
+#include "Level.h"
 
 namespace GameSystems {
 	class ObjectFactory
@@ -28,6 +29,7 @@ namespace GameSystems {
 
 		void putObjectDepthOrdered(GameObjects::BaseGameObject * obj);
 		std::list<GameObjects::BaseGameObject *> listGameObject;
+		std::vector<Level> listLevels;
 	};
 }
 

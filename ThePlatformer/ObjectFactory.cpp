@@ -10,6 +10,7 @@
 namespace GameSystems {
 	ObjectFactory::ObjectFactory()
 	{
+		listLevels = std::vector<Level>();
 	}
 
 
