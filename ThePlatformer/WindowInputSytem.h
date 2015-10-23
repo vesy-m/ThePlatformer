@@ -3,6 +3,7 @@
 #define _WINDOWINPUTSYSTEM_H_
 
 #include "System.h"
+#include "InputComponent.h"
 #include <SFML/Window.hpp>
 #include <SFML/OpenGL.hpp>
 

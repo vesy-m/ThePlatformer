@@ -162,6 +162,7 @@ copy /Y "$(ProjectDir)\lib\glew-1.13.0\bin\*" "$(OutDir)\"</Command>
     <ClCompile Include="BaseComponent.cpp" />
     <ClCompile Include="BaseGameObject.cpp" />
     <ClCompile Include="BodyComponent.cpp" />
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="debugManager.cpp" />
     <ClCompile Include="gason.cpp" />
     <ClCompile Include="Collider.cpp" />
@@ -191,6 +192,7 @@ copy /Y "$(ProjectDir)\lib\glew-1.13.0\bin\*" "$(OutDir)\"</Command>
     <ClInclude Include="BaseComponent.h" />
     <ClInclude Include="BaseGameObject.h" />
     <ClInclude Include="BodyComponent.h" />
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="debugManager.h" />
     <ClInclude Include="GameEngine.h" />

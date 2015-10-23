@@ -3,7 +3,7 @@
 debugManager::debugManager()
 {
 	debugText = false;
-	debugGraphic = false;
+	debugGraphic = true;
 	rotateNum = -1;
 	scaleNum = 0.1f;
 }
@@ -29,12 +29,14 @@ bool debugManager::isActivateGraphic()
 
 void debugManager::activateGraphic()
 {
-	debugGraphic = true;
+//	debugGraphic = true;
 }
 
 void debugManager::disableGraphic()
 {
-	debugGraphic = false;
+	//GameSystems::ObjectFactory::getInstance().getCurrentLevel().setX(GameSystems::ObjectFactory::getInstance().getCurrentLevel().getX() + 50);
+//	GameSystems::ObjectFactory::getInstance().getCurrentLevel().setScale(GameSystems::ObjectFactory::getInstance().getCurrentLevel().getScale() + 2.0f);
+//	debugGraphic = false;
 }
 
 void debugManager::displayDebug(const std::string &str, DEBUG_TYPE type)

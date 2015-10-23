@@ -31,6 +31,7 @@ namespace GameSystems {
 			else if (std::string(it->key) == "width") ret->setWidth(it->value.toNumber());
 			else if (std::string(it->key) == "height") ret->setHeight(it->value.toNumber());
 			else if (std::string(it->key) == "name") ret->setName(it->value.toString());
+			else if (std::string(it->key) == "type") ret->setType((GameObjects::objectType)it->value.toNumber());
 			else if (std::string(it->key) == "sprite") {
 				auto sprite = new GameComponents::SpriteComponent(ret, it->value.toString());
 				ret->attachComponent((GameComponents::BaseComponent*)sprite);
@@ -65,16 +66,18 @@ namespace GameSystems {
 
 	void ObjectFactory::buildLevel(JsonValue &value) {
 		assert(value.getTag() == JSON_OBJECT);
+		Level newLevel = Level();
 		for (auto i : value) {
 			if (std::string(i->key) == "objects") {
 				auto arr = i->value;
 				assert(arr.getTag() == JSON_ARRAY);
 				for (auto j : arr) {
 					auto obj = parseObject(j->value);
-					if (obj != NULL) putObjectDepthOrdered(obj);
+					if (obj != NULL) newLevel.putObjectDepthOrdered(obj);
 				}
 			}
 		}
+		currentLevel = newLevel;
 	}
 
 	void ObjectFactory::putObjectDepthOrdered(GameObjects::BaseGameObject * obj) {
@@ -90,9 +93,14 @@ namespace GameSystems {
 		}
 		this->listGameObject.push_back(obj);
 	}
-
+	/*
 	std::list<GameObjects::BaseGameObject *> &ObjectFactory::getObjects()
 	{
 		return this->listGameObject;
+	}*/
+
+	Level &ObjectFactory::getCurrentLevel()
+	{
+		return this->currentLevel;
 	}
 }

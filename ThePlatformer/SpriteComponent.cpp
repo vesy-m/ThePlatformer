@@ -1,5 +1,7 @@
 #include "SpriteComponent.h"
 #include "debugManager.h"
+#include "Camera.h"
+
 namespace GameComponents {
 	SpriteComponent::SpriteComponent(GameObjects::BaseGameObject *object, const std::string &fileName) : BaseComponent(object)
 	{
@@ -94,6 +96,13 @@ namespace GameComponents {
 			}
 			this->composition->setScale(newScale + debugManager::getInstance().scaleNum);
 		}
+		if (!std::string("megaman").compare(this->composition->getName())) {
+			Camera::getInstance().cameraStartX = posX - 100;
+			Camera::getInstance().cameraStartY = posY - 100;
+			Camera::getInstance().setWidth(324);
+			Camera::getInstance().setHeight(230);
+		}
+
 
 		glEnable(GL_TEXTURE_2D);
 
@@ -146,7 +155,7 @@ namespace GameComponents {
 			glTexCoord2f(xmin, ymin); glVertex2i(pointX, pointYHeight);
 		glEnd();
 		glRotatef((GLfloat)-this->composition->getRotate(), 0.0, 0.0, 1.0);
-		glTranslated(-posX, -posY, 0);
+		glTranslated(-(posX), -(posY), 0);
 
 		glDisable(GL_TEXTURE_2D);
 	}

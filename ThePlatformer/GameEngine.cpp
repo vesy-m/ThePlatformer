@@ -25,7 +25,7 @@ namespace GameEngine {
 	void Core::Init(void) {
 		this->m_manager = new TimeManager("../log_file.txt");
 		for each (GameSystems::System* system in this->m_systems)
-			system->Init(GameSystems::ObjectFactory::getInstance().getObjects());
+			system->Init(GameSystems::ObjectFactory::getInstance().getCurrentLevel().getObjects());
 	}
 
 	void Core::Update(float dt) {
@@ -38,7 +38,7 @@ namespace GameEngine {
 		while (42) {
 			this->m_manager->StartTimer();
 			for each (GameSystems::System *system in this->m_systems) {
-				if (system->Update(this->m_manager->GetLastTime(), GameSystems::ObjectFactory::getInstance().getObjects()) == 1) {
+				if (system->Update(this->m_manager->GetLastTime(), GameSystems::ObjectFactory::getInstance().getCurrentLevel().getObjects()) == 1) {
 					return;
 				}
 			}
