@@ -2,13 +2,26 @@
   "objects" : [
     {
       "name" : "megaman",
+      "x" : 630,
+      "y" : 500,
+      "depth" : 2,
+      "height" : 42,
+      "width" : 30,
+      "sprite" : "desc-megaman.json",
+      "input" : "joystick",
+      "body" : true,
+      "hexacollider" : true,
+      "vector" : true
+    },
+	{
+      "name" : "megaman2",
       "x" : 330,
       "y" : 500,
       "depth" : 2,
       "height" : 42,
       "width" : 30,
       "sprite" : "desc-megaman.json",
-      "input" : true,
+      "input" : "keyboard",
       "body" : true,
       "hexacollider" : true,
       "vector" : true
