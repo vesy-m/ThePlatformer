@@ -1,7 +1,8 @@
 #include "gason.h"
 #include "SpriteComponent.h"
 #include "ObjectFactory.h"
-#include "InputComponent.h"
+#include "JoystickInputComponent.h"
+#include "KeyboardInputComponent.h"
 #include "BodyComponent.h"
 #include "Collider.h"
 #include "VectorDebugComponent.h"
@@ -52,8 +53,16 @@ namespace GameSystems {
 				ret->attachComponent((GameComponents::BaseComponent*) vector);
 			}
 			else if (std::string(it->key) == "input") {
-				auto input = new GameComponents::InputComponent(ret);
-				ret->attachComponent((GameComponents::BaseComponent*) input);
+				if (std::string(it->value.toString()) == "joystick")
+				{
+					auto input = new GameComponents::JoystickInputComponent(ret);
+					ret->attachComponent((GameComponents::BaseComponent*) input);
+				}
+				else if (std::string(it->value.toString()) == "keyboard")
+				{
+					auto input = new GameComponents::KeyboardInputComponent(ret);
+					ret->attachComponent((GameComponents::BaseComponent*) input);
+				}
 			}
 			else if (std::string(it->key) == "vector") {
 				auto vector = new GameComponents::VectorDebugComponent(ret);

@@ -11,37 +11,35 @@
 
 namespace GameComponents {
 
-	enum INPUT_TYPE
-	{
-		LEFT,
-		RIGHT,
-		JUMP,
-		FIRE,
-		SPECIAL,
-		DEBUG,
-		ROTATE_RIGHT,
-		ROTATE_LEFT,
-	};
-
 	class InputComponent : BaseComponent
 	{
 	public:
+		enum INPUT_TYPE
+		{
+			LEFT,
+			RIGHT,
+			JUMP,
+			FIRE,
+			SPECIAL,
+			DEBUG,
+			ROTATE_RIGHT,
+			ROTATE_LEFT,
+		};
+
 		InputComponent(GameObjects::BaseGameObject *);
 		~InputComponent();
 
 		COMPONENT_TYPE getType();
+		GameObjects::BaseGameObject *getComposition();
 		void Update();
-		void UpdateInputState(sf::Event);
-		void Init();
-		void sendMessage(Message*);
-		void setKeyboardKey(INPUT_TYPE inputType, sf::Keyboard::Key key);
-		void setMouseButton(INPUT_TYPE inputType, sf::Mouse::Button button);
 
-	private:
+		virtual void UpdateInputState(sf::Event) = 0;
+		virtual void Init() = 0;
+		virtual void sendMessage(Message*) = 0;
+
+	protected:
 		const COMPONENT_TYPE componentType = WINDOW;
 		std::map<INPUT_TYPE, bool> inputState;
-		std::map<INPUT_TYPE, sf::Keyboard::Key> keyboardMap;
-		std::map<INPUT_TYPE, sf::Mouse::Button> mouseMap;
 	};
 }
 
