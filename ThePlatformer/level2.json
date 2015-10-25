@@ -2,7 +2,7 @@
   "objects" : [
     {
       "name" : "megaman",
-      "x" : 630,
+      "x" : 830,
       "y" : 500,
       "depth" : 2,
       "height" : 42,
@@ -11,7 +11,8 @@
       "input" : "joystick",
       "body" : true,
       "hexacollider" : true,
-      "vector" : true
+      "vector" : true,
+      "type": 1
     },
 	{
       "name" : "megaman2",
@@ -24,7 +25,8 @@
       "input" : "keyboard",
       "body" : true,
       "hexacollider" : true,
-      "vector" : true
+      "vector" : true,
+      "type": 1
     },
 	{
       "name" : "debugFps",

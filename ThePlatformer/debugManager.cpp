@@ -29,14 +29,12 @@ bool debugManager::isActivateGraphic()
 
 void debugManager::activateGraphic()
 {
-//	debugGraphic = true;
+	debugGraphic = true;
 }
 
 void debugManager::disableGraphic()
 {
-	//GameSystems::ObjectFactory::getInstance().getCurrentLevel().setX(GameSystems::ObjectFactory::getInstance().getCurrentLevel().getX() + 50);
-//	GameSystems::ObjectFactory::getInstance().getCurrentLevel().setScale(GameSystems::ObjectFactory::getInstance().getCurrentLevel().getScale() + 2.0f);
-//	debugGraphic = false;
+	debugGraphic = false;
 }
 
 void debugManager::displayDebug(const std::string &str, DEBUG_TYPE type)

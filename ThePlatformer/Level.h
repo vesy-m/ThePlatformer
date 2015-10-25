@@ -1,7 +1,7 @@
 #pragma once
 #include "Texture.h"
 #include "GameEngine.h"
-
+#include <vector>
 
 class Level
 {
@@ -10,11 +10,7 @@ public:
 	~Level();
 	void putObjectDepthOrdered(GameObjects::BaseGameObject * obj);
 	std::list<GameObjects::BaseGameObject*>& getObjects();
-	int getX();
-	int getY();
-	void setX(int);
-	void setScale(float);
-	float getScale();
+	std::vector<GameObjects::BaseGameObject*> getPlayers();
 private:
 	Texture *background;
 	std::list<GameObjects::BaseGameObject *> listGameObject;

@@ -32,7 +32,7 @@ namespace GameSystems {
 			else if (std::string(it->key) == "width") ret->setWidth(it->value.toNumber());
 			else if (std::string(it->key) == "height") ret->setHeight(it->value.toNumber());
 			else if (std::string(it->key) == "name") ret->setName(it->value.toString());
-			else if (std::string(it->key) == "type") ret->setType((GameObjects::objectType)it->value.toNumber());
+			else if (std::string(it->key) == "type") ret->setType((GameObjects::objectType)(int)it->value.toNumber());
 			else if (std::string(it->key) == "sprite") {
 				auto sprite = new GameComponents::SpriteComponent(ret, it->value.toString());
 				ret->attachComponent((GameComponents::BaseComponent*)sprite);

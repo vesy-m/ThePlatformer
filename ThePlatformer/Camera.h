@@ -12,6 +12,8 @@ public:
 	int cameraStartY;
 	int cameraEndY;
 	int cameraEndX;
+	void setX(int x);
+	void setY(int y);
 	void setWidth(int width);
 	void setHeight(int height);
 private:

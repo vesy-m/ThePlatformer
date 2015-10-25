@@ -15,6 +15,7 @@ namespace GameSystems {
 		int Update(double dt, std::list<GameObjects::BaseGameObject*>&);
 		void Init(std::list<GameObjects::BaseGameObject*>& listObjects);
 		void viewportReload();
+		void resizeCamera();
 		void SendMessage();
 	};
 }
