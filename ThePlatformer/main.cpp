@@ -24,13 +24,11 @@ int main()
 	core.LoadLevelFile("level2.json");
 	
 	//a enlever de commentaire pour corriger frame rate
-	/*
 	sf::Music music;
 	if (!music.openFromFile("dr_wily_stage.ogg"))
 		return -1;
 	music.setVolume(10);
 	music.play();
-	*/
 
 	//start
 	core.Init();
