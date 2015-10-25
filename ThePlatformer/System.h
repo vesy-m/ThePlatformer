@@ -3,7 +3,6 @@
 #define _SYSTEM_H_
 
 #include "BaseGameObject.h"
-#include "InputComponent.h"
 #include <list>
 
 namespace GameSystems

@@ -1,5 +1,7 @@
 #include "SpriteComponent.h"
 #include "debugManager.h"
+#include "Camera.h"
+
 namespace GameComponents {
 	SpriteComponent::SpriteComponent(GameObjects::BaseGameObject *object, const std::string &fileName) : BaseComponent(object)
 	{
@@ -146,7 +148,7 @@ namespace GameComponents {
 			glTexCoord2f(xmin, ymin); glVertex2i(pointX, pointYHeight);
 		glEnd();
 		glRotatef((GLfloat)-this->composition->getRotate(), 0.0, 0.0, 1.0);
-		glTranslated(-posX, -posY, 0);
+		glTranslated(-(posX), -(posY), 0);
 
 		glDisable(GL_TEXTURE_2D);
 	}

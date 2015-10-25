@@ -1,4 +1,5 @@
 #include "TextComponent.h"
+#include "Camera.h"
 
 namespace GameComponents {
 
@@ -26,8 +27,8 @@ namespace GameComponents {
 		float xmax = 1;
 		float ymin = 0;
 		float ymax = 1;
-		GLint posX = this->composition->getX();
-		GLint posY = this->composition->getY();
+		GLint posX = Camera::getInstance().cameraStartX + 20;
+		GLint posY = Camera::getInstance().cameraStartY + 20;
 		Texture *texture = sheet->getTexture();
 		GLint width = texture->getWidth();
 		GLint height = texture->getHeight();
@@ -37,12 +38,12 @@ namespace GameComponents {
 		}
 
 		glEnable(GL_TEXTURE_2D);
-		static int time_to_display = 250;
+		static int time_to_display = 1;
 		static int old_fps = 60;
 
 		time_to_display -= (int) dt;
 		if (time_to_display <= 0) {
-			time_to_display = 250;
+			time_to_display = 1;
 			old_fps = (int)(1000.0 / dt);
 		}
 		
@@ -70,6 +71,8 @@ namespace GameComponents {
 			ymin = (float)(texture->getHeight() - anim.getSpriteYmax(0)) / (float)texture->getHeight();
 			ymax = (float)(texture->getHeight() - anim.getSpriteYmin(0)) / (float)texture->getHeight();
 
+			width = (Camera::getInstance().cameraEndX - Camera::getInstance().cameraStartX) * width / 1280;
+			height = (Camera::getInstance().cameraEndY - Camera::getInstance().cameraStartY) * height / 720;
 
 			int pointX = posX;
 			int pointXWidth = posX + width;

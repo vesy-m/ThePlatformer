@@ -6,12 +6,18 @@
 #include "BaseComponent.h"
 #include "Message.h"
 #include <algorithm>
+
 namespace GameComponents {
 	enum COMPONENT_TYPE;
 	class BaseComponent;
 }
 
 namespace GameObjects {
+
+	enum objectType {
+		NONE,
+		PLAYER
+	};
 
 	class BaseGameObject
 	{
@@ -37,6 +43,8 @@ namespace GameObjects {
 		int getRotate();
 		void setName(std::string name);
 		std::string getName();
+		void setType(objectType newtype);
+		objectType getType();
 	private:
 		std::vector<GameComponents::BaseComponent*> componentsList;
 		int x;
@@ -47,6 +55,7 @@ namespace GameObjects {
 		float scale;
 		int rotate;
 		std::string name;
+		objectType type;
 	};
 }
 

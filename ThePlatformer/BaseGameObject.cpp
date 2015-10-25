@@ -11,6 +11,7 @@ namespace GameObjects {
 		depth = 0;
 		rotate = 0;
 		scale = 1;
+		type = objectType::NONE;
 	}
 
 	BaseGameObject::~BaseGameObject()
@@ -115,5 +116,13 @@ namespace GameObjects {
 	std::string BaseGameObject::getName()
 	{
 		return name;
+	}
+	void BaseGameObject::setType(objectType newtype)
+	{
+		this->type = newtype;
+	}
+	objectType BaseGameObject::getType()
+	{
+		return this->type;
 	}
 }

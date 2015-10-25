@@ -3,6 +3,7 @@
 #define _GRAPHICSSYSTEM_H_
 
 #include "System.h"
+#include "Camera.h"
 #include <SFML\OpenGL.hpp>
 
 namespace GameSystems {
@@ -14,6 +15,7 @@ namespace GameSystems {
 		int Update(double dt, std::list<GameObjects::BaseGameObject*>&);
 		void Init(std::list<GameObjects::BaseGameObject*>& listObjects);
 		void viewportReload();
+		void resizeCamera();
 		void SendMessage();
 	};
 }

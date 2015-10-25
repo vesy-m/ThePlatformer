@@ -111,7 +111,7 @@ namespace GameComponents {
 		//pour tout les objects avec un collider
 		//optimiser selon l'eloignement
 		//BoxCollider *other = new BoxCollider(glm::vec2(200, 450), glm::vec2(250, 500));
-		for each(GameObjects::BaseGameObject* object in GameSystems::ObjectFactory::getInstance().getObjects())
+		for each(GameObjects::BaseGameObject* object in GameSystems::ObjectFactory::getInstance().getCurrentLevel().getObjects())
 		{
 			if (!object->getComponents(GameComponents::COMPONENT_TYPE::COLLIDER).empty())
 			{

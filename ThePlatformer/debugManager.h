@@ -2,6 +2,8 @@
 
 #include <iostream>
 #include <string>
+#include "ObjectFactory.h"
+
 
 class debugManager
 {
