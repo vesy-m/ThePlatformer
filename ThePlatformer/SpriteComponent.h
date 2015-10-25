@@ -4,7 +4,6 @@
 
 #include "BaseGameObject.h"
 
-#include <GL/glew.h>
 #include <SFML/OpenGL.hpp>
 #include <il.h>
 #include <cstdio>
