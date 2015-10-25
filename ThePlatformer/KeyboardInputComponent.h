@@ -4,8 +4,11 @@
 namespace GameComponents {
 	class KeyboardInputComponent : InputComponent
 	{
+		friend class GameSystems::ObjectFactory;
+	private:
+		KeyboardInputComponent(GameObjects::BaseGameObject*);
 	public:
-		KeyboardInputComponent(GameObjects::BaseGameObject *object);
+		
 		~KeyboardInputComponent();
 		void UpdateInputState(sf::Event);
 		void Init();

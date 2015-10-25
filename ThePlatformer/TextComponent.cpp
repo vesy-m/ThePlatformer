@@ -40,7 +40,7 @@ namespace GameComponents {
 		static int time_to_display = 250;
 		static int old_fps = 60;
 
-		time_to_display -= dt;
+		time_to_display -= (int) dt;
 		if (time_to_display <= 0) {
 			time_to_display = 250;
 			old_fps = (int)(1000.0 / dt);

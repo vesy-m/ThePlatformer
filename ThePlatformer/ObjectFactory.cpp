@@ -24,13 +24,13 @@ namespace GameSystems {
 		auto ret = new GameObjects::BaseGameObject();
 
 		for (auto it : value) {
-			if (std::string(it->key) == "x") ret->setX(it->value.toNumber());
-			else if (std::string(it->key) == "y") ret->setY(it->value.toNumber());
-			else if (std::string(it->key) == "depth") ret->setDepth(it->value.toNumber());
-			else if (std::string(it->key) == "scale") ret->setScale(it->value.toNumber());
-			else if (std::string(it->key) == "rotate") ret->setRotate(it->value.toNumber());
-			else if (std::string(it->key) == "width") ret->setWidth(it->value.toNumber());
-			else if (std::string(it->key) == "height") ret->setHeight(it->value.toNumber());
+			if (std::string(it->key) == "x") ret->setX((int) it->value.toNumber());
+			else if (std::string(it->key) == "y") ret->setY((int) it->value.toNumber());
+			else if (std::string(it->key) == "depth") ret->setDepth((int) it->value.toNumber());
+			else if (std::string(it->key) == "scale") ret->setScale((float) it->value.toNumber());
+			else if (std::string(it->key) == "rotate") ret->setRotate((int) it->value.toNumber());
+			else if (std::string(it->key) == "width") ret->setWidth((int) it->value.toNumber());
+			else if (std::string(it->key) == "height") ret->setHeight((int) it->value.toNumber());
 			else if (std::string(it->key) == "name") ret->setName(it->value.toString());
 			else if (std::string(it->key) == "sprite") {
 				auto sprite = new GameComponents::SpriteComponent(ret, it->value.toString());

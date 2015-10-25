@@ -7,12 +7,19 @@
 #include "vectorMessage.h"
 #include "debugManager.h"
 
+namespace GameSystems {
+	class ObjectFactory;
+}
+
 namespace GameComponents {
 
 	class VectorDebugComponent : BaseComponent
 	{
+		friend class GameSystems::ObjectFactory;
+	private:
+		VectorDebugComponent(GameObjects::BaseGameObject*);
 	public:
-		VectorDebugComponent(GameObjects::BaseGameObject *);
+		
 		~VectorDebugComponent();
 		void sendMessage(Message*);
 		COMPONENT_TYPE getType();

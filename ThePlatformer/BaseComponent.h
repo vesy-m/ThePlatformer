@@ -31,7 +31,7 @@ namespace GameComponents {
 		virtual void Update() = 0;
 		virtual void Init() = 0;
 		virtual void sendMessage(Message*) = 0;
-	public:
+	protected:
 		GameObjects::BaseGameObject *composition;
 	};
 }

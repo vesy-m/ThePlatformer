@@ -6,12 +6,15 @@
 #include <string>
 #include "debugManager.h"
 
-namespace GameComponents {
+namespace GameSystems {
+	class ObjectFactory;
+}
 
+namespace GameComponents {
 	class TextComponent : BaseComponent
 	{
+		friend class GameSystems::ObjectFactory;
 	public:
-		TextComponent(GameObjects::BaseGameObject *object);
 		~TextComponent();
 		COMPONENT_TYPE getType();
 		void Update(double dt);
@@ -19,6 +22,7 @@ namespace GameComponents {
 		void Init();
 		void sendMessage(Message*);
 	private:
+		TextComponent(GameObjects::BaseGameObject*);
 		const COMPONENT_TYPE type = COMPONENT_TYPE::TEXT;
 		SpriteSheet *sheet;
 

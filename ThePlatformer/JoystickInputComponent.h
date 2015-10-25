@@ -5,8 +5,11 @@ namespace GameComponents {
 
 	class JoystickInputComponent : InputComponent
 	{
-	public:
+		friend class GameSystems::ObjectFactory;
+	private:
 		JoystickInputComponent(GameObjects::BaseGameObject *object);
+	public:
+		
 		~JoystickInputComponent();
 
 		void UpdateInputState(sf::Event);

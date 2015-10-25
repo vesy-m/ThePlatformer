@@ -108,8 +108,8 @@ namespace GameComponents {
 
 	void BodyComponent::Integrate(float dt)
 	{
-		position.x = composition->getX();
-		position.y = composition->getY();
+		position.x = (float) composition->getX();
+		position.y = (float) composition->getY();
 
 		glm::vec2 newForces = (forces * (1.0f / mass));
 
@@ -126,8 +126,8 @@ namespace GameComponents {
 
 		position += velocity * dt;
 
-		composition->setX(position.x);
-		composition->setY(position.y);
+		composition->setX((int) position.x);
+		composition->setY((int) position.y);
 		VectorMessage *vec = new VectorMessage(Message::DEBUGVECTOR, velocity);
 		this->composition->sendMessage((Message *)vec);
 
@@ -154,19 +154,19 @@ namespace GameComponents {
 
 	void BodyComponent::setPositionX(int x)
 	{
-		position.x = x;
+		position.x = (float) x;
 	}
 
 	void BodyComponent::setPositionY(int y)
 	{
-		position.y = y;
+		position.y = (float) y;
 	}
 	int BodyComponent::getPositionX()
 	{
-		return position.x;
+		return (int) position.x;
 	}
 	int BodyComponent::getPositionY()
 	{
-		return position.y;
+		return (int) position.y;
 	}
 }

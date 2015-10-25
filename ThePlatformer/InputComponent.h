@@ -8,11 +8,12 @@
 #include <map>
 #include "BaseGameObject.h"
 #include "debugManager.h"
+#include "ObjectFactory.h"
 
 namespace GameComponents {
 
 	class InputComponent : BaseComponent
-	{
+	{	
 	public:
 		enum INPUT_TYPE
 		{
@@ -25,7 +26,6 @@ namespace GameComponents {
 			ROTATE_RIGHT,
 			ROTATE_LEFT,
 		};
-
 		InputComponent(GameObjects::BaseGameObject *);
 		~InputComponent();
 

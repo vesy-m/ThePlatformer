@@ -6,16 +6,20 @@
 #include "ObjectFactory.h"
 #include <glm/glm.hpp>
 
+namespace GameSystems {
+	class ObjectFactory;
+}
+
 namespace GameComponents {
 	class CircleCollider;
 	class CollisionMessage;
 
 	class BoxCollider : public BaseComponent
 	{
-	public:
+		friend class GameSystems::ObjectFactory;
+	private:
 		BoxCollider(GameObjects::BaseGameObject *);
-		// min is the top-left corner, max is the bottom-right corner
-		BoxCollider(glm::vec2 min, glm::vec2 max);
+	public:		
 		~BoxCollider();
 
 		COMPONENT_TYPE getType();

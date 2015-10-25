@@ -141,11 +141,11 @@
     <ClCompile Include="Level.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="JoystickInputComponent.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
     <ClCompile Include="KeyboardInputComponent.cpp">
-      <Filter>Fichiers sources</Filter>
+      <Filter>GameComponents\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="JoystickInputComponent.cpp">
+      <Filter>GameComponents\Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -234,10 +234,10 @@
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="JoystickInputComponent.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+      <Filter>GameComponents\Header</Filter>
     </ClInclude>
     <ClInclude Include="KeyboardInputComponent.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+      <Filter>GameComponents\Header</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
