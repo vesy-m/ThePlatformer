@@ -87,11 +87,11 @@ namespace GameObjects {
 	}
 	void BaseGameObject::setHeight(int height)
 	{
-		this->height = height * scale;
+		this->height = (int) (height * scale);
 	}
 	void BaseGameObject::setWidth(int width)
 	{
-		this->width = width * scale;
+		this->width = (int) (width * scale);
 	}
 	void BaseGameObject::setScale(float scale)
 	{

@@ -10,11 +10,12 @@
 #include "JSONParser.h"
 #include "BaseGameObject.h"
 #include "debugManager.h"
+#include "ObjectFactory.h"
 
 namespace GameComponents {
 
 	class InputComponent : BaseComponent
-	{
+	{	
 	public:
 		enum INPUT_TYPE
 		{
@@ -27,7 +28,6 @@ namespace GameComponents {
 			ROTATE_RIGHT = 6,
 			ROTATE_LEFT = 7,
 		};
-
 		InputComponent(GameObjects::BaseGameObject *);
 		~InputComponent();
 

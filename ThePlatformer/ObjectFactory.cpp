@@ -1,7 +1,7 @@
 #include "gason.h"
 #include "SpriteComponent.h"
 #include "ObjectFactory.h"
-#include "JoystickInputComponent.h"
+#include "ControllerInputComponent.h"
 #include "KeyboardInputComponent.h"
 #include "BodyComponent.h"
 #include "Collider.h"
@@ -24,13 +24,13 @@ namespace GameSystems {
 		auto ret = new GameObjects::BaseGameObject();
 
 		for (auto it : value) {
-			if (std::string(it->key) == "x") ret->setX(it->value.toNumber());
-			else if (std::string(it->key) == "y") ret->setY(it->value.toNumber());
-			else if (std::string(it->key) == "depth") ret->setDepth(it->value.toNumber());
-			else if (std::string(it->key) == "scale") ret->setScale(it->value.toNumber());
-			else if (std::string(it->key) == "rotate") ret->setRotate(it->value.toNumber());
-			else if (std::string(it->key) == "width") ret->setWidth(it->value.toNumber());
-			else if (std::string(it->key) == "height") ret->setHeight(it->value.toNumber());
+			if (std::string(it->key) == "x") ret->setX((int) it->value.toNumber());
+			else if (std::string(it->key) == "y") ret->setY((int) it->value.toNumber());
+			else if (std::string(it->key) == "depth") ret->setDepth((int) it->value.toNumber());
+			else if (std::string(it->key) == "scale") ret->setScale((float) it->value.toNumber());
+			else if (std::string(it->key) == "rotate") ret->setRotate((int) it->value.toNumber());
+			else if (std::string(it->key) == "width") ret->setWidth((int) it->value.toNumber());
+			else if (std::string(it->key) == "height") ret->setHeight((int) it->value.toNumber());
 			else if (std::string(it->key) == "name") ret->setName(it->value.toString());
 			else if (std::string(it->key) == "type") ret->setType((GameObjects::objectType)(int)it->value.toNumber());
 			else if (std::string(it->key) == "sprite") {
@@ -45,16 +45,16 @@ namespace GameSystems {
 				auto body = new GameComponents::BodyComponent(ret);
 				ret->attachComponent((GameComponents::BaseComponent*) body);
 			}
-			else if (std::string(it->key) == "hexacollider") {
-				auto vector = new GameComponents::HexagonCollider(ret);
-				ret->attachComponent((GameComponents::BaseComponent*) vector);
-			}
+			//else if (std::string(it->key) == "hexacollider") {
+			//	auto vector = new GameComponents::HexagonCollider(ret);
+			//	ret->attachComponent((GameComponents::BaseComponent*) vector);
+			//}
 			else if (std::string(it->key) == "boxcollider") {
 				auto vector = new GameComponents::BoxCollider(ret);
 				ret->attachComponent((GameComponents::BaseComponent*) vector);
 			}
 			else if (std::string(it->key) == "joystick") {
-				auto input = new GameComponents::JoystickInputComponent(ret, it->value.toString());
+				auto input = new GameComponents::ControllerInputComponent(ret, it->value.toString());
 				ret->attachComponent((GameComponents::BaseComponent*) input);
 			}
 			else if (std::string(it->key) == "keyboard") {

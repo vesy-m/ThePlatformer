@@ -1,6 +1,5 @@
 #include <SFML/Window.hpp>
 #include <SFML/Audio/Music.hpp>
-#include <GL/glew.h>
 #include <SFML/OpenGL.hpp>
 #include "GameEngine.h"
 #include "WindowInputSytem.h"
@@ -23,10 +22,12 @@ int main()
 	core.Add((GameSystems::System *)physics);
 	core.Add((GameSystems::System *)graphics);
 	core.LoadLevelFile("level2.json");
+	
+	//a enlever de commentaire pour corriger frame rate
 	sf::Music music;
 	if (!music.openFromFile("dr_wily_stage.ogg"))
 		return -1;
-	music.setVolume(10);
+	music.setVolume(5);
 	music.play();
 
 	//start

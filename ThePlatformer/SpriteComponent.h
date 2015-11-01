@@ -4,7 +4,6 @@
 
 #include "BaseGameObject.h"
 
-#include <GL/glew.h>
 #include <SFML/OpenGL.hpp>
 #include <il.h>
 #include <cstdio>
@@ -17,12 +16,19 @@
 
 #define TEXTURE_LOAD_ERROR 0
 
+namespace GameSystems {
+	class ObjectFactory;
+}
+
 namespace GameComponents {
 
 	class SpriteComponent : BaseComponent
 	{
+		friend class GameSystems::ObjectFactory;
+	private:
+		SpriteComponent(GameObjects::BaseGameObject*, const std::string&);
 	public:
-		SpriteComponent(GameObjects::BaseGameObject *, const std::string &fileName);
+		
 		~SpriteComponent();
 		COMPONENT_TYPE getType();
 		void Update();

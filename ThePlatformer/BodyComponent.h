@@ -1,15 +1,15 @@
 #pragma once
-#include "BaseGameObject.h"
-
 #include <glm/glm.hpp>
 #include "Collider.h"
 #include "VectorMessage.h"
+#include "BaseGameObject.h"
+#include "ObjectFactory.h"
 
 namespace GameComponents {
 	class BodyComponent : BaseComponent
 	{
+		friend class ::GameSystems::ObjectFactory;
 	public:
-		BodyComponent(GameObjects::BaseGameObject *);
 		~BodyComponent();
 
 		COMPONENT_TYPE getType();
@@ -27,6 +27,7 @@ namespace GameComponents {
 		int getPositionY();
 
 	private:
+		BodyComponent(GameObjects::BaseGameObject*);
 		glm::vec2 position;
 		glm::vec2 velocity;
 

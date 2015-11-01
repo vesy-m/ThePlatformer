@@ -134,10 +134,10 @@ namespace GameComponents {
 			pointYHeight -= height;
 		}
 
-		pointX = pointX * this->composition->getScale();
-		pointXWidth = pointXWidth * this->composition->getScale();
-		pointY = pointY * this->composition->getScale();
-		pointYHeight = pointYHeight * this->composition->getScale();
+		pointX = (int) (pointX * this->composition->getScale());
+		pointXWidth = (int) (pointXWidth * this->composition->getScale());
+		pointY = (int) (pointY * this->composition->getScale());
+		pointYHeight = (int) (pointYHeight * this->composition->getScale());
 
 		glTranslated(posX, posY, 0);
 		glRotated(this->composition->getRotate(), 0, 0, 1);
