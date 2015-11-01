@@ -126,14 +126,6 @@ namespace GameComponents {
 		//std::cout << "Velocity is (" << msg->velocity.x << "," << msg->velocity.y << ")" << std::endl;
 		manifold->A->composition->sendMessage((Message*)msg);
 
-
-
-
-
-
-
-
-
 		// Calculate relative velocity
 		//glm::vec2 rv = -((BoxCollider*)manifold->A)->velocity;
 
@@ -178,7 +170,7 @@ namespace GameComponents {
 		//B.velocity += 1 / B.mass * impulse;
 	}
 
-	void BoxCollider::Update()
+	void BoxCollider::Update(double)
 	{
 		bool collide = false;
 
