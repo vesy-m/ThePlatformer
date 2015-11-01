@@ -27,7 +27,7 @@ int main()
 	sf::Music music;
 	if (!music.openFromFile("dr_wily_stage.ogg"))
 		return -1;
-	music.setVolume(10);
+	music.setVolume(5);
 	music.play();
 
 	//start

@@ -1,7 +1,7 @@
 #include "gason.h"
 #include "SpriteComponent.h"
 #include "ObjectFactory.h"
-#include "JoystickInputComponent.h"
+#include "ControllerInputComponent.h"
 #include "KeyboardInputComponent.h"
 #include "BodyComponent.h"
 #include "Collider.h"
@@ -45,25 +45,21 @@ namespace GameSystems {
 				auto body = new GameComponents::BodyComponent(ret);
 				ret->attachComponent((GameComponents::BaseComponent*) body);
 			}
-			else if (std::string(it->key) == "hexacollider") {
-				auto vector = new GameComponents::HexagonCollider(ret);
-				ret->attachComponent((GameComponents::BaseComponent*) vector);
-			}
+			//else if (std::string(it->key) == "hexacollider") {
+			//	auto vector = new GameComponents::HexagonCollider(ret);
+			//	ret->attachComponent((GameComponents::BaseComponent*) vector);
+			//}
 			else if (std::string(it->key) == "boxcollider") {
 				auto vector = new GameComponents::BoxCollider(ret);
 				ret->attachComponent((GameComponents::BaseComponent*) vector);
 			}
-			else if (std::string(it->key) == "input") {
-				if (std::string(it->value.toString()) == "joystick")
-				{
-					auto input = new GameComponents::JoystickInputComponent(ret);
-					ret->attachComponent((GameComponents::BaseComponent*) input);
-				}
-				else if (std::string(it->value.toString()) == "keyboard")
-				{
-					auto input = new GameComponents::KeyboardInputComponent(ret);
-					ret->attachComponent((GameComponents::BaseComponent*) input);
-				}
+			else if (std::string(it->key) == "joystick") {
+				auto input = new GameComponents::ControllerInputComponent(ret, it->value.toString());
+				ret->attachComponent((GameComponents::BaseComponent*) input);
+			}
+			else if (std::string(it->key) == "keyboard") {
+				auto input = new GameComponents::KeyboardInputComponent(ret, it->value.toString());
+				ret->attachComponent((GameComponents::BaseComponent*) input);
 			}
 			else if (std::string(it->key) == "vector") {
 				auto vector = new GameComponents::VectorDebugComponent(ret);

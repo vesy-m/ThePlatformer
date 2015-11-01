@@ -3,8 +3,9 @@
 
 namespace GameComponents {
 
-	KeyboardInputComponent::KeyboardInputComponent(GameObjects::BaseGameObject *object) : InputComponent(object)
+	KeyboardInputComponent::KeyboardInputComponent(GameObjects::BaseGameObject *object, std::string filename) : InputComponent(object)
 	{
+		this->filename = filename;
 	}
 
 
@@ -14,9 +15,15 @@ namespace GameComponents {
 
 	void KeyboardInputComponent::UpdateInputState(sf::Event event)
 	{
-		for (std::map<INPUT_TYPE, sf::Keyboard::Key>::iterator it = this->keyboardMap.begin(); it != this->keyboardMap.end(); ++it)
+		for (auto it = this->keyboardMap.begin(); it != this->keyboardMap.end(); ++it)
 		{
-			if (event.type == sf::Event::KeyPressed && event.key.code == it->second) inputState.at(it->first) = true;
+			if (event.type == sf::Event::KeyPressed)
+			{
+				if (event.key.code == it->second)
+				{
+					inputState.at(it->first) = true;
+				}
+			}
 			else if (event.type == sf::Event::KeyReleased)
 			{
 				if (event.key.code == it->second)
@@ -42,24 +49,46 @@ namespace GameComponents {
 
 	void KeyboardInputComponent::Init()
 	{
-		this->keyboardMap.emplace(LEFT, sf::Keyboard::A);
+		std::string extension = filename.substr(filename.find_last_of(".") + 1);
+		if (std::string("json").compare(extension) == 0) {
+			GameSystems::JSONParser parser(filename);
+			ParseInputFile(parser.getJSONValue());
+		}
+		/*this->keyboardMap.emplace(LEFT, sf::Keyboard::Q);
 		this->keyboardMap.emplace(RIGHT, sf::Keyboard::D);
 		this->keyboardMap.emplace(JUMP, sf::Keyboard::Space);
 		this->keyboardMap.emplace(DEBUG, sf::Keyboard::F5);
-		this->keyboardMap.emplace(FIRE, sf::Keyboard::F);
 		this->keyboardMap.emplace(ROTATE_LEFT, sf::Keyboard::L);
-		this->keyboardMap.emplace(ROTATE_RIGHT, sf::Keyboard::M);
+		this->keyboardMap.emplace(ROTATE_RIGHT, sf::Keyboard::M);*/
+
 
 		this->inputState.emplace(LEFT, false);
 		this->inputState.emplace(RIGHT, false);
 		this->inputState.emplace(JUMP, false);
 		this->inputState.emplace(DEBUG, false);
-		this->inputState.emplace(FIRE, false);
 		this->inputState.emplace(ROTATE_LEFT, false);
 		this->inputState.emplace(ROTATE_RIGHT, false);
-		
+
+
+
+		this->mouseMap.emplace(FIRE, sf::Mouse::Left);
 		this->mouseMap.emplace(SPECIAL, sf::Mouse::Right);
 	}
+
+	int	KeyboardInputComponent::ParseInputFile(JsonValue o) {
+		switch (o.getTag()) {
+		case JSON_OBJECT:
+			for (auto i : o) {
+				printf("%s = ", i->key);
+				INPUT_TYPE inputKey;
+				inputKey = (INPUT_TYPE)std::stoi(i->key);
+				this->keyboardMap.emplace(inputKey, (int)i->value.toNumber());
+			}
+			break;
+		}
+		return 0;
+	}
+
 	void KeyboardInputComponent::sendMessage(Message *message)
 	{
 		switch (message->id)
