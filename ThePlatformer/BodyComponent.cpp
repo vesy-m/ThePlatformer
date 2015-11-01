@@ -16,7 +16,7 @@ namespace GameComponents {
 		return COMPONENT_TYPE::PHYSIC;
 	}
 
-	void BodyComponent::Update()
+	void BodyComponent::Update(double)
 	{
 		Integrate(0.3f);
 	}

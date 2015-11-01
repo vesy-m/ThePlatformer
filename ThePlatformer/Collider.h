@@ -21,8 +21,9 @@ namespace GameComponents {
 		Collider(GameObjects::BaseGameObject *object) : BaseComponent(object) {};
 		~Collider() {};
 		virtual COLLIDER_TYPE getColliderType() = 0;
+		virtual void Update(double) = 0;
 		COMPONENT_TYPE getType() { return COMPONENT_TYPE::COLLIDER; };
-		void Init() {};
+		virtual void Init() = 0;
 	};
 
 	struct Manifold
@@ -41,8 +42,9 @@ namespace GameComponents {
 
 		virtual bool CollideWithBox(Manifold *manifold);
 		virtual COLLIDER_TYPE getColliderType();
-		void Update();
+		virtual void Update(double);
 		void sendMessage(Message *message);
+		virtual void Init() {}
 
 	public:
 		glm::vec2 min;

@@ -23,7 +23,8 @@ public:
 		COLLISION,
 		NO_COLLISION,
 		ROTATE_LEFT,
-		ROTATE_RIGHT
+		ROTATE_RIGHT,
+		FIRE
 	};
 
 	Message(MessageId);

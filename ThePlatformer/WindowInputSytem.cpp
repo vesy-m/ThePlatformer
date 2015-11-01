@@ -47,7 +47,7 @@ namespace GameSystems {
 			std::vector<GameComponents::BaseComponent*> componentList = object->getComponents(GameComponents::COMPONENT_TYPE::WINDOW);
 			for each (GameComponents::BaseComponent* component in componentList)
 			{
-				component->Update();
+				component->Update(dt);
 			}
 		}
 		window->display();

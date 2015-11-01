@@ -83,5 +83,5 @@ int SpriteAnimation::getTime()
 
 int SpriteAnimation::getSizeListFrame()
 {
-	return this->listCoordSpriteByFrame.size();
+	return (int) this->listCoordSpriteByFrame.size();
 }

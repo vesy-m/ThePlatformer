@@ -33,7 +33,7 @@ namespace GameComponents {
 
 		COMPONENT_TYPE getType();
 		GameObjects::BaseGameObject *getComposition();
-		void Update();
+		void Update(double);
 
 		virtual void UpdateInputState(sf::Event) = 0;
 		virtual void Init() = 0;
