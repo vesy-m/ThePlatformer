@@ -16,7 +16,8 @@ namespace GameObjects {
 
 	enum objectType {
 		NONE,
-		PLAYER
+		PLAYER,
+		PROJECTILE
 	};
 
 	class BaseGameObject

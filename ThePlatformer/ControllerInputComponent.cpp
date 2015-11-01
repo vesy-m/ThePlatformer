@@ -106,12 +106,12 @@ namespace GameComponents {
 			ParseInputFile(parser.getJSONValue());
 		}
 
-		this->inputState.emplace(LEFT, false);
+		/*this->inputState.emplace(LEFT, false);
 		this->inputState.emplace(RIGHT, false);
 		this->inputState.emplace(JUMP, false);
 		this->inputState.emplace(DEBUG, false);
 		this->inputState.emplace(ROTATE_LEFT, false);
-		this->inputState.emplace(ROTATE_RIGHT, false);
+		this->inputState.emplace(ROTATE_RIGHT, false);*/
 	}
 
 	int	ControllerInputComponent::ParseInputFile(JsonValue o) {
@@ -122,6 +122,7 @@ namespace GameComponents {
 				INPUT_TYPE inputKey;
 				inputKey = (INPUT_TYPE)std::stoi(i->key);
 				this->controllerMap.emplace(inputKey, (int)i->value.toNumber());
+				this->inputState.emplace(inputKey, false);
 			}
 			break;
 		}

@@ -83,19 +83,20 @@
       "vector": true,
       "boxcollider": true
     },
-    	{
+    {
       "name" : "arrow",
       "x" : 450,
-        "y": 510,
-        "rotate" :  -20,
+      "y": 510,
+      "rotate" :  -20,
       "scale": 0.25,
       "depth" : 3,
       "height" : 76,
       "width" : 150,
       "sprite": "minecraft_arrow.png",
       "vector": true,
-        "boxcollider": true,
-        "body" :  true
+      "boxcollider": true,
+      "body" :  true,
+	  "type" : 2
     },
 	{
       "name" : "tree1",

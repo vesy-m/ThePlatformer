@@ -177,7 +177,7 @@ namespace GameComponents {
 		this->min = glm::vec2(this->composition->getX(), this->composition->getY());
 		this->max = glm::vec2(this->composition->getX() + this->composition->getWidth(), this->composition->getY() + this->composition->getHeight());
 
-		if (this->composition->getType() == GameObjects::PLAYER)
+		if (this->composition->getType() != GameObjects::NONE)
 		{
 			for each(GameObjects::BaseGameObject* object in GameSystems::ObjectFactory::getInstance().getCurrentLevel().getObjects())
 			{
@@ -191,7 +191,7 @@ namespace GameComponents {
 					manifold->B = other;
 					if (this->CollideWithBox(manifold))
 					{
-						std::cout << "JE COLLIDE ! Normal is (" << manifold->normal.x << "," << manifold->normal.y << ")" << std::endl;
+						//std::cout << "JE COLLIDE ! Normal is (" << manifold->normal.x << "," << manifold->normal.y << ")" << std::endl;
 						ResolveCollision(manifold);
 						collide = true;
 					}
@@ -199,7 +199,7 @@ namespace GameComponents {
 			}
 			if (!collide)
 			{
-				std::cout << "JE NE COLLIDE PAS" << std::endl;
+				//std::cout << "JE NE COLLIDE PAS" << std::endl;
 				this->composition->sendMessage(new Message(Message::NO_COLLISION));
 			}
 		}
