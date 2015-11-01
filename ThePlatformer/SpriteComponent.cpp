@@ -73,7 +73,7 @@ namespace GameComponents {
 		return this->type;
 	}
 
-	void SpriteComponent::Update()
+	void SpriteComponent::Update(double)
 	{
 		float xmin = 0;
 		float xmax = 1;

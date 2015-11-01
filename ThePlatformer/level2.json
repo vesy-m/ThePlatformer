@@ -36,16 +36,16 @@
       "fps": true
     },
     {
-      "name" : "platforme1",
-      "x" : 150,
-      "y" : 450,
+      "name": "platforme1",
+      "x": 150,
+      "y": 450,
       "scale": 0.2,
-      "depth" : 3,
-      "height" : 142,
-      "width" : 527,
-      "sprite" : "platforme1.png",
+      "depth": 3,
+      "height": 142,
+      "width": 527,
+      "sprite": "platforme1.png",
       "vector": true,
-      "boxcollider" : true
+      "boxcollider": true
     },
     {
       "name" : "platforme2",
@@ -71,17 +71,30 @@
       "vector" : true,
       "boxcollider" : true
     },
-	{
-      "name" : "platforme4",
-      "x" : 1000,
-      "y" : 450,
+    {
+      "name": "platforme4",
+      "x": 1000,
+      "y": 450,
       "scale": 0.2,
-      "depth" : 3,
-      "height" : 142,
-      "width" : 527,
-      "sprite" : "platforme1.png",
+      "depth": 3,
+      "height": 142,
+      "width": 527,
+      "sprite": "platforme1.png",
       "vector": true,
-      "boxcollider" : true
+      "boxcollider": true
+    },
+    	{
+      "name" : "arrow",
+      "x" : 360,
+        "y": 510,
+        "rotate" :  -20,
+      "scale": 0.25,
+      "depth" : 3,
+      "height" : 76,
+      "width" : 150,
+      "sprite": "minecraft_arrow.png",
+      "vector": true,
+      "boxcollider": true
     },
 	{
       "name" : "tree1",
@@ -154,7 +167,7 @@
       "sprite" : "ground.png",
       "vector" : true,
       "boxcollider" : true
-    },
+    }
 
   ]
 }

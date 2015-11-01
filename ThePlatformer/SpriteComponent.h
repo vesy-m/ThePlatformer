@@ -31,7 +31,7 @@ namespace GameComponents {
 		
 		~SpriteComponent();
 		COMPONENT_TYPE getType();
-		void Update();
+		void Update(double);
 		void Init();
 		void sendMessage(Message*);
 	private:

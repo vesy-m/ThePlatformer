@@ -17,12 +17,12 @@ namespace GameSystems {
 			std::vector<GameComponents::BaseComponent*> componentList = object->getComponents(GameComponents::COMPONENT_TYPE::PHYSIC);
 			for each (GameComponents::BaseComponent* component in componentList)
 			{
-				component->Update();
+				component->Update(dt);
 			}
 			componentList = object->getComponents(GameComponents::COMPONENT_TYPE::COLLIDER);
 			for each (GameComponents::BaseComponent* component in componentList)
 			{
-				component->Update();
+				component->Update(dt);
 			}
 		}
 		return 0;

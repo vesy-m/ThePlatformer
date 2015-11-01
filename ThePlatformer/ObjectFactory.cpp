@@ -73,6 +73,27 @@ namespace GameSystems {
 		return (ret);
 	}
 
+	void ObjectFactory::attachObject(GameObjects::BaseGameObject *obj) {
+		ObjectFactory::getInstance().currentLevel.getObjects().push_back(obj);
+	}
+
+	GameObjects::BaseGameObject *ObjectFactory::createArrow(unsigned int x, unsigned int y) {
+		auto arrow = new GameObjects::BaseGameObject();
+
+		auto sprite = new GameComponents::SpriteComponent(arrow, "minecraft_arrow.png");
+		arrow->attachComponent(sprite);
+		
+		auto box = new GameComponents::BoxCollider(arrow);
+		arrow->attachComponent(box);
+
+		auto vector = new GameComponents::VectorDebugComponent(arrow);
+		arrow->attachComponent(vector);
+
+		arrow->setX(x);
+		arrow->setY(y);
+		return (arrow);
+	}
+
 	void ObjectFactory::buildLevel(JsonValue &value) {
 		assert(value.getTag() == JSON_OBJECT);
 		Level newLevel = Level();
@@ -92,7 +113,7 @@ namespace GameSystems {
 	void ObjectFactory::putObjectDepthOrdered(GameObjects::BaseGameObject * obj) {
 		assert(obj != NULL);
 		int depth = obj->getDepth();
-		int size = this->listGameObject.size();
+		int size = (int) this->listGameObject.size();
 		
 
 		for (std::list<GameObjects::BaseGameObject *>::iterator it = this->listGameObject.begin(); it != this->listGameObject.end(); ++it) {
@@ -103,11 +124,6 @@ namespace GameSystems {
 		}
 		this->listGameObject.push_back(obj);
 	}
-	/*
-	std::list<GameObjects::BaseGameObject *> &ObjectFactory::getObjects()
-	{
-		return this->listGameObject;
-	}*/
 
 	Level &ObjectFactory::getCurrentLevel()
 	{

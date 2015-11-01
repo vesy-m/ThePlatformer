@@ -28,10 +28,11 @@ namespace GameComponents {
 		BaseComponent(GameObjects::BaseGameObject *);
 		~BaseComponent();
 		virtual COMPONENT_TYPE getType() = 0;
-		virtual void Update() = 0;
+		virtual void Update(double) = 0;
 		virtual void Init() = 0;
 		virtual void sendMessage(Message*) = 0;
 	protected:
+
 		GameObjects::BaseGameObject *composition;
 	};
 }

@@ -16,7 +16,7 @@ namespace GameComponents {
 		return COMPONENT_TYPE::COLLIDER;
 	}
 
-	void BoxCollider::Update()
+	void BoxCollider::Update(double)
 	{
 	}
 
@@ -62,7 +62,7 @@ namespace GameComponents {
 		return COMPONENT_TYPE::COLLIDER;
 	}
 
-	void CircleCollider::Update()
+	void CircleCollider::Update(double)
 	{
 	}
 
@@ -103,7 +103,7 @@ namespace GameComponents {
 		return COMPONENT_TYPE::COLLIDER;
 	}
 
-	void HexagonCollider::Update()
+	void HexagonCollider::Update(double)
 	{
 		bool isCollide = false;
 		glm::vec2 velocity = glm::vec2(0, 0);

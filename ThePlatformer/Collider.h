@@ -23,7 +23,7 @@ namespace GameComponents {
 		~BoxCollider();
 
 		COMPONENT_TYPE getType();
-		void Update();
+		void Update(double);
 		void Init();
 
 		void sendMessage(Message * message);
@@ -44,7 +44,7 @@ namespace GameComponents {
 		~CircleCollider();
 
 		COMPONENT_TYPE getType();
-		void Update();
+		void Update(double);
 		void Init();
 		void sendMessage(Message*);
 
@@ -64,7 +64,7 @@ namespace GameComponents {
 		~HexagonCollider();
 
 		COMPONENT_TYPE getType();
-		void Update();
+		void Update(double);
 		void Init();
 
 		bool CollideTop(BoxCollider *other);

@@ -16,13 +16,7 @@ namespace GameComponents {
 	{
 		for (std::map<INPUT_TYPE, sf::Keyboard::Key>::iterator it = this->keyboardMap.begin(); it != this->keyboardMap.end(); ++it)
 		{
-			if (event.type == sf::Event::KeyPressed)
-			{
-				if (event.key.code == it->second)
-				{
-					inputState.at(it->first) = true;
-				}
-			}
+			if (event.type == sf::Event::KeyPressed && event.key.code == it->second) inputState.at(it->first) = true;
 			else if (event.type == sf::Event::KeyReleased)
 			{
 				if (event.key.code == it->second)
@@ -48,24 +42,22 @@ namespace GameComponents {
 
 	void KeyboardInputComponent::Init()
 	{
-		this->keyboardMap.emplace(LEFT, sf::Keyboard::Q);
+		this->keyboardMap.emplace(LEFT, sf::Keyboard::A);
 		this->keyboardMap.emplace(RIGHT, sf::Keyboard::D);
 		this->keyboardMap.emplace(JUMP, sf::Keyboard::Space);
 		this->keyboardMap.emplace(DEBUG, sf::Keyboard::F5);
+		this->keyboardMap.emplace(FIRE, sf::Keyboard::F);
 		this->keyboardMap.emplace(ROTATE_LEFT, sf::Keyboard::L);
 		this->keyboardMap.emplace(ROTATE_RIGHT, sf::Keyboard::M);
-
 
 		this->inputState.emplace(LEFT, false);
 		this->inputState.emplace(RIGHT, false);
 		this->inputState.emplace(JUMP, false);
 		this->inputState.emplace(DEBUG, false);
+		this->inputState.emplace(FIRE, false);
 		this->inputState.emplace(ROTATE_LEFT, false);
 		this->inputState.emplace(ROTATE_RIGHT, false);
-
-
-
-		this->mouseMap.emplace(FIRE, sf::Mouse::Left);
+		
 		this->mouseMap.emplace(SPECIAL, sf::Mouse::Right);
 	}
 	void KeyboardInputComponent::sendMessage(Message *message)
