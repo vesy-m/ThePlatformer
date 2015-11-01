@@ -6,7 +6,7 @@ namespace GameComponents {
 	class JoystickInputComponent : InputComponent
 	{
 	public:
-		JoystickInputComponent(GameObjects::BaseGameObject *object);
+		JoystickInputComponent(GameObjects::BaseGameObject *object, std::string filename);
 		~JoystickInputComponent();
 
 		void UpdateInputState(sf::Event);
@@ -14,10 +14,11 @@ namespace GameComponents {
 		void sendMessage(Message*);
 		bool JoystickInputComponent::DetectAxisInput(sf::Event event, int button);
 		bool JoystickInputComponent::CheckInputValue(sf::Event event, int button);
+		int	JoystickInputComponent::ParseInputFile(JsonValue o);
 
 	private:
 		std::map<INPUT_TYPE, int> joystickMap;
-		std::map<INPUT_TYPE, sf::Mouse::Button> mouseMap;
+		std::string filename;
 	};
 }
 

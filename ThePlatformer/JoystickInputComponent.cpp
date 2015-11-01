@@ -3,8 +3,9 @@
 
 namespace GameComponents {
 
-	JoystickInputComponent::JoystickInputComponent(GameObjects::BaseGameObject *object) : InputComponent(object)
+	JoystickInputComponent::JoystickInputComponent(GameObjects::BaseGameObject *object, std::string filename) : InputComponent(object)
 	{
+		this->filename = filename;
 	}
 
 
@@ -99,12 +100,18 @@ namespace GameComponents {
 
 	void JoystickInputComponent::Init()
 	{
-		this->joystickMap.emplace(LEFT, 52);
+		std::string extension = filename.substr(filename.find_last_of(".") + 1);
+		if (std::string("json").compare(extension) == 0) {
+			GameSystems::JSONParser parser(filename);
+			ParseInputFile(parser.getJSONValue());
+		}
+
+		/*this->joystickMap.emplace(LEFT, 52);
 		this->joystickMap.emplace(RIGHT, 51);
 		this->joystickMap.emplace(JUMP, 0);
 		this->joystickMap.emplace(DEBUG, 6);
 		this->joystickMap.emplace(ROTATE_LEFT, sf::Keyboard::L);
-		this->joystickMap.emplace(ROTATE_RIGHT, sf::Keyboard::M);
+		this->joystickMap.emplace(ROTATE_RIGHT, sf::Keyboard::M);*/
 
 
 		this->inputState.emplace(LEFT, false);
@@ -113,11 +120,20 @@ namespace GameComponents {
 		this->inputState.emplace(DEBUG, false);
 		this->inputState.emplace(ROTATE_LEFT, false);
 		this->inputState.emplace(ROTATE_RIGHT, false);
+	}
 
-
-
-		this->mouseMap.emplace(FIRE, sf::Mouse::Left);
-		this->mouseMap.emplace(SPECIAL, sf::Mouse::Right);
+	int	JoystickInputComponent::ParseInputFile(JsonValue o) {
+		switch (o.getTag()) {
+		case JSON_OBJECT:
+			for (auto i : o) {
+				printf("%s = ", i->key);
+				INPUT_TYPE inputKey;
+				inputKey = (INPUT_TYPE)std::stoi(i->key);
+				this->joystickMap.emplace(inputKey, (int)i->value.toNumber());
+			}
+			break;
+		}
+		return 0;
 	}
 
 	void JoystickInputComponent::sendMessage(Message* message)
