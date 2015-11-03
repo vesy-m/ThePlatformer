@@ -32,26 +32,19 @@ namespace GameSystems {
 		for each (GameObjects::BaseGameObject* object in listObjects)
 		{
 			std::vector<GameComponents::BaseComponent*> componentList = object->getComponents(GameComponents::COMPONENT_TYPE::SPRITE);
-			for each (GameComponents::BaseComponent* component in componentList)
-			{
+			for each (GameComponents::BaseComponent* component in componentList) {
 				component->Update(dt);
 			}
 		}
 		for each (GameObjects::BaseGameObject* object in listObjects)
 		{
 			std::vector<GameComponents::BaseComponent*> componentList = object->getComponents(GameComponents::COMPONENT_TYPE::DEBUGVECTOR);
-			for each (GameComponents::BaseComponent* component in componentList)
-			{
-				component->Update(dt);
-			}
+			for each (GameComponents::BaseComponent* component in componentList) component->Update(dt);
 		}
 		for each (GameObjects::BaseGameObject* object in listObjects)
 		{
 			std::vector<GameComponents::BaseComponent*> componentList = object->getComponents(GameComponents::COMPONENT_TYPE::TEXT);
-			for each (GameComponents::BaseComponent* component in componentList)
-			{
-				((GameComponents::TextComponent*)component)->Update(dt);
-			}
+			for each (GameComponents::BaseComponent* component in componentList) ((GameComponents::TextComponent*)component)->Update(dt);
 		}
 		glMatrixMode(GL_PROJECTION);
 		glPopMatrix();

@@ -83,21 +83,6 @@
       "vector": true,
       "boxcollider": true
     },
-    {
-      "name" : "arrow",
-      "x" : 450,
-      "y": 510,
-      "rotate" :  -20,
-      "scale": 0.25,
-      "depth" : 3,
-      "height" : 76,
-      "width" : 150,
-      "sprite": "minecraft_arrow.png",
-      "vector": true,
-      "boxcollider": true,
-      "body" :  true,
-	  "type" : 2
-    },
 	{
       "name" : "tree1",
       "x" : 515,
@@ -106,7 +91,7 @@
       "depth" : 3,
       "height" : 106,
       "width" : 138,
-      "sprite" : "tree1.png",
+      "sprite" : "tree1.png"
     },
 	{
       "name" : "grass1",
@@ -116,7 +101,7 @@
       "depth" : 1,
       "height" : 62,
       "width" : 32,
-      "sprite" : "grass1.png",
+      "sprite" : "grass1.png"
     },
 	{
       "name" : "grass2",
@@ -126,7 +111,7 @@
       "depth" : 1,
       "height" : 62,
       "width" : 32,
-      "sprite" : "grass1.png",
+      "sprite" : "grass1.png"
     },
 	{
       "name" : "grass3",
@@ -136,7 +121,7 @@
       "depth" : 1,
       "height" : 62,
       "width" : 32,
-      "sprite" : "grass1.png",
+      "sprite" : "grass1.png"
     },
 	{
       "name" : "grass4",
@@ -146,7 +131,7 @@
       "depth" : 1,
       "height" : 62,
       "width" : 32,
-      "sprite" : "grass1.png",
+      "sprite" : "grass1.png"
     },
 	{
       "name" : "sun",
@@ -156,7 +141,7 @@
       "depth" : 1,
       "height" : 48,
       "width" : 48,
-      "sprite" : "sun.png",
+      "sprite" : "sun.png"
     },
     {
       "name" : "ground",
@@ -170,6 +155,5 @@
       "vector" : true,
       "boxcollider" : true
     }
-
   ]
 }

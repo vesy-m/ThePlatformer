@@ -46,6 +46,17 @@ namespace GameComponents {
 				onGround = false;
 			}
 			break;
+		case Message::FIRE:
+		{
+			if (this->composition->getType() == GameObjects::PROJECTILE) {
+				forces.y = -350.0f;
+				forces.x = 150.0f;
+				velocity.y = -35.0f;
+				velocity.x = 25.0f;
+				onGround = false;
+			}
+			break;
+		}
 		case Message::RIGHT:
 			//if (onGround == true)
 			//this->composition->SendMessage(new Message(Message::RIGHT_ANIMATION));

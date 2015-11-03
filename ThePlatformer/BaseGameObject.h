@@ -46,6 +46,9 @@ namespace GameObjects {
 		std::string getName();
 		void setType(objectType newtype);
 		objectType getType();
+
+		void destroy(bool);
+		bool destroy(void);
 	private:
 		std::vector<GameComponents::BaseComponent*> componentsList;
 		int x;
@@ -57,6 +60,7 @@ namespace GameObjects {
 		int rotate;
 		std::string name;
 		objectType type;
+		bool to_destroy;
 	};
 }
 

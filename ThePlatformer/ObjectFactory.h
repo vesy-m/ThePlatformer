@@ -24,6 +24,7 @@ namespace GameSystems {
 		static void attachObject(GameObjects::BaseGameObject*);
 		void buildLevel(JsonValue&);
 		Level &getCurrentLevel();
+		void cleanupObjects(void);
 	private:
 		ObjectFactory();
 		ObjectFactory(ObjectFactory const&) = delete;

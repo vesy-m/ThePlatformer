@@ -11,11 +11,15 @@ namespace GameObjects {
 		depth = 0;
 		rotate = 0;
 		scale = 1;
+		to_destroy = false;
 		type = objectType::NONE;
 	}
 
 	BaseGameObject::~BaseGameObject()
 	{
+		for (auto it = this->componentsList.begin(); it != this->componentsList.end(); ++it) {
+			delete *it;
+		}
 	}
 
 	std::vector<GameComponents::BaseComponent*> BaseGameObject::getComponents(GameComponents::COMPONENT_TYPE type)
@@ -38,13 +42,8 @@ namespace GameObjects {
 
 	void BaseGameObject::sendMessage(Message *message)
 	{
-		for (size_t i = 0; i < this->componentsList.size(); i++) this->componentsList.at(i)->sendMessage(message);
-/*		for each (GameComponents::BaseComponent *component in this->componentsList)
-		{
-			std::cout << component->getType() << std::endl;
-			component->SendMessage(message);
-		}
-*/	}
+		for each (GameComponents::BaseComponent *component in this->componentsList) component->sendMessage(message);
+	}
 
 	void BaseGameObject::setX(int x)
 	{
@@ -84,11 +83,11 @@ namespace GameObjects {
 	}
 	void BaseGameObject::setHeight(int height)
 	{
-		this->height = (int) (height * scale);
+		this->height = (int)(height * scale);
 	}
 	void BaseGameObject::setWidth(int width)
 	{
-		this->width = (int) (width * scale);
+		this->width = (int)(width * scale);
 	}
 	void BaseGameObject::setScale(float scale)
 	{
@@ -121,5 +120,13 @@ namespace GameObjects {
 	objectType BaseGameObject::getType()
 	{
 		return this->type;
+	}
+
+	void BaseGameObject::destroy(bool des) {
+		to_destroy = des;
+	}
+
+	bool BaseGameObject::destroy(void) {
+		return to_destroy;
 	}
 }

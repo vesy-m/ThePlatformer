@@ -7,14 +7,13 @@
 #include "TimeManager.h"
 
 #define FRAME_PER_SECOND 60
-
 namespace GameEngine {
 	class Core {
 	public:
 		Core();
 		virtual ~Core();
 		void Init(void);
-		void Update(float dt);
+		void Update(float);
 		void MainLoop(void);
 		void Add(GameSystems::System*);
 		void LoadLevelFile(const std::string&);

@@ -192,6 +192,12 @@ namespace GameComponents {
 					if (this->CollideWithBox(manifold))
 					{
 						//std::cout << "JE COLLIDE ! Normal is (" << manifold->normal.x << "," << manifold->normal.y << ")" << std::endl;
+
+						// Destroy projectiles on collision
+						if (other->composition->getType() == GameObjects::PROJECTILE) other->composition->destroy(true);
+						else if (this->composition->getType() == GameObjects::PROJECTILE) this->composition->destroy(true);
+
+
 						ResolveCollision(manifold);
 						collide = true;
 					}

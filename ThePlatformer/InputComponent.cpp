@@ -41,11 +41,7 @@ namespace GameComponents {
 			}
 			else if (it->first == INPUT_TYPE::ROTATE_LEFT && it->second == true)	getComposition()->sendMessage(new Message(Message::ROTATE_LEFT));
 			else if (it->first == INPUT_TYPE::ROTATE_RIGHT && it->second == true) getComposition()->sendMessage(new Message(Message::ROTATE_RIGHT));
-			else if (it->first == INPUT_TYPE::FIRE && it->second == true) {
-				auto arrow = GameSystems::ObjectFactory::createArrow(getComposition()->getX(), getComposition()->getY());
-				std::cout << "create arrow" << std::endl;
-				GameSystems::ObjectFactory::attachObject(arrow);
-			}
+			else if (it->first == INPUT_TYPE::FIRE && it->second == true) getComposition()->sendMessage(new Message(Message::FIRE));
 		}
 	}
 }

@@ -34,11 +34,15 @@ namespace GameComponents {
 					case INPUT_TYPE::LEFT:
 						getComposition()->sendMessage(new Message(Message::LEFT_RELEASED));
 						break;
-
 					case INPUT_TYPE::RIGHT:
 						getComposition()->sendMessage(new Message(Message::RIGHT_RELEASED));
 						break;
-
+					case INPUT_TYPE::FIRE:
+					{
+						GameObjects::BaseGameObject *arrow = GameSystems::ObjectFactory::createArrow(getComposition()->getX() + 35, getComposition()->getY());
+						arrow->sendMessage(new Message(Message::FIRE));
+						break;
+					}
 					default:
 						break;
 					}
@@ -54,24 +58,8 @@ namespace GameComponents {
 			GameSystems::JSONParser parser(filename);
 			ParseInputFile(parser.getJSONValue());
 		}
-		/*this->keyboardMap.emplace(LEFT, sf::Keyboard::Q);
-		this->keyboardMap.emplace(RIGHT, sf::Keyboard::D);
-		this->keyboardMap.emplace(JUMP, sf::Keyboard::Space);
-		this->keyboardMap.emplace(DEBUG, sf::Keyboard::F5);
-		this->keyboardMap.emplace(ROTATE_LEFT, sf::Keyboard::L);
-		this->keyboardMap.emplace(ROTATE_RIGHT, sf::Keyboard::M);*/
 
-
-		/*this->inputState.emplace(LEFT, false);
-		this->inputState.emplace(RIGHT, false);
-		this->inputState.emplace(JUMP, false);
-		this->inputState.emplace(DEBUG, false);
-		this->inputState.emplace(ROTATE_LEFT, false);
-		this->inputState.emplace(ROTATE_RIGHT, false);*/
-
-
-
-		this->mouseMap.emplace(FIRE, sf::Mouse::Left);
+		//this->mouseMap.emplace(FIRE, sf::Mouse::Left);
 		this->mouseMap.emplace(SPECIAL, sf::Mouse::Right);
 	}
 
