@@ -28,6 +28,15 @@
     <Filter Include="GameComponents\Header">
       <UniqueIdentifier>{c51a4240-7a79-434f-8957-3566185fdd75}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObjects">
+      <UniqueIdentifier>{25abd664-fe15-45ff-859f-4e07f2e4324e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Header">
+      <UniqueIdentifier>{fe8f4016-b9dc-4c01-a26c-2b536d5701a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Source">
+      <UniqueIdentifier>{a87dc0af-5043-4e9a-81d2-2a15976fb7c7}</UniqueIdentifier>
+    </Filter>
     <Filter Include="GameSystems">
       <UniqueIdentifier>{b69a1a46-4488-4b07-99b3-9a91bd5a53b2}</UniqueIdentifier>
     </Filter>
@@ -56,6 +65,12 @@
     </ClCompile>
     <ClCompile Include="GameEngine.cpp">
       <Filter>GameEngineCore\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>GameObjects\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseGameObject.cpp">
+      <Filter>GameObjects\Source</Filter>
     </ClCompile>
     <ClCompile Include="BaseComponent.cpp">
       <Filter>GameComponents\Source</Filter>
@@ -126,10 +141,16 @@
     <ClCompile Include="Level.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="JoystickInputComponent.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
     <ClCompile Include="KeyboardInputComponent.cpp">
-      <Filter>GameComponents\Source</Filter>
+      <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="Camera.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioManager.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="BaseGameObject.cpp">
@@ -145,6 +166,12 @@
     </ClInclude>
     <ClInclude Include="GameEngine.h">
       <Filter>GameEngineCore\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>GameObjects\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseGameObject.h">
+      <Filter>GameObjects\Header</Filter>
     </ClInclude>
     <ClInclude Include="BaseComponent.h">
       <Filter>GameComponents\Header</Filter>
@@ -218,10 +245,16 @@
     <ClInclude Include="Level.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
+    <ClInclude Include="JoystickInputComponent.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
     <ClInclude Include="KeyboardInputComponent.h">
-      <Filter>GameComponents\Header</Filter>
+      <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="Camera.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioManager.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="BaseGameObject.h">
