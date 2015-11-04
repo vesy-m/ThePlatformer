@@ -44,7 +44,7 @@ namespace GameComponents {
 		virtual COLLIDER_TYPE getColliderType();
 		virtual void Update(double);
 		void sendMessage(Message *message);
-		virtual void Init() {}
+		virtual void Init();
 
 	public:
 		glm::vec2 min;

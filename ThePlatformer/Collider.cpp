@@ -4,12 +4,15 @@ namespace GameComponents {
 
 	BoxCollider::BoxCollider(GameObjects::BaseGameObject *object) : Collider(object)
 	{
-		this->min = glm::vec2(this->composition->getX(), this->composition->getY());
-		this->max = glm::vec2(this->composition->getX() + this->composition->getWidth(), this->composition->getY() + this->composition->getHeight());
 	}
 
 	BoxCollider::~BoxCollider()
 	{
+	}
+
+	void BoxCollider::Init(void) {
+		this->min = glm::vec2(this->composition->getX(), this->composition->getY());
+		this->max = glm::vec2(this->composition->getX() + this->composition->getWidth(), this->composition->getY() + this->composition->getHeight());
 	}
 
 	bool BoxCollider::CollideWithBox(Manifold *manifold)

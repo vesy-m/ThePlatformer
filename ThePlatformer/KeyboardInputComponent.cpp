@@ -39,7 +39,7 @@ namespace GameComponents {
 						break;
 					case INPUT_TYPE::FIRE:
 					{
-						GameObjects::BaseGameObject *arrow = GameSystems::ObjectFactory::createArrow(getComposition()->getX() + 35, getComposition()->getY());
+						GameObjects::BaseGameObject *arrow = GameSystems::ObjectFactory::getInstance().createArrow(getComposition()->getX() + 35, getComposition()->getY());
 						arrow->sendMessage(new Message(Message::FIRE));
 						break;
 					}

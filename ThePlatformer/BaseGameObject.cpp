@@ -15,6 +15,10 @@ namespace GameObjects {
 		type = objectType::NONE;
 	}
 
+	void BaseGameObject::Init(void) {
+		for (auto it = this->componentsList.begin(); it != this->componentsList.end(); ++it) (*it)->Init();
+	}
+
 	BaseGameObject::~BaseGameObject()
 	{
 		for (auto it = this->componentsList.begin(); it != this->componentsList.end(); ++it) {

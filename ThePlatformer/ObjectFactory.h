@@ -20,7 +20,7 @@ namespace GameSystems {
 		~ObjectFactory();
 
 		GameObjects::BaseGameObject *parseObject(JsonValue&);
-		static GameObjects::BaseGameObject *createArrow(unsigned int, unsigned int);
+		GameObjects::BaseGameObject *createArrow(unsigned int, unsigned int);
 		static void attachObject(GameObjects::BaseGameObject*);
 		void buildLevel(JsonValue&);
 		Level &getCurrentLevel();
@@ -30,8 +30,11 @@ namespace GameSystems {
 		ObjectFactory(ObjectFactory const&) = delete;
 		void operator=(ObjectFactory const&) = delete;
 
-		void putObjectDepthOrdered(GameObjects::BaseGameObject * obj);
-		std::list<GameObjects::BaseGameObject *> listGameObject;
+		void putObjectDepthOrdered(GameObjects::BaseGameObject*);
+		
+		std::list<GameObjects::BaseGameObject *> old_objects;
+
+
 		std::vector<Level> listLevels;
 		Level currentLevel;
 	};
