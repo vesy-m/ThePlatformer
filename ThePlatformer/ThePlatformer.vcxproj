@@ -169,7 +169,7 @@ copy /Y "$(ProjectDir)\lib\lib-x64\devil-1.7.8\bin\*" "$(OutDir)\"</Command>
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="GraphicsSystem.cpp" />
     <ClCompile Include="InputComponent.cpp" />
-    <ClCompile Include="JoystickInputComponent.cpp" />
+    <ClCompile Include="ControllerInputComponent.cpp" />
     <ClCompile Include="JSONParser.cpp" />
     <ClCompile Include="KeyboardInputComponent.cpp" />
     <ClCompile Include="Level.cpp" />
@@ -178,7 +178,6 @@ copy /Y "$(ProjectDir)\lib\lib-x64\devil-1.7.8\bin\*" "$(OutDir)\"</Command>
     <ClCompile Include="Message.cpp" />
     <ClCompile Include="ObjectFactory.cpp" />
     <ClCompile Include="PhysicsSystem.cpp" />
-    <ClCompile Include="Player.cpp" />
     <ClCompile Include="SpriteAnimation.cpp" />
     <ClCompile Include="SpriteComponent.cpp" />
     <ClCompile Include="SpriteSheet.cpp" />
@@ -202,7 +201,7 @@ copy /Y "$(ProjectDir)\lib\lib-x64\devil-1.7.8\bin\*" "$(OutDir)\"</Command>
     <ClInclude Include="GameEngine.h" />
     <ClInclude Include="gason.h" />
     <ClInclude Include="GraphicsSystem.h" />
-    <ClInclude Include="JoystickInputComponent.h" />
+    <ClInclude Include="ControllerInputComponent.h" />
     <ClInclude Include="JSONParser.h" />
     <ClInclude Include="KeyboardInputComponent.h" />
     <ClInclude Include="Level.h" />
@@ -215,7 +214,6 @@ copy /Y "$(ProjectDir)\lib\lib-x64\devil-1.7.8\bin\*" "$(OutDir)\"</Command>
     <ClInclude Include="InputComponent.h" />
     <ClInclude Include="ObjectFactory.h" />
     <ClInclude Include="PhysicsSystem.h" />
-    <ClInclude Include="Player.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="SpriteComponent.h" />
     <ClInclude Include="System.h" />

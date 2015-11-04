@@ -42,6 +42,7 @@ namespace GameEngine {
 					return;
 				}
 			}
+			GameSystems::ObjectFactory::getInstance().cleanupObjects();
 			this->m_manager->WaitFPS(FRAME_PER_SECOND);
 		}
 	}

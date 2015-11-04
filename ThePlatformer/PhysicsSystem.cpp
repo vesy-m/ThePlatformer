@@ -15,15 +15,9 @@ namespace GameSystems {
 		for each (GameObjects::BaseGameObject* object in listObjects)
 		{
 			std::vector<GameComponents::BaseComponent*> componentList = object->getComponents(GameComponents::COMPONENT_TYPE::PHYSIC);
-			for each (GameComponents::BaseComponent* component in componentList)
-			{
-				component->Update();
-			}
+			for each (GameComponents::BaseComponent* component in componentList) component->Update(dt);
 			componentList = object->getComponents(GameComponents::COMPONENT_TYPE::COLLIDER);
-			for each (GameComponents::BaseComponent* component in componentList)
-			{
-				component->Update();
-			}
+			for each (GameComponents::BaseComponent* component in componentList) component->Update(dt);
 		}
 		return 0;
 	}
@@ -33,15 +27,9 @@ namespace GameSystems {
 		for each (GameObjects::BaseGameObject* object in listObjects)
 		{
 			std::vector<GameComponents::BaseComponent*> componentList = object->getComponents(GameComponents::COMPONENT_TYPE::PHYSIC);
-			for each (GameComponents::BaseComponent* component in componentList)
-			{
-				component->Init();
-			}
+			for each (GameComponents::BaseComponent* component in componentList) component->Init();
 			componentList = object->getComponents(GameComponents::COMPONENT_TYPE::COLLIDER);
-			for each (GameComponents::BaseComponent* component in componentList)
-			{
-				component->Init();
-			}
+			for each (GameComponents::BaseComponent* component in componentList) component->Init();
 		}
 	}
 

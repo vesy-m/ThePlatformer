@@ -2,29 +2,29 @@
   "objects" : [
     {
       "name" : "megaman",
-      "x" : 830,
-      "y" : 500,
-      "depth" : 2,
-      "height" : 42,
-      "width" : 30,
-      "sprite" : "desc-megaman.json",
-      "input" : "joystick",
-      "body" : true,
-      "hexacollider" : true,
-      "vector" : true,
-      "type": 1
-    },
-	{
-      "name" : "megaman2",
       "x" : 330,
       "y" : 500,
       "depth" : 2,
       "height" : 42,
       "width" : 30,
       "sprite" : "desc-megaman.json",
-      "input" : "keyboard",
+      "keyboard" : "input_keyboard1.json",
       "body" : true,
-      "hexacollider" : true,
+      "boxcollider" : true,
+      "vector" : true,
+      "type": 1
+    },
+	{
+      "name" : "megaman2",
+      "x" : 830,
+      "y" : 500,
+      "depth" : 2,
+      "height" : 42,
+      "width" : 30,
+      "sprite" : "desc-megaman.json",
+      "keyboard" : "input_keyboard2.json",
+      "body" : true,
+      "boxcollider" : true,
       "vector" : true,
       "type": 1
     },
@@ -36,16 +36,16 @@
       "fps": true
     },
     {
-      "name" : "platforme1",
-      "x" : 150,
-      "y" : 450,
+      "name": "platforme1",
+      "x": 150,
+      "y": 450,
       "scale": 0.2,
-      "depth" : 3,
-      "height" : 142,
-      "width" : 527,
-      "sprite" : "platforme1.png",
+      "depth": 3,
+      "height": 142,
+      "width": 527,
+      "sprite": "platforme1.png",
       "vector": true,
-      "boxcollider" : true
+      "boxcollider": true
     },
     {
       "name" : "platforme2",
@@ -71,17 +71,17 @@
       "vector" : true,
       "boxcollider" : true
     },
-	{
-      "name" : "platforme4",
-      "x" : 1000,
-      "y" : 450,
+    {
+      "name": "platforme4",
+      "x": 1000,
+      "y": 450,
       "scale": 0.2,
-      "depth" : 3,
-      "height" : 142,
-      "width" : 527,
-      "sprite" : "platforme1.png",
+      "depth": 3,
+      "height": 142,
+      "width": 527,
+      "sprite": "platforme1.png",
       "vector": true,
-      "boxcollider" : true
+      "boxcollider": true
     },
 	{
       "name" : "tree1",
@@ -91,7 +91,7 @@
       "depth" : 3,
       "height" : 106,
       "width" : 138,
-      "sprite" : "tree1.png",
+      "sprite" : "tree1.png"
     },
 	{
       "name" : "grass1",
@@ -101,7 +101,7 @@
       "depth" : 1,
       "height" : 62,
       "width" : 32,
-      "sprite" : "grass1.png",
+      "sprite" : "grass1.png"
     },
 	{
       "name" : "grass2",
@@ -111,7 +111,7 @@
       "depth" : 1,
       "height" : 62,
       "width" : 32,
-      "sprite" : "grass1.png",
+      "sprite" : "grass1.png"
     },
 	{
       "name" : "grass3",
@@ -121,7 +121,7 @@
       "depth" : 1,
       "height" : 62,
       "width" : 32,
-      "sprite" : "grass1.png",
+      "sprite" : "grass1.png"
     },
 	{
       "name" : "grass4",
@@ -131,7 +131,7 @@
       "depth" : 1,
       "height" : 62,
       "width" : 32,
-      "sprite" : "grass1.png",
+      "sprite" : "grass1.png"
     },
 	{
       "name" : "sun",
@@ -141,7 +141,7 @@
       "depth" : 1,
       "height" : 48,
       "width" : 48,
-      "sprite" : "sun.png",
+      "sprite" : "sun.png"
     },
     {
       "name" : "ground",
@@ -154,7 +154,6 @@
       "sprite" : "ground.png",
       "vector" : true,
       "boxcollider" : true
-    },
-
+    }
   ]
 }

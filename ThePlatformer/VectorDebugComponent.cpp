@@ -15,7 +15,7 @@ namespace GameComponents {
 	{
 		switch (message->id)
 		{
-			case Message::DEBUGVECTOR:
+			case Message::VELOCITY_VECTOR:
 				this->velocity = ((VectorMessage *)message)->vector;
 				break;
 		/*	case Message::SHOW_DEBUG:
@@ -31,7 +31,7 @@ namespace GameComponents {
 		return this->type;
 	}
 
-	void VectorDebugComponent::Update()
+	void VectorDebugComponent::Update(double)
 	{
 		float x = (float)this->composition->getX();
 		float y = (float)this->composition->getY();

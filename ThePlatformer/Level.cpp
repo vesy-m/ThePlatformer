@@ -14,7 +14,7 @@ Level::~Level()
 
 void Level::putObjectDepthOrdered(GameObjects::BaseGameObject * obj) {
 	int depth = obj->getDepth();
-	int size = this->listGameObject.size();
+	int size = (int) this->listGameObject.size();
 
 
 	for (std::list<GameObjects::BaseGameObject *>::iterator it = this->listGameObject.begin(); it != this->listGameObject.end(); ++it) {

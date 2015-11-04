@@ -56,6 +56,7 @@ int			SpriteSheet::loadAndParseJsonFile(const std::string &filename)
 int			SpriteSheet::loadPngFile(const std::string & filename)
 {
 	this->texture = TextureManager::getInstance().getTexture(filename);
+	if (this->texture == NULL) throw std::exception();
 	return 0;
 }
 

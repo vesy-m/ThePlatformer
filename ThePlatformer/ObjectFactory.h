@@ -20,9 +20,11 @@ namespace GameSystems {
 		~ObjectFactory();
 
 		GameObjects::BaseGameObject *parseObject(JsonValue&);
+		static GameObjects::BaseGameObject *createArrow(unsigned int, unsigned int);
+		static void attachObject(GameObjects::BaseGameObject*);
 		void buildLevel(JsonValue&);
-	//std::list<GameObjects::BaseGameObject *> &getObjects();
 		Level &getCurrentLevel();
+		void cleanupObjects(void);
 	private:
 		ObjectFactory();
 		ObjectFactory(ObjectFactory const&) = delete;

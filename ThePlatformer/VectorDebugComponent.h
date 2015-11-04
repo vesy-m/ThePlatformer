@@ -23,7 +23,7 @@ namespace GameComponents {
 		~VectorDebugComponent();
 		void sendMessage(Message*);
 		COMPONENT_TYPE getType();
-		void Update();
+		void Update(double);
 		void Init();
 	private:
 		const COMPONENT_TYPE type = COMPONENT_TYPE::DEBUGVECTOR;
