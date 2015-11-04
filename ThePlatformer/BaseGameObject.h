@@ -28,7 +28,7 @@ namespace GameObjects {
 		std::vector<GameComponents::BaseComponent*> getComponents(GameComponents::COMPONENT_TYPE type);
 		void Init(void);
 		void attachComponent(GameComponents::BaseComponent*);
-		void sendMessage(Message*);
+		void sendMessage(GameMessage::Message*);
 		void setX(int x);
 		int getX();
 		void setY(int y);

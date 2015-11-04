@@ -124,10 +124,10 @@ namespace GameComponents {
 		else if (manifold->normal.x != 0)
 			newVec.x = 0;
 
-		CollisionMessage *msg = new CollisionMessage(newVec, addPos);
+		GameMessage::CollisionMessage *msg = new GameMessage::CollisionMessage(newVec, addPos);
 
 		//std::cout << "Velocity is (" << msg->velocity.x << "," << msg->velocity.y << ")" << std::endl;
-		manifold->A->composition->sendMessage((Message*)msg);
+		manifold->A->composition->sendMessage((GameMessage::Message*)msg);
 
 		// Calculate relative velocity
 		//glm::vec2 rv = -((BoxCollider*)manifold->A)->velocity;
@@ -209,15 +209,15 @@ namespace GameComponents {
 			if (!collide)
 			{
 				//std::cout << "JE NE COLLIDE PAS" << std::endl;
-				this->composition->sendMessage(new Message(Message::NO_COLLISION));
+				this->composition->sendMessage(new GameMessage::Message(GameMessage::Message::NO_COLLISION));
 			}
 		}
 	}
 
-	void BoxCollider::sendMessage(Message *message)
+	void BoxCollider::sendMessage(GameMessage::Message *message)
 	{
-		if (message->id == Message::VELOCITY_VECTOR)
-			this->velocity = ((VectorMessage*)message)->vector;
+		if (message->id == GameMessage::Message::VELOCITY_VECTOR)
+			this->velocity = ((GameMessage::VectorMessage*)message)->vector;
 	}
 
 	CircleCollider::CircleCollider(float radius, glm::vec2 pos, GameObjects::BaseGameObject *object) : Collider(object)
@@ -275,6 +275,10 @@ namespace GameComponents {
 		return COLLIDER_TYPE::CIRCLE;
 	}
 
+
+}
+
+namespace GameMessage {
 	CollisionMessage::CollisionMessage(glm::vec2 velocity, glm::vec2 position) : Message(COLLISION)
 	{
 		this->velocity = velocity;

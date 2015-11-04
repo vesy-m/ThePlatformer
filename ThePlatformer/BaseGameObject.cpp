@@ -44,7 +44,7 @@ namespace GameObjects {
 		this->componentsList.push_back(component);
 	}
 
-	void BaseGameObject::sendMessage(Message *message)
+	void BaseGameObject::sendMessage(GameMessage::Message *message)
 	{
 		for each (GameComponents::BaseComponent *component in this->componentsList) component->sendMessage(message);
 	}

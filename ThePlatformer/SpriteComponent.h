@@ -33,7 +33,7 @@ namespace GameComponents {
 		COMPONENT_TYPE getType();
 		void Update(double);
 		void Init();
-		void sendMessage(Message*);
+		void sendMessage(GameMessage::Message*);
 	private:
 		const COMPONENT_TYPE type = COMPONENT_TYPE::SPRITE;
 		SpriteSheet *sheet;

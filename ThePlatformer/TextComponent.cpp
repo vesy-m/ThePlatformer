@@ -97,7 +97,7 @@ namespace GameComponents {
 		this->sheet = new SpriteSheet("font.json");
 	}
 
-	void TextComponent::sendMessage(Message *)
+	void TextComponent::sendMessage(GameMessage::Message *)
 	{
 	}
 

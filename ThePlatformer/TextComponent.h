@@ -20,7 +20,7 @@ namespace GameComponents {
 		void Update(double dt);
 		void Update();
 		void Init();
-		void sendMessage(Message*);
+		void sendMessage(GameMessage::Message*);
 	private:
 		TextComponent(GameObjects::BaseGameObject*);
 		const COMPONENT_TYPE type = COMPONENT_TYPE::TEXT;

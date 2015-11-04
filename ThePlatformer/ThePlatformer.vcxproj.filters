@@ -66,9 +66,6 @@
     <ClCompile Include="GameEngine.cpp">
       <Filter>GameEngineCore\Source</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>GameObjects\Source</Filter>
-    </ClCompile>
     <ClCompile Include="BaseGameObject.cpp">
       <Filter>GameObjects\Source</Filter>
     </ClCompile>
@@ -141,12 +138,6 @@
     <ClCompile Include="Level.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="JoystickInputComponent.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="KeyboardInputComponent.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
     <ClCompile Include="Camera.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
@@ -159,6 +150,9 @@
     <ClCompile Include="ControllerInputComponent.cpp">
       <Filter>GameComponents\Source</Filter>
     </ClCompile>
+    <ClCompile Include="KeyboardInputComponent.cpp">
+      <Filter>GameComponents\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -166,9 +160,6 @@
     </ClInclude>
     <ClInclude Include="GameEngine.h">
       <Filter>GameEngineCore\Header</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>GameObjects\Header</Filter>
     </ClInclude>
     <ClInclude Include="BaseGameObject.h">
       <Filter>GameObjects\Header</Filter>
@@ -245,12 +236,6 @@
     <ClInclude Include="Level.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="JoystickInputComponent.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="KeyboardInputComponent.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
     <ClInclude Include="Camera.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
@@ -261,6 +246,9 @@
       <Filter>GameSystems\Header</Filter>
     </ClInclude>
     <ClInclude Include="ControllerInputComponent.h">
+      <Filter>GameComponents\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyboardInputComponent.h">
       <Filter>GameComponents\Header</Filter>
     </ClInclude>
   </ItemGroup>
