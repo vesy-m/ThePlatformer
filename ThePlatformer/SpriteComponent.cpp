@@ -96,6 +96,9 @@ namespace GameComponents {
 			}
 			this->composition->setScale(newScale + debugManager::getInstance().scaleNum);
 		}
+		else if (!std::string("megaman2").compare(this->composition->getName())) {
+			glColor3f((GLfloat)1.0, (GLfloat)0.3, (GLfloat)0.3);
+		}
 
 		glEnable(GL_TEXTURE_2D);
 
@@ -151,6 +154,7 @@ namespace GameComponents {
 		glTranslated(-(posX), -(posY), 0);
 
 		glDisable(GL_TEXTURE_2D);
+		glColor3f(1.0f, 1.0f, 1.0f);
 	}
 
 	void SpriteComponent::Init()
