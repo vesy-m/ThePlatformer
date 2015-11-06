@@ -1,5 +1,5 @@
 #include "BodyComponent.h"
-
+#include "SpriteComponent.h"
 
 namespace GameComponents {
 
@@ -32,15 +32,20 @@ namespace GameComponents {
 		onGround = false;
 		lastCollisionVelocity = glm::vec2(0, 0);
 		isColliding = false;
-		
 	}
 
-	void BodyComponent::Init(float intensity, Direction dir) {
+	void BodyComponent::Init(float intensity, bool dir) {
 		if (intensity > 0 && this->composition->getType() == GameObjects::PROJECTILE) {
+			if (dir == false) {
+				forces.x = 150.0f;
+				velocity.x = 50.0f * intensity / 1000.0f;
+			}
+			else {
+				forces.x = -150.0f;
+				velocity.x = -50.0f * intensity / 1000.0f;
+			}
 			forces.y = -150.0f;
-			forces.x = 150.0f;
 			velocity.y = -50.0f * intensity / 1000.0f;
-			velocity.x = 50.0f * intensity / 1000.0f;
 			onGround = false;
 		}
 	}

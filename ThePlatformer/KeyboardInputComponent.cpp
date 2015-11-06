@@ -1,5 +1,5 @@
 #include "KeyboardInputComponent.h"
-
+#include "SpriteComponent.h"
 
 namespace GameComponents {
 
@@ -15,7 +15,7 @@ namespace GameComponents {
 
 	void KeyboardInputComponent::UpdateInputState(sf::Event event, double dt)
 	{
-		static float duration = 500.0f;
+		static float duration = 250.0f;
 		for (auto it = this->keyboardMap.begin(); it != this->keyboardMap.end(); ++it)
 		{
 			if (event.type == sf::Event::KeyPressed)
@@ -38,8 +38,10 @@ namespace GameComponents {
 						break;
 					case INPUT_TYPE::FIRE:
 					{
-						GameObjects::BaseGameObject *arrow = GameSystems::ObjectFactory::getInstance().createArrow(getComposition()->getX() + 35, getComposition()->getY(), duration);
-						duration = 500.0f;
+						GameComponents::SpriteComponent *sprite = reinterpret_cast<GameComponents::SpriteComponent*>(getComposition()->getComponent(GameComponents::SPRITE));
+						GameObjects::BaseGameObject *arrow = GameSystems::ObjectFactory::getInstance().createArrow(getComposition()->getX(),
+							getComposition()->getY(), duration, sprite->revertX);
+						duration = 250.0f;
 						break;
 					}
 					default:

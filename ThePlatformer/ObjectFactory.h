@@ -7,6 +7,11 @@
 #include "BaseGameObject.h"
 #include "gason.h"
 #include "Level.h"
+#include "SpriteComponent.h"
+
+namespace GameComponents {
+	class SpriteComponent;
+}
 
 namespace GameSystems {
 	class ObjectFactory
@@ -20,7 +25,7 @@ namespace GameSystems {
 		~ObjectFactory();
 
 		GameObjects::BaseGameObject *parseObject(JsonValue&);
-		GameObjects::BaseGameObject *createArrow(unsigned int, unsigned int, float);
+		GameObjects::BaseGameObject *createArrow(unsigned int, unsigned int, float, bool);
 		static void attachObject(GameObjects::BaseGameObject*);
 		void buildLevel(JsonValue&);
 		Level &getCurrentLevel();

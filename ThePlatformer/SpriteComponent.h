@@ -34,16 +34,18 @@ namespace GameComponents {
 		void Update(double);
 		void Init();
 		void sendMessage(GameMessage::Message*);
+		bool revertX;
 	private:
 		const COMPONENT_TYPE type = COMPONENT_TYPE::SPRITE;
 		SpriteSheet *sheet;
-		bool revertX;
+		int rotateNum;
+		
 		bool revertY;
 		int currentFrame;
 		int counter;
 		std::string currentAnim;
 		std::string _fileName;
-		int rotateNum;
+		
 
 	};
 }
