@@ -27,6 +27,13 @@ namespace GameObjects {
 		}
 	}
 
+	GameComponents::BaseComponent *BaseGameObject::getComponent(GameComponents::COMPONENT_TYPE type) {
+		for (auto component : this->componentsList) {
+			if (component->getType() == type) return component;
+		}
+		return NULL;
+	}
+
 	std::vector<GameComponents::BaseComponent*> BaseGameObject::getComponents(GameComponents::COMPONENT_TYPE type)
 	{
 		// a changer

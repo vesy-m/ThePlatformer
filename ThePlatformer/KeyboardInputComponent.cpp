@@ -15,7 +15,7 @@ namespace GameComponents {
 
 	void KeyboardInputComponent::UpdateInputState(sf::Event event, double dt)
 	{
-		static float duration = 0;
+		static float duration = 500.0f;
 		for (auto it = this->keyboardMap.begin(); it != this->keyboardMap.end(); ++it)
 		{
 			if (event.type == sf::Event::KeyPressed)
@@ -39,8 +39,7 @@ namespace GameComponents {
 					case INPUT_TYPE::FIRE:
 					{
 						GameObjects::BaseGameObject *arrow = GameSystems::ObjectFactory::getInstance().createArrow(getComposition()->getX() + 35, getComposition()->getY(), duration);
-						duration = 0;
-						arrow->sendMessage(new GameMessage::Message(GameMessage::Message::FIRE));
+						duration = 500.0f;
 						break;
 					}
 					default:

@@ -10,11 +10,19 @@ namespace GameComponents {
 	{
 		friend class ::GameSystems::ObjectFactory;
 	public:
+		enum Direction {
+			LEFT,
+			TOP_LEFT,
+			RIGHT,
+			TOP_RIGHT
+		};
+
 		~BodyComponent();
 
 		COMPONENT_TYPE getType();
 		void Update(double);
 		void Init();
+		void Init(float, Direction);
 		void sendMessage(GameMessage::Message*);
 
 		void Integrate(float dt);

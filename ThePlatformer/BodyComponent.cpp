@@ -32,6 +32,17 @@ namespace GameComponents {
 		onGround = false;
 		lastCollisionVelocity = glm::vec2(0, 0);
 		isColliding = false;
+		
+	}
+
+	void BodyComponent::Init(float intensity, Direction dir) {
+		if (intensity > 0 && this->composition->getType() == GameObjects::PROJECTILE) {
+			forces.y = -150.0f;
+			forces.x = 150.0f;
+			velocity.y = -50.0f * intensity / 1000.0f;
+			velocity.x = 50.0f * intensity / 1000.0f;
+			onGround = false;
+		}
 	}
 
 	void BodyComponent::sendMessage(GameMessage::Message *message)
@@ -46,17 +57,6 @@ namespace GameComponents {
 				onGround = false;
 			}
 			break;
-		case GameMessage::Message::FIRE:
-		{
-			if (this->composition->getType() == GameObjects::PROJECTILE) {
-				forces.y = -150.0f;
-				forces.x = 150.0f;
-				velocity.y = -25.0f;
-				velocity.x = 25.0f;
-				onGround = false;
-			}
-			break;
-		}
 		case GameMessage::Message::RIGHT:
 			velocity.x = 20.0f;
 			isColliding = false;

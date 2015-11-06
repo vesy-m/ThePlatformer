@@ -66,6 +66,7 @@ namespace GameSystems {
 
 	GameObjects::BaseGameObject *ObjectFactory::createArrow(unsigned int x, unsigned int y, float base_force) {
 		GameObjects::BaseGameObject *arrow = NULL;
+		GameComponents::BodyComponent *body = NULL;
 		if (this->old_objects.size() == 0) {
 			arrow = new GameObjects::BaseGameObject();
 			arrow->setName("arrow");
@@ -81,16 +82,20 @@ namespace GameSystems {
 			new GameComponents::SpriteComponent(arrow, "minecraft_arrow.png");
 			new GameComponents::BoxCollider(arrow);
 			new GameComponents::VectorDebugComponent(arrow);
-			new GameComponents::BodyComponent(arrow);
+			body = new GameComponents::BodyComponent(arrow);
 		}
 		else {
 			arrow = this->old_objects.front();
 			this->old_objects.pop_front();
 			arrow->destroy(false);
 			arrow->setX(x);
-			arrow->setY(y);	
+			arrow->setY(y);
+			body = reinterpret_cast<GameComponents::BodyComponent*>(arrow->getComponent(GameComponents::PHYSIC));
 		}
+		assert(arrow != NULL);
+		assert(body != NULL);
 		arrow->Init();
+		body->Init(base_force, GameComponents::BodyComponent::RIGHT);
 		this->currentLevel.putObjectDepthOrdered(arrow);
 		return (arrow);
 	}
