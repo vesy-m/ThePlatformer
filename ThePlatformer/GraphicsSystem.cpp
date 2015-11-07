@@ -19,14 +19,12 @@ namespace GameSystems {
 		glPushAttrib(GL_DEPTH_BUFFER_BIT | GL_LIGHTING_BIT);
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		GLint iViewport[4];
-		glGetIntegerv(GL_VIEWPORT, iViewport);
 		glColor3f((GLfloat)(1.0 / 255.0 * 104.0), (GLfloat)(1.0 / 255.0 * 185.0), (GLfloat)(1.0 / 255.0 * 228.0));
 		glBegin(GL_QUADS);
-			glVertex2i(iViewport[0], iViewport[1]);
-			glVertex2i(iViewport[0], iViewport[1] + iViewport[3]);
-			glVertex2i(iViewport[0] + iViewport[2], iViewport[1] + iViewport[3]);
-			glVertex2i(iViewport[0] + iViewport[2], iViewport[1]);
+			glVertex2i(0, 0);
+			glVertex2i(0, Camera::getInstance().resolutionHeight);
+			glVertex2i(Camera::getInstance().resolutionWidth, Camera::getInstance().resolutionHeight);
+			glVertex2i(Camera::getInstance().resolutionWidth, 0);
 		glEnd();
 		glColor3f(1.0f, 1.0f, 1.0f);
 		for each (GameObjects::BaseGameObject* object in listObjects)
@@ -55,13 +53,7 @@ namespace GameSystems {
 
 	void GraphicsSystem::Init(std::list<GameObjects::BaseGameObject*>& listObjects)
 	{
-		//viewportReload();
-		GLint iViewport[4];
-		glGetIntegerv(GL_VIEWPORT, iViewport);
-		Camera::getInstance().cameraStartX = iViewport[0];
-		Camera::getInstance().cameraEndX = iViewport[0] + iViewport[2];
-		Camera::getInstance().cameraStartY = iViewport[1];
-		Camera::getInstance().cameraEndY = iViewport[1] + iViewport[3];
+		Camera::getInstance();
 		for each (GameObjects::BaseGameObject* object in listObjects)
 		{
 			std::vector<GameComponents::BaseComponent*> componentList = object->getComponents(GameComponents::COMPONENT_TYPE::SPRITE);
@@ -104,8 +96,8 @@ namespace GameSystems {
 	{
 		GLint iViewport[4];
 		glGetIntegerv(GL_VIEWPORT, iViewport);
-		int screenWidth = iViewport[0] + iViewport[2];
-		int screenHeight = iViewport[1] + iViewport[3];
+		int screenWidth = Camera::getInstance().resolutionWidth;//iViewport[0] + iViewport[2];
+		int screenHeight = Camera::getInstance().resolutionHeight;//iViewport[1] + iViewport[3];
 
 		int sizeWidthMax = screenWidth;
 		int sizeToWidthMax = screenWidth - 300;

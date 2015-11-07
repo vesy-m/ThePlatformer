@@ -18,6 +18,7 @@ namespace GameSystems {
 		void SendMessage();
 	private:
 		sf::Window *window;
+		bool fullscreen;
 	};
 }
 #endif // !_WINDOWINPUTSYSTEM_H_
