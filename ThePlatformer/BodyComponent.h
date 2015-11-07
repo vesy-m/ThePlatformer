@@ -32,11 +32,12 @@ namespace GameComponents {
 		glm::vec2 velocity;
 
 		glm::vec2 acceleration;
-		float mass;
 		glm::vec2 gravity;
 		glm::vec2 forces;
-		bool onGround;
 		glm::vec2 lastCollisionVelocity;
+		float mass;
+		float maxForces;
+		bool onGround;
 		bool isColliding;
 	};
 }
