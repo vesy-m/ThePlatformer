@@ -29,20 +29,18 @@ namespace GameSystems {
 		glColor3f(1.0f, 1.0f, 1.0f);
 		for each (GameObjects::BaseGameObject* object in listObjects)
 		{
-			std::vector<GameComponents::BaseComponent*> componentList = object->getComponents(GameComponents::COMPONENT_TYPE::SPRITE);
-			for each (GameComponents::BaseComponent* component in componentList) {
-				component->Update(dt);
-			}
+			GameComponents::BaseComponent*component = object->getComponent(GameComponents::COMPONENT_TYPE::SPRITE);
+			if (component) component->Update(dt);
 		}
 		for each (GameObjects::BaseGameObject* object in listObjects)
 		{
-			std::vector<GameComponents::BaseComponent*> componentList = object->getComponents(GameComponents::COMPONENT_TYPE::DEBUGVECTOR);
-			for each (GameComponents::BaseComponent* component in componentList) component->Update(dt);
+			GameComponents::BaseComponent* component = object->getComponent(GameComponents::COMPONENT_TYPE::DEBUGVECTOR);
+			if (component) component->Update(dt);
 		}
 		for each (GameObjects::BaseGameObject* object in listObjects)
 		{
-			std::vector<GameComponents::BaseComponent*> componentList = object->getComponents(GameComponents::COMPONENT_TYPE::TEXT);
-			for each (GameComponents::BaseComponent* component in componentList) ((GameComponents::TextComponent*)component)->Update(dt);
+			GameComponents::BaseComponent* component = object->getComponent(GameComponents::COMPONENT_TYPE::TEXT);
+			if (component) component->Update(dt);
 		}
 		glMatrixMode(GL_PROJECTION);
 		glPopMatrix();
@@ -56,27 +54,18 @@ namespace GameSystems {
 		Camera::getInstance();
 		for each (GameObjects::BaseGameObject* object in listObjects)
 		{
-			std::vector<GameComponents::BaseComponent*> componentList = object->getComponents(GameComponents::COMPONENT_TYPE::SPRITE);
-			for each (GameComponents::BaseComponent* component in componentList)
-			{
-				component->Init();
-			}
+			GameComponents::BaseComponent* component = object->getComponent(GameComponents::COMPONENT_TYPE::SPRITE);
+			if (component) component->Init();
 		}
 		for each (GameObjects::BaseGameObject* object in listObjects)
 		{
-			std::vector<GameComponents::BaseComponent*> componentList = object->getComponents(GameComponents::COMPONENT_TYPE::DEBUGVECTOR);
-			for each (GameComponents::BaseComponent* component in componentList)
-			{
-				component->Init();
-			}
+			GameComponents::BaseComponent* component = object->getComponent(GameComponents::COMPONENT_TYPE::DEBUGVECTOR);
+			if (component) component->Init();
 		}
 		for each (GameObjects::BaseGameObject* object in listObjects)
 		{
-			std::vector<GameComponents::BaseComponent*> componentList = object->getComponents(GameComponents::COMPONENT_TYPE::TEXT);
-			for each (GameComponents::BaseComponent* component in componentList)
-			{
-				component->Init();
-			}
+			GameComponents::BaseComponent* component = object->getComponent(GameComponents::COMPONENT_TYPE::TEXT);
+			if (component) component->Init();
 		}
 	}
 

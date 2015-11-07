@@ -126,11 +126,11 @@ namespace GameComponents {
 			{
 				if (this->composition->getType() != GameObjects::PROJECTILE && object->getType() == GameObjects::PLAYER)
 					continue;
-				if (!object->getComponents(GameComponents::COMPONENT_TYPE::COLLIDER).empty())
+				if (object->getComponent(GameComponents::COMPONENT_TYPE::COLLIDER))
 				{
-					if (object->getComponents(GameComponents::COMPONENT_TYPE::COLLIDER)[0] == this)
-						continue;
-					BoxCollider *other = (BoxCollider*)object->getComponents(GameComponents::COMPONENT_TYPE::COLLIDER)[0];
+					if (object->getComponent(GameComponents::COMPONENT_TYPE::COLLIDER) == this) continue;
+					BoxCollider *other = dynamic_cast<BoxCollider*>(object->getComponent(GameComponents::COMPONENT_TYPE::COLLIDER));
+					assert(other != NULL);
 					Manifold *manifold = new Manifold();
 					manifold->A = this;
 					manifold->B = other;

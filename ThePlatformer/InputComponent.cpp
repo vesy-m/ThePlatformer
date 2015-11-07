@@ -10,11 +10,6 @@ namespace GameComponents {
 	{
 	}
 
-	COMPONENT_TYPE InputComponent::getType()
-	{
-		return this->componentType;
-	}
-
 	GameObjects::BaseGameObject * InputComponent::getComposition()
 	{
 		return this->composition;

@@ -87,7 +87,7 @@ namespace GameSystems {
 			this->old_objects.pop_front();
 			arrow->destroy(false);
 
-			body = reinterpret_cast<GameComponents::BodyComponent*>(arrow->getComponent(GameComponents::PHYSIC));
+			body = dynamic_cast<GameComponents::BodyComponent*>(arrow->getComponent(GameComponents::PHYSIC));
 		}
 		assert(arrow != NULL);
 		assert(body != NULL);
@@ -96,7 +96,7 @@ namespace GameSystems {
 		}
 		else {
 			arrow->setX(x - 40);
-			auto arrow_sprite = reinterpret_cast<GameComponents::SpriteComponent*>(arrow->getComponent(GameComponents::SPRITE));
+			auto arrow_sprite = dynamic_cast<GameComponents::SpriteComponent*>(arrow->getComponent(GameComponents::SPRITE));
 			arrow_sprite->revertX = true;
 		}
 		arrow->setY(y);
