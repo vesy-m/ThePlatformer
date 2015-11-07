@@ -126,6 +126,7 @@ namespace GameComponents {
 			{
 				if (this->composition->getType() != GameObjects::PROJECTILE && object->getType() == GameObjects::PLAYER)
 					continue;
+				if (this->composition->getType() == GameObjects::PROJECTILE && dynamic_cast<GameObjects::Projectile*>(composition))
 				if (!object->getComponents(GameComponents::COMPONENT_TYPE::COLLIDER).empty())
 				{
 					if (object->getComponents(GameComponents::COMPONENT_TYPE::COLLIDER)[0] == this)

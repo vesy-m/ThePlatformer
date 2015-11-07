@@ -153,6 +153,9 @@
     <ClCompile Include="KeyboardInputComponent.cpp">
       <Filter>GameComponents\Source</Filter>
     </ClCompile>
+    <ClCompile Include="Projectile.cpp">
+      <Filter>GameObjects\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -250,6 +253,9 @@
     </ClInclude>
     <ClInclude Include="KeyboardInputComponent.h">
       <Filter>GameComponents\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Projectile.h">
+      <Filter>GameObjects\Header</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

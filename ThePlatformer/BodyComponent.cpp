@@ -34,9 +34,9 @@ namespace GameComponents {
 		isColliding = false;
 	}
 
-	void BodyComponent::Init(float intensity, bool dir) {
+	void BodyComponent::Init(float intensity, glm::vec2 dir) {
 		if (intensity > 0 && this->composition->getType() == GameObjects::PROJECTILE) {
-			if (dir == false) {
+			/*if (dir == false) {
 				forces.x = 150.0f;
 				velocity.x = 50.0f * intensity / 1000.0f;
 			}
@@ -45,7 +45,9 @@ namespace GameComponents {
 				velocity.x = -50.0f * intensity / 1000.0f;
 			}
 			forces.y = -150.0f;
-			velocity.y = -50.0f * intensity / 1000.0f;
+			velocity.y = -50.0f * intensity / 1000.0f;*/
+			forces = dir * 150.0f;
+			velocity = dir * 50.0f;
 			onGround = false;
 		}
 	}

@@ -68,8 +68,12 @@ namespace GameComponents {
 					{
 						std::cout << "mouse x: " << event.mouseButton.x << std::endl;
 						std::cout << "mouse y: " << event.mouseButton.y << std::endl;
-						GameObjects::BaseGameObject *arrow = GameSystems::ObjectFactory::getInstance().createArrow(getComposition()->getX() + 35, getComposition()->getY(), duration);
-						duration = 500.0f;
+						glm::vec2 direction = glm::vec2(event.mouseButton.x - this->getComposition()->getX(),
+							event.mouseButton.y - this->getComposition()->getY());
+						GameComponents::SpriteComponent *sprite = reinterpret_cast<GameComponents::SpriteComponent*>(getComposition()->getComponent(GameComponents::SPRITE));
+						GameObjects::BaseGameObject *arrow = GameSystems::ObjectFactory::getInstance().createArrow(getComposition()->getX(),
+							getComposition()->getY(), duration, glm::normalize(direction));
+						duration = 250.0f;
 						break;
 					}
 					}
