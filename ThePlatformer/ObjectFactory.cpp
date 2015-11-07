@@ -64,14 +64,12 @@ namespace GameSystems {
 		ObjectFactory::getInstance().currentLevel.putObjectDepthOrdered(obj);
 	}
 
-	GameObjects::BaseGameObject *ObjectFactory::createArrow(unsigned int x, unsigned int y, float base_force) {
+	GameObjects::BaseGameObject *ObjectFactory::createArrow(unsigned int x, unsigned int y, float base_force, bool direction) {
 		GameObjects::BaseGameObject *arrow = NULL;
 		GameComponents::BodyComponent *body = NULL;
 		if (this->old_objects.size() == 0) {
 			arrow = new GameObjects::BaseGameObject();
 			arrow->setName("arrow");
-			arrow->setX(x);
-			arrow->setY(y);
 			arrow->setHeight(int(76 * 0.25f));
 			arrow->setWidth(int(150 * 0.25f));
 			arrow->setScale(0.25f);
@@ -88,14 +86,22 @@ namespace GameSystems {
 			arrow = this->old_objects.front();
 			this->old_objects.pop_front();
 			arrow->destroy(false);
-			arrow->setX(x);
-			arrow->setY(y);
+
 			body = reinterpret_cast<GameComponents::BodyComponent*>(arrow->getComponent(GameComponents::PHYSIC));
 		}
 		assert(arrow != NULL);
 		assert(body != NULL);
+		if (direction == false) {
+			arrow->setX(x + 35);
+		}
+		else {
+			arrow->setX(x - 40);
+			auto arrow_sprite = reinterpret_cast<GameComponents::SpriteComponent*>(arrow->getComponent(GameComponents::SPRITE));
+			arrow_sprite->revertX = true;
+		}
+		arrow->setY(y);
 		arrow->Init();
-		body->Init(base_force, GameComponents::BodyComponent::RIGHT);
+		body->Init(base_force, direction);
 		this->currentLevel.putObjectDepthOrdered(arrow);
 		return (arrow);
 	}
