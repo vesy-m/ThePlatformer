@@ -35,9 +35,9 @@ namespace GameComponents {
 		GameObjects::BaseGameObject *getComposition();
 		void Update(double);
 
-		virtual void UpdateInputState(sf::Event) = 0;
+		virtual void UpdateInputState(sf::Event, double) = 0;
 		virtual void Init() = 0;
-		virtual void sendMessage(Message*) = 0;
+		virtual void sendMessage(GameMessage::Message*) = 0;
 
 	protected:
 		const COMPONENT_TYPE componentType = WINDOW;

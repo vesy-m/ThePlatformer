@@ -13,7 +13,7 @@ namespace GameComponents {
 	{
 	}
 
-	void ControllerInputComponent::UpdateInputState(sf::Event event)
+	void ControllerInputComponent::UpdateInputState(sf::Event event, double)
 	{
 		for (auto it = this->controllerMap.begin(); it != this->controllerMap.end(); ++it)
 		{
@@ -43,9 +43,9 @@ namespace GameComponents {
 					{
 						inputState.at(it->first) = false;
 						if (it->first == INPUT_TYPE::RIGHT)
-							getComposition()->sendMessage(new Message(Message::RIGHT_RELEASED));
+							getComposition()->sendMessage(new GameMessage::Message(GameMessage::Message::RIGHT_RELEASED));
 						else if(it->first == INPUT_TYPE::LEFT)
-							getComposition()->sendMessage(new Message(Message::LEFT_RELEASED));
+							getComposition()->sendMessage(new GameMessage::Message(GameMessage::Message::LEFT_RELEASED));
 					}
 				}
 			}
@@ -129,11 +129,11 @@ namespace GameComponents {
 		return 0;
 	}
 
-	void ControllerInputComponent::sendMessage(Message* message)
+	void ControllerInputComponent::sendMessage(GameMessage::Message* message)
 	{
 		switch (message->id)
 		{
-		case Message::JUMP_RELEASED:
+		case GameMessage::Message::JUMP_RELEASED:
 			inputState.at(INPUT_TYPE::JUMP) = false;
 			break;
 		default:

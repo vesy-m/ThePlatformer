@@ -20,7 +20,7 @@ namespace GameSystems {
 		~ObjectFactory();
 
 		GameObjects::BaseGameObject *parseObject(JsonValue&);
-		GameObjects::BaseGameObject *createArrow(unsigned int, unsigned int);
+		GameObjects::BaseGameObject *createArrow(unsigned int, unsigned int, float);
 		static void attachObject(GameObjects::BaseGameObject*);
 		void buildLevel(JsonValue&);
 		Level &getCurrentLevel();

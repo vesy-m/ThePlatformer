@@ -15,7 +15,7 @@ namespace GameComponents {
 		COMPONENT_TYPE getType();
 		void Update(double);
 		void Init();
-		void sendMessage(Message*);
+		void sendMessage(GameMessage::Message*);
 
 		void Integrate(float dt);
 		void AddForce(float x, float y);

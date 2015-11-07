@@ -67,7 +67,7 @@ namespace GameSystems {
 		ObjectFactory::getInstance().currentLevel.putObjectDepthOrdered(obj);
 	}
 
-	GameObjects::BaseGameObject *ObjectFactory::createArrow(unsigned int x, unsigned int y) {
+	GameObjects::BaseGameObject *ObjectFactory::createArrow(unsigned int x, unsigned int y, float base_force) {
 		GameObjects::BaseGameObject *arrow = NULL;
 		if (this->old_objects.size() == 0) {
 			arrow = new GameObjects::BaseGameObject();

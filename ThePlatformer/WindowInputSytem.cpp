@@ -36,18 +36,10 @@ namespace GameSystems {
 				}
 			}
 
-			//std::list<GameObjects::BaseGameObject*>::iterator firstObject = listObjects.begin();
-			//firstObject++;
-			//GameComponents::BaseComponent* firstComponent = (*firstObject)->getComponents(GameComponents::COMPONENT_TYPE::WINDOW).at(0);
-			//((GameComponents::InputComponent *)firstComponent)->UpdateInputState(event);
-
 			for each (GameObjects::BaseGameObject* object in listObjects)
 			{
 				std::vector<GameComponents::BaseComponent*> componentList = object->getComponents(GameComponents::COMPONENT_TYPE::WINDOW);
-				for each (GameComponents::BaseComponent* component in componentList)
-				{
-					((GameComponents::InputComponent *)component)->UpdateInputState(event);
-				}
+				for each (GameComponents::BaseComponent* component in componentList) ((GameComponents::InputComponent *)component)->UpdateInputState(event, dt);
 			}
 		}
 
@@ -64,10 +56,7 @@ namespace GameSystems {
 		for each (GameObjects::BaseGameObject* object in listObjects)
 		{
 			std::vector<GameComponents::BaseComponent*> componentList = object->getComponents(GameComponents::COMPONENT_TYPE::WINDOW);
-			for each (GameComponents::BaseComponent* component in componentList)
-			{
-				component->Update(dt);
-			}
+			for each (GameComponents::BaseComponent* component in componentList) component->Update(dt);
 		}
 		window->display();
 		return 0;
@@ -81,10 +70,7 @@ namespace GameSystems {
 		for each (GameObjects::BaseGameObject* object in listObjects)
 		{
 			std::vector<GameComponents::BaseComponent*> componentList = object->getComponents(GameComponents::COMPONENT_TYPE::WINDOW);
-			for each (GameComponents::BaseComponent* component in componentList)
-			{
-				component->Init();
-			}
+			for each (GameComponents::BaseComponent* component in componentList) component->Init();
 		}
 	}
 
