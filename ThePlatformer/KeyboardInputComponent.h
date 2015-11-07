@@ -7,9 +7,9 @@ namespace GameComponents {
 	public:
 		KeyboardInputComponent(GameObjects::BaseGameObject *object, std::string filename);
 		~KeyboardInputComponent();
-		void UpdateInputState(sf::Event);
+		virtual void UpdateInputState(sf::Event, double);
 		void Init();
-		void sendMessage(Message*);
+		void sendMessage(GameMessage::Message*);
 		int	ParseInputFile(JsonValue o);
 
 	private:

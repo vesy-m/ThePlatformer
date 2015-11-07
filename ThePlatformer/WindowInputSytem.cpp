@@ -3,6 +3,7 @@
 namespace GameSystems {
 	WindowInputSytem::WindowInputSytem()
 	{
+		this->fullscreen = false;
 	}
 
 
@@ -14,7 +15,7 @@ namespace GameSystems {
 	int WindowInputSytem::Update(double dt, std::list<GameObjects::BaseGameObject*>& listObjects)
 	{
 		sf::Event event;
-
+		bool changeSize = false;
 
 
 		while (window->pollEvent(event))
@@ -26,29 +27,36 @@ namespace GameSystems {
 				// adjust the viewport when the window is resized
 				glViewport(0, 0, event.size.width, event.size.height);
 			}
-
-			//std::list<GameObjects::BaseGameObject*>::iterator firstObject = listObjects.begin();
-			//firstObject++;
-			//GameComponents::BaseComponent* firstComponent = (*firstObject)->getComponents(GameComponents::COMPONENT_TYPE::WINDOW).at(0);
-			//((GameComponents::InputComponent *)firstComponent)->UpdateInputState(event);
+			else if (event.type == sf::Event::KeyReleased)
+			{
+				if (event.key.code == sf::Keyboard::F11)
+				{
+					changeSize = true;
+					break;
+				}
+			}
 
 			for each (GameObjects::BaseGameObject* object in listObjects)
 			{
 				std::vector<GameComponents::BaseComponent*> componentList = object->getComponents(GameComponents::COMPONENT_TYPE::WINDOW);
-				for each (GameComponents::BaseComponent* component in componentList)
-				{
-					((GameComponents::InputComponent *)component)->UpdateInputState(event);
-				}
+				for each (GameComponents::BaseComponent* component in componentList) ((GameComponents::InputComponent *)component)->UpdateInputState(event, dt);
+			}
+		}
+
+		if (changeSize == true) {
+			this->fullscreen = !this->fullscreen;
+			if (this->fullscreen) {
+				window->create(sf::VideoMode::getDesktopMode(), "ThePlatformer", sf::Style::Fullscreen, sf::ContextSettings(32));
+			}
+			else {
+				window->create(sf::VideoMode(1280, 720), "ThePlatformer", sf::Style::Close, sf::ContextSettings(32));
 			}
 		}
 
 		for each (GameObjects::BaseGameObject* object in listObjects)
 		{
 			std::vector<GameComponents::BaseComponent*> componentList = object->getComponents(GameComponents::COMPONENT_TYPE::WINDOW);
-			for each (GameComponents::BaseComponent* component in componentList)
-			{
-				component->Update(dt);
-			}
+			for each (GameComponents::BaseComponent* component in componentList) component->Update(dt);
 		}
 		window->display();
 		return 0;
@@ -56,16 +64,13 @@ namespace GameSystems {
 
 	void WindowInputSytem::Init(std::list<GameObjects::BaseGameObject*>& listObjects)
 	{
-		this->window = new sf::Window(sf::VideoMode(1280, 720), "ThePlatformer", sf::Style::Default, sf::ContextSettings(32));
+		this->window = new sf::Window(sf::VideoMode(1280, 720), "ThePlatformer", sf::Style::Close, sf::ContextSettings(32));
 		window->setVerticalSyncEnabled(false);
 		window->setKeyRepeatEnabled(true);
 		for each (GameObjects::BaseGameObject* object in listObjects)
 		{
 			std::vector<GameComponents::BaseComponent*> componentList = object->getComponents(GameComponents::COMPONENT_TYPE::WINDOW);
-			for each (GameComponents::BaseComponent* component in componentList)
-			{
-				component->Init();
-			}
+			for each (GameComponents::BaseComponent* component in componentList) component->Init();
 		}
 	}
 

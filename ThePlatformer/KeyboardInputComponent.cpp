@@ -13,16 +13,15 @@ namespace GameComponents {
 	{
 	}
 
-	void KeyboardInputComponent::UpdateInputState(sf::Event event)
+	void KeyboardInputComponent::UpdateInputState(sf::Event event, double dt)
 	{
+		static float duration = 0;
 		for (auto it = this->keyboardMap.begin(); it != this->keyboardMap.end(); ++it)
 		{
 			if (event.type == sf::Event::KeyPressed)
 			{
-				if (event.key.code == it->second)
-				{
-					inputState.at(it->first) = true;
-				}
+				if (event.key.code == it->second) inputState.at(it->first) = true;
+				if (it->first == INPUT_TYPE::FIRE) duration += (float)((duration + dt > 1000.0f) ? (1000.0f - duration) : dt);
 			}
 			else if (event.type == sf::Event::KeyReleased)
 			{
@@ -32,15 +31,16 @@ namespace GameComponents {
 					switch (it->first)
 					{
 					case INPUT_TYPE::LEFT:
-						getComposition()->sendMessage(new Message(Message::LEFT_RELEASED));
+						getComposition()->sendMessage(new GameMessage::Message(GameMessage::Message::LEFT_RELEASED));
 						break;
 					case INPUT_TYPE::RIGHT:
-						getComposition()->sendMessage(new Message(Message::RIGHT_RELEASED));
+						getComposition()->sendMessage(new GameMessage::Message(GameMessage::Message::RIGHT_RELEASED));
 						break;
 					case INPUT_TYPE::FIRE:
 					{
-						GameObjects::BaseGameObject *arrow = GameSystems::ObjectFactory::createArrow(getComposition()->getX() + 35, getComposition()->getY());
-						arrow->sendMessage(new Message(Message::FIRE));
+						GameObjects::BaseGameObject *arrow = GameSystems::ObjectFactory::getInstance().createArrow(getComposition()->getX() + 35, getComposition()->getY(), duration);
+						duration = 0;
+						arrow->sendMessage(new GameMessage::Message(GameMessage::Message::FIRE));
 						break;
 					}
 					default:
@@ -78,11 +78,11 @@ namespace GameComponents {
 		return 0;
 	}
 
-	void KeyboardInputComponent::sendMessage(Message *message)
+	void KeyboardInputComponent::sendMessage(GameMessage::Message *message)
 	{
 		switch (message->id)
 		{
-		case Message::JUMP_RELEASED:
+		case GameMessage::Message::JUMP_RELEASED:
 			inputState.at(INPUT_TYPE::JUMP) = false;
 			break;
 		default:

@@ -11,12 +11,12 @@ namespace GameComponents {
 	{
 	}
 
-	void VectorDebugComponent::sendMessage(Message *message)
+	void VectorDebugComponent::sendMessage(GameMessage::Message *message)
 	{
 		switch (message->id)
 		{
-			case Message::VELOCITY_VECTOR:
-				this->velocity = ((VectorMessage *)message)->vector;
+		case GameMessage::Message::VELOCITY_VECTOR:
+				this->velocity = ((GameMessage::VectorMessage *)message)->vector;
 				break;
 		/*	case Message::SHOW_DEBUG:
 				showDebug = !showDebug;

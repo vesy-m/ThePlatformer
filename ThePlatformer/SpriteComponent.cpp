@@ -18,11 +18,11 @@ namespace GameComponents {
 	{
 	}
 
-	void SpriteComponent::sendMessage(Message *message)
+	void SpriteComponent::sendMessage(GameMessage::Message *message)
 	{
 		switch (message->id)
 		{
-			case Message::LEFT:
+		case GameMessage::Message::LEFT:
 				if ((std::string("walk").compare(currentAnim) != 0 || revertX != true) && std::string("jump").compare(currentAnim) != 0) {
 					currentFrame = 0;
 					currentAnim = "walk";
@@ -33,7 +33,7 @@ namespace GameComponents {
 					revertX = true;
 				}
 				break;
-			case Message::RIGHT:
+		case GameMessage::Message::RIGHT:
 				if ((std::string("walk").compare(currentAnim) != 0 || revertX != false) && std::string("jump").compare(currentAnim) != 0) {
 					currentFrame = 0;
 					currentAnim = "walk";
@@ -44,23 +44,23 @@ namespace GameComponents {
 					revertX = false;
 				}
 				break;
-			case Message::JUMP_ANIMATION:
-			case Message::JUMP:
+		case GameMessage::Message::JUMP_ANIMATION:
+		case GameMessage::Message::JUMP:
 				if (std::string("jump").compare(currentAnim) != 0) {
 					currentFrame = 0;
 					currentAnim = "jump";
 				}
 				break;
-			case Message::STAND_ANIMATION:
+		case GameMessage::Message::STAND_ANIMATION:
 				if (std::string("default").compare(currentAnim) != 0) {
 					currentFrame = 0;
 					currentAnim = "default";
 				}
 				break;
-			case Message::ROTATE_LEFT:
+		case GameMessage::Message::ROTATE_LEFT:
 				debugManager::getInstance().rotateNum = -1;
 				break;
-			case Message::ROTATE_RIGHT:
+		case GameMessage::Message::ROTATE_RIGHT:
 				debugManager::getInstance().rotateNum = 1;
 				break;
 			default:
@@ -95,6 +95,9 @@ namespace GameComponents {
 				debugManager::getInstance().scaleNum = 0.01f;
 			}
 			this->composition->setScale(newScale + debugManager::getInstance().scaleNum);
+		}
+		else if (!std::string("megaman2").compare(this->composition->getName())) {
+			glColor3f((GLfloat)1.0, (GLfloat)0.3, (GLfloat)0.3);
 		}
 
 		glEnable(GL_TEXTURE_2D);
@@ -151,6 +154,7 @@ namespace GameComponents {
 		glTranslated(-(posX), -(posY), 0);
 
 		glDisable(GL_TEXTURE_2D);
+		glColor3f(1.0f, 1.0f, 1.0f);
 	}
 
 	void SpriteComponent::Init()

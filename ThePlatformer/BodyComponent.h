@@ -15,7 +15,7 @@ namespace GameComponents {
 		COMPONENT_TYPE getType();
 		void Update(double);
 		void Init();
-		void sendMessage(Message*);
+		void sendMessage(GameMessage::Message*);
 
 		void Integrate(float dt);
 		void AddForce(float x, float y);
@@ -32,11 +32,11 @@ namespace GameComponents {
 		glm::vec2 velocity;
 
 		glm::vec2 acceleration;
-		float mass;
 		glm::vec2 gravity;
 		glm::vec2 forces;
-		bool onGround;
 		glm::vec2 lastCollisionVelocity;
+		float mass;
+		bool onGround;
 		bool isColliding;
 	};
 }

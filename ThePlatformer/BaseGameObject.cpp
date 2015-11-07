@@ -11,8 +11,13 @@ namespace GameObjects {
 		depth = 0;
 		rotate = 0;
 		scale = 1;
+		mass = 1.0f;
 		to_destroy = false;
 		type = objectType::NONE;
+	}
+
+	void BaseGameObject::Init(void) {
+		for (auto it = this->componentsList.begin(); it != this->componentsList.end(); ++it) (*it)->Init();
 	}
 
 	BaseGameObject::~BaseGameObject()
@@ -40,7 +45,7 @@ namespace GameObjects {
 		this->componentsList.push_back(component);
 	}
 
-	void BaseGameObject::sendMessage(Message *message)
+	void BaseGameObject::sendMessage(GameMessage::Message *message)
 	{
 		for each (GameComponents::BaseComponent *component in this->componentsList) component->sendMessage(message);
 	}
@@ -96,6 +101,14 @@ namespace GameObjects {
 	float BaseGameObject::getScale()
 	{
 		return this->scale;
+	}
+	void BaseGameObject::setMass(float mass)
+	{
+		this->mass = mass;
+	}
+	float BaseGameObject::getMass()
+	{
+		return this->mass;
 	}
 	void BaseGameObject::setRotate(int rotate)
 	{

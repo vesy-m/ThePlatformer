@@ -26,8 +26,9 @@ namespace GameObjects {
 		BaseGameObject();
 		~BaseGameObject();
 		std::vector<GameComponents::BaseComponent*> getComponents(GameComponents::COMPONENT_TYPE type);
+		void Init(void);
 		void attachComponent(GameComponents::BaseComponent*);
-		void sendMessage(Message*);
+		void sendMessage(GameMessage::Message*);
 		void setX(int x);
 		int getX();
 		void setY(int y);
@@ -40,6 +41,8 @@ namespace GameObjects {
 		void setWidth(int width);
 		void setScale(float scale);
 		float getScale();
+		void setMass(float mass);
+		float getMass();
 		void setRotate(int rotate);
 		int getRotate();
 		void setName(std::string name);
@@ -56,8 +59,9 @@ namespace GameObjects {
 		int height;
 		int width;
 		int depth;
-		float scale;
 		int rotate;
+		float scale;
+		float mass;
 		std::string name;
 		objectType type;
 		bool to_destroy;

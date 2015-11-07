@@ -9,9 +9,9 @@ namespace GameComponents {
 		ControllerInputComponent(GameObjects::BaseGameObject *object, std::string filename);
 		~ControllerInputComponent();
 
-		void UpdateInputState(sf::Event);
+		virtual void UpdateInputState(sf::Event, double);
 		void Init();
-		void sendMessage(Message*);
+		void sendMessage(GameMessage::Message*);
 		bool ControllerInputComponent::DetectAxisInput(sf::Event event, int button);
 		bool ControllerInputComponent::CheckInputValue(sf::Event event, int button);
 		int	ControllerInputComponent::ParseInputFile(JsonValue o);
