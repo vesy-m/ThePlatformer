@@ -24,6 +24,8 @@ namespace GameComponents {
 		virtual void Update(double) = 0;
 		COMPONENT_TYPE getType() { return COMPONENT_TYPE::COLLIDER; };
 		virtual void Init() = 0;
+
+		glm::vec2 velocity;
 	};
 
 	struct Manifold
@@ -49,17 +51,21 @@ namespace GameComponents {
 	public:
 		glm::vec2 min;
 		glm::vec2 max;
-		glm::vec2 velocity;
+
 	};
 
 	class CircleCollider : public Collider
 	{
 	public:
-		CircleCollider(float radius, glm::vec2 pos, GameObjects::BaseGameObject *object);
+		CircleCollider(GameObjects::BaseGameObject *object);
 		~CircleCollider();
 
 		virtual bool CollideWithCircle(Manifold *manifold);
+		virtual bool CollideWithBox(Manifold *manifold);
 		virtual COLLIDER_TYPE getColliderType();
+		virtual void Update(double);
+		void sendMessage(Message *message);
+		virtual void Init() {}
 
 	public:
 		float radius;

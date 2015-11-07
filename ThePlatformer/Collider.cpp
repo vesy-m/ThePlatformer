@@ -115,7 +115,7 @@ namespace GameComponents {
 
 		glm::vec2 addPos = manifold->normal * penetration;
 
-		glm::vec2 newVec = ((BoxCollider*)manifold->A)->velocity;
+		glm::vec2 newVec = ((Collider*)manifold->A)->velocity;
 		if (manifold->normal.y != 0)
 			newVec.y = 0;
 		else if (manifold->normal.x != 0)
@@ -217,10 +217,10 @@ namespace GameComponents {
 			this->velocity = ((VectorMessage*)message)->vector;
 	}
 
-	CircleCollider::CircleCollider(float radius, glm::vec2 pos, GameObjects::BaseGameObject *object) : Collider(object)
+	CircleCollider::CircleCollider(GameObjects::BaseGameObject *object) : Collider(object)
 	{
-		this->radius = radius;
-		this->pos = pos;
+		this->radius = this->composition->getHeight() / 2.0f;
+		this->pos = glm::vec2(this->composition->getX() + this->composition->getWidth() / 2.0f, this->composition->getY() + this->composition->getHeight() / 2.0f);
 	}
 
 	CircleCollider::~CircleCollider()
@@ -253,7 +253,7 @@ namespace GameComponents {
 
 			// Utilize our d since we performed sqrt on it already within Length( )
 			// Points from A to B, and is a unit vector
-			//manifold->normal = t / d;
+			manifold->normal = n / d;
 			return true;
 		}
 
@@ -267,9 +267,177 @@ namespace GameComponents {
 		}
 	}
 
+	float Clamp(float min, float max, float value)
+	{
+	return std::min(std::max(value, min), max);
+	}
+
+	bool CircleCollider::CollideWithBox(Manifold *manifold)
+	{
+		// Setup a couple pointers to each object
+		CircleCollider *A = (CircleCollider*)manifold->A;
+		BoxCollider *B = (BoxCollider*)manifold->B;
+
+		glm::vec2 positionB = glm::vec2(manifold->B->composition->getX() + manifold->B->composition->getWidth() / 2.0f, manifold->B->composition->getY() + manifold->B->composition->getHeight() / 2.0f);
+
+			// Vector from A to B
+		glm::vec2 n = A->pos - positionB;
+
+			// Closest point on A to center of B
+		glm::vec2 closest = n;
+
+			// Calculate half extents along each axis
+		float x_extent = (B->max.x - B->min.x) / 2;
+		float y_extent = (B->max.y - B->min.y) / 2;
+
+			// Clamp point to edges of the AABB
+		closest.x = Clamp(-x_extent, x_extent, closest.x);
+		closest.y = Clamp(-y_extent, y_extent, closest.y);
+
+		bool inside = false;
+
+			// Circle is inside the AABB, so we need to clamp the circle's center
+			// to the closest edge
+			if (n == closest)
+			{
+				inside = true;
+
+					// Find closest axis
+					if (abs(n.x) > abs(n.y))
+					{
+						// Clamp to closest extent
+						if (closest.x > 0)
+							closest.x = x_extent;
+						else
+							closest.x = -x_extent;
+					}
+
+				// y axis is shorter
+					else
+					{
+						// Clamp to closest extent
+						if (closest.y > 0)
+							closest.y = y_extent;
+						else
+							closest.y = -y_extent;
+					}
+			}
+
+			glm::vec2 normal = n - closest;
+			float d = std::pow(normal.length(), 2);
+			float r = A->radius;
+
+			// Early out of the radius is shorter than distance to closest point and
+			// Circle not inside the AABB
+			if (d > r * r && !inside)
+				return false;
+
+				// Avoided sqrt until we needed
+			d = sqrt(d);
+
+				// Collision normal needs to be flipped to point outside if circle was
+				// inside the AABB
+				if (inside)
+				{
+					manifold->normal = -n;
+					manifold->penetration = r - d;
+				}
+				else
+				{
+					manifold->normal = n;
+					manifold->penetration = r - d;
+				}
+				glm::vec2 tmp = glm::normalize(manifold->normal);
+				std::cout << "tmp x,y is " << tmp.x << "," << tmp.y << std::endl;
+				if (tmp.x > 0.50f)
+					manifold->normal.x = 1;
+				else if (tmp.x < -0.50f)
+					manifold->normal.x = -1;
+				else
+					manifold->normal.x = 0;
+				if (tmp.y > 0.50f)
+					manifold->normal.y = 1;
+				else if (tmp.y < -0.50f)
+					manifold->normal.y = -1;
+				else
+					manifold->normal.y = 0;
+				std::cout << "final x,y is " << manifold->normal.x << "," << manifold->normal.y << std::endl;
+				return true;
+	}
+
+	void CircleCollider::Update(double)
+	{
+		bool collide = false;
+
+		this->pos = glm::vec2(this->composition->getX() + this->composition->getWidth() / 2.0f, this->composition->getY() + this->composition->getHeight() / 2.0f);;
+
+		if (this->composition->getType() != GameObjects::NONE)
+		{
+			for each(GameObjects::BaseGameObject* object in GameSystems::ObjectFactory::getInstance().getCurrentLevel().getObjects())
+			{
+				if (!object->getComponents(GameComponents::COMPONENT_TYPE::COLLIDER).empty())
+				{
+					if (object->getComponents(GameComponents::COMPONENT_TYPE::COLLIDER)[0] == this)
+						continue;
+					Collider* collider = (Collider*)object->getComponents(GameComponents::COMPONENT_TYPE::COLLIDER)[0];
+					Manifold *manifold = new Manifold();
+					manifold->A = this;
+					if (collider->getColliderType() == COLLIDER_TYPE::BOX)
+					{
+						std::cout << "TEST" << std::endl;
+						BoxCollider *other = (BoxCollider*)object->getComponents(GameComponents::COMPONENT_TYPE::COLLIDER)[0];
+						manifold->B = other;
+						if (this->CollideWithBox(manifold))
+						{
+							std::cout << "JE COLLIDE ! Normal is (" << manifold->normal.x << "," << manifold->normal.y << ")" << std::endl;
+
+							// Destroy projectiles on collision
+							if (other->composition->getType() == GameObjects::PROJECTILE) other->composition->destroy(true);
+							else if (this->composition->getType() == GameObjects::PROJECTILE) this->composition->destroy(true);
+
+
+							ResolveCollision(manifold);
+							collide = true;
+						}
+					}
+					// TO DO
+					/*else if (collider->getColliderType() == COLLIDER_TYPE::CIRCLE)
+					{
+						CircleCollider *other = (CircleCollider*)object->getComponents(GameComponents::COMPONENT_TYPE::COLLIDER)[0];
+						manifold->B = other;
+						//std::cout << "TEST" << std::endl;
+						if (this->CollideWithCircle(manifold))
+						{
+							//std::cout << "JE COLLIDE ! Normal is (" << manifold->normal.x << "," << manifold->normal.y << ")" << std::endl;
+
+							// Destroy projectiles on collision
+							if (other->composition->getType() == GameObjects::PROJECTILE) other->composition->destroy(true);
+							else if (this->composition->getType() == GameObjects::PROJECTILE) this->composition->destroy(true);
+
+
+							ResolveCollision(manifold);
+							collide = true;
+						}
+					}*/
+				}
+			}
+			if (!collide)
+			{
+				//std::cout << "JE NE COLLIDE PAS" << std::endl;
+				this->composition->sendMessage(new Message(Message::NO_COLLISION));
+			}
+		}
+	}
+
 	COLLIDER_TYPE CircleCollider::getColliderType()
 	{
 		return COLLIDER_TYPE::CIRCLE;
+	}
+
+	void CircleCollider::sendMessage(Message *message)
+	{
+		if (message->id == Message::VELOCITY_VECTOR)
+			this->velocity = ((VectorMessage*)message)->vector;
 	}
 
 	CollisionMessage::CollisionMessage(glm::vec2 velocity, glm::vec2 position) : Message(COLLISION)

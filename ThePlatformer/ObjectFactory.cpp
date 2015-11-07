@@ -50,6 +50,9 @@ namespace GameSystems {
 			else if (std::string(it->key) == "boxcollider") {
 				auto vector = new GameComponents::BoxCollider(ret);
 			}
+			else if (std::string(it->key) == "circlecollider") {
+				auto vector = new GameComponents::CircleCollider(ret);
+			}
 			else if (std::string(it->key) == "joystick") {
 				auto input = new GameComponents::ControllerInputComponent(ret, it->value.toString());
 			}
