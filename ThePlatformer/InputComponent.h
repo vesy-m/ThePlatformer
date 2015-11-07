@@ -1,7 +1,4 @@
 #pragma once
-#ifndef _INPUTCOMPONENT_H_
-#define _INPUTCOMPONENT_H_
-
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Mouse.hpp>
 #include <SFML\Window.hpp>
@@ -29,11 +26,10 @@ namespace GameComponents {
 			ROTATE_LEFT = 7,
 		};
 		InputComponent(GameObjects::BaseGameObject *);
-		~InputComponent();
-
-		COMPONENT_TYPE getType();
-		GameObjects::BaseGameObject *getComposition();
-		void Update(double);
+		virtual ~InputComponent();
+		virtual COMPONENT_TYPE getType();
+		virtual GameObjects::BaseGameObject *getComposition();
+		virtual void Update(double);
 
 		virtual void UpdateInputState(sf::Event, double) = 0;
 		virtual void Init() = 0;
@@ -44,6 +40,3 @@ namespace GameComponents {
 		std::map<INPUT_TYPE, bool> inputState;
 	};
 }
-
-#endif // !_INPUTCOMPONENT_H_
-

@@ -18,7 +18,7 @@ namespace GameComponents {
 
 	void BodyComponent::Update(double dt)
 	{
-		Integrate((dt / 100.0) * 2.0);
+		Integrate((float)((dt / 100.0) * 2.0));
 	}
 
 	void BodyComponent::Init()

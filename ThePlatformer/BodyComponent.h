@@ -10,16 +10,16 @@ namespace GameSystems {
 }
 
 namespace GameComponents {
-	class BodyComponent : BaseComponent
+	class BodyComponent : public BaseComponent
 	{
 		friend class ::GameSystems::ObjectFactory;
 	public:
-		~BodyComponent();
+		virtual ~BodyComponent();
 
-		COMPONENT_TYPE getType();
-		void Update(double);
-		void Init();
-		void Init(float, bool);
+		virtual COMPONENT_TYPE getType();
+		virtual void Update(double);
+		virtual void Init();
+		virtual void Init(float, bool);
 		void sendMessage(GameMessage::Message*);
 
 		void Integrate(float dt);
