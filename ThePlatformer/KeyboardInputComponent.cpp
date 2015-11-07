@@ -21,7 +21,7 @@ namespace GameComponents {
 			if (event.type == sf::Event::KeyPressed)
 			{
 				if (event.key.code == it->second) inputState.at(it->first) = true;
-				if (it->first == INPUT_TYPE::FIRE) duration += (float)((duration + dt > 1000.0f) ? (1000.0f - duration) : dt);
+				//if (it->first == INPUT_TYPE::FIRE) duration += (float)((duration + dt > 1000.0f) ? (1000.0f - duration) : dt);
 			}
 			else if (event.type == sf::Event::KeyReleased)
 			{
@@ -36,14 +36,40 @@ namespace GameComponents {
 					case INPUT_TYPE::RIGHT:
 						getComposition()->sendMessage(new GameMessage::Message(GameMessage::Message::RIGHT_RELEASED));
 						break;
-					case INPUT_TYPE::FIRE:
+					/*case INPUT_TYPE::FIRE:
 					{
 						GameObjects::BaseGameObject *arrow = GameSystems::ObjectFactory::getInstance().createArrow(getComposition()->getX() + 35, getComposition()->getY(), duration);
 						duration = 500.0f;
 						break;
-					}
+					}*/
 					default:
 						break;
+					}
+				}
+			}
+			else if (event.type == sf::Event::MouseButtonPressed)
+			{
+				if (event.mouseButton.button == it->second) inputState.at(it->first) = true;
+				if (it->first == INPUT_TYPE::FIRE) {
+					duration += (float)((duration + dt > 1000.0f) ? (1000.0f - duration) : dt);
+					std::cout << "Duration: " << duration << std::endl;
+				}
+			}
+			else if (event.type == sf::Event::MouseButtonReleased)
+			{
+				if (event.key.code == it->second)
+				{
+					inputState.at(it->first) = false;
+					switch (it->first)
+					{
+					case INPUT_TYPE::FIRE:
+					{
+						std::cout << "mouse x: " << event.mouseButton.x << std::endl;
+						std::cout << "mouse y: " << event.mouseButton.y << std::endl;
+						GameObjects::BaseGameObject *arrow = GameSystems::ObjectFactory::getInstance().createArrow(getComposition()->getX() + 35, getComposition()->getY(), duration);
+						duration = 500.0f;
+						break;
+					}
 					}
 				}
 			}
@@ -57,9 +83,6 @@ namespace GameComponents {
 			GameSystems::JSONParser parser(filename);
 			ParseInputFile(parser.getJSONValue());
 		}
-
-		//this->mouseMap.emplace(FIRE, sf::Mouse::Left);
-		this->mouseMap.emplace(SPECIAL, sf::Mouse::Right);
 	}
 
 	int	KeyboardInputComponent::ParseInputFile(JsonValue o) {
