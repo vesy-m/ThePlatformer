@@ -124,6 +124,8 @@ namespace GameComponents {
 		{
 			for each(GameObjects::BaseGameObject* object in GameSystems::ObjectFactory::getInstance().getCurrentLevel().getObjects())
 			{
+				if (this->composition->getType() != GameObjects::PROJECTILE && object->getType() == GameObjects::PLAYER)
+					continue;
 				if (!object->getComponents(GameComponents::COMPONENT_TYPE::COLLIDER).empty())
 				{
 					if (object->getComponents(GameComponents::COMPONENT_TYPE::COLLIDER)[0] == this)
