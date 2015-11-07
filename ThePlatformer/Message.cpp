@@ -1,10 +1,13 @@
 #include "Message.h"
 
-Message::Message(MessageId id)
-{
-	this->id = id;
+namespace GameMessage {
+	Message::Message(MessageId id)
+	{
+		this->id = id;
+	}
+
+	Message::~Message()
+	{
+	}
 }
 
-Message::~Message()
-{
-}

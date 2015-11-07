@@ -29,6 +29,7 @@ namespace GameSystems {
 			else if (std::string(it->key) == "y") ret->setY((int) it->value.toNumber());
 			else if (std::string(it->key) == "depth") ret->setDepth((int) it->value.toNumber());
 			else if (std::string(it->key) == "scale") ret->setScale((float) it->value.toNumber());
+			else if (std::string(it->key) == "mass") ret->setMass((float)it->value.toNumber());
 			else if (std::string(it->key) == "rotate") ret->setRotate((int) it->value.toNumber());
 			else if (std::string(it->key) == "width") ret->setWidth((int) it->value.toNumber());
 			else if (std::string(it->key) == "height") ret->setHeight((int) it->value.toNumber());
@@ -43,10 +44,6 @@ namespace GameSystems {
 			else if (std::string(it->key) == "body") {
 				auto body = new GameComponents::BodyComponent(ret);
 			}
-			//else if (std::string(it->key) == "hexacollider") {
-			//	auto vector = new GameComponents::HexagonCollider(ret);
-			//	ret->attachComponent((GameComponents::BaseComponent*) vector);
-			//}
 			else if (std::string(it->key) == "boxcollider") {
 				auto vector = new GameComponents::BoxCollider(ret);
 			}
@@ -67,30 +64,34 @@ namespace GameSystems {
 		ObjectFactory::getInstance().currentLevel.putObjectDepthOrdered(obj);
 	}
 
-	GameObjects::BaseGameObject *ObjectFactory::createArrow(unsigned int x, unsigned int y) {
-		auto arrow = new GameObjects::BaseGameObject();
-		arrow->setName("arrow");
-		arrow->setX(x);
-		arrow->setY(y);
-		arrow->setHeight(76 * 0.25f);
-		arrow->setWidth(150 * 0.25f);
-		arrow->setScale(0.25f);
-		arrow->setDepth(0);
-		arrow->setType(GameObjects::objectType::PROJECTILE);
+	GameObjects::BaseGameObject *ObjectFactory::createArrow(unsigned int x, unsigned int y, float base_force) {
+		GameObjects::BaseGameObject *arrow = NULL;
+		if (this->old_objects.size() == 0) {
+			arrow = new GameObjects::BaseGameObject();
+			arrow->setName("arrow");
+			arrow->setX(x);
+			arrow->setY(y);
+			arrow->setHeight(int(76 * 0.25f));
+			arrow->setWidth(int(150 * 0.25f));
+			arrow->setScale(0.25f);
+			arrow->setMass(50.0f);
+			arrow->setDepth(0);
+			arrow->setType(GameObjects::objectType::PROJECTILE);
 
-		auto sprite = new GameComponents::SpriteComponent(arrow, "minecraft_arrow.png");
-		sprite->Init();
-
-		auto box = new GameComponents::BoxCollider(arrow);
-		box->Init();
-
-		auto vector = new GameComponents::VectorDebugComponent(arrow);
-		vector->Init();
-
-		auto body = new GameComponents::BodyComponent(arrow);
-		body->Init();
-		
-		ObjectFactory::getInstance().currentLevel.putObjectDepthOrdered(arrow);
+			new GameComponents::SpriteComponent(arrow, "minecraft_arrow.png");
+			new GameComponents::BoxCollider(arrow);
+			new GameComponents::VectorDebugComponent(arrow);
+			new GameComponents::BodyComponent(arrow);
+		}
+		else {
+			arrow = this->old_objects.front();
+			this->old_objects.pop_front();
+			arrow->destroy(false);
+			arrow->setX(x);
+			arrow->setY(y);	
+		}
+		arrow->Init();
+		this->currentLevel.putObjectDepthOrdered(arrow);
 		return (arrow);
 	}
 
@@ -113,23 +114,19 @@ namespace GameSystems {
 	void ObjectFactory::putObjectDepthOrdered(GameObjects::BaseGameObject * obj) {
 		assert(obj != NULL);
 		int depth = obj->getDepth();
-		int size = (int) this->listGameObject.size();
+		int size = (int) this->old_objects.size();
 		
-
-		for (std::list<GameObjects::BaseGameObject *>::iterator it = this->listGameObject.begin(); it != this->listGameObject.end(); ++it) {
-			if ((*it)->getDepth() <= depth) {
-				this->listGameObject.insert(it, obj);
-				return;
-			}
-		}
-		this->listGameObject.push_back(obj);
+		for (auto it = this->old_objects.begin(); it != this->old_objects.end(); ++it)
+			if ((*it)->getDepth() <= depth) return (void) this->old_objects.insert(it, obj);
+		this->old_objects.push_back(obj);
 	}
 
 	void ObjectFactory::cleanupObjects(void) {
 		std::list<GameObjects::BaseGameObject*> &list = this->currentLevel.getObjects();
-		list.erase(std::remove_if(list.begin(), list.end(), [](auto obj) {
+		list.erase(std::remove_if(list.begin(), list.end(), [&](auto obj) {
 			if (obj->destroy()) {
-				delete obj;
+				if (obj->getName() == "arrow") this->old_objects.push_back(obj);
+				else delete obj;
 				return true;
 			}
 			return false;

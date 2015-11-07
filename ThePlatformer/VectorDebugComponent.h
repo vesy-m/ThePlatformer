@@ -21,7 +21,7 @@ namespace GameComponents {
 	public:
 		
 		~VectorDebugComponent();
-		void sendMessage(Message*);
+		void sendMessage(GameMessage::Message*);
 		COMPONENT_TYPE getType();
 		void Update(double);
 		void Init();

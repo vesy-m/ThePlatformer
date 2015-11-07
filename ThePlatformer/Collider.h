@@ -43,8 +43,8 @@ namespace GameComponents {
 		virtual bool CollideWithBox(Manifold *manifold);
 		virtual COLLIDER_TYPE getColliderType();
 		virtual void Update(double);
-		void sendMessage(Message *message);
-		virtual void Init() {}
+		void sendMessage(GameMessage::Message *message);
+		virtual void Init();
 
 	public:
 		glm::vec2 min;
@@ -65,7 +65,9 @@ namespace GameComponents {
 		float radius;
 		glm::vec2 pos;
 	};
+}
 
+namespace GameMessage {
 	class CollisionMessage : Message
 	{
 	public:

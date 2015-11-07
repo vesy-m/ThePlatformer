@@ -4,12 +4,15 @@ namespace GameComponents {
 
 	BoxCollider::BoxCollider(GameObjects::BaseGameObject *object) : Collider(object)
 	{
-		this->min = glm::vec2(this->composition->getX(), this->composition->getY());
-		this->max = glm::vec2(this->composition->getX() + this->composition->getWidth(), this->composition->getY() + this->composition->getHeight());
 	}
 
 	BoxCollider::~BoxCollider()
 	{
+	}
+
+	void BoxCollider::Init(void) {
+		this->min = glm::vec2(this->composition->getX(), this->composition->getY());
+		this->max = glm::vec2(this->composition->getX() + this->composition->getWidth(), this->composition->getY() + this->composition->getHeight());
 	}
 
 	bool BoxCollider::CollideWithBox(Manifold *manifold)
@@ -17,6 +20,9 @@ namespace GameComponents {
 		// Setup a couple pointers to each object
 		BoxCollider *A = (BoxCollider*)manifold->A;
 		BoxCollider *B = (BoxCollider*)manifold->B;
+
+		glm::vec2 positionA = glm::vec2(manifold->A->composition->getX(), manifold->A->composition->getY());
+		glm::vec2 positionB = glm::vec2(manifold->B->composition->getX(), manifold->B->composition->getY());
 
 		// Vector from A to B
 		float x = (B->min.x + (B->composition->getWidth() / 2)) - (A->min.x + (A->composition->getWidth() / 2));
@@ -50,10 +56,12 @@ namespace GameComponents {
 					if (n.x < 0)
 					{
 						manifold->normal = glm::vec2(1, 0);
+						manifold->penetration = ((positionB.x + manifold->B->composition->getWidth()) - positionA.x) + 1;
 					}
 					else
 					{
 						manifold->normal = glm::vec2(-1, 0);
+						manifold->penetration = ((positionA.x + manifold->A->composition->getWidth()) - positionB.x) + 1;
 					}
 					manifold->penetration = x_overlap;
 					return true;
@@ -64,12 +72,13 @@ namespace GameComponents {
 					if (n.y < 0)
 					{
 						manifold->normal = glm::vec2(0, 1);
+						manifold->penetration = ((positionB.y + manifold->B->composition->getHeight()) - positionA.y) + 0.1f;
 					}
 					else
 					{
 						manifold->normal = glm::vec2(0, -1);
+						manifold->penetration = (positionA.y + manifold->A->composition->getHeight()) - positionB.y;
 					}
-					manifold->penetration = y_overlap;
 					return true;
 				}
 			}
@@ -89,85 +98,19 @@ namespace GameComponents {
 
 	void ResolveCollision(Manifold *manifold) // A changer à terme
 	{
-		float massA = 20.0f;
-		float massB = 100.0f;
-
 		glm::vec2 positionA = glm::vec2(manifold->A->composition->getX(), manifold->A->composition->getY());
 		glm::vec2 positionB = glm::vec2(manifold->B->composition->getX(), manifold->B->composition->getY());
 
-		float TotalInvertMass = massA + massB;
-
-		float penetration = 0.0f;
-
-		if (manifold->normal.y == -1)
-			penetration = (positionA.y + manifold->A->composition->getHeight()) - positionB.y;
-		else if (manifold->normal.y == 1)
-			penetration = (positionB.y + manifold->B->composition->getHeight()) - positionA.y;
-		else if (manifold->normal.x == -1)
-			penetration = ((positionA.x + manifold->A->composition->getWidth()) - positionB.x) + 1;
-		else if (manifold->normal.x == 1)
-			penetration = ((positionB.x + manifold->B->composition->getWidth()) - positionA.x) + 1;
-
-
-		/*glm::vec2 movePerIMass = manifold->normal * (penetration / TotalInvertMass);
-		glm::vec2 addPos = movePerIMass * (1 / massA);
-		addPos += -movePerIMass * (1 / massB);*/
+		float penetration = manifold->penetration;
 
 		glm::vec2 addPos = manifold->normal * penetration;
 
-		glm::vec2 newVec = ((BoxCollider*)manifold->A)->velocity;
-		if (manifold->normal.y != 0)
-			newVec.y = 0;
-		else if (manifold->normal.x != 0)
-			newVec.x = 0;
+		glm::vec2 newVelocity = ((BoxCollider*)manifold->A)->velocity;
+		if (manifold->normal.y != 0) newVelocity.y = 0;
+		else if (manifold->normal.x != 0) newVelocity.x = 0;
 
-		CollisionMessage *msg = new CollisionMessage(newVec, addPos);
-
-		//std::cout << "Velocity is (" << msg->velocity.x << "," << msg->velocity.y << ")" << std::endl;
-		manifold->A->composition->sendMessage((Message*)msg);
-
-		// Calculate relative velocity
-		//glm::vec2 rv = -((BoxCollider*)manifold->A)->velocity;
-
-		// Calculate relative velocity in terms of the normal direction
-		//float velAlongNormal = DotProduct(rv, manifold->normal);
-
-		// Do not resolve if velocities are separating
-		//if (velAlongNormal > 0)
-		//	return;
-
-		// Calculate restitution
-		//float e = min(A.restitution, B.restitution)
-		//float e = 0;
-		//float massA = 20.0f;
-		//float massB = 1000.0f;
-
-		// Calculate impulse scalar
-		//float j = -(1 + e) * velAlongNormal;
-		//j /= 1 / A.mass + 1 / B.mass;
-		//j /= 1 / massA + 1 / massB;
-
-		// Apply impulse
-		//glm::vec2 impulse = j * manifold->normal;
-		//float massSum = massA + massB;
-		//float ratio = massA / massSum;
-		//glm::vec2 minuValue = impulse / massA;
-		//glm::vec2 test = ((BoxCollider*)manifold->A)->velocity - minuValue;
-		//CollisionMessage *msg = new CollisionMessage(test);
-		//CollisionMessage *msg = new CollisionMessage(((BoxCollider*)manifold->A)->velocity - ratio * impulse);
-		//msg->velocity.y -= 9.8f; // Valeur de la gravité
-
-		// Positional Correction
-		/*const float percent = 0.4f;
-		const float slop = 0.01f;
-		float massInvA = 1 / massA;
-		float massInvB = 0;
-		glm::vec2 correction = (std::max(manifold->penetration - slop, 0.0f) / (massInvA + massInvB)) * percent * manifold->normal;
-		msg->velocity -= massInvA * correction;*/
-
-
-		//A.velocity -= 1 / A.mass * impulse;
-		//B.velocity += 1 / B.mass * impulse;
+		GameMessage::CollisionMessage *msg = new GameMessage::CollisionMessage(newVelocity, addPos);
+		manifold->A->composition->sendMessage((GameMessage::Message*)msg);
 	}
 
 	void BoxCollider::Update(double)
@@ -206,15 +149,15 @@ namespace GameComponents {
 			if (!collide)
 			{
 				//std::cout << "JE NE COLLIDE PAS" << std::endl;
-				this->composition->sendMessage(new Message(Message::NO_COLLISION));
+				this->composition->sendMessage(new GameMessage::Message(GameMessage::Message::NO_COLLISION));
 			}
 		}
 	}
 
-	void BoxCollider::sendMessage(Message *message)
+	void BoxCollider::sendMessage(GameMessage::Message *message)
 	{
-		if (message->id == Message::VELOCITY_VECTOR)
-			this->velocity = ((VectorMessage*)message)->vector;
+		if (message->id == GameMessage::Message::VELOCITY_VECTOR)
+			this->velocity = ((GameMessage::VectorMessage*)message)->vector;
 	}
 
 	CircleCollider::CircleCollider(float radius, glm::vec2 pos, GameObjects::BaseGameObject *object) : Collider(object)
@@ -272,6 +215,10 @@ namespace GameComponents {
 		return COLLIDER_TYPE::CIRCLE;
 	}
 
+
+}
+
+namespace GameMessage {
 	CollisionMessage::CollisionMessage(glm::vec2 velocity, glm::vec2 position) : Message(COLLISION)
 	{
 		this->velocity = velocity;
