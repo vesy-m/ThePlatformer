@@ -18,7 +18,7 @@ namespace GameComponents {
 	class Collider : public BaseComponent
 	{
 	public:
-		Collider(GameObjects::BaseGameObject *object) : BaseComponent(object) {};
+		Collider(GameObjects::BaseGameObject *object) : BaseComponent(object) { object->attachComponent(this); };
 		virtual ~Collider() {};
 		virtual COLLIDER_TYPE getColliderType() = 0;
 		virtual void Update(double) = 0;

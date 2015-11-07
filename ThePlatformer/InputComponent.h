@@ -11,7 +11,7 @@
 
 namespace GameComponents {
 
-	class InputComponent : BaseComponent
+	class InputComponent : public BaseComponent
 	{	
 	public:
 		enum INPUT_TYPE

@@ -5,8 +5,8 @@ namespace GameComponents {
 
 	TextComponent::TextComponent(GameObjects::BaseGameObject *object) : BaseComponent(object)
 	{
+		object->attachComponent(this);
 	}
-
 
 	TextComponent::~TextComponent()
 	{

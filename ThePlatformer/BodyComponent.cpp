@@ -5,6 +5,7 @@ namespace GameComponents {
 
 	BodyComponent::BodyComponent(GameObjects::BaseGameObject *object) : BaseComponent(object)
 	{
+		object->attachComponent(this);
 	}
 
 	BodyComponent::~BodyComponent()

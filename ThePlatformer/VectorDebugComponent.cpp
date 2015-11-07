@@ -4,8 +4,8 @@ namespace GameComponents {
 
 	VectorDebugComponent::VectorDebugComponent(GameObjects::BaseGameObject *object) : BaseComponent(object)
 	{
+		object->attachComponent(this);
 	}
-
 
 	VectorDebugComponent::~VectorDebugComponent()
 	{

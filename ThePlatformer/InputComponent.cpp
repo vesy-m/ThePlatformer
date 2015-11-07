@@ -4,6 +4,7 @@ namespace GameComponents {
 
 	InputComponent::InputComponent(GameObjects::BaseGameObject *object) : BaseComponent(object)
 	{
+		object->attachComponent(this);
 	}
 
 	InputComponent::~InputComponent()
