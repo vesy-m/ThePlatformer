@@ -75,13 +75,12 @@ namespace GameSystems {
 		ObjectFactory::getInstance().currentLevel.putObjectDepthOrdered(obj);
 	}
 
-	GameObjects::BaseGameObject *ObjectFactory::createArrow(unsigned int x, unsigned int y, float base_force) {
+	GameObjects::BaseGameObject *ObjectFactory::createArrow(unsigned int x, unsigned int y, float base_force, bool direction) {
 		GameObjects::BaseGameObject *arrow = NULL;
+		GameComponents::BodyComponent *body = NULL;
 		if (this->old_objects.size() == 0) {
 			arrow = new GameObjects::BaseGameObject();
 			arrow->setName("arrow");
-			arrow->setX(x);
-			arrow->setY(y);
 			arrow->setHeight(int(76 * 0.25f));
 			arrow->setWidth(int(150 * 0.25f));
 			arrow->setScale(0.25f);
@@ -92,16 +91,28 @@ namespace GameSystems {
 			new GameComponents::SpriteComponent(arrow, "minecraft_arrow.png");
 			new GameComponents::BoxCollider(arrow);
 			new GameComponents::VectorDebugComponent(arrow);
-			new GameComponents::BodyComponent(arrow);
+			body = new GameComponents::BodyComponent(arrow);
 		}
 		else {
 			arrow = this->old_objects.front();
 			this->old_objects.pop_front();
 			arrow->destroy(false);
-			arrow->setX(x);
-			arrow->setY(y);	
+
+			body = dynamic_cast<GameComponents::BodyComponent*>(arrow->getComponent(GameComponents::PHYSIC));
 		}
+		assert(arrow != NULL);
+		assert(body != NULL);
+		if (direction == false) {
+			arrow->setX(x + 35);
+		}
+		else {
+			arrow->setX(x - 40);
+			auto arrow_sprite = dynamic_cast<GameComponents::SpriteComponent*>(arrow->getComponent(GameComponents::SPRITE));
+			arrow_sprite->revertX = true;
+		}
+		arrow->setY(y);
 		arrow->Init();
+		body->Init(base_force, direction);
 		this->currentLevel.putObjectDepthOrdered(arrow);
 		return (arrow);
 	}

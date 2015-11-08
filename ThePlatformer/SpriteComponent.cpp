@@ -5,6 +5,7 @@
 namespace GameComponents {
 	SpriteComponent::SpriteComponent(GameObjects::BaseGameObject *object, const std::string &fileName) : BaseComponent(object)
 	{
+		object->attachComponent(this);
 		_fileName = fileName;
 		revertX = false;
 		revertY = false;

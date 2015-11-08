@@ -4,15 +4,11 @@ namespace GameComponents {
 
 	InputComponent::InputComponent(GameObjects::BaseGameObject *object) : BaseComponent(object)
 	{
+		object->attachComponent(this);
 	}
 
 	InputComponent::~InputComponent()
 	{
-	}
-
-	COMPONENT_TYPE InputComponent::getType()
-	{
-		return this->componentType;
 	}
 
 	GameObjects::BaseGameObject * InputComponent::getComposition()

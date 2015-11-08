@@ -1,10 +1,11 @@
 #include "BodyComponent.h"
-
+#include "SpriteComponent.h"
 
 namespace GameComponents {
 
 	BodyComponent::BodyComponent(GameObjects::BaseGameObject *object) : BaseComponent(object)
 	{
+		object->attachComponent(this);
 	}
 
 	BodyComponent::~BodyComponent()
@@ -18,7 +19,7 @@ namespace GameComponents {
 
 	void BodyComponent::Update(double dt)
 	{
-		Integrate((dt / 100.0) * 2.0);
+		Integrate((float)((dt / 100.0) * 2.0));
 	}
 
 	void BodyComponent::Init()
@@ -34,6 +35,22 @@ namespace GameComponents {
 		isColliding = false;
 	}
 
+	void BodyComponent::Init(float intensity, bool dir) {
+		if (intensity > 0 && this->composition->getType() == GameObjects::PROJECTILE) {
+			if (dir == false) {
+				forces.x = 150.0f;
+				velocity.x = 50.0f * intensity / 1000.0f;
+			}
+			else {
+				forces.x = -150.0f;
+				velocity.x = -50.0f * intensity / 1000.0f;
+			}
+			forces.y = -150.0f;
+			velocity.y = -50.0f * intensity / 1000.0f;
+			onGround = false;
+		}
+	}
+
 	void BodyComponent::sendMessage(GameMessage::Message *message)
 	{
 		switch (message->id)
@@ -46,17 +63,6 @@ namespace GameComponents {
 				onGround = false;
 			}
 			break;
-		case GameMessage::Message::FIRE:
-		{
-			if (this->composition->getType() == GameObjects::PROJECTILE) {
-				forces.y = -150.0f;
-				forces.x = 150.0f;
-				velocity.y = -25.0f;
-				velocity.x = 25.0f;
-				onGround = false;
-			}
-			break;
-		}
 		case GameMessage::Message::RIGHT:
 			velocity.x = 20.0f;
 			isColliding = false;

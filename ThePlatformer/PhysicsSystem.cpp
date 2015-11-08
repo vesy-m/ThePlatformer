@@ -5,7 +5,6 @@ namespace GameSystems {
 	{
 	}
 
-
 	PhysicsSystem::~PhysicsSystem()
 	{
 	}
@@ -14,10 +13,10 @@ namespace GameSystems {
 	{
 		for each (GameObjects::BaseGameObject* object in listObjects)
 		{
-			std::vector<GameComponents::BaseComponent*> componentList = object->getComponents(GameComponents::COMPONENT_TYPE::PHYSIC);
-			for each (GameComponents::BaseComponent* component in componentList) component->Update(dt);
-			componentList = object->getComponents(GameComponents::COMPONENT_TYPE::COLLIDER);
-			for each (GameComponents::BaseComponent* component in componentList) component->Update(dt);
+			GameComponents::BaseComponent *component = object->getComponent(GameComponents::COMPONENT_TYPE::PHYSIC);
+			if (component) component->Update(dt);
+			component = object->getComponent(GameComponents::COMPONENT_TYPE::COLLIDER);
+			if (component) component->Update(dt);
 		}
 		return 0;
 	}
@@ -26,10 +25,10 @@ namespace GameSystems {
 	{
 		for each (GameObjects::BaseGameObject* object in listObjects)
 		{
-			std::vector<GameComponents::BaseComponent*> componentList = object->getComponents(GameComponents::COMPONENT_TYPE::PHYSIC);
-			for each (GameComponents::BaseComponent* component in componentList) component->Init();
-			componentList = object->getComponents(GameComponents::COMPONENT_TYPE::COLLIDER);
-			for each (GameComponents::BaseComponent* component in componentList) component->Init();
+			GameComponents::BaseComponent* component = object->getComponent(GameComponents::COMPONENT_TYPE::PHYSIC);
+			if (component) component->Init();
+			component = object->getComponent(GameComponents::COMPONENT_TYPE::COLLIDER);
+			if (component) component->Init();
 		}
 	}
 

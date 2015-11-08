@@ -1,7 +1,6 @@
 #pragma once
 
 #include "BaseGameObject.h"
-
 #include <SFML/OpenGL.hpp>
 #include <glm/glm.hpp>
 #include "vectorMessage.h"
@@ -12,23 +11,20 @@ namespace GameSystems {
 }
 
 namespace GameComponents {
-
-	class VectorDebugComponent : BaseComponent
+	class VectorDebugComponent : public BaseComponent
 	{
 		friend class GameSystems::ObjectFactory;
 	private:
 		VectorDebugComponent(GameObjects::BaseGameObject*);
 	public:
-		
-		~VectorDebugComponent();
-		void sendMessage(GameMessage::Message*);
-		COMPONENT_TYPE getType();
-		void Update(double);
-		void Init();
+		virtual ~VectorDebugComponent();
+		virtual void sendMessage(GameMessage::Message*);
+		virtual COMPONENT_TYPE getType();
+		virtual void Update(double);
+		virtual void Init();
 	private:
 		const COMPONENT_TYPE type = COMPONENT_TYPE::DEBUGVECTOR;
 		glm::vec2 velocity;
 		bool showDebug;
 	};
-
 }
