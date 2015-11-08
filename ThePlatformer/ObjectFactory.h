@@ -7,10 +7,18 @@
 #include "BaseGameObject.h"
 #include "gason.h"
 #include "Level.h"
+#include "Menu.h"
 
 namespace GameSystems {
 	class ObjectFactory
 	{
+		enum gameState
+		{
+			MENU,
+			LEVEL,
+			NONE
+		};
+
 	public:
 		static ObjectFactory& getInstance()
 		{
@@ -23,8 +31,15 @@ namespace GameSystems {
 		GameObjects::BaseGameObject *createArrow(unsigned int, unsigned int, float);
 		static void attachObject(GameObjects::BaseGameObject*);
 		void buildLevel(JsonValue&);
+		void buildMenu(JsonValue & value);
+		void LoadLevelFileAsCurrent(const std::string & filename);
+		void LoadMenuFileAsCurrent(const std::string & filename);
 		Level &getCurrentLevel();
 		void cleanupObjects(void);
+		std::list<GameObjects::BaseGameObject*>& getCurrentObjects();
+		const std::list<GameSystems::System *> &getSystems();
+		void initSystems();
+		void addSystems(GameSystems::System *);
 	private:
 		ObjectFactory();
 		ObjectFactory(ObjectFactory const&) = delete;
@@ -33,10 +48,13 @@ namespace GameSystems {
 		void putObjectDepthOrdered(GameObjects::BaseGameObject*);
 		
 		std::list<GameObjects::BaseGameObject *> old_objects;
-
+		std::list<GameSystems::System *>		m_systems;
 
 		std::vector<Level> listLevels;
 		Level currentLevel;
+		Menu currentMenu;
+		gameState stateGame;
+
 	};
 }
 

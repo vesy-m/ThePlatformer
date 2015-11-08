@@ -58,6 +58,15 @@
     <Filter Include="GameMessages\Header">
       <UniqueIdentifier>{fe3149a4-64ba-45c4-8b0a-efbf7c139c13}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Menu">
+      <UniqueIdentifier>{888f1da2-63f7-4a28-bd43-0744eb1d00a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Menu\Header">
+      <UniqueIdentifier>{bc2b0213-86f1-4401-bbc6-50bd06d4f2d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Menu\Source">
+      <UniqueIdentifier>{f64a7563-f95e-4450-a5f2-e84f963759d5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -138,6 +147,9 @@
     <ClCompile Include="Level.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="KeyboardInputComponent.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
     <ClCompile Include="Camera.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
@@ -150,7 +162,10 @@
     <ClCompile Include="ControllerInputComponent.cpp">
       <Filter>GameComponents\Source</Filter>
     </ClCompile>
-    <ClCompile Include="KeyboardInputComponent.cpp">
+    <ClCompile Include="Menu.cpp">
+      <Filter>Menu\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="ButtonComponent.cpp">
       <Filter>GameComponents\Source</Filter>
     </ClCompile>
   </ItemGroup>
@@ -236,6 +251,9 @@
     <ClInclude Include="Level.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
+    <ClInclude Include="KeyboardInputComponent.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
     <ClInclude Include="Camera.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
@@ -248,7 +266,10 @@
     <ClInclude Include="ControllerInputComponent.h">
       <Filter>GameComponents\Header</Filter>
     </ClInclude>
-    <ClInclude Include="KeyboardInputComponent.h">
+    <ClInclude Include="Menu.h">
+      <Filter>Menu\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="ButtonComponent.h">
       <Filter>GameComponents\Header</Filter>
     </ClInclude>
   </ItemGroup>

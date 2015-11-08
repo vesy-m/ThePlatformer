@@ -122,7 +122,7 @@ namespace GameComponents {
 
 		if (this->composition->getType() != GameObjects::NONE)
 		{
-			for each(GameObjects::BaseGameObject* object in GameSystems::ObjectFactory::getInstance().getCurrentLevel().getObjects())
+			for each(GameObjects::BaseGameObject* object in GameSystems::ObjectFactory::getInstance().getCurrentObjects())
 			{
 				if (this->composition->getType() != GameObjects::PROJECTILE && object->getType() == GameObjects::PLAYER)
 					continue;
@@ -369,7 +369,7 @@ glm::vec2 pos = glm::vec2(this->composition->getX(), this->composition->getY());
 //pour tout les objects avec un collider
 //optimiser selon l'eloignement
 //BoxCollider *other = new BoxCollider(glm::vec2(200, 450), glm::vec2(250, 500));
-for each(GameObjects::BaseGameObject* object in GameSystems::ObjectFactory::getInstance().getCurrentLevel().getObjects())
+for each(GameObjects::BaseGameObject* object in GameSystems::ObjectFactory::getInstance().getCurrentObjects())
 {
 if (!object->getComponents(GameComponents::COMPONENT_TYPE::COLLIDER).empty())
 {

@@ -8,11 +8,13 @@
 #include "Collider.h"
 #include "VectorDebugComponent.h"
 #include "TextComponent.h"
+#include "ButtonComponent.h"
 
 namespace GameSystems {
 	ObjectFactory::ObjectFactory()
 	{
 		listLevels = std::vector<Level>();
+		stateGame = gameState::NONE;
 	}
 
 
@@ -37,6 +39,15 @@ namespace GameSystems {
 			else if (std::string(it->key) == "type") ret->setType((GameObjects::objectType)(int)it->value.toNumber());
 			else if (std::string(it->key) == "sprite") {
 				auto sprite = new GameComponents::SpriteComponent(ret, it->value.toString());
+			}
+			else if (std::string(it->key) == "level") {
+				auto buttonLevel = new GameComponents::ButtonComponent(ret, GameComponents::ButtonComponent::ButtonType::LEVEL, it->value.toString());
+			}
+			else if (std::string(it->key) == "menu") {
+				auto buttonMenu = new GameComponents::ButtonComponent(ret, GameComponents::ButtonComponent::ButtonType::MENU, it->value.toString());
+			}
+			else if (std::string(it->key) == "function") {
+				auto buttonFunction = new GameComponents::ButtonComponent(ret, GameComponents::ButtonComponent::ButtonType::FUNCTION, it->value.toString());
 			}
 			else if (std::string(it->key) == "fps") {
 				auto fps = new GameComponents::TextComponent(ret);
@@ -111,6 +122,36 @@ namespace GameSystems {
 		currentLevel = newLevel;
 	}
 
+	void ObjectFactory::buildMenu(JsonValue &value) {
+		assert(value.getTag() == JSON_OBJECT);
+		Menu newMenu = Menu();
+		for (auto i : value) {
+			if (std::string(i->key) == "button") {
+				auto arr = i->value;
+				assert(arr.getTag() == JSON_ARRAY);
+				for (auto j : arr) {
+					auto obj = parseObject(j->value);
+					if (obj != NULL) newMenu.addButton(obj);
+				}
+			}
+		}
+		currentMenu = newMenu;
+	}
+
+	void ObjectFactory::LoadLevelFileAsCurrent(const std::string &filename) {
+		GameSystems::JSONParser fileParser(filename);
+		this->buildLevel(fileParser.getJSONValue());
+		this->stateGame = gameState::LEVEL;
+		this->initSystems();
+	}
+
+	void ObjectFactory::LoadMenuFileAsCurrent(const std::string &filename) {
+		GameSystems::JSONParser fileParser(filename);
+		this->buildMenu(fileParser.getJSONValue());
+		this->stateGame = gameState::MENU;
+		this->initSystems();
+	}
+
 	void ObjectFactory::putObjectDepthOrdered(GameObjects::BaseGameObject * obj) {
 		assert(obj != NULL);
 		int depth = obj->getDepth();
@@ -133,8 +174,38 @@ namespace GameSystems {
 		}), list.end());
 	}
 
+	std::list<GameObjects::BaseGameObject*>& ObjectFactory::getCurrentObjects()
+	{
+		if (this->stateGame == gameState::LEVEL) {
+			return this->currentLevel.getObjects();
+		}
+		else if(this->stateGame == gameState::MENU){
+			return this->currentMenu.getObjects();
+		}
+		else {
+			return std::list<GameObjects::BaseGameObject*>();
+		}
+
+	}
+
+	const std::list<GameSystems::System*>& ObjectFactory::getSystems()
+	{
+		return this->m_systems;
+	}
+
+	void ObjectFactory::initSystems() {
+		for each (GameSystems::System* system in this->m_systems)
+			system->Init(this->getCurrentObjects());
+	}
+
+	void ObjectFactory::addSystems(GameSystems::System *newSystem)
+	{
+		this->m_systems.push_back(newSystem);
+	}
+
 	Level &ObjectFactory::getCurrentLevel()
 	{
 		return this->currentLevel;
 	}
+
 }

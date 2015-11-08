@@ -1,0 +1,14 @@
+{
+	"bouton" : {
+		"x" : 50,
+		"y" : 40,
+		"sprite" : "resolution.png",
+		"function" : "changeResolution"
+	},
+	"bouton" : {
+		"x" : 300,
+		"y" : 400,
+		"sprite" : "otherAction.png",
+		"function" : "actionbidon"
+	}
+}

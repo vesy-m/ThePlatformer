@@ -163,6 +163,7 @@ copy /Y "$(ProjectDir)\lib\lib-x64\devil-1.7.8\bin\*" "$(OutDir)\"</Command>
     <ClCompile Include="BaseComponent.cpp" />
     <ClCompile Include="BaseGameObject.cpp" />
     <ClCompile Include="BodyComponent.cpp" />
+    <ClCompile Include="ButtonComponent.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="debugManager.cpp" />
     <ClCompile Include="gason.cpp" />
@@ -175,6 +176,7 @@ copy /Y "$(ProjectDir)\lib\lib-x64\devil-1.7.8\bin\*" "$(OutDir)\"</Command>
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="GameEngine.cpp" />
+    <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Message.cpp" />
     <ClCompile Include="ObjectFactory.cpp" />
     <ClCompile Include="PhysicsSystem.cpp" />
@@ -195,6 +197,7 @@ copy /Y "$(ProjectDir)\lib\lib-x64\devil-1.7.8\bin\*" "$(OutDir)\"</Command>
     <ClInclude Include="BaseComponent.h" />
     <ClInclude Include="BaseGameObject.h" />
     <ClInclude Include="BodyComponent.h" />
+    <ClInclude Include="ButtonComponent.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="debugManager.h" />
@@ -205,6 +208,7 @@ copy /Y "$(ProjectDir)\lib\lib-x64\devil-1.7.8\bin\*" "$(OutDir)\"</Command>
     <ClInclude Include="JSONParser.h" />
     <ClInclude Include="KeyboardInputComponent.h" />
     <ClInclude Include="Level.h" />
+    <ClInclude Include="Menu.h" />
     <ClInclude Include="Message.h" />
     <ClInclude Include="SpriteAnimation.h" />
     <ClInclude Include="SpriteSheet.h" />
