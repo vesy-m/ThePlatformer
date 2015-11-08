@@ -67,6 +67,15 @@
     <Filter Include="Menu\Source">
       <UniqueIdentifier>{f64a7563-f95e-4450-a5f2-e84f963759d5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameTools">
+      <UniqueIdentifier>{50037d6a-2dd1-48db-b591-678173cca18d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameTools\Header">
+      <UniqueIdentifier>{4bd5f223-28b1-479e-b8e5-5c0bfcd04cd2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameTools\Source">
+      <UniqueIdentifier>{386811a0-c4a3-4375-85ee-efc4e7c58a90}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -102,23 +111,8 @@
     <ClCompile Include="InputComponent.cpp">
       <Filter>GameComponents\Source</Filter>
     </ClCompile>
-    <ClCompile Include="gason.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="SpriteAnimation.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="SpriteSheet.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
     <ClCompile Include="BodyComponent.cpp">
       <Filter>GameComponents\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="TextureManager.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="Texture.cpp">
-      <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="TimeManager.cpp">
       <Filter>GameEngineCore\Source</Filter>
@@ -138,14 +132,8 @@
     <ClCompile Include="VectorMessage.cpp">
       <Filter>GameMessages\Source</Filter>
     </ClCompile>
-    <ClCompile Include="debugManager.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
     <ClCompile Include="TextComponent.cpp">
       <Filter>GameComponents\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="KeyboardInputComponent.cpp">
-      <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="BaseGameObject.cpp">
       <Filter>GameSystems\Source</Filter>
@@ -159,11 +147,29 @@
     <ClCompile Include="ButtonComponent.cpp">
       <Filter>GameComponents\Source</Filter>
     </ClCompile>
+    <ClCompile Include="debugManager.cpp">
+      <Filter>GameTools\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="gason.cpp">
+      <Filter>GameTools\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteAnimation.cpp">
+      <Filter>GameTools\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteSheet.cpp">
+      <Filter>GameTools\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>GameTools\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureManager.cpp">
+      <Filter>GameTools\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyboardInputComponent.cpp">
+      <Filter>GameComponents\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="resource.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
     <ClInclude Include="GameEngine.h">
       <Filter>GameEngineCore\Header</Filter>
     </ClInclude>
@@ -194,23 +200,8 @@
     <ClInclude Include="InputComponent.h">
       <Filter>GameComponents\Header</Filter>
     </ClInclude>
-    <ClInclude Include="gason.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="SpriteAnimation.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="SpriteSheet.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
     <ClInclude Include="BodyComponent.h">
       <Filter>GameComponents\Header</Filter>
-    </ClInclude>
-    <ClInclude Include="TextureManager.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="Texture.h">
-      <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="TimeManager.h">
       <Filter>GameEngineCore\Header</Filter>
@@ -230,14 +221,8 @@
     <ClInclude Include="VectorMessage.h">
       <Filter>GameMessages\Header</Filter>
     </ClInclude>
-    <ClInclude Include="debugManager.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
     <ClInclude Include="TextComponent.h">
       <Filter>GameComponents\Header</Filter>
-    </ClInclude>
-    <ClInclude Include="KeyboardInputComponent.h">
-      <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="BaseGameObject.h">
       <Filter>GameSystems\Header</Filter>
@@ -252,15 +237,36 @@
       <Filter>GameComponents\Header</Filter>
     </ClInclude>
     <ClInclude Include="BaseSystem.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+      <Filter>GameSystems\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyboardInputComponent.h">
+      <Filter>GameComponents\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="debugManager.h">
+      <Filter>GameTools\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Gason.h">
+      <Filter>GameTools\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>GameTools\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteAnimation.h">
+      <Filter>GameTools\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteSheet.h">
+      <Filter>GameTools\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>GameTools\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureManager.h">
+      <Filter>GameTools\Header</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="ThePlatformer.rc">
       <Filter>Fichiers de ressources</Filter>
     </ResourceCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>
