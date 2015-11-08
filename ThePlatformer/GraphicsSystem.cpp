@@ -101,7 +101,7 @@ namespace GameSystems {
 
 		int sizeWidthMax = screenWidth;
 		int sizeToWidthMax = screenWidth - 300;
-		int sizeWidthMin = screenWidth / 1.2;
+		int sizeWidthMin = (int)(screenWidth / 1.2);
 
 		std::vector<GameObjects::BaseGameObject *> listPlayers = ObjectFactory::getInstance().getCurrentLevel().getPlayers();
 		if (listPlayers.size() == 2) {

@@ -71,7 +71,7 @@ namespace GameComponents {
 						glm::vec2 direction = glm::vec2(event.mouseButton.x - this->getComposition()->getX(),
 							event.mouseButton.y - this->getComposition()->getY());
 						GameComponents::SpriteComponent *sprite = reinterpret_cast<GameComponents::SpriteComponent*>(getComposition()->getComponent(GameComponents::SPRITE));
-						GameObjects::BaseGameObject *arrow = GameSystems::ObjectFactory::getInstance().createArrow(getComposition()->getX(),
+						GameObjects::BaseGameObject *arrow = GameSystems::ObjectFactory::getInstance().createArrow(getComposition(), getComposition()->getX(),
 							getComposition()->getY(), duration, glm::normalize(direction));
 						duration = 250.0f;
 						break;

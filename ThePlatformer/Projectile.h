@@ -6,16 +6,16 @@
 
 namespace GameObjects {
 
-	class Projectile : GameObjects::BaseGameObject
+	class Projectile : public GameObjects::BaseGameObject
 	{
 	public:
-		Projectile(GameObjects::BaseGameObject);
+		Projectile(GameObjects::BaseGameObject*);
 		~Projectile();
 
-		GameObjects::BaseGameObject getShooter();
+		GameObjects::BaseGameObject* getShooter();
 
 	private:
-		GameObjects::BaseGameObject shooter;
+		GameObjects::BaseGameObject* shooter;
 	};
 }
 

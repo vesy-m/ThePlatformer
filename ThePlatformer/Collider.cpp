@@ -107,7 +107,7 @@ namespace GameComponents {
 
 		glm::vec2 newVelocity = ((BoxCollider*)manifold->A)->velocity;
 		if (manifold->normal.y != 0) newVelocity.y = 0;
-		else if (manifold->normal.x != 0) newVelocity.x = 0;
+		if (manifold->normal.x != 0) newVelocity.x = 0;
 
 		GameMessage::CollisionMessage *msg = new GameMessage::CollisionMessage(newVelocity, addPos);
 		manifold->A->composition->sendMessage((GameMessage::Message*)msg);
@@ -124,9 +124,17 @@ namespace GameComponents {
 		{
 			for each(GameObjects::BaseGameObject* object in GameSystems::ObjectFactory::getInstance().getCurrentLevel().getObjects())
 			{
-				if (this->composition->getType() != GameObjects::PROJECTILE && object->getType() == GameObjects::PLAYER)
-					continue;
-				if (this->composition->getType() == GameObjects::PROJECTILE && dynamic_cast<GameObjects::Projectile*>(composition))
+				if (this->composition->getType() == GameObjects::PROJECTILE) {
+					GameObjects::BaseGameObject* shooter = reinterpret_cast<GameObjects::Projectile*>(composition)->getShooter();
+					if (object->getName().compare(shooter->getName()) == 0)
+						continue;
+				}
+				if (this->composition->getType() == GameObjects::PLAYER) {
+					if (object->getType() == GameObjects::PLAYER)
+						continue;
+					if (object->getType() == GameObjects::PROJECTILE && this->composition->getName().compare(object->getName()) == 0)
+						continue;
+				}
 				if (!object->getComponents(GameComponents::COMPONENT_TYPE::COLLIDER).empty())
 				{
 					if (object->getComponents(GameComponents::COMPONENT_TYPE::COLLIDER)[0] == this)

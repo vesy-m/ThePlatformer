@@ -30,6 +30,7 @@ namespace GameSystems {
 			else if (std::string(it->key) == "depth") ret->setDepth((int) it->value.toNumber());
 			else if (std::string(it->key) == "scale") ret->setScale((float) it->value.toNumber());
 			else if (std::string(it->key) == "mass") ret->setMass((float)it->value.toNumber());
+			//else if (std::string(it->key) == "bounce") ret->setMass((float)it->value.toNumber());
 			else if (std::string(it->key) == "rotate") ret->setRotate((int) it->value.toNumber());
 			else if (std::string(it->key) == "width") ret->setWidth((int) it->value.toNumber());
 			else if (std::string(it->key) == "height") ret->setHeight((int) it->value.toNumber());
@@ -64,12 +65,12 @@ namespace GameSystems {
 		ObjectFactory::getInstance().currentLevel.putObjectDepthOrdered(obj);
 	}
 
-	GameObjects::BaseGameObject *ObjectFactory::createArrow(GameObjects::BaseGameObject shooter, unsigned int x, unsigned int y, float base_force, glm::vec2 direction) {
+	GameObjects::BaseGameObject *ObjectFactory::createArrow(GameObjects::BaseGameObject *shooter, unsigned int x, unsigned int y, float base_force, glm::vec2 direction) {
 		GameObjects::Projectile *arrow = NULL;
 		GameComponents::BodyComponent *body = NULL;
 		if (this->old_objects.size() == 0) {
 			arrow = new GameObjects::Projectile(shooter);
-			arrow->setName("arrow");
+			arrow->setName(shooter->getName());
 			arrow->setHeight(int(76 * 0.25f));
 			arrow->setWidth(int(150 * 0.25f));
 			arrow->setScale(0.25f);
@@ -83,7 +84,7 @@ namespace GameSystems {
 			body = new GameComponents::BodyComponent(arrow);
 		}
 		else {
-			arrow = this->old_objects.front();
+			arrow = reinterpret_cast<GameObjects::Projectile*>(this->old_objects.front());
 			this->old_objects.pop_front();
 			arrow->destroy(false);
 
@@ -100,7 +101,7 @@ namespace GameSystems {
 			arrow_sprite->revertX = true;
 		}*/
 		arrow->setX(x);
-		arrow->setY(y - 50);
+		arrow->setY(y);
 		arrow->Init();
 		body->Init(base_force, direction);
 		this->currentLevel.putObjectDepthOrdered(arrow);

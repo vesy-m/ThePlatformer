@@ -2,7 +2,7 @@
 
 
 namespace GameObjects {
-	Projectile::Projectile(GameObjects::BaseGameObject shooter) : BaseGameObject()
+	Projectile::Projectile(GameObjects::BaseGameObject *shooter) : BaseGameObject()
 	{
 		this->shooter = shooter;
 	}
@@ -12,7 +12,7 @@ namespace GameObjects {
 	{
 	}
 
-	GameObjects::BaseGameObject Projectile::getShooter()
+	GameObjects::BaseGameObject* Projectile::getShooter()
 	{
 		return this->shooter;
 	}
