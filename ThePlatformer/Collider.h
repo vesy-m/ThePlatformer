@@ -5,6 +5,7 @@
 #include "BaseGameObject.h"
 #include "ObjectFactory.h"
 #include "vectorMessage.h"
+#include "Message.h"
 #include <glm/glm.hpp>
 
 namespace GameComponents {
@@ -64,7 +65,7 @@ namespace GameComponents {
 		virtual bool CollideWithBox(Manifold *manifold);
 		virtual COLLIDER_TYPE getColliderType();
 		virtual void Update(double);
-		void sendMessage(Message *message);
+		void sendMessage(GameMessage::Message *message);
 		virtual void Init() {}
 
 	public:
