@@ -32,8 +32,8 @@ namespace GameComponents {
 			else if (it->first == INPUT_TYPE::DEBUG && it->second == true)
 			{
 				//this->composition->sendMessage(new Message(Message::SHOW_DEBUG));
-				if (debugManager::getInstance().isActivateGraphic()) debugManager::getInstance().disableGraphic();
-				else debugManager::getInstance().activateGraphic();
+				if (GameTools::debugManager::getInstance().isActivateGraphic()) GameTools::debugManager::getInstance().disableGraphic();
+				else GameTools::debugManager::getInstance().activateGraphic();
 				it->second = false;
 			}
 			else if (it->first == INPUT_TYPE::ROTATE_LEFT && it->second == true)	getComposition()->sendMessage(new GameMessage::Message(GameMessage::Message::ROTATE_LEFT));

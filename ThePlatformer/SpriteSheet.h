@@ -11,22 +11,24 @@
 #include <sstream>
 #include "TextureManager.h"
 
-class SpriteSheet
-{
-public:
-	SpriteSheet(const std::string &jsonfileName);
-	~SpriteSheet();
-	std::string getExtension(const std::string & filename);
-	int		parseSheetFile(JsonValue o);
-	int		loadAndParseJsonFile(const std::string &filename);
-	int		loadPngFile(const std::string &filename);
-	bool	isAnimated();
-	const SpriteAnimation & getAnim(const std::string & animName);
-	Texture	*getTexture();
-private:
-	Texture			*texture;
-	bool			animated;
-	std::map<std::string, SpriteAnimation> anims;
+namespace GameTools{
+	class SpriteSheet
+	{
+	public:
+		SpriteSheet(const std::string&);
+		~SpriteSheet();
+		std::string getExtension(const std::string&);
+		int		parseSheetFile(JsonValue);
+		int		loadAndParseJsonFile(const std::string&);
+		int		loadPngFile(const std::string&);
+		bool	isAnimated();
+		const	SpriteAnimation & getAnim(const std::string&);
+		Texture	*getTexture();
+	private:
+		Texture			*texture;
+		bool			animated;
+		std::map<std::string, SpriteAnimation> anims;
+	};
+}
 
-};
 

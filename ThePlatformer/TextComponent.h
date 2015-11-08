@@ -24,7 +24,7 @@ namespace GameComponents {
 	private:
 		TextComponent(GameObjects::BaseGameObject*);
 		const COMPONENT_TYPE type = COMPONENT_TYPE::TEXT;
-		SpriteSheet *sheet;
+		GameTools::SpriteSheet *sheet;
 
 	};
 }

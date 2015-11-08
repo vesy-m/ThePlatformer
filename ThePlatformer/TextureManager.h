@@ -8,22 +8,23 @@
 #include <iostream>
 #include <stdexcept>
 
-class TextureManager
-{
-public:
-	void		loadTexture(const std::string & filename);
-	Texture		*getTexture(const std::string &fileName);
-	~TextureManager();
-	static TextureManager& getInstance()
+namespace GameTools {
+	class TextureManager
 	{
-		static TextureManager    instance;
-		return instance;
-	}
-private:
-	TextureManager();
-	TextureManager(TextureManager const&) = delete;
-	void operator=(TextureManager const&) = delete;
+	public:
+		void					loadTexture(const std::string &);
+		Texture		*getTexture(const std::string&);
+		~TextureManager();
+		static TextureManager&	getInstance()
+		{
+			static TextureManager    instance;
+			return instance;
+		}
+	private:
+		TextureManager();
+		TextureManager(TextureManager const&) = delete;
+		void operator=(TextureManager const&) = delete;
 
-	std::map<std::string, Texture> textureMap;
-};
-
+		std::map<std::string, Texture> textureMap;
+	};
+}

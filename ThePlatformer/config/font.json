@@ -1,5 +1,5 @@
 {
-	"file": "basicfont.png",
+	"file": "./assets/sprite/basicfont.png",
     "name": "basicfont",
     "anim": [
     	{
@@ -64,7 +64,7 @@
 	        "images": [
 				[2800, 3200]
 	        ]
-    	},    	
+    	},
     	{
     		"name":"2",
 	        "time": 10,

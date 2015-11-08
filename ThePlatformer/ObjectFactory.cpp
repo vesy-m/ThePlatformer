@@ -12,7 +12,7 @@
 namespace GameSystems {
 	ObjectFactory::ObjectFactory()
 	{
-		listLevels = std::vector<Level>();
+		listLevels = std::vector<GameEngine::Core::Level>();
 	}
 
 
@@ -20,8 +20,8 @@ namespace GameSystems {
 	{
 	}
 
-	GameObjects::BaseGameObject *ObjectFactory::parseObject(JsonValue &value) {
-		assert(value.getTag() == JSON_OBJECT);
+	GameObjects::BaseGameObject *ObjectFactory::parseObject(GameTools::JsonValue &value) {
+		assert(value.getTag() == GameTools::JSON_OBJECT);
 		auto ret = new GameObjects::BaseGameObject();
 
 		for (auto it : value) {
@@ -78,7 +78,7 @@ namespace GameSystems {
 			arrow->setDepth(0);
 			arrow->setType(GameObjects::objectType::PROJECTILE);
 
-			new GameComponents::SpriteComponent(arrow, "minecraft_arrow.png");
+			new GameComponents::SpriteComponent(arrow, "./assets/sprite/minecraft_arrow.png");
 			new GameComponents::BoxCollider(arrow);
 			new GameComponents::VectorDebugComponent(arrow);
 			body = new GameComponents::BodyComponent(arrow);
@@ -100,13 +100,13 @@ namespace GameSystems {
 		return (arrow);
 	}
 
-	void ObjectFactory::buildLevel(JsonValue &value) {
-		assert(value.getTag() == JSON_OBJECT);
-		Level newLevel = Level();
+	void ObjectFactory::buildLevel(GameTools::JsonValue &value) {
+		assert(value.getTag() == GameTools::JSON_OBJECT);
+		GameEngine::Core::Level newLevel = GameEngine::Core::Level();
 		for (auto i : value) {
 			if (std::string(i->key) == "objects") {
 				auto arr = i->value;
-				assert(arr.getTag() == JSON_ARRAY);
+				assert(arr.getTag() == GameTools::JSON_ARRAY);
 				for (auto j : arr) {
 					auto obj = parseObject(j->value);
 					if (obj != NULL) newLevel.putObjectDepthOrdered(obj);
@@ -138,7 +138,7 @@ namespace GameSystems {
 		}), list.end());
 	}
 
-	Level &ObjectFactory::getCurrentLevel()
+	GameEngine::Core::Level &ObjectFactory::getCurrentLevel()
 	{
 		return this->currentLevel;
 	}

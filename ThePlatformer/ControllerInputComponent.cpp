@@ -116,9 +116,9 @@ namespace GameComponents {
 		axisY = 0.0;
 	}
 
-	int	ControllerInputComponent::ParseInputFile(JsonValue o) {
+	int	ControllerInputComponent::ParseInputFile(GameTools::JsonValue o) {
 		switch (o.getTag()) {
-		case JSON_OBJECT:
+		case GameTools::JSON_OBJECT:
 			for (auto i : o) {
 				printf("%s = ", i->key);
 				INPUT_TYPE inputKey;
