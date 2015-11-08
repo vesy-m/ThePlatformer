@@ -33,7 +33,7 @@ namespace GameComponents {
 		bool revertX;
 	private:
 		const COMPONENT_TYPE type = COMPONENT_TYPE::SPRITE;
-		SpriteSheet *sheet;
+		GameTools::SpriteSheet *sheet;
 		int rotateNum;
 		
 		bool revertY;

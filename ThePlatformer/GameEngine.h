@@ -1,9 +1,8 @@
 #pragma once
-#ifndef __GAMEENGINE_H_
-#define __GAMEENGINE_H_
-
 #include <list>
-#include "System.h"
+#include <vector>
+#include "Texture.h"
+#include "BaseSystem.h"
 #include "TimeManager.h"
 
 #define FRAME_PER_SECOND 60
@@ -15,12 +14,27 @@ namespace GameEngine {
 		void Init(void);
 		void Update(float);
 		void MainLoop(void);
-		void Add(GameSystems::System*);
+		void Add(GameSystems::BaseSystem*);
+		class Level;
 	private:
 		TimeManager								*m_manager;
 		
 	};
+
+	class Core::Level
+	{
+	public:
+		Level();
+		~Level();
+		void putObjectDepthOrdered(GameObjects::BaseGameObject * obj);
+		std::list<GameObjects::BaseGameObject*>& getObjects();
+		std::vector<GameObjects::BaseGameObject*> getPlayers();
+	private:
+		GameTools::Texture *background;
+		std::list<GameObjects::BaseGameObject *> listGameObject;
+		int x;
+		int y;
+		float scale;
+	};
+
 }
-
-
-#endif /* __GAMEENGINE_H_ */

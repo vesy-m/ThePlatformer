@@ -64,9 +64,9 @@ namespace GameComponents {
 		this->mouseMap.emplace(SPECIAL, sf::Mouse::Right);
 	}
 
-	int	KeyboardInputComponent::ParseInputFile(JsonValue o) {
+	int	KeyboardInputComponent::ParseInputFile(GameTools::JsonValue o) {
 		switch (o.getTag()) {
-		case JSON_OBJECT:
+		case GameTools::JSON_OBJECT:
 			for (auto i : o) {
 				printf("%s = ", i->key);
 				INPUT_TYPE inputKey;

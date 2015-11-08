@@ -1,6 +1,5 @@
 #include "SpriteComponent.h"
 #include "debugManager.h"
-#include "Camera.h"
 
 namespace GameComponents {
 	SpriteComponent::SpriteComponent(GameObjects::BaseGameObject *object, const std::string &fileName) : BaseComponent(object)
@@ -59,10 +58,10 @@ namespace GameComponents {
 				}
 				break;
 		case GameMessage::Message::ROTATE_LEFT:
-				debugManager::getInstance().rotateNum = -1;
+				GameTools::debugManager::getInstance().rotateNum = -1;
 				break;
 		case GameMessage::Message::ROTATE_RIGHT:
-				debugManager::getInstance().rotateNum = 1;
+				GameTools::debugManager::getInstance().rotateNum = 1;
 				break;
 			default:
 				break;
@@ -80,22 +79,18 @@ namespace GameComponents {
 		float xmax = 1;
 		float ymin = 0;
 		float ymax = 1;
-		Texture *texture = sheet->getTexture();
+		GameTools::Texture *texture = sheet->getTexture();
 		GLint width = texture->getWidth();
 		GLint height = texture->getHeight();
 		GLint posX = this->composition->getX() + (this->composition->getWidth() / 2);
 		GLint posY = this->composition->getY() + (this->composition->getHeight() / 2);
 
 		if (!std::string("sun").compare(this->composition->getName())) {
-			this->composition->setRotate((this->composition->getRotate() + debugManager::getInstance().rotateNum) % 360);
+			this->composition->setRotate((this->composition->getRotate() + GameTools::debugManager::getInstance().rotateNum) % 360);
 			float newScale = this->composition->getScale();
-			if (newScale > 2.0) {
-				debugManager::getInstance().scaleNum = -0.01f;
-			}
-			else if (newScale <= 1.0) {
-				debugManager::getInstance().scaleNum = 0.01f;
-			}
-			this->composition->setScale(newScale + debugManager::getInstance().scaleNum);
+			if (newScale > 2.0) GameTools::debugManager::getInstance().scaleNum = -0.01f;
+			else if (newScale <= 1.0) GameTools::debugManager::getInstance().scaleNum = 0.01f;
+			this->composition->setScale(newScale + GameTools::debugManager::getInstance().scaleNum);
 		}
 		else if (!std::string("megaman2").compare(this->composition->getName())) {
 			glColor3f((GLfloat)1.0, (GLfloat)0.3, (GLfloat)0.3);
@@ -104,7 +99,7 @@ namespace GameComponents {
 		glEnable(GL_TEXTURE_2D);
 
 		if (sheet->isAnimated()) {
-			SpriteAnimation anim = sheet->getAnim(this->currentAnim);
+			GameTools::SpriteAnimation anim = sheet->getAnim(this->currentAnim);
 
 			// get height and width of the sprite of the currentFrame
 			height = anim.getSpriteYmax(currentFrame) - anim.getSpriteYmin(currentFrame);
@@ -160,8 +155,8 @@ namespace GameComponents {
 
 	void SpriteComponent::Init()
 	{
-		this->sheet = new SpriteSheet(this->_fileName);
-		Texture *texture = sheet->getTexture();
+		this->sheet = new GameTools::SpriteSheet(this->_fileName);
+		GameTools::Texture *texture = sheet->getTexture();
 		GLint width = texture->getWidth();
 		GLint height = texture->getHeight();
 		if (this->composition->getWidth() == 0 && this->composition->getHeight() == 0) {

@@ -144,16 +144,7 @@
     <ClCompile Include="TextComponent.cpp">
       <Filter>GameComponents\Source</Filter>
     </ClCompile>
-    <ClCompile Include="Level.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
     <ClCompile Include="KeyboardInputComponent.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="AudioManager.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="BaseGameObject.cpp">
@@ -195,9 +186,6 @@
       <Filter>GameSystems\Header</Filter>
     </ClInclude>
     <ClInclude Include="ObjectFactory.h">
-      <Filter>GameSystems\Header</Filter>
-    </ClInclude>
-    <ClInclude Include="System.h">
       <Filter>GameSystems\Header</Filter>
     </ClInclude>
     <ClInclude Include="SpriteComponent.h">
@@ -248,16 +236,7 @@
     <ClInclude Include="TextComponent.h">
       <Filter>GameComponents\Header</Filter>
     </ClInclude>
-    <ClInclude Include="Level.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
     <ClInclude Include="KeyboardInputComponent.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="AudioManager.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="BaseGameObject.h">
@@ -272,10 +251,16 @@
     <ClInclude Include="ButtonComponent.h">
       <Filter>GameComponents\Header</Filter>
     </ClInclude>
+    <ClInclude Include="BaseSystem.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="ThePlatformer.rc">
       <Filter>Fichiers de ressources</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>

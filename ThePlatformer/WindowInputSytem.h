@@ -2,13 +2,13 @@
 #ifndef _WINDOWINPUTSYSTEM_H_
 #define _WINDOWINPUTSYSTEM_H_
 
-#include "System.h"
+#include "BaseSystem.h"
 #include "InputComponent.h"
 #include <SFML/Window.hpp>
 #include <SFML/OpenGL.hpp>
 
 namespace GameSystems {
-	class WindowInputSytem : public System
+	class WindowInputSytem : public BaseSystem
 	{
 	public:
 		WindowInputSytem();

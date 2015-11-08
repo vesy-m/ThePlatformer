@@ -65,6 +65,6 @@ namespace GameComponents {
 
 	void ButtonComponent::changeResolution()
 	{
-		Camera::getInstance().setResolution1080p();
+		GameSystems::GraphicsSystem::Camera::getInstance().setResolution1080p();
 	}
 }

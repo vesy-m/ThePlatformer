@@ -1,5 +1,5 @@
 #include "TextComponent.h"
-#include "Camera.h"
+#include "GraphicsSystem.h"
 
 namespace GameComponents {
 
@@ -27,13 +27,13 @@ namespace GameComponents {
 		float xmax = 1;
 		float ymin = 0;
 		float ymax = 1;
-		GLint posX = Camera::getInstance().cameraStartX + 20;
-		GLint posY = Camera::getInstance().cameraStartY + 20;
-		Texture *texture = sheet->getTexture();
+		GLint posX = GameSystems::GraphicsSystem::Camera::getInstance().cameraStartX + 20;
+		GLint posY = GameSystems::GraphicsSystem::Camera::getInstance().cameraStartY + 20;
+		GameTools::Texture *texture = sheet->getTexture();
 		GLint width = texture->getWidth();
 		GLint height = texture->getHeight();
 
-		if (dt == 0.0 || debugManager::getInstance().isActivateGraphic() == false) {
+		if (dt == 0.0 || GameTools::debugManager::getInstance().isActivateGraphic() == false) {
 			return;
 		}
 
@@ -55,7 +55,7 @@ namespace GameComponents {
 		for (size_t i = 0; i < text.size(); i++) {
 
 			std::string strChar(1, text.at(i));
-			SpriteAnimation anim = sheet->getAnim(strChar);
+			GameTools::SpriteAnimation anim = sheet->getAnim(strChar);
 
 			// get height and width of the sprite of the currentFrame
 			height = anim.getSpriteYmax(0) - anim.getSpriteYmin(0);
@@ -71,8 +71,8 @@ namespace GameComponents {
 			ymin = (float)(texture->getHeight() - anim.getSpriteYmax(0)) / (float)texture->getHeight();
 			ymax = (float)(texture->getHeight() - anim.getSpriteYmin(0)) / (float)texture->getHeight();
 
-			width = (Camera::getInstance().cameraEndX - Camera::getInstance().cameraStartX) * width / 1280;
-			height = (Camera::getInstance().cameraEndY - Camera::getInstance().cameraStartY) * height / 720;
+			width = (GameSystems::GraphicsSystem::Camera::getInstance().cameraEndX - GameSystems::GraphicsSystem::Camera::getInstance().cameraStartX) * width / 1280;
+			height = (GameSystems::GraphicsSystem::Camera::getInstance().cameraEndY - GameSystems::GraphicsSystem::Camera::getInstance().cameraStartY) * height / 720;
 
 			int pointX = posX;
 			int pointXWidth = posX + width;
@@ -94,7 +94,7 @@ namespace GameComponents {
 
 	void TextComponent::Init()
 	{
-		this->sheet = new SpriteSheet("font.json");
+		this->sheet = new GameTools::SpriteSheet("./config/font.json");
 	}
 
 	void TextComponent::sendMessage(GameMessage::Message *)

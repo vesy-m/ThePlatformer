@@ -2,10 +2,10 @@
 #ifndef _AUDIOSYSTEM_H_
 #define _AUDIOSYSTEM_H_
 
-#include "System.h"
+#include "BaseSystem.h"
 
 namespace GameSystems {
-	class AudioSystem : public System
+	class AudioSystem : public BaseSystem
 	{
 	public:
 		AudioSystem();

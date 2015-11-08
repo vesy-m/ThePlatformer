@@ -3,7 +3,7 @@
 #include "BaseComponent.h"
 #include <map>
 #include <functional>
-#include "Camera.h"
+#include "GraphicsSystem.h"
 #include "ObjectFactory.h"
 
 namespace GameComponents {

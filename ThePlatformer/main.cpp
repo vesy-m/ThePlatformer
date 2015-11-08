@@ -19,14 +19,14 @@ int main()
 	GameSystems::GraphicsSystem *graphics = new GameSystems::GraphicsSystem();
 	GameSystems::PhysicsSystem *physics = new GameSystems::PhysicsSystem();
 
-	core.Add((GameSystems::System *)winInput);
-	core.Add((GameSystems::System *)physics);
-	core.Add((GameSystems::System *)graphics);
-	GameSystems::ObjectFactory::getInstance().LoadLevelFileAsCurrent("level2.json");
+	core.Add((GameSystems::BaseSystem *)winInput);
+	core.Add((GameSystems::BaseSystem *)physics);
+	core.Add((GameSystems::BaseSystem *)graphics);
+	GameSystems::ObjectFactory::getInstance().LoadLevelFileAsCurrent("./config/level2.json");
 	
 	//a enlever de commentaire pour corriger frame rate
 	sf::Music music;
-	if (!music.openFromFile("dr_wily_stage.ogg"))
+	if (!music.openFromFile("./assets/audio/dr_wily_stage.ogg"))
 		return -1;
 	music.setVolume(5);
 	music.play();

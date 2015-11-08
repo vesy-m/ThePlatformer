@@ -6,7 +6,7 @@
 #include <list>
 #include "BaseGameObject.h"
 #include "gason.h"
-#include "Level.h"
+#include "GameEngine.h"
 #include "SpriteComponent.h"
 #include "Menu.h"
 
@@ -31,32 +31,29 @@ namespace GameSystems {
 			return instance;
 		}
 		~ObjectFactory();
-
-		GameObjects::BaseGameObject *parseObject(JsonValue&);
+		GameObjects::BaseGameObject *parseObject(GameTools::JsonValue&);
 		GameObjects::BaseGameObject *createArrow(unsigned int, unsigned int, float, bool);
 		static void attachObject(GameObjects::BaseGameObject*);
-		void buildLevel(JsonValue&);
-		void buildMenu(JsonValue & value);
+		void buildLevel(GameTools::JsonValue&);
+		GameEngine::Core::Level &getCurrentLevel();
+		void buildMenu(GameTools::JsonValue & value);
 		void LoadLevelFileAsCurrent(const std::string & filename);
 		void LoadMenuFileAsCurrent(const std::string & filename);
-		Level &getCurrentLevel();
 		void cleanupObjects(void);
 		std::list<GameObjects::BaseGameObject*>& getCurrentObjects();
-		const std::list<GameSystems::System *> &getSystems();
+		const std::list<GameSystems::BaseSystem *> &getSystems();
 		void initSystems();
-		void addSystems(GameSystems::System *);
+		void addSystems(GameSystems::BaseSystem *);
 	private:
 		ObjectFactory();
 		ObjectFactory(ObjectFactory const&) = delete;
 		void operator=(ObjectFactory const&) = delete;
-
 		void putObjectDepthOrdered(GameObjects::BaseGameObject*);
-		
 		std::list<GameObjects::BaseGameObject *> old_objects;
-		std::list<GameSystems::System *>		m_systems;
+		std::list<GameSystems::BaseSystem *>		m_systems;
 
-		std::vector<Level> listLevels;
-		Level currentLevel;
+		std::vector<GameEngine::Core::Level> listLevels;
+		GameEngine::Core::Level currentLevel;
 		Menu currentMenu;
 		gameState stateGame;
 

@@ -3,7 +3,7 @@
 #include <ctime>
 #include <iomanip>
 #include "GameEngine.h"
-#include "System.h"
+#include "BaseSystem.h"
 #include "JSONParser.h"
 #include "ObjectFactory.h"
 
@@ -16,7 +16,7 @@ namespace GameEngine {
 		/*for (auto it = listSystems.begin(); it != listSystems.end(); ++it)
 			delete *it;*/
 	}
-
+	
 	void Core::Init(void) {
 		this->m_manager = new TimeManager("../log_file.txt");
 	}
@@ -30,8 +30,8 @@ namespace GameEngine {
 		
 		while (42) {
 			this->m_manager->StartTimer();
-			std::list<GameSystems::System *> listSystems = GameSystems::ObjectFactory::getInstance().getSystems();
-			for each (GameSystems::System *system in listSystems) {
+			std::list<GameSystems::BaseSystem *> listSystems = GameSystems::ObjectFactory::getInstance().getSystems();
+			for each (GameSystems::BaseSystem *system in listSystems) {
 				if (system->Update(this->m_manager->GetLastTime(), GameSystems::ObjectFactory::getInstance().getCurrentObjects()) == 1) {
 					return;
 				}
@@ -41,7 +41,45 @@ namespace GameEngine {
 		}
 	}
 
-	void Core::Add(GameSystems::System *sys) {
+	void Core::Add(GameSystems::BaseSystem *sys) {
 		GameSystems::ObjectFactory::getInstance().addSystems(sys);
+	}
+
+	Core::Level::Level()
+	{
+	}
+
+	Core::Level::~Level()
+	{
+	}
+
+	void Core::Level::putObjectDepthOrdered(GameObjects::BaseGameObject * obj) {
+		int depth = obj->getDepth();
+		int size = (int) this->listGameObject.size();
+
+
+		for (std::list<GameObjects::BaseGameObject *>::iterator it = this->listGameObject.begin(); it != this->listGameObject.end(); ++it) {
+			if ((*it)->getDepth() <= depth) {
+				this->listGameObject.insert(it, obj);
+				return;
+			}
+		}
+		this->listGameObject.push_back(obj);
+	}
+
+	std::list<GameObjects::BaseGameObject *> &Core::Level::getObjects()
+	{
+		return this->listGameObject;
+	}
+
+	std::vector<GameObjects::BaseGameObject *> Core::Level::getPlayers()
+	{
+		std::vector<GameObjects::BaseGameObject *> playersList = std::vector<GameObjects::BaseGameObject *>();
+		for (std::list<GameObjects::BaseGameObject *>::iterator it = this->listGameObject.begin(); it != this->listGameObject.end(); ++it) {
+			if ((*it)->getType() == GameObjects::objectType::PLAYER) {
+				playersList.push_back((*it));
+			}
+		}
+		return playersList;
 	}
 }

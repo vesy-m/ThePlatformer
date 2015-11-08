@@ -114,9 +114,9 @@ namespace GameComponents {
 		this->inputState.emplace(ROTATE_RIGHT, false);*/
 	}
 
-	int	ControllerInputComponent::ParseInputFile(JsonValue o) {
+	int	ControllerInputComponent::ParseInputFile(GameTools::JsonValue o) {
 		switch (o.getTag()) {
-		case JSON_OBJECT:
+		case GameTools::JSON_OBJECT:
 			for (auto i : o) {
 				printf("%s = ", i->key);
 				INPUT_TYPE inputKey;
