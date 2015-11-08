@@ -102,12 +102,19 @@ namespace GameComponents {
 		glm::vec2 positionB = glm::vec2(manifold->B->composition->getX(), manifold->B->composition->getY());
 
 		float penetration = manifold->penetration;
+		float bounce = 0.0;/*manifold->A->composition->getBounce();*/
 
 		glm::vec2 addPos = manifold->normal * penetration;
 
 		glm::vec2 newVelocity = ((BoxCollider*)manifold->A)->velocity;
-		if (manifold->normal.y != 0) newVelocity.y = 0;
-		else if (manifold->normal.x != 0) newVelocity.x = 0;
+		if (manifold->normal.y != 0) {
+			if (newVelocity.y >= -1 && newVelocity.y <= 1) newVelocity.y = 0.0;
+			else newVelocity.y *= -bounce;
+		}
+		if (manifold->normal.x != 0) {
+			if (newVelocity.x >= -1 && newVelocity.x <= 1) newVelocity.x = 0.0;
+			else newVelocity.x *= -bounce;
+		}
 
 		GameMessage::CollisionMessage *msg = new GameMessage::CollisionMessage(newVelocity, addPos);
 		manifold->A->composition->sendMessage((GameMessage::Message*)msg);
@@ -122,15 +129,26 @@ namespace GameComponents {
 
 		if (this->composition->getType() != GameObjects::NONE)
 		{
-			for each(GameObjects::BaseGameObject* object in GameSystems::ObjectFactory::getInstance().getCurrentLevel().getObjects())
+			for each(GameObjects::BaseGameObject* object in GameSystems::ObjectFactory::getInstance().getCurrentObjects())
 			{
-				if (this->composition->getType() != GameObjects::PROJECTILE && object->getType() == GameObjects::PLAYER)
-					continue;
-				if (!object->getComponents(GameComponents::COMPONENT_TYPE::COLLIDER).empty())
-				{
-					if (object->getComponents(GameComponents::COMPONENT_TYPE::COLLIDER)[0] == this)
+				if (this->composition->getType() == GameObjects::PLAYER) {
+					if (object->getType() == GameObjects::PROJECTILE && object->getName().compare(this->composition->getName()) == 0)
 						continue;
-					BoxCollider *other = (BoxCollider*)object->getComponents(GameComponents::COMPONENT_TYPE::COLLIDER)[0];
+					else if (object->getType() == GameObjects::PLAYER)
+						continue;
+				}
+
+				if (this->composition->getType() == GameObjects::PROJECTILE) {
+					if (object->getType() == GameObjects::PLAYER && object->getName().compare(this->composition->getName()) == 0)
+						continue;
+					if (object->getType() == GameObjects::PROJECTILE)
+						continue;
+				}
+				if (object->getComponent(GameComponents::COMPONENT_TYPE::COLLIDER))
+				{
+					if (object->getComponent(GameComponents::COMPONENT_TYPE::COLLIDER) == this) continue;
+					BoxCollider *other = dynamic_cast<BoxCollider*>(object->getComponent(GameComponents::COMPONENT_TYPE::COLLIDER));
+					assert(other != NULL);
 					Manifold *manifold = new Manifold();
 					manifold->A = this;
 					manifold->B = other;
@@ -141,6 +159,11 @@ namespace GameComponents {
 						// Destroy projectiles on collision
 						if (other->composition->getType() == GameObjects::PROJECTILE) other->composition->destroy(true);
 						else if (this->composition->getType() == GameObjects::PROJECTILE) this->composition->destroy(true);
+						
+						if (this->composition->getType() == GameObjects::PROJECTILE && other->composition->getType() == GameObjects::PLAYER)
+							other->composition->destroy(true);
+						else if (this->composition->getType() == GameObjects::PLAYER && other->composition->getType() == GameObjects::PROJECTILE)
+							this->composition->destroy(true);
 
 
 						ResolveCollision(manifold);
@@ -614,7 +637,7 @@ glm::vec2 pos = glm::vec2(this->composition->getX(), this->composition->getY());
 //pour tout les objects avec un collider
 //optimiser selon l'eloignement
 //BoxCollider *other = new BoxCollider(glm::vec2(200, 450), glm::vec2(250, 500));
-for each(GameObjects::BaseGameObject* object in GameSystems::ObjectFactory::getInstance().getCurrentLevel().getObjects())
+for each(GameObjects::BaseGameObject* object in GameSystems::ObjectFactory::getInstance().getCurrentObjects())
 {
 if (!object->getComponents(GameComponents::COMPONENT_TYPE::COLLIDER).empty())
 {

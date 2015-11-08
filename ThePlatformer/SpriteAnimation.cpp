@@ -1,12 +1,12 @@
 #include "SpriteAnimation.h"
 
-
-SpriteAnimation::SpriteAnimation(JsonValue &animInfos)
-{
-	listCoordSpriteByFrame = std::vector<std::vector<int>>();
-	int ymin;
-	int ymax;
-	switch (animInfos.getTag()) {
+namespace GameTools {
+	SpriteAnimation::SpriteAnimation(JsonValue &animInfos)
+	{
+		listCoordSpriteByFrame = std::vector<std::vector<int>>();
+		int ymin;
+		int ymax;
+		switch (animInfos.getTag()) {
 		case JSON_OBJECT:
 			for (auto i : animInfos) {
 				printf("%s = ", i->key);
@@ -40,48 +40,49 @@ SpriteAnimation::SpriteAnimation(JsonValue &animInfos)
 
 			}
 			break;
+		}
 	}
-}
 
-SpriteAnimation::SpriteAnimation()
-{
-}
+	SpriteAnimation::SpriteAnimation()
+	{
+	}
 
-SpriteAnimation::~SpriteAnimation()
-{
-}
+	SpriteAnimation::~SpriteAnimation()
+	{
+	}
 
-std::string SpriteAnimation::getName()
-{
-	return this->name;
-}
+	std::string SpriteAnimation::getName()
+	{
+		return this->name;
+	}
 
-int SpriteAnimation::getSpriteXmin(int numFrame)
-{
-	return this->listCoordSpriteByFrame[numFrame][0];
-}
+	int SpriteAnimation::getSpriteXmin(int numFrame)
+	{
+		return this->listCoordSpriteByFrame[numFrame][0];
+	}
 
-int SpriteAnimation::getSpriteXmax(int numFrame)
-{
-	return this->listCoordSpriteByFrame[numFrame][1];
-}
+	int SpriteAnimation::getSpriteXmax(int numFrame)
+	{
+		return this->listCoordSpriteByFrame[numFrame][1];
+	}
 
-int SpriteAnimation::getSpriteYmin(int numFrame)
-{
-	return this->listCoordSpriteByFrame[numFrame][2];
-}
+	int SpriteAnimation::getSpriteYmin(int numFrame)
+	{
+		return this->listCoordSpriteByFrame[numFrame][2];
+	}
 
-int SpriteAnimation::getSpriteYmax(int numFrame)
-{
-	return this->listCoordSpriteByFrame[numFrame][3];
-}
+	int SpriteAnimation::getSpriteYmax(int numFrame)
+	{
+		return this->listCoordSpriteByFrame[numFrame][3];
+	}
 
-int SpriteAnimation::getTime()
-{
-	return this->time;
-}
+	int SpriteAnimation::getTime()
+	{
+		return this->time;
+	}
 
-int SpriteAnimation::getSizeListFrame()
-{
-	return (int) this->listCoordSpriteByFrame.size();
+	int SpriteAnimation::getSizeListFrame()
+	{
+		return (int) this->listCoordSpriteByFrame.size();
+	}
 }

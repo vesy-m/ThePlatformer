@@ -19,11 +19,11 @@ namespace GameComponents {
 	class Collider : public BaseComponent
 	{
 	public:
-		Collider(GameObjects::BaseGameObject *object) : BaseComponent(object) {};
-		~Collider() {};
+		Collider(GameObjects::BaseGameObject *object) : BaseComponent(object) { object->attachComponent(this); };
+		virtual ~Collider() {};
 		virtual COLLIDER_TYPE getColliderType() = 0;
 		virtual void Update(double) = 0;
-		COMPONENT_TYPE getType() { return COMPONENT_TYPE::COLLIDER; };
+		virtual COMPONENT_TYPE getType() { return COMPONENT_TYPE::COLLIDER; };
 		virtual void Init() = 0;
 
 		glm::vec2 velocity;
@@ -39,16 +39,16 @@ namespace GameComponents {
 
 	class BoxCollider : public Collider
 	{
+		friend class GameSystems::ObjectFactory;
+	private:
+		BoxCollider(GameObjects::BaseGameObject*);
 	public:
-		BoxCollider(GameObjects::BaseGameObject *object);
-		~BoxCollider();
-
+		virtual ~BoxCollider();
 		virtual bool CollideWithBox(Manifold *manifold);
 		virtual COLLIDER_TYPE getColliderType();
 		virtual void Update(double);
-		void sendMessage(GameMessage::Message *message);
+		virtual void sendMessage(GameMessage::Message *message);
 		virtual void Init();
-
 	public:
 		glm::vec2 min;
 		glm::vec2 max;
@@ -57,10 +57,9 @@ namespace GameComponents {
 
 	class CircleCollider : public Collider
 	{
+		friend class GameSystems::ObjectFactory;
 	public:
-		CircleCollider(GameObjects::BaseGameObject *object);
-		~CircleCollider();
-
+		virtual ~CircleCollider();
 		virtual bool CollideWithCircle(Manifold *manifold);
 		virtual bool CollideWithBox(Manifold *manifold);
 		virtual COLLIDER_TYPE getColliderType();
@@ -71,6 +70,8 @@ namespace GameComponents {
 	public:
 		float radius;
 		glm::vec2 pos;
+	private:
+		CircleCollider(float radius, glm::vec2 pos, GameObjects::BaseGameObject *object);
 	};
 }
 

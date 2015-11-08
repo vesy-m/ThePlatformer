@@ -158,12 +158,11 @@ copy /Y "$(ProjectDir)\lib\lib-x64\devil-1.7.8\bin\*" "$(OutDir)\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AudioManager.cpp" />
     <ClCompile Include="AudioSystem.cpp" />
     <ClCompile Include="BaseComponent.cpp" />
     <ClCompile Include="BaseGameObject.cpp" />
     <ClCompile Include="BodyComponent.cpp" />
-    <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="ButtonComponent.cpp" />
     <ClCompile Include="debugManager.cpp" />
     <ClCompile Include="gason.cpp" />
     <ClCompile Include="Collider.cpp" />
@@ -172,12 +171,14 @@ copy /Y "$(ProjectDir)\lib\lib-x64\devil-1.7.8\bin\*" "$(OutDir)\"</Command>
     <ClCompile Include="ControllerInputComponent.cpp" />
     <ClCompile Include="JSONParser.cpp" />
     <ClCompile Include="KeyboardInputComponent.cpp" />
-    <ClCompile Include="Level.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="GameEngine.cpp" />
+    <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Message.cpp" />
+    <ClCompile Include="MouseClickComponent.cpp" />
     <ClCompile Include="ObjectFactory.cpp" />
     <ClCompile Include="PhysicsSystem.cpp" />
+    <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="SpriteAnimation.cpp" />
     <ClCompile Include="SpriteComponent.cpp" />
     <ClCompile Include="SpriteSheet.cpp" />
@@ -190,22 +191,23 @@ copy /Y "$(ProjectDir)\lib\lib-x64\devil-1.7.8\bin\*" "$(OutDir)\"</Command>
     <ClCompile Include="WindowInputSytem.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AudioManager.h" />
     <ClInclude Include="AudioSystem.h" />
     <ClInclude Include="BaseComponent.h" />
     <ClInclude Include="BaseGameObject.h" />
     <ClInclude Include="BodyComponent.h" />
-    <ClInclude Include="Camera.h" />
+    <ClInclude Include="ButtonComponent.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="debugManager.h" />
     <ClInclude Include="GameEngine.h" />
-    <ClInclude Include="gason.h" />
+    <ClInclude Include="Gason.h" />
     <ClInclude Include="GraphicsSystem.h" />
     <ClInclude Include="ControllerInputComponent.h" />
     <ClInclude Include="JSONParser.h" />
     <ClInclude Include="KeyboardInputComponent.h" />
-    <ClInclude Include="Level.h" />
+    <ClInclude Include="Menu.h" />
     <ClInclude Include="Message.h" />
+    <ClInclude Include="MouseClickComponent.h" />
+    <ClInclude Include="Projectile.h" />
     <ClInclude Include="SpriteAnimation.h" />
     <ClInclude Include="SpriteSheet.h" />
     <ClInclude Include="TextComponent.h" />
@@ -216,7 +218,7 @@ copy /Y "$(ProjectDir)\lib\lib-x64\devil-1.7.8\bin\*" "$(OutDir)\"</Command>
     <ClInclude Include="PhysicsSystem.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="SpriteComponent.h" />
-    <ClInclude Include="System.h" />
+    <ClInclude Include="BaseSystem.h" />
     <ClInclude Include="TimeManager.h" />
     <ClInclude Include="VectorDebugComponent.h" />
     <ClInclude Include="VectorMessage.h" />

@@ -2,10 +2,10 @@
 #ifndef _PHYSICSYSTEM_H_
 #define _PHYSICSYSTEM_H_
 
-#include "System.h"
+#include "BaseSystem.h"
 
 namespace GameSystems {
-	class PhysicsSystem : public System
+	class PhysicsSystem : public BaseSystem
 	{
 	public:
 		PhysicsSystem();

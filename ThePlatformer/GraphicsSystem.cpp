@@ -29,20 +29,18 @@ namespace GameSystems {
 		glColor3f(1.0f, 1.0f, 1.0f);
 		for each (GameObjects::BaseGameObject* object in listObjects)
 		{
-			std::vector<GameComponents::BaseComponent*> componentList = object->getComponents(GameComponents::COMPONENT_TYPE::SPRITE);
-			for each (GameComponents::BaseComponent* component in componentList) {
-				component->Update(dt);
-			}
+			GameComponents::BaseComponent*component = object->getComponent(GameComponents::COMPONENT_TYPE::SPRITE);
+			if (component) component->Update(dt);
 		}
 		for each (GameObjects::BaseGameObject* object in listObjects)
 		{
-			std::vector<GameComponents::BaseComponent*> componentList = object->getComponents(GameComponents::COMPONENT_TYPE::DEBUGVECTOR);
-			for each (GameComponents::BaseComponent* component in componentList) component->Update(dt);
+			GameComponents::BaseComponent* component = object->getComponent(GameComponents::COMPONENT_TYPE::DEBUGVECTOR);
+			if (component) component->Update(dt);
 		}
 		for each (GameObjects::BaseGameObject* object in listObjects)
 		{
-			std::vector<GameComponents::BaseComponent*> componentList = object->getComponents(GameComponents::COMPONENT_TYPE::TEXT);
-			for each (GameComponents::BaseComponent* component in componentList) ((GameComponents::TextComponent*)component)->Update(dt);
+			GameComponents::BaseComponent* component = object->getComponent(GameComponents::COMPONENT_TYPE::TEXT);
+			if (component) component->Update(dt);
 		}
 		glMatrixMode(GL_PROJECTION);
 		glPopMatrix();
@@ -56,27 +54,18 @@ namespace GameSystems {
 		Camera::getInstance();
 		for each (GameObjects::BaseGameObject* object in listObjects)
 		{
-			std::vector<GameComponents::BaseComponent*> componentList = object->getComponents(GameComponents::COMPONENT_TYPE::SPRITE);
-			for each (GameComponents::BaseComponent* component in componentList)
-			{
-				component->Init();
-			}
+			GameComponents::BaseComponent* component = object->getComponent(GameComponents::COMPONENT_TYPE::SPRITE);
+			if (component) component->Init();
 		}
 		for each (GameObjects::BaseGameObject* object in listObjects)
 		{
-			std::vector<GameComponents::BaseComponent*> componentList = object->getComponents(GameComponents::COMPONENT_TYPE::DEBUGVECTOR);
-			for each (GameComponents::BaseComponent* component in componentList)
-			{
-				component->Init();
-			}
+			GameComponents::BaseComponent* component = object->getComponent(GameComponents::COMPONENT_TYPE::DEBUGVECTOR);
+			if (component) component->Init();
 		}
 		for each (GameObjects::BaseGameObject* object in listObjects)
 		{
-			std::vector<GameComponents::BaseComponent*> componentList = object->getComponents(GameComponents::COMPONENT_TYPE::TEXT);
-			for each (GameComponents::BaseComponent* component in componentList)
-			{
-				component->Init();
-			}
+			GameComponents::BaseComponent* component = object->getComponent(GameComponents::COMPONENT_TYPE::TEXT);
+			if (component) component->Init();
 		}
 	}
 
@@ -101,7 +90,7 @@ namespace GameSystems {
 
 		int sizeWidthMax = screenWidth;
 		int sizeToWidthMax = screenWidth - 300;
-		int sizeWidthMin = screenWidth / 1.2;
+		int sizeWidthMin = (int)(screenWidth / 1.2);
 
 		std::vector<GameObjects::BaseGameObject *> listPlayers = ObjectFactory::getInstance().getCurrentLevel().getPlayers();
 		if (listPlayers.size() == 2) {
@@ -159,6 +148,54 @@ namespace GameSystems {
 	}
 
 	void GraphicsSystem::SendMessage()
+	{
+	}
+
+	void GraphicsSystem::Camera::setX(int x)
+	{
+		int width = this->cameraEndX - this->cameraStartX;
+		this->cameraStartX = x;
+		this->cameraEndX = this->cameraStartX + width;
+	}
+
+	void GraphicsSystem::Camera::setY(int y)
+	{
+		int height = this->cameraEndY - this->cameraStartY;
+		this->cameraStartY = y;
+		this->cameraEndY = this->cameraStartY + height;
+	}
+
+	void GraphicsSystem::Camera::setWidth(int width)
+	{
+		this->cameraEndX = this->cameraStartX + width;
+	}
+
+	void GraphicsSystem::Camera::setHeight(int height)
+	{
+		this->cameraEndY = this->cameraStartY + height;
+	}
+
+	void GraphicsSystem::Camera::setResolution720p() {
+		this->resolutionWidth = 1280;
+		this->resolutionHeight = 720;
+	}
+
+	void GraphicsSystem::Camera::setResolution1080p() {
+		this->resolutionWidth = 1920;
+		this->resolutionHeight = 1080;
+	}
+
+	GraphicsSystem::Camera::Camera()
+	{
+		this->resolutionWidth = 1280;
+		this->resolutionHeight = 720;
+		this->cameraStartX = 0;
+		this->cameraEndX = this->resolutionWidth;
+		this->cameraStartY = 0;
+		this->cameraEndY = this->resolutionHeight;
+	}
+
+	GraphicsSystem::Camera::~Camera()
 	{
 	}
 }

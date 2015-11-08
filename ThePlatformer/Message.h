@@ -24,7 +24,8 @@ namespace GameMessage {
 			NO_COLLISION,
 			ROTATE_LEFT,
 			ROTATE_RIGHT,
-			FIRE
+			FIRE,
+			CLICKON
 		};
 
 		Message(MessageId);

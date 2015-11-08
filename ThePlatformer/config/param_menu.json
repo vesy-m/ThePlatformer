@@ -1,0 +1,14 @@
+{
+	"button" : {
+		"x" : 540,
+		"y" : 215,
+		"sprite" : "./assets/sprite/resolutionButton.png",
+		"function" : "changeResolution"
+	},
+	"button" : {
+		"x" : 540,
+		"y" : 455,
+		"sprite" : "./assets/sprite/returnButton.png",
+		"menu" : "./config/main_menu.json"
+	}
+}

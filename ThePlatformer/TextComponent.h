@@ -11,20 +11,20 @@ namespace GameSystems {
 }
 
 namespace GameComponents {
-	class TextComponent : BaseComponent
+	class TextComponent : public BaseComponent
 	{
 		friend class GameSystems::ObjectFactory;
 	public:
-		~TextComponent();
-		COMPONENT_TYPE getType();
-		void Update(double dt);
-		void Update();
-		void Init();
-		void sendMessage(GameMessage::Message*);
+		virtual ~TextComponent();
+		virtual COMPONENT_TYPE getType();
+		virtual void Update(double);
+		virtual void Update();
+		virtual void Init();
+		virtual void sendMessage(GameMessage::Message*);
 	private:
 		TextComponent(GameObjects::BaseGameObject*);
 		const COMPONENT_TYPE type = COMPONENT_TYPE::TEXT;
-		SpriteSheet *sheet;
+		GameTools::SpriteSheet *sheet;
 
 	};
 }
