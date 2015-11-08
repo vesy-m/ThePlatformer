@@ -9,6 +9,7 @@
 #include "SpriteComponent.h"
 #include "InputComponent.h"
 #include "SpriteSheet.h"
+#include "ObjectFactory.h"
 
 int main()
 {
@@ -21,7 +22,7 @@ int main()
 	core.Add((GameSystems::BaseSystem *)winInput);
 	core.Add((GameSystems::BaseSystem *)physics);
 	core.Add((GameSystems::BaseSystem *)graphics);
-	core.LoadLevelFile("./config/level2.json");
+	GameSystems::ObjectFactory::getInstance().LoadLevelFileAsCurrent("./config/level2.json");
 	
 	//a enlever de commentaire pour corriger frame rate
 	sf::Music music;

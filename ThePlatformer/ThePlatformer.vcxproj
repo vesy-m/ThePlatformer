@@ -162,6 +162,7 @@ copy /Y "$(ProjectDir)\lib\lib-x64\devil-1.7.8\bin\*" "$(OutDir)\"</Command>
     <ClCompile Include="BaseComponent.cpp" />
     <ClCompile Include="BaseGameObject.cpp" />
     <ClCompile Include="BodyComponent.cpp" />
+    <ClCompile Include="ButtonComponent.cpp" />
     <ClCompile Include="debugManager.cpp" />
     <ClCompile Include="gason.cpp" />
     <ClCompile Include="Collider.cpp" />
@@ -172,6 +173,7 @@ copy /Y "$(ProjectDir)\lib\lib-x64\devil-1.7.8\bin\*" "$(OutDir)\"</Command>
     <ClCompile Include="KeyboardInputComponent.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="GameEngine.cpp" />
+    <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Message.cpp" />
     <ClCompile Include="ObjectFactory.cpp" />
     <ClCompile Include="PhysicsSystem.cpp" />
@@ -192,6 +194,7 @@ copy /Y "$(ProjectDir)\lib\lib-x64\devil-1.7.8\bin\*" "$(OutDir)\"</Command>
     <ClInclude Include="BaseComponent.h" />
     <ClInclude Include="BaseGameObject.h" />
     <ClInclude Include="BodyComponent.h" />
+    <ClInclude Include="ButtonComponent.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="debugManager.h" />
     <ClInclude Include="GameEngine.h" />
@@ -200,6 +203,7 @@ copy /Y "$(ProjectDir)\lib\lib-x64\devil-1.7.8\bin\*" "$(OutDir)\"</Command>
     <ClInclude Include="ControllerInputComponent.h" />
     <ClInclude Include="JSONParser.h" />
     <ClInclude Include="KeyboardInputComponent.h" />
+    <ClInclude Include="Menu.h" />
     <ClInclude Include="Message.h" />
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="SpriteAnimation.h" />
@@ -220,9 +224,6 @@ copy /Y "$(ProjectDir)\lib\lib-x64\devil-1.7.8\bin\*" "$(OutDir)\"</Command>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="ThePlatformer.rc" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

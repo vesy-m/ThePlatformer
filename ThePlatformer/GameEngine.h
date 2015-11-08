@@ -15,11 +15,10 @@ namespace GameEngine {
 		void Update(float);
 		void MainLoop(void);
 		void Add(GameSystems::BaseSystem*);
-		void LoadLevelFile(const std::string&);
 		class Level;
 	private:
 		TimeManager								*m_manager;
-		std::list<GameSystems::BaseSystem *>	m_systems;
+		
 	};
 
 	class Core::Level

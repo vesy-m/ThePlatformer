@@ -58,14 +58,23 @@
     <Filter Include="GameMessages\Header">
       <UniqueIdentifier>{fe3149a4-64ba-45c4-8b0a-efbf7c139c13}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Menu">
+      <UniqueIdentifier>{888f1da2-63f7-4a28-bd43-0744eb1d00a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Menu\Header">
+      <UniqueIdentifier>{bc2b0213-86f1-4401-bbc6-50bd06d4f2d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Menu\Source">
+      <UniqueIdentifier>{f64a7563-f95e-4450-a5f2-e84f963759d5}</UniqueIdentifier>
+    </Filter>
     <Filter Include="GameTools">
-      <UniqueIdentifier>{7a6d60ce-60a6-468e-bfd0-364c36692563}</UniqueIdentifier>
+      <UniqueIdentifier>{50037d6a-2dd1-48db-b591-678173cca18d}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameTools\Header">
-      <UniqueIdentifier>{36ce3ffd-3fbb-472a-8610-34f91436a6a1}</UniqueIdentifier>
+      <UniqueIdentifier>{4bd5f223-28b1-479e-b8e5-5c0bfcd04cd2}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameTools\Source">
-      <UniqueIdentifier>{84cf5c82-2427-468b-9673-7c4cfcff8909}</UniqueIdentifier>
+      <UniqueIdentifier>{386811a0-c4a3-4375-85ee-efc4e7c58a90}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -132,7 +141,10 @@
     <ClCompile Include="ControllerInputComponent.cpp">
       <Filter>GameComponents\Source</Filter>
     </ClCompile>
-    <ClCompile Include="KeyboardInputComponent.cpp">
+    <ClCompile Include="Menu.cpp">
+      <Filter>Menu\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="ButtonComponent.cpp">
       <Filter>GameComponents\Source</Filter>
     </ClCompile>
     <ClCompile Include="debugManager.cpp">
@@ -152,6 +164,9 @@
     </ClCompile>
     <ClCompile Include="TextureManager.cpp">
       <Filter>GameTools\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyboardInputComponent.cpp">
+      <Filter>GameComponents\Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -215,13 +230,22 @@
     <ClInclude Include="ControllerInputComponent.h">
       <Filter>GameComponents\Header</Filter>
     </ClInclude>
-    <ClInclude Include="KeyboardInputComponent.h">
+    <ClInclude Include="Menu.h">
+      <Filter>Menu\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="ButtonComponent.h">
       <Filter>GameComponents\Header</Filter>
     </ClInclude>
     <ClInclude Include="BaseSystem.h">
       <Filter>GameSystems\Header</Filter>
     </ClInclude>
+    <ClInclude Include="KeyboardInputComponent.h">
+      <Filter>GameComponents\Header</Filter>
+    </ClInclude>
     <ClInclude Include="debugManager.h">
+      <Filter>GameTools\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Gason.h">
       <Filter>GameTools\Header</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">
@@ -239,16 +263,10 @@
     <ClInclude Include="TextureManager.h">
       <Filter>GameTools\Header</Filter>
     </ClInclude>
-    <ClInclude Include="Gason.h">
-      <Filter>GameTools\Header</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="ThePlatformer.rc">
       <Filter>Fichiers de ressources</Filter>
     </ResourceCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>

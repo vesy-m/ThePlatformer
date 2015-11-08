@@ -13,19 +13,12 @@ namespace GameEngine {
 
 	Core::~Core() {
 		delete this->m_manager;
-		for (auto it = this->m_systems.begin(); it != this->m_systems.end(); ++it)
-			delete *it;
+		/*for (auto it = listSystems.begin(); it != listSystems.end(); ++it)
+			delete *it;*/
 	}
 	
-	void Core::LoadLevelFile(const std::string &filename) {
-		GameSystems::JSONParser fileParser(filename);
-		GameSystems::ObjectFactory::getInstance().buildLevel(fileParser.getJSONValue());
-	}
-
 	void Core::Init(void) {
 		this->m_manager = new TimeManager("../log_file.txt");
-		for each (GameSystems::BaseSystem* system in this->m_systems)
-			system->Init(GameSystems::ObjectFactory::getInstance().getCurrentLevel().getObjects());
 	}
 
 	void Core::Update(float dt) {
@@ -37,8 +30,9 @@ namespace GameEngine {
 		
 		while (42) {
 			this->m_manager->StartTimer();
-			for each (GameSystems::BaseSystem *system in this->m_systems) {
-				if (system->Update(this->m_manager->GetLastTime(), GameSystems::ObjectFactory::getInstance().getCurrentLevel().getObjects()) == 1) {
+			std::list<GameSystems::BaseSystem *> listSystems = GameSystems::ObjectFactory::getInstance().getSystems();
+			for each (GameSystems::BaseSystem *system in listSystems) {
+				if (system->Update(this->m_manager->GetLastTime(), GameSystems::ObjectFactory::getInstance().getCurrentObjects()) == 1) {
 					return;
 				}
 			}
@@ -48,7 +42,7 @@ namespace GameEngine {
 	}
 
 	void Core::Add(GameSystems::BaseSystem *sys) {
-		this->m_systems.push_back(sys);
+		GameSystems::ObjectFactory::getInstance().addSystems(sys);
 	}
 
 	Core::Level::Level()
