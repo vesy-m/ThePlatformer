@@ -216,7 +216,7 @@ copy /Y "$(ProjectDir)\lib\lib-x64\devil-1.7.8\bin\*" "$(OutDir)\"</Command>
     <ClInclude Include="PhysicsSystem.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="SpriteComponent.h" />
-    <ClInclude Include="System.h" />
+    <ClInclude Include="BaseSystem.h" />
     <ClInclude Include="TimeManager.h" />
     <ClInclude Include="VectorDebugComponent.h" />
     <ClInclude Include="VectorMessage.h" />

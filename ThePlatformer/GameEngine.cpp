@@ -3,7 +3,7 @@
 #include <ctime>
 #include <iomanip>
 #include "GameEngine.h"
-#include "System.h"
+#include "BaseSystem.h"
 #include "JSONParser.h"
 #include "ObjectFactory.h"
 
@@ -24,7 +24,7 @@ namespace GameEngine {
 
 	void Core::Init(void) {
 		this->m_manager = new TimeManager("../log_file.txt");
-		for each (GameSystems::System* system in this->m_systems)
+		for each (GameSystems::BaseSystem* system in this->m_systems)
 			system->Init(GameSystems::ObjectFactory::getInstance().getCurrentLevel().getObjects());
 	}
 
@@ -37,7 +37,7 @@ namespace GameEngine {
 		
 		while (42) {
 			this->m_manager->StartTimer();
-			for each (GameSystems::System *system in this->m_systems) {
+			for each (GameSystems::BaseSystem *system in this->m_systems) {
 				if (system->Update(this->m_manager->GetLastTime(), GameSystems::ObjectFactory::getInstance().getCurrentLevel().getObjects()) == 1) {
 					return;
 				}
@@ -47,7 +47,7 @@ namespace GameEngine {
 		}
 	}
 
-	void Core::Add(GameSystems::System *sys) {
+	void Core::Add(GameSystems::BaseSystem *sys) {
 		this->m_systems.push_back(sys);
 	}
 }

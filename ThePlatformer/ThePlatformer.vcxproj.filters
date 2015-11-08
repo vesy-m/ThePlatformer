@@ -182,9 +182,6 @@
     <ClInclude Include="ObjectFactory.h">
       <Filter>GameSystems\Header</Filter>
     </ClInclude>
-    <ClInclude Include="System.h">
-      <Filter>GameSystems\Header</Filter>
-    </ClInclude>
     <ClInclude Include="SpriteComponent.h">
       <Filter>GameComponents\Header</Filter>
     </ClInclude>
@@ -250,6 +247,9 @@
     </ClInclude>
     <ClInclude Include="KeyboardInputComponent.h">
       <Filter>GameComponents\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseSystem.h">
+      <Filter>GameSystems\Header</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -2,12 +2,12 @@
 #ifndef _GRAPHICSSYSTEM_H_
 #define _GRAPHICSSYSTEM_H_
 
-#include "System.h"
+#include "BaseSystem.h"
 #include "Camera.h"
 #include <SFML\OpenGL.hpp>
 
 namespace GameSystems {
-	class GraphicsSystem : public System
+	class GraphicsSystem : public BaseSystem
 	{
 	public:
 		GraphicsSystem();

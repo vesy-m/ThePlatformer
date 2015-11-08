@@ -18,9 +18,9 @@ int main()
 	GameSystems::GraphicsSystem *graphics = new GameSystems::GraphicsSystem();
 	GameSystems::PhysicsSystem *physics = new GameSystems::PhysicsSystem();
 
-	core.Add((GameSystems::System *)winInput);
-	core.Add((GameSystems::System *)physics);
-	core.Add((GameSystems::System *)graphics);
+	core.Add((GameSystems::BaseSystem *)winInput);
+	core.Add((GameSystems::BaseSystem *)physics);
+	core.Add((GameSystems::BaseSystem *)graphics);
 	core.LoadLevelFile("level2.json");
 	
 	//a enlever de commentaire pour corriger frame rate
