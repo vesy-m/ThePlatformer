@@ -5,7 +5,8 @@
 #include "ControllerInputComponent.h"
 #include "KeyboardInputComponent.h"
 #include "BodyComponent.h"
-#include "Collider.h"
+#include "BoxCollider.h"
+#include "CircleCollider.h"
 #include "VectorDebugComponent.h"
 #include "TextComponent.h"
 #include "ButtonComponent.h"
@@ -64,6 +65,9 @@ namespace GameSystems {
 			}
 			else if (std::string(it->key) == "boxcollider") {
 				auto vector = new GameComponents::BoxCollider(ret);
+			}
+			else if (std::string(it->key) == "circlecollider") {
+				auto vector = new GameComponents::CircleCollider(ret);
 			}
 			else if (std::string(it->key) == "controller") {
 				auto input = new GameComponents::ControllerInputComponent(ret, it->value.toString());
