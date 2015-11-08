@@ -32,9 +32,17 @@ namespace GameComponents {
 				{
 					inputState.at(it->first) = false;
 					if (it->first == INPUT_TYPE::FIRE) {
-						int centerX = this->getComposition()->getX() + (this->getComposition()->getHeight() / 2);
-						int centerY = this->getComposition()->getY() + (this->getComposition()->getHeight() / 2);
+						GLint iViewport[4];
+						glGetIntegerv(GL_VIEWPORT, iViewport);
+						int screenWidth = iViewport[0] + iViewport[2];
+						int screenHeight = iViewport[1] + iViewport[3];
+						int resolutionWidth = GameSystems::GraphicsSystem::Camera::getInstance().resolutionWidth;
+						int resolutionHeight = GameSystems::GraphicsSystem::Camera::getInstance().resolutionHeight;
+
+						int centerX = (this->getComposition()->getX() + (this->getComposition()->getWidth() / 2)) * screenWidth / resolutionWidth;
+						int centerY = (this->getComposition()->getY() + (this->getComposition()->getHeight() / 2)) * screenHeight / resolutionHeight;
 						GameComponents::SpriteComponent *sprite = reinterpret_cast<GameComponents::SpriteComponent*>(getComposition()->getComponent(GameComponents::SPRITE));
+
 						glm::vec2 direction = glm::vec2(100.0, 100.0);
 						if (aimAxisX >= -50.0 && aimAxisX <= 50.0 && aimAxisY >= -50.0 && aimAxisY <= 50.0) {
 							if (sprite->revertX)
@@ -70,15 +78,14 @@ namespace GameComponents {
 							int centerX = this->getComposition()->getX() + (this->getComposition()->getHeight() / 2);
 							int centerY = this->getComposition()->getY() + (this->getComposition()->getHeight() / 2);
 							GameComponents::SpriteComponent *sprite = reinterpret_cast<GameComponents::SpriteComponent*>(getComposition()->getComponent(GameComponents::SPRITE));
+
 							glm::vec2 direction = glm::vec2(100.0, 100.0);
 							if (aimAxisX >= -50.0 && aimAxisX <= 50.0 && aimAxisY >= -50.0 && aimAxisY <= 50.0) {
-								if (sprite->revertX)
-									direction = glm::vec2((-100 + centerX) - centerX, (aimAxisY + centerY) - centerY);
-								else
-									direction = glm::vec2((100 + centerX) - centerX, (aimAxisY + centerY) - centerY);
+								if (sprite->revertX) direction = glm::vec2((-100 + centerX) - centerX, (aimAxisY + centerY) - centerY);
+								else direction = glm::vec2((100 + centerX) - centerX, (aimAxisY + centerY) - centerY);
 							}
-							else
-								direction = glm::vec2((aimAxisX + centerX) - centerX, (aimAxisY + centerY) - centerY);
+							else direction = glm::vec2((aimAxisX + centerX) - centerX, (aimAxisY + centerY) - centerY);
+
 							std::cout << "Duration: " << this->getDuration() << std::endl;
 							GameObjects::BaseGameObject *arrow = GameSystems::ObjectFactory::getInstance().createArrow(getComposition(), getComposition()->getX(),
 								getComposition()->getY(), this->getDuration(), glm::normalize(direction));

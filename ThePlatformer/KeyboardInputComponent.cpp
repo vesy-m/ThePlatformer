@@ -52,9 +52,21 @@ namespace GameComponents {
 					{
 					case INPUT_TYPE::FIRE:
 					{
-						glm::vec2 direction = glm::vec2(event.mouseButton.x - (this->getComposition()->getX() + (this->getComposition()->getHeight() / 2)),
-							event.mouseButton.y - (this->getComposition()->getY() + (this->getComposition()->getHeight() / 2)));
-						GameComponents::SpriteComponent *sprite = reinterpret_cast<GameComponents::SpriteComponent*>(getComposition()->getComponent(GameComponents::SPRITE));
+						GLint iViewport[4];
+						glGetIntegerv(GL_VIEWPORT, iViewport);
+						int screenWidth = iViewport[0] + iViewport[2];
+						int screenHeight = iViewport[1] + iViewport[3];
+						int resolutionWidth = GameSystems::GraphicsSystem::Camera::getInstance().resolutionWidth;
+						int resolutionHeight = GameSystems::GraphicsSystem::Camera::getInstance().resolutionHeight;
+
+						/*std::cout << "screenWidth: " << screenWidth << "\tscreenHeight: " << screenHeight << std::endl;
+						std::cout << "resolutionWidth: " << resolutionWidth << "\tresolutionHeight: " << resolutionHeight << std::endl;*/
+
+						int centerX = (this->getComposition()->getX() + (this->getComposition()->getWidth() / 2)) * screenWidth / resolutionWidth;
+						int centerY = (this->getComposition()->getY() + (this->getComposition()->getHeight() / 2)) * screenHeight / resolutionHeight;
+
+						glm::vec2 direction = glm::vec2(event.mouseButton.x - centerX, event.mouseButton.y - centerY);
+
 						GameObjects::BaseGameObject *arrow = GameSystems::ObjectFactory::getInstance().createArrow(getComposition(), getComposition()->getX(),
 							getComposition()->getY(), this->getDuration(), glm::normalize(direction));
 						this->setDuration(500.0f);

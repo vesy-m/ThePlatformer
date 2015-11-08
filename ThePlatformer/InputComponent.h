@@ -6,6 +6,7 @@
 #include <sstream>
 #include "JSONParser.h"
 #include "BaseGameObject.h"
+#include "GraphicsSystem.h"
 #include "debugManager.h"
 #include "ObjectFactory.h"
 

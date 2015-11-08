@@ -26,7 +26,7 @@
 	  "mass" : 20,
 	  "projectile_type" : "soccer",
       "sprite" : "./config/desc-megaman.json",
-      "keyboard" : "./config/input_keyboard1.json",
+      "keyboard" : "./config/input_keyboard2.json",
       "body" : true,
       "boxcollider" : true,
       "vector" : true,
