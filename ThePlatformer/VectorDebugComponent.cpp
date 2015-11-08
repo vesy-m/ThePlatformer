@@ -40,7 +40,7 @@ namespace GameComponents {
 		float centerX = x + width / 2;
 		float centerY = y + height / 2;
 
-		if (!debugManager::getInstance().isActivateGraphic())
+		if (!GameTools::debugManager::getInstance().isActivateGraphic())
 		{
 			return;
 		}

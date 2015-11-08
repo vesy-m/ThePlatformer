@@ -9,22 +9,23 @@
 #include <fstream>
 #include <sstream>
 
-class SpriteAnimation
-{
-public:
-	SpriteAnimation(JsonValue &animInfos);
-	SpriteAnimation();
-	~SpriteAnimation();
-	std::string getName();
-	int getSpriteXmin(int numFrame);
-	int getSpriteXmax(int numFrame);
-	int getSpriteYmin(int numFrame);
-	int getSpriteYmax(int numFrame);
-	int getTime();
-	int getSizeListFrame();
-private:
-	int time;
-	std::string name;
-	std::vector<std::vector<int>> listCoordSpriteByFrame;
-};
-
+namespace GameTools {
+	class SpriteAnimation
+	{
+	public:
+		SpriteAnimation(JsonValue&);
+		SpriteAnimation();
+		~SpriteAnimation();
+		std::string getName();
+		int getSpriteXmin(int);
+		int getSpriteXmax(int);
+		int getSpriteYmin(int);
+		int getSpriteYmax(int);
+		int getTime();
+		int getSizeListFrame();
+	private:
+		int time;
+		std::string name;
+		std::vector<std::vector<int>> listCoordSpriteByFrame;
+	};
+}

@@ -17,13 +17,13 @@ namespace GameSystems {
 	void JSONParser::initParse(const std::string &filename) {
 		char *jsonFile = readFile(filename), *endptr = NULL;
 		int status = jsonParse(jsonFile, &endptr, &this->m_value, this->m_allocator);
-		if (status != JSON_OK) {
-			fprintf(stderr, "%s at %zd\n", jsonStrError(status), endptr - jsonFile);
+		if (status != GameTools::JSON_OK) {
+			fprintf(stderr, "%s at %zd\n", GameTools::jsonStrError(status), endptr - jsonFile);
 			exit(EXIT_FAILURE);
 		}
 	}
 
-	JsonValue &JSONParser::getJSONValue(void) {
+	GameTools::JsonValue &JSONParser::getJSONValue(void) {
 		return this->m_value;
 	}
 

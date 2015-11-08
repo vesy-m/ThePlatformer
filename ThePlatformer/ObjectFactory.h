@@ -6,7 +6,7 @@
 #include <list>
 #include "BaseGameObject.h"
 #include "gason.h"
-#include "Level.h"
+#include "GameEngine.h"
 #include "SpriteComponent.h"
 
 namespace GameComponents {
@@ -23,25 +23,20 @@ namespace GameSystems {
 			return instance;
 		}
 		~ObjectFactory();
-
-		GameObjects::BaseGameObject *parseObject(JsonValue&);
+		GameObjects::BaseGameObject *parseObject(GameTools::JsonValue&);
 		GameObjects::BaseGameObject *createArrow(unsigned int, unsigned int, float, bool);
 		static void attachObject(GameObjects::BaseGameObject*);
-		void buildLevel(JsonValue&);
-		Level &getCurrentLevel();
+		void buildLevel(GameTools::JsonValue&);
+		GameEngine::Core::Level &getCurrentLevel();
 		void cleanupObjects(void);
 	private:
 		ObjectFactory();
 		ObjectFactory(ObjectFactory const&) = delete;
 		void operator=(ObjectFactory const&) = delete;
-
 		void putObjectDepthOrdered(GameObjects::BaseGameObject*);
-		
 		std::list<GameObjects::BaseGameObject *> old_objects;
-
-
-		std::vector<Level> listLevels;
-		Level currentLevel;
+		std::vector<GameEngine::Core::Level> listLevels;
+		GameEngine::Core::Level currentLevel;
 	};
 }
 

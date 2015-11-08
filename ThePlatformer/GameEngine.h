@@ -1,8 +1,7 @@
 #pragma once
-#ifndef __GAMEENGINE_H_
-#define __GAMEENGINE_H_
-
 #include <list>
+#include <vector>
+#include "Texture.h"
 #include "BaseSystem.h"
 #include "TimeManager.h"
 
@@ -17,11 +16,26 @@ namespace GameEngine {
 		void MainLoop(void);
 		void Add(GameSystems::BaseSystem*);
 		void LoadLevelFile(const std::string&);
+		class Level;
 	private:
 		TimeManager								*m_manager;
-		std::list<GameSystems::BaseSystem *>		m_systems;
+		std::list<GameSystems::BaseSystem *>	m_systems;
 	};
+
+	class Core::Level
+	{
+	public:
+		Level();
+		~Level();
+		void putObjectDepthOrdered(GameObjects::BaseGameObject * obj);
+		std::list<GameObjects::BaseGameObject*>& getObjects();
+		std::vector<GameObjects::BaseGameObject*> getPlayers();
+	private:
+		GameTools::Texture *background;
+		std::list<GameObjects::BaseGameObject *> listGameObject;
+		int x;
+		int y;
+		float scale;
+	};
+
 }
-
-
-#endif /* __GAMEENGINE_H_ */

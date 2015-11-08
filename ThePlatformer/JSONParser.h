@@ -10,10 +10,10 @@ namespace GameSystems {
 		JSONParser(const std::string&);
 		~JSONParser();
 		void initParse(const std::string&);
-		JsonValue &getJSONValue(void);
+		GameTools::JsonValue &getJSONValue(void);
 	private:
 		char			*readFile(const std::string&);
-		JsonValue		m_value;
-		JsonAllocator	m_allocator;
+		GameTools::JsonValue		m_value;
+		GameTools::JsonAllocator	m_allocator;
 	};
 }
