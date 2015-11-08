@@ -168,6 +168,9 @@
     <ClCompile Include="KeyboardInputComponent.cpp">
       <Filter>GameComponents\Source</Filter>
     </ClCompile>
+    <ClCompile Include="MouseClickComponent.cpp">
+      <Filter>GameComponents\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameEngine.h">
@@ -262,6 +265,9 @@
     </ClInclude>
     <ClInclude Include="TextureManager.h">
       <Filter>GameTools\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="MouseClickComponent.h">
+      <Filter>GameComponents\Header</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

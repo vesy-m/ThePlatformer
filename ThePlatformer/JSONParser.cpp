@@ -6,7 +6,9 @@
 namespace GameSystems {
 	JSONParser::JSONParser(const std::string &filename = "")
 	{
-		if (filename != "") this->initParse(filename);
+		if (filename != "") {
+			this->initParse(filename);
+		}
 	}
 
 

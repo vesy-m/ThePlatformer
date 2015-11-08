@@ -56,6 +56,7 @@ namespace GameSystems {
 		GameEngine::Core::Level currentLevel;
 		Menu currentMenu;
 		gameState stateGame;
+		bool systemNeedReinit;
 
 	};
 }

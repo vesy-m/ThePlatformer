@@ -29,10 +29,11 @@ namespace GameEngine {
 	void Core::MainLoop(void) {
 		
 		while (42) {
-			this->m_manager->StartTimer();
 			std::list<GameSystems::BaseSystem *> listSystems = GameSystems::ObjectFactory::getInstance().getSystems();
+			std::list<GameObjects::BaseGameObject * > listCurrentObjects = GameSystems::ObjectFactory::getInstance().getCurrentObjects();
+			this->m_manager->StartTimer();
 			for each (GameSystems::BaseSystem *system in listSystems) {
-				if (system->Update(this->m_manager->GetLastTime(), GameSystems::ObjectFactory::getInstance().getCurrentObjects()) == 1) {
+				if (system->Update(this->m_manager->GetLastTime(), listCurrentObjects) == 1) {
 					return;
 				}
 			}

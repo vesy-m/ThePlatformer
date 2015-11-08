@@ -9,11 +9,13 @@
 #include "VectorDebugComponent.h"
 #include "TextComponent.h"
 #include "ButtonComponent.h"
+#include "MouseClickComponent.h"
 
 namespace GameSystems {
 	ObjectFactory::ObjectFactory()
 	{
 		stateGame = gameState::NONE;
+		systemNeedReinit = true;
 		listLevels = std::vector<GameEngine::Core::Level>();
 	}
 
@@ -42,12 +44,15 @@ namespace GameSystems {
 			}
 			else if (std::string(it->key) == "level") {
 				auto buttonLevel = new GameComponents::ButtonComponent(ret, GameComponents::ButtonComponent::ButtonType::LEVEL, it->value.toString());
+				auto mouse = new GameComponents::MouseClickComponent(ret);
 			}
 			else if (std::string(it->key) == "menu") {
 				auto buttonMenu = new GameComponents::ButtonComponent(ret, GameComponents::ButtonComponent::ButtonType::MENU, it->value.toString());
+				auto mouse = new GameComponents::MouseClickComponent(ret);
 			}
 			else if (std::string(it->key) == "function") {
 				auto buttonFunction = new GameComponents::ButtonComponent(ret, GameComponents::ButtonComponent::ButtonType::FUNCTION, it->value.toString());
+				auto mouse = new GameComponents::MouseClickComponent(ret);
 			}
 			else if (std::string(it->key) == "fps") {
 				auto fps = new GameComponents::TextComponent(ret);
@@ -138,12 +143,8 @@ namespace GameSystems {
 		Menu newMenu = Menu();
 		for (auto i : value) {
 			if (std::string(i->key) == "button") {
-				auto arr = i->value;
-				assert(arr.getTag() == GameTools::JSON_ARRAY);
-				for (auto j : arr) {
-					auto obj = parseObject(j->value);
-					if (obj != NULL) newMenu.addButton(obj);
-				}
+				auto obj = parseObject(i->value);
+				if (obj != NULL) newMenu.addButton(obj);
 			}
 		}
 		currentMenu = newMenu;
@@ -153,14 +154,14 @@ namespace GameSystems {
 		GameSystems::JSONParser fileParser(filename);
 		this->buildLevel(fileParser.getJSONValue());
 		this->stateGame = gameState::LEVEL;
-		this->initSystems();
+		systemNeedReinit = true;
 	}
 
 	void ObjectFactory::LoadMenuFileAsCurrent(const std::string &filename) {
 		GameSystems::JSONParser fileParser(filename);
 		this->buildMenu(fileParser.getJSONValue());
 		this->stateGame = gameState::MENU;
-		this->initSystems();
+		systemNeedReinit = true;
 	}
 
 	void ObjectFactory::putObjectDepthOrdered(GameObjects::BaseGameObject * obj) {
@@ -194,19 +195,23 @@ namespace GameSystems {
 			return this->currentMenu.getObjects();
 		}
 		else {
-			return std::list<GameObjects::BaseGameObject*>();
+			return this->currentLevel.getObjects(); // empty by default
 		}
 
 	}
 
 	const std::list<GameSystems::BaseSystem*>& ObjectFactory::getSystems()
 	{
+		if (systemNeedReinit) {
+			this->initSystems();
+		}
 		return this->m_systems;
 	}
 
 	void ObjectFactory::initSystems() {
 		for each (GameSystems::BaseSystem* system in this->m_systems)
 			system->Init(this->getCurrentObjects());
+		systemNeedReinit = false;
 	}
 
 	void ObjectFactory::addSystems(GameSystems::BaseSystem *newSystem)

@@ -3,6 +3,7 @@
 namespace GameComponents {
 	ButtonComponent::ButtonComponent(GameObjects::BaseGameObject* object, ButtonType buttonType, const std::string& actionName) : BaseComponent(object)
 	{
+		object->attachComponent(this);
 		this->buttonType = buttonType;
 		this->actionName = actionName;
 		this->typeMap[ButtonType::MENU] = &ButtonComponent::execMenu;
@@ -65,6 +66,13 @@ namespace GameComponents {
 
 	void ButtonComponent::changeResolution()
 	{
-		GameSystems::GraphicsSystem::Camera::getInstance().setResolution1080p();
+		if (GameSystems::GraphicsSystem::Camera::getInstance().resolutionHeight == 720) {
+			std::cout << "resolution change to 1080p" << std::endl;
+			GameSystems::GraphicsSystem::Camera::getInstance().setResolution1080p();
+		}
+		else {
+			std::cout << "resolution change to 720p" << std::endl;
+			GameSystems::GraphicsSystem::Camera::getInstance().setResolution720p();
+		}
 	}
 }

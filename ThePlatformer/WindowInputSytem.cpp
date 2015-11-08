@@ -4,6 +4,7 @@ namespace GameSystems {
 	WindowInputSytem::WindowInputSytem()
 	{
 		this->fullscreen = false;
+		this->window = NULL;
 	}
 
 
@@ -64,9 +65,11 @@ namespace GameSystems {
 
 	void WindowInputSytem::Init(std::list<GameObjects::BaseGameObject*>& listObjects)
 	{
-		this->window = new sf::Window(sf::VideoMode(1280, 720), "ThePlatformer", sf::Style::Close, sf::ContextSettings(32));
-		window->setVerticalSyncEnabled(false);
-		window->setKeyRepeatEnabled(true);
+		if (this->window == NULL) {
+			this->window = new sf::Window(sf::VideoMode(1280, 720), "ThePlatformer", sf::Style::Close, sf::ContextSettings(32));
+			window->setVerticalSyncEnabled(false);
+			window->setKeyRepeatEnabled(true);
+		}
 		for each (GameObjects::BaseGameObject* object in listObjects)
 		{
 			GameComponents::BaseComponent*component = object->getComponent(GameComponents::COMPONENT_TYPE::WINDOW);

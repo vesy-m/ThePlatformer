@@ -16,6 +16,7 @@ namespace GameComponents {
 	class VectorDebugComponent;
 	class Collider;
 	class BodyComponent;
+	class ButtonComponent;
 }
 
 namespace GameObjects {
@@ -39,6 +40,7 @@ namespace GameObjects {
 		void attachComponent(GameComponents::VectorDebugComponent*);
 		void attachComponent(GameComponents::Collider*);
 		void attachComponent(GameComponents::BodyComponent*);
+		void attachComponent(GameComponents::ButtonComponent*);
 		void sendMessage(GameMessage::Message*);
 		void setX(int x);
 		int getX();
@@ -71,6 +73,7 @@ namespace GameObjects {
 		GameComponents::VectorDebugComponent *m_vector;
 		GameComponents::Collider *m_collider;
 		GameComponents::BodyComponent *m_body;
+		GameComponents::ButtonComponent *m_button;
 		int x;
 		int y;
 		int height;

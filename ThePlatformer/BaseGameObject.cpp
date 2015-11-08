@@ -5,6 +5,7 @@
 #include "SpriteComponent.h"
 #include "TextComponent.h"
 #include "VectorDebugComponent.h"
+#include "ButtonComponent.h"
 
 namespace GameObjects {
 	BaseGameObject::BaseGameObject()
@@ -95,6 +96,11 @@ namespace GameObjects {
 		this->m_body = body;
 	}
 
+	void BaseGameObject::attachComponent(GameComponents::ButtonComponent *button)
+	{
+		this->m_button = button;
+	}
+
 	void BaseGameObject::sendMessage(GameMessage::Message *message)
 	{
 		if (this->m_body) this->m_body->sendMessage(message);
@@ -103,6 +109,7 @@ namespace GameObjects {
 		if (this->m_sprite) this->m_sprite->sendMessage(message);
 		if (this->m_text) this->m_text->sendMessage(message);
 		if (this->m_vector) this->m_vector->sendMessage(message);
+		if (this->m_button) this->m_button->sendMessage(message);
 	}
 
 	void BaseGameObject::setX(int x)
