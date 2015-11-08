@@ -21,11 +21,11 @@ int main()
 	core.Add((GameSystems::BaseSystem *)winInput);
 	core.Add((GameSystems::BaseSystem *)physics);
 	core.Add((GameSystems::BaseSystem *)graphics);
-	core.LoadLevelFile("level2.json");
+	core.LoadLevelFile("./config/level2.json");
 	
 	//a enlever de commentaire pour corriger frame rate
 	sf::Music music;
-	if (!music.openFromFile("dr_wily_stage.ogg"))
+	if (!music.openFromFile("./assets/audio/dr_wily_stage.ogg"))
 		return -1;
 	music.setVolume(5);
 	music.play();

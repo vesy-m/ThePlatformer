@@ -77,7 +77,7 @@ namespace GameSystems {
 			arrow->setDepth(0);
 			arrow->setType(GameObjects::objectType::PROJECTILE);
 
-			new GameComponents::SpriteComponent(arrow, "minecraft_arrow.png");
+			new GameComponents::SpriteComponent(arrow, "./assets/sprite/minecraft_arrow.png");
 			new GameComponents::BoxCollider(arrow);
 			new GameComponents::VectorDebugComponent(arrow);
 			body = new GameComponents::BodyComponent(arrow);

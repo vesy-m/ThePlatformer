@@ -8,8 +8,8 @@
       "height" : 42,
       "width" : 30,
 	  "mass" : 20,
-      "sprite" : "desc-megaman.json",
-      "keyboard" : "input_keyboard1.json",
+      "sprite" : "./config/desc-megaman.json",
+      "keyboard" : "./config/input_keyboard1.json",
       "body" : true,
       "boxcollider" : true,
       "vector" : true,
@@ -23,8 +23,8 @@
       "height" : 42,
       "width" : 30,
 	  "mass" : 20,
-      "sprite" : "desc-megaman.json",
-      "keyboard" : "input_keyboard2.json",
+      "sprite" : "./config/desc-megaman.json",
+      "keyboard" : "./config/input_keyboard2.json",
       "body" : true,
       "boxcollider" : true,
       "vector" : true,
@@ -45,7 +45,7 @@
       "depth": 3,
       "height": 142,
       "width": 527,
-      "sprite": "platforme1.png",
+      "sprite": "./assets/sprite/platforme1.png",
       "vector": true,
       "boxcollider": true
     },
@@ -55,7 +55,7 @@
       "y" : 550,
       "scale": 0.2,
       "depth" : 3,
-      "sprite" : "platforme1.png",
+      "sprite" : "./assets/sprite/platforme1.png",
       "vector": true,
       "height" : 142,
       "width" : 527,
@@ -69,7 +69,7 @@
       "depth" : 3,
       "height" : 142,
       "width" : 527,
-      "sprite" : "platforme1.png",
+      "sprite" : "./assets/sprite/platforme1.png",
       "vector" : true,
       "boxcollider" : true
     },
@@ -81,7 +81,7 @@
       "depth": 3,
       "height": 142,
       "width": 527,
-      "sprite": "platforme1.png",
+      "sprite": "./assets/sprite/platforme1.png",
       "vector": true,
       "boxcollider": true
     },
@@ -93,7 +93,7 @@
       "depth" : 3,
       "height" : 106,
       "width" : 138,
-      "sprite" : "tree1.png"
+      "sprite" : "./assets/sprite/tree1.png"
     },
 	{
       "name" : "grass1",
@@ -103,7 +103,7 @@
       "depth" : 1,
       "height" : 62,
       "width" : 32,
-      "sprite" : "grass1.png"
+      "sprite" : "./assets/sprite/grass1.png"
     },
 	{
       "name" : "grass2",
@@ -113,7 +113,7 @@
       "depth" : 1,
       "height" : 62,
       "width" : 32,
-      "sprite" : "grass1.png"
+      "sprite" : "./assets/sprite/grass1.png"
     },
 	{
       "name" : "grass3",
@@ -123,7 +123,7 @@
       "depth" : 1,
       "height" : 62,
       "width" : 32,
-      "sprite" : "grass1.png"
+      "sprite" : "./assets/sprite/grass1.png"
     },
 	{
       "name" : "grass4",
@@ -133,7 +133,7 @@
       "depth" : 1,
       "height" : 62,
       "width" : 32,
-      "sprite" : "grass1.png"
+      "sprite" : "./assets/sprite/grass1.png"
     },
 	{
       "name" : "sun",
@@ -143,7 +143,7 @@
       "depth" : 1,
       "height" : 48,
       "width" : 48,
-      "sprite" : "sun.png"
+      "sprite" : "./assets/sprite/sun.png"
     },
     {
       "name" : "ground",
@@ -153,7 +153,7 @@
       "depth" : 3,
       "height" : 110,
       "width" : 1920,
-      "sprite" : "ground.png",
+      "sprite" : "./assets/sprite/ground.png",
       "vector" : true,
       "boxcollider" : true
     }
