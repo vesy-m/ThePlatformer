@@ -38,8 +38,8 @@ namespace GameSystems {
 
 			for each (GameObjects::BaseGameObject* object in listObjects)
 			{
-				std::vector<GameComponents::BaseComponent*> componentList = object->getComponents(GameComponents::COMPONENT_TYPE::WINDOW);
-				for each (GameComponents::BaseComponent* component in componentList) ((GameComponents::InputComponent *)component)->UpdateInputState(event, dt);
+				GameComponents::InputComponent *component = reinterpret_cast<GameComponents::InputComponent*>(object->getComponent(GameComponents::COMPONENT_TYPE::WINDOW));
+				if (component) component->UpdateInputState(event, dt);
 			}
 		}
 
@@ -55,8 +55,8 @@ namespace GameSystems {
 
 		for each (GameObjects::BaseGameObject* object in listObjects)
 		{
-			std::vector<GameComponents::BaseComponent*> componentList = object->getComponents(GameComponents::COMPONENT_TYPE::WINDOW);
-			for each (GameComponents::BaseComponent* component in componentList) component->Update(dt);
+			GameComponents::BaseComponent* component = object->getComponent(GameComponents::COMPONENT_TYPE::WINDOW);
+			if(component) component->Update(dt);
 		}
 		window->display();
 		return 0;
@@ -69,8 +69,8 @@ namespace GameSystems {
 		window->setKeyRepeatEnabled(true);
 		for each (GameObjects::BaseGameObject* object in listObjects)
 		{
-			std::vector<GameComponents::BaseComponent*> componentList = object->getComponents(GameComponents::COMPONENT_TYPE::WINDOW);
-			for each (GameComponents::BaseComponent* component in componentList) component->Init();
+			GameComponents::BaseComponent*component = object->getComponent(GameComponents::COMPONENT_TYPE::WINDOW);
+			if (component) component->Init();
 		}
 	}
 

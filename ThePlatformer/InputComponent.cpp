@@ -4,15 +4,12 @@ namespace GameComponents {
 
 	InputComponent::InputComponent(GameObjects::BaseGameObject *object) : BaseComponent(object)
 	{
+		object->attachComponent(this);
+		this->duration = 250.0f;
 	}
 
 	InputComponent::~InputComponent()
 	{
-	}
-
-	COMPONENT_TYPE InputComponent::getType()
-	{
-		return this->componentType;
 	}
 
 	GameObjects::BaseGameObject * InputComponent::getComposition()
@@ -41,7 +38,17 @@ namespace GameComponents {
 			}
 			else if (it->first == INPUT_TYPE::ROTATE_LEFT && it->second == true)	getComposition()->sendMessage(new GameMessage::Message(GameMessage::Message::ROTATE_LEFT));
 			else if (it->first == INPUT_TYPE::ROTATE_RIGHT && it->second == true) getComposition()->sendMessage(new GameMessage::Message(GameMessage::Message::ROTATE_RIGHT));
-			else if (it->first == INPUT_TYPE::FIRE && it->second == true) getComposition()->sendMessage(new GameMessage::Message(GameMessage::Message::FIRE));
+			else if (it->first == INPUT_TYPE::FIRE && it->second == true)
+				this->duration += (float)((this->duration + dt > 1000.0f) ? (1000.0f - this->duration) : dt);
+				//getComposition()->sendMessage(new GameMessage::Message(GameMessage::Message::FIRE));
 		}
+	}
+	void InputComponent::setDuration(float duration)
+	{
+		this->duration = duration;
+	}
+	float InputComponent::getDuration()
+	{
+		return this->duration;
 	}
 }

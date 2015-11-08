@@ -15,13 +15,11 @@ namespace GameComponents {
 
 	void KeyboardInputComponent::UpdateInputState(sf::Event event, double dt)
 	{
-		static float duration = 250.0f;
+		//static float duration = 250.0f;
 		for (auto it = this->keyboardMap.begin(); it != this->keyboardMap.end(); ++it)
 		{
-			if (event.type == sf::Event::KeyPressed)
-			{
+			if (event.type == sf::Event::KeyPressed) {
 				if (event.key.code == it->second) inputState.at(it->first) = true;
-				//if (it->first == INPUT_TYPE::FIRE) duration += (float)((duration + dt > 1000.0f) ? (1000.0f - duration) : dt);
 			}
 			else if (event.type == sf::Event::KeyReleased)
 			{
@@ -36,14 +34,6 @@ namespace GameComponents {
 					case INPUT_TYPE::RIGHT:
 						getComposition()->sendMessage(new GameMessage::Message(GameMessage::Message::RIGHT_RELEASED));
 						break;
-					/*case INPUT_TYPE::FIRE:
-					{
-						GameComponents::SpriteComponent *sprite = reinterpret_cast<GameComponents::SpriteComponent*>(getComposition()->getComponent(GameComponents::SPRITE));
-						GameObjects::BaseGameObject *arrow = GameSystems::ObjectFactory::getInstance().createArrow(getComposition()->getX(),
-							getComposition()->getY(), duration, sprite->revertX);
-						duration = 250.0f;
-						break;
-					}*/
 					default:
 						break;
 					}
@@ -52,10 +42,9 @@ namespace GameComponents {
 			else if (event.type == sf::Event::MouseButtonPressed)
 			{
 				if (event.mouseButton.button == it->second) inputState.at(it->first) = true;
-				if (it->first == INPUT_TYPE::FIRE) {
+				/*if (it->first == INPUT_TYPE::FIRE) {
 					duration += (float)((duration + dt > 1000.0f) ? (1000.0f - duration) : dt);
-					std::cout << "Duration: " << duration << std::endl;
-				}
+				}*/
 			}
 			else if (event.type == sf::Event::MouseButtonReleased)
 			{
@@ -66,14 +55,12 @@ namespace GameComponents {
 					{
 					case INPUT_TYPE::FIRE:
 					{
-						std::cout << "mouse x: " << event.mouseButton.x << std::endl;
-						std::cout << "mouse y: " << event.mouseButton.y << std::endl;
-						glm::vec2 direction = glm::vec2(event.mouseButton.x - this->getComposition()->getX(),
-							event.mouseButton.y - this->getComposition()->getY());
+						glm::vec2 direction = glm::vec2(event.mouseButton.x - (this->getComposition()->getX() + (this->getComposition()->getHeight() / 2)),
+							event.mouseButton.y - (this->getComposition()->getY() + (this->getComposition()->getHeight() / 2)));
 						GameComponents::SpriteComponent *sprite = reinterpret_cast<GameComponents::SpriteComponent*>(getComposition()->getComponent(GameComponents::SPRITE));
 						GameObjects::BaseGameObject *arrow = GameSystems::ObjectFactory::getInstance().createArrow(getComposition(), getComposition()->getX(),
-							getComposition()->getY(), duration, glm::normalize(direction));
-						duration = 250.0f;
+							getComposition()->getY(), this->getDuration(), glm::normalize(direction));
+						this->setDuration(250.0f);
 						break;
 					}
 					}

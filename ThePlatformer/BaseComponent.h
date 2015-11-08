@@ -12,7 +12,6 @@ namespace GameComponents {
 	{
 		WINDOW,
 		SPRITE,
-		LOGIC,
 		PHYSIC,
 		COLLIDER,
 		DEBUGVECTOR,

@@ -1,9 +1,14 @@
 #include "BaseGameObject.h"
+#include "BodyComponent.h"
+#include "Collider.h"
+#include "InputComponent.h"
+#include "SpriteComponent.h"
+#include "TextComponent.h"
+#include "VectorDebugComponent.h"
 
 namespace GameObjects {
 	BaseGameObject::BaseGameObject()
 	{
-		this->componentsList = std::vector<GameComponents::BaseComponent*>();
 		x = 0;
 		y = 0;
 		height = 0;
@@ -12,49 +17,93 @@ namespace GameObjects {
 		rotate = 0;
 		scale = 1;
 		mass = 1.0f;
+		bounce = 0.0f;
 		to_destroy = false;
 		type = objectType::NONE;
+		this->m_body = NULL;
+		this->m_collider = NULL;
+		this->m_input = NULL;
+		this->m_sprite = NULL;
+		this->m_text = NULL;
+		this->m_vector = NULL;
 	}
 
 	void BaseGameObject::Init(void) {
-		for (auto it = this->componentsList.begin(); it != this->componentsList.end(); ++it) (*it)->Init();
+		if (this->m_body) this->m_body->Init();
+		if (this->m_collider) this->m_collider->Init();
+		if (this->m_input) this->m_input->Init();
+		if (this->m_sprite) this->m_sprite->Init();
+		if (this->m_text) this->m_text->Init();
+		if (this->m_vector) this->m_vector->Init();
 	}
 
 	BaseGameObject::~BaseGameObject()
 	{
-		for (auto it = this->componentsList.begin(); it != this->componentsList.end(); ++it) {
-			delete *it;
-		}
+		delete this->m_body;
+		delete this->m_collider;
+		delete this->m_input;
+		delete this->m_sprite;
+		delete this->m_text;
+		delete this->m_vector;
 	}
 
 	GameComponents::BaseComponent *BaseGameObject::getComponent(GameComponents::COMPONENT_TYPE type) {
-		for (auto component : this->componentsList) {
-			if (component->getType() == type) return component;
+		switch (type) {
+		case GameComponents::COLLIDER:
+			return this->m_collider;
+		case GameComponents::DEBUGVECTOR:
+			return this->m_vector;
+		case GameComponents::PHYSIC:
+			return this->m_body;
+		case GameComponents::WINDOW:
+			return this->m_input;
+		case GameComponents::TEXT:
+			return this->m_text;
+		case GameComponents::SPRITE:
+			return this->m_sprite;
+		default:
+			return NULL;
 		}
-		return NULL;
 	}
 
-	std::vector<GameComponents::BaseComponent*> BaseGameObject::getComponents(GameComponents::COMPONENT_TYPE type)
+	void BaseGameObject::attachComponent(GameComponents::InputComponent *input)
 	{
-		// a changer
-		std::vector<GameComponents::BaseComponent*> newVect = std::vector<GameComponents::BaseComponent*>();
-		for (size_t i = 0; i < this->componentsList.size(); i++)
-		{
-			GameComponents::BaseComponent* elem = this->componentsList.at(i);
-			if (elem->getType() == type) {
-				newVect.push_back(elem);
-			}
-		}
-		return newVect;
+		this->m_input = input;
 	}
-	void BaseGameObject::attachComponent(GameComponents::BaseComponent *component)
+
+	void BaseGameObject::attachComponent(GameComponents::Collider *collider)
 	{
-		this->componentsList.push_back(component);
+		this->m_collider = collider;
+	}
+
+	void BaseGameObject::attachComponent(GameComponents::VectorDebugComponent *vector)
+	{
+		this->m_vector = vector;
+	}
+
+	void BaseGameObject::attachComponent(GameComponents::TextComponent *text)
+	{
+		this->m_text = text;
+	}
+
+	void BaseGameObject::attachComponent(GameComponents::SpriteComponent *sprite)
+	{
+		this->m_sprite = sprite;;
+	}
+
+	void BaseGameObject::attachComponent(GameComponents::BodyComponent *body)
+	{
+		this->m_body = body;
 	}
 
 	void BaseGameObject::sendMessage(GameMessage::Message *message)
 	{
-		for each (GameComponents::BaseComponent *component in this->componentsList) component->sendMessage(message);
+		if (this->m_body) this->m_body->sendMessage(message);
+		if (this->m_collider) this->m_collider->sendMessage(message);
+		if (this->m_input) this->m_input->sendMessage(message);
+		if (this->m_sprite) this->m_sprite->sendMessage(message);
+		if (this->m_text) this->m_text->sendMessage(message);
+		if (this->m_vector) this->m_vector->sendMessage(message);
 	}
 
 	void BaseGameObject::setX(int x)
@@ -116,6 +165,14 @@ namespace GameObjects {
 	float BaseGameObject::getMass()
 	{
 		return this->mass;
+	}
+	void BaseGameObject::setBounce(float bounce)
+	{
+		this->bounce = bounce;
+	}
+	float BaseGameObject::getBounce()
+	{
+		return this->bounce;
 	}
 	void BaseGameObject::setRotate(int rotate)
 	{

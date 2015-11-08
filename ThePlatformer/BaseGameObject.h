@@ -10,6 +10,12 @@
 namespace GameComponents {
 	enum COMPONENT_TYPE;
 	class BaseComponent;
+	class InputComponent;
+	class SpriteComponent;
+	class TextComponent;
+	class VectorDebugComponent;
+	class Collider;
+	class BodyComponent;
 }
 
 namespace GameObjects {
@@ -26,9 +32,13 @@ namespace GameObjects {
 		BaseGameObject();
 		~BaseGameObject();
 		GameComponents::BaseComponent* getComponent(GameComponents::COMPONENT_TYPE);
-		std::vector<GameComponents::BaseComponent*> getComponents(GameComponents::COMPONENT_TYPE type);
 		void Init(void);
-		void attachComponent(GameComponents::BaseComponent*);
+		void attachComponent(GameComponents::InputComponent*);
+		void attachComponent(GameComponents::SpriteComponent*);
+		void attachComponent(GameComponents::TextComponent*);
+		void attachComponent(GameComponents::VectorDebugComponent*);
+		void attachComponent(GameComponents::Collider*);
+		void attachComponent(GameComponents::BodyComponent*);
 		void sendMessage(GameMessage::Message*);
 		void setX(int x);
 		int getX();
@@ -44,6 +54,8 @@ namespace GameObjects {
 		float getScale();
 		void setMass(float mass);
 		float getMass();
+		void setBounce(float bounce);
+		float getBounce();
 		void setRotate(int rotate);
 		int getRotate();
 		void setName(std::string name);
@@ -54,7 +66,13 @@ namespace GameObjects {
 		void destroy(bool);
 		bool destroy(void);
 	private:
-		std::vector<GameComponents::BaseComponent*> componentsList;
+		//std::vector<GameComponents::BaseComponent*> componentsList;
+		GameComponents::InputComponent *m_input;
+		GameComponents::SpriteComponent *m_sprite;
+		GameComponents::TextComponent *m_text;
+		GameComponents::VectorDebugComponent *m_vector;
+		GameComponents::Collider *m_collider;
+		GameComponents::BodyComponent *m_body;
 		int x;
 		int y;
 		int height;
@@ -63,6 +81,7 @@ namespace GameObjects {
 		int rotate;
 		float scale;
 		float mass;
+		float bounce;
 		std::string name;
 		objectType type;
 		bool to_destroy;

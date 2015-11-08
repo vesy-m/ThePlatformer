@@ -46,6 +46,15 @@ namespace GameComponents {
 							getComposition()->sendMessage(new GameMessage::Message(GameMessage::Message::RIGHT_RELEASED));
 						else if(it->first == INPUT_TYPE::LEFT)
 							getComposition()->sendMessage(new GameMessage::Message(GameMessage::Message::LEFT_RELEASED));
+						else if (it->first == INPUT_TYPE::LEFT) {
+							int centerX = this->getComposition()->getX() + (this->getComposition()->getHeight() / 2);
+							int centerY = this->getComposition()->getY() + (this->getComposition()->getHeight() / 2);
+							glm::vec2 direction = glm::vec2((axisX + centerX) - centerX, (axisY + centerY) - centerY);
+							GameComponents::SpriteComponent *sprite = reinterpret_cast<GameComponents::SpriteComponent*>(getComposition()->getComponent(GameComponents::SPRITE));
+							GameObjects::BaseGameObject *arrow = GameSystems::ObjectFactory::getInstance().createArrow(getComposition(), getComposition()->getX(),
+								getComposition()->getY(), this->getDuration(), glm::normalize(direction));
+							this->setDuration(250.0f);
+						}
 					}
 				}
 			}
@@ -54,14 +63,17 @@ namespace GameComponents {
 
 	bool ControllerInputComponent::DetectAxisInput(sf::Event event, int button)
 	{
-		if (event.joystickMove.axis == sf::Joystick::X && button >= 50 && button <= 53)
+		if (event.joystickMove.axis == sf::Joystick::X && button >= 50 && button <= 53) {
+			axisX = event.joystickMove.position;
 			return true;
-		else if (event.joystickMove.axis == sf::Joystick::U && button >= 60 && button <= 63)
-			return true;
-		else if (event.joystickMove.axis == sf::Joystick::Z && (button == 70 || button == 71))
-			return true;
-		else
+		}
+		else if (event.joystickMove.axis == sf::Joystick::Y) {
+			axisY = event.joystickMove.position;
 			return false;
+		}
+		else if (event.joystickMove.axis == sf::Joystick::U && button >= 60 && button <= 63) return true;
+		else if (event.joystickMove.axis == sf::Joystick::Z && (button == 70 || button == 71)) return true;
+		else return false;
 	}
 
 	bool ControllerInputComponent::CheckInputValue(sf::Event event, int button)
@@ -69,28 +81,22 @@ namespace GameComponents {
 		switch (button)
 		{
 		case 52:
-			if (event.joystickMove.position <= -98)
-				return true;
+			if (event.joystickMove.position <= -98) return true;
 			break;
 		case 51:
-			if (event.joystickMove.position >= 98)
-				return true;
+			if (event.joystickMove.position >= 98) return true;
 			break;
 		case 62:
-			if (event.joystickMove.position <= -98)
-				return true;
+			if (event.joystickMove.position <= -98) return true;
 			break;
 		case 61:
-			if (event.joystickMove.position >= 98)
-				return true;
+			if (event.joystickMove.position >= 98) return true;
 			break;
 		case 71:
-			if (event.joystickMove.position <= -98)
-				return true;
+			if (event.joystickMove.position <= -98) return true;
 			break;
 		case 70:
-			if (event.joystickMove.position >= 98)
-				return true;
+			if (event.joystickMove.position >= 98) return true;
 			break;
 		default:
 			break;
@@ -105,6 +111,9 @@ namespace GameComponents {
 			GameSystems::JSONParser parser(filename);
 			ParseInputFile(parser.getJSONValue());
 		}
+
+		axisX = 0.0;
+		axisY = 0.0;
 	}
 
 	int	ControllerInputComponent::ParseInputFile(JsonValue o) {

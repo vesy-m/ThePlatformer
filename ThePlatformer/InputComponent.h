@@ -11,7 +11,7 @@
 
 namespace GameComponents {
 
-	class InputComponent : BaseComponent
+	class InputComponent : public BaseComponent
 	{	
 	public:
 		enum INPUT_TYPE
@@ -27,7 +27,7 @@ namespace GameComponents {
 		};
 		InputComponent(GameObjects::BaseGameObject *);
 		virtual ~InputComponent();
-		virtual COMPONENT_TYPE getType();
+		virtual COMPONENT_TYPE getType() { return WINDOW; }
 		virtual GameObjects::BaseGameObject *getComposition();
 		virtual void Update(double);
 
@@ -35,8 +35,11 @@ namespace GameComponents {
 		virtual void Init() = 0;
 		virtual void sendMessage(GameMessage::Message*) = 0;
 
+		void setDuration(float);
+		float getDuration();
+
 	protected:
-		const COMPONENT_TYPE componentType = WINDOW;
 		std::map<INPUT_TYPE, bool> inputState;
+		float duration;
 	};
 }

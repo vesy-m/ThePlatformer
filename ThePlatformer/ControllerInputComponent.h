@@ -22,9 +22,12 @@ namespace GameComponents {
 		bool ControllerInputComponent::DetectAxisInput(sf::Event event, int button);
 		bool ControllerInputComponent::CheckInputValue(sf::Event event, int button);
 		int	ControllerInputComponent::ParseInputFile(JsonValue o);
+
 	private:
 		std::map<INPUT_TYPE, int> controllerMap;
 		std::string filename;
+		float axisX;
+		float axisY;
 	};
 }
 

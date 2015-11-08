@@ -5,6 +5,7 @@ namespace GameComponents {
 
 	BodyComponent::BodyComponent(GameObjects::BaseGameObject *object) : BaseComponent(object)
 	{
+		object->attachComponent(this);
 	}
 
 	BodyComponent::~BodyComponent()
@@ -27,7 +28,7 @@ namespace GameComponents {
 		velocity = glm::vec2(0, 0);
 		acceleration = glm::vec2(0, 0);
 		mass = this->composition->getMass();
-		gravity = glm::vec2(0, 9.8);
+		gravity = glm::vec2(0, 0);
 		forces = glm::vec2(0, 0);
 		onGround = false;
 		lastCollisionVelocity = glm::vec2(0, 0);
@@ -47,7 +48,8 @@ namespace GameComponents {
 			forces.y = -150.0f;
 			velocity.y = -50.0f * intensity / 1000.0f;*/
 			forces = dir * 150.0f;
-			velocity = dir * 50.0f;
+			velocity = dir * 50.0f * intensity / 1000.0f;
+			gravity = glm::vec2(0, 9.8);
 			onGround = false;
 		}
 	}
