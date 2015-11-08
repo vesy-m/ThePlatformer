@@ -34,6 +34,7 @@ namespace GameSystems {
 			else if (std::string(it->key) == "rotate") ret->setRotate((int) it->value.toNumber());
 			else if (std::string(it->key) == "width") ret->setWidth((int) it->value.toNumber());
 			else if (std::string(it->key) == "height") ret->setHeight((int) it->value.toNumber());
+			else if (std::string(it->key) == "projectile_type") ret->setProjectileType(it->value.toString());
 			else if (std::string(it->key) == "name") ret->setName(it->value.toString());
 			else if (std::string(it->key) == "type") ret->setType((GameObjects::objectType)(int)it->value.toNumber());
 			else if (std::string(it->key) == "sprite") {
@@ -48,7 +49,7 @@ namespace GameSystems {
 			else if (std::string(it->key) == "boxcollider") {
 				auto vector = new GameComponents::BoxCollider(ret);
 			}
-			else if (std::string(it->key) == "joystick") {
+			else if (std::string(it->key) == "controller") {
 				auto input = new GameComponents::ControllerInputComponent(ret, it->value.toString());
 			}
 			else if (std::string(it->key) == "keyboard") {
@@ -66,38 +67,54 @@ namespace GameSystems {
 	}
 
 	GameObjects::BaseGameObject *ObjectFactory::createArrow(GameObjects::BaseGameObject *shooter, unsigned int x, unsigned int y, float base_force, glm::vec2 direction) {
-		GameObjects::Projectile *arrow = NULL;
+		GameObjects::Projectile *projectile = NULL;
 		GameComponents::BodyComponent *body = NULL;
 		if (this->old_objects.size() == 0) {
-			arrow = new GameObjects::Projectile(shooter);
-			arrow->setName(shooter->getName());
-			arrow->setHeight(int(76 * 0.25f));
-			arrow->setWidth(int(150 * 0.25f));
-			arrow->setScale(0.25f);
-			arrow->setMass(50.0f);
-			arrow->setDepth(0);
-			arrow->setType(GameObjects::objectType::PROJECTILE);
+			projectile = new GameObjects::Projectile(shooter);
+			projectile->setName(shooter->getName());
 
-			new GameComponents::SpriteComponent(arrow, "./assets/sprite/minecraft_arrow.png");
-			new GameComponents::BoxCollider(arrow);
-			new GameComponents::VectorDebugComponent(arrow);
-			body = new GameComponents::BodyComponent(arrow);
+			projectile->setMass(50.0f);
+			projectile->setDepth(0);
+			projectile->setType(GameObjects::objectType::PROJECTILE);
+
+			if (std::string("tennis").compare(shooter->getProjectileType()) == 0) {
+				projectile->setHeight(int(30 * 0.50f));
+				projectile->setWidth(int(30 * 0.50f));
+				projectile->setScale(0.50f);
+				new GameComponents::SpriteComponent(projectile, "./assets/sprite/tennis_ball.png");
+			}
+			else if (std::string("soccer").compare(shooter->getProjectileType()) == 0) {
+				projectile->setHeight(int(30 * 0.50f));
+				projectile->setWidth(int(30 * 0.50f));
+				projectile->setScale(0.50f);
+				new GameComponents::SpriteComponent(projectile, "./assets/sprite/soccer_ball.png");
+			}
+			else {
+				projectile->setHeight(int(76 * 0.25f));
+				projectile->setWidth(int(150 * 0.25f));
+				projectile->setScale(0.25f);
+				new GameComponents::SpriteComponent(projectile, "./assets/sprite/minecraft_arrow.png");
+			}
+
+			new GameComponents::BoxCollider(projectile);
+			new GameComponents::VectorDebugComponent(projectile);
+			body = new GameComponents::BodyComponent(projectile);
 		}
 		else {
-			arrow = reinterpret_cast<GameObjects::Projectile*>(this->old_objects.front());
+			projectile = reinterpret_cast<GameObjects::Projectile*>(this->old_objects.front());
 			this->old_objects.pop_front();
-			arrow->destroy(false);
+			projectile->destroy(false);
 
-			body = dynamic_cast<GameComponents::BodyComponent*>(arrow->getComponent(GameComponents::PHYSIC));
+			body = dynamic_cast<GameComponents::BodyComponent*>(projectile->getComponent(GameComponents::PHYSIC));
 		}
-		assert(arrow != NULL);
+		assert(projectile != NULL);
 		assert(body != NULL);
-		arrow->setX(x);
-		arrow->setY(y);
-		arrow->Init();
+		projectile->setX(x);
+		projectile->setY(y);
+		projectile->Init();
 		body->Init(base_force, direction);
-		this->currentLevel.putObjectDepthOrdered(arrow);
-		return (arrow);
+		this->currentLevel.putObjectDepthOrdered(projectile);
+		return (projectile);
 	}
 
 	void ObjectFactory::buildLevel(GameTools::JsonValue &value) {

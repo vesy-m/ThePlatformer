@@ -58,6 +58,8 @@ namespace GameObjects {
 		float getBounce();
 		void setRotate(int rotate);
 		int getRotate();
+		void setProjectileType(std::string);
+		std::string getProjectileType();
 		void setName(std::string name);
 		std::string getName();
 		void setType(objectType newtype);
@@ -82,6 +84,7 @@ namespace GameObjects {
 		float scale;
 		float mass;
 		float bounce;
+		std::string projectileType;
 		std::string name;
 		objectType type;
 		bool to_destroy;

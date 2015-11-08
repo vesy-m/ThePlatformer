@@ -5,7 +5,7 @@ namespace GameComponents {
 	InputComponent::InputComponent(GameObjects::BaseGameObject *object) : BaseComponent(object)
 	{
 		object->attachComponent(this);
-		this->duration = 250.0f;
+		this->duration = 500.0f;
 	}
 
 	InputComponent::~InputComponent()

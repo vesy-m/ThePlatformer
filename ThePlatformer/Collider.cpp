@@ -127,7 +127,7 @@ namespace GameComponents {
 		this->min = glm::vec2(this->composition->getX(), this->composition->getY());
 		this->max = glm::vec2(this->composition->getX() + this->composition->getWidth(), this->composition->getY() + this->composition->getHeight());
 
-		if (this->composition->getType() == GameObjects::PROJECTILE)
+		if (this->composition->getType() != GameObjects::NONE)
 		{
 			for each(GameObjects::BaseGameObject* object in GameSystems::ObjectFactory::getInstance().getCurrentLevel().getObjects())
 			{
@@ -140,6 +140,8 @@ namespace GameComponents {
 
 				if (this->composition->getType() == GameObjects::PROJECTILE) {
 					if (object->getType() == GameObjects::PLAYER && object->getName().compare(this->composition->getName()) == 0)
+						continue;
+					if (object->getType() == GameObjects::PROJECTILE)
 						continue;
 				}
 				if (object->getComponent(GameComponents::COMPONENT_TYPE::COLLIDER))
@@ -158,10 +160,10 @@ namespace GameComponents {
 						if (other->composition->getType() == GameObjects::PROJECTILE) other->composition->destroy(true);
 						else if (this->composition->getType() == GameObjects::PROJECTILE) this->composition->destroy(true);
 						
-						/*if (this->composition->getType() == GameObjects::PROJECTILE && other->composition->getType() == GameObjects::PLAYER)
+						if (this->composition->getType() == GameObjects::PROJECTILE && other->composition->getType() == GameObjects::PLAYER)
 							other->composition->destroy(true);
 						else if (this->composition->getType() == GameObjects::PLAYER && other->composition->getType() == GameObjects::PROJECTILE)
-							this->composition->destroy(true);*/
+							this->composition->destroy(true);
 
 
 						ResolveCollision(manifold);

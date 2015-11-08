@@ -42,9 +42,6 @@ namespace GameComponents {
 			else if (event.type == sf::Event::MouseButtonPressed)
 			{
 				if (event.mouseButton.button == it->second) inputState.at(it->first) = true;
-				/*if (it->first == INPUT_TYPE::FIRE) {
-					duration += (float)((duration + dt > 1000.0f) ? (1000.0f - duration) : dt);
-				}*/
 			}
 			else if (event.type == sf::Event::MouseButtonReleased)
 			{
@@ -60,7 +57,7 @@ namespace GameComponents {
 						GameComponents::SpriteComponent *sprite = reinterpret_cast<GameComponents::SpriteComponent*>(getComposition()->getComponent(GameComponents::SPRITE));
 						GameObjects::BaseGameObject *arrow = GameSystems::ObjectFactory::getInstance().createArrow(getComposition(), getComposition()->getX(),
 							getComposition()->getY(), this->getDuration(), glm::normalize(direction));
-						this->setDuration(250.0f);
+						this->setDuration(500.0f);
 						break;
 					}
 					}

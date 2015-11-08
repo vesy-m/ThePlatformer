@@ -182,6 +182,14 @@ namespace GameObjects {
 	{
 		return this->rotate;
 	}
+	void BaseGameObject::setProjectileType(std::string projectileType)
+	{
+		this->projectileType = projectileType;
+	}
+	std::string BaseGameObject::getProjectileType()
+	{
+		return this->projectileType;
+	}
 	void BaseGameObject::setName(std::string name)
 	{
 		this->name = name;
