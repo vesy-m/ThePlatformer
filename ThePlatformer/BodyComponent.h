@@ -19,7 +19,7 @@ namespace GameComponents {
 		virtual COMPONENT_TYPE getType();
 		virtual void Update(double);
 		virtual void Init();
-		virtual void Init(float, bool);
+		virtual void Init(float, glm::vec2);
 		void sendMessage(GameMessage::Message*);
 
 		void Integrate(float dt);

@@ -25,6 +25,9 @@ namespace GameComponents {
 	private:
 		std::map<INPUT_TYPE, int> controllerMap;
 		std::string filename;
+		int controllerNumber;
+		float aimAxisX;
+		float aimAxisY;
 	};
 }
 

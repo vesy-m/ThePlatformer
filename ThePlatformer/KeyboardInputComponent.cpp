@@ -15,13 +15,11 @@ namespace GameComponents {
 
 	void KeyboardInputComponent::UpdateInputState(sf::Event event, double dt)
 	{
-		static float duration = 250.0f;
+		//static float duration = 250.0f;
 		for (auto it = this->keyboardMap.begin(); it != this->keyboardMap.end(); ++it)
 		{
-			if (event.type == sf::Event::KeyPressed)
-			{
+			if (event.type == sf::Event::KeyPressed) {
 				if (event.key.code == it->second) inputState.at(it->first) = true;
-				if (it->first == INPUT_TYPE::FIRE) duration += (float)((duration + dt > 1000.0f) ? (1000.0f - duration) : dt);
 			}
 			else if (event.type == sf::Event::KeyReleased)
 			{
@@ -36,16 +34,44 @@ namespace GameComponents {
 					case INPUT_TYPE::RIGHT:
 						getComposition()->sendMessage(new GameMessage::Message(GameMessage::Message::RIGHT_RELEASED));
 						break;
-					case INPUT_TYPE::FIRE:
-					{
-						GameComponents::SpriteComponent *sprite = reinterpret_cast<GameComponents::SpriteComponent*>(getComposition()->getComponent(GameComponents::SPRITE));
-						GameObjects::BaseGameObject *arrow = GameSystems::ObjectFactory::getInstance().createArrow(getComposition()->getX(),
-							getComposition()->getY(), duration, sprite->revertX);
-						duration = 250.0f;
-						break;
-					}
 					default:
 						break;
+					}
+				}
+			}
+			else if (event.type == sf::Event::MouseButtonPressed)
+			{
+				if (event.mouseButton.button == it->second) inputState.at(it->first) = true;
+			}
+			else if (event.type == sf::Event::MouseButtonReleased)
+			{
+				if (event.key.code == it->second)
+				{
+					inputState.at(it->first) = false;
+					switch (it->first)
+					{
+					case INPUT_TYPE::FIRE:
+					{
+						GLint iViewport[4];
+						glGetIntegerv(GL_VIEWPORT, iViewport);
+						int screenWidth = iViewport[0] + iViewport[2];
+						int screenHeight = iViewport[1] + iViewport[3];
+						int resolutionWidth = GameSystems::GraphicsSystem::Camera::getInstance().resolutionWidth;
+						int resolutionHeight = GameSystems::GraphicsSystem::Camera::getInstance().resolutionHeight;
+
+						/*std::cout << "screenWidth: " << screenWidth << "\tscreenHeight: " << screenHeight << std::endl;
+						std::cout << "resolutionWidth: " << resolutionWidth << "\tresolutionHeight: " << resolutionHeight << std::endl;*/
+
+						int centerX = (this->getComposition()->getX() + (this->getComposition()->getWidth() / 2)) * screenWidth / resolutionWidth;
+						int centerY = (this->getComposition()->getY() + (this->getComposition()->getHeight() / 2)) * screenHeight / resolutionHeight;
+
+						glm::vec2 direction = glm::vec2(event.mouseButton.x - centerX, event.mouseButton.y - centerY);
+
+						GameObjects::BaseGameObject *arrow = GameSystems::ObjectFactory::getInstance().createArrow(getComposition(), getComposition()->getX(),
+							getComposition()->getY(), this->getDuration(), glm::normalize(direction));
+						this->setDuration(500.0f);
+						break;
+					}
 					}
 				}
 			}
@@ -59,9 +85,6 @@ namespace GameComponents {
 			GameSystems::JSONParser parser(filename);
 			ParseInputFile(parser.getJSONValue());
 		}
-
-		//this->mouseMap.emplace(FIRE, sf::Mouse::Left);
-		this->mouseMap.emplace(SPECIAL, sf::Mouse::Right);
 	}
 
 	int	KeyboardInputComponent::ParseInputFile(GameTools::JsonValue o) {

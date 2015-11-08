@@ -5,6 +5,7 @@
 #include <vector>
 #include <list>
 #include "BaseGameObject.h"
+#include "Projectile.h"
 #include "gason.h"
 #include "GameEngine.h"
 #include "SpriteComponent.h"
@@ -32,7 +33,7 @@ namespace GameSystems {
 		}
 		~ObjectFactory();
 		GameObjects::BaseGameObject *parseObject(GameTools::JsonValue&);
-		GameObjects::BaseGameObject *createArrow(unsigned int, unsigned int, float, bool);
+		GameObjects::BaseGameObject *createArrow(GameObjects::BaseGameObject*, unsigned int, unsigned int, float, glm::vec2);
 		static void attachObject(GameObjects::BaseGameObject*);
 		void buildLevel(GameTools::JsonValue&);
 		GameEngine::Core::Level &getCurrentLevel();

@@ -6,6 +6,7 @@
 #include <sstream>
 #include "JSONParser.h"
 #include "BaseGameObject.h"
+#include "GraphicsSystem.h"
 #include "debugManager.h"
 #include "ObjectFactory.h"
 
@@ -35,7 +36,11 @@ namespace GameComponents {
 		virtual void Init() = 0;
 		virtual void sendMessage(GameMessage::Message*) = 0;
 
+		void setDuration(float);
+		float getDuration();
+
 	protected:
 		std::map<INPUT_TYPE, bool> inputState;
+		float duration;
 	};
 }

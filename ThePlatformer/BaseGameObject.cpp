@@ -18,6 +18,7 @@ namespace GameObjects {
 		rotate = 0;
 		scale = 1;
 		mass = 1.0f;
+		bounce = 0.0f;
 		to_destroy = false;
 		type = objectType::NONE;
 		this->m_body = NULL;
@@ -172,6 +173,14 @@ namespace GameObjects {
 	{
 		return this->mass;
 	}
+	void BaseGameObject::setBounce(float bounce)
+	{
+		this->bounce = bounce;
+	}
+	float BaseGameObject::getBounce()
+	{
+		return this->bounce;
+	}
 	void BaseGameObject::setRotate(int rotate)
 	{
 		this->rotate = rotate;
@@ -179,6 +188,14 @@ namespace GameObjects {
 	int BaseGameObject::getRotate()
 	{
 		return this->rotate;
+	}
+	void BaseGameObject::setProjectileType(std::string projectileType)
+	{
+		this->projectileType = projectileType;
+	}
+	std::string BaseGameObject::getProjectileType()
+	{
+		return this->projectileType;
 	}
 	void BaseGameObject::setName(std::string name)
 	{
