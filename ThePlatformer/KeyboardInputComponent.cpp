@@ -52,6 +52,8 @@ namespace GameComponents {
 					{
 					case INPUT_TYPE::FIRE:
 					{
+						if (this->savedDt < this->maxElapsedTime)
+							break;
 						GLint iViewport[4];
 						glGetIntegerv(GL_VIEWPORT, iViewport);
 						int screenWidth = iViewport[0] + iViewport[2];
@@ -78,6 +80,7 @@ namespace GameComponents {
 						GameObjects::BaseGameObject *arrow = GameSystems::ObjectFactory::getInstance().createArrow(getComposition(), getComposition()->getX(),
 							getComposition()->getY(), this->getDuration(), glm::normalize(direction));
 						this->setDuration(500.0f);
+						this->savedDt = 0.0f;
 						break;
 					}
 					}

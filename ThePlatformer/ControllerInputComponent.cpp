@@ -31,31 +31,30 @@ namespace GameComponents {
 				if (event.joystickButton.button == it->second)
 				{
 					inputState.at(it->first) = false;
-					if (it->first == INPUT_TYPE::FIRE) {
-						GLint iViewport[4];
-						glGetIntegerv(GL_VIEWPORT, iViewport);
-						int screenWidth = iViewport[0] + iViewport[2];
-						int screenHeight = iViewport[1] + iViewport[3];
-						int resolutionWidth = GameSystems::GraphicsSystem::Camera::getInstance().resolutionWidth;
-						int resolutionHeight = GameSystems::GraphicsSystem::Camera::getInstance().resolutionHeight;
+					switch (it->first)
+					{
+					case INPUT_TYPE::FIRE:
+					{
+						if (this->savedDt < this->maxElapsedTime)
+							break;
 
-						int centerX = (this->getComposition()->getX() + (this->getComposition()->getWidth() / 2)) * screenWidth / resolutionWidth;
-						int centerY = (this->getComposition()->getY() + (this->getComposition()->getHeight() / 2)) * screenHeight / resolutionHeight;
+						int centerX = (this->getComposition()->getX() + (this->getComposition()->getWidth() / 2));
+						int centerY = (this->getComposition()->getY() + (this->getComposition()->getHeight() / 2));
 						GameComponents::SpriteComponent *sprite = reinterpret_cast<GameComponents::SpriteComponent*>(getComposition()->getComponent(GameComponents::SPRITE));
 
 						glm::vec2 direction = glm::vec2(100.0, 100.0);
 						if (aimAxisX >= -50.0 && aimAxisX <= 50.0 && aimAxisY >= -50.0 && aimAxisY <= 50.0) {
-							if (sprite->revertX)
-								direction = glm::vec2((-100 + centerX) - centerX, (aimAxisY + centerY) - centerY);
-							else
-								direction = glm::vec2((100 + centerX) - centerX, (aimAxisY + centerY) - centerY);
+							if (sprite->revertX) direction = glm::vec2((-100 + centerX) - centerX, (aimAxisY + centerY) - centerY);
+							else direction = glm::vec2((100 + centerX) - centerX, (aimAxisY + centerY) - centerY);
 						}
-						else
-							direction = glm::vec2((aimAxisX + centerX) - centerX, (aimAxisY + centerY) - centerY);
-						std::cout << "Duration: " << this->getDuration() << std::endl;
+						else direction = glm::vec2((aimAxisX + centerX) - centerX, (aimAxisY + centerY) - centerY);
+
 						GameObjects::BaseGameObject *arrow = GameSystems::ObjectFactory::getInstance().createArrow(getComposition(), getComposition()->getX(),
 							getComposition()->getY(), this->getDuration(), glm::normalize(direction));
 						this->setDuration(500.0f);
+						this->savedDt = 0.0f;
+						break;
+					}
 					}
 				}
 			}

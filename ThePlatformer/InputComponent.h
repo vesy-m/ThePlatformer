@@ -38,9 +38,14 @@ namespace GameComponents {
 
 		void setDuration(float);
 		float getDuration();
+		void setSavedDt(float);
+		float getSavedDt();
+		float getMaxElapsedTime();
 
 	protected:
 		std::map<INPUT_TYPE, bool> inputState;
 		float duration;
+		float savedDt;
+		float maxElapsedTime;
 	};
 }

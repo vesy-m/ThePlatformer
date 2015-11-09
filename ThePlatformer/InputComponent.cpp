@@ -6,6 +6,8 @@ namespace GameComponents {
 	{
 		object->attachComponent(this);
 		this->duration = 500.0f;
+		this->savedDt = 0.0f;
+		this->maxElapsedTime = 2000.0f;
 	}
 
 	InputComponent::~InputComponent()
@@ -41,6 +43,7 @@ namespace GameComponents {
 			else if (it->first == INPUT_TYPE::FIRE && it->second == true)
 				this->duration += (float)((this->duration + dt > 1000.0f) ? (1000.0f - this->duration) : dt);
 				//getComposition()->sendMessage(new GameMessage::Message(GameMessage::Message::FIRE));
+			if (this->savedDt <= this->maxElapsedTime) this->savedDt += (float)dt;
 		}
 	}
 	void InputComponent::setDuration(float duration)
@@ -50,5 +53,17 @@ namespace GameComponents {
 	float InputComponent::getDuration()
 	{
 		return this->duration;
+	}
+	void InputComponent::setSavedDt(float savedDt)
+	{
+		this->savedDt = savedDt;
+	}
+	float InputComponent::getSavedDt()
+	{
+		return this->savedDt;
+	}
+	float InputComponent::getMaxElapsedTime()
+	{
+		return this->maxElapsedTime;
 	}
 }
