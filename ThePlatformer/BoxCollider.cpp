@@ -99,7 +99,8 @@ namespace GameComponents {
 
 		if (this->composition->getType() != GameObjects::NONE)
 		{
-			for each(GameObjects::BaseGameObject* object in GameSystems::ObjectFactory::getInstance().getCurrentObjects())
+			std::list<GameObjects::BaseGameObject*> listObjects = GameSystems::ObjectFactory::getInstance().getCurrentObjects();
+			for each(GameObjects::BaseGameObject* object in listObjects)
 			{
 				if (this->composition->getType() == GameObjects::PLAYER) {
 					if (object->getType() == GameObjects::PROJECTILE && object->getName().compare(this->composition->getName()) == 0)
@@ -128,10 +129,29 @@ namespace GameComponents {
 						if (other->composition->getType() == GameObjects::PROJECTILE) other->composition->destroy(true);
 						else if (this->composition->getType() == GameObjects::PROJECTILE) this->composition->destroy(true);
 
-						if (this->composition->getType() == GameObjects::PROJECTILE && other->composition->getType() == GameObjects::PLAYER)
+						if (this->composition->getType() == GameObjects::PROJECTILE && other->composition->getType() == GameObjects::PLAYER) {
 							other->composition->destroy(true);
-						else if (this->composition->getType() == GameObjects::PLAYER && other->composition->getType() == GameObjects::PROJECTILE)
+							if (other->composition->getName() == "megaman") {
+								GameSystems::GraphicsSystem::Camera::getInstance().reInit();
+								GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/metalslug_win_menu.json");
+							}
+							else {
+								GameSystems::GraphicsSystem::Camera::getInstance().reInit();
+								GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/megaman_win_menu.json");
+							}
+
+						}
+						else if (this->composition->getType() == GameObjects::PLAYER && other->composition->getType() == GameObjects::PROJECTILE) {
 							this->composition->destroy(true);
+							if (this->composition->getName() == "megaman") {
+								GameSystems::GraphicsSystem::Camera::getInstance().reInit();
+								GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/metalslug_win_menu.json");
+							}
+							else {
+								GameSystems::GraphicsSystem::Camera::getInstance().reInit();
+								GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/megaman_win_menu.json");
+							}
+						}
 
 						ResolveCollision(manifold);
 						collide = true;

@@ -23,48 +23,48 @@ namespace GameComponents {
 		switch (message->id)
 		{
 		case GameMessage::Message::LEFT:
-				if ((std::string("walk").compare(currentAnim) != 0 || revertX != true) && std::string("jump").compare(currentAnim) != 0) {
-					currentFrame = 0;
-					currentAnim = "walk";
-					revertX = true;
-				}
-				if (revertX != true)
-				{
-					revertX = true;
-				}
-				break;
+			if ((std::string("walk").compare(currentAnim) != 0 || revertX != true) && std::string("jump").compare(currentAnim) != 0) {
+				currentFrame = 0;
+				currentAnim = "walk";
+				revertX = true;
+			}
+			if (revertX != true)
+			{
+				revertX = true;
+			}
+			break;
 		case GameMessage::Message::RIGHT:
-				if ((std::string("walk").compare(currentAnim) != 0 || revertX != false) && std::string("jump").compare(currentAnim) != 0) {
-					currentFrame = 0;
-					currentAnim = "walk";
-					revertX = false;
-				}
-				if (revertX != false)
-				{
-					revertX = false;
-				}
-				break;
+			if ((std::string("walk").compare(currentAnim) != 0 || revertX != false) && std::string("jump").compare(currentAnim) != 0) {
+				currentFrame = 0;
+				currentAnim = "walk";
+				revertX = false;
+			}
+			if (revertX != false)
+			{
+				revertX = false;
+			}
+			break;
 		case GameMessage::Message::JUMP_ANIMATION:
 		case GameMessage::Message::JUMP:
-				if (std::string("jump").compare(currentAnim) != 0) {
-					currentFrame = 0;
-					currentAnim = "jump";
-				}
-				break;
+			if (std::string("jump").compare(currentAnim) != 0) {
+				currentFrame = 0;
+				currentAnim = "jump";
+			}
+			break;
 		case GameMessage::Message::STAND_ANIMATION:
-				if (std::string("default").compare(currentAnim) != 0) {
-					currentFrame = 0;
-					currentAnim = "default";
-				}
-				break;
+			if (std::string("default").compare(currentAnim) != 0) {
+				currentFrame = 0;
+				currentAnim = "default";
+			}
+			break;
 		case GameMessage::Message::ROTATE_LEFT:
-				GameTools::debugManager::getInstance().rotateNum = -1;
-				break;
+			GameTools::debugManager::getInstance().rotateNum = -1;
+			break;
 		case GameMessage::Message::ROTATE_RIGHT:
-				GameTools::debugManager::getInstance().rotateNum = 1;
-				break;
-			default:
-				break;
+			GameTools::debugManager::getInstance().rotateNum = 1;
+			break;
+		default:
+			break;
 		}
 	}
 
@@ -92,9 +92,10 @@ namespace GameComponents {
 			else if (newScale <= 1.0) GameTools::debugManager::getInstance().scaleNum = 0.01f;
 			this->composition->setScale(newScale + GameTools::debugManager::getInstance().scaleNum);
 		}
+		/*
 		else if (!std::string("megaman2").compare(this->composition->getName())) {
 			glColor3f((GLfloat)1.0, (GLfloat)0.3, (GLfloat)0.3);
-		}
+		}*/
 
 		glEnable(GL_TEXTURE_2D);
 
@@ -104,7 +105,7 @@ namespace GameComponents {
 			// get height and width of the sprite of the currentFrame
 			height = anim.getSpriteYmax(currentFrame) - anim.getSpriteYmin(currentFrame);
 			width = anim.getSpriteXmax(currentFrame) - anim.getSpriteXmin(currentFrame);
-				
+
 			xmin = (float)(anim.getSpriteXmin(currentFrame)) / (float)texture->getWidth();
 			xmax = (float)(anim.getSpriteXmax(currentFrame)) / (float)texture->getWidth();
 
@@ -133,10 +134,10 @@ namespace GameComponents {
 			pointYHeight -= height;
 		}
 
-		pointX = (int) (pointX * this->composition->getScale());
-		pointXWidth = (int) (pointXWidth * this->composition->getScale());
-		pointY = (int) (pointY * this->composition->getScale());
-		pointYHeight = (int) (pointYHeight * this->composition->getScale());
+		pointX = (int)(pointX * this->composition->getScale());
+		pointXWidth = (int)(pointXWidth * this->composition->getScale());
+		pointY = (int)(pointY * this->composition->getScale());
+		pointYHeight = (int)(pointYHeight * this->composition->getScale());
 
 		glTranslated(posX, posY, 0);
 		glRotated(this->composition->getRotate(), 0, 0, 1);

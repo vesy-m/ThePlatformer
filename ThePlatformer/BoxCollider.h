@@ -3,6 +3,7 @@
 #define _BOXCOLLIDER_H_
 
 #include "Collider.h"
+#include "ObjectFactory.h"
 
 namespace GameComponents {
 	class BoxCollider : public Collider

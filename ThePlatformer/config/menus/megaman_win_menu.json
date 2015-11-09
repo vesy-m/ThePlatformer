@@ -1,0 +1,13 @@
+{
+	"button" : {
+		"x" : 540,
+		"y" : 100,
+		"sprite" : "./assets/sprite/megaman_win.png"
+	},
+	"button" : {
+		"x" : 540,
+		"y" : 455,
+		"sprite" : "./assets/sprite/returnMenuButton.png",
+		"menu" : "./config/menus/main_menu.json"
+	}
+}

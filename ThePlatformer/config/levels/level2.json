@@ -25,7 +25,7 @@
       "width" : 30,
       "mass" : 20,
       "projectile_type" : "soccer",
-      "sprite" : "./config/sprite_sheets/desc-megaman.json",
+      "sprite" : "./config/sprite_sheets/desc-metalslug.json",
       "keyboard" : "./config/controllers/input_keyboard2.json",
       "body" : true,
       "boxcollider" : true,
