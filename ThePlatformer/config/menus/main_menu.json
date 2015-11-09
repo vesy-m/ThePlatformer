@@ -3,7 +3,7 @@
 		"x" : 540,
 		"y" : 215,
 		"sprite" : "./assets/sprite/playButton.png",
-		"level" : "./config/levels/level2.json"
+		"level" : "./config/levels/level3.json"
 	},
 	"button" : {
 		"x" : 540,
