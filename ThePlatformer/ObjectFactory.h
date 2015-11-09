@@ -10,6 +10,7 @@
 #include "GameEngine.h"
 #include "SpriteComponent.h"
 #include "Menu.h"
+#include "GraphicsSystem.h"
 
 namespace GameComponents {
 	class SpriteComponent;
@@ -18,14 +19,13 @@ namespace GameComponents {
 namespace GameSystems {
 	class ObjectFactory
 	{
+	public:
 		enum gameState
 		{
 			MENU,
 			LEVEL,
 			NONE
 		};
-
-	public:
 		static ObjectFactory& getInstance()
 		{
 			static ObjectFactory    instance;
@@ -45,6 +45,7 @@ namespace GameSystems {
 		const std::list<GameSystems::BaseSystem *> &getSystems();
 		void initSystems();
 		void addSystems(GameSystems::BaseSystem *);
+		gameState stateGame;
 	private:
 		ObjectFactory();
 		ObjectFactory(ObjectFactory const&) = delete;
@@ -56,7 +57,6 @@ namespace GameSystems {
 		std::vector<GameEngine::Core::Level> listLevels;
 		GameEngine::Core::Level currentLevel;
 		Menu currentMenu;
-		gameState stateGame;
 		bool systemNeedReinit;
 
 	};

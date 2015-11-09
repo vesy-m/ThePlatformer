@@ -14,7 +14,7 @@ namespace GameComponents {
 
 	void MouseClickComponent::UpdateInputState(sf::Event event, double dt)
 	{
-		if (event.type == sf::Event::MouseButtonPressed)
+		if (event.type == sf::Event::MouseButtonReleased)
 		{
 			if (event.mouseButton.button == sf::Mouse::Left)
 			{

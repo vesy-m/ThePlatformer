@@ -40,6 +40,7 @@ namespace GameSystems {
 		int resolutionHeight;
 		void setResolution720p();
 		void setResolution1080p();
+		void reInit();
 	private:
 		Camera();
 		Camera(Camera const&) = delete;

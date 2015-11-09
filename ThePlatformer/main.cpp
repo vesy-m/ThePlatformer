@@ -22,7 +22,7 @@ int main()
 	core.Add((GameSystems::BaseSystem *)winInput);
 	core.Add((GameSystems::BaseSystem *)physics);
 	core.Add((GameSystems::BaseSystem *)graphics);
-	GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/main_menu.json");
+	GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/main_menu.json");
 	
 	//a enlever de commentaire pour corriger frame rate
 	sf::Music music;

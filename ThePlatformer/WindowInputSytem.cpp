@@ -35,6 +35,12 @@ namespace GameSystems {
 					changeSize = true;
 					break;
 				}
+				if (event.key.code == sf::Keyboard::Escape)
+				{
+					GameSystems::GraphicsSystem::Camera::getInstance().reInit();
+					GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/pause_menu.json");
+					break;
+				}
 			}
 
 			for each (GameObjects::BaseGameObject* object in listObjects)

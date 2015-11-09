@@ -11,6 +11,7 @@ namespace GameComponents {
 		this->typeMap[ButtonType::FUNCTION] = &ButtonComponent::execFunction;
 
 		this->functionMap["changeResolution"] = &ButtonComponent::changeResolution;
+		this->functionMap["resumeToLevel"] = &ButtonComponent::resumeToLevel;
 	}
 
 
@@ -61,7 +62,9 @@ namespace GameComponents {
 
 	void ButtonComponent::execFunction()
 	{
-		this->functionMap[this->actionName](this);
+		if (this->functionMap[this->actionName] != NULL) {
+			this->functionMap[this->actionName](this);
+		}
 	}
 
 	void ButtonComponent::changeResolution()
@@ -74,5 +77,11 @@ namespace GameComponents {
 			std::cout << "resolution change to 720p" << std::endl;
 			GameSystems::GraphicsSystem::Camera::getInstance().setResolution720p();
 		}
+	}
+
+	void ButtonComponent::resumeToLevel()
+	{
+		std::cout << "resume" << std::endl;
+		GameSystems::ObjectFactory::getInstance().stateGame = GameSystems::ObjectFactory::gameState::LEVEL;
 	}
 }

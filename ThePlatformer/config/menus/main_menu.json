@@ -3,12 +3,12 @@
 		"x" : 540,
 		"y" : 215,
 		"sprite" : "./assets/sprite/playButton.png",
-		"level" : "./config/level2.json"
+		"level" : "./config/levels/level2.json"
 	},
 	"button" : {
 		"x" : 540,
 		"y" : 455,
 		"sprite" : "./assets/sprite/settingsButton.png",
-		"menu" : "./config/param_menu.json"
+		"menu" : "./config/menus/param_menu.json"
 	}
 }

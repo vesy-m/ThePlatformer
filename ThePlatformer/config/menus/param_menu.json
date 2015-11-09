@@ -9,6 +9,6 @@
 		"x" : 540,
 		"y" : 455,
 		"sprite" : "./assets/sprite/returnButton.png",
-		"menu" : "./config/main_menu.json"
+		"menu" : "./config/menus/main_menu.json"
 	}
 }

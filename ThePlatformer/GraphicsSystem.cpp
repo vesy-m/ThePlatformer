@@ -93,7 +93,7 @@ namespace GameSystems {
 		int sizeWidthMin = (int)(screenWidth / 1.2);
 
 		std::vector<GameObjects::BaseGameObject *> listPlayers = ObjectFactory::getInstance().getCurrentLevel().getPlayers();
-		if (listPlayers.size() == 2) {
+		if (listPlayers.size() == 2 && GameSystems::ObjectFactory::getInstance().stateGame == GameSystems::ObjectFactory::gameState::LEVEL) {
 			int XmiddlePlayer1 = listPlayers[0]->getX() + (listPlayers[0]->getWidth() / 2);
 			int XmiddlePlayer2 = listPlayers[1]->getX() + (listPlayers[1]->getWidth() / 2);
 			int xMiddle = ((XmiddlePlayer1 < XmiddlePlayer2) ? XmiddlePlayer1 : XmiddlePlayer2) + (abs(XmiddlePlayer1 - XmiddlePlayer2) / 2);
@@ -185,14 +185,18 @@ namespace GameSystems {
 		this->resolutionHeight = 1080;
 	}
 
-	GraphicsSystem::Camera::Camera()
-	{
+	void GraphicsSystem::Camera::reInit() {
 		this->resolutionWidth = 1280;
 		this->resolutionHeight = 720;
 		this->cameraStartX = 0;
 		this->cameraEndX = this->resolutionWidth;
 		this->cameraStartY = 0;
 		this->cameraEndY = this->resolutionHeight;
+	}
+
+	GraphicsSystem::Camera::Camera()
+	{
+		this->reInit();
 	}
 
 	GraphicsSystem::Camera::~Camera()
