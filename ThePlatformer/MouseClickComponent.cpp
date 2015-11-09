@@ -18,8 +18,19 @@ namespace GameComponents {
 		{
 			if (event.mouseButton.button == sf::Mouse::Left)
 			{
-				if (this->composition->getX() < event.mouseButton.x && event.mouseButton.x < this->composition->getX() + this->composition->getWidth() &&
-					this->composition->getY() < event.mouseButton.y && event.mouseButton.y < this->composition->getY() + this->composition->getHeight()) {
+				GLint iViewport[4];
+				glGetIntegerv(GL_VIEWPORT, iViewport);
+				int screenWidth = iViewport[0] + iViewport[2];
+				int screenHeight = iViewport[1] + iViewport[3];
+				int resolutionWidth = GameSystems::GraphicsSystem::Camera::getInstance().resolutionWidth;
+				int resolutionHeight = GameSystems::GraphicsSystem::Camera::getInstance().resolutionHeight;
+				int mousex = event.mouseButton.x * resolutionWidth / screenWidth;
+				int mousey = event.mouseButton.y * resolutionHeight / screenHeight;
+				std::cout << mousex << " " << mousey << std::endl;
+
+
+				if (this->composition->getX() < mousex && mousex < this->composition->getX() + this->composition->getWidth() &&
+					this->composition->getY() < mousey && mousey < this->composition->getY() + this->composition->getHeight()) {
 					this->composition->sendMessage(new GameMessage::Message(GameMessage::Message::CLICKON));
 				}
 			}

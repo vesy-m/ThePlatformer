@@ -59,13 +59,21 @@ namespace GameComponents {
 						int resolutionWidth = GameSystems::GraphicsSystem::Camera::getInstance().resolutionWidth;
 						int resolutionHeight = GameSystems::GraphicsSystem::Camera::getInstance().resolutionHeight;
 
-						/*std::cout << "screenWidth: " << screenWidth << "\tscreenHeight: " << screenHeight << std::endl;
+						int cameraWith = GameSystems::GraphicsSystem::Camera::getInstance().cameraEndX - GameSystems::GraphicsSystem::Camera::getInstance().cameraStartX;
+						int cameraHeight = GameSystems::GraphicsSystem::Camera::getInstance().cameraEndY - GameSystems::GraphicsSystem::Camera::getInstance().cameraStartY;
+						int mouseX = event.mouseButton.x * cameraWith / screenWidth;
+						int mouseY = event.mouseButton.y * cameraHeight / screenHeight;
+
+						mouseX += GameSystems::GraphicsSystem::Camera::getInstance().cameraStartX;
+						mouseY += GameSystems::GraphicsSystem::Camera::getInstance().cameraStartY;
+
+						/*std::cout << "screenWidth: " << mouseX << "\tscreenHeight: " << mouseY << std::endl;
 						std::cout << "resolutionWidth: " << resolutionWidth << "\tresolutionHeight: " << resolutionHeight << std::endl;*/
 
-						int centerX = (this->getComposition()->getX() + (this->getComposition()->getWidth() / 2)) * screenWidth / resolutionWidth;
-						int centerY = (this->getComposition()->getY() + (this->getComposition()->getHeight() / 2)) * screenHeight / resolutionHeight;
+						int centerX = (this->getComposition()->getX() + (this->getComposition()->getWidth() / 2));
+						int centerY = (this->getComposition()->getY() + (this->getComposition()->getHeight() / 2));
 
-						glm::vec2 direction = glm::vec2(event.mouseButton.x - centerX, event.mouseButton.y - centerY);
+						glm::vec2 direction = glm::vec2(mouseX - centerX, mouseY - centerY);
 
 						GameObjects::BaseGameObject *arrow = GameSystems::ObjectFactory::getInstance().createArrow(getComposition(), getComposition()->getX(),
 							getComposition()->getY(), this->getDuration(), glm::normalize(direction));
