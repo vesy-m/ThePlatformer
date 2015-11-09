@@ -1,14 +1,19 @@
 {
 	"button" : {
 		"x" : 540,
-		"y" : 215,
-		"sprite" : "./assets/sprite/playButton.png",
-		"level" : "./config/levels/level3.json"
+		"y" : 100,
+		"sprite" : "./assets/sprite/levelChooseButton.png",
 	},
 	"button" : {
-		"x" : 540,
-		"y" : 455,
-		"sprite" : "./assets/sprite/settingsButton.png",
-		"menu" : "./config/menus/param_menu.json"
+		"x" : 289,
+		"y" : 300,
+		"sprite" : "./assets/sprite/level2.png",
+		"level" : "./config/levels/level2.json"
+	},
+	"button" : {
+		"x" : 716,
+		"y" : 300,
+		"sprite" : "./assets/sprite/level3.png",
+		"level" : "./config/levels/level3.json"
 	}
 }
