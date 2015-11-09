@@ -35,7 +35,7 @@ namespace GameSystems {
 					changeSize = true;
 					break;
 				}
-				if (event.key.code == sf::Keyboard::Escape)
+				if (event.key.code == sf::Keyboard::Escape && GameSystems::ObjectFactory::getInstance().stateGame == GameSystems::ObjectFactory::gameState::LEVEL)
 				{
 					GameSystems::GraphicsSystem::Camera::getInstance().reInit();
 					GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/pause_menu.json");

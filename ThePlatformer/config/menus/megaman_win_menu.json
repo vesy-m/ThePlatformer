@@ -9,5 +9,11 @@
 		"y" : 455,
 		"sprite" : "./assets/sprite/returnMenuButton.png",
 		"menu" : "./config/menus/main_menu.json"
+	},
+	"button" : {
+		"x" : 540,
+		"y" : 550,
+		"sprite" : "./assets/sprite/restartButton.png",
+		"function" : "restartLevel"
 	}
 }

@@ -36,5 +36,6 @@ namespace GameComponents {
 		void execFunction();
 		void changeResolution();
 		void resumeToLevel();
+		void restartLevel();
 	};
 }

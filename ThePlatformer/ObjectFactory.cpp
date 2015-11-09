@@ -169,6 +169,7 @@ namespace GameSystems {
 		GameSystems::JSONParser fileParser(filename);
 		this->buildLevel(fileParser.getJSONValue());
 		this->stateGame = gameState::LEVEL;
+		this->currentLevelFileName = filename;
 		systemNeedReinit = true;
 	}
 

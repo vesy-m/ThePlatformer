@@ -46,6 +46,7 @@ namespace GameSystems {
 		void initSystems();
 		void addSystems(GameSystems::BaseSystem *);
 		gameState stateGame;
+		std::string currentLevelFileName;
 	private:
 		ObjectFactory();
 		ObjectFactory(ObjectFactory const&) = delete;

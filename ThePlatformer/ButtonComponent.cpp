@@ -12,6 +12,7 @@ namespace GameComponents {
 
 		this->functionMap["changeResolution"] = &ButtonComponent::changeResolution;
 		this->functionMap["resumeToLevel"] = &ButtonComponent::resumeToLevel;
+		this->functionMap["restartLevel"] = &ButtonComponent::restartLevel;
 	}
 
 
@@ -83,5 +84,11 @@ namespace GameComponents {
 	{
 		std::cout << "resume" << std::endl;
 		GameSystems::ObjectFactory::getInstance().stateGame = GameSystems::ObjectFactory::gameState::LEVEL;
+	}
+
+	void ButtonComponent::restartLevel()
+	{
+		std::cout << "resume" << std::endl;
+		GameSystems::ObjectFactory::getInstance().LoadLevelFileAsCurrent(GameSystems::ObjectFactory::getInstance().currentLevelFileName);
 	}
 }
