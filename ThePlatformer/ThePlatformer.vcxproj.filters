@@ -183,6 +183,12 @@
     <ClCompile Include="CollisionMessage.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="Sound.cpp">
+      <Filter>GameTools\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundManager.cpp">
+      <Filter>GameTools\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameEngine.h">
@@ -291,6 +297,15 @@
       <Filter>GameComponents\Header</Filter>
     </ClInclude>
     <ClInclude Include="CollisionMessage.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound.h">
+      <Filter>GameTools\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundManager.h">
+      <Filter>GameTools\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Singleton.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
