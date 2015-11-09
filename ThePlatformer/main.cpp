@@ -10,6 +10,7 @@
 #include "InputComponent.h"
 #include "SpriteSheet.h"
 #include "ObjectFactory.h"
+#include "SoundManager.h"
 
 int main()
 {
@@ -23,17 +24,13 @@ int main()
 	core.Add((GameSystems::BaseSystem *)physics);
 	core.Add((GameSystems::BaseSystem *)graphics);
 	GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/main_menu.json");
-	
-	//a enlever de commentaire pour corriger frame rate
-	sf::Music music;
-	if (!music.openFromFile("./assets/audio/dr_wily_stage.ogg"))
-		return -1;
-	music.setVolume(5);
-	music.play();
+
+	GameTools::CSound *sound = GameTools::CSoundManager::getInstance().getSound("./assets/audio/dr_wily_stage.ogg");
+	sound->setVolume(5);
+	sound->play();
 
 	//start
 	core.Init();
 	core.MainLoop();
-
     return (0);
 }

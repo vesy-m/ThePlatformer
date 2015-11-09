@@ -182,6 +182,8 @@ copy /Y "$(ProjectDir)\lib\lib-x64\devil-1.7.8\bin\*" "$(OutDir)\"</Command>
     <ClCompile Include="ObjectFactory.cpp" />
     <ClCompile Include="PhysicsSystem.cpp" />
     <ClCompile Include="Projectile.cpp" />
+    <ClCompile Include="Sound.cpp" />
+    <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="SpriteAnimation.cpp" />
     <ClCompile Include="SpriteComponent.cpp" />
     <ClCompile Include="SpriteSheet.cpp" />
@@ -214,6 +216,9 @@ copy /Y "$(ProjectDir)\lib\lib-x64\devil-1.7.8\bin\*" "$(OutDir)\"</Command>
     <ClInclude Include="Message.h" />
     <ClInclude Include="MouseClickComponent.h" />
     <ClInclude Include="Projectile.h" />
+    <ClInclude Include="Singleton.h" />
+    <ClInclude Include="Sound.h" />
+    <ClInclude Include="SoundManager.h" />
     <ClInclude Include="SpriteAnimation.h" />
     <ClInclude Include="SpriteSheet.h" />
     <ClInclude Include="TextComponent.h" />
