@@ -112,8 +112,8 @@ namespace GameComponents {
 				if (this->composition->getType() == GameObjects::PROJECTILE) {
 					if (object->getType() == GameObjects::PLAYER && object->getName().compare(this->composition->getName()) == 0)
 						continue;
-					if (object->getType() == GameObjects::PROJECTILE)
-						continue;
+					/*if (object->getType() == GameObjects::PROJECTILE)
+						continue;*/
 				}
 				if (object->getComponent(GameComponents::COMPONENT_TYPE::COLLIDER))
 				{
