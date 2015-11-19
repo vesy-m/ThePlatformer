@@ -25,6 +25,12 @@ namespace GameSystems {
 			LEVEL,
 			NONE
 		};
+		enum ProjectileType {
+			ARROW,
+			SOCCER_BALL,
+			TENNIS_BALL,
+			BASE_BALL
+		};
 		static ObjectFactory& getInstance()
 		{
 			static ObjectFactory    instance;
@@ -32,7 +38,7 @@ namespace GameSystems {
 		}
 		~ObjectFactory();
 		GameObjects::BaseGameObject *parseObject(GameTools::JsonValue&);
-		GameObjects::BaseGameObject *createArrow(GameObjects::BaseGameObject*, unsigned int, unsigned int, float, glm::vec2);
+		GameObjects::BaseGameObject *createProjectile(GameObjects::BaseGameObject*, unsigned int, unsigned int, float, glm::vec2, ProjectileType);
 		static void attachObject(GameObjects::BaseGameObject*);
 		void buildLevel(GameTools::JsonValue&);
 		GameEngine::Core::Level &getCurrentLevel();

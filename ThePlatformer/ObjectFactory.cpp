@@ -72,7 +72,7 @@ namespace GameSystems {
 		ObjectFactory::getInstance().currentLevel.putObjectDepthOrdered(obj);
 	}
 
-	GameObjects::BaseGameObject *ObjectFactory::createArrow(GameObjects::BaseGameObject *shooter, unsigned int x, unsigned int y, float base_force, glm::vec2 direction) {
+	GameObjects::BaseGameObject *ObjectFactory::createProjectile(GameObjects::BaseGameObject *shooter, unsigned int x, unsigned int y, float base_force, glm::vec2 direction, ProjectileType) {
 		GameObjects::BaseGameObject *projectile = NULL;
 		GameComponents::BodyComponent *body = NULL;
 		if (this->old_objects.size() == 0) {

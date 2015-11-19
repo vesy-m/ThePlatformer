@@ -56,8 +56,8 @@ namespace GameComponents {
 
 			glm::vec2 direction = glm::vec2(mouseX - centerX, mouseY - centerY);
 
-			GameObjects::BaseGameObject *arrow = GameSystems::ObjectFactory::getInstance().createArrow(getComposition(), getComposition()->getX(),
-			getComposition()->getY(), fireMessage->getDuration(), glm::normalize(direction));
+			GameObjects::BaseGameObject *arrow = GameSystems::ObjectFactory::getInstance().createProjectile(getComposition(), getComposition()->getX(),
+				getComposition()->getY(), fireMessage->getDuration(), glm::normalize(direction), GameSystems::ObjectFactory::SOCCER_BALL);
 		}
 	}
 }

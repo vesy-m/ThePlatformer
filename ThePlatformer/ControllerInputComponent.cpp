@@ -49,8 +49,8 @@ namespace GameComponents {
 						}
 						else direction = glm::vec2((aimAxisX + centerX) - centerX, (aimAxisY + centerY) - centerY);
 
-						GameObjects::BaseGameObject *arrow = GameSystems::ObjectFactory::getInstance().createArrow(getComposition(), getComposition()->getX(),
-							getComposition()->getY(), this->getDuration(), glm::normalize(direction));
+						GameObjects::BaseGameObject *arrow = GameSystems::ObjectFactory::getInstance().createProjectile(getComposition(), getComposition()->getX(),
+							getComposition()->getY(), this->getDuration(), glm::normalize(direction), GameSystems::ObjectFactory::SOCCER_BALL);
 						this->setDuration(500.0f);
 						this->savedDt = 0.0f;
 						break;
@@ -86,8 +86,8 @@ namespace GameComponents {
 							else direction = glm::vec2((aimAxisX + centerX) - centerX, (aimAxisY + centerY) - centerY);
 
 							std::cout << "Duration: " << this->getDuration() << std::endl;
-							GameObjects::BaseGameObject *arrow = GameSystems::ObjectFactory::getInstance().createArrow(getComposition(), getComposition()->getX(),
-								getComposition()->getY(), this->getDuration(), glm::normalize(direction));
+							GameObjects::BaseGameObject *arrow = GameSystems::ObjectFactory::getInstance().createProjectile(getComposition(), getComposition()->getX(),
+								getComposition()->getY(), this->getDuration(), glm::normalize(direction), GameSystems::ObjectFactory::SOCCER_BALL);
 							this->setDuration(500.0f);
 						}
 					}
