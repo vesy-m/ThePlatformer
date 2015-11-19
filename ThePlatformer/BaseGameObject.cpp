@@ -6,6 +6,8 @@
 #include "TextComponent.h"
 #include "VectorDebugComponent.h"
 #include "ButtonComponent.h"
+#include "FireComponent.h"
+#include "FireMessage.h"
 
 namespace GameObjects {
 	BaseGameObject::BaseGameObject()
@@ -36,6 +38,7 @@ namespace GameObjects {
 		if (this->m_sprite) this->m_sprite->Init();
 		if (this->m_text) this->m_text->Init();
 		if (this->m_vector) this->m_vector->Init();
+		if (this->m_fire) this->m_fire->Init();
 	}
 
 	BaseGameObject::~BaseGameObject()
@@ -116,6 +119,7 @@ namespace GameObjects {
 		if (this->m_text) this->m_text->sendMessage(message);
 		if (this->m_vector) this->m_vector->sendMessage(message);
 		if (this->m_button) this->m_button->sendMessage(message);
+		if (this->m_fire && message->id == GameMessage::FIRE) this->m_fire->sendMessage(message);
 	}
 
 	void BaseGameObject::setX(int x)

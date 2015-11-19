@@ -1,5 +1,6 @@
 #include "KeyboardInputComponent.h"
 #include "SpriteComponent.h"
+#include "FireMessage.h"
 
 namespace GameComponents {
 
@@ -47,35 +48,14 @@ namespace GameComponents {
 					inputState.at(it->first) = false;
 					switch (it->first)
 					{
-					case INPUT_TYPE::FIRE:
-					{
-						if (this->savedDt < this->maxElapsedTime) break;
-						GLint iViewport[4];
-						glGetIntegerv(GL_VIEWPORT, iViewport);
-						int screenWidth = iViewport[0] + iViewport[2];
-						int screenHeight = iViewport[1] + iViewport[3];
-						int resolutionWidth = GameSystems::GraphicsSystem::Camera::getInstance().resolutionWidth;
-						int resolutionHeight = GameSystems::GraphicsSystem::Camera::getInstance().resolutionHeight;
-
-						int cameraWith = GameSystems::GraphicsSystem::Camera::getInstance().cameraEndX - GameSystems::GraphicsSystem::Camera::getInstance().cameraStartX;
-						int cameraHeight = GameSystems::GraphicsSystem::Camera::getInstance().cameraEndY - GameSystems::GraphicsSystem::Camera::getInstance().cameraStartY;
-						int mouseX = event.mouseButton.x * cameraWith / screenWidth;
-						int mouseY = event.mouseButton.y * cameraHeight / screenHeight;
-
-						mouseX += GameSystems::GraphicsSystem::Camera::getInstance().cameraStartX;
-						mouseY += GameSystems::GraphicsSystem::Camera::getInstance().cameraStartY;
-
-						int centerX = (this->getComposition()->getX() + (this->getComposition()->getWidth() / 2));
-						int centerY = (this->getComposition()->getY() + (this->getComposition()->getHeight() / 2));
-
-						glm::vec2 direction = glm::vec2(mouseX - centerX, mouseY - centerY);
-
-						GameObjects::BaseGameObject *arrow = GameSystems::ObjectFactory::getInstance().createArrow(getComposition(), getComposition()->getX(),
-						getComposition()->getY(), this->getDuration(), glm::normalize(direction));
-						this->setDuration(500.0f);
-						this->savedDt = 0.0f;
-						break;
-					}
+						case INPUT_TYPE::FIRE:
+						{
+							if (this->savedDt < this->maxElapsedTime) break;
+							this->composition->sendMessage(new GameMessage::FireMessage(event, this->getDuration()));
+							this->setDuration(500.0f);
+							this->savedDt = 0.0f;
+							break;
+						}
 					}
 				}
 			}

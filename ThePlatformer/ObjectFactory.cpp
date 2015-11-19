@@ -11,6 +11,7 @@
 #include "TextComponent.h"
 #include "ButtonComponent.h"
 #include "MouseClickComponent.h"
+#include "FireBallComponent.h"
 
 namespace GameSystems {
 	ObjectFactory::ObjectFactory()
@@ -49,6 +50,7 @@ namespace GameSystems {
 			else if (std::string(it->key) == "controller") new GameComponents::ControllerInputComponent(ret, it->value.toString());
 			else if (std::string(it->key) == "keyboard") new GameComponents::KeyboardInputComponent(ret, it->value.toString());
 			else if (std::string(it->key) == "vector") new GameComponents::VectorDebugComponent(ret);
+			else if (std::string(it->key) == "fire_ball") new GameComponents::FireBallComponent(ret);
 			else if (std::string(it->key) == "level") {
 				auto buttonLevel = new GameComponents::ButtonComponent(ret, GameComponents::ButtonComponent::ButtonType::LEVEL, it->value.toString());
 				auto mouse = new GameComponents::MouseClickComponent(ret);

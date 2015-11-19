@@ -30,7 +30,7 @@ namespace GameMessage {
 	{
 	public:
 		Message(MessageId);
-		~Message();
+		virtual ~Message();
 		MessageId id;
 	};
 }
