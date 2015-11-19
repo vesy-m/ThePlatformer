@@ -48,7 +48,7 @@ namespace GameComponents {
 	{
 		switch (message->id)
 		{
-		case GameMessage::Message::JUMP:
+		case GameMessage::JUMP:
 			if (forces.y == (gravity.y / (1.0f / mass)) * (-1.0f))
 			{
 				forces.y = -50.0f;
@@ -56,28 +56,28 @@ namespace GameComponents {
 				onGround = false;
 			}
 			break;
-		case GameMessage::Message::RIGHT:
+		case GameMessage::RIGHT:
 			velocity.x = 20.0f;
 			isColliding = false;
 			break;
-		case GameMessage::Message::LEFT:
+		case GameMessage::LEFT:
 			velocity.x = -20.0f;
 			isColliding = false;
 			break;
-		case GameMessage::Message::RIGHT_RELEASED:
+		case GameMessage::RIGHT_RELEASED:
 			if (!isColliding || (lastCollisionVelocity.x > 0 && velocity.x > 0)) velocity.x -= 20.0f;
-			if (onGround == true) this->composition->sendMessage(new GameMessage::Message(GameMessage::Message::STAND_ANIMATION));
+			if (onGround == true) this->composition->sendMessage(new GameMessage::Message(GameMessage::STAND_ANIMATION));
 			break;
-		case GameMessage::Message::LEFT_RELEASED:
+		case GameMessage::LEFT_RELEASED:
 			if (!isColliding || (lastCollisionVelocity.x < 0 && velocity.x < 0)) velocity.x -= -20.0f;
-			if (onGround == true) this->composition->sendMessage(new GameMessage::Message(GameMessage::Message::STAND_ANIMATION));
+			if (onGround == true) this->composition->sendMessage(new GameMessage::Message(GameMessage::STAND_ANIMATION));
 			break;
-		case GameMessage::Message::NO_COLLISION:
-			if (onGround == true) this->composition->sendMessage(new GameMessage::Message(GameMessage::Message::JUMP_ANIMATION));
+		case GameMessage::NO_COLLISION:
+			if (onGround == true) this->composition->sendMessage(new GameMessage::Message(GameMessage::JUMP_ANIMATION));
 			if (this->composition->getType() != GameObjects::PROJECTILE) forces.y = 0;
 			onGround = false;
 			break;
-		case GameMessage::Message::COLLISION:
+		case GameMessage::COLLISION:
 			GameMessage::CollisionMessage *collision = (GameMessage::CollisionMessage *)message;
 			lastCollisionVelocity = this->velocity;
 			this->velocity = collision->velocity;
@@ -88,7 +88,7 @@ namespace GameComponents {
 			if (forces.y > 0 && collision->position.y < 0)
 			{
 				forces = (gravity / (1.0f / mass)) * (-1.0f);
-				if (!onGround) this->composition->sendMessage(new GameMessage::Message(GameMessage::Message::STAND_ANIMATION));
+				if (!onGround) this->composition->sendMessage(new GameMessage::Message(GameMessage::STAND_ANIMATION));
 				onGround = true;
 			}
 			else if (res < 0)
@@ -117,8 +117,8 @@ namespace GameComponents {
 
 		composition->setX((int) position.x);
 		composition->setY((int) position.y);
-		GameMessage::VectorMessage *vec = new GameMessage::VectorMessage(GameMessage::Message::VELOCITY_VECTOR, velocity);
-		this->composition->sendMessage((GameMessage::Message *)vec);
+		GameMessage::VectorMessage *vec = new GameMessage::VectorMessage(GameMessage::VELOCITY_VECTOR, velocity);
+		this->composition->sendMessage((GameMessage::Message*)vec);
 	}
 
 	void BodyComponent::AddForce(float x, float y)

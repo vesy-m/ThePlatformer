@@ -4,7 +4,7 @@ namespace GameTools {
 	debugManager::debugManager()
 	{
 		debugText = false;
-		debugGraphic = true;
+		debugGraphic = false;
 		rotateNum = -1;
 		scaleNum = 0.1f;
 	}

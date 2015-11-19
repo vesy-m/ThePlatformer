@@ -160,14 +160,14 @@ namespace GameComponents {
 			}
 			if (!collide)
 			{
-				this->composition->sendMessage(new GameMessage::Message(GameMessage::Message::NO_COLLISION));
+				this->composition->sendMessage(new GameMessage::Message(GameMessage::NO_COLLISION));
 			}
 		}
 	}
 
 	void BoxCollider::sendMessage(GameMessage::Message *message)
 	{
-		if (message->id == GameMessage::Message::VELOCITY_VECTOR)
+		if (message->id == GameMessage::VELOCITY_VECTOR)
 			this->velocity = ((GameMessage::VectorMessage*)message)->vector;
 	}
 

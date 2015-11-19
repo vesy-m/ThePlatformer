@@ -38,7 +38,7 @@ namespace GameComponents {
 	{
 		switch (message->id)
 		{
-		case GameMessage::Message::CLICKON:
+		case GameMessage::CLICKON:
 			this->execAction();
 			break;
 		default:

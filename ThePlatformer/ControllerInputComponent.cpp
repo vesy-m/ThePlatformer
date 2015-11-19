@@ -70,9 +70,9 @@ namespace GameComponents {
 					{
 						inputState.at(it->first) = false;
 						if (it->first == INPUT_TYPE::RIGHT)
-							getComposition()->sendMessage(new GameMessage::Message(GameMessage::Message::RIGHT_RELEASED));
+							getComposition()->sendMessage(new GameMessage::Message(GameMessage::RIGHT_RELEASED));
 						else if(it->first == INPUT_TYPE::LEFT)
-							getComposition()->sendMessage(new GameMessage::Message(GameMessage::Message::LEFT_RELEASED));
+							getComposition()->sendMessage(new GameMessage::Message(GameMessage::LEFT_RELEASED));
 						else if (it->first == INPUT_TYPE::FIRE) {
 							int centerX = this->getComposition()->getX() + (this->getComposition()->getHeight() / 2);
 							int centerY = this->getComposition()->getY() + (this->getComposition()->getHeight() / 2);
@@ -174,7 +174,7 @@ namespace GameComponents {
 	{
 		switch (message->id)
 		{
-		case GameMessage::Message::JUMP_RELEASED:
+		case GameMessage::JUMP_RELEASED:
 			inputState.at(INPUT_TYPE::JUMP) = false;
 			break;
 		default:

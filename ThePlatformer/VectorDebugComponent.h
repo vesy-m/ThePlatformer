@@ -25,6 +25,5 @@ namespace GameComponents {
 	private:
 		const COMPONENT_TYPE type = COMPONENT_TYPE::DEBUGVECTOR;
 		glm::vec2 velocity;
-		bool showDebug;
 	};
 }

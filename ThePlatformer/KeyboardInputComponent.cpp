@@ -15,12 +15,9 @@ namespace GameComponents {
 
 	void KeyboardInputComponent::UpdateInputState(sf::Event event, double dt)
 	{
-		//static float duration = 250.0f;
 		for (auto it = this->keyboardMap.begin(); it != this->keyboardMap.end(); ++it)
 		{
-			if (event.type == sf::Event::KeyPressed) {
-				if (event.key.code == it->second) inputState.at(it->first) = true;
-			}
+			if (event.type == sf::Event::KeyPressed && event.key.code == it->second) inputState.at(it->first) = true;
 			else if (event.type == sf::Event::KeyReleased)
 			{
 				if (event.key.code == it->second)
@@ -29,10 +26,10 @@ namespace GameComponents {
 					switch (it->first)
 					{
 					case INPUT_TYPE::LEFT:
-						getComposition()->sendMessage(new GameMessage::Message(GameMessage::Message::LEFT_RELEASED));
+						getComposition()->sendMessage(new GameMessage::Message(GameMessage::LEFT_RELEASED));
 						break;
 					case INPUT_TYPE::RIGHT:
-						getComposition()->sendMessage(new GameMessage::Message(GameMessage::Message::RIGHT_RELEASED));
+						getComposition()->sendMessage(new GameMessage::Message(GameMessage::RIGHT_RELEASED));
 						break;
 					default:
 						break;
@@ -52,8 +49,7 @@ namespace GameComponents {
 					{
 					case INPUT_TYPE::FIRE:
 					{
-						if (this->savedDt < this->maxElapsedTime)
-							break;
+						if (this->savedDt < this->maxElapsedTime) break;
 						GLint iViewport[4];
 						glGetIntegerv(GL_VIEWPORT, iViewport);
 						int screenWidth = iViewport[0] + iViewport[2];
@@ -69,16 +65,13 @@ namespace GameComponents {
 						mouseX += GameSystems::GraphicsSystem::Camera::getInstance().cameraStartX;
 						mouseY += GameSystems::GraphicsSystem::Camera::getInstance().cameraStartY;
 
-						/*std::cout << "screenWidth: " << mouseX << "\tscreenHeight: " << mouseY << std::endl;
-						std::cout << "resolutionWidth: " << resolutionWidth << "\tresolutionHeight: " << resolutionHeight << std::endl;*/
-
 						int centerX = (this->getComposition()->getX() + (this->getComposition()->getWidth() / 2));
 						int centerY = (this->getComposition()->getY() + (this->getComposition()->getHeight() / 2));
 
 						glm::vec2 direction = glm::vec2(mouseX - centerX, mouseY - centerY);
 
 						GameObjects::BaseGameObject *arrow = GameSystems::ObjectFactory::getInstance().createArrow(getComposition(), getComposition()->getX(),
-							getComposition()->getY(), this->getDuration(), glm::normalize(direction));
+						getComposition()->getY(), this->getDuration(), glm::normalize(direction));
 						this->setDuration(500.0f);
 						this->savedDt = 0.0f;
 						break;
@@ -117,7 +110,7 @@ namespace GameComponents {
 	{
 		switch (message->id)
 		{
-		case GameMessage::Message::JUMP_RELEASED:
+		case GameMessage::JUMP_RELEASED:
 			inputState.at(INPUT_TYPE::JUMP) = false;
 			break;
 		default:
