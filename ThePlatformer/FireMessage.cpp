@@ -6,6 +6,5 @@ namespace GameMessage {
 	}
 
 	FireMessage::~FireMessage() {
-
 	}
 }

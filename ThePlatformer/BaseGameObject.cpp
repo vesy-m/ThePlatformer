@@ -102,6 +102,11 @@ namespace GameObjects {
 		this->m_button = button;
 	}
 
+	void BaseGameObject::attachComponent(GameComponents::FireComponent *fire)
+	{
+		this->m_fire = fire;
+	}
+
 	void BaseGameObject::sendMessage(GameMessage::Message *message)
 	{
 		if (this->m_body) this->m_body->sendMessage(message);

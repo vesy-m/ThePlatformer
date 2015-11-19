@@ -6,5 +6,6 @@ namespace GameMessage {
 	public:
 		FireMessage();
 		~FireMessage();
+	private:
 	};
 }
