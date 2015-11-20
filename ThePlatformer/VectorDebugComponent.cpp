@@ -15,7 +15,7 @@ namespace GameComponents {
 	{
 		switch (message->id)
 		{
-		case GameMessage::Message::VELOCITY_VECTOR:
+		case GameMessage::VELOCITY_VECTOR:
 				this->velocity = ((GameMessage::VectorMessage *)message)->vector;
 				break;
 		/*	case Message::SHOW_DEBUG:
@@ -40,10 +40,7 @@ namespace GameComponents {
 		float centerX = x + width / 2;
 		float centerY = y + height / 2;
 
-		if (!GameTools::debugManager::getInstance().isActivateGraphic())
-		{
-			return;
-		}
+		if (!GameTools::debugManager::getInstance().isActivateGraphic()) return;
 		// top
 		glLineWidth(1);
 		glBegin(GL_LINES);
@@ -90,11 +87,8 @@ namespace GameComponents {
 		glEnd();
 	}
 
-
 	void VectorDebugComponent::Init()
 	{
 		velocity = glm::vec2(0, 0);
-		showDebug = false;
 	}
-
 }

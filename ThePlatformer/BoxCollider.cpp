@@ -20,8 +20,8 @@ namespace GameComponents {
 		BoxCollider *A = (BoxCollider*)manifold->A;
 		BoxCollider *B = (BoxCollider*)manifold->B;
 
-		glm::vec2 positionA = glm::vec2(manifold->A->composition->getX(), manifold->A->composition->getY());
-		glm::vec2 positionB = glm::vec2(manifold->B->composition->getX(), manifold->B->composition->getY());
+		glm::vec2 positionA = glm::vec2(manifold->A->getComposition()->getX(), manifold->A->getComposition()->getY());
+		glm::vec2 positionB = glm::vec2(manifold->B->getComposition()->getX(), manifold->B->getComposition()->getY());
 
 		// Vector from A to B
 		float x = (B->min.x + (B->composition->getWidth() / 2)) - (A->min.x + (A->composition->getWidth() / 2));
@@ -55,12 +55,12 @@ namespace GameComponents {
 					if (n.x < 0)
 					{
 						manifold->normal = glm::vec2(1, 0);
-						manifold->penetration = ((positionB.x + manifold->B->composition->getWidth()) - positionA.x) + 1;
+						manifold->penetration = ((positionB.x + manifold->B->getComposition()->getWidth()) - positionA.x) + 1;
 					}
 					else
 					{
 						manifold->normal = glm::vec2(-1, 0);
-						manifold->penetration = ((positionA.x + manifold->A->composition->getWidth()) - positionB.x) + 1;
+						manifold->penetration = ((positionA.x + manifold->A->getComposition()->getWidth()) - positionB.x) + 1;
 					}
 					manifold->penetration = x_overlap;
 					return true;
@@ -71,12 +71,12 @@ namespace GameComponents {
 					if (n.y < 0)
 					{
 						manifold->normal = glm::vec2(0, 1);
-						manifold->penetration = ((positionB.y + manifold->B->composition->getHeight()) - positionA.y) + 0.1f;
+						manifold->penetration = ((positionB.y + manifold->B->getComposition()->getHeight()) - positionA.y) + 0.1f;
 					}
 					else
 					{
 						manifold->normal = glm::vec2(0, -1);
-						manifold->penetration = (positionA.y + manifold->A->composition->getHeight()) - positionB.y;
+						manifold->penetration = (positionA.y + manifold->A->getComposition()->getHeight()) - positionB.y;
 					}
 					return true;
 				}
@@ -112,8 +112,8 @@ namespace GameComponents {
 				if (this->composition->getType() == GameObjects::PROJECTILE) {
 					if (object->getType() == GameObjects::PLAYER && object->getName().compare(this->composition->getName()) == 0)
 						continue;
-					if (object->getType() == GameObjects::PROJECTILE)
-						continue;
+					/*if (object->getType() == GameObjects::PROJECTILE)
+						continue;*/
 				}
 				if (object->getComponent(GameComponents::COMPONENT_TYPE::COLLIDER))
 				{
@@ -160,21 +160,21 @@ namespace GameComponents {
 			}
 			if (!collide)
 			{
-				this->composition->sendMessage(new GameMessage::Message(GameMessage::Message::NO_COLLISION));
+				this->composition->sendMessage(new GameMessage::Message(GameMessage::NO_COLLISION));
 			}
 		}
 	}
 
 	void BoxCollider::sendMessage(GameMessage::Message *message)
 	{
-		if (message->id == GameMessage::Message::VELOCITY_VECTOR)
+		if (message->id == GameMessage::VELOCITY_VECTOR)
 			this->velocity = ((GameMessage::VectorMessage*)message)->vector;
 	}
 
 	void ResolveCollision(Manifold *manifold)
 	{
-		glm::vec2 positionA = glm::vec2(manifold->A->composition->getX(), manifold->A->composition->getY());
-		glm::vec2 positionB = glm::vec2(manifold->B->composition->getX(), manifold->B->composition->getY());
+		glm::vec2 positionA = glm::vec2(manifold->A->getComposition()->getX(), manifold->A->getComposition()->getY());
+		glm::vec2 positionB = glm::vec2(manifold->B->getComposition()->getX(), manifold->B->getComposition()->getY());
 
 		float penetration = manifold->penetration;
 		float bounce = 0.0;
@@ -192,6 +192,6 @@ namespace GameComponents {
 		}
 
 		GameMessage::CollisionMessage *msg = new GameMessage::CollisionMessage(newVelocity, addPos);
-		manifold->A->composition->sendMessage((GameMessage::Message*)msg);
+		manifold->A->getComposition()->sendMessage((GameMessage::Message*)msg);
 	}
 }

@@ -97,7 +97,7 @@ namespace GameComponents {
 		this->sheet = new GameTools::SpriteSheet("./config/sprite_sheets/font.json");
 	}
 
-	void TextComponent::sendMessage(GameMessage::Message *)
+	void TextComponent::sendMessage(GameMessage::Message*)
 	{
 	}
 

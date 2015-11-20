@@ -22,7 +22,7 @@ namespace GameComponents {
 	{
 		switch (message->id)
 		{
-		case GameMessage::Message::LEFT:
+		case GameMessage::LEFT:
 			if ((std::string("walk").compare(currentAnim) != 0 || revertX != true) && std::string("jump").compare(currentAnim) != 0) {
 				currentFrame = 0;
 				currentAnim = "walk";
@@ -33,7 +33,7 @@ namespace GameComponents {
 				revertX = true;
 			}
 			break;
-		case GameMessage::Message::RIGHT:
+		case GameMessage::RIGHT:
 			if ((std::string("walk").compare(currentAnim) != 0 || revertX != false) && std::string("jump").compare(currentAnim) != 0) {
 				currentFrame = 0;
 				currentAnim = "walk";
@@ -44,23 +44,23 @@ namespace GameComponents {
 				revertX = false;
 			}
 			break;
-		case GameMessage::Message::JUMP_ANIMATION:
-		case GameMessage::Message::JUMP:
+		case GameMessage::JUMP_ANIMATION:
+		case GameMessage::JUMP:
 			if (std::string("jump").compare(currentAnim) != 0) {
 				currentFrame = 0;
 				currentAnim = "jump";
 			}
 			break;
-		case GameMessage::Message::STAND_ANIMATION:
+		case GameMessage::STAND_ANIMATION:
 			if (std::string("default").compare(currentAnim) != 0) {
 				currentFrame = 0;
 				currentAnim = "default";
 			}
 			break;
-		case GameMessage::Message::ROTATE_LEFT:
+		case GameMessage::ROTATE_LEFT:
 			GameTools::debugManager::getInstance().rotateNum = -1;
 			break;
-		case GameMessage::Message::ROTATE_RIGHT:
+		case GameMessage::ROTATE_RIGHT:
 			GameTools::debugManager::getInstance().rotateNum = 1;
 			break;
 		default:

@@ -25,24 +25,21 @@ namespace GameComponents {
 		{
 			if (it->first == INPUT_TYPE::LEFT && it->second == true
 				&& this->inputState.at(INPUT_TYPE::RIGHT) == false)
-				getComposition()->sendMessage(new GameMessage::Message(GameMessage::Message::LEFT));
+				getComposition()->sendMessage(new GameMessage::Message(GameMessage::LEFT));
 			else if (it->first == INPUT_TYPE::RIGHT
 				&& it->second == true && this->inputState.at(INPUT_TYPE::LEFT) == false)
-				getComposition()->sendMessage(new GameMessage::Message(GameMessage::Message::RIGHT));
+				getComposition()->sendMessage(new GameMessage::Message(GameMessage::RIGHT));
 			else if (it->first == INPUT_TYPE::JUMP && it->second == true)
-				getComposition()->sendMessage(new GameMessage::Message(GameMessage::Message::JUMP));
+				getComposition()->sendMessage(new GameMessage::Message(GameMessage::JUMP));
 			else if (it->first == INPUT_TYPE::DEBUG && it->second == true)
 			{
-				//this->composition->sendMessage(new Message(Message::SHOW_DEBUG));
 				if (GameTools::debugManager::getInstance().isActivateGraphic()) GameTools::debugManager::getInstance().disableGraphic();
 				else GameTools::debugManager::getInstance().activateGraphic();
 				it->second = false;
 			}
-			else if (it->first == INPUT_TYPE::ROTATE_LEFT && it->second == true)	getComposition()->sendMessage(new GameMessage::Message(GameMessage::Message::ROTATE_LEFT));
-			else if (it->first == INPUT_TYPE::ROTATE_RIGHT && it->second == true) getComposition()->sendMessage(new GameMessage::Message(GameMessage::Message::ROTATE_RIGHT));
-			else if (it->first == INPUT_TYPE::FIRE && it->second == true)
-				this->duration += (float)((this->duration + dt > 1000.0f) ? (1000.0f - this->duration) : dt);
-				//getComposition()->sendMessage(new GameMessage::Message(GameMessage::Message::FIRE));
+			else if (it->first == INPUT_TYPE::ROTATE_LEFT && it->second == true) getComposition()->sendMessage(new GameMessage::Message(GameMessage::ROTATE_LEFT));
+			else if (it->first == INPUT_TYPE::ROTATE_RIGHT && it->second == true) getComposition()->sendMessage(new GameMessage::Message(GameMessage::ROTATE_RIGHT));
+			else if (it->first == INPUT_TYPE::FIRE && it->second == true) this->duration += (float)((this->duration + dt > 1000.0f) ? (1000.0f - this->duration) : dt);
 			if (this->savedDt <= this->maxElapsedTime) this->savedDt += (float)dt;
 		}
 	}
