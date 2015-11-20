@@ -14,7 +14,8 @@
       "body" : true,
       "boxcollider" : true,
       "vector" : true,
-      "type": 1
+      "type": 1,
+      "fire_ball" : true
     },
 	{
       "name" : "megaman2",
@@ -30,7 +31,8 @@
       "body" : true,
       "boxcollider" : true,
       "vector" : true,
-      "type": 1
+      "type": 1,
+      "fire_ball" : true
     },
 	{
       "name" : "debugFps",
