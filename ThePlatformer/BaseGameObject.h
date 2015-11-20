@@ -68,6 +68,8 @@ namespace GameObjects {
 		std::string getName();
 		void setType(objectType newtype);
 		objectType getType();
+		int getLife();
+		void setDamage(int damage);
 
 		void destroy(bool);
 		bool destroy(void);
@@ -94,6 +96,7 @@ namespace GameObjects {
 		std::string name;
 		objectType type;
 		bool to_destroy;
+		int life = 100;
 	};
 }
 

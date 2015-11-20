@@ -130,26 +130,34 @@ namespace GameComponents {
 						else if (this->composition->getType() == GameObjects::PROJECTILE) this->composition->destroy(true);
 
 						if (this->composition->getType() == GameObjects::PROJECTILE && other->composition->getType() == GameObjects::PLAYER) {
-							other->composition->destroy(true);
-							if (other->composition->getName() == "megaman") {
-								GameSystems::GraphicsSystem::Camera::getInstance().reInit();
-								GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/metalslug_win_menu.json");
-							}
-							else {
-								GameSystems::GraphicsSystem::Camera::getInstance().reInit();
-								GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/megaman_win_menu.json");
+							other->composition->setDamage(25); //utiliser une variable de projectile plutôt
+							if (other->composition->getLife() <= 0)
+							{
+								other->composition->destroy(true);
+								if (other->composition->getName() == "megaman") {
+									GameSystems::GraphicsSystem::Camera::getInstance().reInit();
+									GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/metalslug_win_menu.json");
+								}
+								else {
+									GameSystems::GraphicsSystem::Camera::getInstance().reInit();
+									GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/megaman_win_menu.json");
+								}
 							}
 
 						}
 						else if (this->composition->getType() == GameObjects::PLAYER && other->composition->getType() == GameObjects::PROJECTILE) {
-							this->composition->destroy(true);
-							if (this->composition->getName() == "megaman") {
-								GameSystems::GraphicsSystem::Camera::getInstance().reInit();
-								GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/metalslug_win_menu.json");
-							}
-							else {
-								GameSystems::GraphicsSystem::Camera::getInstance().reInit();
-								GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/megaman_win_menu.json");
+							this->composition->setDamage(25); //utiliser une variable de projectile plutôt
+							if (this->composition->getLife() <= 0)
+							{
+								this->composition->destroy(true);
+								if (this->composition->getName() == "megaman") {
+									GameSystems::GraphicsSystem::Camera::getInstance().reInit();
+									GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/metalslug_win_menu.json");
+								}
+								else {
+									GameSystems::GraphicsSystem::Camera::getInstance().reInit();
+									GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/megaman_win_menu.json");
+								}
 							}
 						}
 

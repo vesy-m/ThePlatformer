@@ -223,6 +223,16 @@ namespace GameObjects {
 		return this->type;
 	}
 
+	int BaseGameObject::getLife()
+	{
+		return this->life;
+	}
+
+	void BaseGameObject::setDamage(int damage)
+	{
+		this->life -= damage;
+	}
+
 	void BaseGameObject::destroy(bool des) {
 		to_destroy = des;
 	}
