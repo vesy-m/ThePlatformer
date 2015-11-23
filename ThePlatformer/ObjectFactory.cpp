@@ -49,7 +49,7 @@ namespace GameSystems {
 			else if (std::string(it->key) == "circlecollider") new GameComponents::CircleCollider(ret);
 			else if (std::string(it->key) == "controller") new GameComponents::ControllerInputComponent(ret, it->value.toString());
 			else if (std::string(it->key) == "keyboard") new GameComponents::KeyboardInputComponent(ret, it->value.toString());
-			else if (std::string(it->key) == "vector") new GameComponents::VectorDebugComponent(ret);
+			else if (std::string(it->key) == "vector") new GameComponents::VectorDebugComponent(ret, it->value.toString());
 			else if (std::string(it->key) == "fire_ball") new GameComponents::FireBallComponent(ret);
 			else if (std::string(it->key) == "level") {
 				auto buttonLevel = new GameComponents::ButtonComponent(ret, GameComponents::ButtonComponent::ButtonType::LEVEL, it->value.toString());
@@ -109,7 +109,7 @@ namespace GameSystems {
 			}
 
 			new GameComponents::BoxCollider(projectile);
-			new GameComponents::VectorDebugComponent(projectile);
+			new GameComponents::VectorDebugComponent(projectile, "circle");
 			body = new GameComponents::BodyComponent(projectile);
 		}
 		else {
