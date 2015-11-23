@@ -84,21 +84,27 @@ namespace GameSystems {
 			projectile->setType(GameObjects::objectType::PROJECTILE);
 
 			if (std::string("tennis").compare(shooter->getProjectileType()) == 0) {
+				shooter->setCooldown(1500.0f);
 				projectile->setHeight(int(30 * 0.50f));
 				projectile->setWidth(int(30 * 0.50f));
 				projectile->setScale(0.50f);
+				projectile->setPower(20);
 				new GameComponents::SpriteComponent(projectile, "./assets/sprite/tennis_ball.png");
 			}
 			else if (std::string("soccer").compare(shooter->getProjectileType()) == 0) {
+				shooter->setCooldown(2000.0f);
 				projectile->setHeight(int(30 * 0.50f));
 				projectile->setWidth(int(30 * 0.50f));
 				projectile->setScale(0.50f);
+				projectile->setPower(35);
 				new GameComponents::SpriteComponent(projectile, "./assets/sprite/soccer_ball.png");
 			}
 			else {
+				shooter->setCooldown(2500.0f);
 				projectile->setHeight(int(76 * 0.25f));
 				projectile->setWidth(int(150 * 0.25f));
 				projectile->setScale(0.25f);
+				projectile->setPower(40);
 				new GameComponents::SpriteComponent(projectile, "./assets/sprite/minecraft_arrow.png");
 			}
 

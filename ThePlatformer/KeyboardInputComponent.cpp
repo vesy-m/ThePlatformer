@@ -50,7 +50,7 @@ namespace GameComponents {
 					{
 						case INPUT_TYPE::FIRE:
 						{
-							if (this->savedDt < this->maxElapsedTime) break;
+							if (this->savedDt < this->getComposition()->getCooldown()) break;
 							this->composition->sendMessage(new GameMessage::FireMessage(event, this->getDuration()));
 							this->setDuration(500.0f);
 							this->savedDt = 0.0f;

@@ -70,6 +70,10 @@ namespace GameObjects {
 		objectType getType();
 		int getLife();
 		void setDamage(int damage);
+		int getPower();
+		void setPower(int power);
+		float getCooldown();
+		void setCooldown(float cooldown);
 
 		void destroy(bool);
 		bool destroy(void);
@@ -97,6 +101,8 @@ namespace GameObjects {
 		objectType type;
 		bool to_destroy;
 		int life = 100;
+		int power = 0;
+		float cooldown = 2000.0f;
 	};
 }
 

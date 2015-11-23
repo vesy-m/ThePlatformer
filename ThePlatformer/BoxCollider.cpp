@@ -130,7 +130,7 @@ namespace GameComponents {
 						else if (this->composition->getType() == GameObjects::PROJECTILE) this->composition->destroy(true);
 
 						if (this->composition->getType() == GameObjects::PROJECTILE && other->composition->getType() == GameObjects::PLAYER) {
-							other->composition->setDamage(25); //utiliser une variable de projectile plutôt
+							other->composition->setDamage(this->composition->getPower());
 							if (other->composition->getLife() <= 0)
 							{
 								other->composition->destroy(true);
@@ -146,7 +146,7 @@ namespace GameComponents {
 
 						}
 						else if (this->composition->getType() == GameObjects::PLAYER && other->composition->getType() == GameObjects::PROJECTILE) {
-							this->composition->setDamage(25); //utiliser une variable de projectile plutôt
+							this->composition->setDamage(other->composition->getPower());
 							if (this->composition->getLife() <= 0)
 							{
 								this->composition->destroy(true);

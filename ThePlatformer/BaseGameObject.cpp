@@ -233,6 +233,26 @@ namespace GameObjects {
 		this->life -= damage;
 	}
 
+	int BaseGameObject::getPower()
+	{
+		return this->power;
+	}
+
+	void BaseGameObject::setPower(int power)
+	{
+		this->power = power;
+	}
+
+	float BaseGameObject::getCooldown()
+	{
+		return this->cooldown;
+	}
+
+	void BaseGameObject::setCooldown(float cooldown)
+	{
+		this->cooldown = cooldown;
+	}
+
 	void BaseGameObject::destroy(bool des) {
 		to_destroy = des;
 	}

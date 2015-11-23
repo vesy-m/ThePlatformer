@@ -40,7 +40,7 @@ namespace GameComponents {
 			else if (it->first == INPUT_TYPE::ROTATE_LEFT && it->second == true) getComposition()->sendMessage(new GameMessage::Message(GameMessage::ROTATE_LEFT));
 			else if (it->first == INPUT_TYPE::ROTATE_RIGHT && it->second == true) getComposition()->sendMessage(new GameMessage::Message(GameMessage::ROTATE_RIGHT));
 			else if (it->first == INPUT_TYPE::FIRE && it->second == true) this->duration += (float)((this->duration + dt > 1000.0f) ? (1000.0f - this->duration) : dt);
-			if (this->savedDt <= this->maxElapsedTime) this->savedDt += (float)dt;
+			if (this->savedDt <= this->getComposition()->getCooldown()) this->savedDt += (float)dt;
 		}
 	}
 	void InputComponent::setDuration(float duration)

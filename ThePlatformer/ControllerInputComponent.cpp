@@ -35,7 +35,7 @@ namespace GameComponents {
 					{
 					case INPUT_TYPE::FIRE:
 					{
-						if (this->savedDt < this->maxElapsedTime)
+						if (this->savedDt < this->getComposition()->getCooldown())
 							break;
 
 						int centerX = (this->getComposition()->getX() + (this->getComposition()->getWidth() / 2));
