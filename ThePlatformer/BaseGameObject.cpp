@@ -50,6 +50,8 @@ namespace GameObjects {
 
 	GameComponents::BaseComponent *BaseGameObject::getComponent(GameComponents::COMPONENT_TYPE type) {
 		switch (type) {
+		case GameComponents::CIRCLE_COLLIDER:
+		case GameComponents::BOX_COLLIDER:
 		case GameComponents::COLLIDER:
 			return this->m_collider;
 		case GameComponents::DEBUGVECTOR:
@@ -72,7 +74,7 @@ namespace GameObjects {
 		this->m_input = input;
 	}
 
-	void BaseGameObject::attachComponent(GameComponents::Collider *collider)
+	void BaseGameObject::attachComponent(GameComponents::ColliderComponent *collider)
 	{
 		this->m_collider = collider;
 	}

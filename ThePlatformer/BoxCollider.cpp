@@ -1,7 +1,7 @@
 #include "BoxCollider.h"
 
 namespace GameComponents {
-	BoxCollider::BoxCollider(GameObjects::BaseGameObject *object) : Collider(object)
+	BoxCollider::BoxCollider(GameObjects::BaseGameObject *object) : ColliderComponent(object)
 	{
 	}
 
@@ -10,8 +10,9 @@ namespace GameComponents {
 	}
 
 	void BoxCollider::Init(void) {
-		this->min = glm::vec2(this->composition->getX(), this->composition->getY());
-		this->max = glm::vec2(this->composition->getX() + this->composition->getWidth(), this->composition->getY() + this->composition->getHeight());
+		this->centerPos = glm::vec2(this->composition->getX() + this->composition->getWidth() / 2.0f, this->composition->getY() + this->composition->getHeight() / 2.0f);
+		this->minPoint = glm::vec2(this->composition->getX(), this->composition->getY());
+		this->maxPoint = glm::vec2(this->composition->getX() + this->composition->getWidth(), this->composition->getY() + this->composition->getHeight());
 	}
 
 	bool BoxCollider::CollideWithBox(Manifold *manifold)
@@ -24,13 +25,13 @@ namespace GameComponents {
 		glm::vec2 positionB = glm::vec2(manifold->B->composition->getX(), manifold->B->composition->getY());
 
 		// Vector from A to B
-		float x = (B->min.x + (B->composition->getWidth() / 2)) - (A->min.x + (A->composition->getWidth() / 2));
-		float y = (B->min.y + B->composition->getHeight() / 2) - (A->min.y + A->composition->getHeight() / 2);
+		float x = (B->minPoint.x + (B->composition->getWidth() / 2)) - (A->minPoint.x + (A->composition->getWidth() / 2));
+		float y = (B->minPoint.y + B->composition->getHeight() / 2) - (A->minPoint.y + A->composition->getHeight() / 2);
 		glm::vec2 n = glm::vec2(x, y);
 
 		// Calculate half extents along x axis for each object
-		float a_extent = (A->max.x - A->min.x) / 2;
-		float b_extent = (B->max.x - B->min.x) / 2;
+		float a_extent = (A->maxPoint.x - A->minPoint.x) / 2;
+		float b_extent = (B->maxPoint.x - B->minPoint.x) / 2;
 
 		// Calculate overlap on x axis
 		float x_overlap = a_extent + b_extent - abs(n.x);
@@ -39,8 +40,8 @@ namespace GameComponents {
 		if (x_overlap > 0)
 		{
 			// Calculate half extents along x axis for each object
-			float a_extent = (A->max.y - A->min.y) / 2;
-			float b_extent = (B->max.y - B->min.y) / 2;
+			float a_extent = (A->maxPoint.y - A->minPoint.y) / 2;
+			float b_extent = (B->maxPoint.y - B->minPoint.y) / 2;
 
 			// Calculate overlap on y axis
 			float y_overlap = a_extent + b_extent - abs(n.y);
@@ -85,17 +86,21 @@ namespace GameComponents {
 		return false;
 	}
 
-	COLLIDER_TYPE BoxCollider::getColliderType()
+	COMPONENT_TYPE BoxCollider::getType()
 	{
-		return COLLIDER_TYPE::BOX;
+		return COMPONENT_TYPE::BOX_COLLIDER;
 	}
 
 	void BoxCollider::Update(double)
 	{
+		this->centerPos = glm::vec2(this->composition->getX() + this->composition->getWidth() / 2.0f, this->composition->getY() + this->composition->getHeight() / 2.0f);
+		this->minPoint = glm::vec2(this->composition->getX(), this->composition->getY());
+		this->maxPoint = glm::vec2(this->composition->getX() + this->composition->getWidth(), this->composition->getY() + this->composition->getHeight());
+
 		bool collide = false;
 
-		this->min = glm::vec2(this->composition->getX(), this->composition->getY());
-		this->max = glm::vec2(this->composition->getX() + this->composition->getWidth(), this->composition->getY() + this->composition->getHeight());
+		this->minPoint = glm::vec2(this->composition->getX(), this->composition->getY());
+		this->maxPoint = glm::vec2(this->composition->getX() + this->composition->getWidth(), this->composition->getY() + this->composition->getHeight());
 
 		if (this->composition->getType() != GameObjects::NONE)
 		{
@@ -118,43 +123,46 @@ namespace GameComponents {
 				if (object->getComponent(GameComponents::COMPONENT_TYPE::COLLIDER))
 				{
 					if (object->getComponent(GameComponents::COMPONENT_TYPE::COLLIDER) == this) continue;
-					BoxCollider *other = dynamic_cast<BoxCollider*>(object->getComponent(GameComponents::COMPONENT_TYPE::COLLIDER));
-					assert(other != NULL);
 					Manifold *manifold = new Manifold();
-					manifold->A = this;
-					manifold->B = other;
-					if (this->CollideWithBox(manifold))
+					if (object->getComponent(GameComponents::COMPONENT_TYPE::COLLIDER)->getType() == COMPONENT_TYPE::BOX_COLLIDER)
 					{
-						// Destroy projectiles on collision
-						if (other->composition->getType() == GameObjects::PROJECTILE) other->composition->destroy(true);
-						else if (this->composition->getType() == GameObjects::PROJECTILE) this->composition->destroy(true);
+						BoxCollider *otherObject = dynamic_cast<BoxCollider*>(object->getComponent(GameComponents::COMPONENT_TYPE::COLLIDER));
+						assert(otherObject != NULL);
+						manifold->A = this;
+						manifold->B = otherObject;
+						if (this->CollideWithBox(manifold))
+						{
+							// Destroy projectiles on collision
+							if (otherObject->composition->getType() == GameObjects::PROJECTILE) otherObject->composition->destroy(true);
+							else if (this->composition->getType() == GameObjects::PROJECTILE) this->composition->destroy(true);
 
-						if (this->composition->getType() == GameObjects::PROJECTILE && other->composition->getType() == GameObjects::PLAYER) {
-							other->composition->destroy(true);
-							if (other->composition->getName() == "megaman") {
-								GameSystems::GraphicsSystem::Camera::getInstance().reInit();
-								GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/metalslug_win_menu.json");
+							if (this->composition->getType() == GameObjects::PROJECTILE && otherObject->composition->getType() == GameObjects::PLAYER) {
+								otherObject->composition->destroy(true);
+								if (otherObject->composition->getName() == "megaman") {
+									GameSystems::GraphicsSystem::Camera::getInstance().reInit();
+									GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/metalslug_win_menu.json");
+								}
+								else {
+									GameSystems::GraphicsSystem::Camera::getInstance().reInit();
+									GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/megaman_win_menu.json");
+								}
+
 							}
-							else {
-								GameSystems::GraphicsSystem::Camera::getInstance().reInit();
-								GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/megaman_win_menu.json");
+							else if (this->composition->getType() == GameObjects::PLAYER && otherObject->composition->getType() == GameObjects::PROJECTILE) {
+								this->composition->destroy(true);
+								if (this->composition->getName() == "megaman") {
+									GameSystems::GraphicsSystem::Camera::getInstance().reInit();
+									GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/metalslug_win_menu.json");
+								}
+								else {
+									GameSystems::GraphicsSystem::Camera::getInstance().reInit();
+									GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/megaman_win_menu.json");
+								}
 							}
 
+							ResolveCollision(manifold);
+							collide = true;
 						}
-						else if (this->composition->getType() == GameObjects::PLAYER && other->composition->getType() == GameObjects::PROJECTILE) {
-							this->composition->destroy(true);
-							if (this->composition->getName() == "megaman") {
-								GameSystems::GraphicsSystem::Camera::getInstance().reInit();
-								GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/metalslug_win_menu.json");
-							}
-							else {
-								GameSystems::GraphicsSystem::Camera::getInstance().reInit();
-								GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/megaman_win_menu.json");
-							}
-						}
-
-						ResolveCollision(manifold);
-						collide = true;
 					}
 				}
 			}
@@ -169,29 +177,5 @@ namespace GameComponents {
 	{
 		if (message->id == GameMessage::Message::VELOCITY_VECTOR)
 			this->velocity = ((GameMessage::VectorMessage*)message)->vector;
-	}
-
-	void ResolveCollision(Manifold *manifold)
-	{
-		glm::vec2 positionA = glm::vec2(manifold->A->composition->getX(), manifold->A->composition->getY());
-		glm::vec2 positionB = glm::vec2(manifold->B->composition->getX(), manifold->B->composition->getY());
-
-		float penetration = manifold->penetration;
-		float bounce = 0.0;
-
-		glm::vec2 addPos = manifold->normal * penetration;
-
-		glm::vec2 newVelocity = ((BoxCollider*)manifold->A)->velocity;
-		if (manifold->normal.y != 0) {
-			if (newVelocity.y >= -1 && newVelocity.y <= 1) newVelocity.y = 0.0;
-			else newVelocity.y *= -bounce;
-		}
-		if (manifold->normal.x != 0) {
-			if (newVelocity.x >= -1 && newVelocity.x <= 1) newVelocity.x = 0.0;
-			else newVelocity.x *= -bounce;
-		}
-
-		GameMessage::CollisionMessage *msg = new GameMessage::CollisionMessage(newVelocity, addPos);
-		manifold->A->composition->sendMessage((GameMessage::Message*)msg);
 	}
 }

@@ -177,9 +177,6 @@
     <ClCompile Include="BoxCollider.cpp">
       <Filter>GameComponents\Source</Filter>
     </ClCompile>
-    <ClCompile Include="CircleCollider.cpp">
-      <Filter>GameComponents\Source</Filter>
-    </ClCompile>
     <ClCompile Include="CollisionMessage.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
@@ -188,6 +185,9 @@
     </ClCompile>
     <ClCompile Include="SoundManager.cpp">
       <Filter>GameTools\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CircleCollider.cpp">
+      <Filter>GameComponents\Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -293,9 +293,6 @@
     <ClInclude Include="BoxCollider.h">
       <Filter>GameComponents\Header</Filter>
     </ClInclude>
-    <ClInclude Include="CircleCollider.h">
-      <Filter>GameComponents\Header</Filter>
-    </ClInclude>
     <ClInclude Include="CollisionMessage.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
@@ -307,6 +304,9 @@
     </ClInclude>
     <ClInclude Include="Singleton.h">
       <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="CircleCollider.h">
+      <Filter>GameComponents\Header</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

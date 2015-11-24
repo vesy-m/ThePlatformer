@@ -13,6 +13,8 @@ namespace GameComponents {
 		WINDOW,
 		SPRITE,
 		PHYSIC,
+		BOX_COLLIDER,
+		CIRCLE_COLLIDER,
 		COLLIDER,
 		DEBUGVECTOR,
 		TEXT,
