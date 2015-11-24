@@ -31,7 +31,7 @@ namespace GameComponents {
 
 				if (this->composition->getX() < mousex && mousex < this->composition->getX() + this->composition->getWidth() &&
 					this->composition->getY() < mousey && mousey < this->composition->getY() + this->composition->getHeight()) {
-					this->composition->sendMessage(new GameMessage::Message(GameMessage::Message::CLICKON));
+					this->composition->sendMessage(new GameMessage::Message(GameMessage::CLICKON));
 				}
 			}
 		}
@@ -41,7 +41,7 @@ namespace GameComponents {
 	{
 	}
 
-	void MouseClickComponent::sendMessage(GameMessage::Message *)
+	void MouseClickComponent::sendMessage(GameMessage::Message*)
 	{
 	}
 

@@ -9,4 +9,8 @@ namespace GameComponents {
 	BaseComponent::~BaseComponent()
 	{
 	}
+
+	GameObjects::BaseGameObject *BaseComponent::getComposition(void) const {
+		return this->composition;
+	}
 }

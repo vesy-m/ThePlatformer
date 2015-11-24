@@ -5,7 +5,6 @@
 #include <vector>
 #include <list>
 #include "BaseGameObject.h"
-#include "Projectile.h"
 #include "gason.h"
 #include "GameEngine.h"
 #include "SpriteComponent.h"
@@ -26,6 +25,12 @@ namespace GameSystems {
 			LEVEL,
 			NONE
 		};
+		enum ProjectileType {
+			ARROW,
+			SOCCER_BALL,
+			TENNIS_BALL,
+			BASE_BALL
+		};
 		static ObjectFactory& getInstance()
 		{
 			static ObjectFactory    instance;
@@ -33,18 +38,18 @@ namespace GameSystems {
 		}
 		~ObjectFactory();
 		GameObjects::BaseGameObject *parseObject(GameTools::JsonValue&);
-		GameObjects::BaseGameObject *createArrow(GameObjects::BaseGameObject*, unsigned int, unsigned int, float, glm::vec2);
+		GameObjects::BaseGameObject *createProjectile(GameObjects::BaseGameObject*, unsigned int, unsigned int, float, glm::vec2, ProjectileType);
 		static void attachObject(GameObjects::BaseGameObject*);
 		void buildLevel(GameTools::JsonValue&);
 		GameEngine::Core::Level &getCurrentLevel();
 		void buildMenu(GameTools::JsonValue & value);
-		void LoadLevelFileAsCurrent(const std::string & filename);
-		void LoadMenuFileAsCurrent(const std::string & filename);
+		void LoadLevelFileAsCurrent(const std::string&);
+		void LoadMenuFileAsCurrent(const std::string&);
 		void cleanupObjects(void);
 		std::list<GameObjects::BaseGameObject*>& getCurrentObjects();
-		const std::list<GameSystems::BaseSystem *> &getSystems();
+		const std::list<GameSystems::BaseSystem *>& getSystems();
 		void initSystems();
-		void addSystems(GameSystems::BaseSystem *);
+		void addSystems(GameSystems::BaseSystem*);
 		gameState stateGame;
 		std::string currentLevelFileName;
 	private:
@@ -52,8 +57,8 @@ namespace GameSystems {
 		ObjectFactory(ObjectFactory const&) = delete;
 		void operator=(ObjectFactory const&) = delete;
 		void putObjectDepthOrdered(GameObjects::BaseGameObject*);
-		std::list<GameObjects::BaseGameObject *> old_objects;
-		std::list<GameSystems::BaseSystem *>		m_systems;
+		std::list<GameObjects::BaseGameObject*> old_objects;
+		std::list<GameSystems::BaseSystem*>		m_systems;
 
 		std::vector<GameEngine::Core::Level> listLevels;
 		GameEngine::Core::Level currentLevel;

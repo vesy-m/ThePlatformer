@@ -18,7 +18,6 @@ namespace GameComponents {
 	}
 
 	void TextComponent::Update() {
-
 	}
 
 	void TextComponent::Update(double dt)
@@ -33,7 +32,7 @@ namespace GameComponents {
 		GLint width = texture->getWidth();
 		GLint height = texture->getHeight();
 
-		if (dt == 0.0 || GameTools::debugManager::getInstance().isActivateGraphic() == false) {
+		if (dt == 0.0 || GameTools::debugManager::getInstance().isActivateGraphic() == false && this->composition->getType() != GameObjects::objectType::PLAYER) {
 			return;
 		}
 
@@ -50,7 +49,15 @@ namespace GameComponents {
 		std::stringstream ss = std::stringstream();
 		ss << old_fps;
 		std::string text = std::string("FPS : " + ss.str());
-
+		if (this->composition->getType() == GameObjects::objectType::PLAYER)
+		{
+			if (this->composition->getLife() >= 0)
+				text = std::to_string(this->composition->getLife());
+			else
+				text = "0";
+			posX = this->composition->getX() - 10;
+			posY = this->composition->getY() - 20;
+		}
 		glBindTexture(GL_TEXTURE_2D, texture->getId());
 		for (size_t i = 0; i < text.size(); i++) {
 
@@ -97,7 +104,7 @@ namespace GameComponents {
 		this->sheet = new GameTools::SpriteSheet("./config/sprite_sheets/font.json");
 	}
 
-	void TextComponent::sendMessage(GameMessage::Message *)
+	void TextComponent::sendMessage(GameMessage::Message*)
 	{
 	}
 

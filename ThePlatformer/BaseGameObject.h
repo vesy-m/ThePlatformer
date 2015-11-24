@@ -17,6 +17,7 @@ namespace GameComponents {
 	class ColliderComponent;
 	class BodyComponent;
 	class ButtonComponent;
+	class FireComponent;
 }
 
 namespace GameObjects {
@@ -41,6 +42,7 @@ namespace GameObjects {
 		void attachComponent(GameComponents::ColliderComponent*);
 		void attachComponent(GameComponents::BodyComponent*);
 		void attachComponent(GameComponents::ButtonComponent*);
+		void attachComponent(GameComponents::FireComponent*);
 		void sendMessage(GameMessage::Message*);
 		void setX(int x);
 		int getX();
@@ -66,6 +68,12 @@ namespace GameObjects {
 		std::string getName();
 		void setType(objectType newtype);
 		objectType getType();
+		int getLife();
+		void setDamage(int damage);
+		int getPower();
+		void setPower(int power);
+		float getCooldown();
+		void setCooldown(float cooldown);
 
 		void destroy(bool);
 		bool destroy(void);
@@ -78,6 +86,7 @@ namespace GameObjects {
 		GameComponents::ColliderComponent *m_collider;
 		GameComponents::BodyComponent *m_body;
 		GameComponents::ButtonComponent *m_button;
+		GameComponents::FireComponent *m_fire;
 		int x;
 		int y;
 		int height;
@@ -91,6 +100,9 @@ namespace GameObjects {
 		std::string name;
 		objectType type;
 		bool to_destroy;
+		int life = 100;
+		int power = 0;
+		float cooldown = 2000.0f;
 	};
 }
 

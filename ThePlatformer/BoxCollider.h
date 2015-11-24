@@ -15,7 +15,7 @@ namespace GameComponents {
 		virtual ~BoxCollider();
 		virtual COMPONENT_TYPE getType();
 		virtual void Update(double);
-		virtual void sendMessage(GameMessage::Message *message);
+		virtual void sendMessage(GameMessage::Message*);
 		virtual void Init();
 
 		bool CollideWithBox(Manifold *manifold);

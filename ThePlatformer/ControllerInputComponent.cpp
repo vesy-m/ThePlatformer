@@ -35,7 +35,7 @@ namespace GameComponents {
 					{
 					case INPUT_TYPE::FIRE:
 					{
-						if (this->savedDt < this->maxElapsedTime)
+						if (this->savedDt < this->getComposition()->getCooldown())
 							break;
 
 						int centerX = (this->getComposition()->getX() + (this->getComposition()->getWidth() / 2));
@@ -49,8 +49,8 @@ namespace GameComponents {
 						}
 						else direction = glm::vec2((aimAxisX + centerX) - centerX, (aimAxisY + centerY) - centerY);
 
-						GameObjects::BaseGameObject *arrow = GameSystems::ObjectFactory::getInstance().createArrow(getComposition(), getComposition()->getX(),
-							getComposition()->getY(), this->getDuration(), glm::normalize(direction));
+						GameObjects::BaseGameObject *arrow = GameSystems::ObjectFactory::getInstance().createProjectile(getComposition(), getComposition()->getX(),
+							getComposition()->getY(), this->getDuration(), glm::normalize(direction), GameSystems::ObjectFactory::SOCCER_BALL);
 						this->setDuration(500.0f);
 						this->savedDt = 0.0f;
 						break;
@@ -70,9 +70,9 @@ namespace GameComponents {
 					{
 						inputState.at(it->first) = false;
 						if (it->first == INPUT_TYPE::RIGHT)
-							getComposition()->sendMessage(new GameMessage::Message(GameMessage::Message::RIGHT_RELEASED));
+							getComposition()->sendMessage(new GameMessage::Message(GameMessage::RIGHT_RELEASED));
 						else if(it->first == INPUT_TYPE::LEFT)
-							getComposition()->sendMessage(new GameMessage::Message(GameMessage::Message::LEFT_RELEASED));
+							getComposition()->sendMessage(new GameMessage::Message(GameMessage::LEFT_RELEASED));
 						else if (it->first == INPUT_TYPE::FIRE) {
 							int centerX = this->getComposition()->getX() + (this->getComposition()->getHeight() / 2);
 							int centerY = this->getComposition()->getY() + (this->getComposition()->getHeight() / 2);
@@ -86,8 +86,8 @@ namespace GameComponents {
 							else direction = glm::vec2((aimAxisX + centerX) - centerX, (aimAxisY + centerY) - centerY);
 
 							std::cout << "Duration: " << this->getDuration() << std::endl;
-							GameObjects::BaseGameObject *arrow = GameSystems::ObjectFactory::getInstance().createArrow(getComposition(), getComposition()->getX(),
-								getComposition()->getY(), this->getDuration(), glm::normalize(direction));
+							GameObjects::BaseGameObject *arrow = GameSystems::ObjectFactory::getInstance().createProjectile(getComposition(), getComposition()->getX(),
+								getComposition()->getY(), this->getDuration(), glm::normalize(direction), GameSystems::ObjectFactory::SOCCER_BALL);
 							this->setDuration(500.0f);
 						}
 					}
@@ -174,7 +174,7 @@ namespace GameComponents {
 	{
 		switch (message->id)
 		{
-		case GameMessage::Message::JUMP_RELEASED:
+		case GameMessage::JUMP_RELEASED:
 			inputState.at(INPUT_TYPE::JUMP) = false;
 			break;
 		default:

@@ -21,8 +21,8 @@ namespace GameComponents {
 		BoxCollider *A = (BoxCollider*)manifold->A;
 		BoxCollider *B = (BoxCollider*)manifold->B;
 
-		glm::vec2 positionA = glm::vec2(manifold->A->composition->getX(), manifold->A->composition->getY());
-		glm::vec2 positionB = glm::vec2(manifold->B->composition->getX(), manifold->B->composition->getY());
+		glm::vec2 positionA = glm::vec2(manifold->A->getComposition()->getX(), manifold->A->getComposition()->getY());
+		glm::vec2 positionB = glm::vec2(manifold->B->getComposition()->getX(), manifold->B->getComposition()->getY());
 
 		// Vector from A to B
 		float x = (B->minPoint.x + (B->composition->getWidth() / 2)) - (A->minPoint.x + (A->composition->getWidth() / 2));
@@ -56,12 +56,12 @@ namespace GameComponents {
 					if (n.x < 0)
 					{
 						manifold->normal = glm::vec2(1, 0);
-						manifold->penetration = ((positionB.x + manifold->B->composition->getWidth()) - positionA.x) + 1;
+						manifold->penetration = ((positionB.x + manifold->B->getComposition()->getWidth()) - positionA.x) + 1;
 					}
 					else
 					{
 						manifold->normal = glm::vec2(-1, 0);
-						manifold->penetration = ((positionA.x + manifold->A->composition->getWidth()) - positionB.x) + 1;
+						manifold->penetration = ((positionA.x + manifold->A->getComposition()->getWidth()) - positionB.x) + 1;
 					}
 					manifold->penetration = x_overlap;
 					return true;
@@ -72,12 +72,12 @@ namespace GameComponents {
 					if (n.y < 0)
 					{
 						manifold->normal = glm::vec2(0, 1);
-						manifold->penetration = ((positionB.y + manifold->B->composition->getHeight()) - positionA.y) + 0.1f;
+						manifold->penetration = ((positionB.y + manifold->B->getComposition()->getHeight()) - positionA.y) + 0.1f;
 					}
 					else
 					{
 						manifold->normal = glm::vec2(0, -1);
-						manifold->penetration = (positionA.y + manifold->A->composition->getHeight()) - positionB.y;
+						manifold->penetration = (positionA.y + manifold->A->getComposition()->getHeight()) - positionB.y;
 					}
 					return true;
 				}
@@ -128,54 +128,62 @@ namespace GameComponents {
 					{
 						BoxCollider *otherObject = dynamic_cast<BoxCollider*>(object->getComponent(GameComponents::COMPONENT_TYPE::COLLIDER));
 						assert(otherObject != NULL);
-						manifold->A = this;
+					manifold->A = this;
 						manifold->B = otherObject;
-						if (this->CollideWithBox(manifold))
-						{
-							// Destroy projectiles on collision
+					if (this->CollideWithBox(manifold))
+					{
+						// Destroy projectiles on collision
 							if (otherObject->composition->getType() == GameObjects::PROJECTILE) otherObject->composition->destroy(true);
-							else if (this->composition->getType() == GameObjects::PROJECTILE) this->composition->destroy(true);
+						else if (this->composition->getType() == GameObjects::PROJECTILE) this->composition->destroy(true);
 
-							if (this->composition->getType() == GameObjects::PROJECTILE && otherObject->composition->getType() == GameObjects::PLAYER) {
+						if (this->composition->getType() == GameObjects::PROJECTILE && otherObject->composition->getType() == GameObjects::PLAYER) {
+							otherObject->composition->setDamage(this->composition->getPower());
+							if (otherObject->composition->getLife() <= 0)
+							{
 								otherObject->composition->destroy(true);
 								if (otherObject->composition->getName() == "megaman") {
-									GameSystems::GraphicsSystem::Camera::getInstance().reInit();
-									GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/metalslug_win_menu.json");
-								}
-								else {
-									GameSystems::GraphicsSystem::Camera::getInstance().reInit();
-									GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/megaman_win_menu.json");
-								}
-
+								GameSystems::GraphicsSystem::Camera::getInstance().reInit();
+								GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/metalslug_win_menu.json");
 							}
-							else if (this->composition->getType() == GameObjects::PLAYER && otherObject->composition->getType() == GameObjects::PROJECTILE) {
-								this->composition->destroy(true);
-								if (this->composition->getName() == "megaman") {
-									GameSystems::GraphicsSystem::Camera::getInstance().reInit();
-									GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/metalslug_win_menu.json");
-								}
-								else {
-									GameSystems::GraphicsSystem::Camera::getInstance().reInit();
-									GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/megaman_win_menu.json");
-								}
+							else {
+								GameSystems::GraphicsSystem::Camera::getInstance().reInit();
+								GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/megaman_win_menu.json");
+							}
 							}
 
-							ResolveCollision(manifold);
-							collide = true;
 						}
+						else if (this->composition->getType() == GameObjects::PLAYER && otherObject->composition->getType() == GameObjects::PROJECTILE) {
+							this->composition->setDamage(otherObject->composition->getPower());
+							if (this->composition->getLife() <= 0)
+							{
+							this->composition->destroy(true);
+							if (this->composition->getName() == "megaman") {
+								GameSystems::GraphicsSystem::Camera::getInstance().reInit();
+								GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/metalslug_win_menu.json");
+							}
+							else {
+								GameSystems::GraphicsSystem::Camera::getInstance().reInit();
+								GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/megaman_win_menu.json");
+							}
+						}
+						}
+
+						ResolveCollision(manifold);
+						collide = true;
 					}
 				}
 			}
+			}
 			if (!collide)
 			{
-				this->composition->sendMessage(new GameMessage::Message(GameMessage::Message::NO_COLLISION));
+				this->composition->sendMessage(new GameMessage::Message(GameMessage::NO_COLLISION));
 			}
 		}
 	}
 
 	void BoxCollider::sendMessage(GameMessage::Message *message)
 	{
-		if (message->id == GameMessage::Message::VELOCITY_VECTOR)
+		if (message->id == GameMessage::VELOCITY_VECTOR)
 			this->velocity = ((GameMessage::VectorMessage*)message)->vector;
 	}
 }

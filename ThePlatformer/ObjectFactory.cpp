@@ -11,6 +11,7 @@
 #include "TextComponent.h"
 #include "ButtonComponent.h"
 #include "MouseClickComponent.h"
+#include "FireBallComponent.h"
 
 namespace GameSystems {
 	ObjectFactory::ObjectFactory()
@@ -19,7 +20,6 @@ namespace GameSystems {
 		systemNeedReinit = true;
 		listLevels = std::vector<GameEngine::Core::Level>();
 	}
-
 
 	ObjectFactory::~ObjectFactory()
 	{
@@ -42,9 +42,15 @@ namespace GameSystems {
 			else if (std::string(it->key) == "projectile_type") ret->setProjectileType(it->value.toString());
 			else if (std::string(it->key) == "name") ret->setName(it->value.toString());
 			else if (std::string(it->key) == "type") ret->setType((GameObjects::objectType)(int)it->value.toNumber());
-			else if (std::string(it->key) == "sprite") {
-				auto sprite = new GameComponents::SpriteComponent(ret, it->value.toString());
-			}
+			else if (std::string(it->key) == "sprite") new GameComponents::SpriteComponent(ret, it->value.toString());
+			else if (std::string(it->key) == "fps") new GameComponents::TextComponent(ret);
+			else if (std::string(it->key) == "body") new GameComponents::BodyComponent(ret);
+			else if (std::string(it->key) == "boxcollider") new GameComponents::BoxCollider(ret);
+			else if (std::string(it->key) == "circlecollider") new GameComponents::CircleCollider(ret);
+			else if (std::string(it->key) == "controller") new GameComponents::ControllerInputComponent(ret, it->value.toString());
+			else if (std::string(it->key) == "keyboard") new GameComponents::KeyboardInputComponent(ret, it->value.toString());
+			else if (std::string(it->key) == "vector") new GameComponents::VectorDebugComponent(ret, it->value.toString());
+			else if (std::string(it->key) == "fire_ball") new GameComponents::FireBallComponent(ret);
 			else if (std::string(it->key) == "level") {
 				auto buttonLevel = new GameComponents::ButtonComponent(ret, GameComponents::ButtonComponent::ButtonType::LEVEL, it->value.toString());
 				auto mouse = new GameComponents::MouseClickComponent(ret);
@@ -57,28 +63,8 @@ namespace GameSystems {
 				auto buttonFunction = new GameComponents::ButtonComponent(ret, GameComponents::ButtonComponent::ButtonType::FUNCTION, it->value.toString());
 				auto mouse = new GameComponents::MouseClickComponent(ret);
 			}
-			else if (std::string(it->key) == "fps") {
-				auto fps = new GameComponents::TextComponent(ret);
+			
 			}
-			else if (std::string(it->key) == "body") {
-				auto body = new GameComponents::BodyComponent(ret);
-			}
-			else if (std::string(it->key) == "boxcollider") {
-				auto vector = new GameComponents::BoxCollider(ret);
-			}
-			else if (std::string(it->key) == "circlecollider") {
-				auto vector = new GameComponents::CircleCollider(ret);
-			}
-			else if (std::string(it->key) == "controller") {
-				auto input = new GameComponents::ControllerInputComponent(ret, it->value.toString());
-			}
-			else if (std::string(it->key) == "keyboard") {
-				auto input = new GameComponents::KeyboardInputComponent(ret, it->value.toString());
-			}
-			else if (std::string(it->key) == "vector") {
-				auto vector = new GameComponents::VectorDebugComponent(ret);
-			}
-		}
 		return (ret);
 	}
 
@@ -86,11 +72,11 @@ namespace GameSystems {
 		ObjectFactory::getInstance().currentLevel.putObjectDepthOrdered(obj);
 	}
 
-	GameObjects::BaseGameObject *ObjectFactory::createArrow(GameObjects::BaseGameObject *shooter, unsigned int x, unsigned int y, float base_force, glm::vec2 direction) {
-		GameObjects::Projectile *projectile = NULL;
+	GameObjects::BaseGameObject *ObjectFactory::createProjectile(GameObjects::BaseGameObject *shooter, unsigned int x, unsigned int y, float base_force, glm::vec2 direction, ProjectileType) {
+		GameObjects::BaseGameObject *projectile = NULL;
 		GameComponents::BodyComponent *body = NULL;
 		if (this->old_objects.size() == 0) {
-			projectile = new GameObjects::Projectile(shooter);
+			projectile = new GameObjects::BaseGameObject();
 			projectile->setName(shooter->getName());
 
 			projectile->setMass(50.0f);
@@ -99,33 +85,39 @@ namespace GameSystems {
 			//projectile->setBounce(0.1f);
 
 			if (std::string("tennis").compare(shooter->getProjectileType()) == 0) {
+				shooter->setCooldown(1500.0f);
 				projectile->setHeight(int(30 * 0.50f));
 				projectile->setWidth(int(30 * 0.50f));
 				projectile->setScale(0.50f);
+				projectile->setPower(20);
 				new GameComponents::SpriteComponent(projectile, "./assets/sprite/tennis_ball.png");
 			}
 			else if (std::string("soccer").compare(shooter->getProjectileType()) == 0) {
+				shooter->setCooldown(2000.0f);
 				projectile->setHeight(int(30 * 0.50f));
 				projectile->setWidth(int(30 * 0.50f));
 				projectile->setScale(0.50f);
+				projectile->setPower(35);
 				new GameComponents::SpriteComponent(projectile, "./assets/sprite/soccer_ball.png");
 			}
 			else {
+				shooter->setCooldown(2500.0f);
 				projectile->setHeight(int(76 * 0.25f));
 				projectile->setWidth(int(150 * 0.25f));
 				projectile->setScale(0.25f);
+				projectile->setPower(40);
 				new GameComponents::SpriteComponent(projectile, "./assets/sprite/minecraft_arrow.png");
 			}
 
 			new GameComponents::CircleCollider(projectile);
-			new GameComponents::VectorDebugComponent(projectile);
+			new GameComponents::VectorDebugComponent(projectile, "circle");
 			body = new GameComponents::BodyComponent(projectile);
 		}
 		else {
-			projectile = reinterpret_cast<GameObjects::Projectile*>(this->old_objects.front());
+			projectile = dynamic_cast<GameObjects::BaseGameObject*>(this->old_objects.front());
+			assert(projectile != NULL);
 			this->old_objects.pop_front();
 			projectile->destroy(false);
-
 			body = dynamic_cast<GameComponents::BodyComponent*>(projectile->getComponent(GameComponents::PHYSIC));
 		}
 		assert(projectile != NULL);
@@ -205,29 +197,20 @@ namespace GameSystems {
 
 	std::list<GameObjects::BaseGameObject*>& ObjectFactory::getCurrentObjects()
 	{
-		if (this->stateGame == gameState::LEVEL) {
-			return this->currentLevel.getObjects();
-		}
-		else if(this->stateGame == gameState::MENU){
-			return this->currentMenu.getObjects();
-		}
-		else {
-			return this->currentLevel.getObjects(); // empty by default
-		}
+		if (this->stateGame == gameState::LEVEL) return this->currentLevel.getObjects();
+		else if(this->stateGame == gameState::MENU)	return this->currentMenu.getObjects();
+		else return this->currentLevel.getObjects();
 
 	}
 
 	const std::list<GameSystems::BaseSystem*>& ObjectFactory::getSystems()
 	{
-		if (systemNeedReinit) {
-			this->initSystems();
-		}
+		if (systemNeedReinit) this->initSystems();
 		return this->m_systems;
 	}
 
 	void ObjectFactory::initSystems() {
-		for each (GameSystems::BaseSystem* system in this->m_systems)
-			system->Init(this->getCurrentObjects());
+		for each (GameSystems::BaseSystem* system in this->m_systems) system->Init(this->getCurrentObjects());
 		systemNeedReinit = false;
 	}
 

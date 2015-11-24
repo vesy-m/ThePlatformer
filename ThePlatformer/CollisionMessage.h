@@ -1,7 +1,4 @@
 #pragma once
-#ifndef _COLLISIONMESSAGE_H_
-#define _COLLISIONMESSAGE_H_
-
 #include "vectorMessage.h"
 
 namespace GameMessage {
@@ -17,6 +14,3 @@ namespace GameMessage {
 		glm::vec2 normal;
 	};
 }
-
-#endif // !_COLLISIONMESSAGE_H_
-

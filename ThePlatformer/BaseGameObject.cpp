@@ -6,6 +6,8 @@
 #include "TextComponent.h"
 #include "VectorDebugComponent.h"
 #include "ButtonComponent.h"
+#include "FireComponent.h"
+#include "FireMessage.h"
 
 namespace GameObjects {
 	BaseGameObject::BaseGameObject()
@@ -36,6 +38,7 @@ namespace GameObjects {
 		if (this->m_sprite) this->m_sprite->Init();
 		if (this->m_text) this->m_text->Init();
 		if (this->m_vector) this->m_vector->Init();
+		if (this->m_fire) this->m_fire->Init();
 	}
 
 	BaseGameObject::~BaseGameObject()
@@ -104,6 +107,11 @@ namespace GameObjects {
 		this->m_button = button;
 	}
 
+	void BaseGameObject::attachComponent(GameComponents::FireComponent *fire)
+	{
+		this->m_fire = fire;
+	}
+
 	void BaseGameObject::sendMessage(GameMessage::Message *message)
 	{
 		if (this->m_body) this->m_body->sendMessage(message);
@@ -113,6 +121,7 @@ namespace GameObjects {
 		if (this->m_text) this->m_text->sendMessage(message);
 		if (this->m_vector) this->m_vector->sendMessage(message);
 		if (this->m_button) this->m_button->sendMessage(message);
+		if (this->m_fire && message->id == GameMessage::FIRE) this->m_fire->sendMessage(message);
 	}
 
 	void BaseGameObject::setX(int x)
@@ -214,6 +223,36 @@ namespace GameObjects {
 	objectType BaseGameObject::getType()
 	{
 		return this->type;
+	}
+
+	int BaseGameObject::getLife()
+	{
+		return this->life;
+	}
+
+	void BaseGameObject::setDamage(int damage)
+	{
+		this->life -= damage;
+	}
+
+	int BaseGameObject::getPower()
+	{
+		return this->power;
+	}
+
+	void BaseGameObject::setPower(int power)
+	{
+		this->power = power;
+	}
+
+	float BaseGameObject::getCooldown()
+	{
+		return this->cooldown;
+	}
+
+	void BaseGameObject::setCooldown(float cooldown)
+	{
+		this->cooldown = cooldown;
 	}
 
 	void BaseGameObject::destroy(bool des) {

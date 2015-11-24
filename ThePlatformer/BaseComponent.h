@@ -18,7 +18,8 @@ namespace GameComponents {
 		COLLIDER,
 		DEBUGVECTOR,
 		TEXT,
-		BUTTON
+		BUTTON,
+		FIRE
 	};
 
 	class BaseComponent
@@ -30,7 +31,8 @@ namespace GameComponents {
 		virtual void Update(double) = 0;
 		virtual void Init() = 0;
 		virtual void sendMessage(GameMessage::Message*) = 0;
-	public:
+		GameObjects::BaseGameObject *getComposition(void) const;
+	protected:
 		GameObjects::BaseGameObject *composition;
 	};
 }
