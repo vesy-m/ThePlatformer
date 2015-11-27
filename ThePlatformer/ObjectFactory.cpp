@@ -79,12 +79,13 @@ namespace GameSystems {
 			projectile = new GameObjects::BaseGameObject();
 			projectile->setName(shooter->getName());
 
-			projectile->setMass(50.0f);
+			
 			projectile->setDepth(0);
 			projectile->setType(GameObjects::objectType::PROJECTILE);
 			projectile->setBounce(0.3f);
 
 			if (std::string("tennis").compare(shooter->getProjectileType()) == 0) {
+				projectile->setMass(25.0f);
 				shooter->setCooldown(1500.0f);
 				projectile->setHeight(int(30 * 0.50f));
 				projectile->setWidth(int(30 * 0.50f));
@@ -93,11 +94,12 @@ namespace GameSystems {
 				new GameComponents::SpriteComponent(projectile, "./assets/sprite/tennis_ball.png");
 			}
 			else if (std::string("soccer").compare(shooter->getProjectileType()) == 0) {
-				shooter->setCooldown(2000.0f);
+				projectile->setMass(100.0f);
+				shooter->setCooldown(2500.0f);
 				projectile->setHeight(int(30 * 0.50f));
 				projectile->setWidth(int(30 * 0.50f));
 				projectile->setScale(0.50f);
-				projectile->setPower(35);
+				projectile->setPower(50);
 				new GameComponents::SpriteComponent(projectile, "./assets/sprite/soccer_ball.png");
 			}
 			else {

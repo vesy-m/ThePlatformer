@@ -37,10 +37,16 @@ namespace GameComponents {
 
 	void BodyComponent::Init(float intensity, glm::vec2 dir) {
 		if (intensity > 0 && this->composition->getType() == GameObjects::PROJECTILE) {
-			forces = dir * 150.0f;
-			maxForce = 200.0f;
-			velocity = dir * 50.0f /** intensity / 1500.0f*/;
-			gravity = glm::vec2(0.0f, 5.80f);
+			if (this->composition->getName() == "megaman") {
+				forces = dir * 150.0f;
+				maxForce = 200.0f;
+				velocity = dir * 75.0f;
+			} else if (this->composition->getName() == "megaman2") {
+				forces = dir * 150.0f;
+				maxForce = 200.0f;
+				velocity = dir * 50.0f;
+			}
+			gravity = glm::vec2(0.0f, 5.8f);
 			onGround = false;
 		}
 	}
