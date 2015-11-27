@@ -22,6 +22,9 @@ namespace GameComponents {
 			else newVelocity.x *= -bounce;
 		}
 
+		/*if (newVelocity.y >= -5.0f)
+			newVelocity.y = 0.0f;*/
+
 		GameMessage::CollisionMessage *msg = new GameMessage::CollisionMessage(newVelocity, addPos, manifold->normal);
 		manifold->A->composition->sendMessage((GameMessage::Message*)msg);
 	}

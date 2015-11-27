@@ -20,7 +20,7 @@ namespace GameComponents {
 	private:
 		std::map<INPUT_TYPE, int> keyboardMap;
 		std::map<INPUT_TYPE, sf::Mouse::Button> mouseMap;
-		std::string filename;
+		std::string inputFilename;
 	};
 }
 

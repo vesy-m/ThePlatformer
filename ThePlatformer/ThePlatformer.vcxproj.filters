@@ -195,6 +195,9 @@
     <ClCompile Include="FireComponent.cpp">
       <Filter>GameComponents\Source</Filter>
     </ClCompile>
+    <ClCompile Include="DamageMessage.cpp">
+      <Filter>GameMessages\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameEngine.h">
@@ -319,6 +322,9 @@
     </ClInclude>
     <ClInclude Include="FireComponent.h">
       <Filter>GameComponents\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="DamageMessage.h">
+      <Filter>GameMessages\Header</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

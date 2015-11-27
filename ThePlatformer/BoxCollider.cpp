@@ -128,51 +128,48 @@ namespace GameComponents {
 					{
 						BoxCollider *otherObject = dynamic_cast<BoxCollider*>(object->getComponent(GameComponents::COMPONENT_TYPE::COLLIDER));
 						assert(otherObject != NULL);
-					manifold->A = this;
+						manifold->A = this;
 						manifold->B = otherObject;
-					if (this->CollideWithBox(manifold))
-					{
-						// Destroy projectiles on collision
+						if (this->CollideWithBox(manifold))
+						{
+							// Destroy projectiles on collision
 							if (otherObject->composition->getType() == GameObjects::PROJECTILE) otherObject->composition->destroy(true);
-						else if (this->composition->getType() == GameObjects::PROJECTILE) this->composition->destroy(true);
+							else if (this->composition->getType() == GameObjects::PROJECTILE) this->composition->destroy(true);
 
-						if (this->composition->getType() == GameObjects::PROJECTILE && otherObject->composition->getType() == GameObjects::PLAYER) {
-							otherObject->composition->setDamage(this->composition->getPower());
-							if (otherObject->composition->getLife() <= 0)
-							{
-								otherObject->composition->destroy(true);
-								if (otherObject->composition->getName() == "megaman") {
-								GameSystems::GraphicsSystem::Camera::getInstance().reInit();
-								GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/metalslug_win_menu.json");
+							if (this->composition->getType() == GameObjects::PROJECTILE && otherObject->composition->getType() == GameObjects::PLAYER) {
+								if (otherObject->composition->getLife() - this->composition->getPower() <= 0)
+								{
+									if (otherObject->composition->getName() == "megaman") {
+										GameSystems::GraphicsSystem::Camera::getInstance().reInit();
+										GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/metalslug_win_menu.json");
+									}
+									else {
+										GameSystems::GraphicsSystem::Camera::getInstance().reInit();
+										GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/megaman_win_menu.json");
+									}
+								}
+								otherObject->composition->sendMessage(new GameMessage::DamageMessage(this->composition->getPower()));
 							}
-							else {
-								GameSystems::GraphicsSystem::Camera::getInstance().reInit();
-								GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/megaman_win_menu.json");
-							}
+							else if (this->composition->getType() == GameObjects::PLAYER && otherObject->composition->getType() == GameObjects::PROJECTILE) {
+								if (this->composition->getLife() - otherObject->composition->getPower() <= 0)
+								{
+									if (this->composition->getName() == "megaman") {
+										GameSystems::GraphicsSystem::Camera::getInstance().reInit();
+										GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/metalslug_win_menu.json");
+									}
+									else {
+										GameSystems::GraphicsSystem::Camera::getInstance().reInit();
+										GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/megaman_win_menu.json");
+									}
+								}
+								otherObject->composition->sendMessage(new GameMessage::DamageMessage(otherObject->composition->getPower()));
 							}
 
+							ResolveCollision(manifold);
+							collide = true;
 						}
-						else if (this->composition->getType() == GameObjects::PLAYER && otherObject->composition->getType() == GameObjects::PROJECTILE) {
-							this->composition->setDamage(otherObject->composition->getPower());
-							if (this->composition->getLife() <= 0)
-							{
-							this->composition->destroy(true);
-							if (this->composition->getName() == "megaman") {
-								GameSystems::GraphicsSystem::Camera::getInstance().reInit();
-								GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/metalslug_win_menu.json");
-							}
-							else {
-								GameSystems::GraphicsSystem::Camera::getInstance().reInit();
-								GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/megaman_win_menu.json");
-							}
-						}
-						}
-
-						ResolveCollision(manifold);
-						collide = true;
 					}
 				}
-			}
 			}
 			if (!collide)
 			{

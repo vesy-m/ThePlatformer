@@ -12,9 +12,18 @@
 
 namespace GameComponents {
 
+	enum CHEAT_CODE_TYPE
+	{
+		I_WIN,
+		INVICIBLE,
+
+		DEFAULT,
+	};
+
 	class InputComponent : public BaseComponent
 	{	
 	public:
+		
 		enum INPUT_TYPE
 		{
 			LEFT = 0,
@@ -26,6 +35,7 @@ namespace GameComponents {
 			ROTATE_RIGHT = 6,
 			ROTATE_LEFT = 7,
 		};
+
 		InputComponent(GameObjects::BaseGameObject *);
 		virtual ~InputComponent();
 		virtual COMPONENT_TYPE getType() { return WINDOW; }
@@ -36,6 +46,10 @@ namespace GameComponents {
 		virtual void Init() = 0;
 		virtual void sendMessage(GameMessage::Message*) = 0;
 
+		void ParseCheatCodeFile(std::string cheatCodeFilename);
+		CHEAT_CODE_TYPE IsCheatCodeActivated();
+		void ExecuteCheatCode(CHEAT_CODE_TYPE);
+
 		void setDuration(float);
 		float getDuration();
 		void setSavedDt(float);
@@ -44,6 +58,10 @@ namespace GameComponents {
 
 	protected:
 		std::map<INPUT_TYPE, bool> inputState;
+		std::map<CHEAT_CODE_TYPE, std::vector<int>> cheatCodeMap;
+		std::vector<int> savedMessage;
+
+		std::string cheatCodeFilename;
 		float duration;
 		float savedDt;
 		float maxElapsedTime;

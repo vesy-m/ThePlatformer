@@ -82,7 +82,7 @@ namespace GameSystems {
 			projectile->setMass(50.0f);
 			projectile->setDepth(0);
 			projectile->setType(GameObjects::objectType::PROJECTILE);
-			//projectile->setBounce(0.1f);
+			projectile->setBounce(0.3f);
 
 			if (std::string("tennis").compare(shooter->getProjectileType()) == 0) {
 				shooter->setCooldown(1500.0f);
@@ -109,8 +109,8 @@ namespace GameSystems {
 				new GameComponents::SpriteComponent(projectile, "./assets/sprite/minecraft_arrow.png");
 			}
 
-			new GameComponents::CircleCollider(projectile);
-			new GameComponents::VectorDebugComponent(projectile, "circle");
+			new GameComponents::BoxCollider(projectile);
+			new GameComponents::VectorDebugComponent(projectile, "square");
 			body = new GameComponents::BodyComponent(projectile);
 		}
 		else {

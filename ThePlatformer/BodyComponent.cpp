@@ -88,8 +88,6 @@ namespace GameComponents {
 			float res = (forces.y * (1.0f / mass)) + gravity.y;
 			if (forces.y > 0 && collision->normal.y < 0.0f)
 			{
-				/*if (composition->getType() == GameObjects::PROJECTILE)
-					gravity.y = 0.0f;*/
 				forces = (gravity / (1.0f / mass)) * (-1.0f);
 				if (!onGround) this->composition->sendMessage(new GameMessage::Message(GameMessage::STAND_ANIMATION));
 				onGround = true;
@@ -109,24 +107,15 @@ namespace GameComponents {
 
 	void BodyComponent::Integrate(float dt)
 	{
-		//std::cout << dt << std::endl;
 		position.x = (float) composition->getX();
 		position.y = (float) composition->getY();
 
 		glm::vec2 newForces = (forces * (1.0f / mass));
 
-		/*if (composition->getType() == GameObjects::PROJECTILE)
-			std::cout << newForces.x << " / " << newForces.y << std::endl;*/
-
 		glm::vec2 acceleration = newForces + gravity;
 		if (acceleration.y >= -0.0001f && acceleration.y <= 0.0001f)
 			acceleration.y = 0.0f;
 		velocity += acceleration * dt;
-		/*if (composition->getType() == GameObjects::PROJECTILE)
-		{
-			this->m_log_file << "Velocity:\t" << velocity.x << "\t" << velocity.y << std::endl;
-			this->m_log_file << "Acceleration:\t" << acceleration.x << "\t" << acceleration.y << std::endl;
-		}*/
 
 		if (onGround == false && (forces.y <= maxForce)) forces = forces + gravity;
 

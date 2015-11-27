@@ -5,6 +5,7 @@
 #include <vector>
 #include "BaseComponent.h"
 #include "Message.h"
+#include "DamageMessage.h"
 #include <algorithm>
 
 namespace GameComponents {
@@ -69,11 +70,14 @@ namespace GameObjects {
 		void setType(objectType newtype);
 		objectType getType();
 		int getLife();
-		void setDamage(int damage);
+		void setDamage(GameMessage::DamageMessage*);
 		int getPower();
 		void setPower(int power);
 		float getCooldown();
 		void setCooldown(float cooldown);
+
+		void setInvicible(void);
+		bool getInvicible(void);
 
 		void destroy(bool);
 		bool destroy(void);
@@ -100,6 +104,7 @@ namespace GameObjects {
 		std::string name;
 		objectType type;
 		bool to_destroy;
+		bool invicible;
 		int life = 100;
 		int power = 0;
 		float cooldown = 2000.0f;

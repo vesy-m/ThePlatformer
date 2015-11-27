@@ -22,6 +22,7 @@ namespace GameObjects {
 		mass = 1.0f;
 		bounce = 0.0f;
 		to_destroy = false;
+		invicible = false;
 		type = objectType::NONE;
 		this->m_body = NULL;
 		this->m_collider = NULL;
@@ -122,6 +123,7 @@ namespace GameObjects {
 		if (this->m_vector) this->m_vector->sendMessage(message);
 		if (this->m_button) this->m_button->sendMessage(message);
 		if (this->m_fire && message->id == GameMessage::FIRE) this->m_fire->sendMessage(message);
+		if (message->id == GameMessage::DAMAGE) this->setDamage(dynamic_cast<GameMessage::DamageMessage*>(message));
 	}
 
 	void BaseGameObject::setX(int x)
@@ -230,9 +232,15 @@ namespace GameObjects {
 		return this->life;
 	}
 
-	void BaseGameObject::setDamage(int damage)
+	void BaseGameObject::setDamage(GameMessage::DamageMessage *damageMsg)
 	{
-		this->life -= damage;
+		if (invicible)
+			return;
+
+		this->life -= damageMsg->damage;
+
+		if (this->life <= 0)
+			this->destroy();
 	}
 
 	int BaseGameObject::getPower()
@@ -253,6 +261,16 @@ namespace GameObjects {
 	void BaseGameObject::setCooldown(float cooldown)
 	{
 		this->cooldown = cooldown;
+	}
+
+	void BaseGameObject::setInvicible(void)
+	{
+		this->invicible = !invicible;
+	}
+
+	bool BaseGameObject::getInvicible(void)
+	{
+		return invicible;
 	}
 
 	void BaseGameObject::destroy(bool des) {

@@ -69,7 +69,7 @@ namespace GameComponents {
 			}
 			if (!collide)
 			{
-				this->composition->sendMessage(new GameMessage::Message(GameMessage::Message::NO_COLLISION));
+				this->composition->sendMessage(new GameMessage::Message(GameMessage::NO_COLLISION));
 			}
 		}
 	}
@@ -137,7 +137,7 @@ namespace GameComponents {
 			if (dir == 0 || dir == 2) {
 				manifold->normal = compass[dir];
 				if (dir == 0)
-					manifold->penetration = (A->radius - std::abs(distance.y));
+					manifold->penetration = (A->radius - std::abs(distance.y)) + 0.1f;
 				else
 					manifold->penetration = (A->radius - std::abs(distance.y));
 			}
@@ -160,7 +160,7 @@ namespace GameComponents {
 
 	void CircleCollider::sendMessage(GameMessage::Message *message)
 	{
-		if (message->id == GameMessage::Message::VELOCITY_VECTOR)
+		if (message->id == GameMessage::VELOCITY_VECTOR)
 			this->velocity = ((GameMessage::VectorMessage*)message)->vector;
 	}
 }

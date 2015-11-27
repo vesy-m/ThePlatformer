@@ -56,6 +56,9 @@ namespace GameComponents {
 						break;
 					}
 					}
+					if (savedMessage.size() >= 10)
+						savedMessage.erase(savedMessage.begin());
+					savedMessage.push_back(it->first);
 				}
 			}
 			else if (event.type == sf::Event::JoystickMoved)
@@ -90,6 +93,9 @@ namespace GameComponents {
 								getComposition()->getY(), this->getDuration(), glm::normalize(direction), GameSystems::ObjectFactory::SOCCER_BALL);
 							this->setDuration(500.0f);
 						}
+						if (savedMessage.size() >= 10)
+							savedMessage.erase(savedMessage.begin());
+						savedMessage.push_back(it->first);
 					}
 				}
 			}
@@ -158,6 +164,7 @@ namespace GameComponents {
 			for (auto i : o) {
 				printf("%s = ", i->key);
 				if (std::string(i->key) == "controller") controllerNumber = (int)i->value.toNumber();
+				else if (std::string(i->key) == "cheat_code") ParseCheatCodeFile(i->value.toString());
 				else {
 					INPUT_TYPE inputKey;
 					inputKey = (INPUT_TYPE)std::stoi(i->key);

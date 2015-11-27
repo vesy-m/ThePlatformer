@@ -23,7 +23,8 @@ namespace GameMessage {
 		ROTATE_LEFT,
 		ROTATE_RIGHT,
 		FIRE,
-		CLICKON
+		CLICKON,
+		DAMAGE,
 	};
 
 	class Message
