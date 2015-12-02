@@ -52,6 +52,17 @@ namespace GameSystems {
 		void addSystems(GameSystems::BaseSystem*);
 		gameState stateGame;
 		std::string currentLevelFileName;
+		//create for button and controller management
+		bool controllerAlreadyTook(int idController);
+		void removeAllPlayersWithController();
+		void addOrChangePlayerWithController(int idController, int idPerso);
+		void changeGameObjectSpriteComponent(GameObjects::BaseGameObject * obj, std::string filename);
+		void playersReady(int nb);
+		void changeSelectedButtonMenu(int idButton);
+		void changeSelectedButtonMenu(GameObjects::BaseGameObject * button);
+		void clearPlayers();
+		void returnPrevMenuOrResumeLevel();
+		//----
 	private:
 		ObjectFactory();
 		ObjectFactory(ObjectFactory const&) = delete;
@@ -64,6 +75,9 @@ namespace GameSystems {
 		GameEngine::Core::Level currentLevel;
 		Menu currentMenu;
 		bool systemNeedReinit;
+		std::vector<GameObjects::BaseGameObject*> listPlayers;
+		int nbPlayerReady;
+		std::map<int, std::string> mapPlayersController;
 
 	};
 }

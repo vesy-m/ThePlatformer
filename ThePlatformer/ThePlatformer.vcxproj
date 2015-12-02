@@ -180,6 +180,7 @@ copy /Y "$(ProjectDir)\lib\lib-x64\devil-1.7.8\bin\*" "$(OutDir)\"</Command>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="GameEngine.cpp" />
     <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="MenuControllerMessage.cpp" />
     <ClCompile Include="Message.cpp" />
     <ClCompile Include="MouseClickComponent.cpp" />
     <ClCompile Include="ObjectFactory.cpp" />
@@ -224,6 +225,7 @@ copy /Y "$(ProjectDir)\lib\lib-x64\devil-1.7.8\bin\*" "$(OutDir)\"</Command>
     <ClInclude Include="JSONParser.h" />
     <ClInclude Include="KeyboardInputComponent.h" />
     <ClInclude Include="Menu.h" />
+    <ClInclude Include="MenuControllerMessage.h" />
     <ClInclude Include="Message.h" />
     <ClInclude Include="MouseClickComponent.h" />
     <ClInclude Include="Singleton.h" />

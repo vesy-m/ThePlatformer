@@ -1,0 +1,26 @@
+{
+	"button" : {
+		"x" : 10,
+		"y" : 5,
+		"sprite" : "./assets/sprite/menu/pressAOrEnter.png",
+		"function" : "createPlayer"
+	},
+	"button" : {
+		"x" : 650,
+		"y" : 5,
+		"sprite" : "./assets/sprite/menu/pressAOrEnter.png",
+		"function" : "createPlayer"
+	},
+	"button" : {
+		"x" : 10,
+		"y" : 365,
+		"sprite" : "./assets/sprite/menu/pressAOrEnter.png",
+		"function" : "createPlayer"
+	},
+	"button" : {
+		"x" : 650,
+		"y" : 365,
+		"sprite" : "./assets/sprite/menu/pressAOrEnter.png",
+		"function" : "createPlayer"
+	}
+}

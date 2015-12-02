@@ -3,9 +3,10 @@
 
 namespace GameComponents {
 
-	ControllerInputComponent::ControllerInputComponent(GameObjects::BaseGameObject *object, std::string filename) : InputComponent(object)
+	ControllerInputComponent::ControllerInputComponent(GameObjects::BaseGameObject *object, const std::string &filename, int idController) : InputComponent(object)
 	{
 		this->filename = filename;
+		this->controllerNumber = idController;
 	}
 
 
@@ -162,7 +163,7 @@ namespace GameComponents {
 
 	void ControllerInputComponent::Init()
 	{
-		controllerNumber = 0;
+		//controllerNumber = 0;
 		aimAxisX = 0.0;
 		aimAxisY = 0.0;
 		std::string extension = filename.substr(filename.find_last_of(".") + 1);
@@ -177,8 +178,8 @@ namespace GameComponents {
 		case GameTools::JSON_OBJECT:
 			for (auto i : o) {
 				printf("%s = ", i->key);
-				if (std::string(i->key) == "controller") controllerNumber = (int)i->value.toNumber();
-				else if (std::string(i->key) == "cheat_code") ParseCheatCodeFile(i->value.toString());
+				//if (std::string(i->key) == "controller") controllerNumber = (int)i->value.toNumber();
+				if (std::string(i->key) == "cheat_code") ParseCheatCodeFile(i->value.toString());
 				else {
 					INPUT_TYPE inputKey;
 					inputKey = (INPUT_TYPE)std::stoi(i->key);

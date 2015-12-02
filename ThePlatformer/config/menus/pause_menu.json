@@ -2,13 +2,29 @@
 	"button" : {
 		"x" : 540,
 		"y" : 215,
-		"sprite" : "./assets/sprite/resumeButton.png",
-		"function" : "resumeToLevel"
+		"sprite" : "./assets/sprite/menu/resumeButton.png",
+		"function" : "resumeToLevel",
+		"menunav" : [1, -1, -1, 3, 1]
+	},
+	"button" : {
+		"x" : 540,
+		"y" : 300,
+		"sprite" : "./assets/sprite/menu/howToPlayButton.png",
+		"menu" : "./config/menus/how_to_play_menu.json",
+		"menunav" : [0, -1, -1, 0, 2]
 	},
 	"button" : {
 		"x" : 540,
 		"y" : 455,
-		"sprite" : "./assets/sprite/returnMenuButton.png",
-		"menu" : "./config/menus/main_menu.json"
+		"sprite" : "./assets/sprite/menu/returnMenuButton.png",
+		"menu" : "./config/menus/main_menu.json",
+		"menunav" : [0, -1, -1, 1, 3]
+	},
+	"button" : {
+		"x" : 540,
+		"y" : 550,
+		"sprite" : "./assets/sprite/menu/QuitGameButton.png",
+		"menu" : "./config/menus/quit_menu.json",
+		"menunav" : [0, -1, -1, 2, 0]
 	}
 }

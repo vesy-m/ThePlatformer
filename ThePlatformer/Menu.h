@@ -8,6 +8,9 @@ class Menu
 public:
 	Menu();
 	~Menu();
+	std::string fileName;
+	std::string prevMenu;
+	int prevState;
 	std::list<GameObjects::BaseGameObject*>& getObjects();
 	void addButton(GameObjects::BaseGameObject *button);
 private:

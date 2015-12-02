@@ -1,0 +1,19 @@
+{
+	"button" : {
+		"x" : 50,
+		"y" : 10,
+		"sprite" : "./assets/sprite/menu/howToPlayController.png"
+	},
+	"button" : {
+		"x" : 590,
+		"y" : 10,
+		"sprite" : "./assets/sprite/menu/howToPlayKeyboard.png"
+	},
+	"button" : {
+		"x" : 540,
+		"y" : 455,
+		"sprite" : "./assets/sprite/menu/returnMenuButton.png",
+		"menu" : "./config/menus/pause_menu.json",
+		"menunav" : [1, -1, -1, -1, -1]
+	}
+}
