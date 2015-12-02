@@ -16,9 +16,10 @@ namespace GameSystems {
 		int Update(double dt, std::list<GameObjects::BaseGameObject*>&);
 		void Init(std::list<GameObjects::BaseGameObject*>& listObjects);
 		void SendMessage();
+		static bool fullscreen;
 	private:
 		sf::Window *window;
-		bool fullscreen;
+		bool currentFullScreenState;
 	};
 }
 #endif // !_WINDOWINPUTSYSTEM_H_

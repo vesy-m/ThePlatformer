@@ -1,9 +1,11 @@
 #include "WindowInputSytem.h"
 
 namespace GameSystems {
+	bool WindowInputSytem::fullscreen = false;
+
 	WindowInputSytem::WindowInputSytem()
 	{
-		this->fullscreen = false;
+		this->currentFullScreenState = false;
 		this->window = NULL;
 	}
 
@@ -22,9 +24,22 @@ namespace GameSystems {
 		while (window->pollEvent(event))
 		{
 			if (event.type == sf::Event::Closed) {
+				sf::WindowHandle handle = this->window->getSystemHandle();
+				ShowWindow(handle, SW_RESTORE);
 				GameSystems::GraphicsSystem::Camera::getInstance().reInit();
 				GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/quit_menu.json");
 				break;
+			}
+			else if (event.type == sf::Event::LostFocus)
+			{
+				std::cout << "lost focus" << std::endl;
+				sf::WindowHandle handle = this->window->getSystemHandle();
+				ShowWindow(handle, SW_MINIMIZE);
+				if (GameSystems::ObjectFactory::getInstance().stateGame == GameSystems::ObjectFactory::gameState::LEVEL) {
+					GameSystems::GraphicsSystem::Camera::getInstance().reInit();
+					GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/pause_menu.json");
+					break;
+				}
 			}
 			else if (event.type == sf::Event::Resized)
 			{
@@ -33,11 +48,6 @@ namespace GameSystems {
 			}
 			else if (event.type == sf::Event::KeyReleased)
 			{
-				if (event.key.code == sf::Keyboard::F11)
-				{
-					changeSize = true;
-					break;
-				}
 				if (event.key.code == sf::Keyboard::Escape && GameSystems::ObjectFactory::getInstance().stateGame == GameSystems::ObjectFactory::gameState::LEVEL)
 				{
 					GameSystems::GraphicsSystem::Camera::getInstance().reInit();
@@ -60,9 +70,9 @@ namespace GameSystems {
 			}
 		}
 
-		if (changeSize == true) {
-			this->fullscreen = !this->fullscreen;
-			if (this->fullscreen) {
+		if (WindowInputSytem::fullscreen != this->currentFullScreenState) {
+			this->currentFullScreenState = WindowInputSytem::fullscreen;
+			if (this->currentFullScreenState) {
 				window->create(sf::VideoMode::getDesktopMode(), "ThePlatformer", sf::Style::Fullscreen, sf::ContextSettings(32));
 			}
 			else {

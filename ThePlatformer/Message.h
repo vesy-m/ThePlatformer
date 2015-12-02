@@ -31,7 +31,9 @@ namespace GameMessage {
 		UPMENU,
 		DOWNMENU,
 		SELECT_CONTROLLER_MENU,
-		START_MENU
+		START_MENU,
+		ECHAP_MENU,
+		B_MENU
 	};
 
 	class Message

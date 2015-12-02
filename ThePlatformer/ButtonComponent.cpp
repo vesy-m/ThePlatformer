@@ -22,7 +22,9 @@ namespace GameComponents {
 		this->functionMap["restartLevel"] = &ButtonComponent::restartLevel;
 		this->functionMap["quitGame"] = &ButtonComponent::quitGame;
 		this->functionMap["prevMenu"] = &ButtonComponent::prevMenu;
-
+		this->functionMap["backPlayer"] = &ButtonComponent::backPlayer;
+		this->functionMap["switchFullScreen"] = &ButtonComponent::switchFullScreen;
+		
 		this->buttonState = ButtonState::CLASSIC;
 		if (actionName == "createPlayer") {
 			this->buttonState = ButtonState::PLAYERCREATOR;
@@ -113,6 +115,18 @@ namespace GameComponents {
 				this->execAction();
 			}
 			break;
+		case GameMessage::ECHAP_MENU:
+			if (actionName == "resumeToLevel") {
+				this->execAction();
+			} else if (actionName == "backPlayer") {
+				this->backPlayer();
+			}
+			break;
+		case GameMessage::B_MENU:
+			if (actionName == "backPlayer") {
+				this->backPlayer();
+			}
+			break;
 		case GameMessage::ENTERMENU:
 			if (this->buttonState == ButtonState::CHOOSEPLAYER) {
 				this->buttonState = ButtonState::READYPLAYER;
@@ -181,6 +195,9 @@ namespace GameComponents {
 	}
 
 	void ButtonComponent::toggleSelected(bool state) {
+		if (this->actionName == "backPlayer") {
+			return;
+		}
 		if (this->buttonState == ButtonState::CLASSIC && state == true) {
 			this->buttonState = ButtonState::SELECTED;
 		}
@@ -251,5 +268,13 @@ namespace GameComponents {
 	void ButtonComponent::prevMenu() {
 		std::cout << "prev game" << std::endl;
 		GameSystems::ObjectFactory::getInstance().returnPrevMenuOrResumeLevel();
+	}
+
+	void ButtonComponent::backPlayer() {
+		GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/main_menu.json");
+	}
+
+	void ButtonComponent::switchFullScreen() {
+		GameSystems::WindowInputSytem::fullscreen = !GameSystems::WindowInputSytem::fullscreen;
 	}
 }

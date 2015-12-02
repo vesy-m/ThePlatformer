@@ -1,26 +1,32 @@
 {
 	"button" : {
-		"x" : 10,
-		"y" : 5,
+		"x" : 70,
+		"y" : 10,
 		"sprite" : "./assets/sprite/menu/pressAOrEnter.png",
 		"function" : "createPlayer"
 	},
 	"button" : {
-		"x" : 650,
-		"y" : 5,
+		"x" : 660,
+		"y" : 10,
 		"sprite" : "./assets/sprite/menu/pressAOrEnter.png",
 		"function" : "createPlayer"
 	},
 	"button" : {
-		"x" : 10,
-		"y" : 365,
+		"x" : 70,
+		"y" : 340,
 		"sprite" : "./assets/sprite/menu/pressAOrEnter.png",
 		"function" : "createPlayer"
 	},
 	"button" : {
-		"x" : 650,
-		"y" : 365,
+		"x" : 660,
+		"y" : 340,
 		"sprite" : "./assets/sprite/menu/pressAOrEnter.png",
 		"function" : "createPlayer"
-	}
+	},
+	"button" : {
+		"x" : 500,
+		"y" : 670,
+		"sprite" : "./assets/sprite/menu/moveInSelectPlayer.png",
+		"function" : "backPlayer"
+	},
 }
