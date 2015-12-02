@@ -4,9 +4,9 @@
 
 namespace GameComponents {
 
-	KeyboardInputComponent::KeyboardInputComponent(GameObjects::BaseGameObject *object, std::string filename) : InputComponent(object)
+	KeyboardInputComponent::KeyboardInputComponent(GameObjects::BaseGameObject *object, std::string inputFilename) : InputComponent(object)
 	{
-		this->filename = filename;
+		this->inputFilename = inputFilename;
 	}
 
 
@@ -35,6 +35,9 @@ namespace GameComponents {
 					default:
 						break;
 					}
+					if (savedMessage.size() >= 10)
+						savedMessage.erase(savedMessage.begin());
+					savedMessage.push_back(it->first);
 				}
 			}
 			else if (event.type == sf::Event::MouseButtonPressed)
@@ -50,13 +53,16 @@ namespace GameComponents {
 					{
 						case INPUT_TYPE::FIRE:
 						{
-							if (this->savedDt < this->maxElapsedTime) break;
+							if (this->savedDt < this->getComposition()->getCooldown()) break;
 							this->composition->sendMessage(new GameMessage::FireMessage(event, this->getDuration()));
 							this->setDuration(500.0f);
 							this->savedDt = 0.0f;
 							break;
 						}
 					}
+					if (savedMessage.size() >= 10)
+						savedMessage.erase(savedMessage.begin());
+					savedMessage.push_back(it->first);
 				}
 			}
 		}
@@ -64,9 +70,9 @@ namespace GameComponents {
 
 	void KeyboardInputComponent::Init()
 	{
-		std::string extension = filename.substr(filename.find_last_of(".") + 1);
+		std::string extension = inputFilename.substr(inputFilename.find_last_of(".") + 1);
 		if (std::string("json").compare(extension) == 0) {
-			GameSystems::JSONParser parser(filename);
+			GameSystems::JSONParser parser(inputFilename);
 			ParseInputFile(parser.getJSONValue());
 		}
 	}
@@ -76,10 +82,13 @@ namespace GameComponents {
 		case GameTools::JSON_OBJECT:
 			for (auto i : o) {
 				printf("%s = ", i->key);
-				INPUT_TYPE inputKey;
-				inputKey = (INPUT_TYPE)std::stoi(i->key);
-				this->keyboardMap.emplace(inputKey, (int)i->value.toNumber());
-				this->inputState.emplace(inputKey, false);
+				if (std::string(i->key) == "cheat_code") ParseCheatCodeFile(i->value.toString());
+				else {
+					INPUT_TYPE inputKey;
+					inputKey = (INPUT_TYPE)std::stoi(i->key);
+					this->keyboardMap.emplace(inputKey, (int)i->value.toNumber());
+					this->inputState.emplace(inputKey, false);
+				}
 			}
 			break;
 		}

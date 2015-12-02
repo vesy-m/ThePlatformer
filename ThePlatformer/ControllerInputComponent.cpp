@@ -36,7 +36,7 @@ namespace GameComponents {
 					{
 					case INPUT_TYPE::FIRE:
 					{
-						if (this->savedDt < this->maxElapsedTime)
+						if (this->savedDt < this->getComposition()->getCooldown())
 							break;
 
 						int centerX = (this->getComposition()->getX() + (this->getComposition()->getWidth() / 2));
@@ -57,6 +57,9 @@ namespace GameComponents {
 						break;
 					}
 					}
+					if (savedMessage.size() >= 10)
+						savedMessage.erase(savedMessage.begin());
+					savedMessage.push_back(it->first);
 				}
 			}
 			else if (event.type == sf::Event::JoystickMoved)
@@ -91,6 +94,9 @@ namespace GameComponents {
 								getComposition()->getY(), this->getDuration(), glm::normalize(direction), GameSystems::ObjectFactory::SOCCER_BALL);
 							this->setDuration(500.0f);
 						}
+						if (savedMessage.size() >= 10)
+							savedMessage.erase(savedMessage.begin());
+						savedMessage.push_back(it->first);
 					}
 				}
 			}
@@ -158,13 +164,14 @@ namespace GameComponents {
 		case GameTools::JSON_OBJECT:
 			for (auto i : o) {
 				printf("%s = ", i->key);
-/*				if (std::string(i->key) == "controller") controllerNumber = (int)i->value.toNumber();
-				else {*/
-				INPUT_TYPE inputKey;
-				inputKey = (INPUT_TYPE)std::stoi(i->key);
-				this->controllerMap.emplace(inputKey, (int)i->value.toNumber());
-				this->inputState.emplace(inputKey, false);
-			//	}
+				//if (std::string(i->key) == "controller") controllerNumber = (int)i->value.toNumber();
+				if (std::string(i->key) == "cheat_code") ParseCheatCodeFile(i->value.toString());
+				else {
+					INPUT_TYPE inputKey;
+					inputKey = (INPUT_TYPE)std::stoi(i->key);
+					this->controllerMap.emplace(inputKey, (int)i->value.toNumber());
+					this->inputState.emplace(inputKey, false);
+				}
 			}
 			break;
 		}

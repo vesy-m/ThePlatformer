@@ -68,7 +68,7 @@ namespace GameSystems {
 				buttonComponent->setNav(it->value);
 			}
 			
-		}
+			}
 		return (ret);
 	}
 
@@ -83,31 +83,40 @@ namespace GameSystems {
 			projectile = new GameObjects::BaseGameObject();
 			projectile->setName(shooter->getName());
 
-			projectile->setMass(50.0f);
+			
 			projectile->setDepth(0);
 			projectile->setType(GameObjects::objectType::PROJECTILE);
+			projectile->setBounce(0.3f);
 
 			if (std::string("tennis").compare(shooter->getProjectileType()) == 0) {
+				projectile->setMass(25.0f);
+				shooter->setCooldown(1500.0f);
 				projectile->setHeight(int(30 * 0.50f));
 				projectile->setWidth(int(30 * 0.50f));
 				projectile->setScale(0.50f);
+				projectile->setPower(20);
 				new GameComponents::SpriteComponent(projectile, "./assets/sprite/tennis_ball.png");
 			}
 			else if (std::string("soccer").compare(shooter->getProjectileType()) == 0) {
+				projectile->setMass(100.0f);
+				shooter->setCooldown(2500.0f);
 				projectile->setHeight(int(30 * 0.50f));
 				projectile->setWidth(int(30 * 0.50f));
 				projectile->setScale(0.50f);
+				projectile->setPower(50);
 				new GameComponents::SpriteComponent(projectile, "./assets/sprite/soccer_ball.png");
 			}
 			else {
+				shooter->setCooldown(2500.0f);
 				projectile->setHeight(int(76 * 0.25f));
 				projectile->setWidth(int(150 * 0.25f));
 				projectile->setScale(0.25f);
+				projectile->setPower(40);
 				new GameComponents::SpriteComponent(projectile, "./assets/sprite/minecraft_arrow.png");
 			}
 
 			new GameComponents::BoxCollider(projectile);
-			new GameComponents::VectorDebugComponent(projectile, "circle");
+			new GameComponents::VectorDebugComponent(projectile, "square");
 			body = new GameComponents::BodyComponent(projectile);
 		}
 		else {

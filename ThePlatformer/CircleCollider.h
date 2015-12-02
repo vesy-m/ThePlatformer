@@ -1,28 +1,27 @@
 #pragma once
-#ifndef _CIRCLECOLLIDER_H_
-#define _CIRCLECOLLIDER_H_
-
 #include "Collider.h"
+#include "ObjectFactory.h"
 
 namespace GameComponents {
-	class CircleCollider : public Collider
+	class CircleCollider : public ColliderComponent
 	{
 		friend class GameSystems::ObjectFactory;
+	private:
+		CircleCollider(GameObjects::BaseGameObject*);
 	public:
 		virtual ~CircleCollider();
-		virtual bool CollideWithCircle(Manifold *manifold);
-		virtual bool CollideWithBox(Manifold *manifold);
-		virtual COLLIDER_TYPE getColliderType();
-		virtual void Update(double);
-		void sendMessage(GameMessage::Message*);
-		virtual void Init() {}
 
+		virtual void Init();
+		virtual void Update(double);
+		virtual COMPONENT_TYPE getType();
+		virtual void sendMessage(GameMessage::Message *message);
+
+		bool CollideWithBox(Manifold *manifold);
 	public:
 		float radius;
-		glm::vec2 pos;
-	private:
-		CircleCollider(GameObjects::BaseGameObject *object);
+		glm::vec2 centerPos;
+		glm::vec2 minPoint;
+		glm::vec2 maxPoint;
 	};
 }
 
-#endif // !_CIRCLECOLLIDER_H_

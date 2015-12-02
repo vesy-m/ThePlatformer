@@ -51,7 +51,10 @@ namespace GameComponents {
 		std::string text = std::string("FPS : " + ss.str());
 		if (this->composition->getType() == GameObjects::objectType::PLAYER)
 		{
-			text = std::to_string(this->composition->getLife());
+			if (this->composition->getLife() >= 0)
+				text = std::to_string(this->composition->getLife());
+			else
+				text = "0";
 			posX = this->composition->getX() - 10;
 			posY = this->composition->getY() - 20;
 		}

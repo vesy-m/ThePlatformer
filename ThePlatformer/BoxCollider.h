@@ -6,25 +6,25 @@
 #include "ObjectFactory.h"
 
 namespace GameComponents {
-	class BoxCollider : public Collider
+	class BoxCollider : public ColliderComponent
 	{
 		friend class GameSystems::ObjectFactory;
 	private:
 		BoxCollider(GameObjects::BaseGameObject*);
 	public:
 		virtual ~BoxCollider();
-		virtual bool CollideWithBox(Manifold *manifold);
-		virtual COLLIDER_TYPE getColliderType();
+		virtual COMPONENT_TYPE getType();
 		virtual void Update(double);
 		virtual void sendMessage(GameMessage::Message*);
 		virtual void Init();
+
+		bool CollideWithBox(Manifold *manifold);
 	public:
-		glm::vec2 min;
-		glm::vec2 max;
+		glm::vec2 centerPos;
+		glm::vec2 minPoint;
+		glm::vec2 maxPoint;
 
 	};
-
-	void ResolveCollision(Manifold *manifold);
 }
 
 #endif // !_BOXCOLLIDER_H_

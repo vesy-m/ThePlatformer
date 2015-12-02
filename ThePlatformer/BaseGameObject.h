@@ -5,6 +5,7 @@
 #include <vector>
 #include "BaseComponent.h"
 #include "Message.h"
+#include "DamageMessage.h"
 #include <algorithm>
 
 namespace GameComponents {
@@ -14,7 +15,7 @@ namespace GameComponents {
 	class SpriteComponent;
 	class TextComponent;
 	class VectorDebugComponent;
-	class Collider;
+	class ColliderComponent;
 	class BodyComponent;
 	class ButtonComponent;
 	class FireComponent;
@@ -39,7 +40,7 @@ namespace GameObjects {
 		void attachComponent(GameComponents::SpriteComponent*);
 		void attachComponent(GameComponents::TextComponent*);
 		void attachComponent(GameComponents::VectorDebugComponent*);
-		void attachComponent(GameComponents::Collider*);
+		void attachComponent(GameComponents::ColliderComponent*);
 		void attachComponent(GameComponents::BodyComponent*);
 		void attachComponent(GameComponents::ButtonComponent*);
 		void attachComponent(GameComponents::FireComponent*);
@@ -69,7 +70,14 @@ namespace GameObjects {
 		void setType(objectType newtype);
 		objectType getType();
 		int getLife();
-		void setDamage(int damage);
+		void setDamage(GameMessage::DamageMessage*);
+		int getPower();
+		void setPower(int power);
+		float getCooldown();
+		void setCooldown(float cooldown);
+
+		void setInvicible(void);
+		bool getInvicible(void);
 
 		void destroy(bool);
 		bool destroy(void);
@@ -79,7 +87,7 @@ namespace GameObjects {
 		GameComponents::SpriteComponent *m_sprite;
 		GameComponents::TextComponent *m_text;
 		GameComponents::VectorDebugComponent *m_vector;
-		GameComponents::Collider *m_collider;
+		GameComponents::ColliderComponent *m_collider;
 		GameComponents::BodyComponent *m_body;
 		GameComponents::ButtonComponent *m_button;
 		GameComponents::FireComponent *m_fire;
@@ -96,7 +104,10 @@ namespace GameObjects {
 		std::string name;
 		objectType type;
 		bool to_destroy;
+		bool invicible;
 		int life = 100;
+		int power = 0;
+		float cooldown = 2000.0f;
 	};
 }
 

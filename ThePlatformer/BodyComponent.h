@@ -33,14 +33,16 @@ namespace GameComponents {
 
 	private:
 		BodyComponent(GameObjects::BaseGameObject*);
+		std::ofstream m_log_file;
 		glm::vec2 position;
 		glm::vec2 velocity;
 
-		glm::vec2 acceleration;
 		glm::vec2 gravity;
 		glm::vec2 forces;
 		glm::vec2 lastCollisionVelocity;
+
 		float mass;
+		float maxForce;
 		bool onGround;
 		bool isColliding;
 	};

@@ -44,7 +44,7 @@ namespace GameComponents {
 				int resolutionHeight = GameSystems::GraphicsSystem::Camera::getInstance().resolutionHeight;
 				int mousex = event.mouseButton.x * resolutionWidth / screenWidth;
 				int mousey = event.mouseButton.y * resolutionHeight / screenHeight;
-				std::cout << mousex << " " << mousey << std::endl;
+				//std::cout << mousex << " " << mousey << std::endl;
 
 
 				if (this->composition->getX() < mousex && mousex < this->composition->getX() + this->composition->getWidth() &&
@@ -62,7 +62,7 @@ namespace GameComponents {
 			int resolutionHeight = GameSystems::GraphicsSystem::Camera::getInstance().resolutionHeight;
 			int mousex = event.mouseMove.x * resolutionWidth / screenWidth;
 			int mousey = event.mouseMove.y * resolutionHeight / screenHeight;
-			std::cout << mousex << " " << mousey << std::endl;
+			//std::cout << mousex << " " << mousey << std::endl;
 
 
 			if (this->composition->getX() < mousex && mousex < this->composition->getX() + this->composition->getWidth() &&
@@ -74,7 +74,7 @@ namespace GameComponents {
 			if (this->idPadSelected == -1) {
 				// while no pad selected
 				if (checkPressAOrEnter(event)) {
-					std::cout << "a or enter pressed : " << this->idPadSelected << " take" << std::endl;
+					//std::cout << "a or enter pressed : " << this->idPadSelected << " take" << std::endl;
 					this->composition->sendMessage(new GameMessage::MenuControllerMessage(GameMessage::SELECT_CONTROLLER_MENU, this->idPadSelected));
 				}
 			}
@@ -85,7 +85,7 @@ namespace GameComponents {
 					// or if keyboard release
 					(event.type == sf::Event::KeyReleased && this->idPadSelected == 8)) 
 				{
-					std::cout << this->idPadSelected << " presse or moved" << std::endl;
+					//std::cout << this->idPadSelected << " presse or moved" << std::endl;
 					OneKeyPressInMenu(event);
 				}
 			}
@@ -122,7 +122,7 @@ namespace GameComponents {
 			else if (event.key.code == sf::Keyboard::Escape) { idMessage = GameMessage::START_MENU; }
 		}
 		if (idMessage != GameMessage::DEFAULT) {
-			std::cout << "key press send message : " << idMessage << std::endl;
+			//std::cout << "key press send message : " << idMessage << std::endl;
 			this->composition->sendMessage(new GameMessage::MenuControllerMessage(idMessage, this->idPadSelected));
 		}
 	}

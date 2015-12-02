@@ -22,6 +22,7 @@ namespace GameObjects {
 		mass = 1.0f;
 		bounce = 0.0f;
 		to_destroy = false;
+		invicible = false;
 		type = objectType::NONE;
 		this->m_body = NULL;
 		this->m_collider = NULL;
@@ -53,6 +54,8 @@ namespace GameObjects {
 
 	GameComponents::BaseComponent *BaseGameObject::getComponent(GameComponents::COMPONENT_TYPE type) {
 		switch (type) {
+		case GameComponents::CIRCLE_COLLIDER:
+		case GameComponents::BOX_COLLIDER:
 		case GameComponents::COLLIDER:
 			return this->m_collider;
 		case GameComponents::DEBUGVECTOR:
@@ -77,7 +80,7 @@ namespace GameObjects {
 		this->m_input = input;
 	}
 
-	void BaseGameObject::attachComponent(GameComponents::Collider *collider)
+	void BaseGameObject::attachComponent(GameComponents::ColliderComponent *collider)
 	{
 		this->m_collider = collider;
 	}
@@ -122,6 +125,7 @@ namespace GameObjects {
 		if (this->m_vector) this->m_vector->sendMessage(message);
 		if (this->m_button) this->m_button->sendMessage(message);
 		if (this->m_fire && message->id == GameMessage::FIRE) this->m_fire->sendMessage(message);
+		if (message->id == GameMessage::DAMAGE) this->setDamage(dynamic_cast<GameMessage::DamageMessage*>(message));
 	}
 
 	void BaseGameObject::setX(int x)
@@ -230,9 +234,45 @@ namespace GameObjects {
 		return this->life;
 	}
 
-	void BaseGameObject::setDamage(int damage)
+	void BaseGameObject::setDamage(GameMessage::DamageMessage *damageMsg)
 	{
-		this->life -= damage;
+		if (invicible)
+			return;
+
+		this->life -= damageMsg->damage;
+
+		if (this->life <= 0)
+			this->destroy();
+	}
+
+	int BaseGameObject::getPower()
+	{
+		return this->power;
+	}
+
+	void BaseGameObject::setPower(int power)
+	{
+		this->power = power;
+	}
+
+	float BaseGameObject::getCooldown()
+	{
+		return this->cooldown;
+	}
+
+	void BaseGameObject::setCooldown(float cooldown)
+	{
+		this->cooldown = cooldown;
+	}
+
+	void BaseGameObject::setInvicible(void)
+	{
+		this->invicible = !invicible;
+	}
+
+	bool BaseGameObject::getInvicible(void)
+	{
+		return invicible;
 	}
 
 	void BaseGameObject::destroy(bool des) {
