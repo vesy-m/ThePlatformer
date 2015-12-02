@@ -16,6 +16,7 @@ namespace GameEngine {
 		void MainLoop(void);
 		void Add(GameSystems::BaseSystem*);
 		class Level;
+		static bool gameLoop;
 	private:
 		TimeManager								*m_manager;
 		

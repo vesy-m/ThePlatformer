@@ -18,6 +18,7 @@ namespace GameSystems {
 
 	void JSONParser::initParse(const std::string &filename) {
 		char *jsonFile = readFile(filename), *endptr = NULL;
+		std::cout << "parsing : " << filename << std::endl;
 		int status = jsonParse(jsonFile, &endptr, &this->m_value, this->m_allocator);
 		if (status != GameTools::JSON_OK) {
 			fprintf(stderr, "%s at %zd\n", GameTools::jsonStrError(status), endptr - jsonFile);

@@ -23,7 +23,14 @@ namespace GameMessage {
 		ROTATE_LEFT,
 		ROTATE_RIGHT,
 		FIRE,
-		CLICKON
+		CLICKON,
+		ENTERMENU,
+		RIGHTMENU,
+		LEFTMENU,
+		UPMENU,
+		DOWNMENU,
+		SELECT_CONTROLLER_MENU,
+		START_MENU
 	};
 
 	class Message

@@ -21,8 +21,11 @@ namespace GameSystems {
 
 		while (window->pollEvent(event))
 		{
-			if (event.type == sf::Event::Closed)
-				return 1;
+			if (event.type == sf::Event::Closed) {
+				GameSystems::GraphicsSystem::Camera::getInstance().reInit();
+				GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/quit_menu.json");
+				break;
+			}
 			else if (event.type == sf::Event::Resized)
 			{
 				// adjust the viewport when the window is resized
@@ -42,7 +45,14 @@ namespace GameSystems {
 					break;
 				}
 			}
-
+			else if (event.type == sf::Event::JoystickButtonReleased) {
+				if (event.joystickButton.button == 7 && GameSystems::ObjectFactory::getInstance().stateGame == GameSystems::ObjectFactory::gameState::LEVEL)
+				{
+					GameSystems::GraphicsSystem::Camera::getInstance().reInit();
+					GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/pause_menu.json");
+					break;
+				}
+			}
 			for each (GameObjects::BaseGameObject* object in listObjects)
 			{
 				GameComponents::InputComponent *component = reinterpret_cast<GameComponents::InputComponent*>(object->getComponent(GameComponents::COMPONENT_TYPE::WINDOW));

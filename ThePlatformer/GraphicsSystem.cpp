@@ -42,6 +42,12 @@ namespace GameSystems {
 			GameComponents::BaseComponent* component = object->getComponent(GameComponents::COMPONENT_TYPE::TEXT);
 			if (component) component->Update(dt);
 		}
+		for each (GameObjects::BaseGameObject* object in listObjects)
+		{
+			GameComponents::BaseComponent* component = object->getComponent(GameComponents::COMPONENT_TYPE::BUTTON);
+			if (component) 
+				component->Update(dt);
+		}
 		glMatrixMode(GL_PROJECTION);
 		glPopMatrix();
 		glMatrixMode(GL_MODELVIEW);

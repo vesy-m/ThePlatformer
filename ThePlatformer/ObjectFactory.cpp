@@ -19,6 +19,8 @@ namespace GameSystems {
 		stateGame = gameState::NONE;
 		systemNeedReinit = true;
 		listLevels = std::vector<GameEngine::Core::Level>();
+		listPlayers = std::vector<GameObjects::BaseGameObject *>();
+		this->nbPlayerReady = 0;
 	}
 
 	ObjectFactory::~ObjectFactory()
@@ -29,6 +31,8 @@ namespace GameSystems {
 		assert(value.getTag() == GameTools::JSON_OBJECT);
 		auto ret = new GameObjects::BaseGameObject();
 
+
+		GameComponents::ButtonComponent *buttonComponent = NULL;
 		for (auto it : value) {
 			if (std::string(it->key) == "x") ret->setX((int) it->value.toNumber());
 			else if (std::string(it->key) == "y") ret->setY((int) it->value.toNumber());
@@ -51,17 +55,17 @@ namespace GameSystems {
 			else if (std::string(it->key) == "keyboard") new GameComponents::KeyboardInputComponent(ret, it->value.toString());
 			else if (std::string(it->key) == "vector") new GameComponents::VectorDebugComponent(ret, it->value.toString());
 			else if (std::string(it->key) == "fire_ball") new GameComponents::FireBallComponent(ret);
-			else if (std::string(it->key) == "level") {
-				auto buttonLevel = new GameComponents::ButtonComponent(ret, GameComponents::ButtonComponent::ButtonType::LEVEL, it->value.toString());
-				auto mouse = new GameComponents::MouseClickComponent(ret);
+			else if (std::string(it->key) == "level" || std::string(it->key) == "menu" || std::string(it->key) == "function") {
+				buttonComponent = new GameComponents::ButtonComponent(ret, std::string(it->key), it->value.toString());
+				if (buttonComponent->buttonState == GameComponents::ButtonComponent::ButtonState::PLAYERCREATOR) {
+					new GameComponents::MouseClickComponent(ret, 1);
+				}
+				else {
+					new GameComponents::MouseClickComponent(ret);
+				}
 			}
-			else if (std::string(it->key) == "menu") {
-				auto buttonMenu = new GameComponents::ButtonComponent(ret, GameComponents::ButtonComponent::ButtonType::MENU, it->value.toString());
-				auto mouse = new GameComponents::MouseClickComponent(ret);
-			}
-			else if (std::string(it->key) == "function") {
-				auto buttonFunction = new GameComponents::ButtonComponent(ret, GameComponents::ButtonComponent::ButtonType::FUNCTION, it->value.toString());
-				auto mouse = new GameComponents::MouseClickComponent(ret);
+			else if (std::string(it->key) == "menunav") {
+				buttonComponent->setNav(it->value);
 			}
 			
 		}
@@ -148,6 +152,8 @@ namespace GameSystems {
 				if (obj != NULL) newMenu.addButton(obj);
 			}
 		}
+		newMenu.prevMenu = currentMenu.fileName;
+		newMenu.prevState = this->stateGame;
 		currentMenu = newMenu;
 	}
 
@@ -157,11 +163,27 @@ namespace GameSystems {
 		this->stateGame = gameState::LEVEL;
 		this->currentLevelFileName = filename;
 		systemNeedReinit = true;
+		for (std::pair<int, std::string> entry : this->mapPlayersController) {
+			GameSystems::JSONParser fileParser(entry.second);
+			GameObjects::BaseGameObject* newPlayer = parseObject(fileParser.getJSONValue());
+			if (entry.first == 8) {
+				new GameComponents::KeyboardInputComponent(newPlayer, "./config/controllers/input_keyboard1.json");
+			}
+			else {
+				new GameComponents::ControllerInputComponent(newPlayer, "./config/controllers/input_controller1.json", entry.first);
+			}
+			this->currentLevel.putObjectDepthOrdered(newPlayer);
+		}
 	}
 
 	void ObjectFactory::LoadMenuFileAsCurrent(const std::string &filename) {
+		if (filename == this->currentMenu.fileName && this->stateGame == gameState::MENU) {
+			return;
+		}
+		std::string currentMenuFileName = filename;
 		GameSystems::JSONParser fileParser(filename);
 		this->buildMenu(fileParser.getJSONValue());
+		this->currentMenu.fileName = currentMenuFileName;
 		this->stateGame = gameState::MENU;
 		systemNeedReinit = true;
 	}
@@ -217,4 +239,71 @@ namespace GameSystems {
 		return this->currentLevel;
 	}
 
+	bool ObjectFactory::controllerAlreadyTook(int idController)
+	{
+		for (std::pair<int, std::string> entry : this->mapPlayersController) {
+			if (idController == entry.first) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	void ObjectFactory::removeAllPlayersWithController() {
+		this->mapPlayersController.clear();
+	}
+
+	void ObjectFactory::addOrChangePlayerWithController(int idController, int idPerso) {
+		std::stringstream filenameConfigPlayer;
+		filenameConfigPlayer << "./config/players/player" << idPerso << ".json";
+		this->mapPlayersController[idController] = filenameConfigPlayer.str();
+	}
+
+	void ObjectFactory::changeGameObjectSpriteComponent(GameObjects::BaseGameObject* obj, std::string filename) {
+		GameComponents::SpriteComponent *sprite = new GameComponents::SpriteComponent(obj, filename);
+		sprite->Init();
+	}
+
+	void ObjectFactory::playersReady(int nb) {
+		this->nbPlayerReady += nb;
+		if (this->mapPlayersController.size() > 1 && this->nbPlayerReady == this->mapPlayersController.size()) {
+			this->LoadMenuFileAsCurrent("./config/menus/choose_level_menu.json");
+		}
+	}
+
+	void ObjectFactory::changeSelectedButtonMenu(int idButton) {
+		int i = 0;
+		for (GameObjects::BaseGameObject *button : this->currentMenu.getObjects()) {
+			if (i == idButton) {
+				GameComponents::ButtonComponent * comp = (GameComponents::ButtonComponent *)button->getComponent(GameComponents::COMPONENT_TYPE::BUTTON);
+				comp->toggleSelected(true);
+				std::cout << i << " id selected" << std::endl;
+				break;
+			}
+			i++;
+		}
+	}
+
+	void ObjectFactory::changeSelectedButtonMenu(GameObjects::BaseGameObject* button) {
+		for (GameObjects::BaseGameObject *curButton : this->currentMenu.getObjects()) {
+			GameComponents::ButtonComponent * comp = (GameComponents::ButtonComponent *)curButton->getComponent(GameComponents::COMPONENT_TYPE::BUTTON);
+			if (comp) comp->toggleSelected(false);
+		}
+		GameComponents::ButtonComponent * compButton = (GameComponents::ButtonComponent *)button->getComponent(GameComponents::COMPONENT_TYPE::BUTTON);
+		if (compButton) compButton->toggleSelected(true);
+	}
+
+	void ObjectFactory::clearPlayers() {
+		this->mapPlayersController.clear();
+		this->nbPlayerReady = 0;
+	}
+
+	void ObjectFactory::returnPrevMenuOrResumeLevel() {
+		if (this->currentMenu.prevState == gameState::LEVEL) {
+			GameSystems::ObjectFactory::getInstance().stateGame = GameSystems::ObjectFactory::gameState::LEVEL;
+		}
+		else {
+			this->LoadMenuFileAsCurrent(this->currentMenu.prevMenu);
+		}
+	}
 }

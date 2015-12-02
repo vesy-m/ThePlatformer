@@ -5,9 +5,10 @@
 #include <functional>
 #include "GraphicsSystem.h"
 #include "ObjectFactory.h"
+#include "MenuControllerMessage.h"
 
 namespace GameComponents {
-	class ButtonComponent : BaseComponent
+	class ButtonComponent : public BaseComponent
 	{
 		enum ButtonType
 		{
@@ -15,19 +16,32 @@ namespace GameComponents {
 			LEVEL,
 			FUNCTION,
 		};
+		enum ButtonState
+		{
+			CLASSIC,
+			SELECTED,
+			PLAYERCREATOR,
+			CHOOSEPLAYER,
+			READYPLAYER,
+		};
 		friend class GameSystems::ObjectFactory;
 
 	public:
 		~ButtonComponent();
+		void setNav(GameTools::JsonValue & value);
 		COMPONENT_TYPE getType();
 		void Update(double dt);
+		void drawSquare(GLfloat x, GLfloat y, GLfloat width, GLfloat height);
 		void Init();
 		void sendMessage(GameMessage::Message*);
+		void toggleSelected(bool state);
 		ButtonType buttonType;
+		ButtonState buttonState;
 		std::string actionName;
 		void execAction();
+		void createPlayer(int idController);
 	private:
-		ButtonComponent(GameObjects::BaseGameObject* object, ButtonType buttonType, const std::string& actionName);
+		ButtonComponent(GameObjects::BaseGameObject * object, const std::string & buttonType, const std::string & actionName);
 		const COMPONENT_TYPE type = COMPONENT_TYPE::BUTTON;
 		std::map<std::string, std::function<void(ButtonComponent*)>> functionMap;
 		std::map<ButtonType, std::function<void(ButtonComponent*)>> typeMap;
@@ -37,5 +51,11 @@ namespace GameComponents {
 		void changeResolution();
 		void resumeToLevel();
 		void restartLevel();
+		void quitGame();
+		void prevMenu();
+		int numPlayerSelected;
+		int idPad;
+		int *navDirection;
+		static bool actionAlreadyCompute;
 	};
 }

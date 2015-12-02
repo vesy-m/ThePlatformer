@@ -11,7 +11,7 @@ namespace GameComponents {
 	{
 		friend class GameSystems::ObjectFactory;
 	private:
-		ControllerInputComponent(GameObjects::BaseGameObject*, std::string);
+		ControllerInputComponent(GameObjects::BaseGameObject * object, const std::string & filename, int idController = 0);
 	public:
 		
 		virtual ~ControllerInputComponent();

@@ -65,6 +65,8 @@ namespace GameObjects {
 			return this->m_text;
 		case GameComponents::SPRITE:
 			return this->m_sprite;
+		case GameComponents::BUTTON:
+			return this->m_button;
 		default:
 			return NULL;
 		}

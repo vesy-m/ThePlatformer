@@ -4,6 +4,9 @@
 
 Menu::Menu()
 {
+	this->fileName = "";
+	this->prevMenu = "";
+	this->prevState = -1;
 }
 
 

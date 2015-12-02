@@ -2,6 +2,7 @@
 
 #include "gason.h"
 #include <string>
+#include <iostream>
 
 namespace GameSystems {
 	class JSONParser

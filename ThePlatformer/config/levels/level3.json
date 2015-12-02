@@ -1,42 +1,6 @@
 {
   "objects" : [
     {
-      "name" : "megaman",
-      "x" : 200,
-      "y" : 450,
-      "depth" : 2,
-      "height" : 42,
-      "width" : 30,
-      "mass" : 20,
-      "projectile_type" : "tennis",
-      "sprite" : "./config/sprite_sheets/desc-megaman.json",
-      "keyboard" : "./config/controllers/input_keyboard1.json",
-      "body" : true,
-      "boxcollider" : true,
-      "vector" : "square",
-      "type": 1,
-      "fire_ball": true,
-      "fps":  true
-    },
-	{
-      "name" : "megaman2",
-      "x" : 1000,
-      "y" : 450,
-      "depth" : 2,
-      "height" : 42,
-      "width" : 30,
-      "mass" : 20,
-      "projectile_type" : "soccer",
-      "sprite" : "./config/sprite_sheets/desc-metalslug.json",
-      "controller" : "./config/controllers/input_controller1.json",
-      "body" : true,
-      "boxcollider" : true,
-      "vector" : "square",
-      "type": 1,
-      "fire_ball": true,
-      "fps":  true
-    },
-	{
       "name" : "debugFps",
       "x" : 50,
       "y" : 50,

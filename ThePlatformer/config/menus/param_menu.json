@@ -2,13 +2,15 @@
 	"button" : {
 		"x" : 540,
 		"y" : 215,
-		"sprite" : "./assets/sprite/resolutionButton.png",
-		"function" : "changeResolution"
+		"sprite" : "./assets/sprite/menu/resolutionButton.png",
+		"function" : "changeResolution",
+		"menunav" : [1, -1, -1, 1, 1]
 	},
 	"button" : {
 		"x" : 540,
 		"y" : 455,
-		"sprite" : "./assets/sprite/returnButton.png",
-		"menu" : "./config/menus/main_menu.json"
+		"sprite" : "./assets/sprite/menu/returnButton.png",
+		"menu" : "./config/menus/main_menu.json",
+		"menunav" : [0, -1, -1, 0, 0]
 	}
 }

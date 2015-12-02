@@ -8,6 +8,9 @@
 #include "ObjectFactory.h"
 
 namespace GameEngine {
+
+	bool Core::gameLoop = true;
+
 	Core::Core() {
 	}
 
@@ -24,7 +27,7 @@ namespace GameEngine {
 
 	void Core::MainLoop(void) {
 		
-		while (42) {
+		while (Core::gameLoop) {
 			std::list<GameSystems::BaseSystem *> listSystems = GameSystems::ObjectFactory::getInstance().getSystems();
 			std::list<GameObjects::BaseGameObject * > listCurrentObjects = GameSystems::ObjectFactory::getInstance().getCurrentObjects();
 			this->m_manager->StartTimer();
