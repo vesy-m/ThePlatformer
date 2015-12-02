@@ -117,12 +117,12 @@ namespace GameComponents {
 				if (this->composition->getType() == GameObjects::PROJECTILE) {
 					if (object->getType() == GameObjects::PLAYER && object->getName().compare(this->composition->getName()) == 0)
 						continue;
-					/*if (object->getType() == GameObjects::PROJECTILE)
-						continue;*/
 				}
 				if (object->getComponent(GameComponents::COMPONENT_TYPE::COLLIDER))
 				{
-					if (object->getComponent(GameComponents::COMPONENT_TYPE::COLLIDER) == this) continue;
+					if (object->getComponent(GameComponents::COMPONENT_TYPE::COLLIDER) == this) {
+						continue;
+					}
 					Manifold *manifold = new Manifold();
 					if (object->getComponent(GameComponents::COMPONENT_TYPE::COLLIDER)->getType() == COMPONENT_TYPE::BOX_COLLIDER)
 					{
@@ -132,36 +132,20 @@ namespace GameComponents {
 						manifold->B = otherObject;
 						if (this->CollideWithBox(manifold))
 						{
+							if (this->composition->getType() == GameObjects::PROJECTILE)
+								std::cout << "PROJECTILE COLLISION" << std::endl;
 							// Destroy projectiles on collision
 							if (otherObject->composition->getType() == GameObjects::PROJECTILE) otherObject->composition->destroy(true);
 							else if (this->composition->getType() == GameObjects::PROJECTILE) this->composition->destroy(true);
 
-							if (this->composition->getType() == GameObjects::PROJECTILE && otherObject->composition->getType() == GameObjects::PLAYER) {
-								if (otherObject->composition->getLife() - this->composition->getPower() <= 0)
-								{
-									if (otherObject->composition->getName() == "megaman") {
-										GameSystems::GraphicsSystem::Camera::getInstance().reInit();
-										GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/metalslug_win_menu.json");
-									}
-									else {
-										GameSystems::GraphicsSystem::Camera::getInstance().reInit();
-										GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/megaman_win_menu.json");
-									}
-								}
+							if (this->composition->getType() == GameObjects::PROJECTILE &&
+								otherObject->composition->getType() == GameObjects::PLAYER)
+							{
 								otherObject->composition->sendMessage(new GameMessage::DamageMessage(this->composition->getPower()));
 							}
-							else if (this->composition->getType() == GameObjects::PLAYER && otherObject->composition->getType() == GameObjects::PROJECTILE) {
-								if (this->composition->getLife() - otherObject->composition->getPower() <= 0)
-								{
-									if (this->composition->getName() == "megaman") {
-										GameSystems::GraphicsSystem::Camera::getInstance().reInit();
-										GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/metalslug_win_menu.json");
-									}
-									else {
-										GameSystems::GraphicsSystem::Camera::getInstance().reInit();
-										GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/megaman_win_menu.json");
-									}
-								}
+							else if (this->composition->getType() == GameObjects::PLAYER &&
+									 otherObject->composition->getType() == GameObjects::PROJECTILE)
+							{
 								otherObject->composition->sendMessage(new GameMessage::DamageMessage(otherObject->composition->getPower()));
 							}
 

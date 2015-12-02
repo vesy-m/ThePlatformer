@@ -6,6 +6,7 @@
 #include "GraphicsSystem.h"
 #include "ObjectFactory.h"
 #include "MenuControllerMessage.h"
+#include "WindowInputSytem.h"
 
 namespace GameComponents {
 	class ButtonComponent : public BaseComponent
@@ -53,6 +54,8 @@ namespace GameComponents {
 		void restartLevel();
 		void quitGame();
 		void prevMenu();
+		void backPlayer();
+		void switchFullScreen();
 		int numPlayerSelected;
 		int idPad;
 		int *navDirection;

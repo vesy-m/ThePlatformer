@@ -62,6 +62,9 @@ namespace GameSystems {
 		void changeSelectedButtonMenu(GameObjects::BaseGameObject * button);
 		void clearPlayers();
 		void returnPrevMenuOrResumeLevel();
+		void winTheGame(std::string);
+		void checkWinCondition();
+		GameObjects::BaseGameObject *isPLayersAlive();
 		//----
 	private:
 		ObjectFactory();
@@ -77,6 +80,7 @@ namespace GameSystems {
 		bool systemNeedReinit;
 		std::vector<GameObjects::BaseGameObject*> listPlayers;
 		int nbPlayerReady;
+		int countObjects;
 		std::map<int, std::string> mapPlayersController;
 
 	};

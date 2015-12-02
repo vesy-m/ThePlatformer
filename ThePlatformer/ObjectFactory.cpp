@@ -22,6 +22,7 @@ namespace GameSystems {
 		listLevels = std::vector<GameEngine::Core::Level>();
 		listPlayers = std::vector<GameObjects::BaseGameObject *>();
 		this->nbPlayerReady = 0;
+		this->countObjects = 0;
 	}
 
 	ObjectFactory::~ObjectFactory()
@@ -45,7 +46,7 @@ namespace GameSystems {
 			else if (std::string(it->key) == "width") ret->setWidth((int) it->value.toNumber());
 			else if (std::string(it->key) == "height") ret->setHeight((int) it->value.toNumber());
 			else if (std::string(it->key) == "projectile_type") ret->setProjectileType(it->value.toString());
-			else if (std::string(it->key) == "name") ret->setName(it->value.toString());
+			else if (std::string(it->key) == "name") ret->setName(std::string(it->value.toString() + std::to_string(countObjects++)));
 			else if (std::string(it->key) == "type") ret->setType((GameObjects::objectType)(int)it->value.toNumber());
 			else if (std::string(it->key) == "sprite") new GameComponents::SpriteComponent(ret, it->value.toString());
 			else if (std::string(it->key) == "fps") new GameComponents::TextComponent(ret);
@@ -184,6 +185,7 @@ namespace GameSystems {
 				new GameComponents::ControllerInputComponent(newPlayer, "./config/controllers/input_controller1.json", entry.first);
 			}
 			this->currentLevel.putObjectDepthOrdered(newPlayer);
+			listPlayers.push_back(newPlayer);
 		}
 	}
 
@@ -191,6 +193,7 @@ namespace GameSystems {
 		if (filename == this->currentMenu.fileName && this->stateGame == gameState::MENU) {
 			return;
 		}
+		countObjects = 0;
 		std::string currentMenuFileName = filename;
 		GameSystems::JSONParser fileParser(filename);
 		this->buildMenu(fileParser.getJSONValue());
@@ -320,5 +323,49 @@ namespace GameSystems {
 		else {
 			this->LoadMenuFileAsCurrent(this->currentMenu.prevMenu);
 		}
+	}
+
+	void ObjectFactory::winTheGame(std::string name)
+	{
+		for (auto player : listPlayers) {
+			if (name.compare(player->getName()) != 0)
+				player->destroy(true);
+		}
+	}
+
+	void ObjectFactory::checkWinCondition()
+	{
+		if (listPlayers.empty())
+			return;
+		auto winPlayer = isPLayersAlive();
+
+		if (winPlayer == nullptr)
+			return;
+	
+		listPlayers.clear();
+		if (winPlayer->getName().find("megaman") != std::string::npos) {
+			GameSystems::GraphicsSystem::Camera::getInstance().reInit();
+			GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/megaman_win_menu.json");
+		}
+		else {
+			GameSystems::GraphicsSystem::Camera::getInstance().reInit();
+			GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/metalslug_win_menu.json");
+		}
+	}
+
+	GameObjects::BaseGameObject * ObjectFactory::isPLayersAlive()
+	{
+		bool winCondition = false;
+		GameObjects::BaseGameObject *tmpObj = nullptr;
+		for (auto player : listPlayers) {
+			if (!player->destroy() && !winCondition) {
+				tmpObj = player;
+				winCondition = true;
+			}
+			else if (!player->destroy() && winCondition) {
+				return nullptr;
+			}
+		}
+		return tmpObj;
 	}
 }

@@ -254,7 +254,7 @@ namespace GameObjects {
 		this->life -= damageMsg->damage;
 
 		if (this->life <= 0)
-			this->destroy();
+			this->destroy(true);
 	}
 
 	int BaseGameObject::getPower()

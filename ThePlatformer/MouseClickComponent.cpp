@@ -100,6 +100,7 @@ namespace GameComponents {
 		if (event.type == sf::Event::JoystickButtonReleased) {
 			if (event.joystickButton.button == 0) { idMessage = GameMessage::ENTERMENU;	}
 			else if (event.joystickButton.button == 7) { idMessage = GameMessage::START_MENU; }
+			else if (event.joystickButton.button == 1) { idMessage = GameMessage::B_MENU; }
 		} else if (event.type == sf::Event::JoystickMoved) {
 			if (event.joystickMove.axis == 6 || event.joystickMove.axis == 0)
 			{
@@ -119,7 +120,7 @@ namespace GameComponents {
 			else if (event.key.code == sf::Keyboard::Right) { idMessage = GameMessage::RIGHTMENU; }
 			else if (event.key.code == sf::Keyboard::Up) { idMessage = GameMessage::UPMENU; }
 			else if (event.key.code == sf::Keyboard::Down) { idMessage = GameMessage::DOWNMENU; }
-			else if (event.key.code == sf::Keyboard::Escape) { idMessage = GameMessage::START_MENU; }
+			else if (event.key.code == sf::Keyboard::Escape) { idMessage = GameMessage::ECHAP_MENU; }
 		}
 		if (idMessage != GameMessage::DEFAULT) {
 			//std::cout << "key press send message : " << idMessage << std::endl;

@@ -10,7 +10,7 @@
 		"x" : 540,
 		"y" : 360,
 		"sprite" : "./assets/sprite/menu/settingsButton.png",
-		"menu" : "./config/menus/param_menu.json",
+		"menu" : "./config/menus/param_main_menu.json",
 		"menunav" : [0, -1, -1, 0, 2]
 	},
 	"button" : {

@@ -33,6 +33,7 @@ namespace GameEngine {
 			this->m_manager->StartTimer();
 			for each (GameSystems::BaseSystem *system in listSystems)
 				if (system->Update(this->m_manager->GetLastTime(), listCurrentObjects) == 1) return;
+			GameSystems::ObjectFactory::getInstance().checkWinCondition();
 			GameSystems::ObjectFactory::getInstance().cleanupObjects();
 			this->m_manager->WaitFPS(FRAME_PER_SECOND);
 		}
