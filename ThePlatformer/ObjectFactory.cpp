@@ -1,6 +1,7 @@
 #include "gason.h"
 #include "BaseComponent.h"
 #include "SpriteComponent.h"
+#include "AimComponent.h"
 #include "ObjectFactory.h"
 #include "ControllerInputComponent.h"
 #include "KeyboardInputComponent.h"
@@ -63,6 +64,7 @@ namespace GameSystems {
 				auto buttonFunction = new GameComponents::ButtonComponent(ret, GameComponents::ButtonComponent::ButtonType::FUNCTION, it->value.toString());
 				auto mouse = new GameComponents::MouseClickComponent(ret);
 			}
+			else if (std::string(it->key) == "aim") new GameComponents::AimComponent(ret, it->value.toString());
 			
 			}
 		return (ret);

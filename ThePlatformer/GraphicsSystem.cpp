@@ -31,15 +31,14 @@ namespace GameSystems {
 		{
 			GameComponents::BaseComponent*component = object->getComponent(GameComponents::COMPONENT_TYPE::SPRITE);
 			if (component) component->Update(dt);
-		}
-		for each (GameObjects::BaseGameObject* object in listObjects)
-		{
-			GameComponents::BaseComponent* component = object->getComponent(GameComponents::COMPONENT_TYPE::DEBUGVECTOR);
+			
+			component = object->getComponent(GameComponents::COMPONENT_TYPE::AIM);
 			if (component) component->Update(dt);
-		}
-		for each (GameObjects::BaseGameObject* object in listObjects)
-		{
-			GameComponents::BaseComponent* component = object->getComponent(GameComponents::COMPONENT_TYPE::TEXT);
+			
+			component = object->getComponent(GameComponents::COMPONENT_TYPE::DEBUGVECTOR);
+			if (component) component->Update(dt);
+
+			component = object->getComponent(GameComponents::COMPONENT_TYPE::TEXT);
 			if (component) component->Update(dt);
 		}
 		glMatrixMode(GL_PROJECTION);
@@ -56,15 +55,14 @@ namespace GameSystems {
 		{
 			GameComponents::BaseComponent* component = object->getComponent(GameComponents::COMPONENT_TYPE::SPRITE);
 			if (component) component->Init();
-		}
-		for each (GameObjects::BaseGameObject* object in listObjects)
-		{
-			GameComponents::BaseComponent* component = object->getComponent(GameComponents::COMPONENT_TYPE::DEBUGVECTOR);
+
+			component = object->getComponent(GameComponents::COMPONENT_TYPE::AIM);
 			if (component) component->Init();
-		}
-		for each (GameObjects::BaseGameObject* object in listObjects)
-		{
-			GameComponents::BaseComponent* component = object->getComponent(GameComponents::COMPONENT_TYPE::TEXT);
+			
+			component = object->getComponent(GameComponents::COMPONENT_TYPE::DEBUGVECTOR);
+			if (component) component->Init();
+
+			component = object->getComponent(GameComponents::COMPONENT_TYPE::TEXT);
 			if (component) component->Init();
 		}
 	}

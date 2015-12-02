@@ -44,8 +44,8 @@ namespace GameComponents {
 
 						glm::vec2 direction = glm::vec2(100.0, 100.0);
 						if (aimAxisX >= -50.0 && aimAxisX <= 50.0 && aimAxisY >= -50.0 && aimAxisY <= 50.0) {
-							if (sprite->revertX) direction = glm::vec2((-100 + centerX) - centerX, (aimAxisY + centerY) - centerY);
-							else direction = glm::vec2((100 + centerX) - centerX, (aimAxisY + centerY) - centerY);
+							if (sprite->revertX) direction = glm::vec2((-100 + centerX) - centerX, (-70 + centerY) - centerY);
+							else direction = glm::vec2((100 + centerX) - centerX, (-70 + centerY) - centerY);
 						}
 						else direction = glm::vec2((aimAxisX + centerX) - centerX, (aimAxisY + centerY) - centerY);
 
@@ -83,8 +83,8 @@ namespace GameComponents {
 
 							glm::vec2 direction = glm::vec2(100.0, 100.0);
 							if (aimAxisX >= -50.0 && aimAxisX <= 50.0 && aimAxisY >= -50.0 && aimAxisY <= 50.0) {
-								if (sprite->revertX) direction = glm::vec2((-100 + centerX) - centerX, (aimAxisY + centerY) - centerY);
-								else direction = glm::vec2((100 + centerX) - centerX, (aimAxisY + centerY) - centerY);
+								if (sprite->revertX) direction = glm::vec2((-100 + centerX) - centerX, (-100 + centerY) - centerY);
+								else direction = glm::vec2((100 + centerX) - centerX, (-100 + centerY) - centerY);
 							}
 							else direction = glm::vec2((aimAxisX + centerX) - centerX, (aimAxisY + centerY) - centerY);
 
@@ -100,6 +100,20 @@ namespace GameComponents {
 				}
 			}
 		}
+		glm::vec2 direction;
+		glm::vec2 aimAxis = glm::vec2(aimAxisX, aimAxisY);
+		GameComponents::SpriteComponent *sprite = reinterpret_cast<GameComponents::SpriteComponent*>(getComposition()->getComponent(GameComponents::SPRITE));
+
+		if ((sprite->revertX && aimAxisX > 0.0f && aimAxisX <= 0.005f) ||
+			(!sprite->revertX && aimAxisX < 0.0f && aimAxisX >= -0.005f)) aimAxisX *= -1;
+
+		if (aimAxisX == 0.0f && aimAxisY == 0.0f) direction = aimAxis;
+		else direction = glm::normalize(aimAxis);
+
+
+		//std::cout << "aimAxisX x: " << aimAxisX << "\t" << "aimAxisY y: " << aimAxisY << std::endl;
+
+		this->composition->sendMessage(new GameMessage::AimMessage(direction));
 	}
 
 	bool ControllerInputComponent::DetectAxisInput(sf::Event event, int button)
@@ -123,10 +137,10 @@ namespace GameComponents {
 		switch (button)
 		{
 		case 52:
-			if (event.joystickMove.position <= -98) return true;
+			if (event.joystickMove.position <= -78) return true;
 			break;
 		case 51:
-			if (event.joystickMove.position >= 98) return true;
+			if (event.joystickMove.position >= 78) return true;
 			break;
 		case 62:
 			if (event.joystickMove.position <= -98) return true;

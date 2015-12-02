@@ -3,6 +3,7 @@
 #include "Collider.h"
 #include "InputComponent.h"
 #include "SpriteComponent.h"
+#include "AimComponent.h"
 #include "TextComponent.h"
 #include "VectorDebugComponent.h"
 #include "ButtonComponent.h"
@@ -30,6 +31,7 @@ namespace GameObjects {
 		this->m_sprite = NULL;
 		this->m_text = NULL;
 		this->m_vector = NULL;
+		this->m_aim = NULL;
 	}
 
 	void BaseGameObject::Init(void) {
@@ -40,6 +42,7 @@ namespace GameObjects {
 		if (this->m_text) this->m_text->Init();
 		if (this->m_vector) this->m_vector->Init();
 		if (this->m_fire) this->m_fire->Init();
+		if (this->m_aim) this->m_aim->Init();
 	}
 
 	BaseGameObject::~BaseGameObject()
@@ -50,6 +53,7 @@ namespace GameObjects {
 		delete this->m_sprite;
 		delete this->m_text;
 		delete this->m_vector;
+		delete this->m_aim;
 	}
 
 	GameComponents::BaseComponent *BaseGameObject::getComponent(GameComponents::COMPONENT_TYPE type) {
@@ -68,6 +72,8 @@ namespace GameObjects {
 			return this->m_text;
 		case GameComponents::SPRITE:
 			return this->m_sprite;
+		case GameComponents::AIM:
+			return this->m_aim;
 		default:
 			return NULL;
 		}
@@ -113,6 +119,11 @@ namespace GameObjects {
 		this->m_fire = fire;
 	}
 
+	void BaseGameObject::attachComponent(GameComponents::AimComponent *aim)
+	{
+		this->m_aim = aim;
+	}
+
 	void BaseGameObject::sendMessage(GameMessage::Message *message)
 	{
 		if (this->m_body) this->m_body->sendMessage(message);
@@ -122,6 +133,7 @@ namespace GameObjects {
 		if (this->m_text) this->m_text->sendMessage(message);
 		if (this->m_vector) this->m_vector->sendMessage(message);
 		if (this->m_button) this->m_button->sendMessage(message);
+		if (this->m_aim) this->m_aim->sendMessage(message);
 		if (this->m_fire && message->id == GameMessage::FIRE) this->m_fire->sendMessage(message);
 		if (message->id == GameMessage::DAMAGE) this->setDamage(dynamic_cast<GameMessage::DamageMessage*>(message));
 	}

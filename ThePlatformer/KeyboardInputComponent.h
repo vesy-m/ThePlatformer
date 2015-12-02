@@ -17,7 +17,10 @@ namespace GameComponents {
 		virtual void Init();
 		virtual void sendMessage(GameMessage::Message*);
 		int	ParseInputFile(GameTools::JsonValue);
+		void setMousePosition(sf::Event);
 	private:
+		int mouseX;
+		int mouseY;
 		std::map<INPUT_TYPE, int> keyboardMap;
 		std::map<INPUT_TYPE, sf::Mouse::Button> mouseMap;
 		std::string inputFilename;

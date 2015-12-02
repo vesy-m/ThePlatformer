@@ -25,6 +25,7 @@ namespace GameMessage {
 		FIRE,
 		CLICKON,
 		DAMAGE,
+		AIM,
 	};
 
 	class Message

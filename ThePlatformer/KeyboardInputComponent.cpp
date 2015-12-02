@@ -18,7 +18,9 @@ namespace GameComponents {
 	{
 		for (auto it = this->keyboardMap.begin(); it != this->keyboardMap.end(); ++it)
 		{
-			if (event.type == sf::Event::KeyPressed && event.key.code == it->second) inputState.at(it->first) = true;
+			if (event.type == sf::Event::KeyPressed && event.key.code == it->second) {
+				inputState.at(it->first) = true;
+			}
 			else if (event.type == sf::Event::KeyReleased)
 			{
 				if (event.key.code == it->second)
@@ -65,7 +67,19 @@ namespace GameComponents {
 					savedMessage.push_back(it->first);
 				}
 			}
+			setMousePosition(event);
 		}
+		int centerX = (this->getComposition()->getX() + (this->getComposition()->getWidth() / 2));
+		int centerY = (this->getComposition()->getY() + (this->getComposition()->getHeight() / 2));
+
+		glm::vec2 direction = glm::vec2(mouseX - centerX, mouseY - centerY);
+
+		if (direction.x != 0.0f || direction.y != 0.0f) direction = glm::normalize(direction);
+
+		//std::cout << "mouseX x: " << mouseX << "\t" << "mouseY y: " << mouseY << std::endl;
+		//std::cout << "direction x: " << direction.x << "\t" << "direction y: " << direction.y << std::endl;
+
+		this->composition->sendMessage(new GameMessage::AimMessage(direction));
 	}
 
 	void KeyboardInputComponent::Init()
@@ -75,6 +89,8 @@ namespace GameComponents {
 			GameSystems::JSONParser parser(inputFilename);
 			ParseInputFile(parser.getJSONValue());
 		}
+		mouseX = 0;
+		mouseY = 0;
 	}
 
 	int	KeyboardInputComponent::ParseInputFile(GameTools::JsonValue o) {
@@ -93,6 +109,28 @@ namespace GameComponents {
 			break;
 		}
 		return 0;
+	}
+
+	void KeyboardInputComponent::setMousePosition(sf::Event event)
+	{
+		GLint iViewport[4];
+		glGetIntegerv(GL_VIEWPORT, iViewport);
+		int screenWidth = iViewport[0] + iViewport[2];
+		int screenHeight = iViewport[1] + iViewport[3];
+		int resolutionWidth = GameSystems::GraphicsSystem::Camera::getInstance().resolutionWidth;
+		int resolutionHeight = GameSystems::GraphicsSystem::Camera::getInstance().resolutionHeight;
+
+		int cameraWith = GameSystems::GraphicsSystem::Camera::getInstance().cameraEndX - GameSystems::GraphicsSystem::Camera::getInstance().cameraStartX;
+		int cameraHeight = GameSystems::GraphicsSystem::Camera::getInstance().cameraEndY - GameSystems::GraphicsSystem::Camera::getInstance().cameraStartY;
+		
+		if (event.type == sf::Event::MouseMoved) {
+			mouseX = event.mouseMove.x * cameraWith / screenWidth;
+			mouseY = event.mouseMove.y * cameraHeight / screenHeight;
+			mouseX += GameSystems::GraphicsSystem::Camera::getInstance().cameraStartX;
+			mouseY += GameSystems::GraphicsSystem::Camera::getInstance().cameraStartY;
+		}
+
+		//std::cout << "mouseX x: " << mouseX << "\t" << "mouseY y: " << mouseY << std::endl;
 	}
 
 	void KeyboardInputComponent::sendMessage(GameMessage::Message *message)

@@ -58,6 +58,7 @@ namespace GameComponents {
 			glColor3f(1.0, 0.0, 0.0);
 			glVertex2f(centerX + velocity.x, centerY + velocity.y);
 		glEnd();
+		glColor3f(1.0, 1.0, 1.0);
 	}
 
 	void VectorDebugComponent::drawHollowCircle(GLfloat x, GLfloat y, GLfloat radius) {

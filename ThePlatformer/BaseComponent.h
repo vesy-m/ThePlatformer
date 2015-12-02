@@ -19,7 +19,8 @@ namespace GameComponents {
 		DEBUGVECTOR,
 		TEXT,
 		BUTTON,
-		FIRE
+		FIRE,
+		AIM,
 	};
 
 	class BaseComponent

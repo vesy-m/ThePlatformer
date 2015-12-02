@@ -198,6 +198,12 @@
     <ClCompile Include="DamageMessage.cpp">
       <Filter>GameMessages\Source</Filter>
     </ClCompile>
+    <ClCompile Include="AimComponent.cpp">
+      <Filter>GameComponents\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="AimMessage.cpp">
+      <Filter>GameMessages\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameEngine.h">
@@ -324,6 +330,12 @@
       <Filter>GameComponents\Header</Filter>
     </ClInclude>
     <ClInclude Include="DamageMessage.h">
+      <Filter>GameMessages\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="AimComponent.h">
+      <Filter>GameComponents\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="AimMessage.h">
       <Filter>GameMessages\Header</Filter>
     </ClInclude>
   </ItemGroup>

@@ -8,6 +8,7 @@
 #include "BaseGameObject.h"
 #include "GraphicsSystem.h"
 #include "debugManager.h"
+#include "AimMessage.h"
 #include "ObjectFactory.h"
 
 namespace GameComponents {

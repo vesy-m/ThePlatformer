@@ -1,6 +1,7 @@
 #include "FireBallComponent.h"
 #include "Message.h"
 #include "FireMessage.h"
+#include "AimMessage.h"
 
 #include <assert.h>
 

@@ -8,6 +8,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include "SpriteSheet.h"
+#include "AimMessage.h"
 #include "ObjectFactory.h"
 
 #define TEXTURE_LOAD_ERROR 0
@@ -17,28 +18,22 @@ namespace GameSystems {
 }
 
 namespace GameComponents {
-
-	class SpriteComponent : public BaseComponent
+	class AimComponent : public BaseComponent
 	{
 		friend class GameSystems::ObjectFactory;
 	private:
-		SpriteComponent(GameObjects::BaseGameObject*, const std::string&);
+		AimComponent(GameObjects::BaseGameObject*, const std::string&);
 	public:
-		virtual ~SpriteComponent();
+		virtual ~AimComponent();
 		virtual COMPONENT_TYPE getType();
 		virtual void Update(double);
 		virtual void Init();
 		virtual void sendMessage(GameMessage::Message*);
-		bool revertX;
 	private:
-		const COMPONENT_TYPE type = COMPONENT_TYPE::SPRITE;
 		GameTools::SpriteSheet *sheet;
-		int rotateNum;
-		
-		bool revertY;
-		int currentFrame;
-		int counter;
-		std::string currentAnim;
 		std::string _fileName;
+
+		glm::vec2 direction;
 	};
 }
+
