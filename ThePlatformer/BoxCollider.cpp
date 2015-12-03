@@ -1,4 +1,5 @@
 #include "BoxCollider.h"
+#include "AudioSystem.h"
 
 namespace GameComponents {
 	BoxCollider::BoxCollider(GameObjects::BaseGameObject *object) : ColliderComponent(object)
