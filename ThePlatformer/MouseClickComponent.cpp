@@ -102,24 +102,24 @@ namespace GameComponents {
 			else if (event.joystickButton.button == 7) { idMessage = GameMessage::START_MENU; }
 			else if (event.joystickButton.button == 1) { idMessage = GameMessage::B_MENU; }
 		} else if (event.type == sf::Event::JoystickMoved) {
-			if (event.joystickMove.axis == 6 || event.joystickMove.axis == 0)
+			if (event.joystickMove.axis == 6 || event.joystickMove.axis == 0 || event.joystickMove.axis == 4)
 			{
 				if (event.joystickMove.position == -100) { idMessage = GameMessage::LEFTMENU; }
 				else if (event.joystickMove.position == 100) { idMessage = GameMessage::RIGHTMENU; }
 			}
-			else if (event.joystickMove.axis == 7 || event.joystickMove.axis == 1)
+			else if (event.joystickMove.axis == 7 || event.joystickMove.axis == 1 || event.joystickMove.axis == 3)
 			{
 				int multiplicator = 1;
-				if (event.joystickMove.axis == 1) multiplicator = -1;
+				if (event.joystickMove.axis == 1 || event.joystickMove.axis == 3) multiplicator = -1;
 				if (event.joystickMove.position == 100 * multiplicator) { idMessage = GameMessage::UPMENU; }
 				else if (event.joystickMove.position == -100 * multiplicator) { idMessage = GameMessage::DOWNMENU; }
 			}
 		} else if (event.type == sf::Event::KeyReleased){
 			if (event.key.code == sf::Keyboard::Return) { idMessage = GameMessage::ENTERMENU; } 
-			else if (event.key.code == sf::Keyboard::Left) { idMessage = GameMessage::LEFTMENU; }
-			else if (event.key.code == sf::Keyboard::Right) { idMessage = GameMessage::RIGHTMENU; }
-			else if (event.key.code == sf::Keyboard::Up) { idMessage = GameMessage::UPMENU; }
-			else if (event.key.code == sf::Keyboard::Down) { idMessage = GameMessage::DOWNMENU; }
+			else if (event.key.code == sf::Keyboard::Left || event.key.code == sf::Keyboard::A) { idMessage = GameMessage::LEFTMENU; }
+			else if (event.key.code == sf::Keyboard::Right || event.key.code == sf::Keyboard::D) { idMessage = GameMessage::RIGHTMENU; }
+			else if (event.key.code == sf::Keyboard::Up || event.key.code == sf::Keyboard::W) { idMessage = GameMessage::UPMENU; }
+			else if (event.key.code == sf::Keyboard::Down || event.key.code == sf::Keyboard::S) { idMessage = GameMessage::DOWNMENU; }
 			else if (event.key.code == sf::Keyboard::Escape) { idMessage = GameMessage::ECHAP_MENU; }
 		}
 		if (idMessage != GameMessage::DEFAULT) {

@@ -79,6 +79,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(ProjectDir)\lib\devil-1.7.8\lib;$(ProjectDir)\lib\SFML-2.3.2\lib;$(ProjectDir)\lib\glew-1.13.0\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>sfml-audio-d.lib;sfml-window-d.lib;sfml-network-d.lib;sfml-system-d.lib;sfml-graphics-d.lib;openal32.lib;opengl32.lib;glu32.lib;glew32.lib;DevIL.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
+      <SubSystem>Windows</SubSystem>
     </Link>
     <PostBuildEvent />
     <PostBuildEvent />
@@ -101,6 +103,8 @@ copy /Y "$(ProjectDir)\lib\devil-1.7.8\bin\*" "$(OutDir)\"
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(ProjectDir)\lib\lib-x64\SFML-2.3.2\lib;$(ProjectDir)\lib\lib-x64\devil-1.7.8\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>sfml-audio-d.lib;sfml-window-d.lib;sfml-network-d.lib;sfml-system-d.lib;sfml-graphics-d.lib;openal32.lib;opengl32.lib;glu32.lib;DevIL.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
+      <SubSystem>Windows</SubSystem>
     </Link>
     <PostBuildEvent />
     <PostBuildEvent />
@@ -125,6 +129,8 @@ copy /Y "$(ProjectDir)\lib\lib-x64\devil-1.7.8\bin\*" "$(OutDir)\"</Command>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>$(ProjectDir)\lib\devil-1.7.8\lib;$(ProjectDir)\lib\SFML-2.3.2\lib;$(ProjectDir)\lib\glew-1.13.0\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>sfml-audio.lib;sfml-window.lib;sfml-network.lib;sfml-system.lib;sfml-graphics.lib;openal32.lib;opengl32.lib;glu32.lib;glew32.lib;DevIL.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
+      <SubSystem>Windows</SubSystem>
     </Link>
     <PostBuildEvent />
     <PostBuildEvent>
@@ -150,6 +156,8 @@ copy /Y "$(ProjectDir)\lib\devil-1.7.8\bin\*" "$(OutDir)\"
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>$(ProjectDir)\lib\lib-x64\SFML-2.3.2\lib;$(ProjectDir)\lib\lib-x64\devil-1.7.8\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>sfml-audio.lib;sfml-window.lib;sfml-network.lib;sfml-system.lib;sfml-graphics.lib;openal32.lib;opengl32.lib;glu32.lib;DevIL.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
+      <SubSystem>Windows</SubSystem>
     </Link>
     <PostBuildEvent />
     <PostBuildEvent>

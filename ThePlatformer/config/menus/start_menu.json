@@ -1,0 +1,14 @@
+{
+	"button" : {
+		"x" : 540,
+		"y" : 455,
+		"sprite" : "./assets/sprite/menu/startButton.png",
+		"menu" : "./config/menus/main_menu.json",
+		"menunav" : [1, -1, -1, -1, -1]
+	},
+	"button" : {
+		"x" : 730,
+		"y" : 660,
+		"sprite" : "./assets/sprite/menu/playWithControllerInfo.png",
+	}
+}

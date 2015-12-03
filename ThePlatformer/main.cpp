@@ -23,7 +23,7 @@ int main()
 	core.Add((GameSystems::BaseSystem *)winInput);
 	core.Add((GameSystems::BaseSystem *)physics);
 	core.Add((GameSystems::BaseSystem *)graphics);
-	GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/main_menu.json");
+	GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/start_menu.json");
 	//GameSystems::ObjectFactory::getInstance().LoadLevelFileAsCurrent("./config/levels/level2.json");
 
 	GameTools::CSound *sound = GameTools::CSoundManager::getInstance().getSound("./assets/audio/dr_wily_stage.ogg");
