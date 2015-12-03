@@ -11,6 +11,7 @@
 #include "SpriteSheet.h"
 #include "ObjectFactory.h"
 #include "SoundManager.h"
+#include "AudioSystem.h"
 
 int main()
 {
@@ -19,16 +20,18 @@ int main()
 	GameSystems::WindowInputSytem *winInput = new GameSystems::WindowInputSytem();
 	GameSystems::GraphicsSystem *graphics = new GameSystems::GraphicsSystem();
 	GameSystems::PhysicsSystem *physics = new GameSystems::PhysicsSystem();
+	GameSystems::AudioSystem *audio = new GameSystems::AudioSystem();
 
 	core.Add((GameSystems::BaseSystem *)winInput);
 	core.Add((GameSystems::BaseSystem *)physics);
 	core.Add((GameSystems::BaseSystem *)graphics);
+	core.Add((GameSystems::BaseSystem *)audio);
 	GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/start_menu.json");
 	//GameSystems::ObjectFactory::getInstance().LoadLevelFileAsCurrent("./config/levels/level2.json");
 
-	GameTools::CSound *sound = GameTools::CSoundManager::getInstance().getSound("./assets/audio/dr_wily_stage.ogg");
-	sound->setVolume(5);
-	sound->play();
+	//GameTools::CSound *sound = GameTools::CSoundManager::getInstance().getSound("./assets/audio/dr_wily_stage.ogg");
+	//sound->setVolume(5);
+	//sound->play();
 
 	//start
 	core.Init();

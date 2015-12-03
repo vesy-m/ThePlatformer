@@ -1,4 +1,5 @@
 #include "WindowInputSytem.h"
+#include "AudioSystem.h"
 
 namespace GameSystems {
 	bool WindowInputSytem::fullscreen = false;
@@ -35,11 +36,15 @@ namespace GameSystems {
 				std::cout << "lost focus" << std::endl;
 				sf::WindowHandle handle = this->window->getSystemHandle();
 				ShowWindow(handle, SW_MINIMIZE);
+				GameSystems::AudioSystem::_pause = true;
 				if (GameSystems::ObjectFactory::getInstance().stateGame == GameSystems::ObjectFactory::gameState::LEVEL) {
 					GameSystems::GraphicsSystem::Camera::getInstance().reInit();
 					GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/pause_menu.json");
 					break;
 				}
+			}
+			else if (event.type == sf::Event::GainedFocus) {
+				GameSystems::AudioSystem::_pause = false;
 			}
 			else if (event.type == sf::Event::Resized)
 			{

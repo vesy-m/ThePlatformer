@@ -9,6 +9,7 @@
 #include "ButtonComponent.h"
 #include "FireComponent.h"
 #include "FireMessage.h"
+#include "AudioComponent.h"
 
 namespace GameObjects {
 	BaseGameObject::BaseGameObject()
@@ -32,6 +33,7 @@ namespace GameObjects {
 		this->m_text = NULL;
 		this->m_vector = NULL;
 		this->m_aim = NULL;
+		this->m_sound = NULL;
 	}
 
 	void BaseGameObject::Init(void) {
@@ -43,6 +45,7 @@ namespace GameObjects {
 		if (this->m_vector) this->m_vector->Init();
 		if (this->m_fire) this->m_fire->Init();
 		if (this->m_aim) this->m_aim->Init();
+		if (this->m_sound) this->m_sound->Init();
 	}
 
 	BaseGameObject::~BaseGameObject()
@@ -54,6 +57,7 @@ namespace GameObjects {
 		delete this->m_text;
 		delete this->m_vector;
 		delete this->m_aim;
+		delete this->m_sound;
 	}
 
 	GameComponents::BaseComponent *BaseGameObject::getComponent(GameComponents::COMPONENT_TYPE type) {
@@ -76,6 +80,8 @@ namespace GameObjects {
 			return this->m_button;
 		case GameComponents::AIM:
 			return this->m_aim;
+		case GameComponents::SOUND:
+			return this->m_sound;
 		default:
 			return NULL;
 		}
@@ -126,6 +132,11 @@ namespace GameObjects {
 		this->m_aim = aim;
 	}
 
+	void BaseGameObject::attachComponent(GameComponents::AudioComponent *sound)
+	{
+		this->m_sound = sound;
+	}
+
 	void BaseGameObject::sendMessage(GameMessage::Message *message)
 	{
 		if (this->m_body) this->m_body->sendMessage(message);
@@ -138,6 +149,7 @@ namespace GameObjects {
 		if (this->m_aim) this->m_aim->sendMessage(message);
 		if (this->m_fire && message->id == GameMessage::FIRE) this->m_fire->sendMessage(message);
 		if (message->id == GameMessage::DAMAGE) this->setDamage(dynamic_cast<GameMessage::DamageMessage*>(message));
+		if (this->m_sound) this->m_sound->sendMessage(message);
 	}
 
 	void BaseGameObject::setX(int x)

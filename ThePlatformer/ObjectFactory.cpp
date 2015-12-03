@@ -13,6 +13,8 @@
 #include "ButtonComponent.h"
 #include "MouseClickComponent.h"
 #include "FireBallComponent.h"
+#include "AudioComponent.h"
+#include "AudioSystem.h"
 
 namespace GameSystems {
 	ObjectFactory::ObjectFactory()
@@ -57,6 +59,10 @@ namespace GameSystems {
 			else if (std::string(it->key) == "keyboard") new GameComponents::KeyboardInputComponent(ret, it->value.toString());
 			else if (std::string(it->key) == "vector") new GameComponents::VectorDebugComponent(ret, it->value.toString());
 			else if (std::string(it->key) == "fire_ball") new GameComponents::FireBallComponent(ret);
+			else if (std::string(it->key) == "sfx")
+			{
+				new GameComponents::AudioComponent(ret, it->value.toString());
+			}
 			else if (std::string(it->key) == "level" || std::string(it->key) == "menu" || std::string(it->key) == "function") {
 				buttonComponent = new GameComponents::ButtonComponent(ret, std::string(it->key), it->value.toString());
 				if (buttonComponent->buttonState == GameComponents::ButtonComponent::ButtonState::PLAYERCREATOR) {
@@ -346,10 +352,12 @@ namespace GameSystems {
 		if (winPlayer->getName().find("megaman") != std::string::npos) {
 			GameSystems::GraphicsSystem::Camera::getInstance().reInit();
 			GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/megaman_win_menu.json");
+			GameSystems::AudioSystem::_menuVictory = true;
 		}
 		else {
 			GameSystems::GraphicsSystem::Camera::getInstance().reInit();
 			GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/metalslug_win_menu.json");
+			GameSystems::AudioSystem::_menuVictory = true;
 		}
 	}
 

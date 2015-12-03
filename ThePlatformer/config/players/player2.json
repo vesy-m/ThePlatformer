@@ -14,5 +14,6 @@
       "vector" : "square",
       "type": 1,
       "fire_ball" : true,
-      "fps":  true
+      "fps":  true,
+      "sfx" : "./config/sound/Desc-SFX.json"
 }

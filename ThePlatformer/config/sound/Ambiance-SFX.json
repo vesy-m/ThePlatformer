@@ -1,0 +1,16 @@
+{
+	"SFX" : [
+		{
+			"name" : "ambiance",
+			"file" : "./assets/audio/dr_wily_stage.ogg",
+			"volume" : 50,
+			"loop" : 1
+		},
+		{
+			"name" : "victory",
+			"file" : "./assets/audio/tick_tock_jingle.ogg",
+			"volume" : 50,
+			"loop" : 1
+		}
+	]
+}
