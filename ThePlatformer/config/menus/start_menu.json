@@ -1,7 +1,12 @@
 {
 	"button" : {
-		"x" : 540,
-		"y" : 455,
+		"x" : 50,
+		"y" : 20,
+		"sprite" : "./assets/sprite/menu/title.png",
+	},
+	"button" : {
+		"x" : 850,
+		"y" : 400,
 		"sprite" : "./assets/sprite/menu/startButton.png",
 		"menu" : "./config/menus/main_menu.json",
 		"menunav" : [1, -1, -1, -1, -1]
