@@ -1,0 +1,19 @@
+{
+      "name" : "metalslug",
+      "x" : 850,
+      "y" : 450,
+      "depth" : 2,
+      "height" : 42,
+      "width" : 30,
+      "mass" : 20,
+      "projectile_type" : "soccer",
+      "sprite" : "./config/sprite_sheets/desc-metalslug.json",
+	  "aim" : "./assets/sprite/aim_reticle.png",
+      "body" : true,
+      "boxcollider" : true,
+      "vector" : "square",
+      "type": 1,
+      "fire_ball" : true,
+      "fps":  true,
+      "sfx" : "./config/sound/Desc-SFX.json"
+}

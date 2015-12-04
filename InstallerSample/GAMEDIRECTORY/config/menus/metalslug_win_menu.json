@@ -1,0 +1,22 @@
+{
+	"button" : {
+		"x" : 540,
+		"y" : 100,
+		"sprite" : "./assets/sprite/menu/metalslug_win.png"
+	},
+	"button" : {
+		"x" : 540,
+		"y" : 455,
+		"sprite" : "./assets/sprite/menu/restartButton.png",
+		"function" : "restartLevel",
+		"menunav" : [1, -1, -1, -1, 2]
+	},
+	"button" : {
+		"x" : 540,
+		"y" : 550,
+		"sprite" : "./assets/sprite/menu/returnMenuButton.png",
+		"menu" : "./config/menus/main_menu.json",
+		"menunav" : [0, -1, -1, 1, -1]
+	}
+
+}
