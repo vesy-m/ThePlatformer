@@ -51,7 +51,8 @@ namespace GameComponents
 								_isLoop = value->value.toNumber();
 						}
 						_sound[name] = GameTools::CSoundManager::getInstance().getSound(_fileName);
-						assert(_sound[name] != NULL);
+						if (!_sound[name])
+							GameTools::debugManager::getInstance().dAssert("Sound does not exist");
 						_sound[name]->setLoop(_isLoop);
 						_sound[name]->setVolume(_volume);
 						if (std::string("ambiance").compare(name) == 0)

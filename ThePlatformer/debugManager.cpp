@@ -38,6 +38,15 @@ namespace GameTools {
 		debugGraphic = false;
 	}
 
+	void debugManager::dAssert(std::string const &what)
+	{
+#ifdef _DEBUG
+		assert(0, what.c_str());
+#else
+		throw std::exception(what.c_str());
+#endif
+	}
+
 	void debugManager::displayDebug(const std::string &str, DEBUG_TYPE type)
 	{
 		switch (type)

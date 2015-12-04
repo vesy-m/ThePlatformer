@@ -1,12 +1,15 @@
 #include "Sound.h"
 #include <cassert>
+#include <exception>
+
 namespace GameTools
 {
 	CSound::CSound(std::string const &fileName, sf::SoundBuffer *sound)
 		: _fileName(fileName)
 	{
 		_soundBuffer = new sf::SoundBuffer;
-		assert(_soundBuffer->loadFromFile(fileName));
+		if (!_soundBuffer->loadFromFile(fileName))
+			debugManager::getInstance().dAssert("Path of the song does not exist");
 		_sound = sf::Sound(*_soundBuffer);
 	}
 
