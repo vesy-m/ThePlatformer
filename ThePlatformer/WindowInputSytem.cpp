@@ -13,14 +13,12 @@ namespace GameSystems {
 
 	WindowInputSytem::~WindowInputSytem()
 	{
-
 	}
 	
 	int WindowInputSytem::Update(double dt, std::list<GameObjects::BaseGameObject*>& listObjects)
 	{
 		sf::Event event;
 		bool changeSize = false;
-
 
 		while (window->pollEvent(event))
 		{
@@ -111,6 +109,5 @@ namespace GameSystems {
 	//have to receive message in case of change in window like size...
 	void WindowInputSytem::SendMessage()
 	{
-
 	}
 }
