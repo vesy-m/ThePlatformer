@@ -19,7 +19,7 @@ namespace GameEngine {
 	}
 	
 	void Core::Init(void) {
-		this->m_manager = new TimeManager("../log_file.txt");
+		this->m_manager = new TimeManager();
 	}
 
 	void Core::Update(float dt) {

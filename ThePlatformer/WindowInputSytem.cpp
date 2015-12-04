@@ -20,7 +20,6 @@ namespace GameSystems {
 		sf::Event event;
 		bool changeSize = false;
 
-
 		while (window->pollEvent(event))
 		{
 			if (event.type == sf::Event::Closed) {
@@ -110,6 +109,5 @@ namespace GameSystems {
 	//have to receive message in case of change in window like size...
 	void WindowInputSytem::SendMessage()
 	{
-
 	}
 }
