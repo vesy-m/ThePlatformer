@@ -2,7 +2,7 @@
 #include "AudioSystem.h"
 
 namespace GameSystems {
-	bool WindowInputSytem::fullscreen = false;
+	bool WindowInputSytem::fullscreen = true;
 
 	WindowInputSytem::WindowInputSytem()
 	{
@@ -13,7 +13,6 @@ namespace GameSystems {
 
 	WindowInputSytem::~WindowInputSytem()
 	{
-
 	}
 	
 	int WindowInputSytem::Update(double dt, std::list<GameObjects::BaseGameObject*>& listObjects)
