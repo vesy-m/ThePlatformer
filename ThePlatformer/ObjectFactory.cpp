@@ -181,6 +181,8 @@ namespace GameSystems {
 		this->stateGame = gameState::LEVEL;
 		this->currentLevelFileName = filename;
 		systemNeedReinit = true;
+		int i = 1;
+		int add = 1280 / (this->mapPlayersController.size() + 1);
 		for (std::pair<int, std::string> entry : this->mapPlayersController) {
 			GameSystems::JSONParser fileParser(entry.second);
 			GameObjects::BaseGameObject* newPlayer = parseObject(fileParser.getJSONValue());
@@ -190,8 +192,11 @@ namespace GameSystems {
 			else {
 				new GameComponents::ControllerInputComponent(newPlayer, "./config/controllers/input_controller1.json", entry.first);
 			}
+			newPlayer->setY(400);
+			newPlayer->setX(add * i);
 			this->currentLevel.putObjectDepthOrdered(newPlayer);
 			listPlayers.push_back(newPlayer);
+			i++;
 		}
 	}
 
@@ -347,7 +352,8 @@ namespace GameSystems {
 
 		if (winPlayer == nullptr)
 			return;
-	
+		
+		this->idWinPlayer = this->getPlayerId(winPlayer);
 		listPlayers.clear();
 		if (winPlayer->getName().find("megaman") != std::string::npos) {
 			GameSystems::GraphicsSystem::Camera::getInstance().reInit();
@@ -360,6 +366,11 @@ namespace GameSystems {
 			GameSystems::AudioSystem::_menuVictory = true;
 		}
 	}
+
+	int			ObjectFactory::getPlayerId(GameObjects::BaseGameObject * player) {
+		return find(this->listPlayers.begin(), this->listPlayers.end(), player) - this->listPlayers.begin();
+	}
+
 
 	GameObjects::BaseGameObject * ObjectFactory::isPLayersAlive()
 	{

@@ -22,78 +22,104 @@ namespace GameComponents {
 
 	void TextComponent::Update(double dt)
 	{
-		float xmin = 0;
-		float xmax = 1;
-		float ymin = 0;
-		float ymax = 1;
-		GLint posX = GameSystems::GraphicsSystem::Camera::getInstance().cameraStartX + 20;
-		GLint posY = GameSystems::GraphicsSystem::Camera::getInstance().cameraStartY + 20;
-		GameTools::Texture *texture = sheet->getTexture();
-		GLint width = texture->getWidth();
-		GLint height = texture->getHeight();
-
-		if (dt == 0.0 || GameTools::debugManager::getInstance().isActivateGraphic() == false && this->composition->getType() != GameObjects::objectType::PLAYER) {
-			return;
-		}
-
-		glEnable(GL_TEXTURE_2D);
-		static int time_to_display = 1000;
-		static int old_fps = 60;
-
-		time_to_display -= (int) dt;
-		if (time_to_display <= 0) {
-			time_to_display = 1000;
-			old_fps = (int)(1000.0 / dt);
-		}
-		
-		std::stringstream ss = std::stringstream();
-		ss << old_fps;
-		std::string text = std::string("FPS : " + ss.str());
 		if (this->composition->getType() == GameObjects::objectType::PLAYER)
 		{
+			int playerId = GameSystems::ObjectFactory::getInstance().getPlayerId(this->composition) + 1;
+			std::string lifeText = "0";
 			if (this->composition->getLife() >= 0)
-				text = std::to_string(this->composition->getLife());
-			else
-				text = "0";
-			posX = this->composition->getX() - 10;
-			posY = this->composition->getY() - 20;
-		}
-		glBindTexture(GL_TEXTURE_2D, texture->getId());
-		for (size_t i = 0; i < text.size(); i++) {
+				lifeText = std::to_string(this->composition->getLife());
 
-			std::string strChar(1, text.at(i));
+			std::stringstream playerstr = std::stringstream();
+			playerstr << "Player " << playerId;
+
+			int posX = this->composition->getX() - 10;
+			int posY = this->composition->getY() - 20;
+			drawText(playerstr.str(), posX, posY, -5);
+			playerstr << " : " << lifeText;
+			if (playerId == 1) {
+				posX = GameSystems::GraphicsSystem::Camera::getInstance().cameraStartX + 20;
+				posY = GameSystems::GraphicsSystem::Camera::getInstance().cameraStartY + 20;
+			}
+			else if (playerId == 2) {
+				posX = GameSystems::GraphicsSystem::Camera::getInstance().cameraStartX + 320;
+				posY = GameSystems::GraphicsSystem::Camera::getInstance().cameraStartY + 20;
+			}
+			else if (playerId == 3) {
+				posX = GameSystems::GraphicsSystem::Camera::getInstance().cameraEndX - 520;
+				posY = GameSystems::GraphicsSystem::Camera::getInstance().cameraStartY + 20;
+			}
+			else if (playerId == 4) {
+				posX = GameSystems::GraphicsSystem::Camera::getInstance().cameraEndX - 220;
+				posY = GameSystems::GraphicsSystem::Camera::getInstance().cameraStartY + 20;
+			}
+			drawText(playerstr.str(), posX, posY, 1);
+		}
+		else if (GameSystems::ObjectFactory::getInstance().stateGame == GameSystems::ObjectFactory::gameState::MENU) {
+			int posX = this->composition->getX();
+			int posY = this->composition->getY();
+
+			int playerId = GameSystems::ObjectFactory::getInstance().idWinPlayer + 1;
+			std::stringstream playerstr = std::stringstream();
+			playerstr << "Player " << playerId;
+			drawText(playerstr.str(), posX, posY, 3);
+		}
+		else if (dt != 0.0 && GameTools::debugManager::getInstance().isActivateGraphic()) {
+			int posX = GameSystems::GraphicsSystem::Camera::getInstance().cameraStartX + 20;
+			int posY = GameSystems::GraphicsSystem::Camera::getInstance().cameraStartY + 50;
+
+			static int time_to_display = 1000;
+			static int old_fps = 60;
+
+			time_to_display -= (int)dt;
+			if (time_to_display <= 0) {
+				time_to_display = 1000;
+				old_fps = (int)(1000.0 / dt);
+			}
+
+			std::stringstream fpsStr = std::stringstream();
+			fpsStr << "FPS : " << old_fps;
+			drawText(fpsStr.str(), posX, posY);
+		}
+	}
+
+	void TextComponent::drawText(std::string str, int posX, int posY, int size) {
+		GameTools::Texture *texture = sheet->getTexture();
+		glEnable(GL_TEXTURE_2D);
+		glBindTexture(GL_TEXTURE_2D, texture->getId());
+		for (size_t i = 0; i < str.size(); i++) {
+
+			std::string strChar(1, str.at(i));
 			GameTools::SpriteAnimation anim = sheet->getAnim(strChar);
 
-			// get height and width of the sprite of the currentFrame
-			height = anim.getSpriteYmax(0) - anim.getSpriteYmin(0);
-			width = anim.getSpriteXmax(0) - anim.getSpriteXmin(0);
-
-			height /= 15;
-			width /= 15;
-
-			xmin = (float)(anim.getSpriteXmin(0)) / (float)texture->getWidth();
-			xmax = (float)(anim.getSpriteXmax(0)) / (float)texture->getWidth();
-
+			//get letter coordinate in texture 
+			float xTexCoordMin = (float)(anim.getSpriteXmin(0)) / (float)texture->getWidth();
+			float xTexCoordMax = (float)(anim.getSpriteXmax(0)) / (float)texture->getWidth();
 			// Y axis must be inverted because the opengl Y axis go from bottom to top
-			ymin = (float)(texture->getHeight() - anim.getSpriteYmax(0)) / (float)texture->getHeight();
-			ymax = (float)(texture->getHeight() - anim.getSpriteYmin(0)) / (float)texture->getHeight();
+			float yTexCoordMin = (float)(texture->getHeight() - anim.getSpriteYmax(0)) / (float)texture->getHeight();
+			float yTexCoordMax = (float)(texture->getHeight() - anim.getSpriteYmin(0)) / (float)texture->getHeight();
 
-			width = (GameSystems::GraphicsSystem::Camera::getInstance().cameraEndX - GameSystems::GraphicsSystem::Camera::getInstance().cameraStartX) * width / 1280;
-			height = (GameSystems::GraphicsSystem::Camera::getInstance().cameraEndY - GameSystems::GraphicsSystem::Camera::getInstance().cameraStartY) * height / 720;
+			// get height and width of the sprite of the currentFrame
+			GLint letterHeight = anim.getSpriteYmax(0) - anim.getSpriteYmin(0);
+			GLint letterWidth = anim.getSpriteXmax(0) - anim.getSpriteXmin(0);
+
+			letterHeight /= 20 - size;
+			letterWidth /= 20 - size;
+
+			//letterWidth = (GameSystems::GraphicsSystem::Camera::getInstance().cameraEndX - GameSystems::GraphicsSystem::Camera::getInstance().cameraStartX) * letterWidth / 1280;
+			//letterHeight = (GameSystems::GraphicsSystem::Camera::getInstance().cameraEndY - GameSystems::GraphicsSystem::Camera::getInstance().cameraStartY) * letterHeight / 720;
 
 			int pointX = posX;
-			int pointXWidth = posX + width;
+			int pointXWidth = posX + letterWidth;
 			int pointY = posY;
-			int pointYHeight = posY + height;
-
+			int pointYHeight = posY + letterHeight;
 
 			glBegin(GL_QUADS);
-				glTexCoord2f(xmin, ymax); glVertex2i(pointX, pointY);
-				glTexCoord2f(xmax, ymax); glVertex2i(pointXWidth, pointY);
-				glTexCoord2f(xmax, ymin); glVertex2i(pointXWidth, pointYHeight);
-				glTexCoord2f(xmin, ymin); glVertex2i(pointX, pointYHeight);
+				glTexCoord2f(xTexCoordMin, yTexCoordMax); glVertex2i(pointX, pointY);
+				glTexCoord2f(xTexCoordMax, yTexCoordMax); glVertex2i(pointXWidth, pointY);
+				glTexCoord2f(xTexCoordMax, yTexCoordMin); glVertex2i(pointXWidth, pointYHeight);
+				glTexCoord2f(xTexCoordMin, yTexCoordMin); glVertex2i(pointX, pointYHeight);
 			glEnd();
-			posX += width;
+			posX += letterWidth;
 		}
 
 		glDisable(GL_TEXTURE_2D);
