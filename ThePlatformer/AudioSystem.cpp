@@ -80,7 +80,8 @@ namespace GameSystems {
 								isLoop = value->value.toNumber();
 						}
 						_sound[name] = GameTools::CSoundManager::getInstance().getSound(fileName);
-						assert(_sound[name] != NULL);
+						if (!_sound[name])
+							GameTools::debugManager::getInstance().dAssert("Sound does not exist");
 						_sound[name]->setLoop(isLoop);
 						_sound[name]->setVolume(volume);
 					}

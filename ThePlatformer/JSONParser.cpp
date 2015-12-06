@@ -11,14 +11,13 @@ namespace GameSystems {
 		}
 	}
 
-
 	JSONParser::~JSONParser()
 	{
 	}
 
 	void JSONParser::initParse(const std::string &filename) {
 		char *jsonFile = readFile(filename), *endptr = NULL;
-		std::cout << "parsing : " << filename << std::endl;
+		assert(jsonFile != NULL);
 		int status = jsonParse(jsonFile, &endptr, &this->m_value, this->m_allocator);
 		if (status != GameTools::JSON_OK) {
 			fprintf(stderr, "%s at %zd\n", GameTools::jsonStrError(status), endptr - jsonFile);
@@ -45,5 +44,4 @@ namespace GameSystems {
 		strcpy_s(cstr, tmp.length() + 1, tmp.c_str());
 		return cstr;
 	}
-
 }

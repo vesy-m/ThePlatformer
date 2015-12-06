@@ -7,6 +7,7 @@
 #include "BaseSystem.h"
 #include "Sound.h"
 #include "SoundManager.h"
+#include "debugManager.h"
 
 namespace GameSystems {
 	typedef std::map<std::string, GameTools::CSound*> SoundMap;

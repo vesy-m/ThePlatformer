@@ -19,6 +19,8 @@
 
 int main()
 {
+	try
+	{
 	//_CrtSetBreakAlloc(5335);
 	GameEngine::Core core = GameEngine::Core();
 	//systems
@@ -32,15 +34,15 @@ int main()
 	core.Add((GameSystems::BaseSystem *)graphics);
 	core.Add((GameSystems::BaseSystem *)audio);
 	GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/start_menu.json");
-	//GameSystems::ObjectFactory::getInstance().LoadLevelFileAsCurrent("./config/levels/level2.json");
-
-	//GameTools::CSound *sound = GameTools::CSoundManager::getInstance().getSound("./assets/audio/dr_wily_stage.ogg");
-	//sound->setVolume(5);
-	//sound->play();
 
 	//start
 	core.Init();
 	core.MainLoop();
+	}
+	catch (std::exception &e)
+	{
+		MessageBox(NULL, e.what(), "Error", 0);
+	}
 	//_CrtDumpMemoryLeaks();
-	return (0);
+    return (0);
 }

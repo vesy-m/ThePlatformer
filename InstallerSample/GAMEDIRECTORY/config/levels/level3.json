@@ -1,0 +1,195 @@
+{
+  "objects" : [
+    {
+      "name" : "debugFps",
+      "x" : 50,
+      "y" : 50,
+      "depth" : 3,
+      "fps": true
+    },
+    {
+      "name": "left_bordur",
+      "x": 0,
+      "y": 0,
+      "scale": 1,
+      "depth": 4,
+      "height": 720,
+      "width": 30,
+      "sprite": "./assets/sprite/left_bordur.png",
+      "vector" : "square",
+      "boxcollider": true
+    },
+    {
+      "name" : "right_bordur",
+      "x" : 1250,
+      "y" : 0,
+      "scale": 1,
+      "depth" : 4,
+      "sprite" : "./assets/sprite/right_bordur.png",
+      "vector" : "square",
+      "height" : 720,
+      "width" : 30,
+      "boxcollider" : true
+    },
+    {
+      "name": "platforme2",
+      "x": 950,
+      "y": 550,
+      "scale": 0.2,
+      "depth": 3,
+      "height": 142,
+      "width": 527,
+      "sprite": "./assets/sprite/platforme1.png",
+      "vector" : "square",
+      "boxcollider": true
+    },
+    {
+      "name": "platforme3",
+      "x": 750,
+      "y": 450,
+      "scale": 0.2,
+      "depth": 3,
+      "height": 142,
+      "width": 527,
+      "sprite": "./assets/sprite/platforme1.png",
+      "vector" : "square",
+      "boxcollider": true
+    },
+    {
+      "name": "platforme4",
+      "x": 550,
+      "y": 350,
+      "scale": 0.2,
+      "depth": 3,
+      "height": 142,
+      "width": 527,
+      "sprite": "./assets/sprite/platforme1.png",
+      "vector" : "square",
+      "boxcollider": true
+    },
+    {
+      "name": "platforme5",
+      "x": 350,
+      "y": 450,
+      "scale": 0.2,
+      "depth": 3,
+      "height": 142,
+      "width": 527,
+      "sprite": "./assets/sprite/platforme1.png",
+      "vector" : "square",
+      "boxcollider": true
+    },
+    {
+      "name": "platforme6",
+      "x": 150,
+      "y": 550,
+      "scale": 0.2,
+      "depth": 3,
+      "height": 142,
+      "width": 527,
+      "sprite": "./assets/sprite/platforme1.png",
+      "vector" : "square",
+      "boxcollider": true
+    },
+    {
+      "name": "platforme7",
+      "x": 750,
+      "y": 250,
+      "scale": 0.2,
+      "depth": 3,
+      "height": 142,
+      "width": 527,
+      "sprite": "./assets/sprite/platforme1.png",
+      "vector" : "square",
+      "boxcollider": true
+    },
+    {
+      "name": "platforme9",
+      "x": 350,
+      "y": 250,
+      "scale": 0.2,
+      "depth": 3,
+      "height": 142,
+      "width": 527,
+      "sprite": "./assets/sprite/platforme1.png",
+      "vector" : "square",
+      "boxcollider": true
+    },
+    {
+      "name": "platforme11",
+      "x": 0,
+      "y": 350,
+      "scale": 0.2,
+      "depth": 4,
+      "height": 142,
+      "width": 527,
+      "sprite": "./assets/sprite/platforme1.png",
+      "vector" : "square",
+      "boxcollider": true
+    },
+    {
+      "name": "platforme12",
+      "x": 1175,
+      "y": 350,
+      "scale": 0.2,
+      "depth": 4,
+      "height": 142,
+      "width": 527,
+      "sprite": "./assets/sprite/platforme1.png",
+      "vector" : "square",
+      "boxcollider": true
+    },
+	{
+      "name" : "grass1",
+      "x" : 15,
+      "y" : 605,
+      "scale": 1,
+      "depth" : 1,
+      "height" : 62,
+      "width" : 32,
+      "sprite" : "./assets/sprite/grass1.png"
+    },
+	{
+      "name" : "grass2",
+      "x" : 70,
+      "y" : 605,
+      "scale": 1,
+      "depth" : 1,
+      "height" : 62,
+      "width" : 32,
+      "sprite" : "./assets/sprite/grass1.png"
+    },
+	{
+      "name" : "grass3",
+      "x" : 1190,
+      "y" : 605,
+      "scale": 1,
+      "depth" : 1,
+      "height" : 62,
+      "width" : 32,
+      "sprite" : "./assets/sprite/grass1.png"
+    },
+	{
+      "name" : "grass4",
+      "x" : 1245,
+      "y" : 605,
+      "scale": 1,
+      "depth" : 1,
+      "height" : 62,
+      "width" : 32,
+      "sprite" : "./assets/sprite/grass1.png"
+    },
+    {
+      "name" : "ground",
+      "x" : 0,
+      "y" : 650,
+      "scale": 0.7,
+      "depth" : 3,
+      "height" : 110,
+      "width" : 1920,
+      "sprite" : "./assets/sprite/ground.png",
+      "vector" : "square",
+      "boxcollider" : true
+    }
+  ]
+}

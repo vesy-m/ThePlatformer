@@ -40,7 +40,8 @@ namespace GameComponents {
 
 	void ButtonComponent::setNav(GameTools::JsonValue &value)
 	{
-		assert(value.getTag() == GameTools::JSON_ARRAY);
+		if (value.getTag() != GameTools::JSON_ARRAY)
+			GameTools::debugManager::getInstance().dAssert("ButtonComponent NAV not an array");
 		int i = -1;
 		for (auto j : value) {
 			assert(i < 4);

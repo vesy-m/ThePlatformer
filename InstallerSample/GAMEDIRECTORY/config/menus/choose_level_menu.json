@@ -1,0 +1,29 @@
+{
+	"button" : {
+		"x" : 540,
+		"y" : 100,
+		"sprite" : "./assets/sprite/menu/levelChooseButton.png",
+	},
+	"button" : {
+		"x" : 289,
+		"y" : 300,
+		"sprite" : "./assets/sprite/menu/level2.png",
+		"level" : "./config/levels/level2.json",
+		"menunav" : [1, -1, 2, -1, 3]
+	},
+	"button" : {
+		"x" : 716,
+		"y" : 300,
+		"sprite" : "./assets/sprite/menu/level3.png",
+		"level" : "./config/levels/level3.json",
+		"menunav" : [0, 1, -1, -1, 3]
+	},
+	"button" : {
+		"x" : 540,
+		"y" : 500,
+		"sprite" : "./assets/sprite/menu/returnButton.png",
+		"menu" : "./config/menus/choose_nb_player_menu.json",
+		"menunav" : [0, 1, 2, 1, 2]
+	},
+
+}

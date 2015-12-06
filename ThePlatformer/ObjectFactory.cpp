@@ -182,7 +182,7 @@ namespace GameSystems {
 		this->currentLevelFileName = filename;
 		systemNeedReinit = true;
 		int i = 1;
-		int add = 1280 / (this->mapPlayersController.size() + 1);
+		int add = 1280 / (int)(this->mapPlayersController.size() + 1);
 		for (std::pair<int, std::string> entry : this->mapPlayersController) {
 			GameSystems::JSONParser fileParser(entry.second);
 			GameObjects::BaseGameObject* newPlayer = parseObject(fileParser.getJSONValue());
@@ -368,7 +368,8 @@ namespace GameSystems {
 	}
 
 	int			ObjectFactory::getPlayerId(GameObjects::BaseGameObject * player) {
-		return find(this->listPlayers.begin(), this->listPlayers.end(), player) - this->listPlayers.begin();
+		int var = (int)(find(this->listPlayers.begin(), this->listPlayers.end(), player) - this->listPlayers.begin());
+		return var;
 	}
 
 

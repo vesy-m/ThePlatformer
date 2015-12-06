@@ -3,7 +3,7 @@
 #include"TimeManager.h"
 
 namespace GameEngine {
-	TimeManager::TimeManager(const std::string &name = "")
+	TimeManager::TimeManager(const std::string &name)
 	{
 		if (name != "") this->m_log_file.open(name);
 		m_last_time = 0;

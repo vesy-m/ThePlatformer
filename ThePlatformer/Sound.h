@@ -3,6 +3,8 @@
 #include <SFML/Audio.hpp>
 #include <string>
 
+#include "debugManager.h"
+
 namespace GameTools
 {
 	class					CSound
