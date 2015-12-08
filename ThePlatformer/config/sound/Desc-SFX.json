@@ -8,7 +8,7 @@
 		},
 		{
 			"name" : "jump",
-			"file" : "./assets/audio/tick_tock_jingle.ogg",
+			"file" : "./assets/audio/Jump.ogg",
 			"volume" : 100,
 			"loop" : 1
 		},

@@ -38,6 +38,7 @@ namespace GameSystems {
 				if (GameSystems::ObjectFactory::getInstance().stateGame == GameSystems::ObjectFactory::gameState::LEVEL) {
 					GameSystems::GraphicsSystem::Camera::getInstance().reInit();
 					GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/pause_menu.json");
+					GameSystems::AudioSystem::_pauseMenu = true;
 					break;
 				}
 			}
@@ -55,6 +56,7 @@ namespace GameSystems {
 				{
 					GameSystems::GraphicsSystem::Camera::getInstance().reInit();
 					GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/pause_menu.json");
+					GameSystems::AudioSystem::_pauseMenu = true;
 					break;
 				}
 			}
@@ -63,6 +65,7 @@ namespace GameSystems {
 				{
 					GameSystems::GraphicsSystem::Camera::getInstance().reInit();
 					GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/pause_menu.json");
+					GameSystems::AudioSystem::_pauseMenu = true;
 					break;
 				}
 			}

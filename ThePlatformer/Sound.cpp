@@ -22,9 +22,16 @@ namespace GameTools
 		_sound.setLoop(loop);
 	}
 
-	void CSound::setVolume(float volume)
+	void CSound::setVolume(float volume, bool save)
 	{
+		if (save)
+			_volume = volume;
 		_sound.setVolume(volume);
+	}
+
+	float CSound::getVolume() const
+	{
+		return _volume;
 	}
 
 	void CSound::play()

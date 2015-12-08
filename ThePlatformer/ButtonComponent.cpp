@@ -1,4 +1,5 @@
 #include "ButtonComponent.h"
+#include "AudioSystem.h"
 
 namespace GameComponents {
 
@@ -113,12 +114,14 @@ namespace GameComponents {
 			break;
 		case GameMessage::START_MENU:
 			if (actionName == "resumeToLevel") {
+				GameSystems::AudioSystem::_pauseMenu = false;
 				this->execAction();
 			}
 			break;
 		case GameMessage::ECHAP_MENU:
 			if (actionName == "resumeToLevel") {
 				this->execAction();
+				GameSystems::AudioSystem::_pauseMenu = false;
 			} else if (actionName == "backPlayer") {
 				this->backPlayer();
 			}
@@ -209,6 +212,8 @@ namespace GameComponents {
 
 	void ButtonComponent::execAction()
 	{
+		if (this->actionName == "resumeToLevel")
+			GameSystems::AudioSystem::_pauseMenu = false;
 		this->typeMap[this->buttonType](this);
 	}
 

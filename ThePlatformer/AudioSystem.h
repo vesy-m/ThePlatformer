@@ -24,9 +24,12 @@ namespace GameSystems {
 
 		static bool				_menuVictory;
 		static bool				_pause;
+		static bool				_pauseMenu;
 	private:
 		SoundMap				_sound;
 		bool					isPaused;
+		bool					_isAmbiance;
+		bool					_isMenu;
 	};
 }
 
