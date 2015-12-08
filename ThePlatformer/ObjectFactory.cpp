@@ -185,6 +185,7 @@ namespace GameSystems {
 				new GameComponents::ControllerInputComponent(newPlayer, "./config/controllers/input_controller1.json", entry.first);
 			}
 			this->currentLevel.putObjectDepthOrdered(newPlayer);
+			std::cout << "Add: " << newPlayer->getType() << std::endl;
 			listPlayers.push_back(newPlayer);
 		}
 	}
@@ -313,6 +314,7 @@ namespace GameSystems {
 
 	void ObjectFactory::clearPlayers() {
 		this->mapPlayersController.clear();
+		this->listPlayers.clear();
 		this->nbPlayerReady = 0;
 	}
 

@@ -105,8 +105,14 @@ namespace GameComponents {
 		glm::vec2 aimAxis = glm::vec2(aimAxisX, aimAxisY);
 		GameComponents::SpriteComponent *sprite = reinterpret_cast<GameComponents::SpriteComponent*>(getComposition()->getComponent(GameComponents::SPRITE));
 
-		if ((sprite->revertX && aimAxisX > 0.0f && aimAxisX <= 0.005f) ||
-			(!sprite->revertX && aimAxisX < 0.0f && aimAxisX >= -0.005f)) aimAxisX *= -1;
+		//std::cout << "AimAxis X: " << aimAxisX << std::endl;
+
+		if ((sprite->revertX && aimAxisX > 0.0f && aimAxisX <= 0.05f) ||
+			(!sprite->revertX && aimAxisX < 0.0f && aimAxisX >= -0.05f)) {
+			//std::cout << "Direction Change" << std::endl;
+			aimAxisX *= -1;
+		} else
+			//std::cout << "XXXX" << std::endl;
 
 		if (aimAxisX == 0.0f && aimAxisY == 0.0f) direction = aimAxis;
 		else direction = glm::normalize(aimAxis);
