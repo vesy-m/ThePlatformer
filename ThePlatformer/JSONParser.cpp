@@ -17,11 +17,12 @@ namespace GameSystems {
 
 	void JSONParser::initParse(const std::string &filename) {
 		char *jsonFile = readFile(filename), *endptr = NULL;
-		assert(jsonFile != NULL);
+		if (jsonFile == NULL) {
+			GameTools::debugManager::getInstance().dAssert("json file unreadable : " + filename);
+		}
 		int status = jsonParse(jsonFile, &endptr, &this->m_value, this->m_allocator);
 		if (status != GameTools::JSON_OK) {
-			fprintf(stderr, "%s at %zd\n", GameTools::jsonStrError(status), endptr - jsonFile);
-			exit(EXIT_FAILURE);
+			GameTools::debugManager::getInstance().dAssert(GameTools::jsonStrError(status));
 		}
 	}
 

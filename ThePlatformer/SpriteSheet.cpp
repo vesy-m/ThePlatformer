@@ -34,6 +34,9 @@ namespace GameTools {
 					this->texture = TextureManager::getInstance().getTexture(i->value.toString());
 				}
 				if (std::string("anim").compare(i->key) == 0) {
+					if (i->value.getTag() != GameTools::JSON_ARRAY) {
+						GameTools::debugManager::getInstance().dAssert("anim is not an array");
+					}
 					for (auto an : i->value) {
 						SpriteAnimation anim = SpriteAnimation(an->value);
 						this->anims[anim.getName()] = anim;
@@ -66,7 +69,12 @@ namespace GameTools {
 	}
 
 	const SpriteAnimation &SpriteSheet::getAnim(const std::string & animName) {
-		return this->anims[animName];
+		std::map<std::string, SpriteAnimation>::iterator it = this->anims.find(animName);
+		if (it == this->anims.end())
+		{
+			GameTools::debugManager::getInstance().dAssert("anim name doesn't exist");
+		}
+		return it->second;
 	}
 
 	Texture		*SpriteSheet::getTexture()
