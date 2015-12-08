@@ -1,0 +1,28 @@
+{
+	"SFX" : [
+		{
+			"name" : "walk",
+			"file" : "./assets/audio/patriarch.ogg",
+			"volume" : 100,
+			"loop" : 0
+		},
+		{
+			"name" : "jump",
+			"file" : "./assets/audio/tick_tock_jingle.ogg",
+			"volume" : 100,
+			"loop" : 1
+		},
+		{
+			"name" : "fire",
+			"file" : "./assets/audio/tick_tock_jingle.ogg",
+			"volume" : 100,
+			"loop" : 0
+		},
+		{
+			"name" : "damage",
+			"file" : "./assets/audio/Death.ogg",
+			"volume" : 100,
+			"loop" : 0
+		}
+	]
+}

@@ -64,7 +64,9 @@ namespace GameSystems {
 		void returnPrevMenuOrResumeLevel();
 		void winTheGame(std::string);
 		void checkWinCondition();
+		int getPlayerId(GameObjects::BaseGameObject * player);
 		GameObjects::BaseGameObject *isPLayersAlive();
+		int idWinPlayer;
 		//----
 	private:
 		ObjectFactory();

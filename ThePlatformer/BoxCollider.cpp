@@ -1,4 +1,5 @@
 #include "BoxCollider.h"
+#include "AudioSystem.h"
 
 namespace GameComponents {
 	BoxCollider::BoxCollider(GameObjects::BaseGameObject *object) : ColliderComponent(object)
@@ -127,7 +128,8 @@ namespace GameComponents {
 					if (object->getComponent(GameComponents::COMPONENT_TYPE::COLLIDER)->getType() == COMPONENT_TYPE::BOX_COLLIDER)
 					{
 						BoxCollider *otherObject = dynamic_cast<BoxCollider*>(object->getComponent(GameComponents::COMPONENT_TYPE::COLLIDER));
-						assert(otherObject != NULL);
+						if (!otherObject)
+							GameTools::debugManager::getInstance().dAssert("BoxCollider otherObject is NULL");
 						manifold->A = this;
 						manifold->B = otherObject;
 						if (this->CollideWithBox(manifold))

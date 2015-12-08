@@ -1,0 +1,21 @@
+{
+	"button" : {
+		"x" : 150,
+		"y" : 240,
+		"sprite" : "./assets/sprite/menu/reallyQuitTheGame.png"
+	},
+	"button" : {
+		"x" : 400,
+		"y" : 480,
+		"sprite" : "./assets/sprite/menu/NoButton.png",
+		"function" : "prevMenu",
+		"menunav" : [1, -1, 2, -1, -1]
+	},
+	"button" : {
+		"x" : 800,
+		"y" : 480,
+		"sprite" : "./assets/sprite/menu/YesButton.png",
+		"function" : "quitGame",
+		"menunav" : [0, 1, -1, -1, -1]
+	}
+}

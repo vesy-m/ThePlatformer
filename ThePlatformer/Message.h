@@ -35,6 +35,8 @@ namespace GameMessage {
 		ECHAP_MENU,
 		B_MENU,
 		AIM,
+		PLAY_SOUND,
+		STOP_SOUND
 	};
 
 	class Message

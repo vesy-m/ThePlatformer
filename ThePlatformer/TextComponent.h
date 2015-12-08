@@ -18,6 +18,7 @@ namespace GameComponents {
 		virtual ~TextComponent();
 		virtual COMPONENT_TYPE getType();
 		virtual void Update(double);
+		void drawText(std::string str, int posX, int posY, int size = 5);
 		virtual void Update();
 		virtual void Init();
 		virtual void sendMessage(GameMessage::Message*);

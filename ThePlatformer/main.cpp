@@ -11,27 +11,38 @@
 #include "SpriteSheet.h"
 #include "ObjectFactory.h"
 #include "SoundManager.h"
+#include "AudioSystem.h"
+//#define _CRTDBG_MAP_ALLOC
+//#include <stdlib.h>
+//#include <crtdbg.h>
+
 
 int main()
 {
+	try
+	{
+	//_CrtSetBreakAlloc(5335);
 	GameEngine::Core core = GameEngine::Core();
 	//systems
 	GameSystems::WindowInputSytem *winInput = new GameSystems::WindowInputSytem();
 	GameSystems::GraphicsSystem *graphics = new GameSystems::GraphicsSystem();
 	GameSystems::PhysicsSystem *physics = new GameSystems::PhysicsSystem();
+	GameSystems::AudioSystem *audio = new GameSystems::AudioSystem();
 
 	core.Add((GameSystems::BaseSystem *)winInput);
 	core.Add((GameSystems::BaseSystem *)physics);
 	core.Add((GameSystems::BaseSystem *)graphics);
-	GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/main_menu.json");
-	//GameSystems::ObjectFactory::getInstance().LoadLevelFileAsCurrent("./config/levels/level2.json");
-
-	GameTools::CSound *sound = GameTools::CSoundManager::getInstance().getSound("./assets/audio/dr_wily_stage.ogg");
-	sound->setVolume(5);
-	sound->play();
+	core.Add((GameSystems::BaseSystem *)audio);
+	GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/start_menu.json");
 
 	//start
 	core.Init();
 	core.MainLoop();
+	}
+	catch (std::exception &e)
+	{
+		MessageBox(NULL, e.what(), "Error", 0);
+	}
+	//_CrtDumpMemoryLeaks();
     return (0);
 }

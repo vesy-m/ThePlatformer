@@ -44,8 +44,7 @@ namespace GameSystems {
 		for each (GameObjects::BaseGameObject* object in listObjects)
 		{
 			GameComponents::BaseComponent* component = object->getComponent(GameComponents::COMPONENT_TYPE::BUTTON);
-			if (component) 
-				component->Update(dt);
+			if (component) component->Update(dt);
 		}
 		glMatrixMode(GL_PROJECTION);
 		glPopMatrix();

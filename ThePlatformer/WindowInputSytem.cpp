@@ -1,4 +1,5 @@
 #include "WindowInputSytem.h"
+#include "AudioSystem.h"
 
 namespace GameSystems {
 	bool WindowInputSytem::fullscreen = false;
@@ -12,14 +13,12 @@ namespace GameSystems {
 
 	WindowInputSytem::~WindowInputSytem()
 	{
-
 	}
 	
 	int WindowInputSytem::Update(double dt, std::list<GameObjects::BaseGameObject*>& listObjects)
 	{
 		sf::Event event;
 		bool changeSize = false;
-
 
 		while (window->pollEvent(event))
 		{
@@ -35,11 +34,16 @@ namespace GameSystems {
 				std::cout << "lost focus" << std::endl;
 				sf::WindowHandle handle = this->window->getSystemHandle();
 				ShowWindow(handle, SW_MINIMIZE);
+				GameSystems::AudioSystem::_pause = true;
 				if (GameSystems::ObjectFactory::getInstance().stateGame == GameSystems::ObjectFactory::gameState::LEVEL) {
 					GameSystems::GraphicsSystem::Camera::getInstance().reInit();
 					GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/pause_menu.json");
+					GameSystems::AudioSystem::_pauseMenu = true;
 					break;
 				}
+			}
+			else if (event.type == sf::Event::GainedFocus) {
+				GameSystems::AudioSystem::_pause = false;
 			}
 			else if (event.type == sf::Event::Resized)
 			{
@@ -52,6 +56,7 @@ namespace GameSystems {
 				{
 					GameSystems::GraphicsSystem::Camera::getInstance().reInit();
 					GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/pause_menu.json");
+					GameSystems::AudioSystem::_pauseMenu = true;
 					break;
 				}
 			}
@@ -60,6 +65,7 @@ namespace GameSystems {
 				{
 					GameSystems::GraphicsSystem::Camera::getInstance().reInit();
 					GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/pause_menu.json");
+					GameSystems::AudioSystem::_pauseMenu = true;
 					break;
 				}
 			}
@@ -106,6 +112,5 @@ namespace GameSystems {
 	//have to receive message in case of change in window like size...
 	void WindowInputSytem::SendMessage()
 	{
-
 	}
 }

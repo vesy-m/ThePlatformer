@@ -13,6 +13,8 @@
 #include "ButtonComponent.h"
 #include "MouseClickComponent.h"
 #include "FireBallComponent.h"
+#include "AudioComponent.h"
+#include "AudioSystem.h"
 
 namespace GameSystems {
 	ObjectFactory::ObjectFactory()
@@ -57,6 +59,10 @@ namespace GameSystems {
 			else if (std::string(it->key) == "keyboard") new GameComponents::KeyboardInputComponent(ret, it->value.toString());
 			else if (std::string(it->key) == "vector") new GameComponents::VectorDebugComponent(ret, it->value.toString());
 			else if (std::string(it->key) == "fire_ball") new GameComponents::FireBallComponent(ret);
+			else if (std::string(it->key) == "sfx")
+			{
+				new GameComponents::AudioComponent(ret, it->value.toString());
+			}
 			else if (std::string(it->key) == "level" || std::string(it->key) == "menu" || std::string(it->key) == "function") {
 				buttonComponent = new GameComponents::ButtonComponent(ret, std::string(it->key), it->value.toString());
 				if (buttonComponent->buttonState == GameComponents::ButtonComponent::ButtonState::PLAYERCREATOR) {
@@ -175,6 +181,8 @@ namespace GameSystems {
 		this->stateGame = gameState::LEVEL;
 		this->currentLevelFileName = filename;
 		systemNeedReinit = true;
+		int i = 1;
+		int add = 1280 / (int)(this->mapPlayersController.size() + 1);
 		for (std::pair<int, std::string> entry : this->mapPlayersController) {
 			GameSystems::JSONParser fileParser(entry.second);
 			GameObjects::BaseGameObject* newPlayer = parseObject(fileParser.getJSONValue());
@@ -184,9 +192,12 @@ namespace GameSystems {
 			else {
 				new GameComponents::ControllerInputComponent(newPlayer, "./config/controllers/input_controller1.json", entry.first);
 			}
+			newPlayer->setY(400);
+			newPlayer->setX(add * i);
 			this->currentLevel.putObjectDepthOrdered(newPlayer);
 			std::cout << "Add: " << newPlayer->getType() << std::endl;
 			listPlayers.push_back(newPlayer);
+			i++;
 		}
 	}
 
@@ -343,17 +354,26 @@ namespace GameSystems {
 
 		if (winPlayer == nullptr)
 			return;
-	
+		
+		this->idWinPlayer = this->getPlayerId(winPlayer);
 		listPlayers.clear();
 		if (winPlayer->getName().find("megaman") != std::string::npos) {
 			GameSystems::GraphicsSystem::Camera::getInstance().reInit();
 			GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/megaman_win_menu.json");
+			GameSystems::AudioSystem::_menuVictory = true;
 		}
 		else {
 			GameSystems::GraphicsSystem::Camera::getInstance().reInit();
 			GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/metalslug_win_menu.json");
+			GameSystems::AudioSystem::_menuVictory = true;
 		}
 	}
+
+	int			ObjectFactory::getPlayerId(GameObjects::BaseGameObject * player) {
+		int var = (int)(find(this->listPlayers.begin(), this->listPlayers.end(), player) - this->listPlayers.begin());
+		return var;
+	}
+
 
 	GameObjects::BaseGameObject * ObjectFactory::isPLayersAlive()
 	{

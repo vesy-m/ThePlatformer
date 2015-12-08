@@ -1,4 +1,5 @@
 #include "ButtonComponent.h"
+#include "AudioSystem.h"
 
 namespace GameComponents {
 
@@ -40,7 +41,8 @@ namespace GameComponents {
 
 	void ButtonComponent::setNav(GameTools::JsonValue &value)
 	{
-		assert(value.getTag() == GameTools::JSON_ARRAY);
+		if (value.getTag() != GameTools::JSON_ARRAY)
+			GameTools::debugManager::getInstance().dAssert("ButtonComponent NAV not an array");
 		int i = -1;
 		for (auto j : value) {
 			assert(i < 4);
@@ -112,12 +114,14 @@ namespace GameComponents {
 			break;
 		case GameMessage::START_MENU:
 			if (actionName == "resumeToLevel") {
+				GameSystems::AudioSystem::_pauseMenu = false;
 				this->execAction();
 			}
 			break;
 		case GameMessage::ECHAP_MENU:
 			if (actionName == "resumeToLevel") {
 				this->execAction();
+				GameSystems::AudioSystem::_pauseMenu = false;
 			} else if (actionName == "backPlayer") {
 				this->backPlayer();
 			}
@@ -208,6 +212,8 @@ namespace GameComponents {
 
 	void ButtonComponent::execAction()
 	{
+		if (this->actionName == "resumeToLevel")
+			GameSystems::AudioSystem::_pauseMenu = false;
 		this->typeMap[this->buttonType](this);
 	}
 

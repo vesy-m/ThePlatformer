@@ -30,4 +30,15 @@ namespace GameTools
 		}
 		return &_sound.at(fileName);
 	}
+
+	void CSoundManager::stopAllExceptAmbiance(std::string const ambiance, std::string const victory)
+	{
+		std::map<std::string, CSound>::iterator it;
+
+		for (it = _sound.begin(); it != _sound.end(); ++it)
+		{
+			if (it->first != victory && it->first != ambiance)
+				it->second.stop();
+		}
+	}
 }
