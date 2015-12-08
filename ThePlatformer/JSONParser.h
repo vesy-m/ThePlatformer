@@ -3,6 +3,7 @@
 #include "gason.h"
 #include <string>
 #include <iostream>
+#include "debugManager.h"
 
 namespace GameSystems {
 	class JSONParser
