@@ -92,10 +92,6 @@ namespace GameComponents {
 			else if (newScale <= 1.0) GameTools::debugManager::getInstance().scaleNum = 0.01f;
 			this->composition->setScale(newScale + GameTools::debugManager::getInstance().scaleNum);
 		}
-		/*
-		else if (!std::string("megaman2").compare(this->composition->getName())) {
-			glColor3f((GLfloat)1.0, (GLfloat)0.3, (GLfloat)0.3);
-		}*/
 
 		glEnable(GL_TEXTURE_2D);
 
