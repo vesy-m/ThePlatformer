@@ -2,9 +2,9 @@
 	"SFX" : [
 		{
 			"name" : "walk",
-			"file" : "./assets/audio/patriarch.ogg",
+			"file" : "./assets/audio/Walk.ogg",
 			"volume" : 100,
-			"loop" : 0
+			"loop" : 1
 		},
 		{
 			"name" : "jump",
