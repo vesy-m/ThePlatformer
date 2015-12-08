@@ -212,7 +212,7 @@ namespace GameComponents {
 
 	void ButtonComponent::execAction()
 	{
-		if (this->actionName == "resumeToLevel")
+		if (this->actionName == "resumeToLevel" || this->actionName == "./config/menus/pause_return_main_menu.json")
 			GameSystems::AudioSystem::_pauseMenu = false;
 		this->typeMap[this->buttonType](this);
 	}
