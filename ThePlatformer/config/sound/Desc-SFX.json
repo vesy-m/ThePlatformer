@@ -10,11 +10,11 @@
 			"name" : "jump",
 			"file" : "./assets/audio/Jump.ogg",
 			"volume" : 100,
-			"loop" : 1
+			"loop" : 0
 		},
 		{
 			"name" : "fire",
-			"file" : "./assets/audio/tick_tock_jingle.ogg",
+			"file" : "./assets/audio/Fire.ogg",
 			"volume" : 100,
 			"loop" : 0
 		},
