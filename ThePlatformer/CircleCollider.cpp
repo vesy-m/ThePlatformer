@@ -83,7 +83,6 @@ namespace GameComponents {
 
 		glm::vec2 closestPoint = glm::vec2(Clamp(A->centerPos.x, B->minPoint.x, B->maxPoint.x),
 										   Clamp(A->centerPos.y, B->minPoint.y, B->maxPoint.y));
-		//glm::vec2 closestPoint = ClampTest(A->centerPos, B->minPoint, B->maxPoint);
 
 		float x_extent = (A->maxPoint.x - A->minPoint.x) / 2;
 		float y_extent = (A->maxPoint.y - A->minPoint.y) / 2;
@@ -92,8 +91,6 @@ namespace GameComponents {
 
 		glm::vec2 fakeCenterPos = A->centerPos;
 
-		// Circle is inside the AABB, so we need to clamp the circle's center
-		// to the closest edge
 		if (A->centerPos == closestPoint)
 		{
 			std::cout << "Clamp" << std::endl;
@@ -103,7 +100,6 @@ namespace GameComponents {
 			fakeCenterPos += glm::normalize(-A->velocity) * A->radius;
 		}
 
-		// Calculate the distance between the circle's center and this closest point
 		glm::vec2 fakeDistance = fakeCenterPos - closestPoint;
 
 
@@ -127,13 +123,8 @@ namespace GameComponents {
 
 		glm::vec2 distance = A->centerPos - closestPoint;
 
-
-		// If the distance is less than the circle's radius, an intersection occurs
-		//float distanceSquared = (distance.x * distance.x) + (distance.y * distance.y);
 		if (glm::length(distance) <= A->radius)
 		{
-			//std::cout << "Collision -> Distance = " << distance.x << " / " << distance.y << std::endl;
-
 			if (dir == 0 || dir == 2) {
 				manifold->normal = compass[dir];
 				if (dir == 0)
@@ -145,14 +136,6 @@ namespace GameComponents {
 				manifold->normal = compass[dir];
 				manifold->penetration = (A->radius - std::abs(distance.x));
 			}
-
-			// Collision normal needs to be flipped to point outside if circle was
-			// inside the AABB
-			/*if (inside) manifold->normal = glm::normalize(-distance);
-			else manifold->normal = glm::normalize(distance);
-
-			manifold->penetration = A->radius - std::abs(distance);*/
-
 			return true;
 		}
 		return false;

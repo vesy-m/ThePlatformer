@@ -105,20 +105,13 @@ namespace GameComponents {
 		glm::vec2 aimAxis = glm::vec2(aimAxisX, aimAxisY);
 		GameComponents::SpriteComponent *sprite = reinterpret_cast<GameComponents::SpriteComponent*>(getComposition()->getComponent(GameComponents::SPRITE));
 
-		//std::cout << "AimAxis X: " << aimAxisX << std::endl;
-
 		if ((sprite->revertX && aimAxisX > 0.0f && aimAxisX <= 0.05f) ||
 			(!sprite->revertX && aimAxisX < 0.0f && aimAxisX >= -0.05f)) {
-			//std::cout << "Direction Change" << std::endl;
 			aimAxisX *= -1;
-		} else
-			//std::cout << "XXXX" << std::endl;
+		}
 
 		if (aimAxisX == 0.0f && aimAxisY == 0.0f) direction = aimAxis;
 		else direction = glm::normalize(aimAxis);
-
-
-		//std::cout << "aimAxisX x: " << aimAxisX << "\t" << "aimAxisY y: " << aimAxisY << std::endl;
 
 		this->composition->sendMessage(new GameMessage::AimMessage(direction));
 	}
@@ -134,7 +127,6 @@ namespace GameComponents {
 			aimAxisY = event.joystickMove.position;
 			return false;
 		}
-		//else if (event.joystickMove.axis == sf::Joystick::U && button >= 60 && button <= 63) return true;
 		else if (event.joystickMove.axis == sf::Joystick::Z && (button == 70 || button == 71)) return true;
 		else return false;
 	}
@@ -169,7 +161,6 @@ namespace GameComponents {
 
 	void ControllerInputComponent::Init()
 	{
-		//controllerNumber = 0;
 		aimAxisX = 0.0;
 		aimAxisY = 0.0;
 		std::string extension = filename.substr(filename.find_last_of(".") + 1);
@@ -184,7 +175,6 @@ namespace GameComponents {
 		case GameTools::JSON_OBJECT:
 			for (auto i : o) {
 				printf("%s = ", i->key);
-				//if (std::string(i->key) == "controller") controllerNumber = (int)i->value.toNumber();
 				if (std::string(i->key) == "cheat_code") ParseCheatCodeFile(i->value.toString());
 				else {
 					INPUT_TYPE inputKey;
