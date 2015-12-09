@@ -5,7 +5,7 @@
 #include "BaseSystem.h"
 #include "TimeManager.h"
 
-#define FRAME_PER_SECOND 35
+#define FRAME_PER_SECOND 60
 namespace GameEngine {
 	class Core {
 	public:

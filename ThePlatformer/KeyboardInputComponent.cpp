@@ -19,7 +19,8 @@ namespace GameComponents {
 		for (auto it = this->keyboardMap.begin(); it != this->keyboardMap.end(); ++it)
 		{
 			if (event.type == sf::Event::KeyPressed && event.key.code == it->second) {
-				inputState.at(it->first) = true;
+				if (it->first != INPUT_TYPE::FIRE)
+					inputState.at(it->first) = true;
 			}
 			else if (event.type == sf::Event::KeyReleased)
 			{
@@ -44,7 +45,8 @@ namespace GameComponents {
 			}
 			else if (event.type == sf::Event::MouseButtonPressed)
 			{
-				if (event.mouseButton.button == it->second) inputState.at(it->first) = true;
+				if (event.mouseButton.button == it->second && it->first == INPUT_TYPE::FIRE)
+					inputState.at(it->first) = true;
 			}
 			else if (event.type == sf::Event::MouseButtonReleased)
 			{
@@ -75,9 +77,6 @@ namespace GameComponents {
 		glm::vec2 direction = glm::vec2(mouseX - centerX, mouseY - centerY);
 
 		if (direction.x != 0.0f || direction.y != 0.0f) direction = glm::normalize(direction);
-
-		//std::cout << "mouseX x: " << mouseX << "\t" << "mouseY y: " << mouseY << std::endl;
-		//std::cout << "direction x: " << direction.x << "\t" << "direction y: " << direction.y << std::endl;
 
 		this->composition->sendMessage(new GameMessage::AimMessage(direction));
 	}
@@ -129,8 +128,6 @@ namespace GameComponents {
 			mouseX += GameSystems::GraphicsSystem::Camera::getInstance().cameraStartX;
 			mouseY += GameSystems::GraphicsSystem::Camera::getInstance().cameraStartY;
 		}
-
-		//std::cout << "mouseX x: " << mouseX << "\t" << "mouseY y: " << mouseY << std::endl;
 	}
 
 	void KeyboardInputComponent::sendMessage(GameMessage::Message *message)

@@ -22,7 +22,6 @@ namespace GameComponents {
 			GameMessage::AimMessage *aimMessage = dynamic_cast<GameMessage::AimMessage*>(message);
 			
 			direction = aimMessage->drawPoint;
-			//std::cout << "Test" << std::endl;
 			break;
 		}
 	}
