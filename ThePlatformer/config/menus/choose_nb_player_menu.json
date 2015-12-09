@@ -28,5 +28,5 @@
 		"y" : 670,
 		"sprite" : "./assets/sprite/menu/moveInSelectPlayer.png",
 		"function" : "backPlayer"
-	},
+	}
 }

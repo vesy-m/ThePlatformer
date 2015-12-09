@@ -89,7 +89,6 @@
       "width" : 100,
       "vector" : true,
       "boxcollider" : true
-    },
-
+    }
   ]
 }
