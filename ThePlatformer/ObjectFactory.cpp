@@ -305,9 +305,11 @@ namespace GameSystems {
 		for (GameObjects::BaseGameObject *button : this->currentMenu.getObjects()) {
 			if (i == idButton) {
 				GameComponents::ButtonComponent * comp = (GameComponents::ButtonComponent *)button->getComponent(GameComponents::COMPONENT_TYPE::BUTTON);
-				comp->toggleSelected(true);
-				std::cout << i << " id selected" << std::endl;
-				break;
+				if (comp) {
+					comp->toggleSelected(true);
+					std::cout << i << " id selected" << std::endl;
+					break;
+				}
 			}
 			i++;
 		}
