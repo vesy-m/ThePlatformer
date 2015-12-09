@@ -74,28 +74,34 @@ namespace GameComponents
 		case GameMessage::LEFT:
 			if (std::string("walk").compare(_currentSFX) != 0 && std::string("jump").compare(_currentSFX) != 0)
 			{
-				if (_sound[_currentSFX])
-					_sound[_currentSFX]->stop();
 				_currentSFX = "walk";
 				if (_sound[_currentSFX])
 					_sound[_currentSFX]->play();
 			}
 			break;
+		case GameMessage::LEFT_RELEASED:
+		{
+			if (_sound["walk"])
+				_sound["walk"]->stop();
+			break;
+		}
 		case GameMessage::RIGHT:
 			if (std::string("walk").compare(_currentSFX) != 0 && std::string("jump").compare(_currentSFX) != 0)
 			{
-				if (_sound[_currentSFX])
-					_sound[_currentSFX]->stop();
 				_currentSFX = "walk";
 				if (_sound[_currentSFX])
 					_sound[_currentSFX]->play();
 			}
 			break;
+		case GameMessage::RIGHT_RELEASED:
+		{
+			if (_sound["walk"])
+				_sound["walk"]->stop();
+			break;
+		}
 		case GameMessage::JUMP:
  			if (std::string("jump").compare(_currentSFX) != 0)
 			{
-				if (_sound[_currentSFX])
-					_sound[_currentSFX]->stop();
 				_currentSFX = "jump";
 				if (_sound[_currentSFX])
 					_sound[_currentSFX]->play();
@@ -104,14 +110,12 @@ namespace GameComponents
 		case GameMessage::STAND_ANIMATION:
 			if (std::string("default").compare(_currentSFX) != 0)
 			{
-				if (_sound[_currentSFX])
-					_sound[_currentSFX]->stop();
+				if (_sound["jump"])
+					_sound["jump"]->stop();
 				_currentSFX = "default";
 			}
 			break;
 		case GameMessage::FIRE:
-			if (_sound[_currentSFX])
-				_sound[_currentSFX]->stop();
 			_currentSFX = "fire";
 			_fire = 50;
 			_damage = 0;
@@ -119,8 +123,6 @@ namespace GameComponents
 				_sound[_currentSFX]->play();
 			break;
 		case GameMessage::DAMAGE:
-			if (_sound[_currentSFX])
-				_sound[_currentSFX]->stop();
 			_currentSFX = "damage";
 			_fire = 0;
 			_damage = 50;

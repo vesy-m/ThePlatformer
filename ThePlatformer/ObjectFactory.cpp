@@ -195,6 +195,7 @@ namespace GameSystems {
 			newPlayer->setY(400);
 			newPlayer->setX(add * i);
 			this->currentLevel.putObjectDepthOrdered(newPlayer);
+			std::cout << "Add: " << newPlayer->getType() << std::endl;
 			listPlayers.push_back(newPlayer);
 			i++;
 		}
@@ -326,6 +327,7 @@ namespace GameSystems {
 
 	void ObjectFactory::clearPlayers() {
 		this->mapPlayersController.clear();
+		this->listPlayers.clear();
 		this->nbPlayerReady = 0;
 	}
 

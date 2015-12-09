@@ -18,42 +18,32 @@ namespace GameComponents {
 
 	bool BoxCollider::CollideWithBox(Manifold *manifold)
 	{
-		// Setup a couple pointers to each object
 		BoxCollider *A = (BoxCollider*)manifold->A;
 		BoxCollider *B = (BoxCollider*)manifold->B;
 
 		glm::vec2 positionA = glm::vec2(manifold->A->getComposition()->getX(), manifold->A->getComposition()->getY());
 		glm::vec2 positionB = glm::vec2(manifold->B->getComposition()->getX(), manifold->B->getComposition()->getY());
 
-		// Vector from A to B
 		float x = (B->minPoint.x + (B->composition->getWidth() / 2)) - (A->minPoint.x + (A->composition->getWidth() / 2));
 		float y = (B->minPoint.y + B->composition->getHeight() / 2) - (A->minPoint.y + A->composition->getHeight() / 2);
 		glm::vec2 n = glm::vec2(x, y);
 
-		// Calculate half extents along x axis for each object
 		float a_extent = (A->maxPoint.x - A->minPoint.x) / 2;
 		float b_extent = (B->maxPoint.x - B->minPoint.x) / 2;
 
-		// Calculate overlap on x axis
 		float x_overlap = a_extent + b_extent - abs(n.x);
 
-		// SAT test on x axis
 		if (x_overlap > 0)
 		{
-			// Calculate half extents along x axis for each object
 			float a_extent = (A->maxPoint.y - A->minPoint.y) / 2;
 			float b_extent = (B->maxPoint.y - B->minPoint.y) / 2;
 
-			// Calculate overlap on y axis
 			float y_overlap = a_extent + b_extent - abs(n.y);
 
-			// SAT test on y axis
 			if (y_overlap >= 0)
 			{
-				// Find out which axis is axis of least penetration
 				if (x_overlap < y_overlap)
 				{
-					// Point towards B knowing that n points from A to B
 					if (n.x < 0)
 					{
 						manifold->normal = glm::vec2(1, 0);
@@ -69,7 +59,6 @@ namespace GameComponents {
 				}
 				else
 				{
-					// Point toward B knowing that n points from A to B
 					if (n.y < 0)
 					{
 						manifold->normal = glm::vec2(0, 1);
