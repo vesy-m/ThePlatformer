@@ -8,7 +8,7 @@
       "mass" : 20,
       "projectile_type" : "tennis",
       "sprite" : "./config/sprite_sheets/desc-megaman.json",
-	  "aim" : "./assets/sprite/aim_reticle.png",
+	"aim" : "./assets/sprite/aim_reticle.png",
       "body" : true,
       "boxcollider" : true,
       "vector" : "square",

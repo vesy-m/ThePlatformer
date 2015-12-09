@@ -22,7 +22,7 @@ namespace GameTools {
 		void activateText();
 		bool isActivateGraphic();
 		void activateGraphic();
-		void displayDebug(const std::string &, DEBUG_TYPE);
+		void displayDebug(const std::string&, DEBUG_TYPE);
 		void disableGraphic();
 		void dAssert(std::string const &);
 

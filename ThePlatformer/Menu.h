@@ -12,7 +12,7 @@ public:
 	std::string prevMenu;
 	int prevState;
 	std::list<GameObjects::BaseGameObject*>& getObjects();
-	void addButton(GameObjects::BaseGameObject *button);
+	void addButton(GameObjects::BaseGameObject*);
 private:
 	std::list<GameObjects::BaseGameObject *> listButton;
 };

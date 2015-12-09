@@ -6,9 +6,8 @@
 namespace GameSystems {
 	JSONParser::JSONParser(const std::string &filename = "")
 	{
-		if (filename != "") {
+		if (filename != "")
 			this->initParse(filename);
-		}
 	}
 
 	JSONParser::~JSONParser()
@@ -17,13 +16,11 @@ namespace GameSystems {
 
 	void JSONParser::initParse(const std::string &filename) {
 		char *jsonFile = readFile(filename), *endptr = NULL;
-		if (jsonFile == NULL) {
+		if (jsonFile == NULL)
 			GameTools::debugManager::getInstance().dAssert("json file unreadable : " + filename);
-		}
 		int status = jsonParse(jsonFile, &endptr, &this->m_value, this->m_allocator);
-		if (status != GameTools::JSON_OK) {
+		if (status != GameTools::JSON_OK)
 			GameTools::debugManager::getInstance().dAssert(GameTools::jsonStrError(status));
-		}
 	}
 
 	GameTools::JsonValue &JSONParser::getJSONValue(void) {

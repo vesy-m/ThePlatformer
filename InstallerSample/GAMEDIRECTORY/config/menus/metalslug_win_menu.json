@@ -12,11 +12,15 @@
 		"menunav" : [1, -1, -1, -1, 2]
 	},
 	"button" : {
+		"x" : 600,
+		"y" : 110,
+		"fps": true
+	},
+	"button" : {
 		"x" : 540,
 		"y" : 550,
 		"sprite" : "./assets/sprite/menu/returnMenuButton.png",
-		"menu" : "./config/menus/main_menu.json",
+		"menu" : "./config/menus/metalslug_win_return_main_menu.json",
 		"menunav" : [0, -1, -1, 1, -1]
 	}
-
 }

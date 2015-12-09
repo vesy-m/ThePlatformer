@@ -58,9 +58,8 @@ namespace GameComponents {
 					printf("%s = ", i->key);
 					CHEAT_CODE_TYPE cheatCodeType = (CHEAT_CODE_TYPE)std::stoi(i->key);
 					std::vector<int> inputSequence;
-					for (auto inputKey : i->value) {
+					for (auto inputKey : i->value)
 						inputSequence.push_back((int)inputKey->value.toNumber());
-					}
 					cheatCodeMap.emplace(cheatCodeType, inputSequence);
 				}
 				break;

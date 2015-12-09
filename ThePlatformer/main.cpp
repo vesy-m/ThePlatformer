@@ -21,23 +21,23 @@ int main()
 {
 	try
 	{
-	//_CrtSetBreakAlloc(5335);
-	GameEngine::Core core = GameEngine::Core();
-	//systems
-	GameSystems::WindowInputSytem *winInput = new GameSystems::WindowInputSytem();
-	GameSystems::GraphicsSystem *graphics = new GameSystems::GraphicsSystem();
-	GameSystems::PhysicsSystem *physics = new GameSystems::PhysicsSystem();
-	GameSystems::AudioSystem *audio = new GameSystems::AudioSystem();
+		//_CrtSetBreakAlloc(5335);
+		GameEngine::Core core = GameEngine::Core();
+		//systems
+		GameSystems::WindowInputSytem *winInput = new GameSystems::WindowInputSytem();
+		GameSystems::GraphicsSystem *graphics = new GameSystems::GraphicsSystem();
+		GameSystems::PhysicsSystem *physics = new GameSystems::PhysicsSystem();
+		GameSystems::AudioSystem *audio = new GameSystems::AudioSystem();
 
-	core.Add((GameSystems::BaseSystem *)winInput);
-	core.Add((GameSystems::BaseSystem *)physics);
-	core.Add((GameSystems::BaseSystem *)graphics);
-	core.Add((GameSystems::BaseSystem *)audio);
-	GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/start_menu.json");
+		core.Add((GameSystems::BaseSystem *)winInput);
+		core.Add((GameSystems::BaseSystem *)physics);
+		core.Add((GameSystems::BaseSystem *)graphics);
+		core.Add((GameSystems::BaseSystem *)audio);
+		GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/start_menu.json");
 
-	//start
-	core.Init();
-	core.MainLoop();
+		//start
+		core.Init();
+		core.MainLoop();
 	}
 	catch (std::exception &e)
 	{

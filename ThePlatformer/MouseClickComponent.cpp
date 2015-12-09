@@ -44,8 +44,6 @@ namespace GameComponents {
 				int resolutionHeight = GameSystems::GraphicsSystem::Camera::getInstance().resolutionHeight;
 				int mousex = event.mouseButton.x * resolutionWidth / screenWidth;
 				int mousey = event.mouseButton.y * resolutionHeight / screenHeight;
-				//std::cout << mousex << " " << mousey << std::endl;
-
 
 				if (this->composition->getX() < mousex && mousex < this->composition->getX() + this->composition->getWidth() &&
 					this->composition->getY() < mousey && mousey < this->composition->getY() + this->composition->getHeight()) {
@@ -62,8 +60,6 @@ namespace GameComponents {
 			int resolutionHeight = GameSystems::GraphicsSystem::Camera::getInstance().resolutionHeight;
 			int mousex = event.mouseMove.x * resolutionWidth / screenWidth;
 			int mousey = event.mouseMove.y * resolutionHeight / screenHeight;
-			//std::cout << mousex << " " << mousey << std::endl;
-
 
 			if (this->composition->getX() < mousex && mousex < this->composition->getX() + this->composition->getWidth() &&
 				this->composition->getY() < mousey && mousey < this->composition->getY() + this->composition->getHeight()) {
@@ -73,10 +69,8 @@ namespace GameComponents {
 		if (this->listeningMode == 1) {
 			if (this->idPadSelected == -1) {
 				// while no pad selected
-				if (checkPressAOrEnter(event)) {
-					//std::cout << "a or enter pressed : " << this->idPadSelected << " take" << std::endl;
+				if (checkPressAOrEnter(event))
 					this->composition->sendMessage(new GameMessage::MenuControllerMessage(GameMessage::SELECT_CONTROLLER_MENU, this->idPadSelected));
-				}
 			}
 			else {
 				// after pad selection
@@ -85,14 +79,12 @@ namespace GameComponents {
 					// or if keyboard release
 					(event.type == sf::Event::KeyReleased && this->idPadSelected == 8)) 
 				{
-					//std::cout << this->idPadSelected << " presse or moved" << std::endl;
 					OneKeyPressInMenu(event);
 				}
 			}
 		}
-		else {
+		else
 			OneKeyPressInMenu(event);
-		}
 	}
 
 	void MouseClickComponent::OneKeyPressInMenu(sf::Event event) {
@@ -122,10 +114,8 @@ namespace GameComponents {
 			else if (event.key.code == sf::Keyboard::Down || event.key.code == sf::Keyboard::S) { idMessage = GameMessage::DOWNMENU; }
 			else if (event.key.code == sf::Keyboard::Escape) { idMessage = GameMessage::ECHAP_MENU; }
 		}
-		if (idMessage != GameMessage::DEFAULT) {
-			//std::cout << "key press send message : " << idMessage << std::endl;
+		if (idMessage != GameMessage::DEFAULT)
 			this->composition->sendMessage(new GameMessage::MenuControllerMessage(idMessage, this->idPadSelected));
-		}
 	}
 
 	void MouseClickComponent::Init()
@@ -135,5 +125,4 @@ namespace GameComponents {
 	void MouseClickComponent::sendMessage(GameMessage::Message*)
 	{
 	}
-
 }

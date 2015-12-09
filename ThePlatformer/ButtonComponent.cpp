@@ -50,9 +50,7 @@ namespace GameComponents {
 				if ((int)j->value.toNumber() == 1)
 					this->toggleSelected(true);
 			}
-			else {
-				this->navDirection[i] = (int)j->value.toNumber();
-			}
+			else this->navDirection[i] = (int)j->value.toNumber();
 			i++;
 		}
 	}
@@ -69,9 +67,8 @@ namespace GameComponents {
 		float y = (float)this->composition->getY();
 		float height = (float)this->composition->getHeight();
 		float width = (float)this->composition->getWidth();
-		if (this->buttonState == ButtonState::SELECTED) {
+		if (this->buttonState == ButtonState::SELECTED)
 			drawSquare(x, y, width, height);
-		}
 	}
 
 	void ButtonComponent::drawSquare(GLfloat x, GLfloat y, GLfloat width, GLfloat height) {
@@ -139,17 +136,13 @@ namespace GameComponents {
 				GameSystems::ObjectFactory::getInstance().changeGameObjectSpriteComponent(this->composition, ss.str());
 				GameSystems::ObjectFactory::getInstance().playersReady(1);
 			}
-			else if (this->buttonState == ButtonState::SELECTED)
-			{
-				this->execAction();
-			}
+			else if (this->buttonState == ButtonState::SELECTED) this->execAction();
 			break;
 		case GameMessage::LEFTMENU:
 			if (this->buttonState == ButtonState::CHOOSEPLAYER) {
 				this->numPlayerSelected--;
-				if (this->numPlayerSelected < 1) {
+				if (this->numPlayerSelected < 1)
 					numPlayerSelected = 2;
-				};
 				createPlayer(this->idPad);
 			}
 			else if (this->buttonState == ButtonState::SELECTED && this->navDirection[0] != -1 && ButtonComponent::actionAlreadyCompute == false) {
@@ -161,9 +154,8 @@ namespace GameComponents {
 		case GameMessage::RIGHTMENU:
 			if (this->buttonState == ButtonState::CHOOSEPLAYER) {
 				this->numPlayerSelected++;
-				if (this->numPlayerSelected > 2) {
+				if (this->numPlayerSelected > 2)
 					numPlayerSelected = 1;
-				};
 				createPlayer(this->idPad);
 			}
 			else if (this->buttonState == ButtonState::SELECTED && this->navDirection[1] != -1 && ButtonComponent::actionAlreadyCompute == false) {
@@ -199,15 +191,12 @@ namespace GameComponents {
 	}
 
 	void ButtonComponent::toggleSelected(bool state) {
-		if (this->actionName == "backPlayer") {
+		if (this->actionName == "backPlayer")
 			return;
-		}
-		if (this->buttonState == ButtonState::CLASSIC && state == true) {
+		if (this->buttonState == ButtonState::CLASSIC && state == true)
 			this->buttonState = ButtonState::SELECTED;
-		}
-		else if (this->buttonState == ButtonState::SELECTED && state == false) {
+		else if (this->buttonState == ButtonState::SELECTED && state == false)
 			this->buttonState = ButtonState::CLASSIC;
-		}
 	}
 
 	void ButtonComponent::execAction()
@@ -237,9 +226,8 @@ namespace GameComponents {
 
 	void ButtonComponent::execFunction()
 	{
-		if (this->functionMap[this->actionName] != NULL) {
+		if (this->functionMap[this->actionName] != NULL)
 			this->functionMap[this->actionName](this);
-		}
 	}
 
 	void ButtonComponent::changeResolution()

@@ -19,7 +19,7 @@ namespace GameComponents {
 		friend class			GameSystems::ObjectFactory;
 
 	public:
-		virtual ~AudioComponent();
+		virtual					~AudioComponent();
 		virtual void			Update(double);
 		virtual void			Init();
 		virtual void			sendMessage(GameMessage::Message*);

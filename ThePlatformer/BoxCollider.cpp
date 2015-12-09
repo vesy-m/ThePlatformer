@@ -110,15 +110,12 @@ namespace GameComponents {
 				}
 				if (object->getComponent(GameComponents::COMPONENT_TYPE::COLLIDER))
 				{
-					if (object->getComponent(GameComponents::COMPONENT_TYPE::COLLIDER) == this) {
-						continue;
-					}
+					if (object->getComponent(GameComponents::COMPONENT_TYPE::COLLIDER) == this) continue;
 					Manifold *manifold = new Manifold();
 					if (object->getComponent(GameComponents::COMPONENT_TYPE::COLLIDER)->getType() == COMPONENT_TYPE::BOX_COLLIDER)
 					{
 						BoxCollider *otherObject = dynamic_cast<BoxCollider*>(object->getComponent(GameComponents::COMPONENT_TYPE::COLLIDER));
-						if (!otherObject)
-							GameTools::debugManager::getInstance().dAssert("BoxCollider otherObject is NULL");
+						if (!otherObject) GameTools::debugManager::getInstance().dAssert("BoxCollider otherObject is NULL");
 						manifold->A = this;
 						manifold->B = otherObject;
 						if (this->CollideWithBox(manifold))
@@ -131,14 +128,10 @@ namespace GameComponents {
 
 							if (this->composition->getType() == GameObjects::PROJECTILE &&
 								otherObject->composition->getType() == GameObjects::PLAYER)
-							{
 								otherObject->composition->sendMessage(new GameMessage::DamageMessage(this->composition->getPower()));
-							}
 							else if (this->composition->getType() == GameObjects::PLAYER &&
 									 otherObject->composition->getType() == GameObjects::PROJECTILE)
-							{
 								otherObject->composition->sendMessage(new GameMessage::DamageMessage(otherObject->composition->getPower()));
-							}
 
 							ResolveCollision(manifold);
 							collide = true;

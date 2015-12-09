@@ -32,7 +32,6 @@ namespace GameComponents {
 	private:
 		GameTools::SpriteSheet *sheet;
 		std::string _fileName;
-
 		glm::vec2 direction;
 	};
 }

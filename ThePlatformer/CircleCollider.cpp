@@ -68,9 +68,7 @@ namespace GameComponents {
 				}
 			}
 			if (!collide)
-			{
 				this->composition->sendMessage(new GameMessage::Message(GameMessage::NO_COLLISION));
-			}
 		}
 	}
 

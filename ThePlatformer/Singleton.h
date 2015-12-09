@@ -32,7 +32,6 @@ private:
 };
 template<class T> T *CSingletonDynamicAlloc<T>::_instance = NULL;
 
-
 template <class T>
 class			CSingletonStaticAlloc
 {
@@ -40,7 +39,6 @@ public:
 	static T	&getInstance()
 	{
 		static T instance;
-
 		return instance;
 	}
 

@@ -4,17 +4,10 @@
 #include "AimMessage.h"
 
 #include <assert.h>
-
-//#include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Mouse.hpp>
-//#include <SFML\Window.hpp>
-//#include <map>
-//#include <sstream>
-//#include "JSONParser.h"
-//#include "BaseGameObject.h"
 #include "GraphicsSystem.h"
 #include "debugManager.h"
-//#include "ObjectFactory.h"
+
 
 
 namespace GameMessage {

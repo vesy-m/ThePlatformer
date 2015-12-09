@@ -6,9 +6,8 @@ namespace GameMessage {
 	class VectorMessage : public Message
 	{
 	public:
-		VectorMessage(MessageId, glm::vec2 vector);
+		VectorMessage(MessageId, glm::vec2);
 		~VectorMessage();
 		glm::vec2 vector;
 	};
 }
-
