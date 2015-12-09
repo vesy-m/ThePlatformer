@@ -6,7 +6,6 @@ namespace GameSystems {
 	{
 	}
 
-
 	GraphicsSystem::~GraphicsSystem()
 	{
 	}
@@ -77,7 +76,6 @@ namespace GameSystems {
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
 		glOrtho(Camera::getInstance().cameraStartX, Camera::getInstance().cameraEndX, Camera::getInstance().cameraEndY, Camera::getInstance().cameraStartY, -1, 1);
-		//glOrtho(426, 826, 720, 0, -1, 1);
 
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
@@ -88,8 +86,8 @@ namespace GameSystems {
 	{
 		GLint iViewport[4];
 		glGetIntegerv(GL_VIEWPORT, iViewport);
-		int screenWidth = Camera::getInstance().resolutionWidth;//iViewport[0] + iViewport[2];
-		int screenHeight = Camera::getInstance().resolutionHeight;//iViewport[1] + iViewport[3];
+		int screenWidth = Camera::getInstance().resolutionWidth;
+		int screenHeight = Camera::getInstance().resolutionHeight;
 
 		int sizeWidthMax = screenWidth;
 		int sizeToWidthMax = screenWidth - 300;
@@ -105,34 +103,26 @@ namespace GameSystems {
 			int newWidth = abs(listPlayers[0]->getX() - listPlayers[1]->getX()) + 300;
 			int currentWidth = Camera::getInstance().cameraEndX - Camera::getInstance().cameraStartX;
 
-			if (newWidth > sizeToWidthMax) {
+			if (newWidth > sizeToWidthMax)
 				newWidth = sizeWidthMax;
-			}
-			if (newWidth > sizeToWidthMax && currentWidth < newWidth - 10) {
+			if (newWidth > sizeToWidthMax && currentWidth < newWidth - 10)
 				newWidth = currentWidth + 10;
-			}
-			if (newWidth <= sizeToWidthMax && currentWidth > newWidth + 10) {
+			if (newWidth <= sizeToWidthMax && currentWidth > newWidth + 10)
 				newWidth = currentWidth - 10;
-			}
-			if (newWidth < sizeWidthMin) {
+			if (newWidth < sizeWidthMin)
 				newWidth = sizeWidthMin;
-			}
-			if (newWidth > sizeWidthMax) {
+			if (newWidth > sizeWidthMax)
 				newWidth = sizeWidthMax;
-			}
-
 			int height = newWidth * screenHeight / screenWidth;
 
 			int newXCamera = xMiddle - newWidth / 2;
 			int newYCamera = yMiddle - height / 2;
 
 			//border top
-			if (newXCamera < 0) {
+			if (newXCamera < 0)
 				newXCamera = 0;
-			}
-			if (newYCamera < 0) {
+			if (newYCamera < 0)
 				newYCamera = 0;
-			}
 
 			Camera::getInstance().cameraStartX = newXCamera;
 			Camera::getInstance().setWidth(newWidth);
@@ -140,12 +130,10 @@ namespace GameSystems {
 			Camera::getInstance().setHeight(height);
 
 			//border bottom
-			if (Camera::getInstance().cameraEndX > screenWidth) {
+			if (Camera::getInstance().cameraEndX > screenWidth)
 				Camera::getInstance().setX(Camera::getInstance().cameraStartX - (Camera::getInstance().cameraEndX - screenWidth));
-			}
-			if (Camera::getInstance().cameraEndY > screenHeight) {
+			if (Camera::getInstance().cameraEndY > screenHeight)
 				Camera::getInstance().setY(Camera::getInstance().cameraStartY - (Camera::getInstance().cameraEndY - screenHeight));
-			}
 		}
 
 	}

@@ -18,7 +18,7 @@ namespace GameEngine {
 		class Level;
 		static bool gameLoop;
 	private:
-		TimeManager								*m_manager;
+		TimeManager	*m_manager;
 		
 	};
 
@@ -27,7 +27,7 @@ namespace GameEngine {
 	public:
 		Level();
 		~Level();
-		void putObjectDepthOrdered(GameObjects::BaseGameObject * obj);
+		void putObjectDepthOrdered(GameObjects::BaseGameObject*);
 		std::list<GameObjects::BaseGameObject*>& getObjects();
 		std::vector<GameObjects::BaseGameObject*> getPlayers();
 	private:
@@ -37,5 +37,4 @@ namespace GameEngine {
 		int y;
 		float scale;
 	};
-
 }

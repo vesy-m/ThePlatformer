@@ -6,7 +6,6 @@ namespace GameMessage {
 		this->idController = idController;
 	}
 
-
 	MenuControllerMessage::~MenuControllerMessage()
 	{
 	}

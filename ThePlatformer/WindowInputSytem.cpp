@@ -10,7 +10,6 @@ namespace GameSystems {
 		this->window = NULL;
 	}
 
-
 	WindowInputSytem::~WindowInputSytem()
 	{
 	}
@@ -42,9 +41,8 @@ namespace GameSystems {
 					break;
 				}
 			}
-			else if (event.type == sf::Event::GainedFocus) {
+			else if (event.type == sf::Event::GainedFocus)
 				GameSystems::AudioSystem::_pause = false;
-			}
 			else if (event.type == sf::Event::Resized)
 			{
 				// adjust the viewport when the window is resized
@@ -81,9 +79,8 @@ namespace GameSystems {
 			if (this->currentFullScreenState) {
 				window->create(sf::VideoMode::getDesktopMode(), "ThePlatformer", sf::Style::Fullscreen, sf::ContextSettings(32));
 			}
-			else {
+			else
 				window->create(sf::VideoMode(1280, 720), "ThePlatformer", sf::Style::Close, sf::ContextSettings(32));
-			}
 		}
 
 		for each (GameObjects::BaseGameObject* object in listObjects)

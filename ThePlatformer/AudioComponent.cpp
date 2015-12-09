@@ -17,10 +17,7 @@ namespace GameComponents
 		SoundMap::iterator it = _sound.begin();
 
 		for (; it != _sound.end(); ++it)
-		{
-			if (it->second)
-				it->second->stop();
-		}
+			if (it->second) it->second->stop();
 	}
 
 	void AudioComponent::Update(double dt) {}

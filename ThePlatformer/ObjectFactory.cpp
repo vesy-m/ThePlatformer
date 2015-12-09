@@ -35,7 +35,6 @@ namespace GameSystems {
 		assert(value.getTag() == GameTools::JSON_OBJECT);
 		auto ret = new GameObjects::BaseGameObject();
 
-
 		GameComponents::ButtonComponent *buttonComponent = NULL;
 		for (auto it : value) {
 			if (std::string(it->key) == "x") ret->setX((int) it->value.toNumber());
@@ -59,25 +58,17 @@ namespace GameSystems {
 			else if (std::string(it->key) == "keyboard") new GameComponents::KeyboardInputComponent(ret, it->value.toString());
 			else if (std::string(it->key) == "vector") new GameComponents::VectorDebugComponent(ret, it->value.toString());
 			else if (std::string(it->key) == "fire_ball") new GameComponents::FireBallComponent(ret);
-			else if (std::string(it->key) == "sfx")
-			{
-				new GameComponents::AudioComponent(ret, it->value.toString());
-			}
+			else if (std::string(it->key) == "sfx") new GameComponents::AudioComponent(ret, it->value.toString());
 			else if (std::string(it->key) == "level" || std::string(it->key) == "menu" || std::string(it->key) == "function") {
 				buttonComponent = new GameComponents::ButtonComponent(ret, std::string(it->key), it->value.toString());
-				if (buttonComponent->buttonState == GameComponents::ButtonComponent::ButtonState::PLAYERCREATOR) {
+				if (buttonComponent->buttonState == GameComponents::ButtonComponent::ButtonState::PLAYERCREATOR)
 					new GameComponents::MouseClickComponent(ret, 1);
-				}
-				else {
-					new GameComponents::MouseClickComponent(ret);
-				}
+				else new GameComponents::MouseClickComponent(ret);
 			}
-			else if (std::string(it->key) == "menunav") {
+			else if (std::string(it->key) == "menunav")
 				buttonComponent->setNav(it->value);
-			}
 			else if (std::string(it->key) == "aim") new GameComponents::AimComponent(ret, it->value.toString());
-			
-			}
+		}
 		return (ret);
 	}
 
@@ -91,8 +82,6 @@ namespace GameSystems {
 		if (this->old_objects.size() == 0) {
 			projectile = new GameObjects::BaseGameObject();
 			projectile->setName(shooter->getName());
-
-			
 			projectile->setDepth(0);
 			projectile->setType(GameObjects::objectType::PROJECTILE);
 			projectile->setBounce(0.3f);
@@ -186,25 +175,18 @@ namespace GameSystems {
 		for (std::pair<int, std::string> entry : this->mapPlayersController) {
 			GameSystems::JSONParser fileParser(entry.second);
 			GameObjects::BaseGameObject* newPlayer = parseObject(fileParser.getJSONValue());
-			if (entry.first == 8) {
-				new GameComponents::KeyboardInputComponent(newPlayer, "./config/controllers/input_keyboard1.json");
-			}
-			else {
-				new GameComponents::ControllerInputComponent(newPlayer, "./config/controllers/input_controller1.json", entry.first);
-			}
+			if (entry.first == 8) new GameComponents::KeyboardInputComponent(newPlayer, "./config/controllers/input_keyboard1.json");
+			else new GameComponents::ControllerInputComponent(newPlayer, "./config/controllers/input_controller1.json", entry.first);
 			newPlayer->setY(400);
 			newPlayer->setX(add * i);
 			this->currentLevel.putObjectDepthOrdered(newPlayer);
-			std::cout << "Add: " << newPlayer->getType() << std::endl;
 			listPlayers.push_back(newPlayer);
 			i++;
 		}
 	}
 
 	void ObjectFactory::LoadMenuFileAsCurrent(const std::string &filename) {
-		if (filename == this->currentMenu.fileName && this->stateGame == gameState::MENU) {
-			return;
-		}
+		if (filename == this->currentMenu.fileName && this->stateGame == gameState::MENU) return;
 		countObjects = 0;
 		std::string currentMenuFileName = filename;
 		GameSystems::JSONParser fileParser(filename);
@@ -241,7 +223,6 @@ namespace GameSystems {
 		if (this->stateGame == gameState::LEVEL) return this->currentLevel.getObjects();
 		else if(this->stateGame == gameState::MENU)	return this->currentMenu.getObjects();
 		else return this->currentLevel.getObjects();
-
 	}
 
 	const std::list<GameSystems::BaseSystem*>& ObjectFactory::getSystems()
@@ -268,9 +249,8 @@ namespace GameSystems {
 	bool ObjectFactory::controllerAlreadyTook(int idController)
 	{
 		for (std::pair<int, std::string> entry : this->mapPlayersController) {
-			if (idController == entry.first) {
+			if (idController == entry.first)
 				return true;
-			}
 		}
 		return false;
 	}
@@ -292,9 +272,8 @@ namespace GameSystems {
 
 	void ObjectFactory::playersReady(int nb) {
 		this->nbPlayerReady += nb;
-		if (this->mapPlayersController.size() > 1 && this->nbPlayerReady == this->mapPlayersController.size()) {
+		if (this->mapPlayersController.size() > 1 && this->nbPlayerReady == this->mapPlayersController.size())
 			this->LoadMenuFileAsCurrent("./config/menus/choose_level_menu.json");
-		}
 		else if (this->mapPlayersController.size() == 1 && this->nbPlayerReady == this->mapPlayersController.size()) {
 			this->mapPlayersController[6] = "./config/players/player1.json";
 			this->LoadMenuFileAsCurrent("./config/menus/choose_level_menu.json");
@@ -332,20 +311,17 @@ namespace GameSystems {
 	}
 
 	void ObjectFactory::returnPrevMenuOrResumeLevel() {
-		if (this->currentMenu.prevState == gameState::LEVEL) {
+		if (this->currentMenu.prevState == gameState::LEVEL)
 			GameSystems::ObjectFactory::getInstance().stateGame = GameSystems::ObjectFactory::gameState::LEVEL;
-		}
-		else {
+		else
 			this->LoadMenuFileAsCurrent(this->currentMenu.prevMenu);
-		}
 	}
 
 	void ObjectFactory::winTheGame(std::string name)
 	{
-		for (auto player : listPlayers) {
+		for (auto player : listPlayers)
 			if (name.compare(player->getName()) != 0)
 				player->destroy(true);
-		}
 	}
 
 	void ObjectFactory::checkWinCondition()
@@ -386,9 +362,8 @@ namespace GameSystems {
 				tmpObj = player;
 				winCondition = true;
 			}
-			else if (!player->destroy() && winCondition) {
+			else if (!player->destroy() && winCondition)
 				return nullptr;
-			}
 		}
 		return tmpObj;
 	}

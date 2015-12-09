@@ -24,6 +24,5 @@
 		"sprite" : "./assets/sprite/menu/returnButton.png",
 		"menu" : "./config/menus/choose_nb_player_menu.json",
 		"menunav" : [0, 1, 2, 1, 2]
-	},
-
+	}
 }

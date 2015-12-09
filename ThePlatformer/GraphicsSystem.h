@@ -1,6 +1,4 @@
 #pragma once
-#ifndef _GRAPHICSSYSTEM_H_
-#define _GRAPHICSSYSTEM_H_
 
 #include "BaseSystem.h"
 #include <SFML\OpenGL.hpp>
@@ -11,8 +9,8 @@ namespace GameSystems {
 	public:
 		GraphicsSystem();
 		~GraphicsSystem();
-		int Update(double dt, std::list<GameObjects::BaseGameObject*>&);
-		void Init(std::list<GameObjects::BaseGameObject*>& listObjects);
+		int Update(double, std::list<GameObjects::BaseGameObject*>&);
+		void Init(std::list<GameObjects::BaseGameObject*>&);
 		void viewportReload();
 		void resizeCamera();
 		void SendMessage();
@@ -34,8 +32,8 @@ namespace GameSystems {
 		int cameraEndX;
 		void setX(int x);
 		void setY(int y);
-		void setWidth(int width);
-		void setHeight(int height);
+		void setWidth(int);
+		void setHeight(int);
 		int resolutionWidth;
 		int resolutionHeight;
 		void setResolution720p();
@@ -47,4 +45,3 @@ namespace GameSystems {
 		void operator=(Camera const&) = delete;
 	};
 }
-#endif // !_GRAPHICSSYSTEM_H_

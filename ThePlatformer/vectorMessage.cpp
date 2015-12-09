@@ -7,7 +7,6 @@ namespace GameMessage {
 		this->vector = vector;
 	}
 
-
 	VectorMessage::~VectorMessage()
 	{
 	}

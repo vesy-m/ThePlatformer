@@ -7,7 +7,6 @@ namespace GameMessage {
 		this->damage = damage;
 	}
 
-
 	DamageMessage::~DamageMessage()
 	{
 	}

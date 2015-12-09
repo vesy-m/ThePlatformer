@@ -1,6 +1,4 @@
 #pragma once
-#ifndef _OBJECTFACTORY_H_
-#define _OBJECTFACTORY_H_
 
 #include <vector>
 #include <list>
@@ -42,7 +40,7 @@ namespace GameSystems {
 		static void attachObject(GameObjects::BaseGameObject*);
 		void buildLevel(GameTools::JsonValue&);
 		GameEngine::Core::Level &getCurrentLevel();
-		void buildMenu(GameTools::JsonValue & value);
+		void buildMenu(GameTools::JsonValue&);
 		void LoadLevelFileAsCurrent(const std::string&);
 		void LoadMenuFileAsCurrent(const std::string&);
 		void cleanupObjects(void);
@@ -53,18 +51,18 @@ namespace GameSystems {
 		gameState stateGame;
 		std::string currentLevelFileName;
 		//create for button and controller management
-		bool controllerAlreadyTook(int idController);
+		bool controllerAlreadyTook(int);
 		void removeAllPlayersWithController();
-		void addOrChangePlayerWithController(int idController, int idPerso);
-		void changeGameObjectSpriteComponent(GameObjects::BaseGameObject * obj, std::string filename);
-		void playersReady(int nb);
-		void changeSelectedButtonMenu(int idButton);
-		void changeSelectedButtonMenu(GameObjects::BaseGameObject * button);
+		void addOrChangePlayerWithController(int, int);
+		void changeGameObjectSpriteComponent(GameObjects::BaseGameObject*, std::string);
+		void playersReady(int);
+		void changeSelectedButtonMenu(int);
+		void changeSelectedButtonMenu(GameObjects::BaseGameObject*);
 		void clearPlayers();
 		void returnPrevMenuOrResumeLevel();
 		void winTheGame(std::string);
 		void checkWinCondition();
-		int getPlayerId(GameObjects::BaseGameObject * player);
+		int getPlayerId(GameObjects::BaseGameObject*);
 		GameObjects::BaseGameObject *isPLayersAlive();
 		int idWinPlayer;
 		//----
@@ -87,5 +85,3 @@ namespace GameSystems {
 
 	};
 }
-
-#endif // !_OBJECTFACTORY_H_

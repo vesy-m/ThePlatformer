@@ -1,7 +1,4 @@
 #pragma once
-#ifndef _AUDIOSYSTEM_H_
-#define _AUDIOSYSTEM_H_
-
 #include <map>
 
 #include "BaseSystem.h"
@@ -32,5 +29,3 @@ namespace GameSystems {
 		bool					_isMenu;
 	};
 }
-
-#endif // !_AUDIOSYSTEM_H_

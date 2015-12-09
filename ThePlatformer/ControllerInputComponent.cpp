@@ -16,16 +16,13 @@ namespace GameComponents {
 
 	void ControllerInputComponent::UpdateInputState(sf::Event event, double)
 	{
-		if ((event.joystickButton.joystickId != controllerNumber) || (event.joystickMove.joystickId != controllerNumber))
-			return;
+		if ((event.joystickButton.joystickId != controllerNumber) || (event.joystickMove.joystickId != controllerNumber)) return;
 		for (auto it = this->controllerMap.begin(); it != this->controllerMap.end(); ++it)
 		{
 			if (event.type == sf::Event::JoystickButtonPressed)
 			{
 				if (event.joystickButton.button == it->second)
-				{
 					inputState.at(it->first) = true;
-				}
 			}
 			else if (event.type == sf::Event::JoystickButtonReleased)
 			{
@@ -36,8 +33,7 @@ namespace GameComponents {
 					{
 					case INPUT_TYPE::FIRE:
 					{
-						if (this->savedDt < this->getComposition()->getCooldown())
-							break;
+						if (this->savedDt < this->getComposition()->getCooldown()) break;
 
 						int centerX = (this->getComposition()->getX() + (this->getComposition()->getWidth() / 2));
 						int centerY = (this->getComposition()->getY() + (this->getComposition()->getHeight() / 2));
@@ -65,9 +61,7 @@ namespace GameComponents {
 			else if (event.type == sf::Event::JoystickMoved)
 			{
 				if (DetectAxisInput(event, it->second) && CheckInputValue(event, it->second))
-				{
 					inputState.at(it->first) = true;
-				}
 				else if (DetectAxisInput(event, it->second))
 				{
 					if (inputState.at(it->first) == true)

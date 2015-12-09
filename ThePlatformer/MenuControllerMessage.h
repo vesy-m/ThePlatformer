@@ -5,7 +5,7 @@ namespace GameMessage {
 	class MenuControllerMessage : public Message
 	{
 	public:
-		MenuControllerMessage(MessageId, int idController);
+		MenuControllerMessage(MessageId, int);
 		~MenuControllerMessage();
 		int idController;
 	};

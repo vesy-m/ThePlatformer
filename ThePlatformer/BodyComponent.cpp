@@ -104,8 +104,7 @@ namespace GameComponents {
 				onGround = false;
 			}
 
-			if (velocity.x == 0.0f)
-				forces.x = 0.0f;
+			if (velocity.x == 0.0f) forces.x = 0.0f;
 			isColliding = true;
 			break;
 		}
@@ -119,8 +118,7 @@ namespace GameComponents {
 		glm::vec2 newForces = (forces * (1.0f / mass));
 
 		glm::vec2 acceleration = newForces + gravity;
-		if (acceleration.y >= -0.0001f && acceleration.y <= 0.0001f)
-			acceleration.y = 0.0f;
+		if (acceleration.y >= -0.0001f && acceleration.y <= 0.0001f) acceleration.y = 0.0f;
 		velocity += acceleration * dt;
 
 		if (onGround == false && (forces.y <= maxForce)) forces = forces + gravity;

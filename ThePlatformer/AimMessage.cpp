@@ -8,7 +8,6 @@ namespace GameMessage {
 		this->drawPoint = drawPoint;
 	}
 
-
 	AimMessage::~AimMessage()
 	{
 	}

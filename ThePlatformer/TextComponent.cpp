@@ -105,9 +105,6 @@ namespace GameComponents {
 			letterHeight /= 20 - size;
 			letterWidth /= 20 - size;
 
-			//letterWidth = (GameSystems::GraphicsSystem::Camera::getInstance().cameraEndX - GameSystems::GraphicsSystem::Camera::getInstance().cameraStartX) * letterWidth / 1280;
-			//letterHeight = (GameSystems::GraphicsSystem::Camera::getInstance().cameraEndY - GameSystems::GraphicsSystem::Camera::getInstance().cameraStartY) * letterHeight / 720;
-
 			int pointX = posX;
 			int pointXWidth = posX + letterWidth;
 			int pointY = posY;
@@ -133,5 +130,4 @@ namespace GameComponents {
 	void TextComponent::sendMessage(GameMessage::Message*)
 	{
 	}
-
 }

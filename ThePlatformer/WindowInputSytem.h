@@ -1,6 +1,4 @@
 #pragma once
-#ifndef _WINDOWINPUTSYSTEM_H_
-#define _WINDOWINPUTSYSTEM_H_
 
 #include "BaseSystem.h"
 #include "InputComponent.h"
@@ -14,7 +12,7 @@ namespace GameSystems {
 		WindowInputSytem();
 		~WindowInputSytem();
 		int Update(double dt, std::list<GameObjects::BaseGameObject*>&);
-		void Init(std::list<GameObjects::BaseGameObject*>& listObjects);
+		void Init(std::list<GameObjects::BaseGameObject*>&);
 		void SendMessage();
 		static bool fullscreen;
 	private:
@@ -22,4 +20,3 @@ namespace GameSystems {
 		bool currentFullScreenState;
 	};
 }
-#endif // !_WINDOWINPUTSYSTEM_H_

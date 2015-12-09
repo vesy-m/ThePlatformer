@@ -29,9 +29,7 @@ namespace GameComponents {
 				revertX = true;
 			}
 			if (revertX != true)
-			{
 				revertX = true;
-			}
 			break;
 		case GameMessage::RIGHT:
 			if ((std::string("walk").compare(currentAnim) != 0 || revertX != false) && std::string("jump").compare(currentAnim) != 0) {
@@ -40,9 +38,7 @@ namespace GameComponents {
 				revertX = false;
 			}
 			if (revertX != false)
-			{
 				revertX = false;
-			}
 			break;
 		case GameMessage::JUMP_ANIMATION:
 		case GameMessage::JUMP:

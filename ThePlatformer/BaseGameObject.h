@@ -1,7 +1,4 @@
 #pragma once
-#ifndef _BASEGAMEOBJECT_H_
-#define _BASEGAMEOBJECT_H_
-
 #include <vector>
 #include "BaseComponent.h"
 #include "Message.h"
@@ -55,30 +52,30 @@ namespace GameObjects {
 		int getY();
 		int getHeight();
 		int getWidth();
-		void setDepth(int depth);
+		void setDepth(int);
 		int getDepth();
-		void setHeight(int height);
-		void setWidth(int width);
-		void setScale(float scale);
+		void setHeight(int);
+		void setWidth(int);
+		void setScale(float);
 		float getScale();
-		void setMass(float mass);
+		void setMass(float);
 		float getMass();
-		void setBounce(float bounce);
+		void setBounce(float);
 		float getBounce();
-		void setRotate(int rotate);
+		void setRotate(int);
 		int getRotate();
 		void setProjectileType(std::string);
 		std::string getProjectileType();
-		void setName(std::string name);
+		void setName(std::string);
 		std::string getName();
-		void setType(objectType newtype);
+		void setType(objectType);
 		objectType getType();
 		int getLife();
 		void setDamage(GameMessage::DamageMessage*);
 		int getPower();
-		void setPower(int power);
+		void setPower(int);
 		float getCooldown();
-		void setCooldown(float cooldown);
+		void setCooldown(float);
 
 		void setInvicible(void);
 		bool getInvicible(void);
@@ -86,7 +83,6 @@ namespace GameObjects {
 		void destroy(bool);
 		bool destroy(void);
 	private:
-		//std::vector<GameComponents::BaseComponent*> componentsList;
 		GameComponents::InputComponent *m_input;
 		GameComponents::SpriteComponent *m_sprite;
 		GameComponents::TextComponent *m_text;
@@ -116,6 +112,3 @@ namespace GameObjects {
 		float cooldown = 2000.0f;
 	};
 }
-
-
-#endif // !_BASEGAMEOBJECT_H_

@@ -14,7 +14,6 @@ namespace GameSystems {
 		_isMenu = false;
 	}
 
-
 	AudioSystem::~AudioSystem()
 	{
 	}

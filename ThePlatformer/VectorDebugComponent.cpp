@@ -17,13 +17,10 @@ namespace GameComponents {
 		switch (message->id)
 		{
 		case GameMessage::VELOCITY_VECTOR:
-				this->velocity = ((GameMessage::VectorMessage *)message)->vector;
-				break;
-		/*	case Message::SHOW_DEBUG:
-				showDebug = !showDebug;
-				break;*/
-			default:
-				break;
+			this->velocity = ((GameMessage::VectorMessage *)message)->vector;
+			break;
+		default:
+			break;
 		}
 	}
 
