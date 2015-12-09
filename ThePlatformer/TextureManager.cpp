@@ -1,4 +1,5 @@
 #include "TextureManager.h"
+#include "debugManager.h"
 
 namespace GameTools {
 	TextureManager::TextureManager()
@@ -24,7 +25,7 @@ namespace GameTools {
 		ilOriginFunc(IL_ORIGIN_LOWER_LEFT);
 		success = ilLoadImage((ILstring)filename.c_str());
 		if (!success) {
-			std::cout << "file charged" << std::endl;
+			GameTools::debugManager::getInstance().dAssert("png file not loaded : " + filename);
 		}
 		ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE);
 

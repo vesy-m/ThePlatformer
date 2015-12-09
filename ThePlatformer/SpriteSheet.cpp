@@ -13,6 +13,9 @@ namespace GameTools {
 			animated = false;
 			loadPngFile(filename);
 		}
+		else {
+			GameTools::debugManager::getInstance().dAssert("bad file type");
+		}
 
 	}
 
