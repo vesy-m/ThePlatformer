@@ -7,19 +7,17 @@
 #include <il.h>
 #include <iostream>
 #include <stdexcept>
+#include "Singleton.h"
 
 namespace GameTools {
-	class TextureManager
+	class TextureManager : public CSingletonStaticAlloc<TextureManager>
 	{
+		friend class CSingletonStaticAlloc<TextureManager>;
 	public:
 		void					loadTexture(const std::string &);
 		Texture		*getTexture(const std::string&);
 		~TextureManager();
-		static TextureManager&	getInstance()
-		{
-			static TextureManager    instance;
-			return instance;
-		}
+
 	private:
 		TextureManager();
 		TextureManager(TextureManager const&) = delete;

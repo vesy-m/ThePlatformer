@@ -2,6 +2,7 @@
 
 #include "BaseSystem.h"
 #include <SFML\OpenGL.hpp>
+#include "Singleton.h"
 
 namespace GameSystems {
 	class GraphicsSystem : public BaseSystem
@@ -17,15 +18,11 @@ namespace GameSystems {
 		class Camera;		
 	};
 
-	class GraphicsSystem::Camera
+	class GraphicsSystem::Camera : public CSingletonStaticAlloc<GraphicsSystem::Camera>
 	{
+		friend class CSingletonStaticAlloc<GraphicsSystem::Camera>;
 	public:
 		~Camera();
-		static Camera& getInstance()
-		{
-			static Camera    instance;
-			return instance;
-		}
 		int cameraStartX;
 		int cameraStartY;
 		int cameraEndY;

@@ -95,9 +95,9 @@ namespace GameSystems {
 							if (std::string("file").compare(value->key) == 0)
 								fileName = value->value.toString();
 							if (std::string("volume").compare(value->key) == 0)
-								volume = value->value.toNumber();
+								volume = (unsigned int)value->value.toNumber();
 							if (std::string("loop").compare(value->key) == 0)
-								isLoop = value->value.toNumber();
+								isLoop = (bool)value->value.toNumber();
 						}
 						_sound[name] = GameTools::CSoundManager::getInstance().getSound(fileName);
 						if (!_sound[name])

@@ -8,14 +8,16 @@
 #include "SpriteComponent.h"
 #include "Menu.h"
 #include "GraphicsSystem.h"
+#include "Singleton.h"
 
 namespace GameComponents {
 	class SpriteComponent;
 }
 
 namespace GameSystems {
-	class ObjectFactory
+	class ObjectFactory : public CSingletonStaticAlloc<ObjectFactory>
 	{
+		friend class CSingletonStaticAlloc<ObjectFactory>;
 	public:
 		enum gameState
 		{
@@ -29,11 +31,6 @@ namespace GameSystems {
 			TENNIS_BALL,
 			BASE_BALL
 		};
-		static ObjectFactory& getInstance()
-		{
-			static ObjectFactory    instance;
-			return instance;
-		}
 		~ObjectFactory();
 		GameObjects::BaseGameObject *parseObject(GameTools::JsonValue&);
 		GameObjects::BaseGameObject *createProjectile(GameObjects::BaseGameObject*, unsigned int, unsigned int, float, glm::vec2, ProjectileType);
