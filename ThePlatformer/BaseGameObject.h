@@ -19,6 +19,7 @@ namespace GameComponents {
 	class FireComponent;
 	class CAAttackComponent;
 	class AudioComponent;
+	class DeathTimerComponent;
 }
 
 namespace GameObjects {
@@ -27,6 +28,15 @@ namespace GameObjects {
 		NONE,
 		PLAYER,
 		PROJECTILE
+	};
+
+	enum ProjectileType {
+		ARROW,
+		SOCCER_BALL,
+		TENNIS_BALL,
+		BASE_BALL,
+		BAT,
+		BLOCK
 	};
 
 	class BaseGameObject
@@ -47,6 +57,7 @@ namespace GameObjects {
 		void attachComponent(GameComponents::CAAttackComponent*);
 		void attachComponent(GameComponents::AimComponent*);
 		void attachComponent(GameComponents::AudioComponent*);
+		void attachComponent(GameComponents::DeathTimerComponent*);
 		void sendMessage(GameMessage::Message*);
 		void setX(int x);
 		int getX();
@@ -66,8 +77,8 @@ namespace GameObjects {
 		float getBounce();
 		void setRotate(int);
 		int getRotate();
-		void setProjectileType(std::string);
-		std::string getProjectileType();
+		void setProjectileType(ProjectileType);
+		ProjectileType getProjectileType();
 		void setName(std::string);
 		std::string getName();
 		void setType(objectType);
@@ -96,6 +107,7 @@ namespace GameObjects {
 		GameComponents::AimComponent *m_aim;
 		GameComponents::AudioComponent *m_sound;
 		GameComponents::CAAttackComponent *m_attack;
+		GameComponents::DeathTimerComponent *m_deathTimer;
 		int x;
 		int y;
 		int height;
@@ -105,7 +117,7 @@ namespace GameObjects {
 		float scale;
 		float mass;
 		float bounce;
-		std::string projectileType;
+		ProjectileType projectileType;
 		std::string name;
 		objectType type;
 		bool to_destroy;

@@ -9,9 +9,8 @@ namespace GameComponents {
 	class BoxCollider : public ColliderComponent
 	{
 		friend class GameSystems::ObjectFactory;
-	private:
-		BoxCollider(GameObjects::BaseGameObject*);
 	public:
+		BoxCollider(GameObjects::BaseGameObject*);
 		virtual ~BoxCollider();
 		virtual COMPONENT_TYPE getType() const;
 		virtual void Update(double);

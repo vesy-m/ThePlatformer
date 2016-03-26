@@ -47,7 +47,7 @@ namespace GameSystems {
 			else if (std::string(it->key) == "rotate") ret->setRotate((int) it->value.toNumber());
 			else if (std::string(it->key) == "width") ret->setWidth((int) it->value.toNumber());
 			else if (std::string(it->key) == "height") ret->setHeight((int) it->value.toNumber());
-			else if (std::string(it->key) == "projectile_type") ret->setProjectileType(it->value.toString());
+			//else if (std::string(it->key) == "projectile_type") ret->setProjectileType(it->value.toString());
 			else if (std::string(it->key) == "name") ret->setName(std::string(it->value.toString() + std::to_string(countObjects++)));
 			else if (std::string(it->key) == "type") ret->setType((GameObjects::objectType)(int)it->value.toNumber());
 			else if (std::string(it->key) == "sprite") new GameComponents::SpriteComponent(ret, it->value.toString());
@@ -68,7 +68,7 @@ namespace GameSystems {
 			}
 			else if (std::string(it->key) == "menunav")
 				buttonComponent->setNav(it->value);
-			else if (std::string(it->key) == "aim") new GameComponents::AimComponent(ret, it->value.toString());
+			//else if (std::string(it->key) == "aim") new GameComponents::AimComponent(ret, it->value.toString());
 		}
 		return (ret);
 	}
@@ -77,12 +77,29 @@ namespace GameSystems {
 		ObjectFactory::getInstance().currentLevel.putObjectDepthOrdered(obj);
 	}
 
-	GameObjects::BaseGameObject *ObjectFactory::createProjectile(GameObjects::BaseGameObject *projectile, unsigned int x, unsigned int y, float base_force, glm::vec2 direction, std::string const &sprite, bool gravity) {
+	GameObjects::BaseGameObject *ObjectFactory::getUsableProjectile(GameObjects::ProjectileType projectileType) {
+		GameObjects::BaseGameObject *projectile = NULL;
+
+		if (this->old_objects.size() != 0) {
+			for (auto it = this->old_objects.begin(); it != this->old_objects.end(); ++it) {
+				if ((*it)->getProjectileType() == projectileType) {
+					projectile = dynamic_cast<GameObjects::BaseGameObject*>(this->old_objects.front());
+					assert(projectile != NULL);
+					this->old_objects.remove((*it));
+					projectile->destroy(false);
+					return projectile;
+				}
+			}
+		}
+		return projectile;
+	}
+
+	GameObjects::BaseGameObject *ObjectFactory::createProjectile(GameObjects::BaseGameObject *projectile/*, unsigned int x, unsigned int y, float base_force, glm::vec2 direction, std::string const &sprite, bool gravity*/) {
 		//GameObjects::BaseGameObject *projectile = NULL;
-		GameComponents::BodyComponent *body = NULL;
-		if (this->old_objects.size() == 0) {
-			new GameComponents::SpriteComponent(projectile, sprite);
-			body = dynamic_cast<GameComponents::BodyComponent*>(projectile->getComponent(GameComponents::PHYSIC));
+		//GameComponents::BodyComponent *body = NULL;
+		//if (this->old_objects.size() == 0) {
+		//	new GameComponents::SpriteComponent(projectile, sprite);
+		//	body = dynamic_cast<GameComponents::BodyComponent*>(projectile->getComponent(GameComponents::PHYSIC));
 			//projectile = new GameObjects::BaseGameObject();
 			//projectile->setName(shooter->getName());
 			//projectile->setDepth(0);
@@ -116,24 +133,24 @@ namespace GameSystems {
 			//	new GameComponents::SpriteComponent(projectile, "./assets/sprite/minecraft_arrow.png");
 //			}
 
-			new GameComponents::BoxCollider(projectile);
-			new GameComponents::VectorDebugComponent(projectile, "square");
-		}
-		else {
-			projectile = dynamic_cast<GameObjects::BaseGameObject*>(this->old_objects.front());
-			assert(projectile != NULL);
-			this->old_objects.pop_front();
-			projectile->destroy(false);
-			body = dynamic_cast<GameComponents::BodyComponent*>(projectile->getComponent(GameComponents::PHYSIC));
-		}
-		assert(projectile != NULL);
-		assert(body != NULL);
-		projectile->setX(x);
-		projectile->setY(y);
-		projectile->Init();
-		body->Init(base_force, direction);
-		if (!gravity)
-			body->setGravity(0);
+		//	new GameComponents::BoxCollider(projectile);
+		//	new GameComponents::VectorDebugComponent(projectile, "square");
+		//}
+		//else {
+		//	projectile = dynamic_cast<GameObjects::BaseGameObject*>(this->old_objects.front());
+		//	assert(projectile != NULL);
+		//	this->old_objects.pop_front();
+		//	projectile->destroy(false);
+		//	body = dynamic_cast<GameComponents::BodyComponent*>(projectile->getComponent(GameComponents::PHYSIC));
+		//}
+		//assert(projectile != NULL);
+		//assert(body != NULL);
+		//projectile->setX(x);
+		//projectile->setY(y);
+		//projectile->Init();
+		//body->Init(base_force, direction);
+		//if (!gravity)
+		//	body->setGravity(0);
 		this->currentLevel.putObjectDepthOrdered(projectile);
 		return (projectile);
 	}
@@ -214,7 +231,7 @@ namespace GameSystems {
 		std::list<GameObjects::BaseGameObject*> &list = this->currentLevel.getObjects();
 		list.erase(std::remove_if(list.begin(), list.end(), [&](auto obj) {
 			if (obj->destroy()) {
-				if (obj->getName() == "arrow") this->old_objects.push_back(obj);
+				if (obj->getType() == GameObjects::PROJECTILE) this->old_objects.push_back(obj);
 				else delete obj;
 				return true;
 			}

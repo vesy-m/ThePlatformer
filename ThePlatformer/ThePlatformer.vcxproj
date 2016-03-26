@@ -180,6 +180,7 @@ copy /Y "$(ProjectDir)\lib\lib-x64\devil-1.7.8\bin\*" "$(OutDir)\"</Command>
     <ClCompile Include="CircleCollider.cpp" />
     <ClCompile Include="CollisionMessage.cpp" />
     <ClCompile Include="DamageMessage.cpp" />
+    <ClCompile Include="DeathTimerComponent.cpp" />
     <ClCompile Include="debugManager.cpp" />
     <ClCompile Include="gason.cpp" />
     <ClCompile Include="Collider.cpp" />
@@ -228,6 +229,7 @@ copy /Y "$(ProjectDir)\lib\lib-x64\devil-1.7.8\bin\*" "$(OutDir)\"</Command>
     <ClInclude Include="Collider.h" />
     <ClInclude Include="CollisionMessage.h" />
     <ClInclude Include="DamageMessage.h" />
+    <ClInclude Include="DeathTimerComponent.h" />
     <ClInclude Include="debugManager.h" />
     <ClInclude Include="GameEngine.h" />
     <ClInclude Include="Gason.h" />

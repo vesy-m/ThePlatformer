@@ -21,9 +21,8 @@ namespace GameComponents {
 	class SpriteComponent : public BaseComponent
 	{
 		friend class GameSystems::ObjectFactory;
-	private:
-		SpriteComponent(GameObjects::BaseGameObject*, const std::string&);
 	public:
+		SpriteComponent(GameObjects::BaseGameObject*, const std::string&);
 		virtual ~SpriteComponent();
 		virtual COMPONENT_TYPE getType() const;
 		virtual void Update(double);

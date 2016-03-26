@@ -22,7 +22,8 @@ namespace GameComponents {
 		FIRE,
 		AIM,
 		SOUND,
-		ATTACK
+		ATTACK,
+		MECHANIC
 	};
 
 	class BaseComponent

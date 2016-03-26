@@ -15,9 +15,8 @@ namespace GameComponents {
 	class VectorDebugComponent : public BaseComponent
 	{
 		friend class GameSystems::ObjectFactory;
-	private:
-		VectorDebugComponent(GameObjects::BaseGameObject*, std::string);
 	public:
+		VectorDebugComponent(GameObjects::BaseGameObject*, std::string);
 		virtual ~VectorDebugComponent();
 		virtual void sendMessage(GameMessage::Message*);
 		virtual COMPONENT_TYPE getType() const;

@@ -17,6 +17,8 @@ namespace GameSystems {
 			if (component) component->Update(dt);
 			component = object->getComponent(GameComponents::COMPONENT_TYPE::COLLIDER);
 			if (component) component->Update(dt);
+			component = object->getComponent(GameComponents::COMPONENT_TYPE::MECHANIC);
+			if (component) component->Update(dt);
 		}
 		return 0;
 	}

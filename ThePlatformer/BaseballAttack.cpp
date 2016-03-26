@@ -1,6 +1,7 @@
 #include "BaseballAttack.h"
 #include "BodyComponent.h"
 #include "BoxCollider.h"
+#include "DeathTimerComponent.h"
 #include "VectorDebugComponent.h"
 
 
@@ -45,8 +46,10 @@ namespace GameComponents {
 
 		//GameObjects::BaseGameObject *arrow = GameSystems::ObjectFactory::getInstance().createProjectile(getComposition(), getComposition()->getX(),
 		//	getComposition()->getY(), /*this->getDuration()*/ 1.0f, glm::normalize(direction), GameSystems::ObjectFactory::SOCCER_BALL);
-		GameObjects::BaseGameObject *arrow = GameSystems::ObjectFactory::getInstance().createProjectile(createProjectile(getComposition(), ATTACK1, 1.0f, glm::normalize(direction)), getComposition()->getX(),
-			getComposition()->getY(), 1.0f, glm::normalize(direction), "./assets/sprite/tennis_ball.png", true);
+		//GameObjects::BaseGameObject *arrow = GameSystems::ObjectFactory::getInstance().createProjectile(createProjectile(getComposition(), ATTACK1, 1.0f, glm::normalize(direction)), getComposition()->getX(),
+		//	getComposition()->getY(), 1.0f, glm::normalize(direction), "./assets/sprite/tennis_ball.png", true);
+
+		createProjectile(getComposition(), GameObjects::BASE_BALL, 1.0f, glm::normalize(direction), "./assets/sprite/tennis_ball.png");
 	}
 
 	void BaseballAttack::Attack2()
@@ -61,27 +64,42 @@ namespace GameComponents {
 
 		//GameObjects::BaseGameObject *arrow = GameSystems::ObjectFactory::getInstance().createProjectile(getComposition(), getComposition()->getX(),
 		//	getComposition()->getY(), /*this->getDuration()*/ 1.0f, glm::normalize(direction), GameSystems::ObjectFactory::SOCCER_BALL);
-		GameObjects::BaseGameObject *arrow = GameSystems::ObjectFactory::getInstance().createProjectile(createProjectile(getComposition(), ATTACK1, 1.0f, glm::normalize(direction)), getComposition()->getX(),
-			getComposition()->getY(), 1.0f, glm::normalize(direction), "./assets/sprite/tennis_ball.png", false);
+		/*GameObjects::BaseGameObject *arrow = GameSystems::ObjectFactory::getInstance().createProjectile(createProjectile(getComposition(), ATTACK1, 1.0f, glm::normalize(direction)), getComposition()->getX(),
+			getComposition()->getY(), 1.0f, glm::normalize(direction), "./assets/sprite/bat.png", false);*/
+
+		createProjectile(getComposition(), GameObjects::BAT, 1.0f, glm::normalize(direction), "./assets/sprite/bat.png");
 	}
 
 	void BaseballAttack::Attack3()
 	{
 	}
 
-	GameObjects::BaseGameObject *BaseballAttack::createProjectile(GameObjects::BaseGameObject *shooter, Attack const type, float base_force, glm::vec2 direction)
+	GameObjects::BaseGameObject *BaseballAttack::createProjectile(GameObjects::BaseGameObject *shooter, GameObjects::ProjectileType const type, float base_force, glm::vec2 direction, std::string sprite)
 	{
-		GameObjects::BaseGameObject *projectile = NULL;
-		GameComponents::BodyComponent *body = NULL;
-
-		projectile = new GameObjects::BaseGameObject();
+		GameObjects::BaseGameObject *projectile = GameSystems::ObjectFactory::getInstance().getUsableProjectile(type);
 		assert(projectile != NULL);
+		GameComponents::BodyComponent *body = NULL;
+		GameComponents::DeathTimerComponent *deathTime = NULL;
+
+		if (projectile) {
+			body = dynamic_cast<GameComponents::BodyComponent*>(projectile->getComponent(GameComponents::PHYSIC));
+		}
+		else {
+			projectile = new GameObjects::BaseGameObject();
+			assert(projectile != NULL);
+			body = new GameComponents::BodyComponent(projectile);
+			new GameComponents::SpriteComponent(projectile, sprite);
+			new GameComponents::BoxCollider(projectile);
+			new GameComponents::VectorDebugComponent(projectile, "square");
+		}
+
 		projectile->setName(shooter->getName());
 		projectile->setDepth(0);
 		projectile->setType(GameObjects::objectType::PROJECTILE);
+		projectile->setProjectileType(type);
 		switch (type)
 		{
-		case ATTACK1:
+		case GameObjects::BASE_BALL:
 			projectile->setBounce(0.3f);
 			projectile->setMass(25.0f);
 			shooter->setCooldown(1500.0f); // A changer
@@ -90,8 +108,7 @@ namespace GameComponents {
 			projectile->setScale(0.50f);
 			projectile->setPower(20);
 			break;
-		case ATTACK2:
-			projectile->setBounce(0.3f);
+		case GameObjects::BAT:
 			projectile->setBounce(0.3f);
 			projectile->setMass(25.0f);
 			shooter->setCooldown(1500.0f); // A changer
@@ -99,16 +116,20 @@ namespace GameComponents {
 			projectile->setWidth(int(30 * 0.50f));
 			projectile->setScale(0.50f);
 			projectile->setPower(20);
+			deathTime = new GameComponents::DeathTimerComponent(projectile);
+			deathTime->setDeathTime(10);
+
 			break;
-		case ATTACK3:
+		case GameObjects::BLOCK:
 			projectile->setBounce(0.3f);
 			break;
 		default:
 			break;
 		}
-		body = new GameComponents::BodyComponent(projectile);
 		assert(body != NULL);
 		body->Init(base_force, direction);
+
+		GameSystems::ObjectFactory::getInstance().createProjectile(projectile);
 		return projectile;
 	}
 }
