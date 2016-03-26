@@ -152,6 +152,18 @@ namespace GameComponents {
 	{
 		position.y = (float) y;
 	}
+	void BodyComponent::setGravity(float intensity)
+	{
+		gravity = glm::vec2(0.0, intensity);
+	}
+	void BodyComponent::setForce(glm::vec2 direction, float intensity)
+	{
+		forces = direction * intensity;
+	}
+	void BodyComponent::setVelocity(glm::vec2 direction, float intensity)
+	{
+		velocity = direction * intensity;
+	}
 	int BodyComponent::getPositionX()
 	{
 		return (int) position.x;

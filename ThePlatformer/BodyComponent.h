@@ -28,6 +28,9 @@ namespace GameComponents {
 
 		void setPositionX(int x);
 		void setPositionY(int y);
+		void setGravity(float);
+		void setForce(glm::vec2, float);
+		void setVelocity(glm::vec2, float);
 		int getPositionX();
 		int getPositionY();
 
