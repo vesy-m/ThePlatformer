@@ -14,6 +14,7 @@ namespace GameComponents {
 	{
 		friend class ::GameSystems::ObjectFactory;
 	public:
+		BodyComponent(GameObjects::BaseGameObject*);
 		virtual ~BodyComponent();
 
 		virtual COMPONENT_TYPE getType() const;
@@ -35,7 +36,6 @@ namespace GameComponents {
 		int getPositionY();
 
 	private:
-		BodyComponent(GameObjects::BaseGameObject*);
 		std::ofstream m_log_file;
 		glm::vec2 position;
 		glm::vec2 velocity;

@@ -77,11 +77,12 @@ namespace GameSystems {
 		ObjectFactory::getInstance().currentLevel.putObjectDepthOrdered(obj);
 	}
 
-	GameObjects::BaseGameObject *ObjectFactory::createProjectile(GameObjects::BaseGameObject *projectile, unsigned int x, unsigned int y, float base_force, glm::vec2 direction, std::string const &sprite) {
+	GameObjects::BaseGameObject *ObjectFactory::createProjectile(GameObjects::BaseGameObject *projectile, unsigned int x, unsigned int y, float base_force, glm::vec2 direction, std::string const &sprite, bool gravity) {
 		//GameObjects::BaseGameObject *projectile = NULL;
 		GameComponents::BodyComponent *body = NULL;
 		if (this->old_objects.size() == 0) {
 			new GameComponents::SpriteComponent(projectile, sprite);
+			body = dynamic_cast<GameComponents::BodyComponent*>(projectile->getComponent(GameComponents::PHYSIC));
 			//projectile = new GameObjects::BaseGameObject();
 			//projectile->setName(shooter->getName());
 			//projectile->setDepth(0);
@@ -117,7 +118,6 @@ namespace GameSystems {
 
 			new GameComponents::BoxCollider(projectile);
 			new GameComponents::VectorDebugComponent(projectile, "square");
-			body = new GameComponents::BodyComponent(projectile);
 		}
 		else {
 			projectile = dynamic_cast<GameObjects::BaseGameObject*>(this->old_objects.front());
@@ -132,6 +132,8 @@ namespace GameSystems {
 		projectile->setY(y);
 		projectile->Init();
 		body->Init(base_force, direction);
+		if (!gravity)
+			body->setGravity(0);
 		this->currentLevel.putObjectDepthOrdered(projectile);
 		return (projectile);
 	}

@@ -45,8 +45,8 @@ namespace GameComponents {
 
 		//GameObjects::BaseGameObject *arrow = GameSystems::ObjectFactory::getInstance().createProjectile(getComposition(), getComposition()->getX(),
 		//	getComposition()->getY(), /*this->getDuration()*/ 1.0f, glm::normalize(direction), GameSystems::ObjectFactory::SOCCER_BALL);
-		GameObjects::BaseGameObject *arrow = GameSystems::ObjectFactory::getInstance().createProjectile(createProjectile(getComposition(), ATTACK1), getComposition()->getX(),
-			getComposition()->getY(), /*this->getDuration()*/ 1.0f, glm::normalize(direction), "./assets/sprite/tennis_ball.png");
+		GameObjects::BaseGameObject *arrow = GameSystems::ObjectFactory::getInstance().createProjectile(createProjectile(getComposition(), ATTACK1, 1.0f, glm::normalize(direction)), getComposition()->getX(),
+			getComposition()->getY(), 1.0f, glm::normalize(direction), "./assets/sprite/tennis_ball.png", true);
 	}
 
 	void BaseballAttack::Attack2()
@@ -61,19 +61,21 @@ namespace GameComponents {
 
 		//GameObjects::BaseGameObject *arrow = GameSystems::ObjectFactory::getInstance().createProjectile(getComposition(), getComposition()->getX(),
 		//	getComposition()->getY(), /*this->getDuration()*/ 1.0f, glm::normalize(direction), GameSystems::ObjectFactory::SOCCER_BALL);
-		GameObjects::BaseGameObject *arrow = GameSystems::ObjectFactory::getInstance().createProjectile(createProjectile(getComposition(), ATTACK1), getComposition()->getX(),
-			getComposition()->getY(), /*this->getDuration()*/ 1.0f, glm::normalize(direction), "./assets/sprite/tennis_ball.png");
+		GameObjects::BaseGameObject *arrow = GameSystems::ObjectFactory::getInstance().createProjectile(createProjectile(getComposition(), ATTACK1, 1.0f, glm::normalize(direction)), getComposition()->getX(),
+			getComposition()->getY(), 1.0f, glm::normalize(direction), "./assets/sprite/tennis_ball.png", false);
 	}
 
 	void BaseballAttack::Attack3()
 	{
 	}
 
-	GameObjects::BaseGameObject *BaseballAttack::createProjectile(GameObjects::BaseGameObject *shooter, Attack const type)
+	GameObjects::BaseGameObject *BaseballAttack::createProjectile(GameObjects::BaseGameObject *shooter, Attack const type, float base_force, glm::vec2 direction)
 	{
 		GameObjects::BaseGameObject *projectile = NULL;
+		GameComponents::BodyComponent *body = NULL;
 
 		projectile = new GameObjects::BaseGameObject();
+		assert(projectile != NULL);
 		projectile->setName(shooter->getName());
 		projectile->setDepth(0);
 		projectile->setType(GameObjects::objectType::PROJECTILE);
@@ -104,6 +106,9 @@ namespace GameComponents {
 		default:
 			break;
 		}
+		body = new GameComponents::BodyComponent(projectile);
+		assert(body != NULL);
+		body->Init(base_force, direction);
 		return projectile;
 	}
 }
