@@ -29,7 +29,7 @@ namespace										GameComponents
 		virtual void							Update(double);
 		virtual void							Init() = 0;
 		virtual void							sendMessage(GameMessage::Message *) = 0;
-		virtual GameObjects::BaseGameObject		*createProjectile(GameObjects::BaseGameObject *, Attack const, float, glm::vec2) = 0;
+		virtual GameObjects::BaseGameObject		*createProjectile(GameObjects::BaseGameObject *, GameObjects::ProjectileType const, float, glm::vec2, std::string) = 0;
 
 		virtual COMPONENT_TYPE					getType() const;
 

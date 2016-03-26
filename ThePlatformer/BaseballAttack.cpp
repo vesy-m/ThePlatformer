@@ -77,7 +77,6 @@ namespace GameComponents {
 	GameObjects::BaseGameObject *BaseballAttack::createProjectile(GameObjects::BaseGameObject *shooter, GameObjects::ProjectileType const type, float base_force, glm::vec2 direction, std::string sprite)
 	{
 		GameObjects::BaseGameObject *projectile = GameSystems::ObjectFactory::getInstance().getUsableProjectile(type);
-		assert(projectile != NULL);
 		GameComponents::BodyComponent *body = NULL;
 		GameComponents::DeathTimerComponent *deathTime = NULL;
 
