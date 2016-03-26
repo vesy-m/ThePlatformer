@@ -31,27 +31,21 @@ namespace GameComponents {
 					inputState.at(it->first) = false;
 					switch (it->first)
 					{
-					case INPUT_TYPE::FIRE:
-					{
-						if (this->savedDt < this->getComposition()->getCooldown()) break;
-
-						int centerX = (this->getComposition()->getX() + (this->getComposition()->getWidth() / 2));
-						int centerY = (this->getComposition()->getY() + (this->getComposition()->getHeight() / 2));
-						GameComponents::SpriteComponent *sprite = reinterpret_cast<GameComponents::SpriteComponent*>(getComposition()->getComponent(GameComponents::SPRITE));
-
-						glm::vec2 direction = glm::vec2(100.0, 100.0);
-						if (aimAxisX >= -50.0 && aimAxisX <= 50.0 && aimAxisY >= -50.0 && aimAxisY <= 50.0) {
-							if (sprite->revertX) direction = glm::vec2((-100 + centerX) - centerX, (-70 + centerY) - centerY);
-							else direction = glm::vec2((100 + centerX) - centerX, (-70 + centerY) - centerY);
-						}
-						else direction = glm::vec2((aimAxisX + centerX) - centerX, (aimAxisY + centerY) - centerY);
-
-						GameObjects::BaseGameObject *arrow = GameSystems::ObjectFactory::getInstance().createProjectile(getComposition(), getComposition()->getX(),
-							getComposition()->getY(), this->getDuration(), glm::normalize(direction), GameSystems::ObjectFactory::SOCCER_BALL);
-						this->setDuration(500.0f);
-						this->savedDt = 0.0f;
+					case INPUT_TYPE::LEFT:
+						getComposition()->sendMessage(new GameMessage::Message(GameMessage::LEFT_RELEASED));
 						break;
-					}
+					case INPUT_TYPE::RIGHT:
+						getComposition()->sendMessage(new GameMessage::Message(GameMessage::RIGHT_RELEASED));
+						break;
+					case INPUT_TYPE::ATTACK1:
+						this->composition->sendMessage(new GameMessage::Message(GameMessage::ATTACK1));
+						break;
+					case INPUT_TYPE::ATTACK2:
+						this->composition->sendMessage(new GameMessage::Message(GameMessage::ATTACK2));
+						break;
+					case INPUT_TYPE::ATTACK3:
+						this->composition->sendMessage(new GameMessage::Message(GameMessage::ATTACK3));
+						break;
 					}
 					if (savedMessage.size() >= 10)
 						savedMessage.erase(savedMessage.begin());
@@ -71,23 +65,6 @@ namespace GameComponents {
 							getComposition()->sendMessage(new GameMessage::Message(GameMessage::RIGHT_RELEASED));
 						else if(it->first == INPUT_TYPE::LEFT)
 							getComposition()->sendMessage(new GameMessage::Message(GameMessage::LEFT_RELEASED));
-						else if (it->first == INPUT_TYPE::FIRE) {
-							int centerX = this->getComposition()->getX() + (this->getComposition()->getHeight() / 2);
-							int centerY = this->getComposition()->getY() + (this->getComposition()->getHeight() / 2);
-							GameComponents::SpriteComponent *sprite = reinterpret_cast<GameComponents::SpriteComponent*>(getComposition()->getComponent(GameComponents::SPRITE));
-
-							glm::vec2 direction = glm::vec2(100.0, 100.0);
-							if (aimAxisX >= -50.0 && aimAxisX <= 50.0 && aimAxisY >= -50.0 && aimAxisY <= 50.0) {
-								if (sprite->revertX) direction = glm::vec2((-100 + centerX) - centerX, (-100 + centerY) - centerY);
-								else direction = glm::vec2((100 + centerX) - centerX, (-100 + centerY) - centerY);
-							}
-							else direction = glm::vec2((aimAxisX + centerX) - centerX, (aimAxisY + centerY) - centerY);
-
-							std::cout << "Duration: " << this->getDuration() << std::endl;
-							GameObjects::BaseGameObject *arrow = GameSystems::ObjectFactory::getInstance().createProjectile(getComposition(), getComposition()->getX(),
-								getComposition()->getY(), this->getDuration(), glm::normalize(direction), GameSystems::ObjectFactory::SOCCER_BALL);
-							this->setDuration(500.0f);
-						}
 						if (savedMessage.size() >= 10)
 							savedMessage.erase(savedMessage.begin());
 						savedMessage.push_back(it->first);
@@ -95,19 +72,6 @@ namespace GameComponents {
 				}
 			}
 		}
-		glm::vec2 direction;
-		glm::vec2 aimAxis = glm::vec2(aimAxisX, aimAxisY);
-		GameComponents::SpriteComponent *sprite = reinterpret_cast<GameComponents::SpriteComponent*>(getComposition()->getComponent(GameComponents::SPRITE));
-
-		if ((sprite->revertX && aimAxisX > 0.0f && aimAxisX <= 0.05f) ||
-			(!sprite->revertX && aimAxisX < 0.0f && aimAxisX >= -0.05f)) {
-			aimAxisX *= -1;
-		}
-
-		if (aimAxisX == 0.0f && aimAxisY == 0.0f) direction = aimAxis;
-		else direction = glm::normalize(aimAxis);
-
-		this->composition->sendMessage(new GameMessage::AimMessage(direction));
 	}
 
 	bool ControllerInputComponent::DetectAxisInput(sf::Event event, int button)

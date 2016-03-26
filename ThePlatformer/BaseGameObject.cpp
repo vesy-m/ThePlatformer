@@ -153,7 +153,7 @@ namespace GameObjects {
 		if (this->m_vector) this->m_vector->sendMessage(message);
 		if (this->m_button) this->m_button->sendMessage(message);
 		if (this->m_aim) this->m_aim->sendMessage(message);
-		if (this->m_fire && message->id == GameMessage::FIRE) this->m_fire->sendMessage(message);
+		//if (this->m_fire && message->id == GameMessage::FIRE) this->m_fire->sendMessage(message);
 		if (message->id == GameMessage::DAMAGE) this->setDamage(dynamic_cast<GameMessage::DamageMessage*>(message));
 		if (this->m_sound) this->m_sound->sendMessage(message);
 	}

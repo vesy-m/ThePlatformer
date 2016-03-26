@@ -1,7 +1,7 @@
 #include "FireMessage.h"
 
 namespace GameMessage {
-	FireMessage::FireMessage(sf::Event &eve, float duration) : Message(FIRE), eve(eve), duration(duration)
+	FireMessage::FireMessage(sf::Event &eve, float duration) : Message(ATTACK1), eve(eve), duration(duration)
 	{
 	}
 
