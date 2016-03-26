@@ -76,7 +76,7 @@ namespace GameComponents {
 
 	GameObjects::BaseGameObject *BaseballAttack::createProjectile(GameObjects::BaseGameObject *shooter, GameObjects::ProjectileType const type, float base_force, glm::vec2 direction, std::string sprite)
 	{
-		GameObjects::BaseGameObject *projectile = GameSystems::ObjectFactory::getInstance().getUsableProjectile(type);
+		GameObjects::BaseGameObject *projectile = NULL;/*GameSystems::ObjectFactory::getInstance().getUsableProjectile(type);*/
 		GameComponents::BodyComponent *body = NULL;
 		GameComponents::DeathTimerComponent *deathTime = NULL;
 
@@ -130,7 +130,7 @@ namespace GameComponents {
 		if (type == GameObjects::BAT)
 		{
 			deathTime = new GameComponents::DeathTimerComponent(projectile);
-			deathTime->setDeathTime(10);
+			deathTime->setDeathTime(100);
 			body->setGravity(0.0f);
 		}
 		GameSystems::ObjectFactory::getInstance().createProjectile(projectile);

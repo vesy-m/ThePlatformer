@@ -26,7 +26,7 @@ namespace GameComponents {
 	{
 		this->savedTime += dt;
 
-		if (this->savedTime >= this->deathTime) this->composition->destroy();
+		if (this->savedTime >= this->deathTime) this->composition->destroy(true);
 	}
 
 

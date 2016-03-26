@@ -231,8 +231,8 @@ namespace GameSystems {
 		std::list<GameObjects::BaseGameObject*> &list = this->currentLevel.getObjects();
 		list.erase(std::remove_if(list.begin(), list.end(), [&](auto obj) {
 			if (obj->destroy()) {
-				if (obj->getType() == GameObjects::PROJECTILE) this->old_objects.push_back(obj);
-				else delete obj;
+				/*if (obj->getType() == GameObjects::PROJECTILE) this->old_objects.push_back(obj);
+				else */delete obj;
 				return true;
 			}
 			return false;
