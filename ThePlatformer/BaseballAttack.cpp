@@ -86,48 +86,53 @@ namespace GameComponents {
 		else {
 			projectile = new GameObjects::BaseGameObject();
 			assert(projectile != NULL);
-			body = new GameComponents::BodyComponent(projectile);
 			new GameComponents::SpriteComponent(projectile, sprite);
 			new GameComponents::BoxCollider(projectile);
 			new GameComponents::VectorDebugComponent(projectile, "square");
-		}
+			body = new GameComponents::BodyComponent(projectile);
 
-		projectile->setName(shooter->getName());
-		projectile->setDepth(0);
-		projectile->setType(GameObjects::objectType::PROJECTILE);
-		projectile->setProjectileType(type);
-		switch (type)
-		{
-		case GameObjects::BASE_BALL:
-			projectile->setBounce(0.3f);
-			projectile->setMass(25.0f);
-			shooter->setCooldown(1500.0f); // A changer
-			projectile->setHeight(int(30 * 0.50f));
-			projectile->setWidth(int(30 * 0.50f));
-			projectile->setScale(0.50f);
-			projectile->setPower(20);
-			break;
-		case GameObjects::BAT:
-			projectile->setBounce(0.3f);
-			projectile->setMass(25.0f);
-			shooter->setCooldown(1500.0f); // A changer
-			projectile->setHeight(int(30 * 0.50f));
-			projectile->setWidth(int(30 * 0.50f));
-			projectile->setScale(0.50f);
-			projectile->setPower(20);
-			deathTime = new GameComponents::DeathTimerComponent(projectile);
-			deathTime->setDeathTime(10);
-
-			break;
-		case GameObjects::BLOCK:
-			projectile->setBounce(0.3f);
-			break;
-		default:
-			break;
+			projectile->setName(shooter->getName());
+			projectile->setDepth(0);
+			projectile->setType(GameObjects::objectType::PROJECTILE);
+			projectile->setProjectileType(type);
+			switch (type)
+			{
+			case GameObjects::BASE_BALL:
+				projectile->setBounce(0.3f);
+				projectile->setMass(25.0f);
+				shooter->setCooldown(1500.0f); // A changer
+				projectile->setHeight(int(30 * 0.50f));
+				projectile->setWidth(int(30 * 0.50f));
+				projectile->setScale(0.50f);
+				projectile->setPower(20);
+				break;
+			case GameObjects::BAT:
+				projectile->setBounce(0.3f);
+				projectile->setMass(25.0f);
+				shooter->setCooldown(1500.0f); // A changer
+				projectile->setHeight(int(30 * 0.50f));
+				projectile->setWidth(int(30 * 0.50f));
+				projectile->setScale(0.50f);
+				projectile->setPower(20);
+				break;
+			case GameObjects::BLOCK:
+				projectile->setBounce(0.3f);
+				break;
+			default:
+				break;
+			}
 		}
+		projectile->setX(shooter->getX());
+		projectile->setY(shooter->getY());
+		projectile->Init();
 		assert(body != NULL);
 		body->Init(base_force, direction);
-
+		if (type == GameObjects::BAT)
+		{
+			deathTime = new GameComponents::DeathTimerComponent(projectile);
+			deathTime->setDeathTime(10);
+			body->setGravity(0.0f);
+		}
 		GameSystems::ObjectFactory::getInstance().createProjectile(projectile);
 		return projectile;
 	}
