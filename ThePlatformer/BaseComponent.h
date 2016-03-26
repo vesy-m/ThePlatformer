@@ -21,7 +21,8 @@ namespace GameComponents {
 		BUTTON,
 		FIRE,
 		AIM,
-		SOUND
+		SOUND,
+		ATTACK
 	};
 
 	class BaseComponent

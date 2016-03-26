@@ -35,6 +35,7 @@ namespace GameObjects {
 		this->m_vector = NULL;
 		this->m_aim = NULL;
 		this->m_sound = NULL;
+		this->m_attack = NULL;
 	}
 
 	void BaseGameObject::Init(void) {
@@ -47,6 +48,7 @@ namespace GameObjects {
 		if (this->m_fire) this->m_fire->Init();
 		if (this->m_aim) this->m_aim->Init();
 		if (this->m_sound) this->m_sound->Init();
+		if (this->m_attack) this->m_attack->Init();
 	}
 
 	BaseGameObject::~BaseGameObject()
@@ -59,6 +61,7 @@ namespace GameObjects {
 		delete this->m_vector;
 		delete this->m_aim;
 		delete this->m_sound;
+		delete this->m_attack;
 	}
 
 	GameComponents::BaseComponent *BaseGameObject::getComponent(GameComponents::COMPONENT_TYPE type) {
@@ -83,6 +86,8 @@ namespace GameObjects {
 			return this->m_aim;
 		case GameComponents::SOUND:
 			return this->m_sound;
+		case GameComponents::ATTACK:
+			return this->m_attack;
 		default:
 			return NULL;
 		}
@@ -154,6 +159,7 @@ namespace GameObjects {
 		if (this->m_button) this->m_button->sendMessage(message);
 		if (this->m_aim) this->m_aim->sendMessage(message);
 		//if (this->m_fire && message->id == GameMessage::FIRE) this->m_fire->sendMessage(message);
+		if (this->m_attack) this->m_attack->sendMessage(message);
 		if (message->id == GameMessage::DAMAGE) this->setDamage(dynamic_cast<GameMessage::DamageMessage*>(message));
 		if (this->m_sound) this->m_sound->sendMessage(message);
 	}
