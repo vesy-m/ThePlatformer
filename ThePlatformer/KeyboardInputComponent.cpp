@@ -35,6 +35,12 @@ namespace GameComponents {
 					case INPUT_TYPE::RIGHT:
 						getComposition()->sendMessage(new GameMessage::Message(GameMessage::RIGHT_RELEASED));
 						break;
+					case INPUT_TYPE::ATTACK1:
+						if (this->savedDt < this->getComposition()->getCooldown()) break;
+						this->composition->sendMessage(new GameMessage::Message(GameMessage::ATTACK1));
+						this->setDuration(500.0f);
+						this->savedDt = 0.0f;
+						break;
 					default:
 						break;
 					}
@@ -43,42 +49,7 @@ namespace GameComponents {
 					savedMessage.push_back(it->first);
 				}
 			}
-			else if (event.type == sf::Event::MouseButtonPressed)
-			{
-				if (event.mouseButton.button == it->second && it->first == INPUT_TYPE::FIRE)
-					inputState.at(it->first) = true;
-			}
-			else if (event.type == sf::Event::MouseButtonReleased)
-			{
-				if (event.key.code == it->second)
-				{
-					inputState.at(it->first) = false;
-					switch (it->first)
-					{
-						case INPUT_TYPE::FIRE:
-						{
-							if (this->savedDt < this->getComposition()->getCooldown()) break;
-							this->composition->sendMessage(new GameMessage::FireMessage(event, this->getDuration()));
-							this->setDuration(500.0f);
-							this->savedDt = 0.0f;
-							break;
-						}
-					}
-					if (savedMessage.size() >= 10)
-						savedMessage.erase(savedMessage.begin());
-					savedMessage.push_back(it->first);
-				}
-			}
-			setMousePosition(event);
 		}
-		int centerX = (this->getComposition()->getX() + (this->getComposition()->getWidth() / 2));
-		int centerY = (this->getComposition()->getY() + (this->getComposition()->getHeight() / 2));
-
-		glm::vec2 direction = glm::vec2(mouseX - centerX, mouseY - centerY);
-
-		if (direction.x != 0.0f || direction.y != 0.0f) direction = glm::normalize(direction);
-
-		this->composition->sendMessage(new GameMessage::AimMessage(direction));
 	}
 
 	void KeyboardInputComponent::Init()
@@ -88,8 +59,6 @@ namespace GameComponents {
 			GameSystems::JSONParser parser(inputFilename);
 			ParseInputFile(parser.getJSONValue());
 		}
-		mouseX = 0;
-		mouseY = 0;
 	}
 
 	int	KeyboardInputComponent::ParseInputFile(GameTools::JsonValue o) {
