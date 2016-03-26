@@ -40,7 +40,7 @@ namespace GameComponents {
 
 		InputComponent(GameObjects::BaseGameObject *);
 		virtual ~InputComponent();
-		virtual COMPONENT_TYPE getType() { return WINDOW; }
+		virtual COMPONENT_TYPE getType() const { return WINDOW; }
 		virtual GameObjects::BaseGameObject *getComposition();
 		virtual void Update(double);
 

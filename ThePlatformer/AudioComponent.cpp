@@ -164,5 +164,5 @@ namespace GameComponents
 		}
 	}
 
-	COMPONENT_TYPE AudioComponent::getType() { return _type; }
+	COMPONENT_TYPE AudioComponent::getType() const { return _type; }
 }

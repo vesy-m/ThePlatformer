@@ -24,7 +24,7 @@ namespace GameComponents {
 		}
 	}
 
-	COMPONENT_TYPE VectorDebugComponent::getType()
+	COMPONENT_TYPE VectorDebugComponent::getType() const
 	{
 		return this->type;
 	}

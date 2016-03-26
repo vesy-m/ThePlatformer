@@ -24,7 +24,7 @@ namespace GameComponents {
 		virtual void			Init();
 		virtual void			sendMessage(GameMessage::Message*);
 
-		virtual COMPONENT_TYPE	getType();
+		virtual COMPONENT_TYPE	getType() const;
 
 	private:
 		AudioComponent(GameObjects::BaseGameObject*, std::string const &);

@@ -64,7 +64,7 @@ namespace GameComponents {
 		}
 	}
 
-	COMPONENT_TYPE SpriteComponent::getType()
+	COMPONENT_TYPE SpriteComponent::getType() const
 	{
 		return this->type;
 	}

@@ -30,7 +30,7 @@ namespace GameComponents {
 		ColliderComponent(GameObjects::BaseGameObject *object) : BaseComponent(object) { object->attachComponent(this); };
 		virtual ~ColliderComponent() {};
 		virtual void Update(double) = 0;
-		virtual COMPONENT_TYPE getType() = 0;
+		virtual COMPONENT_TYPE getType() const = 0;
 		virtual void Init() = 0;
 
 		void ResolveCollision(Manifold *manifold);
