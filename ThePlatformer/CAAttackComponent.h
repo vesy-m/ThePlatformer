@@ -1,6 +1,10 @@
 #pragma once
 
+#include <glm/glm.hpp>
+
 #include "BaseGameObject.h"
+#include "ObjectFactory.h"
+
 
 namespace GameObjects
 {

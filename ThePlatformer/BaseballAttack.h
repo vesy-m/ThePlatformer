@@ -1,5 +1,7 @@
 #pragma once
+
 #include "CAAttackComponent.h"
+
 namespace GameSystems {
 	class ObjectFactory;
 }
