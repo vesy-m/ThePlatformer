@@ -10,6 +10,7 @@
 #include "FireComponent.h"
 #include "FireMessage.h"
 #include "AudioComponent.h"
+#include "CAAttackComponent.h"
 
 namespace GameObjects {
 	BaseGameObject::BaseGameObject()
@@ -125,6 +126,11 @@ namespace GameObjects {
 	void BaseGameObject::attachComponent(GameComponents::FireComponent *fire)
 	{
 		this->m_fire = fire;
+	}
+
+	void BaseGameObject::attachComponent(GameComponents::CAAttackComponent *attack)
+	{
+		this->m_attack = attack;
 	}
 
 	void BaseGameObject::attachComponent(GameComponents::AimComponent *aim)

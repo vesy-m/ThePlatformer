@@ -210,6 +210,9 @@
     <ClCompile Include="AudioComponent.cpp">
       <Filter>GameComponents\Source</Filter>
     </ClCompile>
+    <ClCompile Include="CAAttackComponent.cpp">
+      <Filter>GameComponents\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameEngine.h">
@@ -348,6 +351,9 @@
       <Filter>GameMessages\Header</Filter>
     </ClInclude>
     <ClInclude Include="AudioComponent.h">
+      <Filter>GameComponents\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CAAttackComponent.h">
       <Filter>GameComponents\Header</Filter>
     </ClInclude>
   </ItemGroup>

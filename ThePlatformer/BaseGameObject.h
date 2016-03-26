@@ -17,6 +17,7 @@ namespace GameComponents {
 	class BodyComponent;
 	class ButtonComponent;
 	class FireComponent;
+	class CAAttackComponent;
 	class AudioComponent;
 }
 
@@ -43,6 +44,7 @@ namespace GameObjects {
 		void attachComponent(GameComponents::BodyComponent*);
 		void attachComponent(GameComponents::ButtonComponent*);
 		void attachComponent(GameComponents::FireComponent*);
+		void attachComponent(GameComponents::CAAttackComponent*);
 		void attachComponent(GameComponents::AimComponent*);
 		void attachComponent(GameComponents::AudioComponent*);
 		void sendMessage(GameMessage::Message*);
@@ -93,6 +95,7 @@ namespace GameObjects {
 		GameComponents::FireComponent *m_fire;
 		GameComponents::AimComponent *m_aim;
 		GameComponents::AudioComponent *m_sound;
+		GameComponents::CAAttackComponent *m_attack;
 		int x;
 		int y;
 		int height;
