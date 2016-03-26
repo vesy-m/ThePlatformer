@@ -170,6 +170,7 @@ copy /Y "$(ProjectDir)\lib\lib-x64\devil-1.7.8\bin\*" "$(OutDir)\"</Command>
     <ClCompile Include="AimMessage.cpp" />
     <ClCompile Include="AudioComponent.cpp" />
     <ClCompile Include="AudioSystem.cpp" />
+    <ClCompile Include="BaseballAttack.cpp" />
     <ClCompile Include="BaseComponent.cpp" />
     <ClCompile Include="BaseGameObject.cpp" />
     <ClCompile Include="BodyComponent.cpp" />
@@ -214,6 +215,7 @@ copy /Y "$(ProjectDir)\lib\lib-x64\devil-1.7.8\bin\*" "$(OutDir)\"</Command>
   <ItemGroup>
     <ClInclude Include="AimComponent.h" />
     <ClInclude Include="AimMessage.h" />
+    <ClInclude Include="BaseballAttack.h" />
     <ClInclude Include="CAAttackComponent.h" />
     <ClInclude Include="AudioComponent.h" />
     <ClInclude Include="AudioSystem.h" />
