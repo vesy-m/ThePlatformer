@@ -13,8 +13,22 @@ namespace GameComponents {
 	void BaseballAttack::Init()
 	{
 	}
-	void BaseballAttack::sendMessage(GameMessage::Message *)
+	void BaseballAttack::sendMessage(GameMessage::Message *message)
 	{
+		switch (message->id)
+		{
+		case GameMessage::ATTACK1:
+			Attack1();
+			break;
+		case GameMessage::ATTACK2:
+			Attack2();
+			break;
+		case GameMessage::ATTACK3:
+			Attack3();
+			break;
+		default:
+			break;
+		}
 	}
 	void BaseballAttack::Attack1()
 	{
@@ -29,9 +43,11 @@ namespace GameComponents {
 		GameObjects::BaseGameObject *arrow = GameSystems::ObjectFactory::getInstance().createProjectile(getComposition(), getComposition()->getX(),
 			getComposition()->getY(), /*this->getDuration()*/ 1.0f, glm::normalize(direction), GameSystems::ObjectFactory::SOCCER_BALL);
 	}
+
 	void BaseballAttack::Attack2()
 	{
 	}
+
 	void BaseballAttack::Attack3()
 	{
 	}
