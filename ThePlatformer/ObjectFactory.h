@@ -33,7 +33,7 @@ namespace GameSystems {
 		};
 		~ObjectFactory();
 		GameObjects::BaseGameObject *parseObject(GameTools::JsonValue&);
-		GameObjects::BaseGameObject *createProjectile(GameObjects::BaseGameObject*, unsigned int, unsigned int, float, glm::vec2, ProjectileType);
+		GameObjects::BaseGameObject *createProjectile(GameObjects::BaseGameObject*, unsigned int, unsigned int, float, glm::vec2, std::string const &sprite);
 		static void attachObject(GameObjects::BaseGameObject*);
 		void buildLevel(GameTools::JsonValue&);
 		GameEngine::Core::Level &getCurrentLevel();

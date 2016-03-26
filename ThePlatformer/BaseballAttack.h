@@ -7,18 +7,25 @@ namespace GameSystems {
 }
 
 namespace GameComponents {
-	class BaseballAttack : public CAAttackComponent
+	class SpriteComponent;
+}
+
+namespace								GameComponents
+{
+	class								BaseballAttack : public CAAttackComponent
 	{
 	public:
 		BaseballAttack(GameObjects::BaseGameObject *);
 		~BaseballAttack();
 
-		void				Init();
-		void				sendMessage(GameMessage::Message *);
+		void							Init();
+		void							sendMessage(GameMessage::Message *);
 
-		void				Attack1();
-		void				Attack2();
-		void				Attack3();
+	private:
+		void							Attack1();
+		void							Attack2();
+		void							Attack3();
+		GameObjects::BaseGameObject		*createProjectile(GameObjects::BaseGameObject *, Attack const);
 	};
 }
 

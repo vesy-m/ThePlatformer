@@ -11,27 +11,35 @@ namespace GameObjects
 	class BaseGameObject;
 }
 
-namespace GameComponents
+namespace										GameComponents
 {
-	class							CAAttackComponent : public BaseComponent
+	enum Attack
+	{
+		ATTACK1,
+		ATTACK2,
+		ATTACK3
+	};
+
+	class										CAAttackComponent : public BaseComponent
 	{
 	public:
 		CAAttackComponent(GameObjects::BaseGameObject *);
 		virtual ~CAAttackComponent();
 
-		virtual void				Update(double);
-		virtual void				Init() = 0;
-		virtual void				sendMessage(GameMessage::Message *) = 0;
+		virtual void							Update(double);
+		virtual void							Init() = 0;
+		virtual void							sendMessage(GameMessage::Message *) = 0;
+		virtual GameObjects::BaseGameObject		*createProjectile(GameObjects::BaseGameObject *, Attack const) = 0;
 
-		virtual COMPONENT_TYPE		getType() const;
+		virtual COMPONENT_TYPE					getType() const;
 
 	private:
-		virtual void				Attack1() = 0;
-		virtual void				Attack2() = 0;
-		virtual void				Attack3() = 0;
+		virtual void							Attack1() = 0;
+		virtual void							Attack2() = 0;
+		virtual void							Attack3() = 0;
 
-		double						_cooldownA1;
-		double						_cooldownA2;
-		double						_cooldownA3;
+		double									_cooldownA1;
+		double									_cooldownA2;
+		double									_cooldownA3;
 	};
 }
