@@ -76,7 +76,7 @@ namespace GameComponents {
 		return false;
 	}
 
-	COMPONENT_TYPE BoxCollider::getType()
+	COMPONENT_TYPE BoxCollider::getType() const
 	{
 		return COMPONENT_TYPE::BOX_COLLIDER;
 	}

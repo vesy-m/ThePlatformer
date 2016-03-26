@@ -20,7 +20,7 @@ namespace GameComponents {
 	public:
 		virtual ~VectorDebugComponent();
 		virtual void sendMessage(GameMessage::Message*);
-		virtual COMPONENT_TYPE getType();
+		virtual COMPONENT_TYPE getType() const;
 		virtual void Update(double);
 		virtual void Init();
 	private:

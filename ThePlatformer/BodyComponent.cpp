@@ -12,7 +12,7 @@ namespace GameComponents {
 	{
 	}
 
-	COMPONENT_TYPE BodyComponent::getType()
+	COMPONENT_TYPE BodyComponent::getType() const
 	{
 		return COMPONENT_TYPE::PHYSIC;
 	}

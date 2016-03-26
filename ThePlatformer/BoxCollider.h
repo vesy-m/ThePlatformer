@@ -13,7 +13,7 @@ namespace GameComponents {
 		BoxCollider(GameObjects::BaseGameObject*);
 	public:
 		virtual ~BoxCollider();
-		virtual COMPONENT_TYPE getType();
+		virtual COMPONENT_TYPE getType() const;
 		virtual void Update(double);
 		virtual void sendMessage(GameMessage::Message*);
 		virtual void Init();

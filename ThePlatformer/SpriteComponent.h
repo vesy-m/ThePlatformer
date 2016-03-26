@@ -25,7 +25,7 @@ namespace GameComponents {
 		SpriteComponent(GameObjects::BaseGameObject*, const std::string&);
 	public:
 		virtual ~SpriteComponent();
-		virtual COMPONENT_TYPE getType();
+		virtual COMPONENT_TYPE getType() const;
 		virtual void Update(double);
 		virtual void Init();
 		virtual void sendMessage(GameMessage::Message*);

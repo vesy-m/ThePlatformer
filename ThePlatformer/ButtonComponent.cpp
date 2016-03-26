@@ -55,7 +55,7 @@ namespace GameComponents {
 		}
 	}
 
-	COMPONENT_TYPE ButtonComponent::getType()
+	COMPONENT_TYPE ButtonComponent::getType() const
 	{
 		return this->type;
 	}

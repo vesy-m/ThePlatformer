@@ -12,7 +12,7 @@ namespace GameComponents {
 	{
 	}
 
-	COMPONENT_TYPE TextComponent::getType()
+	COMPONENT_TYPE TextComponent::getType() const
 	{
 		return this->type;
 	}

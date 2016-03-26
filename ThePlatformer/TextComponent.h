@@ -16,7 +16,7 @@ namespace GameComponents {
 		friend class GameSystems::ObjectFactory;
 	public:
 		virtual ~TextComponent();
-		virtual COMPONENT_TYPE getType();
+		virtual COMPONENT_TYPE getType() const;
 		virtual void Update(double);
 		void drawText(std::string str, int posX, int posY, int size = 5);
 		virtual void Update();

@@ -16,7 +16,7 @@ namespace GameComponents {
 	public:
 		virtual ~BodyComponent();
 
-		virtual COMPONENT_TYPE getType();
+		virtual COMPONENT_TYPE getType() const;
 		virtual void Update(double);
 		virtual void Init();
 		virtual void Init(float, glm::vec2);

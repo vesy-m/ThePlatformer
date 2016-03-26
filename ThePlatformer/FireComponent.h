@@ -10,7 +10,7 @@ namespace GameComponents {
 	public:
 		FireComponent(GameObjects::BaseGameObject*);
 		virtual ~FireComponent();
-		virtual COMPONENT_TYPE getType() { return (FIRE); }
+		virtual COMPONENT_TYPE getType() const { return (FIRE); }
 		virtual void Update(double) {};
 		virtual void Init() = 0;
 		virtual void sendMessage(GameMessage::Message*) = 0;

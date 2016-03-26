@@ -20,7 +20,7 @@ namespace GameComponents {
 		this->maxPoint = glm::vec2(this->composition->getX() + this->composition->getHeight(), this->composition->getY() + this->composition->getHeight());
 	}
 
-	COMPONENT_TYPE CircleCollider::getType()
+	COMPONENT_TYPE CircleCollider::getType() const
 	{
 		return COMPONENT_TYPE::CIRCLE_COLLIDER;
 	}
