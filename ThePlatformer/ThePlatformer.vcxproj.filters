@@ -216,7 +216,7 @@
     <ClCompile Include="BaseballAttack.cpp">
       <Filter>GameComponents\Source</Filter>
     </ClCompile>
-    <ClCompile Include="DeathTimerComponent.cpp">
+    <ClCompile Include="TimerComponent.cpp">
       <Filter>GameComponents\Source</Filter>
     </ClCompile>
   </ItemGroup>
@@ -365,7 +365,7 @@
     <ClInclude Include="BaseballAttack.h">
       <Filter>GameComponents\Header</Filter>
     </ClInclude>
-    <ClInclude Include="DeathTimerComponent.h">
+    <ClInclude Include="TimerComponent.h">
       <Filter>GameComponents\Header</Filter>
     </ClInclude>
   </ItemGroup>

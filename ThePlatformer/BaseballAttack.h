@@ -25,6 +25,7 @@ namespace								GameComponents
 		void							Attack1();
 		void							Attack2();
 		void							Attack3();
+		void							Attack3Released();
 		GameObjects::BaseGameObject		*createProjectile(GameObjects::BaseGameObject *, GameObjects::ProjectileType const, float, glm::vec2, std::string);
 	};
 }

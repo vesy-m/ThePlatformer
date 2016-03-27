@@ -19,7 +19,7 @@ namespace GameComponents {
 	class FireComponent;
 	class CAAttackComponent;
 	class AudioComponent;
-	class DeathTimerComponent;
+	class TimerComponent;
 }
 
 namespace GameObjects {
@@ -57,7 +57,7 @@ namespace GameObjects {
 		void attachComponent(GameComponents::CAAttackComponent*);
 		void attachComponent(GameComponents::AimComponent*);
 		void attachComponent(GameComponents::AudioComponent*);
-		void attachComponent(GameComponents::DeathTimerComponent*);
+		void attachComponent(GameComponents::TimerComponent*);
 		void sendMessage(GameMessage::Message*);
 		void setX(int x);
 		int getX();
@@ -107,7 +107,7 @@ namespace GameObjects {
 		GameComponents::AimComponent *m_aim;
 		GameComponents::AudioComponent *m_sound;
 		GameComponents::CAAttackComponent *m_attack;
-		GameComponents::DeathTimerComponent *m_deathTimer;
+		GameComponents::TimerComponent *m_timer;
 		int x;
 		int y;
 		int height;

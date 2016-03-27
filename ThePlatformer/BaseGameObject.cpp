@@ -11,7 +11,7 @@
 #include "FireMessage.h"
 #include "AudioComponent.h"
 #include "CAAttackComponent.h"
-#include "DeathTimerComponent.h"
+#include "TimerComponent.h"
 
 namespace GameObjects {
 	BaseGameObject::BaseGameObject()
@@ -37,7 +37,7 @@ namespace GameObjects {
 		this->m_aim = NULL;
 		this->m_sound = NULL;
 		this->m_attack = NULL;
-		this->m_deathTimer = NULL;
+		this->m_timer = NULL;
 	}
 
 	void BaseGameObject::Init(void) {
@@ -51,7 +51,7 @@ namespace GameObjects {
 		if (this->m_aim) this->m_aim->Init();
 		if (this->m_sound) this->m_sound->Init();
 		if (this->m_attack) this->m_attack->Init();
-		if (this->m_deathTimer) this->m_deathTimer->Init();
+		if (this->m_timer) this->m_timer->Init();
 	}
 
 	BaseGameObject::~BaseGameObject()
@@ -65,7 +65,7 @@ namespace GameObjects {
 		delete this->m_aim;
 		delete this->m_sound;
 		delete this->m_attack;
-		delete this->m_deathTimer;
+		delete this->m_timer;
 	}
 
 	GameComponents::BaseComponent *BaseGameObject::getComponent(GameComponents::COMPONENT_TYPE type) {
@@ -93,7 +93,7 @@ namespace GameObjects {
 		case GameComponents::ATTACK:
 			return this->m_attack;
 		case GameComponents::MECHANIC:
-			return this->m_deathTimer;
+			return this->m_timer;
 		default:
 			return NULL;
 		}
@@ -154,9 +154,9 @@ namespace GameObjects {
 		this->m_sound = sound;
 	}
 
-	void BaseGameObject::attachComponent(GameComponents::DeathTimerComponent *deathTimer)
+	void BaseGameObject::attachComponent(GameComponents::TimerComponent *deathTimer)
 	{
-		this->m_deathTimer = deathTimer;
+		this->m_timer = deathTimer;
 	}
 
 	void BaseGameObject::sendMessage(GameMessage::Message *message)

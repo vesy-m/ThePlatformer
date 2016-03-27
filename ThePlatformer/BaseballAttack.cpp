@@ -1,7 +1,7 @@
 #include "BaseballAttack.h"
 #include "BodyComponent.h"
 #include "BoxCollider.h"
-#include "DeathTimerComponent.h"
+#include "TimerComponent.h"
 #include "VectorDebugComponent.h"
 
 
@@ -29,6 +29,9 @@ namespace GameComponents {
 			break;
 		case GameMessage::ATTACK3:
 			Attack3();
+			break;
+		case GameMessage::ATTACK3_RELEASED:
+			Attack3Released();
 			break;
 		default:
 			break;
@@ -72,13 +75,30 @@ namespace GameComponents {
 
 	void BaseballAttack::Attack3()
 	{
+		if (this->composition->getInvicible()) return;
+
+		GameComponents::TimerComponent *timer = reinterpret_cast<GameComponents::TimerComponent*>(getComposition()->getComponent(GameComponents::MECHANIC));
+		if (!timer) timer = new GameComponents::TimerComponent(this->composition);
+		timer->Init();
+		timer->setTimerType(GameObjects::BLOCK);
+		timer->setTime(100);
+		this->composition->setInvicible();
+		timer->startTimer();
+	}
+
+	void BaseballAttack::Attack3Released()
+	{
+		GameComponents::TimerComponent *timer = reinterpret_cast<GameComponents::TimerComponent*>(getComposition()->getComponent(GameComponents::MECHANIC));
+		assert(timer != NULL);
+		timer->stopTimer();
+		this->composition->setInvicible();
 	}
 
 	GameObjects::BaseGameObject *BaseballAttack::createProjectile(GameObjects::BaseGameObject *shooter, GameObjects::ProjectileType const type, float base_force, glm::vec2 direction, std::string sprite)
 	{
 		GameObjects::BaseGameObject *projectile = NULL;/*GameSystems::ObjectFactory::getInstance().getUsableProjectile(type);*/
 		GameComponents::BodyComponent *body = NULL;
-		GameComponents::DeathTimerComponent *deathTime = NULL;
+		GameComponents::TimerComponent *deathTime = NULL;
 
 		if (projectile) {
 			body = dynamic_cast<GameComponents::BodyComponent*>(projectile->getComponent(GameComponents::PHYSIC));
@@ -129,8 +149,9 @@ namespace GameComponents {
 		body->Init(base_force, direction);
 		if (type == GameObjects::BAT)
 		{
-			deathTime = new GameComponents::DeathTimerComponent(projectile);
-			deathTime->setDeathTime(100);
+			deathTime = new GameComponents::TimerComponent(projectile);
+			deathTime->setTime(100);
+			deathTime->startTimer();
 			body->setGravity(0.0f);
 		}
 		GameSystems::ObjectFactory::getInstance().createProjectile(projectile);

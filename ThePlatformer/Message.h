@@ -25,6 +25,7 @@ namespace GameMessage {
 		ATTACK1,
 		ATTACK2,
 		ATTACK3,
+		ATTACK3_RELEASED,
 		DAMAGE,
 		CLICKON,
 		ENTERMENU,

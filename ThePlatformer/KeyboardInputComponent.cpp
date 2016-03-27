@@ -42,7 +42,8 @@ namespace GameComponents {
 						this->composition->sendMessage(new GameMessage::Message(GameMessage::ATTACK2));
 						break;
 					case INPUT_TYPE::ATTACK3:
-						this->composition->sendMessage(new GameMessage::Message(GameMessage::ATTACK3));
+						if (this->composition->getName().find("megaman") != std::string::npos) this->composition->sendMessage(new GameMessage::Message(GameMessage::ATTACK3_RELEASED));
+						else this->composition->sendMessage(new GameMessage::Message(GameMessage::ATTACK3));
 						break;
 					default:
 						break;
