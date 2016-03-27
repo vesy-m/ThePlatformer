@@ -219,6 +219,9 @@
     <ClCompile Include="TimerComponent.cpp">
       <Filter>GameComponents\Source</Filter>
     </ClCompile>
+    <ClCompile Include="RugbyManAttack.cpp">
+      <Filter>GameComponents\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameEngine.h">
@@ -366,6 +369,9 @@
       <Filter>GameComponents\Header</Filter>
     </ClInclude>
     <ClInclude Include="TimerComponent.h">
+      <Filter>GameComponents\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="RugbyManAttack.h">
       <Filter>GameComponents\Header</Filter>
     </ClInclude>
   </ItemGroup>
