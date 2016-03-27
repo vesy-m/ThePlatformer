@@ -49,7 +49,7 @@ namespace GameComponents {
 		//GameObjects::BaseGameObject *arrow = GameSystems::ObjectFactory::getInstance().createProjectile(createProjectile(getComposition(), ATTACK1, 1.0f, glm::normalize(direction)), getComposition()->getX(),
 		//	getComposition()->getY(), 1.0f, glm::normalize(direction), "./assets/sprite/tennis_ball.png", true);
 
-		createProjectile(getComposition(), GameObjects::BASE_BALL, 1.0f, glm::normalize(direction), "./assets/sprite/tennis_ball.png");
+		createProjectile(getComposition(), GameObjects::BASE_BALL, 1.0f, glm::normalize(direction), "./assets/sprite/baseball.png");
 	}
 
 	void BaseballAttack::Attack2()
@@ -103,7 +103,7 @@ namespace GameComponents {
 				shooter->setCooldown(1500.0f); // A changer
 				projectile->setHeight(int(30 * 0.50f));
 				projectile->setWidth(int(30 * 0.50f));
-				projectile->setScale(0.50f);
+				projectile->setScale(0.07f);
 				projectile->setPower(20);
 				break;
 			case GameObjects::BAT:
@@ -111,7 +111,7 @@ namespace GameComponents {
 				projectile->setMass(25.0f);
 				shooter->setCooldown(1500.0f); // A changer
 				projectile->setHeight(int(30 * 0.50f));
-				projectile->setWidth(int(30 * 0.50f));
+				projectile->setWidth(int(110 * 0.50f));
 				projectile->setScale(0.50f);
 				projectile->setPower(20);
 				break;

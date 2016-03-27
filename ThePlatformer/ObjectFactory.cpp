@@ -16,6 +16,7 @@
 #include "AudioComponent.h"
 #include "AudioSystem.h"
 #include "BaseballAttack.h"
+#include "RugbyManAttack.h"
 
 namespace GameSystems {
 	ObjectFactory::ObjectFactory()

@@ -36,7 +36,10 @@ namespace GameObjects {
 		TENNIS_BALL,
 		BASE_BALL,
 		BAT,
-		BLOCK
+		BLOCK,
+		DROP,
+		RUGBY_BALL,
+		DASH
 	};
 
 	class BaseGameObject
