@@ -35,6 +35,7 @@ namespace GameComponents {
 		int rotateNum;
 		
 		bool revertY;
+		bool isDashing;
 		int currentFrame;
 		int counter;
 		std::string currentAnim;

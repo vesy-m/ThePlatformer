@@ -27,7 +27,8 @@ namespace GameObjects {
 	enum objectType {
 		NONE,
 		PLAYER,
-		PROJECTILE
+		PROJECTILE,
+		PLAYER_ATTACK
 	};
 
 	enum ProjectileType {
@@ -93,8 +94,8 @@ namespace GameObjects {
 		float getCooldown();
 		void setCooldown(float);
 
-		void setInvicible(void);
-		bool getInvicible(void);
+		void setInvicible(bool);
+		bool getInvicible(void) const;
 
 		void destroy(bool);
 		bool destroy(void);

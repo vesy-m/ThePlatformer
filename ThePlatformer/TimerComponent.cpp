@@ -1,4 +1,5 @@
 #include "TimerComponent.h"
+#include "Message.h"
 
 
 namespace GameComponents {
@@ -39,6 +40,9 @@ namespace GameComponents {
 			case GameObjects::BLOCK:
 				invincibleTime();
 				break;
+			case GameObjects::DASH:
+				stopDash();
+				break;
 			}
 			this->timing = false;
 		}
@@ -73,7 +77,13 @@ namespace GameComponents {
 
 	void TimerComponent::invincibleTime()
 	{
-		this->composition->setInvicible();
+		this->composition->setInvicible(false);
+		this->composition->sendMessage(new GameMessage::Message(GameMessage::STOP_BLOCK));
+	}
+
+	void TimerComponent::stopDash()
+	{
+		this->composition->sendMessage(new GameMessage::Message(GameMessage::STOP_DASH));
 	}
 
 }

@@ -312,12 +312,12 @@ namespace GameObjects {
 		this->cooldown = cooldown;
 	}
 
-	void BaseGameObject::setInvicible(void)
+	void BaseGameObject::setInvicible(bool inv)
 	{
-		this->invicible = !invicible;
+		this->invicible = inv;
 	}
 
-	bool BaseGameObject::getInvicible(void)
+	bool BaseGameObject::getInvicible(void) const
 	{
 		return invicible;
 	}

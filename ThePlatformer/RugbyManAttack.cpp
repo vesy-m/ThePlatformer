@@ -27,6 +27,8 @@ namespace GameComponents
 		case GameMessage::ATTACK3:
 			Attack3();
 			break;
+		case GameMessage::STOP_DASH:
+			this->composition->setType(GameObjects::PLAYER);
 		default:
 			break;
 		}
@@ -60,6 +62,21 @@ namespace GameComponents
 
 	void RugbyManAttack::Attack3()
 	{
+		GameComponents::SpriteComponent *sprite = reinterpret_cast<GameComponents::SpriteComponent*>(getComposition()->getComponent(GameComponents::SPRITE));
+		if (sprite->revertX)
+			this->composition->sendMessage(new GameMessage::Message(GameMessage::LEFT_DASH));
+		else
+			this->composition->sendMessage(new GameMessage::Message(GameMessage::RIGHT_DASH));
+		this->composition->setType(GameObjects::PLAYER_ATTACK);
+		this->composition->setPower(100);
+		GameComponents::TimerComponent *timer = reinterpret_cast<GameComponents::TimerComponent*>(getComposition()->getComponent(GameComponents::MECHANIC));
+		if (!timer)
+			timer = new GameComponents::TimerComponent(this->composition);
+		timer->Init();
+		timer->setTimerType(GameObjects::DASH);
+		timer->setTime(150);
+		this->composition->setInvicible(true);
+		timer->startTimer();
 	}
 
 	GameObjects::BaseGameObject * RugbyManAttack::createProjectile(GameObjects::BaseGameObject *shooter, GameObjects::ProjectileType const type, float base_force, glm::vec2 direction, std::string sprite)

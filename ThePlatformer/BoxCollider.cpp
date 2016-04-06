@@ -123,16 +123,19 @@ namespace GameComponents {
 							if (this->composition->getType() == GameObjects::PROJECTILE)
 								std::cout << "PROJECTILE COLLISION" << std::endl;
 							// Destroy projectiles on collision
-							if (otherObject->composition->getType() == GameObjects::PROJECTILE) otherObject->composition->destroy(true);
-							else if (this->composition->getType() == GameObjects::PROJECTILE) this->composition->destroy(true);
+							if (otherObject->composition->getType() == GameObjects::PROJECTILE)
+								otherObject->composition->destroy(true);
+							else if (this->composition->getType() == GameObjects::PROJECTILE)
+								this->composition->destroy(true);
 
-							if (this->composition->getType() == GameObjects::PROJECTILE &&
-								otherObject->composition->getType() == GameObjects::PLAYER)
+							if (this->composition->getType() == GameObjects::PROJECTILE && otherObject->composition->getType() == GameObjects::PLAYER)
 								otherObject->composition->sendMessage(new GameMessage::DamageMessage(this->composition->getPower()));
-							else if (this->composition->getType() == GameObjects::PLAYER &&
-									 otherObject->composition->getType() == GameObjects::PROJECTILE)
-								otherObject->composition->sendMessage(new GameMessage::DamageMessage(otherObject->composition->getPower()));
-
+							else if (this->composition->getType() == GameObjects::PLAYER && otherObject->composition->getType() == GameObjects::PROJECTILE)
+								this->sendMessage(new GameMessage::DamageMessage(otherObject->composition->getPower()));
+							else if (this->composition->getType() == GameObjects::PLAYER_ATTACK && otherObject->composition->getType() == GameObjects::PLAYER)
+								otherObject->composition->sendMessage(new GameMessage::DamageMessage(this->composition->getPower()));
+							else if (otherObject->composition->getType() == GameObjects::PLAYER_ATTACK && this->composition->getType() == GameObjects::PLAYER)
+								this->sendMessage(new GameMessage::DamageMessage(otherObject->composition->getPower()));
 							ResolveCollision(manifold);
 							collide = true;
 						}

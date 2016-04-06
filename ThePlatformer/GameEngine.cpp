@@ -73,7 +73,7 @@ namespace GameEngine {
 	{
 		std::vector<GameObjects::BaseGameObject *>playersList;
 		for (std::list<GameObjects::BaseGameObject *>::iterator it = this->listGameObject.begin(); it != this->listGameObject.end(); ++it)
-			if ((*it)->getType() == GameObjects::objectType::PLAYER) playersList.push_back((*it));
+			if ((*it)->getType() == GameObjects::objectType::PLAYER || (*it)->getType() == GameObjects::objectType::PLAYER_ATTACK) playersList.push_back((*it));
 		return playersList;
 	}
 }

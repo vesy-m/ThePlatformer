@@ -11,9 +11,11 @@ namespace GameMessage {
 		LEFT,
 		LEFT_RELEASED,
 		LEFT_ANIMATION,
+		LEFT_DASH,
 		RIGHT,
 		RIGHT_RELEASED,
 		RIGHT_ANIMATION,
+		RIGHT_DASH,
 		STAND_ANIMATION,
 		DEFAULT,
 		VELOCITY_VECTOR,
@@ -39,7 +41,10 @@ namespace GameMessage {
 		B_MENU,
 		AIM,
 		PLAY_SOUND,
-		STOP_SOUND
+		STOP_SOUND,
+		STOP_DASH,
+		BLOCK,
+		STOP_BLOCK
 	};
 
 	class Message

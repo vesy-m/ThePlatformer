@@ -103,7 +103,10 @@ namespace GameComponents {
 			break;
 		case CHEAT_CODE_TYPE::INVICIBLE:
 			std::cout << "CHEAT CODE ACTIVATED: INVICIBLE" << std::endl;
-			this->composition->setInvicible();
+			if (this->composition->getInvicible())
+				this->composition->setInvicible(false);
+			else
+				this->composition->setInvicible(true);
 			savedMessage.clear();
 			break;
 		default:

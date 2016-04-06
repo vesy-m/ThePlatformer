@@ -48,6 +48,7 @@ namespace GameComponents {
 		float maxForce;
 		bool onGround;
 		bool isColliding;
+		bool isDash;
 	};
 }
 

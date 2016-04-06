@@ -16,7 +16,9 @@ namespace GameComponents {
 	}
 	void BaseballAttack::Init()
 	{
+		isAtt3 = false;
 	}
+
 	void BaseballAttack::sendMessage(GameMessage::Message *message)
 	{
 		switch (message->id)
@@ -75,15 +77,19 @@ namespace GameComponents {
 
 	void BaseballAttack::Attack3()
 	{
+		if (isAtt3)
+			return;
 		if (this->composition->getInvicible()) return;
 
 		GameComponents::TimerComponent *timer = reinterpret_cast<GameComponents::TimerComponent*>(getComposition()->getComponent(GameComponents::MECHANIC));
 		if (!timer) timer = new GameComponents::TimerComponent(this->composition);
 		timer->Init();
 		timer->setTimerType(GameObjects::BLOCK);
-		timer->setTime(100);
-		this->composition->setInvicible();
+		timer->setTime(1000);
+		this->composition->setInvicible(true);
+		this->composition->sendMessage(new GameMessage::Message(GameMessage::BLOCK));
 		timer->startTimer();
+		isAtt3 = true;
 	}
 
 	void BaseballAttack::Attack3Released()
@@ -91,7 +97,9 @@ namespace GameComponents {
 		GameComponents::TimerComponent *timer = reinterpret_cast<GameComponents::TimerComponent*>(getComposition()->getComponent(GameComponents::MECHANIC));
 		assert(timer != NULL);
 		timer->stopTimer();
-		this->composition->setInvicible();
+		this->composition->setInvicible(false);
+		this->composition->sendMessage(new GameMessage::Message(GameMessage::STOP_BLOCK));
+		isAtt3 = false;
 	}
 
 	GameObjects::BaseGameObject *BaseballAttack::createProjectile(GameObjects::BaseGameObject *shooter, GameObjects::ProjectileType const type, float base_force, glm::vec2 direction, std::string spriteStr)
