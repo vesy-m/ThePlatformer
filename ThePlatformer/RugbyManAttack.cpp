@@ -1,7 +1,7 @@
 #include "RugbyManAttack.h"
 #include "BodyComponent.h"
 #include "BoxCollider.h"
-#include "DeathTimerComponent.h"
+#include "TimerComponent.h"
 #include "VectorDebugComponent.h"
 
 namespace GameComponents
@@ -97,7 +97,7 @@ namespace GameComponents
 			case GameObjects::DROP:
 				projectile->setBounce(0.3f);
 				projectile->setMass(25.0f);
-				shooter->setCooldown(1500.0f); // A changer
+				shooter->setCooldown(1500.0f); //À changer
 				projectile->setHeight(int(30 * 0.50f));
 				projectile->setWidth(int(30 * 0.50f));
 				projectile->setScale(0.07f);
@@ -105,6 +105,7 @@ namespace GameComponents
 				break;
 			case GameObjects::DASH:
 				projectile->setBounce(0.3f);
+
 				break;
 			default:
 				break;
@@ -115,10 +116,10 @@ namespace GameComponents
 		projectile->Init();
 		assert(body != NULL);
 		body->Init(base_force, direction);
-		if (type == GameObjects::RUGBY_BALL)
-		{
+		//if (type == GameObjects::RUGBY_BALL)
+		//{
 			body->setGravity(3.5f);
-		}
+		//}
 		GameSystems::ObjectFactory::getInstance().createProjectile(projectile);
 		return projectile;
 	}

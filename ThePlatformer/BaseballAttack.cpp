@@ -94,11 +94,12 @@ namespace GameComponents {
 		this->composition->setInvicible();
 	}
 
-	GameObjects::BaseGameObject *BaseballAttack::createProjectile(GameObjects::BaseGameObject *shooter, GameObjects::ProjectileType const type, float base_force, glm::vec2 direction, std::string sprite)
+	GameObjects::BaseGameObject *BaseballAttack::createProjectile(GameObjects::BaseGameObject *shooter, GameObjects::ProjectileType const type, float base_force, glm::vec2 direction, std::string spriteStr)
 	{
 		GameObjects::BaseGameObject *projectile = NULL;/*GameSystems::ObjectFactory::getInstance().getUsableProjectile(type);*/
 		GameComponents::BodyComponent *body = NULL;
-		GameComponents::TimerComponent *deathTime = NULL;
+		GameComponents::SpriteComponent *sprite = NULL;
+		GameComponents::TimerComponent *timer = NULL;
 
 		if (projectile) {
 			body = dynamic_cast<GameComponents::BodyComponent*>(projectile->getComponent(GameComponents::PHYSIC));
@@ -106,11 +107,13 @@ namespace GameComponents {
 		else {
 			projectile = new GameObjects::BaseGameObject();
 			assert(projectile != NULL);
-			new GameComponents::SpriteComponent(projectile, sprite);
+			sprite = new GameComponents::SpriteComponent(projectile, spriteStr);
 			new GameComponents::BoxCollider(projectile);
 			new GameComponents::VectorDebugComponent(projectile, "square");
 			body = new GameComponents::BodyComponent(projectile);
 
+			if (direction.x <= 0)
+				sprite->revertX = true;
 			projectile->setName(shooter->getName());
 			projectile->setDepth(0);
 			projectile->setType(GameObjects::objectType::PROJECTILE);
@@ -149,9 +152,10 @@ namespace GameComponents {
 		body->Init(base_force, direction);
 		if (type == GameObjects::BAT)
 		{
-			deathTime = new GameComponents::TimerComponent(projectile);
-			deathTime->setTime(100);
-			deathTime->startTimer();
+			timer = new GameComponents::TimerComponent(projectile);
+			timer->setTimerType(type);
+			timer->setTime(100);
+			timer->startTimer();
 			body->setGravity(0.0f);
 		}
 		GameSystems::ObjectFactory::getInstance().createProjectile(projectile);

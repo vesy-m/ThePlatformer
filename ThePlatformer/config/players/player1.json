@@ -11,7 +11,7 @@
       "boxcollider" : true,
       "vector" : "square",
       "type": 1,
-      "fire_ball" : true,
+      "fire_ball" : "baseball",
       "fps":  true,
       "sfx" : "./config/sound/Desc-SFX.json"
 }
