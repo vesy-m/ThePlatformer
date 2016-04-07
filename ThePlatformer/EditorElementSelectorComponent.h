@@ -15,7 +15,7 @@ namespace GameComponents {
 		void Update(double dt);
 		void Init();
 		void sendMessage(GameMessage::Message*);
-		virtual COMPONENT_TYPE getType();
+		virtual COMPONENT_TYPE getType() const;
 	private:
 		EditorElementSelectorComponent(GameObjects::BaseGameObject * object, int position);
 		const COMPONENT_TYPE type = COMPONENT_TYPE::ELEMENT_SELECTOR;

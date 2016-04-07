@@ -173,14 +173,17 @@ copy /Y "$(ProjectDir)\lib\lib-x64\devil-1.7.8\bin\*" "$(OutDir)\"</Command>
     <ClCompile Include="AimMessage.cpp" />
     <ClCompile Include="AudioComponent.cpp" />
     <ClCompile Include="AudioSystem.cpp" />
+    <ClCompile Include="BaseballAttack.cpp" />
     <ClCompile Include="BaseComponent.cpp" />
     <ClCompile Include="BaseGameObject.cpp" />
     <ClCompile Include="BodyComponent.cpp" />
     <ClCompile Include="BoxCollider.cpp" />
     <ClCompile Include="ButtonComponent.cpp" />
+    <ClCompile Include="CAAttackComponent.cpp" />
     <ClCompile Include="CircleCollider.cpp" />
     <ClCompile Include="CollisionMessage.cpp" />
     <ClCompile Include="DamageMessage.cpp" />
+    <ClCompile Include="TimerComponent.cpp" />
     <ClCompile Include="debugManager.cpp" />
     <ClCompile Include="EditorCaseSelectorComponent.cpp" />
     <ClCompile Include="EditorElementSelectorComponent.cpp" />
@@ -202,6 +205,7 @@ copy /Y "$(ProjectDir)\lib\lib-x64\devil-1.7.8\bin\*" "$(OutDir)\"</Command>
     <ClCompile Include="MouseComponent.cpp" />
     <ClCompile Include="ObjectFactory.cpp" />
     <ClCompile Include="PhysicsSystem.cpp" />
+    <ClCompile Include="RugbyManAttack.cpp" />
     <ClCompile Include="Sound.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="FireMessage.cpp" />
@@ -221,6 +225,8 @@ copy /Y "$(ProjectDir)\lib\lib-x64\devil-1.7.8\bin\*" "$(OutDir)\"</Command>
   <ItemGroup>
     <ClInclude Include="AimComponent.h" />
     <ClInclude Include="AimMessage.h" />
+    <ClInclude Include="BaseballAttack.h" />
+    <ClInclude Include="CAAttackComponent.h" />
     <ClInclude Include="AudioComponent.h" />
     <ClInclude Include="AudioSystem.h" />
     <ClInclude Include="BaseComponent.h" />
@@ -250,6 +256,7 @@ copy /Y "$(ProjectDir)\lib\lib-x64\devil-1.7.8\bin\*" "$(OutDir)\"</Command>
     <ClInclude Include="MenuControllerMessage.h" />
     <ClInclude Include="Message.h" />
     <ClInclude Include="MouseClickComponent.h" />
+    <ClInclude Include="RugbyManAttack.h" />
     <ClInclude Include="MouseComponent.h" />
     <ClInclude Include="MouseMessageClick.h" />
     <ClInclude Include="MouseMessageMove.h" />
@@ -269,6 +276,7 @@ copy /Y "$(ProjectDir)\lib\lib-x64\devil-1.7.8\bin\*" "$(OutDir)\"</Command>
     <ClInclude Include="SpriteComponent.h" />
     <ClInclude Include="BaseSystem.h" />
     <ClInclude Include="TimeManager.h" />
+    <ClInclude Include="TimerComponent.h" />
     <ClInclude Include="VectorDebugComponent.h" />
     <ClInclude Include="VectorMessage.h" />
     <ClInclude Include="WindowInputSytem.h" />

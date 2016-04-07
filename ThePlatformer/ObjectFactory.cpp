@@ -15,6 +15,8 @@
 #include "FireBallComponent.h"
 #include "AudioComponent.h"
 #include "AudioSystem.h"
+#include "BaseballAttack.h"
+#include "RugbyManAttack.h"
 #include "EditorManager.h"
 
 namespace GameSystems {
@@ -47,7 +49,7 @@ namespace GameSystems {
 			else if (std::string(it->key) == "rotate") ret->setRotate((int) it->value.toNumber());
 			else if (std::string(it->key) == "width") ret->setWidth((int) it->value.toNumber());
 			else if (std::string(it->key) == "height") ret->setHeight((int) it->value.toNumber());
-			else if (std::string(it->key) == "projectile_type") ret->setProjectileType(it->value.toString());
+			//else if (std::string(it->key) == "projectile_type") ret->setProjectileType(it->value.toString());
 			else if (std::string(it->key) == "name") ret->setName(std::string(it->value.toString() + std::to_string(countObjects++)));
 			else if (std::string(it->key) == "type") ret->setType((GameObjects::objectType)(int)it->value.toNumber());
 			else if (std::string(it->key) == "sprite") new GameComponents::SpriteComponent(ret, it->value.toString());
@@ -58,7 +60,8 @@ namespace GameSystems {
 			else if (std::string(it->key) == "controller") new GameComponents::ControllerInputComponent(ret, it->value.toString());
 			else if (std::string(it->key) == "keyboard") new GameComponents::KeyboardInputComponent(ret, it->value.toString());
 			else if (std::string(it->key) == "vector") new GameComponents::VectorDebugComponent(ret, it->value.toString());
-			else if (std::string(it->key) == "fire_ball") new GameComponents::FireBallComponent(ret);
+			else if (std::string(it->key) == "fire_ball" && std::string(it->value.toString()) == "baseball") new GameComponents::BaseballAttack(ret);
+			else if (std::string(it->key) == "fire_ball" && std::string(it->value.toString()) == "rugby") new GameComponents::RugbyManAttack(ret);
 			else if (std::string(it->key) == "sfx") new GameComponents::AudioComponent(ret, it->value.toString());
 			else if (std::string(it->key) == "level" || std::string(it->key) == "menu" || std::string(it->key) == "function") {
 				std::cout << it->key << std::endl;
@@ -69,7 +72,7 @@ namespace GameSystems {
 			}
 			else if (std::string(it->key) == "menunav")
 				buttonComponent->setNav(it->value);
-			else if (std::string(it->key) == "aim") new GameComponents::AimComponent(ret, it->value.toString());
+			//else if (std::string(it->key) == "aim") new GameComponents::AimComponent(ret, it->value.toString());
 		}
 		return (ret);
 	}
@@ -78,60 +81,80 @@ namespace GameSystems {
 		ObjectFactory::getInstance().currentLevel.putObjectDepthOrdered(obj);
 	}
 
-	GameObjects::BaseGameObject *ObjectFactory::createProjectile(GameObjects::BaseGameObject *shooter, unsigned int x, unsigned int y, float base_force, glm::vec2 direction, ProjectileType) {
+	GameObjects::BaseGameObject *ObjectFactory::getUsableProjectile(GameObjects::ProjectileType projectileType) {
 		GameObjects::BaseGameObject *projectile = NULL;
-		GameComponents::BodyComponent *body = NULL;
-		if (this->old_objects.size() == 0) {
-			projectile = new GameObjects::BaseGameObject();
-			projectile->setName(shooter->getName());
-			projectile->setDepth(0);
-			projectile->setType(GameObjects::objectType::PROJECTILE);
-			projectile->setBounce(0.3f);
 
-			if (std::string("tennis").compare(shooter->getProjectileType()) == 0) {
-				projectile->setMass(25.0f);
-				shooter->setCooldown(1500.0f);
-				projectile->setHeight(int(30 * 0.50f));
-				projectile->setWidth(int(30 * 0.50f));
-				projectile->setScale(0.50f);
-				projectile->setPower(20);
-				new GameComponents::SpriteComponent(projectile, "./assets/sprite/tennis_ball.png");
+		if (this->old_objects.size() != 0) {
+			for (auto it = this->old_objects.begin(); it != this->old_objects.end(); ++it) {
+				if ((*it)->getProjectileType() == projectileType) {
+					projectile = dynamic_cast<GameObjects::BaseGameObject*>(this->old_objects.front());
+					assert(projectile != NULL);
+					this->old_objects.remove((*it));
+					projectile->destroy(false);
+					return projectile;
+				}
 			}
-			else if (std::string("soccer").compare(shooter->getProjectileType()) == 0) {
-				projectile->setMass(100.0f);
-				shooter->setCooldown(2500.0f);
-				projectile->setHeight(int(30 * 0.50f));
-				projectile->setWidth(int(30 * 0.50f));
-				projectile->setScale(0.50f);
-				projectile->setPower(50);
-				new GameComponents::SpriteComponent(projectile, "./assets/sprite/soccer_ball.png");
 			}
-			else {
-				shooter->setCooldown(2500.0f);
-				projectile->setHeight(int(76 * 0.25f));
-				projectile->setWidth(int(150 * 0.25f));
-				projectile->setScale(0.25f);
-				projectile->setPower(40);
-				new GameComponents::SpriteComponent(projectile, "./assets/sprite/minecraft_arrow.png");
+		return projectile;
 			}
 
-			new GameComponents::BoxCollider(projectile);
-			new GameComponents::VectorDebugComponent(projectile, "square");
-			body = new GameComponents::BodyComponent(projectile);
-		}
-		else {
-			projectile = dynamic_cast<GameObjects::BaseGameObject*>(this->old_objects.front());
-			assert(projectile != NULL);
-			this->old_objects.pop_front();
-			projectile->destroy(false);
-			body = dynamic_cast<GameComponents::BodyComponent*>(projectile->getComponent(GameComponents::PHYSIC));
-		}
-		assert(projectile != NULL);
-		assert(body != NULL);
-		projectile->setX(x);
-		projectile->setY(y);
-		projectile->Init();
-		body->Init(base_force, direction);
+	GameObjects::BaseGameObject *ObjectFactory::createProjectile(GameObjects::BaseGameObject *projectile/*, unsigned int x, unsigned int y, float base_force, glm::vec2 direction, std::string const &sprite, bool gravity*/) {
+		//GameObjects::BaseGameObject *projectile = NULL;
+		//GameComponents::BodyComponent *body = NULL;
+		//if (this->old_objects.size() == 0) {
+		//	new GameComponents::SpriteComponent(projectile, sprite);
+		//	body = dynamic_cast<GameComponents::BodyComponent*>(projectile->getComponent(GameComponents::PHYSIC));
+			//projectile = new GameObjects::BaseGameObject();
+			//projectile->setName(shooter->getName());
+			//projectile->setDepth(0);
+			//projectile->setType(GameObjects::objectType::PROJECTILE);
+			//projectile->setBounce(0.3f);
+
+			//if (std::string("tennis").compare(shooter->getProjectileType()) == 0) {
+			//	projectile->setMass(25.0f);
+			//	shooter->setCooldown(1500.0f);
+			//	projectile->setHeight(int(30 * 0.50f));
+			//	projectile->setWidth(int(30 * 0.50f));
+			//	projectile->setScale(0.50f);
+			//	projectile->setPower(20);
+			//	new GameComponents::SpriteComponent(projectile, "./assets/sprite/tennis_ball.png");
+			//}
+			//else if (std::string("soccer").compare(shooter->getProjectileType()) == 0) {
+			//	projectile->setMass(100.0f);
+			//	shooter->setCooldown(2500.0f);
+			//	projectile->setHeight(int(30 * 0.50f));
+			//	projectile->setWidth(int(30 * 0.50f));
+			//	projectile->setScale(0.50f);
+			//	projectile->setPower(50);
+			//	new GameComponents::SpriteComponent(projectile, "./assets/sprite/soccer_ball.png");
+//			}
+			//else {
+			//	shooter->setCooldown(2500.0f);
+			//	projectile->setHeight(int(76 * 0.25f));
+			//	projectile->setWidth(int(150 * 0.25f));
+			//	projectile->setScale(0.25f);
+			//	projectile->setPower(40);
+			//	new GameComponents::SpriteComponent(projectile, "./assets/sprite/minecraft_arrow.png");
+//			}
+
+		//	new GameComponents::BoxCollider(projectile);
+		//	new GameComponents::VectorDebugComponent(projectile, "square");
+		//}
+		//else {
+		//	projectile = dynamic_cast<GameObjects::BaseGameObject*>(this->old_objects.front());
+		//	assert(projectile != NULL);
+		//	this->old_objects.pop_front();
+		//	projectile->destroy(false);
+		//	body = dynamic_cast<GameComponents::BodyComponent*>(projectile->getComponent(GameComponents::PHYSIC));
+		//}
+		//assert(projectile != NULL);
+		//assert(body != NULL);
+		//projectile->setX(x);
+		//projectile->setY(y);
+		//projectile->Init();
+		//body->Init(base_force, direction);
+		//if (!gravity)
+		//	body->setGravity(0);
 		this->currentLevel.putObjectDepthOrdered(projectile);
 		return (projectile);
 	}
@@ -283,8 +306,8 @@ namespace GameSystems {
 		std::list<GameObjects::BaseGameObject*> &list = this->currentLevel.getObjects();
 		list.erase(std::remove_if(list.begin(), list.end(), [&](auto obj) {
 			if (obj->destroy()) {
-				if (obj->getName() == "arrow") this->old_objects.push_back(obj);
-				else delete obj;
+				/*if (obj->getType() == GameObjects::PROJECTILE) this->old_objects.push_back(obj);
+				else */delete obj;
 				return true;
 			}
 			return false;

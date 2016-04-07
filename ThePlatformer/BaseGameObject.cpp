@@ -10,6 +10,8 @@
 #include "FireComponent.h"
 #include "FireMessage.h"
 #include "AudioComponent.h"
+#include "CAAttackComponent.h"
+#include "TimerComponent.h"
 #include "EditorElementSelectorComponent.h"
 #include "EditorCaseSelectorComponent.h"
 #include "EditorKeyboardInputComponent.h"
@@ -37,6 +39,8 @@ namespace GameObjects {
 		this->m_vector = NULL;
 		this->m_aim = NULL;
 		this->m_sound = NULL;
+		this->m_attack = NULL;
+		this->m_timer = NULL;
 		this->m_editorSelector = NULL;
 		this->m_caseSelector = NULL;
 		this->m_editorKeyboard = NULL;
@@ -52,6 +56,8 @@ namespace GameObjects {
 		if (this->m_fire) this->m_fire->Init();
 		if (this->m_aim) this->m_aim->Init();
 		if (this->m_sound) this->m_sound->Init();
+		if (this->m_attack) this->m_attack->Init();
+		if (this->m_timer) this->m_timer->Init();
 		if (this->m_editorSelector) this->m_editorSelector->Init();
 		if (this->m_caseSelector) this->m_caseSelector->Init();
 		if (this->m_editorKeyboard) this->m_editorKeyboard->Init();
@@ -67,6 +73,8 @@ namespace GameObjects {
 		delete this->m_vector;
 		delete this->m_aim;
 		delete this->m_sound;
+		delete this->m_attack;
+		delete this->m_timer;
 		delete this->m_editorSelector;
 		delete this->m_caseSelector;
 		delete this->m_editorKeyboard;
@@ -94,6 +102,10 @@ namespace GameObjects {
 			return this->m_aim;
 		case GameComponents::SOUND:
 			return this->m_sound;
+		case GameComponents::ATTACK:
+			return this->m_attack;
+		case GameComponents::MECHANIC:
+			return this->m_timer;
 		case GameComponents::ELEMENT_SELECTOR:
 			return this->m_editorSelector;
 		case GameComponents::CASE_SELECTOR:
@@ -145,6 +157,11 @@ namespace GameObjects {
 		this->m_fire = fire;
 	}
 
+	void BaseGameObject::attachComponent(GameComponents::CAAttackComponent *attack)
+	{
+		this->m_attack = attack;
+	}
+
 	void BaseGameObject::attachComponent(GameComponents::AimComponent *aim)
 	{
 		this->m_aim = aim;
@@ -153,6 +170,11 @@ namespace GameObjects {
 	void BaseGameObject::attachComponent(GameComponents::AudioComponent *sound)
 	{
 		this->m_sound = sound;
+	}
+
+	void BaseGameObject::attachComponent(GameComponents::TimerComponent *deathTimer)
+	{
+		this->m_timer = deathTimer;
 	}
 
 	void BaseGameObject::attachComponent(GameComponents::EditorElementSelectorComponent *editorSelector)
@@ -180,7 +202,8 @@ namespace GameObjects {
 		if (this->m_vector) this->m_vector->sendMessage(message);
 		if (this->m_button) this->m_button->sendMessage(message);
 		if (this->m_aim) this->m_aim->sendMessage(message);
-		if (this->m_fire && message->id == GameMessage::FIRE) this->m_fire->sendMessage(message);
+		//if (this->m_fire && message->id == GameMessage::FIRE) this->m_fire->sendMessage(message);
+		if (this->m_attack) this->m_attack->sendMessage(message);
 		if (message->id == GameMessage::DAMAGE) this->setDamage(dynamic_cast<GameMessage::DamageMessage*>(message));
 		if (this->m_sound) this->m_sound->sendMessage(message);
 		if (this->m_editorSelector) this->m_editorSelector->sendMessage(message);
@@ -266,11 +289,11 @@ namespace GameObjects {
 	{
 		return this->rotate;
 	}
-	void BaseGameObject::setProjectileType(std::string projectileType)
+	void BaseGameObject::setProjectileType(ProjectileType projectileType)
 	{
 		this->projectileType = projectileType;
 	}
-	std::string BaseGameObject::getProjectileType()
+	ProjectileType BaseGameObject::getProjectileType()
 	{
 		return this->projectileType;
 	}
@@ -327,12 +350,12 @@ namespace GameObjects {
 		this->cooldown = cooldown;
 	}
 
-	void BaseGameObject::setInvicible(void)
+	void BaseGameObject::setInvicible(bool inv)
 	{
-		this->invicible = !invicible;
+		this->invicible = inv;
 	}
 
-	bool BaseGameObject::getInvicible(void)
+	bool BaseGameObject::getInvicible(void) const
 	{
 		return invicible;
 	}

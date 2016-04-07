@@ -210,6 +210,18 @@
     <ClCompile Include="AudioComponent.cpp">
       <Filter>GameComponents\Source</Filter>
     </ClCompile>
+    <ClCompile Include="CAAttackComponent.cpp">
+      <Filter>GameComponents\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseballAttack.cpp">
+      <Filter>GameComponents\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="TimerComponent.cpp">
+      <Filter>GameComponents\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="RugbyManAttack.cpp">
+      <Filter>GameComponents\Source</Filter>
+    </ClCompile>
     <ClCompile Include="EditorManager.cpp">
       <Filter>GameTools\Source</Filter>
     </ClCompile>
@@ -363,6 +375,18 @@
       <Filter>GameMessages\Header</Filter>
     </ClInclude>
     <ClInclude Include="AudioComponent.h">
+      <Filter>GameComponents\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CAAttackComponent.h">
+      <Filter>GameComponents\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseballAttack.h">
+      <Filter>GameComponents\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="TimerComponent.h">
+      <Filter>GameComponents\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="RugbyManAttack.h">
       <Filter>GameComponents\Header</Filter>
     </ClInclude>
     <ClInclude Include="EditorManager.h">

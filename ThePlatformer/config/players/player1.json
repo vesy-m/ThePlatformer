@@ -6,14 +6,12 @@
       "height" : 42,
       "width" : 30,
       "mass" : 20,
-      "projectile_type" : "tennis",
       "sprite" : "./config/sprite_sheets/desc-megaman.json",
-	"aim" : "./assets/sprite/aim_reticle.png",
       "body" : true,
       "boxcollider" : true,
       "vector" : "square",
       "type": 1,
-      "fire_ball" : true,
+      "fire_ball" : "baseball",
       "fps":  true,
       "sfx" : "./config/sound/Desc-SFX.json"
 }

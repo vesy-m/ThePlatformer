@@ -112,13 +112,13 @@ namespace GameComponents
 				_currentSFX = "default";
 			}
 			break;
-		case GameMessage::FIRE:
-			_currentSFX = "fire";
-			_fire = 50;
-			_damage = 0;
-			if (_sound[_currentSFX])
-				_sound[_currentSFX]->play();
-			break;
+		//case GameMessage::FIRE:
+		//	_currentSFX = "fire";
+		//	_fire = 50;
+		//	_damage = 0;
+		//	if (_sound[_currentSFX])
+		//		_sound[_currentSFX]->play();
+		//	break;
 		case GameMessage::DAMAGE:
 			_currentSFX = "damage";
 			_fire = 0;
@@ -164,5 +164,5 @@ namespace GameComponents
 		}
 	}
 
-	COMPONENT_TYPE AudioComponent::getType() { return _type; }
+	COMPONENT_TYPE AudioComponent::getType() const { return _type; }
 }

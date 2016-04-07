@@ -17,7 +17,9 @@ namespace GameComponents {
 	class BodyComponent;
 	class ButtonComponent;
 	class FireComponent;
+	class CAAttackComponent;
 	class AudioComponent;
+	class TimerComponent;
 	class EditorElementSelectorComponent;
 	class EditorCaseSelectorComponent;
 	class EditorKeyboardInputComponent;
@@ -28,7 +30,20 @@ namespace GameObjects {
 	enum objectType {
 		NONE,
 		PLAYER,
-		PROJECTILE
+		PROJECTILE,
+		PLAYER_ATTACK
+	};
+
+	enum ProjectileType {
+		ARROW,
+		SOCCER_BALL,
+		TENNIS_BALL,
+		BASE_BALL,
+		BAT,
+		BLOCK,
+		DROP,
+		RUGBY_BALL,
+		DASH
 	};
 
 	class BaseGameObject
@@ -46,8 +61,10 @@ namespace GameObjects {
 		void attachComponent(GameComponents::BodyComponent*);
 		void attachComponent(GameComponents::ButtonComponent*);
 		void attachComponent(GameComponents::FireComponent*);
+		void attachComponent(GameComponents::CAAttackComponent*);
 		void attachComponent(GameComponents::AimComponent*);
 		void attachComponent(GameComponents::AudioComponent*);
+		void attachComponent(GameComponents::TimerComponent*);
 		void attachComponent(GameComponents::EditorElementSelectorComponent *);
 		void attachComponent(GameComponents::EditorCaseSelectorComponent *);
 		void attachComponent(GameComponents::EditorKeyboardInputComponent *);
@@ -70,8 +87,8 @@ namespace GameObjects {
 		float getBounce();
 		void setRotate(int);
 		int getRotate();
-		void setProjectileType(std::string);
-		std::string getProjectileType();
+		void setProjectileType(ProjectileType);
+		ProjectileType getProjectileType();
 		void setName(std::string);
 		std::string getName();
 		void setType(objectType);
@@ -83,8 +100,8 @@ namespace GameObjects {
 		float getCooldown();
 		void setCooldown(float);
 
-		void setInvicible(void);
-		bool getInvicible(void);
+		void setInvicible(bool);
+		bool getInvicible(void) const;
 
 		void destroy(bool);
 		bool destroy(void);
@@ -99,6 +116,8 @@ namespace GameObjects {
 		GameComponents::FireComponent *m_fire;
 		GameComponents::AimComponent *m_aim;
 		GameComponents::AudioComponent *m_sound;
+		GameComponents::CAAttackComponent *m_attack;
+		GameComponents::TimerComponent *m_timer;
 		GameComponents::EditorElementSelectorComponent *m_editorSelector;
 		GameComponents::EditorCaseSelectorComponent *m_caseSelector;
 		GameComponents::EditorKeyboardInputComponent *m_editorKeyboard;
@@ -111,7 +130,7 @@ namespace GameObjects {
 		float scale;
 		float mass;
 		float bounce;
-		std::string projectileType;
+		ProjectileType projectileType;
 		std::string name;
 		objectType type;
 		bool to_destroy;

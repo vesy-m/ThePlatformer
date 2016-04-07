@@ -26,7 +26,7 @@ namespace GameComponents {
 	}
 
 	void FireBallComponent::sendMessage(GameMessage::Message *message) {
-		if (message->id == GameMessage::FIRE) {
+		/*if (message->id == GameMessage::FIRE) {
 			GameMessage::FireMessage *fireMessage = dynamic_cast<GameMessage::FireMessage*>(message);
 			assert(fireMessage != NULL);
 
@@ -52,6 +52,6 @@ namespace GameComponents {
 
 			GameObjects::BaseGameObject *arrow = GameSystems::ObjectFactory::getInstance().createProjectile(getComposition(), getComposition()->getX(),
 				getComposition()->getY(), fireMessage->getDuration(), glm::normalize(direction), GameSystems::ObjectFactory::SOCCER_BALL);
-		}
+		}*/
 	}
 }

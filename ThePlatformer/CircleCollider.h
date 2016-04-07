@@ -13,7 +13,7 @@ namespace GameComponents {
 
 		virtual void Init();
 		virtual void Update(double);
-		virtual COMPONENT_TYPE getType();
+		virtual COMPONENT_TYPE getType() const;
 		virtual void sendMessage(GameMessage::Message *message);
 
 		bool CollideWithBox(Manifold *manifold);

@@ -26,7 +26,7 @@ namespace GameComponents {
 		}
 	}
 
-	COMPONENT_TYPE AimComponent::getType()
+	COMPONENT_TYPE AimComponent::getType() const
 	{
 		return GameComponents::SPRITE;
 	}

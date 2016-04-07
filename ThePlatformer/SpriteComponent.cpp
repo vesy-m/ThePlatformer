@@ -12,6 +12,7 @@ namespace GameComponents {
 		counter = 0;
 		currentAnim = "default";
 		rotateNum = -1;
+		isDashing = false;
 	}
 
 	SpriteComponent::~SpriteComponent()
@@ -22,7 +23,50 @@ namespace GameComponents {
 	{
 		switch (message->id)
 		{
+		case GameMessage::LEFT_DASH:
+			isDashing = true;
+			if ((std::string("walk").compare(currentAnim) != 0 || revertX != true) && std::string("jump").compare(currentAnim) != 0) {
+				currentFrame = 0;
+				currentAnim = "walk";
+				revertX = true;
+			}
+			if (revertX != true)
+				revertX = true;
+			break;
+		case GameMessage::RIGHT_DASH:
+			isDashing = true;
+			if ((std::string("walk").compare(currentAnim) != 0 || revertX != false) && std::string("jump").compare(currentAnim) != 0) {
+				currentFrame = 0;
+				currentAnim = "walk";
+				revertX = false;
+			}
+			if (revertX != false)
+				revertX = false;
+			break;
+		case GameMessage::STOP_DASH:
+			isDashing = false;
+			if (std::string("default").compare(currentAnim) != 0) {
+				currentFrame = 0;
+				currentAnim = "default";
+			}
+			break;
+		case GameMessage::BLOCK:
+			isDashing = true;
+			if (std::string("jump").compare(currentAnim) != 0) {
+				currentFrame = 0;
+				currentAnim = "default";
+			}
+			break;
+		case GameMessage::STOP_BLOCK:
+			isDashing = false;
+			if (std::string("default").compare(currentAnim) != 0) {
+				currentFrame = 0;
+				currentAnim = "default";
+			}
+			break;
 		case GameMessage::LEFT:
+			if (isDashing)
+				break;
 			if ((std::string("walk").compare(currentAnim) != 0 || revertX != true) && std::string("jump").compare(currentAnim) != 0) {
 				currentFrame = 0;
 				currentAnim = "walk";
@@ -32,6 +76,8 @@ namespace GameComponents {
 				revertX = true;
 			break;
 		case GameMessage::RIGHT:
+			if (isDashing)
+				break;
 			if ((std::string("walk").compare(currentAnim) != 0 || revertX != false) && std::string("jump").compare(currentAnim) != 0) {
 				currentFrame = 0;
 				currentAnim = "walk";
@@ -42,6 +88,8 @@ namespace GameComponents {
 			break;
 		case GameMessage::JUMP_ANIMATION:
 		case GameMessage::JUMP:
+			if (isDashing)
+				break;
 			if (std::string("jump").compare(currentAnim) != 0) {
 				currentFrame = 0;
 				currentAnim = "jump";
@@ -64,7 +112,7 @@ namespace GameComponents {
 		}
 	}
 
-	COMPONENT_TYPE SpriteComponent::getType()
+	COMPONENT_TYPE SpriteComponent::getType() const
 	{
 		return this->type;
 	}

@@ -13,7 +13,7 @@ namespace GameComponents {
 	{
 	}
 
-	COMPONENT_TYPE EditorCaseSelectorComponent::getType()
+	COMPONENT_TYPE EditorCaseSelectorComponent::getType() const
 	{
 		return this->type;
 	}

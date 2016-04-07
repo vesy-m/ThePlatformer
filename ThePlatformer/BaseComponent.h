@@ -22,6 +22,8 @@ namespace GameComponents {
 		FIRE,
 		AIM,
 		SOUND,
+		ATTACK,
+		MECHANIC,
 		ELEMENT_SELECTOR,
 		CASE_SELECTOR,
 		EDITOR_KEYBOARD
@@ -32,7 +34,7 @@ namespace GameComponents {
 	public:
 		BaseComponent(GameObjects::BaseGameObject*);
 		virtual ~BaseComponent();
-		virtual COMPONENT_TYPE getType() = 0;
+		virtual COMPONENT_TYPE getType() const = 0;
 		virtual void Update(double) = 0;
 		virtual void Init() = 0;
 		virtual void sendMessage(GameMessage::Message*) = 0;

@@ -30,16 +30,17 @@ namespace GameComponents {
 			LEFT = 0,
 			RIGHT = 1,
 			JUMP = 2,
-			FIRE = 3,
-			SPECIAL = 4,
-			DEBUG = 5,
-			ROTATE_RIGHT = 6,
-			ROTATE_LEFT = 7,
+			ATTACK1 = 3,
+			ATTACK2 = 4,
+			ATTACK3 = 5,
+			DEBUG = 6,
+			ROTATE_RIGHT = 7,
+			ROTATE_LEFT = 8,
 		};
 
 		InputComponent(GameObjects::BaseGameObject *, bool attachAsInput = true);
 		virtual ~InputComponent();
-		virtual COMPONENT_TYPE getType() { return WINDOW; }
+		virtual COMPONENT_TYPE getType() const { return WINDOW; }
 		virtual GameObjects::BaseGameObject *getComposition();
 		virtual void Update(double);
 

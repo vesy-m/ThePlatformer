@@ -26,15 +26,11 @@ namespace GameSystems {
 			EDITOR,
 			NONE
 		};
-		enum ProjectileType {
-			ARROW,
-			SOCCER_BALL,
-			TENNIS_BALL,
-			BASE_BALL
-		};
+
 		~ObjectFactory();
 		GameObjects::BaseGameObject *parseObject(GameTools::JsonValue&);
-		GameObjects::BaseGameObject *createProjectile(GameObjects::BaseGameObject*, unsigned int, unsigned int, float, glm::vec2, ProjectileType);
+		GameObjects::BaseGameObject *createProjectile(GameObjects::BaseGameObject*); /*, unsigned int, unsigned int, float, glm::vec2, std::string const &sprite, bool*/
+		GameObjects::BaseGameObject *ObjectFactory::getUsableProjectile(GameObjects::ProjectileType);
 		static void attachObject(GameObjects::BaseGameObject*);
 		void buildLevel(GameTools::JsonValue&);
 		void buildMenu(GameTools::JsonValue & value, std::string & currentMenuFileName);

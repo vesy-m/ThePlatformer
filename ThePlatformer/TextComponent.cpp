@@ -12,7 +12,7 @@ namespace GameComponents {
 	{
 	}
 
-	COMPONENT_TYPE TextComponent::getType()
+	COMPONENT_TYPE TextComponent::getType() const
 	{
 		return this->type;
 	}
@@ -22,7 +22,7 @@ namespace GameComponents {
 
 	void TextComponent::Update(double dt)
 	{
-		if (this->composition->getType() == GameObjects::objectType::PLAYER)
+		if (this->composition->getType() == GameObjects::objectType::PLAYER || this->composition->getType() == GameObjects::objectType::PLAYER_ATTACK)
 		{
 			int playerId = GameSystems::ObjectFactory::getInstance().getPlayerId(this->composition) + 1;
 			std::string lifeText = "0";

@@ -26,7 +26,7 @@ namespace GameComponents {
 		this->functionMap["backPlayer"] = &ButtonComponent::backPlayer;
 		this->functionMap["switchFullScreen"] = &ButtonComponent::switchFullScreen;
 		this->functionMap["startEditor"] = &ButtonComponent::startLevelEditor;
-
+		
 
 
 		this->buttonState = ButtonState::CLASSIC;
@@ -95,8 +95,7 @@ namespace GameComponents {
 		std::cout << std::endl;
 	}
 
-
-	COMPONENT_TYPE ButtonComponent::getType()
+	COMPONENT_TYPE ButtonComponent::getType() const
 	{
 		return this->type;
 	}

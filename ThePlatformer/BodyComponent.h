@@ -14,9 +14,10 @@ namespace GameComponents {
 	{
 		friend class ::GameSystems::ObjectFactory;
 	public:
+		BodyComponent(GameObjects::BaseGameObject*);
 		virtual ~BodyComponent();
 
-		virtual COMPONENT_TYPE getType();
+		virtual COMPONENT_TYPE getType() const;
 		virtual void Update(double);
 		virtual void Init();
 		virtual void Init(float, glm::vec2);
@@ -28,11 +29,13 @@ namespace GameComponents {
 
 		void setPositionX(int x);
 		void setPositionY(int y);
+		void setGravity(float);
+		void setForce(glm::vec2, float);
+		void setVelocity(glm::vec2, float);
 		int getPositionX();
 		int getPositionY();
 
 	private:
-		BodyComponent(GameObjects::BaseGameObject*);
 		std::ofstream m_log_file;
 		glm::vec2 position;
 		glm::vec2 velocity;
@@ -45,6 +48,7 @@ namespace GameComponents {
 		float maxForce;
 		bool onGround;
 		bool isColliding;
+		bool isDash;
 	};
 }
 

@@ -12,7 +12,7 @@ namespace GameComponents {
 	{
 	}
 
-	COMPONENT_TYPE BodyComponent::getType()
+	COMPONENT_TYPE BodyComponent::getType() const
 	{
 		return COMPONENT_TYPE::PHYSIC;
 	}
@@ -33,6 +33,7 @@ namespace GameComponents {
 		onGround = false;
 		lastCollisionVelocity = glm::vec2(0.0f, 0.0f);
 		isColliding = false;
+		isDash = false;
 	}
 
 	void BodyComponent::Init(float intensity, glm::vec2 dir) {
@@ -55,8 +56,25 @@ namespace GameComponents {
 	{
 		switch (message->id)
 		{
+		case GameMessage::BLOCK:
+			isDash = true;
+			velocity.x = 0;
+			isColliding = false;
+			break;
+		case GameMessage::STOP_BLOCK:
+			isDash = false;
+			break;
+		case GameMessage::STOP_DASH:
+			isDash = false;
+			if (!isColliding || (lastCollisionVelocity.x > 0 && velocity.x > 0))
+				velocity.x -= 40.0f;
+			else if (!isColliding || (lastCollisionVelocity.x < 0 && velocity.x < 0))
+				velocity.x += 40.0f;
+			if (onGround == true)
+				this->composition->sendMessage(new GameMessage::Message(GameMessage::STAND_ANIMATION));
+			break;
 		case GameMessage::JUMP:
-			if (forces.y == (gravity.y / (1.0f / mass)) * (-1.0f))
+			if (forces.y == (gravity.y / (1.0f / mass)) * (-1.0f) && !isDash)
 			{
 				forces.y = -50.0f;
 				velocity.y = -50.0f;
@@ -64,18 +82,33 @@ namespace GameComponents {
 			}
 			break;
 		case GameMessage::RIGHT:
-			velocity.x = 20.0f;
+			if (!isDash)
+				velocity.x = 20.0f;
+			isColliding = false;
+			break;
+		case GameMessage::RIGHT_DASH:
+			isDash = true;
+			velocity.x = 40.0f;
 			isColliding = false;
 			break;
 		case GameMessage::LEFT:
-			velocity.x = -20.0f;
+			if (!isDash)
+				velocity.x = -20.0f;
 			isColliding = false;
 			break;
+		case GameMessage::LEFT_DASH:
+			isDash = true;
+			velocity.x = -40.0f;
+			isColliding = false;
 		case GameMessage::RIGHT_RELEASED:
+			if (isDash)
+				break;
 			if (!isColliding || (lastCollisionVelocity.x > 0 && velocity.x > 0)) velocity.x -= 20.0f;
 			if (onGround == true) this->composition->sendMessage(new GameMessage::Message(GameMessage::STAND_ANIMATION));
 			break;
 		case GameMessage::LEFT_RELEASED:
+			if (isDash)
+				break;
 			if (!isColliding || (lastCollisionVelocity.x < 0 && velocity.x < 0)) velocity.x -= -20.0f;
 			if (onGround == true) this->composition->sendMessage(new GameMessage::Message(GameMessage::STAND_ANIMATION));
 			break;
@@ -151,6 +184,18 @@ namespace GameComponents {
 	void BodyComponent::setPositionY(int y)
 	{
 		position.y = (float) y;
+	}
+	void BodyComponent::setGravity(float intensity)
+	{
+		gravity = glm::vec2(0.0, intensity);
+	}
+	void BodyComponent::setForce(glm::vec2 direction, float intensity)
+	{
+		forces = direction * intensity;
+	}
+	void BodyComponent::setVelocity(glm::vec2 direction, float intensity)
+	{
+		velocity = direction * intensity;
 	}
 	int BodyComponent::getPositionX()
 	{

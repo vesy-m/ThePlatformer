@@ -31,7 +31,7 @@ namespace GameComponents {
 		~ButtonComponent();
 		void setNav(GameTools::JsonValue & value);
 		void setNav(int *values, int size);
-		COMPONENT_TYPE getType();
+		COMPONENT_TYPE getType() const;
 		void Update(double dt);
 		void drawSquare(GLfloat x, GLfloat y, GLfloat width, GLfloat height);
 		void Init();

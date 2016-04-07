@@ -14,7 +14,7 @@ namespace GameComponents {
 	{
 	}
 
-	COMPONENT_TYPE EditorElementSelectorComponent::getType()
+	COMPONENT_TYPE EditorElementSelectorComponent::getType() const
 	{
 		return this->type;
 	}
