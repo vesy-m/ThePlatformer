@@ -135,7 +135,7 @@ namespace GameComponents {
 				projectile->setHeight(int(30 * 0.50f));
 				projectile->setWidth(int(30 * 0.50f));
 				projectile->setScale(0.07f);
-				projectile->setPower(20);
+				projectile->setPower(10);
 				break;
 			case GameObjects::BAT:
 				projectile->setBounce(0.3f);
@@ -144,7 +144,7 @@ namespace GameComponents {
 				projectile->setHeight(int(30 * 0.50f));
 				projectile->setWidth(int(110 * 0.50f));
 				projectile->setScale(0.50f);
-				projectile->setPower(20);
+				projectile->setPower(30);
 				break;
 			case GameObjects::BLOCK:
 				projectile->setBounce(0.3f);
@@ -162,7 +162,7 @@ namespace GameComponents {
 		{
 			timer = new GameComponents::TimerComponent(projectile);
 			timer->setTimerType(type);
-			timer->setTime(100);
+			timer->setTime(180);
 			timer->startTimer();
 			body->setGravity(0.0f);
 		}

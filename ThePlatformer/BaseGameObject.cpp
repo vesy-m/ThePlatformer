@@ -30,6 +30,7 @@ namespace GameObjects {
 		bounce = 0.0f;
 		to_destroy = false;
 		invicible = false;
+		life = 200;
 		type = objectType::NONE;
 		this->m_body = NULL;
 		this->m_collider = NULL;

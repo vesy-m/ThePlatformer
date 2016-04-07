@@ -68,7 +68,7 @@ namespace GameComponents
 		else
 			this->composition->sendMessage(new GameMessage::Message(GameMessage::RIGHT_DASH));
 		this->composition->setType(GameObjects::PLAYER_ATTACK);
-		this->composition->setPower(100);
+		this->composition->setPower(45);
 		GameComponents::TimerComponent *timer = reinterpret_cast<GameComponents::TimerComponent*>(getComposition()->getComponent(GameComponents::MECHANIC));
 		if (!timer)
 			timer = new GameComponents::TimerComponent(this->composition);
@@ -109,7 +109,7 @@ namespace GameComponents
 				projectile->setHeight(int(30 * 0.50f));
 				projectile->setWidth(int(30 * 0.50f));
 				projectile->setScale(0.07f);
-				projectile->setPower(20);
+				projectile->setPower(10);
 				break;
 			case GameObjects::DROP:
 				projectile->setBounce(0.3f);
@@ -118,7 +118,7 @@ namespace GameComponents
 				projectile->setHeight(int(30 * 0.50f));
 				projectile->setWidth(int(30 * 0.50f));
 				projectile->setScale(0.07f);
-				projectile->setPower(20);
+				projectile->setPower(25);
 				break;
 			case GameObjects::DASH:
 				projectile->setBounce(0.3f);
