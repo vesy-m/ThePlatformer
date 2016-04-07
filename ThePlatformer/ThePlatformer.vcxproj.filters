@@ -210,6 +210,21 @@
     <ClCompile Include="AudioComponent.cpp">
       <Filter>GameComponents\Source</Filter>
     </ClCompile>
+    <ClCompile Include="EditorManager.cpp">
+      <Filter>GameTools\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="MouseComponent.cpp">
+      <Filter>GameComponents\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="EditorElementSelectorComponent.cpp">
+      <Filter>GameComponents\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="EditorCaseSelectorComponent.cpp">
+      <Filter>GameComponents\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="EditorKeyboardInputComponent.cpp">
+      <Filter>GameComponents\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameEngine.h">
@@ -348,6 +363,30 @@
       <Filter>GameMessages\Header</Filter>
     </ClInclude>
     <ClInclude Include="AudioComponent.h">
+      <Filter>GameComponents\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="EditorManager.h">
+      <Filter>GameTools\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="MouseComponent.h">
+      <Filter>GameComponents\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="MouseMessageClick.h">
+      <Filter>GameMessages\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="MouseMessageMove.h">
+      <Filter>GameMessages\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="MouseMessageWheel.h">
+      <Filter>GameMessages\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="EditorElementSelectorComponent.h">
+      <Filter>GameComponents\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="EditorCaseSelectorComponent.h">
+      <Filter>GameComponents\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="EditorKeyboardInputComponent.h">
       <Filter>GameComponents\Header</Filter>
     </ClInclude>
   </ItemGroup>

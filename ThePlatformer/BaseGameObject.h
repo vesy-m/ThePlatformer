@@ -18,6 +18,9 @@ namespace GameComponents {
 	class ButtonComponent;
 	class FireComponent;
 	class AudioComponent;
+	class EditorElementSelectorComponent;
+	class EditorCaseSelectorComponent;
+	class EditorKeyboardInputComponent;
 }
 
 namespace GameObjects {
@@ -45,6 +48,9 @@ namespace GameObjects {
 		void attachComponent(GameComponents::FireComponent*);
 		void attachComponent(GameComponents::AimComponent*);
 		void attachComponent(GameComponents::AudioComponent*);
+		void attachComponent(GameComponents::EditorElementSelectorComponent *);
+		void attachComponent(GameComponents::EditorCaseSelectorComponent *);
+		void attachComponent(GameComponents::EditorKeyboardInputComponent *);
 		void sendMessage(GameMessage::Message*);
 		void setX(int x);
 		int getX();
@@ -93,6 +99,9 @@ namespace GameObjects {
 		GameComponents::FireComponent *m_fire;
 		GameComponents::AimComponent *m_aim;
 		GameComponents::AudioComponent *m_sound;
+		GameComponents::EditorElementSelectorComponent *m_editorSelector;
+		GameComponents::EditorCaseSelectorComponent *m_caseSelector;
+		GameComponents::EditorKeyboardInputComponent *m_editorKeyboard;
 		int x;
 		int y;
 		int height;

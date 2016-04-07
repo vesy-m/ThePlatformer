@@ -2,7 +2,7 @@
 #include "AudioSystem.h"
 
 namespace GameSystems {
-	bool WindowInputSytem::fullscreen = true;
+	bool WindowInputSytem::fullscreen = false;
 
 	WindowInputSytem::WindowInputSytem()
 	{
@@ -71,6 +71,8 @@ namespace GameSystems {
 			{
 				GameComponents::InputComponent *component = reinterpret_cast<GameComponents::InputComponent*>(object->getComponent(GameComponents::COMPONENT_TYPE::WINDOW));
 				if (component) component->UpdateInputState(event, dt);
+				component = reinterpret_cast<GameComponents::InputComponent*>(object->getComponent(GameComponents::COMPONENT_TYPE::EDITOR_KEYBOARD));
+				if (component) component->UpdateInputState(event, dt);
 			}
 		}
 
@@ -87,6 +89,8 @@ namespace GameSystems {
 		{
 			GameComponents::BaseComponent* component = object->getComponent(GameComponents::COMPONENT_TYPE::WINDOW);
 			if(component) component->Update(dt);
+			component = object->getComponent(GameComponents::COMPONENT_TYPE::EDITOR_KEYBOARD);
+			if (component) component->Update(dt);
 		}
 		window->display();
 		return 0;
@@ -102,6 +106,8 @@ namespace GameSystems {
 		for each (GameObjects::BaseGameObject* object in listObjects)
 		{
 			GameComponents::BaseComponent*component = object->getComponent(GameComponents::COMPONENT_TYPE::WINDOW);
+			if (component) component->Init();
+			component = object->getComponent(GameComponents::COMPONENT_TYPE::EDITOR_KEYBOARD);
 			if (component) component->Init();
 		}
 	}

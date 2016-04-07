@@ -36,7 +36,10 @@ namespace GameMessage {
 		B_MENU,
 		AIM,
 		PLAY_SOUND,
-		STOP_SOUND
+		STOP_SOUND,
+		MOUSE_CLICK,
+		MOUSE_WHEEL,
+		MOUSE_MOVE
 	};
 
 	class Message

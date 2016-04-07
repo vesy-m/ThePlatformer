@@ -30,6 +30,7 @@ namespace GameComponents {
 	public:
 		~ButtonComponent();
 		void setNav(GameTools::JsonValue & value);
+		void setNav(int *values, int size);
 		COMPONENT_TYPE getType();
 		void Update(double dt);
 		void drawSquare(GLfloat x, GLfloat y, GLfloat width, GLfloat height);
@@ -56,9 +57,13 @@ namespace GameComponents {
 		void prevMenu();
 		void backPlayer();
 		void switchFullScreen();
+		void startLevelEditor();
 		int numPlayerSelected;
 		int idPad;
 		int *navDirection;
 		static bool actionAlreadyCompute;
+		bool movingButton;
+		int numMovingButton;
+		int sizeListMovingButton;
 	};
 }

@@ -23,6 +23,7 @@ namespace GameSystems {
 		{
 			MENU,
 			LEVEL,
+			EDITOR,
 			NONE
 		};
 		enum ProjectileType {
@@ -36,10 +37,11 @@ namespace GameSystems {
 		GameObjects::BaseGameObject *createProjectile(GameObjects::BaseGameObject*, unsigned int, unsigned int, float, glm::vec2, ProjectileType);
 		static void attachObject(GameObjects::BaseGameObject*);
 		void buildLevel(GameTools::JsonValue&);
+		void buildMenu(GameTools::JsonValue & value, std::string & currentMenuFileName);
 		GameEngine::Core::Level &getCurrentLevel();
-		void buildMenu(GameTools::JsonValue&);
 		void LoadLevelFileAsCurrent(const std::string&);
 		void LoadMenuFileAsCurrent(const std::string&);
+		void LoadLevelEditor();
 		void cleanupObjects(void);
 		std::list<GameObjects::BaseGameObject*>& getCurrentObjects();
 		const std::list<GameSystems::BaseSystem *>& getSystems();
@@ -70,6 +72,9 @@ namespace GameSystems {
 		void putObjectDepthOrdered(GameObjects::BaseGameObject*);
 		std::list<GameObjects::BaseGameObject*> old_objects;
 		std::list<GameSystems::BaseSystem*>		m_systems;
+
+		std::list<GameObjects::BaseGameObject*> editorGameObjects;
+
 
 		std::vector<GameEngine::Core::Level> listLevels;
 		GameEngine::Core::Level currentLevel;

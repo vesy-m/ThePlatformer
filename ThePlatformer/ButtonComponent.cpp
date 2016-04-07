@@ -25,13 +25,20 @@ namespace GameComponents {
 		this->functionMap["prevMenu"] = &ButtonComponent::prevMenu;
 		this->functionMap["backPlayer"] = &ButtonComponent::backPlayer;
 		this->functionMap["switchFullScreen"] = &ButtonComponent::switchFullScreen;
-		
+		this->functionMap["startEditor"] = &ButtonComponent::startLevelEditor;
+
+
+
 		this->buttonState = ButtonState::CLASSIC;
 		if (actionName == "createPlayer") {
 			this->buttonState = ButtonState::PLAYERCREATOR;
 			GameSystems::ObjectFactory::getInstance().clearPlayers();
 		}
 		this->navDirection = new int[4] { -1, -1, -1, -1 };
+		this->movingButton = false;
+		this->numMovingButton = 0;
+		this->sizeListMovingButton = 0;
+
 	}
 
 
@@ -45,15 +52,49 @@ namespace GameComponents {
 			GameTools::debugManager::getInstance().dAssert("ButtonComponent NAV not an array");
 		int i = -1;
 		for (auto j : value) {
-			assert(i < 4);
+			assert(i < 6);
 			if (i == -1) {
 				if ((int)j->value.toNumber() == 1)
 					this->toggleSelected(true);
 			}
-			else this->navDirection[i] = (int)j->value.toNumber();
+			else if (i == 4) {
+				this->movingButton = true;
+				this->numMovingButton = (int)j->value.toNumber();
+			}
+			else if (i == 5) {
+				this->sizeListMovingButton = (int)j->value.toNumber();
+			}
+			else {
+				this->navDirection[i] = (int)j->value.toNumber();
+			}
 			i++;
 		}
 	}
+
+	void ButtonComponent::setNav(int *values, int size)
+	{
+		int i = -1;
+		for (int it = 0; it < size; it++) {
+			std::cout << values[it] << " ";
+			if (i == -1) {
+				if (values[it] == 1)
+					this->toggleSelected(true);
+			}
+			else if (i == 4) {
+				this->movingButton = true;
+				this->numMovingButton = values[it];
+			}
+			else if (i == 5) {
+				this->sizeListMovingButton = values[it];
+			}
+			else {
+				this->navDirection[i] = values[it];
+			}
+			i++;
+		}
+		std::cout << std::endl;
+	}
+
 
 	COMPONENT_TYPE ButtonComponent::getType()
 	{
@@ -104,6 +145,8 @@ namespace GameComponents {
 
 	void ButtonComponent::sendMessage(GameMessage::Message *message)
 	{
+		int minX = 512 - (this->composition->getWidth() - 20) * (this->sizeListMovingButton - (this->numMovingButton + 1));
+		int maxX = 512 + (this->composition->getWidth() + 20) * (this->numMovingButton);
 		switch (message->id)
 		{
 		case GameMessage::CLICKON:
@@ -139,6 +182,9 @@ namespace GameComponents {
 			else if (this->buttonState == ButtonState::SELECTED) this->execAction();
 			break;
 		case GameMessage::LEFTMENU:
+			if (this->composition->getX() < maxX && movingButton == true) {
+				this->composition->setX(this->composition->getX() + this->composition->getWidth() + 20);
+			}
 			if (this->buttonState == ButtonState::CHOOSEPLAYER) {
 				this->numPlayerSelected--;
 				if (this->numPlayerSelected < 1)
@@ -152,6 +198,9 @@ namespace GameComponents {
 			}
 			break;
 		case GameMessage::RIGHTMENU:
+			if (this->composition->getX() > minX && movingButton == true) {
+				this->composition->setX(this->composition->getX() - this->composition->getWidth() - 20);
+			}
 			if (this->buttonState == ButtonState::CHOOSEPLAYER) {
 				this->numPlayerSelected++;
 				if (this->numPlayerSelected > 2)
@@ -271,4 +320,10 @@ namespace GameComponents {
 	void ButtonComponent::switchFullScreen() {
 		GameSystems::WindowInputSytem::fullscreen = !GameSystems::WindowInputSytem::fullscreen;
 	}
+
+	void ButtonComponent::startLevelEditor() {
+		std::cerr << "PPPLLLOOOPP" << std::endl;
+		GameSystems::ObjectFactory::getInstance().LoadLevelEditor();
+	}
+
 }

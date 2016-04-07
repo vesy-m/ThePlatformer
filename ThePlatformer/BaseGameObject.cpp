@@ -10,6 +10,9 @@
 #include "FireComponent.h"
 #include "FireMessage.h"
 #include "AudioComponent.h"
+#include "EditorElementSelectorComponent.h"
+#include "EditorCaseSelectorComponent.h"
+#include "EditorKeyboardInputComponent.h"
 
 namespace GameObjects {
 	BaseGameObject::BaseGameObject()
@@ -34,6 +37,9 @@ namespace GameObjects {
 		this->m_vector = NULL;
 		this->m_aim = NULL;
 		this->m_sound = NULL;
+		this->m_editorSelector = NULL;
+		this->m_caseSelector = NULL;
+		this->m_editorKeyboard = NULL;
 	}
 
 	void BaseGameObject::Init(void) {
@@ -46,6 +52,9 @@ namespace GameObjects {
 		if (this->m_fire) this->m_fire->Init();
 		if (this->m_aim) this->m_aim->Init();
 		if (this->m_sound) this->m_sound->Init();
+		if (this->m_editorSelector) this->m_editorSelector->Init();
+		if (this->m_caseSelector) this->m_caseSelector->Init();
+		if (this->m_editorKeyboard) this->m_editorKeyboard->Init();
 	}
 
 	BaseGameObject::~BaseGameObject()
@@ -58,6 +67,9 @@ namespace GameObjects {
 		delete this->m_vector;
 		delete this->m_aim;
 		delete this->m_sound;
+		delete this->m_editorSelector;
+		delete this->m_caseSelector;
+		delete this->m_editorKeyboard;
 	}
 
 	GameComponents::BaseComponent *BaseGameObject::getComponent(GameComponents::COMPONENT_TYPE type) {
@@ -82,6 +94,12 @@ namespace GameObjects {
 			return this->m_aim;
 		case GameComponents::SOUND:
 			return this->m_sound;
+		case GameComponents::ELEMENT_SELECTOR:
+			return this->m_editorSelector;
+		case GameComponents::CASE_SELECTOR:
+			return this->m_caseSelector;
+		case GameComponents::EDITOR_KEYBOARD:
+			return this->m_editorKeyboard;
 		default:
 			return NULL;
 		}
@@ -109,7 +127,7 @@ namespace GameObjects {
 
 	void BaseGameObject::attachComponent(GameComponents::SpriteComponent *sprite)
 	{
-		this->m_sprite = sprite;;
+		this->m_sprite = sprite;
 	}
 
 	void BaseGameObject::attachComponent(GameComponents::BodyComponent *body)
@@ -137,6 +155,21 @@ namespace GameObjects {
 		this->m_sound = sound;
 	}
 
+	void BaseGameObject::attachComponent(GameComponents::EditorElementSelectorComponent *editorSelector)
+	{
+		this->m_editorSelector = editorSelector;
+	}
+
+	void BaseGameObject::attachComponent(GameComponents::EditorCaseSelectorComponent *caseSelector)
+	{
+		this->m_caseSelector = caseSelector;
+	}
+
+	void BaseGameObject::attachComponent(GameComponents::EditorKeyboardInputComponent *editorKeyboard)
+	{
+		this->m_editorKeyboard = editorKeyboard;
+	}
+
 	void BaseGameObject::sendMessage(GameMessage::Message *message)
 	{
 		if (this->m_body) this->m_body->sendMessage(message);
@@ -150,13 +183,18 @@ namespace GameObjects {
 		if (this->m_fire && message->id == GameMessage::FIRE) this->m_fire->sendMessage(message);
 		if (message->id == GameMessage::DAMAGE) this->setDamage(dynamic_cast<GameMessage::DamageMessage*>(message));
 		if (this->m_sound) this->m_sound->sendMessage(message);
+		if (this->m_editorSelector) this->m_editorSelector->sendMessage(message);
+		if (this->m_caseSelector) this->m_caseSelector->sendMessage(message);
+		if (this->m_editorKeyboard) this->m_editorKeyboard->sendMessage(message);
 	}
 
 	void BaseGameObject::setX(int x)
 	{
+		/*
 		if (x < 0) this->x = 1;
 		else if (x + this->getWidth() >= 1280) this->x = 1280 - this->getWidth();
-		else this->x = x;
+		else this->x = x;*/
+		this->x = x;
 
 	}
 	int BaseGameObject::getX()

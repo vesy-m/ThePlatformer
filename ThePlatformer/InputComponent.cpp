@@ -2,9 +2,11 @@
 
 namespace GameComponents {
 
-	InputComponent::InputComponent(GameObjects::BaseGameObject *object) : BaseComponent(object)
+	InputComponent::InputComponent(GameObjects::BaseGameObject *object, bool attachAsInput) : BaseComponent(object)
 	{
-		object->attachComponent(this);
+		if (attachAsInput == true) {
+			object->attachComponent(this);
+		}
 		this->duration = 500.0f;
 		this->savedDt = 0.0f;
 		this->maxElapsedTime = 2000.0f;

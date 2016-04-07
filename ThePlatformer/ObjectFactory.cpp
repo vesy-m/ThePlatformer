@@ -15,6 +15,7 @@
 #include "FireBallComponent.h"
 #include "AudioComponent.h"
 #include "AudioSystem.h"
+#include "EditorManager.h"
 
 namespace GameSystems {
 	ObjectFactory::ObjectFactory()
@@ -60,6 +61,7 @@ namespace GameSystems {
 			else if (std::string(it->key) == "fire_ball") new GameComponents::FireBallComponent(ret);
 			else if (std::string(it->key) == "sfx") new GameComponents::AudioComponent(ret, it->value.toString());
 			else if (std::string(it->key) == "level" || std::string(it->key) == "menu" || std::string(it->key) == "function") {
+				std::cout << it->key << std::endl;
 				buttonComponent = new GameComponents::ButtonComponent(ret, std::string(it->key), it->value.toString());
 				if (buttonComponent->buttonState == GameComponents::ButtonComponent::ButtonState::PLAYERCREATOR)
 					new GameComponents::MouseClickComponent(ret, 1);
@@ -150,7 +152,7 @@ namespace GameSystems {
 		currentLevel = newLevel;
 	}
 
-	void ObjectFactory::buildMenu(GameTools::JsonValue &value) {
+	void ObjectFactory::buildMenu(GameTools::JsonValue &value, std::string &currentMenuFileName) {
 		assert(value.getTag() == GameTools::JSON_OBJECT);
 		Menu newMenu = Menu();
 		for (auto i : value) {
@@ -161,7 +163,72 @@ namespace GameSystems {
 		}
 		newMenu.prevMenu = currentMenu.fileName;
 		newMenu.prevState = this->stateGame;
-		currentMenu = newMenu;
+		newMenu.fileName = currentMenuFileName;
+		std::cout << "----" << newMenu.fileName << std::endl;
+		if (newMenu.fileName == "./config/menus/choose_level_menu.json") {
+			int midValue = 512;
+			int sizeCase = 256;
+			int sizeSpace = 20;
+			WIN32_FIND_DATA ffd;
+			HANDLE hFind = INVALID_HANDLE_VALUE;
+			int nbFiles = 0;
+			hFind = FindFirstFile("./assets/levels_preview/*", &ffd);
+			do
+			{
+				nbFiles = nbFiles + 1;
+			} while (FindNextFile(hFind, &ffd) != 0);
+			FindClose(hFind);
+			nbFiles = nbFiles - 2;
+			std::cout << nbFiles << std::endl;
+
+			hFind = INVALID_HANDLE_VALUE;
+			int idButtonInFile = 2;
+			int nbFileFind = 0;
+			hFind = FindFirstFile("./assets/levels_preview/*", &ffd);
+			do
+			{
+				if ((ffd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) == false)
+				{
+					auto ret = new GameObjects::BaseGameObject();
+					std::string pathFile = "./assets/levels_preview/";
+					pathFile += ffd.cFileName;
+					std::string filePng = ffd.cFileName;
+					size_t lastindex = filePng.find_last_of(".");
+					std::string rawname = filePng.substr(0, lastindex);
+					new GameComponents::SpriteComponent(ret, pathFile);
+					ret->setScale(0.2f);
+					GameComponents::ButtonComponent *buttonComponent = new GameComponents::ButtonComponent(ret, "level", "./config/levels/" + rawname + ".json");
+					new GameComponents::MouseClickComponent(ret);
+					int nextNb = idButtonInFile + 1;
+					int prevNb = idButtonInFile - 1;
+					if (nbFileFind == nbFiles - 1) {
+						nextNb = -1;
+					}
+					if (nbFileFind == 0) {
+						prevNb = -1;
+					}
+					if (nbFileFind == 0) {
+						int value[7] = {1, prevNb, nextNb, -1, 1, nbFileFind, nbFiles};
+						buttonComponent->setNav(value, 7);
+					}
+					else {
+						int value[7] = {0, prevNb, nextNb, -1, 1, nbFileFind, nbFiles};
+						buttonComponent->setNav(value, 7);
+					}
+					ret->setX(midValue + (sizeCase + sizeSpace) * (nbFileFind));
+					ret->setY(300);
+
+					newMenu.addButton(ret);
+					idButtonInFile++;
+					nbFileFind++;
+				}
+			} while (FindNextFile(hFind, &ffd) != 0);
+			FindClose(hFind);
+
+
+		}
+
+		this->currentMenu = newMenu;
 	}
 
 	void ObjectFactory::LoadLevelFileAsCurrent(const std::string &filename) {
@@ -190,9 +257,15 @@ namespace GameSystems {
 		countObjects = 0;
 		std::string currentMenuFileName = filename;
 		GameSystems::JSONParser fileParser(filename);
-		this->buildMenu(fileParser.getJSONValue());
-		this->currentMenu.fileName = currentMenuFileName;
+		this->buildMenu(fileParser.getJSONValue(), currentMenuFileName);
 		this->stateGame = gameState::MENU;
+		systemNeedReinit = true;
+	}
+
+	void ObjectFactory::LoadLevelEditor() {
+		GameTools::EditorManager::getInstance();
+
+		this->stateGame = gameState::EDITOR;
 		systemNeedReinit = true;
 	}
 
@@ -222,6 +295,7 @@ namespace GameSystems {
 	{
 		if (this->stateGame == gameState::LEVEL) return this->currentLevel.getObjects();
 		else if(this->stateGame == gameState::MENU)	return this->currentMenu.getObjects();
+		else if (this->stateGame == gameState::EDITOR)	return GameTools::EditorManager::getInstance().getObjects();
 		else return this->currentLevel.getObjects();
 	}
 

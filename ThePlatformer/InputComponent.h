@@ -37,7 +37,7 @@ namespace GameComponents {
 			ROTATE_LEFT = 7,
 		};
 
-		InputComponent(GameObjects::BaseGameObject *);
+		InputComponent(GameObjects::BaseGameObject *, bool attachAsInput = true);
 		virtual ~InputComponent();
 		virtual COMPONENT_TYPE getType() { return WINDOW; }
 		virtual GameObjects::BaseGameObject *getComposition();
