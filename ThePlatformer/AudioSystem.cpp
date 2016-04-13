@@ -65,7 +65,7 @@ namespace GameSystems {
 	void AudioSystem::Init(std::list<GameObjects::BaseGameObject*>& listObjects)
 	{
 		bool isLoop = false;
-		unsigned int volume = 0;
+		float volume = 0.0f;
 		std::string name;
 		std::string fileName;
 
@@ -95,9 +95,9 @@ namespace GameSystems {
 							if (std::string("file").compare(value->key) == 0)
 								fileName = value->value.toString();
 							if (std::string("volume").compare(value->key) == 0)
-								volume = (unsigned int)value->value.toNumber();
+								volume = (float)value->value.toNumber();
 							if (std::string("loop").compare(value->key) == 0)
-								isLoop = (bool)value->value.toNumber();
+								isLoop = value->value.toNumber() == 0 ? false : true;
 						}
 						_sound[name] = GameTools::CSoundManager::getInstance().getSound(fileName);
 						if (!_sound[name])
@@ -145,5 +145,5 @@ namespace GameSystems {
 		}
 	}
 
-	void AudioSystem::SendMessage() {}
+	void AudioSystem::SendAMessage() {}
 }

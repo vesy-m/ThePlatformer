@@ -22,6 +22,9 @@ namespace GameComponents {
 
 	void TextComponent::Update(double dt)
 	{
+		GameTools::Texture *texture = sheet->getTexture();
+		glEnable(GL_TEXTURE_2D);
+		glBindTexture(GL_TEXTURE_2D, texture->getId());
 		if (this->composition->getType() == GameObjects::objectType::PLAYER || this->composition->getType() == GameObjects::objectType::PLAYER_ATTACK)
 		{
 			int playerId = GameSystems::ObjectFactory::getInstance().getPlayerId(this->composition) + 1;
@@ -80,14 +83,13 @@ namespace GameComponents {
 			fpsStr << "FPS : " << old_fps;
 			drawText(fpsStr.str(), posX, posY);
 		}
+		glDisable(GL_TEXTURE_2D);
 	}
 
 	void TextComponent::drawText(std::string str, int posX, int posY, int size) {
 		GameTools::Texture *texture = sheet->getTexture();
-		glEnable(GL_TEXTURE_2D);
-		glBindTexture(GL_TEXTURE_2D, texture->getId());
+		std::vector<Letter *> list_letter = std::vector<Letter *>();
 		for (size_t i = 0; i < str.size(); i++) {
-
 			std::string strChar(1, str.at(i));
 			GameTools::SpriteAnimation anim = sheet->getAnim(strChar);
 
@@ -110,16 +112,33 @@ namespace GameComponents {
 			int pointY = posY;
 			int pointYHeight = posY + letterHeight;
 
-			glBegin(GL_QUADS);
-				glTexCoord2f(xTexCoordMin, yTexCoordMax); glVertex2i(pointX, pointY);
-				glTexCoord2f(xTexCoordMax, yTexCoordMax); glVertex2i(pointXWidth, pointY);
-				glTexCoord2f(xTexCoordMax, yTexCoordMin); glVertex2i(pointXWidth, pointYHeight);
-				glTexCoord2f(xTexCoordMin, yTexCoordMin); glVertex2i(pointX, pointYHeight);
-			glEnd();
+			Letter *let = new Letter();
+			let->pointX = pointX;
+			let->pointXWidth = pointXWidth;
+			let->pointY = pointY;
+			let->pointYHeight = pointYHeight;
+			let->xTexCoordMin = xTexCoordMin;
+			let->xTexCoordMax = xTexCoordMax;
+			let->yTexCoordMin = yTexCoordMin;
+			let->yTexCoordMax = yTexCoordMax;
+
+			list_letter.push_back(let);
+
 			posX += letterWidth;
+			
+
 		}
 
-		glDisable(GL_TEXTURE_2D);
+		glBegin(GL_QUADS);
+			for each (Letter *let in list_letter)
+			{
+				glTexCoord2f(let->xTexCoordMin, let->yTexCoordMax); glVertex2i(let->pointX, let->pointY);
+				glTexCoord2f(let->xTexCoordMax, let->yTexCoordMax); glVertex2i(let->pointXWidth, let->pointY);
+				glTexCoord2f(let->xTexCoordMax, let->yTexCoordMin); glVertex2i(let->pointXWidth, let->pointYHeight);
+				glTexCoord2f(let->xTexCoordMin, let->yTexCoordMin); glVertex2i(let->pointX, let->pointYHeight);
+			}
+		glEnd();
+
 	}
 
 	void TextComponent::Init()

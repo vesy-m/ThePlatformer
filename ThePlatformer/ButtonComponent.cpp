@@ -115,27 +115,21 @@ namespace GameComponents {
 		glLineWidth(3);
 		glColor3f(0.0, 1.0, 0.0);
 		glBegin(GL_LINES);
-		glVertex2f(x, y);
-		glVertex2f(x + width, y);
+			//top
+			glVertex2f(x, y);
+			glVertex2f(x + width, y);
+			//left
+			glVertex2f(x, y);
+			glVertex2f(x, y + height);
+			//right
+			glVertex2f(x + width, y);
+			glVertex2f(x + width, y + height);
+			//bottom
+			glVertex2f(x, y + height);
+			glVertex2f(x + width, y + height);
 		glEnd();
+		glColor3f(1.0, 1.0, 1.0);
 
-		//left
-		glBegin(GL_LINES);
-		glVertex2f(x, y);
-		glVertex2f(x, y + height);
-		glEnd();
-
-		//right
-		glBegin(GL_LINES);
-		glVertex2f(x + width, y);
-		glVertex2f(x + width, y + height);
-		glEnd();
-
-		//bottom
-		glBegin(GL_LINES);
-		glVertex2f(x, y + height);
-		glVertex2f(x + width, y + height);
-		glEnd();
 	}
 
 	void ButtonComponent::Init()

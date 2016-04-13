@@ -113,7 +113,7 @@ namespace GameSystems {
 	}
 
 	//have to receive message in case of change in window like size...
-	void WindowInputSytem::SendMessage()
+	void WindowInputSytem::SendAMessage()
 	{
 	}
 }

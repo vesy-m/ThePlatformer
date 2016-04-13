@@ -33,8 +33,8 @@ namespace GameSystems {
 			if (component) component->Init();
 		}
 	}
+	
+	void PhysicsSystem::SendAMessage() {
 
-	void PhysicsSystem::SendMessage()
-	{
 	}
 }

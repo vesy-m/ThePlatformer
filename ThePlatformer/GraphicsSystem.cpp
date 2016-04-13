@@ -29,21 +29,25 @@ namespace GameSystems {
 		for each (GameObjects::BaseGameObject* object in listObjects)
 		{
 			GameComponents::BaseComponent*component = object->getComponent(GameComponents::COMPONENT_TYPE::SPRITE);
-			if (component) component->Update(dt);
-			
+			if (component) {
+				component->Update(dt);
+			}
 			component = object->getComponent(GameComponents::COMPONENT_TYPE::AIM);
-			if (component) component->Update(dt);
-			
+			if (component) {
+				component->Update(dt);
+			}
 			component = object->getComponent(GameComponents::COMPONENT_TYPE::DEBUGVECTOR);
-			if (component) component->Update(dt);
-
+			if (component) {
+				component->Update(dt);
+			}
 			component = object->getComponent(GameComponents::COMPONENT_TYPE::TEXT);
-			if (component) component->Update(dt);
-		}
-		for each (GameObjects::BaseGameObject* object in listObjects)
-		{
-			GameComponents::BaseComponent* component = object->getComponent(GameComponents::COMPONENT_TYPE::BUTTON);
-			if (component) component->Update(dt);
+			if (component) {
+				component->Update(dt);
+			}
+			component = object->getComponent(GameComponents::COMPONENT_TYPE::BUTTON);
+			if (component) { 
+				component->Update(dt);
+			}
 		}
 		glMatrixMode(GL_PROJECTION);
 		glPopMatrix();
@@ -52,7 +56,7 @@ namespace GameSystems {
 		return 0;
 	}
 
-	void GraphicsSystem::Init(std::list<GameObjects::BaseGameObject*>& listObjects)
+	void	GraphicsSystem::Init(std::list<GameObjects::BaseGameObject*>& listObjects)
 	{
 		Camera::getInstance();
 		for each (GameObjects::BaseGameObject* object in listObjects)
@@ -138,7 +142,7 @@ namespace GameSystems {
 
 	}
 
-	void GraphicsSystem::SendMessage()
+	void GraphicsSystem::SendAMessage()
 	{
 	}
 

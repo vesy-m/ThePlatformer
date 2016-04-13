@@ -13,7 +13,7 @@ namespace GameSystems {
 		~WindowInputSytem();
 		int Update(double dt, std::list<GameObjects::BaseGameObject*>&);
 		void Init(std::list<GameObjects::BaseGameObject*>&);
-		void SendMessage();
+		void SendAMessage();
 		static bool fullscreen;
 	private:
 		sf::Window *window;

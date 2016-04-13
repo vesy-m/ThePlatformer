@@ -40,6 +40,7 @@ namespace GameComponents {
 
 		if (!GameTools::debugManager::getInstance().isActivateGraphic()) return;
 		// top
+		glColor3f(1.0, 0.0, 0.0);
 		glLineWidth(1);
 		if (typeDraw == "circle") {
 			drawHollowCircle(centerX, centerY, height / 2);
@@ -49,10 +50,9 @@ namespace GameComponents {
 		}
 		//velocity
 		glLineWidth(3);
+
 		glBegin(GL_LINES);
-			glColor3f(1.0, 0.0, 0.0);
 			glVertex2f(centerX, centerY);
-			glColor3f(1.0, 0.0, 0.0);
 			glVertex2f(centerX + velocity.x, centerY + velocity.y);
 		glEnd();
 		glColor3f(1.0, 1.0, 1.0);
@@ -67,7 +67,6 @@ namespace GameComponents {
 
 		glBegin(GL_LINE_LOOP);
 		for (i = 0; i <= lineAmount; i++) {
-			glColor3f(1.0, 0.0, 0.0);
 			glVertex2f(
 				x + (radius * cos(i *  twicePi / lineAmount)),
 				y + (radius* sin(i * twicePi / lineAmount))
@@ -78,39 +77,18 @@ namespace GameComponents {
 
 	void VectorDebugComponent::drawSquare(GLfloat x, GLfloat y, GLfloat width, GLfloat height) {
 		glBegin(GL_LINES);
-		glColor3f(1.0, 0.0, 0.0);
-		glVertex2f(x, y);
-		glColor3f(1.0, 0.0, 0.0);
-		glVertex2f(x + width, y);
+			glVertex2f(x, y);
+			glVertex2f(x + width, y);
+			//left
+			glVertex2f(x, y);
+			glVertex2f(x, y + height);
+			//right
+			glVertex2f(x + width, y);
+			glVertex2f(x + width, y + height);
+			//bottom
+			glVertex2f(x, y + height);
+			glVertex2f(x + width, y + height);
 		glEnd();
-
-		//left
-		glLineWidth(1);
-		glBegin(GL_LINES);
-		glColor3f(1.0, 0.0, 0.0);
-		glVertex2f(x, y);
-		glColor3f(1.0, 0.0, 0.0);
-		glVertex2f(x, y + height);
-		glEnd();
-
-		//right
-		glLineWidth(1);
-		glBegin(GL_LINES);
-		glColor3f(1.0, 0.0, 0.0);
-		glVertex2f(x + width, y);
-		glColor3f(1.0, 0.0, 0.0);
-		glVertex2f(x + width, y + height);
-		glEnd();
-
-		//bottom
-		glLineWidth(1);
-		glBegin(GL_LINES);
-		glColor3f(1.0, 0.0, 0.0);
-		glVertex2f(x, y + height);
-		glColor3f(1.0, 0.0, 0.0);
-		glVertex2f(x + width, y + height);
-		glEnd();
-		
 	}
 
 	void VectorDebugComponent::Init()

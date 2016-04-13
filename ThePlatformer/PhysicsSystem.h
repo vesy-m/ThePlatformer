@@ -10,6 +10,6 @@ namespace GameSystems {
 		~PhysicsSystem();
 		int Update(double dt, std::list<GameObjects::BaseGameObject*>&);
 		void Init(std::list<GameObjects::BaseGameObject*>&);
-		void SendMessage();
+		void SendAMessage();
 	};
 }

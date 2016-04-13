@@ -16,7 +16,7 @@ namespace GameSystems
 		};
 		virtual int Update(double dt, std::list<GameObjects::BaseGameObject*>&) = 0;
 		virtual void Init(std::list<GameObjects::BaseGameObject*>&) = 0;
-		virtual void SendMessage() = 0;
+		virtual void SendAMessage() = 0;
 		virtual ~BaseSystem() {}
 	};
 }

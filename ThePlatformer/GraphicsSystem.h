@@ -14,8 +14,8 @@ namespace GameSystems {
 		void Init(std::list<GameObjects::BaseGameObject*>&);
 		void viewportReload();
 		void resizeCamera();
-		void SendMessage();
-		class Camera;		
+		void SendAMessage();
+		class Camera;
 	};
 
 	class GraphicsSystem::Camera : public CSingletonStaticAlloc<GraphicsSystem::Camera>

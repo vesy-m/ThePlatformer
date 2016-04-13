@@ -43,9 +43,9 @@ namespace GameComponents
 							if (std::string("file").compare(value->key) == 0)
 								_fileName = value->value.toString();
 							if (std::string("volume").compare(value->key) == 0)
-								_volume = value->value.toNumber();
+								_volume = (float)value->value.toNumber();
 							if (std::string("loop").compare(value->key) == 0)
-								_isLoop = value->value.toNumber();
+								_isLoop = value->value.toNumber() == 0 ? false : true;
 						}
 						_sound[name] = GameTools::CSoundManager::getInstance().getSound(_fileName);
 						if (!_sound[name])

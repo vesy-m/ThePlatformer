@@ -17,7 +17,7 @@ namespace GameSystems {
 
 		int Update(double, std::list<GameObjects::BaseGameObject*>&);
 		void Init(std::list<GameObjects::BaseGameObject*>&);
-		void SendMessage();
+		void SendAMessage();
 
 		static bool				_menuVictory;
 		static bool				_pause;
