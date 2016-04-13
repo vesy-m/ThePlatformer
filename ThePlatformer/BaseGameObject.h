@@ -135,7 +135,7 @@ namespace GameObjects {
 		objectType type;
 		bool to_destroy;
 		bool invicible;
-		int life = 100;
+		int life;
 		int power = 0;
 		float cooldown = 2000.0f;
 	};

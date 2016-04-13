@@ -84,6 +84,7 @@ namespace GameComponents {
 	void TimerComponent::stopDash()
 	{
 		this->composition->sendMessage(new GameMessage::Message(GameMessage::STOP_DASH));
+		this->composition->setInvicible(false);
 	}
 
 }

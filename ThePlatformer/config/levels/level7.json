@@ -41,6 +41,14 @@
     },
     {
       "x" : 42,
+      "y" : 252,
+      "sprite" : "./assets/levels_sprite/element_sprite/rock.png",
+      "depth" : 3,
+      "vector" : "square",
+      "boxcollider" : true
+    },
+    {
+      "x" : 42,
       "y" : 504,
       "sprite" : "./assets/levels_sprite/element_sprite/grass.png",
       "depth" : 3,
@@ -674,7 +682,7 @@
     {
       "x" : 672,
       "y" : 714,
-      "sprite" : "./assets/levels_sprite/element_sprite/grass.png",
+      "sprite" : "./assets/levels_sprite/element_sprite/rock.png",
       "depth" : 3,
       "vector" : "square",
       "boxcollider" : true

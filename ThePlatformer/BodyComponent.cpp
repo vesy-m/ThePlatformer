@@ -41,7 +41,7 @@ namespace GameComponents {
 			if (this->composition->getName().find("megaman") != std::string::npos) {
 				forces = dir * 150.0f;
 				maxForce = 200.0f;
-				velocity = dir * 75.0f;
+				velocity = dir * 50.0f;
 			} else if (this->composition->getName().find("metalslug") != std::string::npos) {
 				forces = dir * 150.0f;
 				maxForce = 200.0f;
