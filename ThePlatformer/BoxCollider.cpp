@@ -140,6 +140,7 @@ namespace GameComponents {
 							collide = true;
 						}
 					}
+					delete manifold;
 				}
 			}
 			if (!collide)
