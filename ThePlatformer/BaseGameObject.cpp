@@ -210,6 +210,7 @@ namespace GameObjects {
 		if (this->m_editorSelector) this->m_editorSelector->sendMessage(message);
 		if (this->m_caseSelector) this->m_caseSelector->sendMessage(message);
 		if (this->m_editorKeyboard) this->m_editorKeyboard->sendMessage(message);
+		delete message;
 	}
 
 	void BaseGameObject::setX(int x)

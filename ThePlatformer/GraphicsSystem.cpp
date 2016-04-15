@@ -26,11 +26,17 @@ namespace GameSystems {
 			glVertex2i(Camera::getInstance().resolutionWidth, 0);
 		glEnd();
 		glColor3f(1.0f, 1.0f, 1.0f);
+		GameTools::debugManager::getInstance().time1 = 0;
+		GameTools::debugManager::getInstance().time2 = 0;
+		GameTools::debugManager::getInstance().time3 = 0;
+		GameTools::debugManager::getInstance().time4 = 0;
 		for each (GameObjects::BaseGameObject* object in listObjects)
 		{
 			GameComponents::BaseComponent*component = object->getComponent(GameComponents::COMPONENT_TYPE::SPRITE);
 			if (component) {
+				auto duration = std::chrono::high_resolution_clock::now();
 				component->Update(dt);
+				GameTools::debugManager::getInstance().time1 += std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now() - duration).count();
 			}
 			component = object->getComponent(GameComponents::COMPONENT_TYPE::AIM);
 			if (component) {
@@ -38,11 +44,16 @@ namespace GameSystems {
 			}
 			component = object->getComponent(GameComponents::COMPONENT_TYPE::DEBUGVECTOR);
 			if (component) {
+				auto duration = std::chrono::high_resolution_clock::now();
 				component->Update(dt);
+				GameTools::debugManager::getInstance().time2 += std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now() - duration).count();
 			}
 			component = object->getComponent(GameComponents::COMPONENT_TYPE::TEXT);
 			if (component) {
+				auto duration = std::chrono::high_resolution_clock::now();
 				component->Update(dt);
+				GameTools::debugManager::getInstance().time3 += std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now() - duration).count();
+
 			}
 			component = object->getComponent(GameComponents::COMPONENT_TYPE::BUTTON);
 			if (component) { 

@@ -29,6 +29,11 @@ namespace GameTools {
 		int rotateNum;
 		float scaleNum;
 
+		long long time1;
+		long long time2;
+		long long time3;
+		long long time4;
+
 	private:
 		debugManager();
 		debugManager(debugManager const&) = delete;
