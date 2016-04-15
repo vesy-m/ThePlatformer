@@ -19,7 +19,8 @@ namespace GameComponents {
 
 	void BodyComponent::Update(double dt)
 	{
-		Integrate((float)((dt / 100.0f) * 2.0f));
+		//Integrate((float)((dt / 100.0f) * 2.0f));
+		Integrate((float)((dt / 100.0f) * 1.6f));
 	}
 
 	void BodyComponent::Init()
@@ -158,8 +159,12 @@ namespace GameComponents {
 
 		position += velocity * dt;
 
+		if (position.y >= 1000.0f)
+			this->composition->destroy(true);
+
 		composition->setX((int) position.x);
 		composition->setY((int) position.y);
+
 		GameMessage::VectorMessage *vec = new GameMessage::VectorMessage(GameMessage::VELOCITY_VECTOR, velocity);
 		this->composition->sendMessage((GameMessage::Message*)vec);
 	}
