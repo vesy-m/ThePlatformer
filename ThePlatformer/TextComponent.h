@@ -26,15 +26,5 @@ namespace GameComponents {
 		TextComponent(GameObjects::BaseGameObject*);
 		const COMPONENT_TYPE type = COMPONENT_TYPE::TEXT;
 		GameTools::SpriteSheet *sheet;
-		typedef struct l {
-			float xTexCoordMin;
-			float xTexCoordMax;
-			float yTexCoordMin;
-			float yTexCoordMax;
-			int pointX;
-			int pointXWidth;
-			int pointY;
-			int pointYHeight;
-		} Letter;
 	};
 }

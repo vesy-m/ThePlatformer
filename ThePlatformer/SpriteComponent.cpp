@@ -129,14 +129,6 @@ namespace GameComponents {
 		GLint posX = this->composition->getX() + (this->composition->getWidth() / 2);
 		GLint posY = this->composition->getY() + (this->composition->getHeight() / 2);
 
-		if (!std::string("sun").compare(this->composition->getName())) {
-			this->composition->setRotate((this->composition->getRotate() + GameTools::debugManager::getInstance().rotateNum) % 360);
-			float newScale = this->composition->getScale();
-			if (newScale > 2.0) GameTools::debugManager::getInstance().scaleNum = -0.01f;
-			else if (newScale <= 1.0) GameTools::debugManager::getInstance().scaleNum = 0.01f;
-			this->composition->setScale(newScale + GameTools::debugManager::getInstance().scaleNum);
-		}
-
 		glEnable(GL_TEXTURE_2D);
 
 		if (sheet->isAnimated()) {

@@ -87,52 +87,22 @@ namespace GameComponents {
 	}
 
 	void TextComponent::drawText(std::string str, int posX, int posY, int size) {
-		GameTools::Texture *texture = sheet->getTexture();
-		std::vector<Letter> list_letter = std::vector<Letter>();
-		float xTexCoordMin, xTexCoordMax, yTexCoordMin, yTexCoordMax;
-		GLint letterHeight, letterWidth;
-		GameTools::SpriteAnimation anim;
+		int letterHeight, letterWidth;
 		size_t sizeStr = str.size();
-		Letter let;
+		glBegin(GL_QUADS);
 		for (size_t i = 0; i < sizeStr; i++) {
-			anim = sheet->getAnim(std::string(1, str.at(i)));
 
-			//get letter coordinate in texture
-			xTexCoordMin = (float)(anim.getSpriteXmin(0)) / (float)texture->getWidth();
-			xTexCoordMax = (float)(anim.getSpriteXmax(0)) / (float)texture->getWidth();
-			// Y axis must be inverted because the opengl Y axis go from bottom to top
-			yTexCoordMin = (float)(texture->getHeight() - anim.getSpriteYmax(0)) / (float)texture->getHeight();
-			yTexCoordMax = (float)(texture->getHeight() - anim.getSpriteYmin(0)) / (float)texture->getHeight();
+			GameTools::SpriteSheet::Letter let = sheet->getLetter(str.at(i));
 
-			// get height and width of the sprite of the currentFrame
-			letterHeight = anim.getSpriteYmax(0) - anim.getSpriteYmin(0);
-			letterWidth = anim.getSpriteXmax(0) - anim.getSpriteXmin(0);
+			letterHeight = let.height / (20 - size);
+			letterWidth = let.width / (20 - size);
 
-			letterHeight /= 20 - size;
-			letterWidth /= 20 - size;
-
-			let.pointX = posX;
-			let.pointXWidth = posX + letterWidth;
-			let.pointY = posY;
-			let.pointYHeight = posY + letterHeight;
-			let.xTexCoordMin = xTexCoordMin;
-			let.xTexCoordMax = xTexCoordMax;
-			let.yTexCoordMin = yTexCoordMin;
-			let.yTexCoordMax = yTexCoordMax;
-
-			list_letter.push_back(let);
-
+			glTexCoord2f(let.xTexCoordMin, let.yTexCoordMax); glVertex2i(posX, posY);
+			glTexCoord2f(let.xTexCoordMax, let.yTexCoordMax); glVertex2i(posX + letterWidth, posY);
+			glTexCoord2f(let.xTexCoordMax, let.yTexCoordMin); glVertex2i(posX + letterWidth, posY + letterHeight);
+			glTexCoord2f(let.xTexCoordMin, let.yTexCoordMin); glVertex2i(posX, posY + letterHeight);
 			posX += letterWidth;
 
-
-		}
-		glBegin(GL_QUADS);
-		for each (Letter let in list_letter)
-		{
-			glTexCoord2f(let.xTexCoordMin, let.yTexCoordMax); glVertex2i(let.pointX, let.pointY);
-			glTexCoord2f(let.xTexCoordMax, let.yTexCoordMax); glVertex2i(let.pointXWidth, let.pointY);
-			glTexCoord2f(let.xTexCoordMax, let.yTexCoordMin); glVertex2i(let.pointXWidth, let.pointYHeight);
-			glTexCoord2f(let.xTexCoordMin, let.yTexCoordMin); glVertex2i(let.pointX, let.pointYHeight);
 		}
 		glEnd();
 	}

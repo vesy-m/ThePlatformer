@@ -42,7 +42,18 @@ namespace GameTools {
 					}
 					for (auto an : i->value) {
 						SpriteAnimation anim = SpriteAnimation(an->value);
-						this->anims[anim.getName()] = anim;
+						if (anim.getName().length() == 1) {
+							this->Alphabet[anim.getName().at(0)].xTexCoordMin = (float)(anim.getSpriteXmin(0)) / (float)texture->getWidth();
+							this->Alphabet[anim.getName().at(0)].xTexCoordMax = (float)(anim.getSpriteXmax(0)) / (float)texture->getWidth();
+							this->Alphabet[anim.getName().at(0)].yTexCoordMin = (float)(texture->getHeight() - anim.getSpriteYmax(0)) / (float)texture->getHeight();
+							this->Alphabet[anim.getName().at(0)].yTexCoordMax = (float)(texture->getHeight() - anim.getSpriteYmin(0)) / (float)texture->getHeight();
+							this->Alphabet[anim.getName().at(0)].height = anim.getSpriteYmax(0) - anim.getSpriteYmin(0);
+							this->Alphabet[anim.getName().at(0)].width = anim.getSpriteXmax(0) - anim.getSpriteXmin(0);
+						}
+						else {
+							this->anims[anim.getName()] = anim;
+						}
+
 					}
 				}
 
@@ -78,6 +89,10 @@ namespace GameTools {
 			GameTools::debugManager::getInstance().dAssert("anim name doesn't exist");
 		}
 		return it->second;
+	}
+
+	const SpriteSheet::Letter &SpriteSheet::getLetter(const char &c) {
+		return this->Alphabet[c];
 	}
 
 	Texture		*SpriteSheet::getTexture()
