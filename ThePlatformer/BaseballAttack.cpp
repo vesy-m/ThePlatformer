@@ -143,7 +143,7 @@ namespace GameComponents {
 				projectile->setMass(25.0f);
 				projectile->setHeight(int(30 * 0.50f));
 				projectile->setWidth(int(110 * 0.50f));
-				projectile->setScale(0.50f);
+				projectile->setScale(0.48f);
 				projectile->setPower(30);
 				break;
 			case GameObjects::BLOCK:
@@ -162,7 +162,7 @@ namespace GameComponents {
 		{
 			timer = new GameComponents::TimerComponent(projectile);
 			timer->setTimerType(type);
-			timer->setTime(180);
+			timer->setTime(450);
 			timer->startTimer();
 			body->setGravity(0.0f);
 		}
