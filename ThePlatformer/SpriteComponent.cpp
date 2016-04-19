@@ -27,6 +27,7 @@ namespace GameComponents {
 			isDashing = true;
 			if ((std::string("walk").compare(currentAnim) != 0 || revertX != true) && std::string("jump").compare(currentAnim) != 0) {
 				currentFrame = 0;
+				prevAnim = currentAnim;
 				currentAnim = "walk";
 				revertX = true;
 			}
@@ -37,6 +38,7 @@ namespace GameComponents {
 			isDashing = true;
 			if ((std::string("walk").compare(currentAnim) != 0 || revertX != false) && std::string("jump").compare(currentAnim) != 0) {
 				currentFrame = 0;
+				prevAnim = currentAnim;
 				currentAnim = "walk";
 				revertX = false;
 			}
@@ -47,28 +49,41 @@ namespace GameComponents {
 			isDashing = false;
 			if (std::string("default").compare(currentAnim) != 0) {
 				currentFrame = 0;
+				prevAnim = currentAnim;
 				currentAnim = "default";
+			}
+			break;
+		case GameMessage::BASEBALL_SHOOT:
+			if (isDashing)
+				break;
+			if (std::string("shoot").compare(currentAnim) != 0) {
+				currentFrame = 0;
+				prevAnim = currentAnim;
+				currentAnim = "shoot";
 			}
 			break;
 		case GameMessage::BLOCK:
 			isDashing = true;
-			if (std::string("jump").compare(currentAnim) != 0) {
+			if (std::string("block").compare(currentAnim) != 0) {
 				currentFrame = 0;
-				currentAnim = "default";
+				prevAnim = currentAnim;
+				currentAnim = "block";
 			}
 			break;
 		case GameMessage::STOP_BLOCK:
 			isDashing = false;
 			if (std::string("default").compare(currentAnim) != 0) {
 				currentFrame = 0;
+				prevAnim = currentAnim;
 				currentAnim = "default";
 			}
 			break;
 		case GameMessage::LEFT:
 			if (isDashing)
 				break;
-			if ((std::string("walk").compare(currentAnim) != 0 || revertX != true) && std::string("jump").compare(currentAnim) != 0) {
+			if ((std::string("walk").compare(currentAnim) != 0 || revertX != true) && std::string("jump").compare(currentAnim) != 0 && std::string("shoot").compare(currentAnim) != 0) {
 				currentFrame = 0;
+				prevAnim = currentAnim;
 				currentAnim = "walk";
 				revertX = true;
 			}
@@ -78,8 +93,9 @@ namespace GameComponents {
 		case GameMessage::RIGHT:
 			if (isDashing)
 				break;
-			if ((std::string("walk").compare(currentAnim) != 0 || revertX != false) && std::string("jump").compare(currentAnim) != 0) {
+			if ((std::string("walk").compare(currentAnim) != 0 || revertX != false) && std::string("jump").compare(currentAnim) != 0 && std::string("shoot").compare(currentAnim) != 0) {
 				currentFrame = 0;
+				prevAnim = currentAnim;
 				currentAnim = "walk";
 				revertX = false;
 			}
@@ -145,9 +161,13 @@ namespace GameComponents {
 			ymin = (float)(texture->getHeight() - anim.getSpriteYmax(currentFrame)) / (float)texture->getHeight();
 			ymax = (float)(texture->getHeight() - anim.getSpriteYmin(currentFrame)) / (float)texture->getHeight();
 
-			if (counter > anim.getTime()) {
-				currentFrame = (currentFrame + 1) % anim.getSizeListFrame();
+			if (counter == anim.getTime() && (currentFrame + 1) == anim.getSizeListFrame() && anim.getIsRepeated() == false) {
+				currentAnim = prevAnim;
+				currentFrame = 0;
+			}
+			else if (counter > anim.getTime()) {
 				counter = 0;
+				currentFrame = (currentFrame + 1) % anim.getSizeListFrame();
 			}
 			counter++;
 		}
@@ -161,6 +181,11 @@ namespace GameComponents {
 		}
 		int pointY = -(height / 2);
 		int pointYHeight = (height / 2);
+		if (this->sheet->positionSprite == GameTools::SpriteSheet::BOTTOM_CENTER) {
+			pointY = -height;
+			pointYHeight = 0;
+			posY = this->composition->getY() + this->composition->getHeight();
+		}
 		if (this->revertY) {
 			pointY += height;
 			pointYHeight -= height;

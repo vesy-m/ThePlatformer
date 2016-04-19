@@ -43,6 +43,7 @@ namespace GameMessage {
 		PLAY_SOUND,
 		STOP_SOUND,
 		STOP_DASH,
+		BASEBALL_SHOOT,
 		BLOCK,
 		STOP_BLOCK,
 		MOUSE_CLICK,

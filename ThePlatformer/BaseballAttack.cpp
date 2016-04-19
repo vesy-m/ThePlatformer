@@ -55,6 +55,7 @@ namespace GameComponents {
 		//	getComposition()->getY(), 1.0f, glm::normalize(direction), "./assets/sprite/tennis_ball.png", true);
 
 		createProjectile(getComposition(), GameObjects::BASE_BALL, 1.0f, glm::normalize(direction), "./assets/sprite/baseball.png");
+		this->composition->sendMessage(new GameMessage::Message(GameMessage::BASEBALL_SHOOT));
 	}
 
 	void BaseballAttack::Attack2()

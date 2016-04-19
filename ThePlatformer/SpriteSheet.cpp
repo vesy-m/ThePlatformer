@@ -4,6 +4,7 @@
 namespace GameTools {
 	SpriteSheet::SpriteSheet(const std::string & filename)
 	{
+		this->positionSprite = CENTER;
 		std::string extension = getExtension(filename);
 		if (std::string("json").compare(extension) == 0) {
 			animated = true;
@@ -35,6 +36,18 @@ namespace GameTools {
 				printf("%s = ", i->key);
 				if (std::string("file").compare(i->key) == 0) {
 					this->texture = TextureManager::getInstance().getTexture(i->value.toString());
+				}
+				if (std::string("position").compare(i->key) == 0) {
+					int it = 0;
+					for each (std::string var in positionSpriteText)
+					{
+						if (var.compare(i->value.toString()) == 0) {
+							this->positionSprite = (POSITION_SPRITE)it;
+							break;
+						}
+						it++;
+
+					}
 				}
 				if (std::string("anim").compare(i->key) == 0) {
 					if (i->value.getTag() != GameTools::JSON_ARRAY) {

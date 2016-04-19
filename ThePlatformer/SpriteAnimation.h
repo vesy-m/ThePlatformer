@@ -23,9 +23,11 @@ namespace GameTools {
 		int getSpriteYmax(int);
 		int getTime();
 		int getSizeListFrame();
+		bool getIsRepeated();
 	private:
 		int time;
 		std::string name;
 		std::vector<std::vector<int>> listCoordSpriteByFrame;
+		bool isRepeated;
 	};
 }

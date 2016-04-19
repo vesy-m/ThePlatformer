@@ -4,6 +4,7 @@
 namespace GameTools {
 	SpriteAnimation::SpriteAnimation(JsonValue &animInfos)
 	{
+		this->isRepeated = true;
 		if (animInfos.getTag() != GameTools::JSON_OBJECT) {
 			GameTools::debugManager::getInstance().dAssert("anim is not an array");
 		}
@@ -23,6 +24,9 @@ namespace GameTools {
 			}
 			if (std::string("ymax").compare(i->key) == 0) {
 				ymax = (int)i->value.toNumber();
+			}
+			if (std::string("repeat").compare(i->key) == 0) {
+				this->isRepeated = i->value.toNumber() == 0 ? false : true;
 			}
 			if (std::string("images").compare(i->key) == 0 && i->value.getTag() == GameTools::JSON_ARRAY) {
 				for (auto frame : i->value) {
@@ -74,6 +78,11 @@ namespace GameTools {
 	int SpriteAnimation::getSpriteYmax(int numFrame)
 	{
 		return this->listCoordSpriteByFrame[numFrame][3];
+	}
+
+	bool SpriteAnimation::getIsRepeated()
+	{
+		return this->isRepeated;
 	}
 
 	int SpriteAnimation::getTime()

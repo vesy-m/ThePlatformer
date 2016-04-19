@@ -24,6 +24,13 @@ namespace GameTools{
 			float yTexCoordMax;
 		} Letter;
 
+		enum POSITION_SPRITE {
+			CENTER,
+			BOTTOM_CENTER
+		};
+
+		std::string positionSpriteText[2] = { "center", "BottomCenter" };
+
 		SpriteSheet(const std::string&);
 		~SpriteSheet();
 		std::string getExtension(const std::string&);
@@ -34,6 +41,8 @@ namespace GameTools{
 		const	SpriteAnimation & getAnim(const std::string&);
 		const	Letter			&getLetter(const char &c);
 		Texture	*getTexture();
+		POSITION_SPRITE positionSprite;
+
 	private:
 		Texture			*texture;
 		bool			animated;

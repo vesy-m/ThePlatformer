@@ -44,6 +44,7 @@ namespace GameComponents {
 		int currentFrame;
 		int counter;
 		std::string currentAnim;
+		std::string prevAnim;
 		std::string _fileName;
 	};
 }
