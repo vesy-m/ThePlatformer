@@ -73,6 +73,13 @@ namespace GameSystems {
 			}
 			else if (std::string(it->key) == "menunav")
 				buttonComponent->setNav(it->value);
+			else if (std::string(it->key) == "attack_1")
+				ret->setAttack1Value((float)it->value.toNumber());
+			else if (std::string(it->key) == "attack_2")
+				ret->setAttack2Value((float)it->value.toNumber());
+			else if (std::string(it->key) == "attack_3")
+				ret->setAttack3Value((float)it->value.toNumber());
+
 			//else if (std::string(it->key) == "aim") new GameComponents::AimComponent(ret, it->value.toString());
 		}
 		return (ret);

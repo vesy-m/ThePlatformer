@@ -46,6 +46,9 @@ namespace GameObjects {
 		this->m_editorSelector = NULL;
 		this->m_caseSelector = NULL;
 		this->m_editorKeyboard = NULL;
+		this->attack_1_value = 0;
+		this->attack_2_value = 0;
+		this->attack_3_value = 0;
 	}
 
 	void BaseGameObject::Init(void) {
@@ -204,7 +207,6 @@ namespace GameObjects {
 		if (this->m_vector) this->m_vector->sendMessage(message);
 		if (this->m_button) this->m_button->sendMessage(message);
 		if (this->m_aim) this->m_aim->sendMessage(message);
-		//if (this->m_fire && message->id == GameMessage::FIRE) this->m_fire->sendMessage(message);
 		if (this->m_attack) this->m_attack->sendMessage(message);
 		if (message->id == GameMessage::DAMAGE) this->setDamage(dynamic_cast<GameMessage::DamageMessage*>(message));
 		if (this->m_sound) this->m_sound->sendMessage(message);
@@ -351,16 +353,6 @@ namespace GameObjects {
 		this->power = power;
 	}
 
-	float BaseGameObject::getCooldown()
-	{
-		return this->cooldown;
-	}
-
-	void BaseGameObject::setCooldown(float cooldown)
-	{
-		this->cooldown = cooldown;
-	}
-
 	void BaseGameObject::setInvicible(bool inv)
 	{
 		this->invicible = inv;
@@ -377,5 +369,29 @@ namespace GameObjects {
 
 	bool BaseGameObject::destroy(void) {
 		return to_destroy;
+	}
+
+	float BaseGameObject::getAttack1Value(void) {
+		return (this->attack_1_value);
+	}
+
+	float BaseGameObject::getAttack2Value(void) {
+		return (this->attack_2_value);
+	}
+
+	float BaseGameObject::getAttack3Value(void) {
+		return (this->attack_3_value);
+	}
+
+	void BaseGameObject::setAttack1Value(float attack_1_value) {
+		this->attack_1_value = attack_1_value;
+	}
+
+	void BaseGameObject::setAttack2Value(float attack_2_value) {
+		this->attack_2_value = attack_2_value;
+	}
+
+	void BaseGameObject::setAttack3Value(float attack_3_value) {
+		this->attack_3_value = attack_3_value;
 	}
 }

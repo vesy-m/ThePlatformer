@@ -10,6 +10,7 @@
 #include "debugManager.h"
 #include "AimMessage.h"
 #include "ObjectFactory.h"
+#include "Message.h"
 
 namespace GameComponents {
 
@@ -67,5 +68,11 @@ namespace GameComponents {
 		float duration;
 		float savedDt;
 		float maxElapsedTime;
+
+		float attack_1;
+		float attack_2;
+		float attack_3;
+
+
 	};
 }

@@ -21,6 +21,7 @@ namespace GameComponents {
 
 	void BaseballAttack::sendMessage(GameMessage::Message *message)
 	{
+		GameComponents::InputComponent *input = reinterpret_cast<GameComponents::InputComponent*> (this->composition->getComponent(GameComponents::WINDOW));
 		switch (message->id)
 		{
 		case GameMessage::ATTACK1:
@@ -132,7 +133,6 @@ namespace GameComponents {
 			case GameObjects::BASE_BALL:
 				projectile->setBounce(0.3f);
 				projectile->setMass(25.0f);
-				shooter->setCooldown(1500.0f); // A changer
 				projectile->setHeight(int(30 * 0.50f));
 				projectile->setWidth(int(30 * 0.50f));
 				projectile->setScale(0.07f);
@@ -141,7 +141,6 @@ namespace GameComponents {
 			case GameObjects::BAT:
 				projectile->setBounce(0.3f);
 				projectile->setMass(25.0f);
-				shooter->setCooldown(1500.0f); // A changer
 				projectile->setHeight(int(30 * 0.50f));
 				projectile->setWidth(int(110 * 0.50f));
 				projectile->setScale(0.50f);

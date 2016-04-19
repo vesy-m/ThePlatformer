@@ -189,12 +189,6 @@
     <ClCompile Include="FireMessage.cpp">
       <Filter>GameMessages\Source</Filter>
     </ClCompile>
-    <ClCompile Include="FireBallCompoment.cpp">
-      <Filter>GameComponents\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="FireComponent.cpp">
-      <Filter>GameComponents\Source</Filter>
-    </ClCompile>
     <ClCompile Include="DamageMessage.cpp">
       <Filter>GameMessages\Source</Filter>
     </ClCompile>
@@ -355,12 +349,6 @@
     </ClInclude>
     <ClInclude Include="FireMessage.h">
       <Filter>GameMessages\Header</Filter>
-    </ClInclude>
-    <ClInclude Include="FireBallComponent.h">
-      <Filter>GameComponents\Header</Filter>
-    </ClInclude>
-    <ClInclude Include="FireComponent.h">
-      <Filter>GameComponents\Header</Filter>
     </ClInclude>
     <ClInclude Include="DamageMessage.h">
       <Filter>GameMessages\Header</Filter>
