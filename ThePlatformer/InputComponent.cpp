@@ -10,6 +10,9 @@ namespace GameComponents {
 		this->duration = 500.0f;
 		this->savedDt = 0.0f;
 		this->maxElapsedTime = 2000.0f;
+		this->attack_1 = 0;
+		this->attack_2 = 0;
+		this->attack_3 = 0;
 	}
 
 	InputComponent::~InputComponent()
@@ -24,6 +27,10 @@ namespace GameComponents {
 	void InputComponent::Update(double dt)
 	{
 		ExecuteCheatCode(IsCheatCodeActivated());
+
+		this->attack_1 = (float) (this->attack_1 - dt > 0 ? this->attack_1 - dt : 0);
+		this->attack_2 = (float) (this->attack_2 - dt > 0 ? this->attack_2 - dt : 0);
+		this->attack_3 = (float) (this->attack_3 - dt > 0 ? this->attack_3 - dt : 0);
 
 		for (auto it = this->inputState.begin(); it != this->inputState.end(); ++it)
 		{
@@ -43,10 +50,9 @@ namespace GameComponents {
 			}
 			else if (it->first == INPUT_TYPE::ROTATE_LEFT && it->second == true) getComposition()->sendMessage(new GameMessage::Message(GameMessage::ROTATE_LEFT));
 			else if (it->first == INPUT_TYPE::ROTATE_RIGHT && it->second == true) getComposition()->sendMessage(new GameMessage::Message(GameMessage::ROTATE_RIGHT));
-			else if (it->first == INPUT_TYPE::ATTACK3 && it->second == true && this->composition->getName().find("megaman") != std::string::npos)
+			else if (it->first == INPUT_TYPE::ATTACK3 && it->second == true && this->composition->getName().find("megaman") != std::string::npos) {
 				getComposition()->sendMessage(new GameMessage::Message(GameMessage::ATTACK3));
-			//else if (it->first == INPUT_TYPE::FIRE && it->second == true) this->duration += (float)((this->duration + dt > 1000.0f) ? (1000.0f - this->duration) : dt);
-			//if (this->savedDt <= this->getComposition()->getCooldown()) this->savedDt += (float)dt;
+			}
 		}
 	}
 	

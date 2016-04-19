@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CAAttackComponent.h"
+#include "InputComponent.h"
 
 namespace GameSystems {
 	class ObjectFactory;
@@ -8,6 +9,7 @@ namespace GameSystems {
 
 namespace GameComponents {
 	class SpriteComponent;
+	class InputComponent;
 }
 
 namespace								GameComponents

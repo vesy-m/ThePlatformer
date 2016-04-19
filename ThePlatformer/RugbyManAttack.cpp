@@ -105,7 +105,6 @@ namespace GameComponents
 			case GameObjects::RUGBY_BALL:
 				projectile->setBounce(0.3f);
 				projectile->setMass(25.0f);
-				shooter->setCooldown(1500.0f); // A changer
 				projectile->setHeight(int(30 * 0.50f));
 				projectile->setWidth(int(30 * 0.50f));
 				projectile->setScale(0.07f);
@@ -114,7 +113,6 @@ namespace GameComponents
 			case GameObjects::DROP:
 				projectile->setBounce(0.3f);
 				projectile->setMass(25.0f);
-				shooter->setCooldown(1500.0f); //À changer
 				projectile->setHeight(int(30 * 0.50f));
 				projectile->setWidth(int(30 * 0.50f));
 				projectile->setScale(0.07f);

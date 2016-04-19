@@ -99,14 +99,20 @@ namespace GameObjects {
 		void setDamage(GameMessage::DamageMessage*);
 		int getPower();
 		void setPower(int);
-		float getCooldown();
-		void setCooldown(float);
 
 		void setInvicible(bool);
 		bool getInvicible(void) const;
 
 		void destroy(bool);
 		bool destroy(void);
+
+		float getAttack1Value(void);
+		float getAttack2Value(void);
+		float getAttack3Value(void);
+
+		void setAttack1Value(float);
+		void setAttack2Value(float);
+		void setAttack3Value(float);
 	private:
 		GameComponents::InputComponent *m_input;
 		GameComponents::SpriteComponent *m_sprite;
@@ -140,6 +146,9 @@ namespace GameObjects {
 		bool invicible;
 		int life;
 		int power = 0;
-		float cooldown = 2000.0f;
+
+		float attack_1_value;
+		float attack_2_value;
+		float attack_3_value;
 	};
 }

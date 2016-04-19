@@ -38,15 +38,24 @@ namespace GameComponents {
 						getComposition()->sendMessage(new GameMessage::Message(GameMessage::RIGHT_RELEASED));
 						break;
 					case INPUT_TYPE::ATTACK1:
-						this->composition->sendMessage(new GameMessage::Message(GameMessage::ATTACK1));
+						if (attack_1 == 0)
+						{
+							attack_1 = this->composition->getAttack1Value();
+							this->composition->sendMessage(new GameMessage::Message(GameMessage::ATTACK1));
+						}
 						break;
 					case INPUT_TYPE::ATTACK2:
-						this->composition->sendMessage(new GameMessage::Message(GameMessage::ATTACK2));
+						if (attack_2 == 0) {
+							attack_2 = this->composition->getAttack2Value();
+							this->composition->sendMessage(new GameMessage::Message(GameMessage::ATTACK2));
+						}
 						break;
 					case INPUT_TYPE::ATTACK3:
-						this->composition->sendMessage(new GameMessage::Message(GameMessage::ATTACK3));
-						if (this->composition->getName().find("megaman") != std::string::npos) this->composition->sendMessage(new GameMessage::Message(GameMessage::ATTACK3_RELEASED));
-						else this->composition->sendMessage(new GameMessage::Message(GameMessage::ATTACK3));
+						if (attack_3 == 0) {
+							this->attack_3 = this->composition->getAttack3Value();
+							if (this->composition->getName().find("megaman") != std::string::npos) this->composition->sendMessage(new GameMessage::Message(GameMessage::ATTACK3_RELEASED));
+							else this->composition->sendMessage(new GameMessage::Message(GameMessage::ATTACK3));
+						}
 						break;
 					}
 					if (savedMessage.size() >= 10)
