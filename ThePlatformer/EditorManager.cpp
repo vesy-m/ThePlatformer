@@ -22,9 +22,10 @@ namespace GameTools {
 		new GameComponents::SpriteComponent(ret, "./assets/levels_sprite/selection.png");
 		new GameComponents::EditorKeyboardInputComponent(ret, true);
 		new GameComponents::MouseComponent(ret, true);
-		new GameComponents::EditorCaseSelectorComponent(ret);
+		new GameComponents::EditorCaseSelectorComponent(ret, this->caseSelectionSize);
 		ret->setX(0);
 		ret->setY(0);
+		ret->setScale(1.0f / (this->textureSize / this->caseSelectionSize));
 		this->addObject(ret);
 
 		WIN32_FIND_DATA ffd;
@@ -100,9 +101,9 @@ namespace GameTools {
 
 	void EditorManager::createNewElement(int posX, int posY)
 	{
-		std::cout << "----------------------------------" << std::endl;
-		std::cout << this->editorLevelObjects.size() << std::endl;
-		std::cout << this->listElements.size() << std::endl;
+		//std::cout << "----------------------------------" << std::endl;
+		//std::cout << this->editorLevelObjects.size() << std::endl;
+		//std::cout << this->listElements.size() << std::endl;
 		auto ret = getObjectByPosition(posX, posY);
 		if (ret != NULL) {
 			return;
@@ -112,24 +113,25 @@ namespace GameTools {
 		ret->setX(posX);
 		ret->setY(posY);
 		ret->setDepth(3);
+		ret->setScale(1.0f / (this->textureSize / this->caseSelectionSize));
 		ret->Init();
 		this->listElements[std::pair<int, int>(posX, posY)].textureStr = this->listMaterial.at(this->positionSelected);
 		this->editorLevelObjects.push_front(ret);
-		std::cout << this->editorLevelObjects.size() << std::endl;
-		std::cout << this->listElements.size() << std::endl;
+		//std::cout << this->editorLevelObjects.size() << std::endl;
+		//std::cout << this->listElements.size() << std::endl;
 		//serializeMap();
 	}
 
 	void EditorManager::removeElementByPosition(int posX, int posY) {
-		std::cout << "----------------------------------" << std::endl;
-		std::cout << this->editorLevelObjects.size() << std::endl;
-		std::cout << this->listElements.size() << std::endl;
+		//std::cout << "----------------------------------" << std::endl;
+		//std::cout << this->editorLevelObjects.size() << std::endl;
+		//std::cout << this->listElements.size() << std::endl;
 		for (GameObjects::BaseGameObject * obj : this->editorLevelObjects) {
 			if (obj->getX() == posX && obj->getY() == posY) {
 				this->editorLevelObjects.remove(obj);
 				this->listElements.erase(std::pair<int, int>(posX, posY));
-				std::cout << this->editorLevelObjects.size() << std::endl;
-				std::cout << this->listElements.size() << std::endl;
+				//std::cout << this->editorLevelObjects.size() << std::endl;
+				//std::cout << this->listElements.size() << std::endl;
 				return;
 			}
 		}
@@ -152,6 +154,7 @@ namespace GameTools {
 			ss << "      " << "\"x\" : " << it->first.first << "," << std::endl;
 			ss << "      " << "\"y\" : " << it->first.second << "," << std::endl;
 			ss << "      " << "\"sprite\" : \"" << it->second.textureStr << "\"," << std::endl;
+			ss << "      " << "\"scale\" : " << 1.0f / (this->textureSize / this->caseSelectionSize) << "," << std::endl;
 			ss << "      " << "\"depth\" : 3," << std::endl;
 			ss << "      " << "\"vector\" : \"square\"," << std::endl;
 			ss << "      " << "\"boxcollider\" : true" << std::endl;

@@ -3,9 +3,10 @@
 
 namespace GameComponents {
 
-	EditorCaseSelectorComponent::EditorCaseSelectorComponent(GameObjects::BaseGameObject* object) : BaseComponent(object)
+	EditorCaseSelectorComponent::EditorCaseSelectorComponent(GameObjects::BaseGameObject* object, int newCaseSize) : BaseComponent(object)
 	{
 		object->attachComponent(this);
+		this->caseSize = newCaseSize;
 	}
 
 
@@ -34,10 +35,14 @@ namespace GameComponents {
 		switch (message->id)
 		{
 		case GameMessage::MOUSE_MOVE:
-			newPosX = ((GameMessage::MouseMessageMove*)message)->positionX / 42;
-			newPosX *= 42;
-			newPosY = ((GameMessage::MouseMessageMove*)message)->positionY / 42;
-			newPosY *= 42;
+			std::cout << "------------------------" << std::endl;
+			std::cout << ((GameMessage::MouseMessageMove*)message)->positionX << std::endl;
+			newPosX = ((GameMessage::MouseMessageMove*)message)->positionX / this->caseSize;
+			std::cout << newPosX << std::endl;
+			newPosX *= this->caseSize;
+			std::cout << newPosX << std::endl;
+			newPosY = ((GameMessage::MouseMessageMove*)message)->positionY / this->caseSize;
+			newPosY *= this->caseSize;
 			this->composition->setX(newPosX);
 			this->composition->setY(newPosY);
 			break;

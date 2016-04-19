@@ -71,10 +71,9 @@ namespace GameComponents {
 			break;
 		case GameMessage::STOP_BLOCK:
 			isDashing = false;
-			if (std::string("default").compare(currentAnim) != 0) {
+			if (std::string("block").compare(currentAnim) == 0) {
 				currentFrame = 0;
-				prevAnim = currentAnim;
-				currentAnim = "default";
+				currentAnim = prevAnim;
 			}
 			break;
 		case GameMessage::LEFT:
@@ -111,6 +110,11 @@ namespace GameComponents {
 			}
 			break;
 		case GameMessage::STAND_ANIMATION:
+			if (isDashing)
+			{
+				prevAnim = "default";
+				break;
+			}
 			if (std::string("default").compare(currentAnim) != 0) {
 				currentFrame = 0;
 				currentAnim = "default";
@@ -172,36 +176,36 @@ namespace GameComponents {
 		}
 		glBindTexture(GL_TEXTURE_2D, texture->getId());
 
-		int pointX = -(width / 2);
-		int pointXWidth = (width / 2);
+		float pointXFloat = -(width / 2.0f);
+		float pointXWidthFloat = (width / 2);
 		if (this->revertX) {
-			pointX += width;
-			pointXWidth -= width;
+			pointXFloat += width;
+			pointXWidthFloat -= width;
 		}
-		int pointY = -(height / 2);
-		int pointYHeight = (height / 2);
+		float pointYFloat = -(height / 2.0f);
+		float pointYHeightFloat = (height / 2.0f);
 		if (this->sheet->positionSprite == GameTools::SpriteSheet::BOTTOM_CENTER) {
-			pointY = -height;
-			pointYHeight = 0;
+			pointYFloat = -height;
+			pointYHeightFloat = 0;
 			posY = this->composition->getY() + this->composition->getHeight();
 		}
 		if (this->revertY) {
-			pointY += height;
-			pointYHeight -= height;
+			pointYFloat += height;
+			pointYHeightFloat -= height;
 		}
 
-		pointX = (int)(pointX * this->composition->getScale());
-		pointXWidth = (int)(pointXWidth * this->composition->getScale());
-		pointY = (int)(pointY * this->composition->getScale());
-		pointYHeight = (int)(pointYHeight * this->composition->getScale());
+		float pointX = (pointXFloat * this->composition->getScale());
+		float pointXWidth =(pointXWidthFloat * this->composition->getScale());
+		float pointY = (pointYFloat * this->composition->getScale());
+		float pointYHeight = (pointYHeightFloat * this->composition->getScale());
 
 		glTranslated(posX, posY, 0);
 		glRotated(this->composition->getRotate(), 0, 0, 1);
 		glBegin(GL_QUADS);
-			glTexCoord2f(xmin, ymax); glVertex2i(pointX, pointY);
-			glTexCoord2f(xmax, ymax); glVertex2i(pointXWidth, pointY);
-			glTexCoord2f(xmax, ymin); glVertex2i(pointXWidth, pointYHeight);
-			glTexCoord2f(xmin, ymin); glVertex2i(pointX, pointYHeight);
+			glTexCoord2f(xmin, ymax); glVertex2f(pointX, pointY);
+			glTexCoord2f(xmax, ymax); glVertex2f(pointXWidth, pointY);
+			glTexCoord2f(xmax, ymin); glVertex2f(pointXWidth, pointYHeight);
+			glTexCoord2f(xmin, ymin); glVertex2f(pointX, pointYHeight);
 		glEnd();
 		glRotatef((GLfloat)-this->composition->getRotate(), 0.0, 0.0, 1.0);
 		glTranslated(-(posX), -(posY), 0);

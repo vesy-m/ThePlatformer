@@ -18,8 +18,9 @@ namespace GameComponents {
 		void sendMessage(GameMessage::Message*);
 		virtual COMPONENT_TYPE getType() const;
 	private:
-		EditorCaseSelectorComponent(GameObjects::BaseGameObject * object);
+		EditorCaseSelectorComponent(GameObjects::BaseGameObject * object, int newCaseSize);
 		const COMPONENT_TYPE type = COMPONENT_TYPE::CASE_SELECTOR;
+		int caseSize;
 
 
 	};
