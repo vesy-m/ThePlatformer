@@ -25,10 +25,10 @@ namespace GameComponents {
 		{
 		case GameMessage::LEFT_DASH:
 			isDashing = true;
-			if ((std::string("walk").compare(currentAnim) != 0 || revertX != true) && std::string("jump").compare(currentAnim) != 0) {
+			if (std::string("dash").compare(currentAnim) != 0 || revertX != true) {
 				currentFrame = 0;
 				prevAnim = currentAnim;
-				currentAnim = "walk";
+				currentAnim = "dash";
 				revertX = true;
 			}
 			if (revertX != true)
@@ -36,10 +36,10 @@ namespace GameComponents {
 			break;
 		case GameMessage::RIGHT_DASH:
 			isDashing = true;
-			if ((std::string("walk").compare(currentAnim) != 0 || revertX != false) && std::string("jump").compare(currentAnim) != 0) {
+			if (std::string("dash").compare(currentAnim) != 0 || revertX != false) {
 				currentFrame = 0;
 				prevAnim = currentAnim;
-				currentAnim = "walk";
+				currentAnim = "dash";
 				revertX = false;
 			}
 			if (revertX != false)
@@ -47,10 +47,9 @@ namespace GameComponents {
 			break;
 		case GameMessage::STOP_DASH:
 			isDashing = false;
-			if (std::string("default").compare(currentAnim) != 0) {
+			if (std::string("dash").compare(currentAnim) == 0) {
 				currentFrame = 0;
-				prevAnim = currentAnim;
-				currentAnim = "default";
+				currentAnim = prevAnim;
 			}
 			break;
 		case GameMessage::BASEBALL_SHOOT:
