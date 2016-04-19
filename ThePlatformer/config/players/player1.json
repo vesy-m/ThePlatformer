@@ -6,6 +6,7 @@
       "height" : 42,
       "width" : 30,
       "mass" : 20,
+      "move_speed" : 1.6,
       "sprite" : "./config/sprite_sheets/desc-megaman.json",
       "body" : true,
       "boxcollider" : true,

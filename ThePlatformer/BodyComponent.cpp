@@ -20,7 +20,10 @@ namespace GameComponents {
 	void BodyComponent::Update(double dt)
 	{
 		//Integrate((float)((dt / 100.0f) * 2.0f));
-		Integrate((float)((dt / 100.0f) * 1.6f));
+		//Integrate((float)((dt / 100.0f) * 1.6f));
+		//std::cout << dt<< std::endl;
+
+		Integrate((float)(dt / 100));
 	}
 
 	void BodyComponent::Init()
@@ -28,6 +31,7 @@ namespace GameComponents {
 		position = glm::vec2(composition->getX(), composition->getY());
 		velocity = glm::vec2(0.0f, 0.0f);
 		mass = this->composition->getMass();
+		movementSpeed = this->composition->getMoveSpeed();
 		gravity = glm::vec2(0.0f, 9.80f);
 		forces = glm::vec2(0.0f, 0.0f);
 		maxForce = 500.0f;
@@ -77,8 +81,7 @@ namespace GameComponents {
 		case GameMessage::JUMP:
 			if (forces.y == (gravity.y / (1.0f / mass)) * (-1.0f) && !isDash)
 			{
-				forces.y = -50.0f;
-				velocity.y = -50.0f;
+				velocity.y = -42.0f;
 				onGround = false;
 			}
 			break;
@@ -152,12 +155,12 @@ namespace GameComponents {
 		glm::vec2 newForces = (forces * (1.0f / mass));
 
 		glm::vec2 acceleration = newForces + gravity;
-		if (acceleration.y >= -0.0001f && acceleration.y <= 0.0001f) acceleration.y = 0.0f;
-		velocity += acceleration * dt;
+		//if (acceleration.y >= -0.0001f && acceleration.y <= 0.0001f) acceleration.y = 0.0f;
+		velocity += acceleration * dt * movementSpeed;
 
 		if (onGround == false && (forces.y <= maxForce)) forces = forces + gravity;
 
-		position += velocity * dt;
+		position += velocity * dt * movementSpeed;
 
 		if (position.y >= 1000.0f)
 			this->composition->destroy(true);

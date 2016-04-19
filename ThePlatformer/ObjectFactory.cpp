@@ -45,6 +45,7 @@ namespace GameSystems {
 			else if (std::string(it->key) == "depth") ret->setDepth((int) it->value.toNumber());
 			else if (std::string(it->key) == "scale") ret->setScale((float) it->value.toNumber());
 			else if (std::string(it->key) == "mass") ret->setMass((float)it->value.toNumber());
+			else if (std::string(it->key) == "move_speed") ret->setMoveSpeed((float)it->value.toNumber());
 			else if (std::string(it->key) == "bounce") ret->setBounce((float)it->value.toNumber());
 			else if (std::string(it->key) == "rotate") ret->setRotate((int) it->value.toNumber());
 			else if (std::string(it->key) == "width") ret->setWidth((int) it->value.toNumber());
