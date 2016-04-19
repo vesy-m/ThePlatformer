@@ -27,6 +27,7 @@ namespace GameObjects {
 		rotate = 0;
 		scale = 1;
 		mass = 1.0f;
+		moveSpeed = 1.0f;
 		bounce = 0.0f;
 		to_destroy = false;
 		invicible = false;
@@ -274,6 +275,14 @@ namespace GameObjects {
 	float BaseGameObject::getMass()
 	{
 		return this->mass;
+	}
+	void BaseGameObject::setMoveSpeed(float moveSpeed)
+	{
+		this->moveSpeed = moveSpeed;
+	}
+	float BaseGameObject::getMoveSpeed()
+	{
+		return this->moveSpeed;
 	}
 	void BaseGameObject::setBounce(float bounce)
 	{

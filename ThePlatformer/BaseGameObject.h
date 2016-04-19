@@ -83,6 +83,8 @@ namespace GameObjects {
 		float getScale();
 		void setMass(float);
 		float getMass();
+		void setMoveSpeed(float);
+		float getMoveSpeed();
 		void setBounce(float);
 		float getBounce();
 		void setRotate(int);
@@ -129,6 +131,7 @@ namespace GameObjects {
 		int rotate;
 		float scale;
 		float mass;
+		float moveSpeed;
 		float bounce;
 		ProjectileType projectileType;
 		std::string name;

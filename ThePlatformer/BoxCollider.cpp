@@ -62,7 +62,7 @@ namespace GameComponents {
 					if (n.y < 0)
 					{
 						manifold->normal = glm::vec2(0, 1);
-						manifold->penetration = ((positionB.y + manifold->B->getComposition()->getHeight()) - positionA.y) + 0.1f;
+						manifold->penetration = ((positionB.y + manifold->B->getComposition()->getHeight()) - positionA.y) + 1;
 					}
 					else
 					{

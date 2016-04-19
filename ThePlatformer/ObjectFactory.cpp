@@ -45,6 +45,7 @@ namespace GameSystems {
 			else if (std::string(it->key) == "depth") ret->setDepth((int) it->value.toNumber());
 			else if (std::string(it->key) == "scale") ret->setScale((float) it->value.toNumber());
 			else if (std::string(it->key) == "mass") ret->setMass((float)it->value.toNumber());
+			else if (std::string(it->key) == "move_speed") ret->setMoveSpeed((float)it->value.toNumber());
 			else if (std::string(it->key) == "bounce") ret->setBounce((float)it->value.toNumber());
 			else if (std::string(it->key) == "rotate") ret->setRotate((int) it->value.toNumber());
 			else if (std::string(it->key) == "width") ret->setWidth((int) it->value.toNumber());
@@ -371,10 +372,10 @@ namespace GameSystems {
 		this->nbPlayerReady += nb;
 		if (this->mapPlayersController.size() > 1 && this->nbPlayerReady == this->mapPlayersController.size())
 			this->LoadMenuFileAsCurrent("./config/menus/choose_level_menu.json");
-		/*else if (this->mapPlayersController.size() == 1 && this->nbPlayerReady == this->mapPlayersController.size()) {
+		else if (this->mapPlayersController.size() == 1 && this->nbPlayerReady == this->mapPlayersController.size()) {
 			this->mapPlayersController[6] = "./config/players/player1.json";
 			this->LoadMenuFileAsCurrent("./config/menus/choose_level_menu.json");
-		}*/
+		}
 	}
 
 	void ObjectFactory::changeSelectedButtonMenu(int idButton) {
