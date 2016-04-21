@@ -68,6 +68,7 @@ namespace GameComponents {
 		glm::vec2 direction = glm::vec2(100.0, 0.0);
 		if (sprite->revertX) direction = glm::vec2((-100 + centerX) - centerX, (centerY) - centerY);
 		else direction = glm::vec2((100 + centerX) - centerX, (centerY) - centerY);
+		revert = sprite->revertX;
 
 		//GameObjects::BaseGameObject *arrow = GameSystems::ObjectFactory::getInstance().createProjectile(getComposition(), getComposition()->getX(),
 		//	getComposition()->getY(), /*this->getDuration()*/ 1.0f, glm::normalize(direction), GameSystems::ObjectFactory::SOCCER_BALL);
@@ -135,26 +136,33 @@ namespace GameComponents {
 				projectile->setMass(25.0f);
 				projectile->setHeight(int(30 * 0.50f));
 				projectile->setWidth(int(30 * 0.50f));
-				projectile->setScale(0.07f);
+				projectile->setScale(0.05f);
 				projectile->setPower(10);
+				projectile->setX(shooter->getX());
+				projectile->setY(shooter->getY());
 				break;
 			case GameObjects::BAT:
 				projectile->setBounce(0.3f);
 				projectile->setMass(25.0f);
 				projectile->setHeight(int(30 * 0.50f));
 				projectile->setWidth(int(110 * 0.50f));
-				projectile->setScale(0.48f);
+				projectile->setScale(0.3f);
 				projectile->setPower(30);
+				if (revert)
+					projectile->setX(shooter->getX() - 40);
+				else
+					projectile->setX(shooter->getX() + 20);
+				projectile->setY(shooter->getY());
 				break;
 			case GameObjects::BLOCK:
 				projectile->setBounce(0.3f);
+				projectile->setX(shooter->getX());
+				projectile->setY(shooter->getY());
 				break;
 			default:
 				break;
 			}
 		}
-		projectile->setX(shooter->getX());
-		projectile->setY(shooter->getY());
 		projectile->Init();
 		assert(body != NULL);
 		body->Init(base_force, direction);
