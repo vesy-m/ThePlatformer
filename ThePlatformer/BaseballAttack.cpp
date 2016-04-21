@@ -138,8 +138,8 @@ namespace GameComponents {
 				projectile->setWidth(int(30 * 0.50f));
 				projectile->setScale(0.05f);
 				projectile->setPower(10);
-				projectile->setX(shooter->getX());
-				projectile->setY(shooter->getY());
+				projectile->setX(shooter->getX() + (shooter->getWidth() / 2));
+				projectile->setY(shooter->getY() + (shooter->getHeight() / 2) - 10);
 				break;
 			case GameObjects::BAT:
 				projectile->setBounce(0.3f);
@@ -148,11 +148,12 @@ namespace GameComponents {
 				projectile->setWidth(int(110 * 0.50f));
 				projectile->setScale(0.3f);
 				projectile->setPower(30);
-				if (revert)
-					projectile->setX(shooter->getX() - 40);
-				else
-					projectile->setX(shooter->getX() + 20);
-				projectile->setY(shooter->getY());
+				//if (revert)
+				//	projectile->setX(shooter->getX() - 40);
+				//else
+				//	projectile->setX(shooter->getX() + 20);
+				projectile->setX(shooter->getX() + (shooter->getWidth() / 2));
+				projectile->setY(shooter->getY() + (shooter->getHeight() / 2) - 10);
 				break;
 			case GameObjects::BLOCK:
 				projectile->setBounce(0.3f);

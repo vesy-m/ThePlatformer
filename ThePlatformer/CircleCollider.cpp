@@ -123,17 +123,17 @@ namespace GameComponents {
 
 		if (glm::length(distance) <= A->radius)
 		{
-			if (dir == 0 || dir == 2) {
-				manifold->normal = compass[dir];
-				if (dir == 0)
-					manifold->penetration = (A->radius - std::abs(distance.y)) + 0.1f;
-				else
-					manifold->penetration = (A->radius - std::abs(distance.y));
-			}
-			else {
-				manifold->normal = compass[dir];
-				manifold->penetration = (A->radius - std::abs(distance.x));
-			}
+			//if (dir == 0 || dir == 2) {
+			//	manifold->normal = compass[dir];
+			//	if (dir == 0)
+			//		manifold->penetration = (A->radius - std::abs(distance.y)) + 0.1f;
+			//	else
+			//		manifold->penetration = (A->radius - std::abs(distance.y));
+			//}
+			//else {
+			//	manifold->normal = compass[dir];
+			//	manifold->penetration = (A->radius - std::abs(distance.x));
+			//}
 			return true;
 		}
 		return false;

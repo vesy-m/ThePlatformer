@@ -68,7 +68,7 @@ namespace GameComponents
 		else
 			this->composition->sendMessage(new GameMessage::Message(GameMessage::RIGHT_DASH));
 		this->composition->setType(GameObjects::PLAYER_ATTACK);
-		this->composition->setPower(45);
+		this->composition->setPower(40);
 		GameComponents::TimerComponent *timer = reinterpret_cast<GameComponents::TimerComponent*>(getComposition()->getComponent(GameComponents::MECHANIC));
 		if (!timer)
 			timer = new GameComponents::TimerComponent(this->composition);
@@ -126,14 +126,14 @@ namespace GameComponents
 				break;
 			}
 		}
-		projectile->setX(shooter->getX());
-		projectile->setY(shooter->getY());
+		projectile->setX(shooter->getX() + (shooter->getWidth() / 2) - 10);
+		projectile->setY(shooter->getY() + (shooter->getHeight() / 2) - 10);
 		projectile->Init();
 		assert(body != NULL);
 		body->Init(base_force, direction);
 		//if (type == GameObjects::RUGBY_BALL)
 		//{
-			body->setGravity(3.5f);
+			body->setGravity(4.0f);
 		//}
 		GameSystems::ObjectFactory::getInstance().createProjectile(projectile);
 		return projectile;

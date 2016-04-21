@@ -7,7 +7,7 @@
   "width" : 30,
   "mass" : 20,
   "sprite" : "./config/sprite_sheets/desc-baseball.json",
-  "move_speed" : 1.6,
+  "move_speed" : 1.5,
   "body" : true,
   "boxcollider" : true,
   "vector" : "square",

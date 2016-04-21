@@ -42,19 +42,30 @@ namespace GameComponents {
 
 			if (y_overlap >= 0)
 			{
+				//if (this->getComposition()->getName().find("metalslug") != std::string::npos)
+				//{
+				//	std::cout << x_overlap << " "<< y_overlap << std::endl;
+				//}
 				if (x_overlap < y_overlap)
 				{
 					if (n.x < 0)
 					{
 						manifold->normal = glm::vec2(1, 0);
 						manifold->penetration = ((positionB.x + manifold->B->getComposition()->getWidth()) - positionA.x) + 1;
+						//if (this->getComposition()->getName().find("metalslug") != std::string::npos)
+						//{
+						//	std::cout << "RIGHT COLLISION" << std::endl;
+						//}
 					}
 					else
 					{
 						manifold->normal = glm::vec2(-1, 0);
 						manifold->penetration = ((positionA.x + manifold->A->getComposition()->getWidth()) - positionB.x) + 1;
+						//if (this->getComposition()->getName().find("metalslug") != std::string::npos)
+						//{
+						//	std::cout << "LEFT COLLISION" << std::endl;
+						//}
 					}
-					manifold->penetration = x_overlap;
 					return true;
 				}
 				else
@@ -63,11 +74,19 @@ namespace GameComponents {
 					{
 						manifold->normal = glm::vec2(0, 1);
 						manifold->penetration = ((positionB.y + manifold->B->getComposition()->getHeight()) - positionA.y) + 1;
+						//if (this->getComposition()->getName().find("metalslug") != std::string::npos)
+						//{
+						//	std::cout << "DOWN COLLISION" << std::endl;
+						//}
 					}
 					else
 					{
 						manifold->normal = glm::vec2(0, -1);
 						manifold->penetration = (positionA.y + manifold->A->getComposition()->getHeight()) - positionB.y;
+						//if (this->getComposition()->getName().find("metalslug") != std::string::npos)
+						//{
+						//	std::cout << "UP COLLISION" << std::endl;
+						//}
 					}
 					return true;
 				}

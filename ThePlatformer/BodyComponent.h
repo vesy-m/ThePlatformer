@@ -50,6 +50,9 @@ namespace GameComponents {
 		bool onGround;
 		bool isColliding;
 		bool isDash;
+
+		bool stopLeft;
+		bool stopRight;
 	};
 }
 

@@ -39,6 +39,8 @@ namespace GameComponents {
 		lastCollisionVelocity = glm::vec2(0.0f, 0.0f);
 		isColliding = false;
 		isDash = false;
+		stopLeft = false;
+		stopRight = false;
 	}
 
 	void BodyComponent::Init(float intensity, glm::vec2 dir) {
@@ -83,12 +85,16 @@ namespace GameComponents {
 			{
 				velocity.y = -42.0f;
 				onGround = false;
+				stopLeft = false;
+				stopRight = false;
 			}
 			break;
 		case GameMessage::RIGHT:
-			if (!isDash)
+			if (!isDash && !stopRight)
+			{
 				velocity.x = 20.0f;
-			isColliding = false;
+				isColliding = false;
+			}
 			break;
 		case GameMessage::RIGHT_DASH:
 			isDash = true;
@@ -96,9 +102,11 @@ namespace GameComponents {
 			isColliding = false;
 			break;
 		case GameMessage::LEFT:
-			if (!isDash)
+			if (!isDash && !stopLeft)
+			{
 				velocity.x = -20.0f;
-			isColliding = false;
+				isColliding = false;
+			}
 			break;
 		case GameMessage::LEFT_DASH:
 			isDash = true;
@@ -123,6 +131,8 @@ namespace GameComponents {
 			break;
 		case GameMessage::COLLISION:
 			GameMessage::CollisionMessage *collision = (GameMessage::CollisionMessage *)message;
+			position.x = (float)composition->getX();
+			position.y = (float)composition->getY();
 			lastCollisionVelocity = this->velocity;
 			this->velocity = collision->velocity;
 			this->position += collision->position;
@@ -143,6 +153,20 @@ namespace GameComponents {
 
 			if (velocity.x == 0.0f) forces.x = 0.0f;
 			isColliding = true;
+
+
+			if (onGround)
+			{
+				forces = (gravity / (1.0f / mass)) * (-1.0f);
+				this->velocity.y = 0.0f;
+				stopLeft = false;
+				stopRight = false;
+			}
+
+			if (collision->normal.x == 1 && onGround)
+				stopLeft = true;
+			if (collision->normal.x == -1 && onGround)
+				stopRight = true;
 			break;
 		}
 	}
@@ -155,12 +179,11 @@ namespace GameComponents {
 		glm::vec2 newForces = (forces * (1.0f / mass));
 
 		glm::vec2 acceleration = newForces + gravity;
-		//if (acceleration.y >= -0.0001f && acceleration.y <= 0.0001f) acceleration.y = 0.0f;
 		velocity += acceleration * dt * movementSpeed;
 
-		if (onGround == false && (forces.y <= maxForce)) forces = forces + gravity;
-
 		position += velocity * dt * movementSpeed;
+
+		if (onGround == false && (forces.y <= maxForce)) forces = forces + gravity;
 
 		if (position.y >= 1000.0f)
 			this->composition->destroy(true);
@@ -168,6 +191,12 @@ namespace GameComponents {
 		composition->setX((int) position.x);
 		composition->setY((int) position.y);
 
+		//if (this->getComposition()->getName().find("metalslug") != std::string::npos)
+		//{
+		//	system("cls");
+		//	std::cout.precision(10);
+		//	std::cout << "velocity x =\t" << velocity.x << "\t velocity y =\t" << velocity.y <<std::endl;
+		//}
 		GameMessage::VectorMessage *vec = new GameMessage::VectorMessage(GameMessage::VELOCITY_VECTOR, velocity);
 		this->composition->sendMessage((GameMessage::Message*)vec);
 	}

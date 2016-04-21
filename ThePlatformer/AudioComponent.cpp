@@ -122,7 +122,7 @@ namespace GameComponents
 		case GameMessage::DAMAGE:
 			_currentSFX = "damage";
 			_fire = 0;
-			_damage = 50;
+			_damage = 150;
 			if (_sound[_currentSFX])
 				_sound[_currentSFX]->play();
 			break;
