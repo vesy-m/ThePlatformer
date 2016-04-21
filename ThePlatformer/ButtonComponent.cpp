@@ -24,10 +24,9 @@ namespace GameComponents {
 		this->functionMap["quitGame"] = &ButtonComponent::quitGame;
 		this->functionMap["prevMenu"] = &ButtonComponent::prevMenu;
 		this->functionMap["backPlayer"] = &ButtonComponent::backPlayer;
+		this->functionMap["backLevel"] = &ButtonComponent::backLevel;
 		this->functionMap["switchFullScreen"] = &ButtonComponent::switchFullScreen;
 		this->functionMap["startEditor"] = &ButtonComponent::startLevelEditor;
-		
-
 
 		this->buttonState = ButtonState::CLASSIC;
 		if (actionName == "createPlayer") {
@@ -157,11 +156,15 @@ namespace GameComponents {
 				GameSystems::AudioSystem::_pauseMenu = false;
 			} else if (actionName == "backPlayer") {
 				this->backPlayer();
+			} else if (actionName == "backLevel") {
+				this->backLevel();
 			}
 			break;
 		case GameMessage::B_MENU:
 			if (actionName == "backPlayer") {
 				this->backPlayer();
+			} else if (actionName == "backLevel") {
+				this->backLevel();
 			}
 			break;
 		case GameMessage::ENTERMENU:
@@ -233,7 +236,7 @@ namespace GameComponents {
 	}
 
 	void ButtonComponent::toggleSelected(bool state) {
-		if (this->actionName == "backPlayer")
+		if (this->actionName == "backPlayer" || this->actionName == "backLevel")
 			return;
 		if (this->buttonState == ButtonState::CLASSIC && state == true)
 			this->buttonState = ButtonState::SELECTED;
@@ -308,6 +311,10 @@ namespace GameComponents {
 
 	void ButtonComponent::backPlayer() {
 		GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/main_menu.json");
+	}
+
+	void ButtonComponent::backLevel() {
+		GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/choose_nb_player_menu.json");
 	}
 
 	void ButtonComponent::switchFullScreen() {

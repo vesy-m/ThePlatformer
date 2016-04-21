@@ -28,6 +28,9 @@ namespace GameComponents {
 			if (std::string("dash").compare(currentAnim) != 0 || revertX != true) {
 				currentFrame = 0;
 				prevAnim = currentAnim;
+				if (prevAnim == "walk") {
+					prevAnim = "default";
+				}
 				currentAnim = "dash";
 				revertX = true;
 			}
@@ -39,6 +42,9 @@ namespace GameComponents {
 			if (std::string("dash").compare(currentAnim) != 0 || revertX != false) {
 				currentFrame = 0;
 				prevAnim = currentAnim;
+				if (prevAnim == "walk") {
+					prevAnim = "default";
+				}
 				currentAnim = "dash";
 				revertX = false;
 			}
@@ -66,6 +72,9 @@ namespace GameComponents {
 			if (std::string("block").compare(currentAnim) != 0) {
 				currentFrame = 0;
 				prevAnim = currentAnim;
+				if (prevAnim == "walk") {
+					prevAnim = "default";
+				}
 				currentAnim = "block";
 			}
 			break;

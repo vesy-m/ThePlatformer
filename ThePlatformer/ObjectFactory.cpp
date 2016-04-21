@@ -239,11 +239,12 @@ namespace GameSystems {
 						prevNb = -1;
 					}
 					if (nbFileFind == 0) {
-						int value[7] = {1, prevNb, nextNb, -1, 1, nbFileFind, nbFiles};
+						//{ifSelectedAtStart, LeftButtonPlace, RightButtonPlace, TopButtonPlace, BottomButtonPlace, levelPlaceInList, NbLevelsInList}
+						int value[7] = {1, prevNb, nextNb, -1, -1, nbFileFind, nbFiles};
 						buttonComponent->setNav(value, 7);
 					}
 					else {
-						int value[7] = {0, prevNb, nextNb, -1, 1, nbFileFind, nbFiles};
+						int value[7] = {0, prevNb, nextNb, -1, -1, nbFileFind, nbFiles};
 						buttonComponent->setNav(value, 7);
 					}
 					ret->setX(midValue + (sizeCase + sizeSpace) * (nbFileFind));
@@ -255,8 +256,6 @@ namespace GameSystems {
 				}
 			} while (FindNextFile(hFind, &ffd) != 0);
 			FindClose(hFind);
-
-
 		}
 
 		this->currentMenu = newMenu;
@@ -270,11 +269,12 @@ namespace GameSystems {
 		systemNeedReinit = true;
 		int i = 1;
 		int add = 1280 / (int)(this->mapPlayersController.size() + 1);
-		for (std::pair<int, std::string> entry : this->mapPlayersController) {
-			GameSystems::JSONParser fileParser(entry.second);
+		for each (int idController in this->orderPlayerController) {
+			std::string value = this->mapPlayersController[idController];
+			GameSystems::JSONParser fileParser(value);
 			GameObjects::BaseGameObject* newPlayer = parseObject(fileParser.getJSONValue());
-			if (entry.first == 8) new GameComponents::KeyboardInputComponent(newPlayer, "./config/controllers/input_keyboard1.json");
-			else new GameComponents::ControllerInputComponent(newPlayer, "./config/controllers/input_controller1.json", entry.first);
+			if (idController == 8) new GameComponents::KeyboardInputComponent(newPlayer, "./config/controllers/input_keyboard1.json");
+			else new GameComponents::ControllerInputComponent(newPlayer, "./config/controllers/input_controller1.json", idController);
 			newPlayer->setY(400);
 			newPlayer->setX(add * i);
 			this->currentLevel.putObjectDepthOrdered(newPlayer);
@@ -362,11 +362,15 @@ namespace GameSystems {
 
 	void ObjectFactory::removeAllPlayersWithController() {
 		this->mapPlayersController.clear();
+		this->orderPlayerController.clear();
 	}
 
 	void ObjectFactory::addOrChangePlayerWithController(int idController, int idPerso) {
 		std::stringstream filenameConfigPlayer;
 		filenameConfigPlayer << "./config/players/player" << idPerso << ".json";
+		if (this->mapPlayersController.find(idController) == this->mapPlayersController.end()) {
+			this->orderPlayerController.push_back(idController);
+		}
 		this->mapPlayersController[idController] = filenameConfigPlayer.str();
 	}
 
@@ -380,6 +384,7 @@ namespace GameSystems {
 		if (this->mapPlayersController.size() > 1 && this->nbPlayerReady == this->mapPlayersController.size())
 			this->LoadMenuFileAsCurrent("./config/menus/choose_level_menu.json");
 		else if (this->mapPlayersController.size() == 1 && this->nbPlayerReady == this->mapPlayersController.size()) {
+			this->orderPlayerController.push_back(6);
 			this->mapPlayersController[6] = "./config/players/player1.json";
 			this->LoadMenuFileAsCurrent("./config/menus/choose_level_menu.json");
 		}
@@ -411,6 +416,7 @@ namespace GameSystems {
 
 	void ObjectFactory::clearPlayers() {
 		this->mapPlayersController.clear();
+		this->orderPlayerController.clear();
 		this->listPlayers.clear();
 		this->nbPlayerReady = 0;
 	}

@@ -80,6 +80,7 @@ namespace GameSystems {
 		int nbPlayerReady;
 		int countObjects;
 		std::map<int, std::string> mapPlayersController;
+		std::vector<int> orderPlayerController;
 
 	};
 }

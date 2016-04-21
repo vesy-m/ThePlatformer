@@ -56,6 +56,7 @@ namespace GameComponents {
 		void quitGame();
 		void prevMenu();
 		void backPlayer();
+		void backLevel();
 		void switchFullScreen();
 		void startLevelEditor();
 		int numPlayerSelected;
