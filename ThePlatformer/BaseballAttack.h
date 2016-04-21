@@ -31,6 +31,7 @@ namespace								GameComponents
 		GameObjects::BaseGameObject		*createProjectile(GameObjects::BaseGameObject *, GameObjects::ProjectileType const, float, glm::vec2, std::string);
 
 		bool							isAtt3;
+		bool							revert;
 	};
 }
 

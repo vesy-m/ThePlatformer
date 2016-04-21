@@ -1,5 +1,5 @@
 {
-	"file": "./assets/sprite/metalslug2.png",
+	"file": "./assets/sprite/metalslug3.png",
     "name": "metalslug",
     "anim": [
     	{
@@ -35,6 +35,15 @@
 	        "ymax": 236,
 	        "images": [
 				[3, 31]
+	        ]
+    	},
+    	{
+    		"name":"dash",
+	        "time": 7,
+	        "ymin": 189,
+	        "ymax": 236,
+	        "images": [
+				[155, 193]
 	        ]
     	}
     ]

@@ -15,7 +15,7 @@
   "fire_ball" : "rugby",
   "fps":  true,
   "sfx": "./config/sound/Desc-SFX.json",
-  "attack_1": 500,
-  "attack_2": 250,
-  "attack_3": 300
+  "attack_1": 300,
+  "attack_2": 650,
+  "attack_3": 1000
 }
