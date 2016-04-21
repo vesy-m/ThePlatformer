@@ -164,6 +164,9 @@ namespace GameComponents {
 		case GameMessage::JUMP_RELEASED:
 			inputState.at(INPUT_TYPE::JUMP) = false;
 			break;
+		case GameMessage::STOP_BLOCK:
+			this->attack_3 = this->composition->getAttack3Value();
+			break;
 		default:
 			break;
 		}

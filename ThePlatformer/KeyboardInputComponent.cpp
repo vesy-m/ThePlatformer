@@ -49,9 +49,14 @@ namespace GameComponents {
 						break;
 					case INPUT_TYPE::ATTACK3:
 						if (attack_3 == 0) {
-							attack_3 = this->composition->getAttack3Value();
-							if (this->composition->getName().find("megaman") != std::string::npos) this->composition->sendMessage(new GameMessage::Message(GameMessage::ATTACK3_RELEASED));
-							else this->composition->sendMessage(new GameMessage::Message(GameMessage::ATTACK3));
+							if (this->composition->getName().find("megaman") != std::string::npos) {
+								this->composition->sendMessage(new GameMessage::Message(GameMessage::ATTACK3_RELEASED));
+								attack_3 = 1500;
+							}
+							else {
+								this->composition->sendMessage(new GameMessage::Message(GameMessage::ATTACK3));
+								attack_3 = this->composition->getAttack3Value();
+							}
 						}
 						break;
 					default:
@@ -118,6 +123,9 @@ namespace GameComponents {
 		{
 		case GameMessage::JUMP_RELEASED:
 			inputState.at(INPUT_TYPE::JUMP) = false;
+			break;
+		case GameMessage::STOP_BLOCK:
+			this->attack_3 = this->composition->getAttack3Value();
 			break;
 		default:
 			break;

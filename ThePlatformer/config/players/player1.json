@@ -17,5 +17,5 @@
   "sfx": "./config/sound/Desc-SFX.json",
   "attack_1": 500,
   "attack_2": 250,
-  "attack_3": 800
+  "attack_3": 1000
 }
