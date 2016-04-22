@@ -45,6 +45,7 @@ namespace GameComponents
 		else direction = glm::vec2((100 + centerX) - centerX, (centerY)-centerY);
 
 		createProjectile(getComposition(), GameObjects::RUGBY_BALL, 1.0f, glm::normalize(direction), "./assets/sprite/rugby_ball.png");
+		this->composition->sendMessage(new GameMessage::Message(GameMessage::BASEBALL_SHOOT));
 	}
 
 	void RugbyManAttack::Attack2()
@@ -58,6 +59,7 @@ namespace GameComponents
 		else direction = glm::vec2((60 + centerX) - centerX, (-40 + centerY) - centerY);
 
 		createProjectile(getComposition(), GameObjects::DROP, 1.0f, glm::normalize(direction), "./assets/sprite/rugby_ball.png");
+		this->composition->sendMessage(new GameMessage::Message(GameMessage::BASEBALL_SHOOT));
 	}
 
 	void RugbyManAttack::Attack3()
