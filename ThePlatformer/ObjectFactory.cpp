@@ -28,6 +28,7 @@ namespace GameSystems {
 		listPlayers = std::vector<GameObjects::BaseGameObject *>();
 		this->nbPlayerReady = 0;
 		this->countObjects = 0;
+		this->waitAMoment = false;
 	}
 
 	ObjectFactory::~ObjectFactory()
@@ -291,6 +292,9 @@ namespace GameSystems {
 		this->buildMenu(fileParser.getJSONValue(), currentMenuFileName);
 		this->stateGame = gameState::MENU;
 		systemNeedReinit = true;
+		if (this->currentMenu.fileName == "./config/menus/megaman_win_menu.json" || this->currentMenu.fileName == "./config/menus/metalslug_win_menu.json") {
+			waitAMoment = true;
+		}
 	}
 
 	void ObjectFactory::LoadLevelEditor() {

@@ -70,7 +70,7 @@ namespace GameComponents
 		else
 			this->composition->sendMessage(new GameMessage::Message(GameMessage::RIGHT_DASH));
 		this->composition->setType(GameObjects::PLAYER_ATTACK);
-		this->composition->setPower(40);
+		this->composition->setPower(30);
 		GameComponents::TimerComponent *timer = reinterpret_cast<GameComponents::TimerComponent*>(getComposition()->getComponent(GameComponents::MECHANIC));
 		if (!timer)
 			timer = new GameComponents::TimerComponent(this->composition);

@@ -152,9 +152,15 @@ namespace GameComponents {
 							else if (this->composition->getType() == GameObjects::PLAYER && otherObject->composition->getType() == GameObjects::PROJECTILE)
 								this->sendMessage(new GameMessage::DamageMessage(otherObject->composition->getPower()));
 							else if (this->composition->getType() == GameObjects::PLAYER_ATTACK && otherObject->composition->getType() == GameObjects::PLAYER)
+							{
 								otherObject->composition->sendMessage(new GameMessage::DamageMessage(this->composition->getPower()));
+								this->composition->sendMessage(new GameMessage::Message(GameMessage::DASH_COLLISION));
+							}
 							else if (otherObject->composition->getType() == GameObjects::PLAYER_ATTACK && this->composition->getType() == GameObjects::PLAYER)
+							{
 								this->sendMessage(new GameMessage::DamageMessage(otherObject->composition->getPower()));
+								otherObject->composition->sendMessage(new GameMessage::Message(GameMessage::DASH_COLLISION));
+							}
 							ResolveCollision(manifold);
 							collide = true;
 						}
