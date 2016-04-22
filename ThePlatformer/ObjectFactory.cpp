@@ -275,7 +275,7 @@ namespace GameSystems {
 			GameObjects::BaseGameObject* newPlayer = parseObject(fileParser.getJSONValue());
 			if (idController == 8) new GameComponents::KeyboardInputComponent(newPlayer, "./config/controllers/input_keyboard1.json");
 			else new GameComponents::ControllerInputComponent(newPlayer, "./config/controllers/input_controller1.json", idController);
-			newPlayer->setY(400);
+			newPlayer->setY(100);
 			newPlayer->setX(add * i);
 			this->currentLevel.putObjectDepthOrdered(newPlayer);
 			listPlayers.push_back(newPlayer);
