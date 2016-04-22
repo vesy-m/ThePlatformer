@@ -1,0 +1,41 @@
+{
+	"file": "./assets/sprite/spritesheet-megaman2.png",
+    "name": "megaman",
+    "anim": [
+    	{
+    		"name": "default",
+	        "time": 10,
+	        "ymin": 225,
+	        "ymax": 310,
+	        "images": [
+				[0, 300]
+	        ]
+    	},
+		{
+    		"name":"jump",
+	        "time": 1,
+	        "ymin": 0,
+	        "ymax": 105,
+	        "images": [
+				[0, 50]
+	        ]
+    	},
+    	{
+    		"name": "walk",
+	        "time": 5,
+	        "ymin": 90,
+	        "ymax": 132,
+	        "images": [
+				[0, 30],
+				[30, 66],
+				[66, 116],
+				[116, 156],
+				[156, 189],
+				[192, 220],
+				[220, 251],
+				[253, 295],
+				[295, 330]
+	        ]
+    	}
+    ]
+}
