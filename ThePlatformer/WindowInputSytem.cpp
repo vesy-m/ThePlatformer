@@ -6,7 +6,7 @@ namespace GameSystems {
 
 	WindowInputSytem::WindowInputSytem()
 	{
-		this->currentFullScreenState = false;
+		this->currentFullScreenState = true;
 		this->window = NULL;
 	}
 
