@@ -30,6 +30,7 @@ namespace GameObjects {
 		mass = 1.0f;
 		moveSpeed = 1.0f;
 		bounce = 0.0f;
+		name = "";
 		to_destroy = false;
 		invicible = false;
 		life = 200;

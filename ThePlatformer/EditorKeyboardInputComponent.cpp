@@ -36,7 +36,8 @@ namespace GameComponents {
 				}
 			}
 			if (event.key.code == sf::Keyboard::Escape) {
-				GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/main_menu.json");
+				//GameTools::EditorManager::getInstance().clearLevel();
+				GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/editor_level_menu.json");
 			}
 		}
 	}

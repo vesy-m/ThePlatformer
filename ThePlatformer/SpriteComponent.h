@@ -26,6 +26,7 @@ namespace GameComponents {
 	class SpriteComponent : public BaseComponent
 	{
 		friend class GameSystems::ObjectFactory;
+		friend class GameTools::EditorManager;
 	public:
 		SpriteComponent(GameObjects::BaseGameObject*, const std::string&);
 		virtual ~SpriteComponent();
@@ -34,6 +35,7 @@ namespace GameComponents {
 		virtual void Init();
 		virtual void sendMessage(GameMessage::Message*);
 		bool revertX;
+		std::string fileName;
 	private:
 		const COMPONENT_TYPE type = COMPONENT_TYPE::SPRITE;
 		GameTools::SpriteSheet *sheet;
@@ -45,6 +47,6 @@ namespace GameComponents {
 		int counter;
 		std::string currentAnim;
 		std::string prevAnim;
-		std::string _fileName;
+
 	};
 }

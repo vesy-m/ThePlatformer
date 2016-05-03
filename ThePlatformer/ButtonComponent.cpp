@@ -9,11 +9,14 @@ namespace GameComponents {
 	{
 		object->attachComponent(this);
 		this->actionName = actionName;
+		this->specialFunction = "";
 		this->numPlayerSelected = 1;
 		if (buttonType == "menu") { this->buttonType = ButtonType::MENU; }
 		else if (buttonType == "level") { this->buttonType = ButtonType::LEVEL; }
 		else if (buttonType == "function") { this->buttonType = ButtonType::FUNCTION; }
-
+		else {
+			this->specialFunction = buttonType;
+		}
 		this->typeMap[ButtonType::MENU] = &ButtonComponent::execMenu;
 		this->typeMap[ButtonType::LEVEL] = &ButtonComponent::execLevel;
 		this->typeMap[ButtonType::FUNCTION] = &ButtonComponent::execFunction;
@@ -25,8 +28,11 @@ namespace GameComponents {
 		this->functionMap["prevMenu"] = &ButtonComponent::prevMenu;
 		this->functionMap["backPlayer"] = &ButtonComponent::backPlayer;
 		this->functionMap["backLevel"] = &ButtonComponent::backLevel;
+		this->functionMap["backEditor"] = &ButtonComponent::backEditor;
 		this->functionMap["switchFullScreen"] = &ButtonComponent::switchFullScreen;
 		this->functionMap["startEditor"] = &ButtonComponent::startLevelEditor;
+		this->functionMap["loadLevelInEditor"] = &ButtonComponent::loadLevelInEditor;
+		this->functionMap["deleteLevel"] = &ButtonComponent::deleteLevel;
 
 		this->buttonState = ButtonState::CLASSIC;
 		if (actionName == "createPlayer") {
@@ -158,6 +164,8 @@ namespace GameComponents {
 				this->backPlayer();
 			} else if (actionName == "backLevel") {
 				this->backLevel();
+			} else if (actionName == "backEditor") {
+				this->backEditor();
 			}
 			break;
 		case GameMessage::B_MENU:
@@ -165,6 +173,8 @@ namespace GameComponents {
 				this->backPlayer();
 			} else if (actionName == "backLevel") {
 				this->backLevel();
+			} else if (actionName == "backEditor") {
+				this->backEditor();
 			}
 			break;
 		case GameMessage::ENTERMENU:
@@ -248,7 +258,12 @@ namespace GameComponents {
 	{
 		if (this->actionName == "resumeToLevel" || this->actionName == "./config/menus/pause_return_main_menu.json")
 			GameSystems::AudioSystem::_pauseMenu = false;
-		this->typeMap[this->buttonType](this);
+		if (this->specialFunction != "") {
+			if (this->functionMap[this->specialFunction] != NULL)
+				this->functionMap[this->specialFunction](this);
+		} else {
+			this->typeMap[this->buttonType](this);
+		}
 	}
 
 	void ButtonComponent::createPlayer(int idController)
@@ -317,13 +332,30 @@ namespace GameComponents {
 		GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/choose_nb_player_menu.json");
 	}
 
+	void ButtonComponent::backEditor() {
+		GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/editor_level_menu.json");
+	}
+	
 	void ButtonComponent::switchFullScreen() {
 		GameSystems::WindowInputSytem::fullscreen = !GameSystems::WindowInputSytem::fullscreen;
 	}
 
 	void ButtonComponent::startLevelEditor() {
-		std::cerr << "PPPLLLOOOPP" << std::endl;
 		GameSystems::ObjectFactory::getInstance().LoadLevelEditor();
+	}
+
+	void ButtonComponent::loadLevelInEditor() {
+		GameSystems::ObjectFactory::getInstance().LoadLevelEditorWithLevel(this->actionName);
+	}
+
+	void ButtonComponent::deleteLevel() {
+		std::string filename = this->actionName.substr(this->actionName.find_last_of("/") + 1);
+		filename = filename.substr(0, filename.find_last_of("."));
+		std::cout << filename << std::endl;
+		std::string previewFile = "./assets/levels_preview/" + filename + ".png";
+		std::remove(previewFile.c_str());
+		std::remove(this->actionName.c_str());
+		GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/delete_level_menu.json");
 	}
 
 }

@@ -13,6 +13,8 @@ namespace GameTools {
 
 	public:
 		~EditorManager();
+		void clearLevel();
+		void LoadLevel(std::list<GameObjects::BaseGameObject*>& objects);
 		std::list<GameObjects::BaseGameObject*> & getObjects();
 		void addObject(GameObjects::BaseGameObject* obj);
 		int midValue = 318;

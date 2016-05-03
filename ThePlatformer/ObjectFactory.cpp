@@ -169,6 +169,22 @@ namespace GameSystems {
 		return (projectile);
 	}
 
+	std::list<GameObjects::BaseGameObject*> ObjectFactory::createListObjectFromLevel(GameTools::JsonValue &value) {
+		assert(value.getTag() == GameTools::JSON_OBJECT);
+		std::list<GameObjects::BaseGameObject*> listGameObjects;
+		for (auto i : value) {
+			if (std::string(i->key) == "objects") {
+				auto arr = i->value;
+				assert(arr.getTag() == GameTools::JSON_ARRAY);
+				for (auto j : arr) {
+					auto obj = parseObject(j->value);
+					listGameObjects.push_back(obj);
+				}
+			}
+		}
+		return listGameObjects;
+	}
+
 	void ObjectFactory::buildLevel(GameTools::JsonValue &value) {
 		assert(value.getTag() == GameTools::JSON_OBJECT);
 		GameEngine::Core::Level newLevel = GameEngine::Core::Level();
@@ -198,7 +214,9 @@ namespace GameSystems {
 		newMenu.prevState = this->stateGame;
 		newMenu.fileName = currentMenuFileName;
 		std::cout << "----" << newMenu.fileName << std::endl;
-		if (newMenu.fileName == "./config/menus/choose_level_menu.json") {
+		if (newMenu.fileName == "./config/menus/choose_level_menu.json"
+			|| newMenu.fileName == "./config/menus/load_level_menu.json"
+			|| newMenu.fileName == "./config/menus/delete_level_menu.json") {
 			int midValue = 512;
 			int sizeCase = 256;
 			int sizeSpace = 20;
@@ -230,7 +248,14 @@ namespace GameSystems {
 					std::string rawname = filePng.substr(0, lastindex);
 					new GameComponents::SpriteComponent(ret, pathFile);
 					ret->setScale(0.2f);
-					GameComponents::ButtonComponent *buttonComponent = new GameComponents::ButtonComponent(ret, "level", "./config/levels/" + rawname + ".json");
+					GameComponents::ButtonComponent *buttonComponent = NULL;
+					if (newMenu.fileName == "./config/menus/load_level_menu.json") {
+						buttonComponent = new GameComponents::ButtonComponent(ret, "loadLevelInEditor", "./config/levels/" + rawname + ".json");
+					} else if (newMenu.fileName == "./config/menus/delete_level_menu.json") {
+						buttonComponent = new GameComponents::ButtonComponent(ret, "deleteLevel", "./config/levels/" + rawname + ".json");
+					} else {
+						buttonComponent = new GameComponents::ButtonComponent(ret, "level", "./config/levels/" + rawname + ".json");
+					}
 					new GameComponents::MouseClickComponent(ret);
 					int nextNb = idButtonInFile + 1;
 					int prevNb = idButtonInFile - 1;
@@ -287,7 +312,7 @@ namespace GameSystems {
 	}
 
 	void ObjectFactory::LoadMenuFileAsCurrent(const std::string &filename) {
-		if (filename == this->currentMenu.fileName && this->stateGame == gameState::MENU) return;
+		if (filename != "./config/menus/delete_level_menu.json" && filename == this->currentMenu.fileName && this->stateGame == gameState::MENU) return;
 		countObjects = 0;
 		std::string currentMenuFileName = filename;
 		GameSystems::JSONParser fileParser(filename);
@@ -302,6 +327,14 @@ namespace GameSystems {
 	void ObjectFactory::LoadLevelEditor() {
 		GameTools::EditorManager::getInstance();
 
+		this->stateGame = gameState::EDITOR;
+		systemNeedReinit = true;
+	}
+
+	void ObjectFactory::LoadLevelEditorWithLevel(std::string levelPath) {
+		GameSystems::JSONParser fileParser(levelPath);
+		std::list<GameObjects::BaseGameObject*> objects = createListObjectFromLevel(fileParser.getJSONValue());
+		GameTools::EditorManager::getInstance().LoadLevel(objects);
 		this->stateGame = gameState::EDITOR;
 		systemNeedReinit = true;
 	}

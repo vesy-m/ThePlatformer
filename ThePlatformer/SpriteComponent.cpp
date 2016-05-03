@@ -5,7 +5,7 @@ namespace GameComponents {
 	SpriteComponent::SpriteComponent(GameObjects::BaseGameObject *object, const std::string &fileName) : BaseComponent(object)
 	{
 		object->attachComponent(this);
-		_fileName = fileName;
+		this->fileName = fileName;
 		revertX = false;
 		revertY = false;
 		currentFrame = 0;
@@ -225,7 +225,7 @@ namespace GameComponents {
 
 	void SpriteComponent::Init()
 	{
-		this->sheet = new GameTools::SpriteSheet(this->_fileName);
+		this->sheet = new GameTools::SpriteSheet(this->fileName);
 		GameTools::Texture *texture = sheet->getTexture();
 		GLint width = texture->getWidth();
 		GLint height = texture->getHeight();

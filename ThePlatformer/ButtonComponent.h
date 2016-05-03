@@ -40,6 +40,7 @@ namespace GameComponents {
 		ButtonType buttonType;
 		ButtonState buttonState;
 		std::string actionName;
+		std::string specialFunction;
 		void execAction();
 		void createPlayer(int idController);
 	private:
@@ -57,8 +58,11 @@ namespace GameComponents {
 		void prevMenu();
 		void backPlayer();
 		void backLevel();
+		void backEditor();
 		void switchFullScreen();
 		void startLevelEditor();
+		void loadLevelInEditor();
+		void deleteLevel();
 		int numPlayerSelected;
 		int idPad;
 		int *navDirection;

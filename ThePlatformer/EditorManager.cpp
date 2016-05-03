@@ -74,6 +74,20 @@ namespace GameTools {
 	{
 	}
 
+	void EditorManager::clearLevel() {
+		this->editorLevelObjects.clear();
+	}
+
+	void EditorManager::LoadLevel(std::list<GameObjects::BaseGameObject*> &objects) {
+		this->editorLevelObjects.clear();
+		for each (GameObjects::BaseGameObject* obj in objects) {
+			if (obj->getName() == "") {
+				this->editorLevelObjects.push_front(obj);
+				this->listElements[std::pair<int, int>(obj->getX(), obj->getY())].textureStr = ((GameComponents::SpriteComponent*)obj->getComponent(GameComponents::SPRITE))->fileName;
+			}
+		}
+	}
+
 	std::list<GameObjects::BaseGameObject*> & EditorManager::getObjects() {
 		this->objectsToDisplay.clear();
 		this->objectsToDisplay.insert(this->objectsToDisplay.end(), this->editorLevelObjects.begin(), this->editorLevelObjects.end());

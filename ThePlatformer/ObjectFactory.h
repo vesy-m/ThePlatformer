@@ -30,6 +30,7 @@ namespace GameSystems {
 		~ObjectFactory();
 		GameObjects::BaseGameObject *parseObject(GameTools::JsonValue&);
 		GameObjects::BaseGameObject *createProjectile(GameObjects::BaseGameObject*); /*, unsigned int, unsigned int, float, glm::vec2, std::string const &sprite, bool*/
+		std::list<GameObjects::BaseGameObject*> createListObjectFromLevel(GameTools::JsonValue & value);
 		GameObjects::BaseGameObject *ObjectFactory::getUsableProjectile(GameObjects::ProjectileType);
 		static void attachObject(GameObjects::BaseGameObject*);
 		void buildLevel(GameTools::JsonValue&);
@@ -38,6 +39,7 @@ namespace GameSystems {
 		void LoadLevelFileAsCurrent(const std::string&);
 		void LoadMenuFileAsCurrent(const std::string&);
 		void LoadLevelEditor();
+		void LoadLevelEditorWithLevel(std::string levelPath);
 		void cleanupObjects(void);
 		std::list<GameObjects::BaseGameObject*>& getCurrentObjects();
 		const std::list<GameSystems::BaseSystem *>& getSystems();
