@@ -2,7 +2,7 @@
 #include "AudioSystem.h"
 
 namespace GameSystems {
-	bool WindowInputSytem::fullscreen = true;
+	bool WindowInputSytem::fullscreen = false;
 
 	WindowInputSytem::WindowInputSytem()
 	{

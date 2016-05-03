@@ -17,6 +17,7 @@
 #include "AudioSystem.h"
 #include "BaseballAttack.h"
 #include "RugbyManAttack.h"
+#include "TennisAttack.h"
 #include "EditorManager.h"
 #include "LifeBarComponent.h"
 
@@ -65,6 +66,7 @@ namespace GameSystems {
 			else if (std::string(it->key) == "vector") new GameComponents::VectorDebugComponent(ret, it->value.toString());
 			else if (std::string(it->key) == "fire_ball" && std::string(it->value.toString()) == "baseball") new GameComponents::BaseballAttack(ret);
 			else if (std::string(it->key) == "fire_ball" && std::string(it->value.toString()) == "rugby") new GameComponents::RugbyManAttack(ret);
+			else if (std::string(it->key) == "fire_ball" && std::string(it->value.toString()) == "tennis") new GameComponents::TennisAttack(ret);
 			else if (std::string(it->key) == "sfx") new GameComponents::AudioComponent(ret, it->value.toString());
 			else if (std::string(it->key) == "level" || std::string(it->key) == "menu" || std::string(it->key) == "function") {
 				std::cout << it->key << std::endl;

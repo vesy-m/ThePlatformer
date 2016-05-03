@@ -1,0 +1,20 @@
+{
+  "name" : "tennisman",
+  "x" : 330,
+  "y" : 0,
+  "depth" : 2,
+  "height" : 50,
+  "width" : 30,
+  "mass" : 20,
+  "sprite" : "./config/sprite_sheets/desc-baseball.json",
+  "move_speed" : 1.5,
+  "body" : true,
+  "boxcollider" : true,
+  "vector" : "square",
+  "type": 1,
+  "fire_ball" : "tennis",
+  "sfx": "./config/sound/Desc-SFX.json",
+  "attack_1": 150,
+  "attack_2": 400,
+  "attack_3": 2000
+}

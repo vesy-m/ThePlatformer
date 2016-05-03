@@ -148,11 +148,10 @@ namespace GameComponents {
 				projectile->setWidth(int(110 * 0.50f));
 				projectile->setScale(0.3f);
 				projectile->setPower(30);
-				//if (revert)
-				//	projectile->setX(shooter->getX() - 40);
-				//else
-				//	projectile->setX(shooter->getX() + 20);
-				projectile->setX(shooter->getX() + (shooter->getWidth() / 2));
+				if (revert)
+					projectile->setX(shooter->getX() - (shooter->getWidth()));
+				else
+					projectile->setX(shooter->getX() + (shooter->getWidth() / 2));
 				projectile->setY(shooter->getY() + (shooter->getHeight() / 2) - 10);
 				break;
 			case GameObjects::BLOCK:

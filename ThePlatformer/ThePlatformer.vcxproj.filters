@@ -234,6 +234,9 @@
     <ClCompile Include="LifeBarComponent.cpp">
       <Filter>GameComponents\Source</Filter>
     </ClCompile>
+    <ClCompile Include="TennisAttack.cpp">
+      <Filter>GameComponents\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameEngine.h">
@@ -405,6 +408,9 @@
       <Filter>GameComponents\Header</Filter>
     </ClInclude>
     <ClInclude Include="LifeBarComponent.h">
+      <Filter>GameComponents\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="TennisAttack.h">
       <Filter>GameComponents\Header</Filter>
     </ClInclude>
   </ItemGroup>

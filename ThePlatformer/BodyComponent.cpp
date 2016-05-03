@@ -44,13 +44,20 @@ namespace GameComponents {
 	}
 
 	void BodyComponent::Init(float intensity, glm::vec2 dir) {
-		if (intensity > 0 && this->composition->getType() == GameObjects::PROJECTILE) {
+		if (intensity > 0 && (this->composition->getType() == GameObjects::PROJECTILE ||
+							  this->composition->getType() == GameObjects::PROJECTILE_BREAK)) {
 			if (this->composition->getName().find("megaman") != std::string::npos) {
 				forces = dir * 150.0f;
 				maxForce = 200.0f;
 				velocity = dir * 50.0f;
-			} else if (this->composition->getName().find("metalslug") != std::string::npos) {
+			} 
+			else if (this->composition->getName().find("metalslug") != std::string::npos) {
 				forces = dir * 150.0f;
+				maxForce = 200.0f;
+				velocity = dir * 50.0f;
+			}
+			else if (this->composition->getName().find("tennisman") != std::string::npos) {
+				forces = dir * 400.0f;
 				maxForce = 200.0f;
 				velocity = dir * 50.0f;
 			}

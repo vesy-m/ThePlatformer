@@ -32,13 +32,16 @@ namespace GameObjects {
 		NONE,
 		PLAYER,
 		PROJECTILE,
+		PROJECTILE_BREAK,
 		PLAYER_ATTACK
 	};
 
 	enum ProjectileType {
 		ARROW,
 		SOCCER_BALL,
-		TENNIS_BALL,
+		TENNIS_BALL1,
+		TENNIS_BALL2,
+		TENNIS_BREAK,
 		BASE_BALL,
 		BAT,
 		BLOCK,

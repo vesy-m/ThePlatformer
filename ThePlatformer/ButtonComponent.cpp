@@ -80,7 +80,7 @@ namespace GameComponents {
 	{
 		int i = -1;
 		for (int it = 0; it < size; it++) {
-			std::cout << values[it] << " ";
+//			std::cout << values[it] << " ";
 			if (i == -1) {
 				if (values[it] == 1)
 					this->toggleSelected(true);
@@ -194,7 +194,7 @@ namespace GameComponents {
 			if (this->buttonState == ButtonState::CHOOSEPLAYER) {
 				this->numPlayerSelected--;
 				if (this->numPlayerSelected < 1)
-					numPlayerSelected = 2;
+					numPlayerSelected = 3;
 				createPlayer(this->idPad);
 			}
 			else if (this->buttonState == ButtonState::SELECTED && this->navDirection[0] != -1 && ButtonComponent::actionAlreadyCompute == false) {
@@ -209,7 +209,7 @@ namespace GameComponents {
 			}
 			if (this->buttonState == ButtonState::CHOOSEPLAYER) {
 				this->numPlayerSelected++;
-				if (this->numPlayerSelected > 2)
+				if (this->numPlayerSelected > 3)
 					numPlayerSelected = 1;
 				createPlayer(this->idPad);
 			}

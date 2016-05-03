@@ -117,15 +117,16 @@ namespace GameComponents {
 			for each(GameObjects::BaseGameObject* object in listObjects)
 			{
 				if (this->composition->getType() == GameObjects::PLAYER) {
-					if (object->getType() == GameObjects::PROJECTILE/* && object->getName().compare(this->composition->getName()) == 0*/)
+					if (object->getType() == GameObjects::PROJECTILE || object->getType() == GameObjects::PROJECTILE_BREAK/* && object->getName().compare(this->composition->getName()) == 0*/)
 						continue;
 					else if (object->getType() == GameObjects::PLAYER)
 						continue;
 				}
 
-				if (this->composition->getType() == GameObjects::PROJECTILE) {
-					if (object->getType() == GameObjects::PLAYER && object->getName().compare(this->composition->getName()) == 0)
-						continue;
+				if (this->composition->getType() == GameObjects::PROJECTILE ||
+					this->composition->getType() == GameObjects::PROJECTILE_BREAK) {
+						if (object->getType() == GameObjects::PLAYER && object->getName().compare(this->composition->getName()) == 0)
+							continue;
 				}
 				if (object->getComponent(GameComponents::COMPONENT_TYPE::COLLIDER))
 				{
@@ -137,21 +138,45 @@ namespace GameComponents {
 						if (!otherObject) GameTools::debugManager::getInstance().dAssert("BoxCollider otherObject is NULL");
 						manifold->A = this;
 						manifold->B = otherObject;
+						GameObjects::objectType typeA = this->composition->getType();
+						GameObjects::objectType typeB = otherObject->composition->getType();
+
 						if (this->CollideWithBox(manifold))
 						{
-							if (this->composition->getType() == GameObjects::PROJECTILE)
+							if (typeA == GameObjects::PROJECTILE)
 								std::cout << "PROJECTILE COLLISION" << std::endl;
 							// Destroy projectiles on collision
-							if (otherObject->composition->getType() == GameObjects::PROJECTILE)
+							if (typeB == GameObjects::PROJECTILE)
 								otherObject->composition->destroy(true);
-							else if (this->composition->getType() == GameObjects::PROJECTILE)
+							else if (typeB == GameObjects::PROJECTILE_BREAK && typeA != GameObjects::PLAYER)
+							{
 								this->composition->destroy(true);
-
-							if (this->composition->getType() == GameObjects::PROJECTILE && otherObject->composition->getType() == GameObjects::PLAYER)
+								if (typeA != GameObjects::PLAYER_ATTACK)
+									otherObject->composition->destroy(true);
+							}
+							else if (typeA == GameObjects::PROJECTILE)
+								this->composition->destroy(true);
+							else if (typeA == GameObjects::PROJECTILE_BREAK && typeB != GameObjects::PLAYER)
+							{
+								this->composition->destroy(true);
+								if (typeB != GameObjects::PLAYER_ATTACK)
+									otherObject->composition->destroy(true);
+							}
+							if ((typeA == GameObjects::PROJECTILE && typeB == GameObjects::PLAYER) ||
+								(typeA == GameObjects::PROJECTILE_BREAK && typeB == GameObjects::PLAYER))
+							{
 								otherObject->composition->sendMessage(new GameMessage::DamageMessage(this->composition->getPower()));
-							else if (this->composition->getType() == GameObjects::PLAYER && otherObject->composition->getType() == GameObjects::PROJECTILE)
+								if (typeA == GameObjects::PROJECTILE_BREAK)
+									this->composition->destroy(true);
+							}
+							else if ((typeA == GameObjects::PLAYER && typeB == GameObjects::PROJECTILE) ||
+									 (typeA == GameObjects::PLAYER && typeB == GameObjects::PROJECTILE_BREAK))
+							{
 								this->sendMessage(new GameMessage::DamageMessage(otherObject->composition->getPower()));
-							else if (this->composition->getType() == GameObjects::PLAYER_ATTACK && otherObject->composition->getType() == GameObjects::PLAYER)
+								if (typeB == GameObjects::PROJECTILE_BREAK)
+									otherObject->composition->destroy(true);
+							}
+							else if (typeA == GameObjects::PLAYER_ATTACK && typeB == GameObjects::PLAYER)
 							{
 								otherObject->composition->sendMessage(new GameMessage::DamageMessage(this->composition->getPower()));
 								this->composition->sendMessage(new GameMessage::Message(GameMessage::STOP_DASH));
