@@ -55,6 +55,10 @@ namespace GameSystems {
 				GameTools::debugManager::getInstance().time3 += std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now() - duration).count();
 
 			}
+			component = object->getComponent(GameComponents::COMPONENT_TYPE::LIFE_BAR);
+			if (component) {
+				component->Update(dt);
+			}
 			component = object->getComponent(GameComponents::COMPONENT_TYPE::BUTTON);
 			if (component) { 
 				component->Update(dt);
@@ -82,6 +86,9 @@ namespace GameSystems {
 			if (component) component->Init();
 
 			component = object->getComponent(GameComponents::COMPONENT_TYPE::TEXT);
+			if (component) component->Init();
+
+			component = object->getComponent(GameComponents::COMPONENT_TYPE::LIFE_BAR);
 			if (component) component->Init();
 		}
 	}

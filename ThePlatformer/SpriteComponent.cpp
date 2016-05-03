@@ -186,7 +186,7 @@ namespace GameComponents {
 		glBindTexture(GL_TEXTURE_2D, texture->getId());
 
 		float pointXFloat = -(width / 2.0f);
-		float pointXWidthFloat = (width / 2);
+		float pointXWidthFloat = (width / 2.0f);
 		if (this->revertX) {
 			pointXFloat += width;
 			pointXWidthFloat -= width;
@@ -194,7 +194,7 @@ namespace GameComponents {
 		float pointYFloat = -(height / 2.0f);
 		float pointYHeightFloat = (height / 2.0f);
 		if (this->sheet->positionSprite == GameTools::SpriteSheet::BOTTOM_CENTER) {
-			pointYFloat = -height;
+			pointYFloat = (float)-height;
 			pointYHeightFloat = 0;
 			posY = this->composition->getY() + this->composition->getHeight();
 		}

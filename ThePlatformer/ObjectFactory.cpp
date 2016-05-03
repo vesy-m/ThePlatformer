@@ -18,6 +18,7 @@
 #include "BaseballAttack.h"
 #include "RugbyManAttack.h"
 #include "EditorManager.h"
+#include "LifeBarComponent.h"
 
 namespace GameSystems {
 	ObjectFactory::ObjectFactory()
@@ -275,6 +276,7 @@ namespace GameSystems {
 			GameObjects::BaseGameObject* newPlayer = parseObject(fileParser.getJSONValue());
 			if (idController == 8) new GameComponents::KeyboardInputComponent(newPlayer, "./config/controllers/input_keyboard1.json");
 			else new GameComponents::ControllerInputComponent(newPlayer, "./config/controllers/input_controller1.json", idController);
+			new GameComponents::LifeBarComponent(newPlayer, i - 1);
 			newPlayer->setY(100);
 			newPlayer->setX(add * i);
 			this->currentLevel.putObjectDepthOrdered(newPlayer);

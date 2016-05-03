@@ -23,6 +23,7 @@ namespace GameComponents {
 	class EditorElementSelectorComponent;
 	class EditorCaseSelectorComponent;
 	class EditorKeyboardInputComponent;
+	class LifeBarComponent;
 }
 
 namespace GameObjects {
@@ -68,6 +69,7 @@ namespace GameObjects {
 		void attachComponent(GameComponents::EditorElementSelectorComponent *);
 		void attachComponent(GameComponents::EditorCaseSelectorComponent *);
 		void attachComponent(GameComponents::EditorKeyboardInputComponent *);
+		void attachComponent(GameComponents::LifeBarComponent *);
 		void sendMessage(GameMessage::Message*);
 		void setX(int x);
 		int getX();
@@ -129,6 +131,7 @@ namespace GameObjects {
 		GameComponents::EditorElementSelectorComponent *m_editorSelector;
 		GameComponents::EditorCaseSelectorComponent *m_caseSelector;
 		GameComponents::EditorKeyboardInputComponent *m_editorKeyboard;
+		GameComponents::LifeBarComponent *m_lifeBarComponent;
 		int x;
 		int y;
 		int height;

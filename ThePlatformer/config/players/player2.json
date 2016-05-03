@@ -13,7 +13,6 @@
   "vector" : "square",
   "type": 1,
   "fire_ball" : "rugby",
-  "fps":  true,
   "sfx": "./config/sound/Desc-SFX.json",
   "attack_1": 300,
   "attack_2": 650,

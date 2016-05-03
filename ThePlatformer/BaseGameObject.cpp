@@ -15,6 +15,7 @@
 #include "EditorElementSelectorComponent.h"
 #include "EditorCaseSelectorComponent.h"
 #include "EditorKeyboardInputComponent.h"
+#include "LifeBarComponent.h"
 
 namespace GameObjects {
 	BaseGameObject::BaseGameObject()
@@ -46,6 +47,7 @@ namespace GameObjects {
 		this->m_editorSelector = NULL;
 		this->m_caseSelector = NULL;
 		this->m_editorKeyboard = NULL;
+		this->m_lifeBarComponent = NULL;
 		this->attack_1_value = 0;
 		this->attack_2_value = 0;
 		this->attack_3_value = 0;
@@ -83,6 +85,7 @@ namespace GameObjects {
 		delete this->m_editorSelector;
 		delete this->m_caseSelector;
 		delete this->m_editorKeyboard;
+		delete this->m_lifeBarComponent;
 	}
 
 	GameComponents::BaseComponent *BaseGameObject::getComponent(GameComponents::COMPONENT_TYPE type) {
@@ -117,6 +120,8 @@ namespace GameObjects {
 			return this->m_caseSelector;
 		case GameComponents::EDITOR_KEYBOARD:
 			return this->m_editorKeyboard;
+		case GameComponents::LIFE_BAR:
+			return this->m_lifeBarComponent;
 		default:
 			return NULL;
 		}
@@ -197,6 +202,11 @@ namespace GameObjects {
 		this->m_editorKeyboard = editorKeyboard;
 	}
 
+	void BaseGameObject::attachComponent(GameComponents::LifeBarComponent *lifeBarComponent)
+	{
+		this->m_lifeBarComponent = lifeBarComponent;
+	}
+
 	void BaseGameObject::sendMessage(GameMessage::Message *message)
 	{
 		if (this->m_body) this->m_body->sendMessage(message);
@@ -213,6 +223,7 @@ namespace GameObjects {
 		if (this->m_editorSelector) this->m_editorSelector->sendMessage(message);
 		if (this->m_caseSelector) this->m_caseSelector->sendMessage(message);
 		if (this->m_editorKeyboard) this->m_editorKeyboard->sendMessage(message);
+		if (this->m_lifeBarComponent) this->m_lifeBarComponent->sendMessage(message);
 		delete message;
 	}
 

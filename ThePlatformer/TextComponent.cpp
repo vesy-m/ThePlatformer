@@ -64,7 +64,25 @@ namespace GameComponents {
 			int playerId = GameSystems::ObjectFactory::getInstance().idWinPlayer + 1;
 			std::stringstream playerstr = std::stringstream();
 			playerstr << "Player " << playerId;
+			switch (playerId - 1)
+			{
+			case 0:
+				glColor3f(1.0, 0.0, 0.0);
+				break;
+			case 1:
+				glColor3f(1.0, 1.0, 0.0);
+				break;
+			case 2:
+				glColor3f(0.0, 1.0, 0.0);
+				break;
+			case 3:
+				glColor3f(0.0, 0.0, 1.0);
+				break;
+			default:
+				break;
+			}
 			drawText(playerstr.str(), posX, posY, 3);
+			glColor3f(1.0, 1.0, 1.0);
 		}
 		else if (dt != 0.0 && GameTools::debugManager::getInstance().isActivateGraphic()) {
 			int posX = GameSystems::GraphicsSystem::Camera::getInstance().cameraStartX + 20;

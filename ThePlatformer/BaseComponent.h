@@ -26,7 +26,8 @@ namespace GameComponents {
 		MECHANIC,
 		ELEMENT_SELECTOR,
 		CASE_SELECTOR,
-		EDITOR_KEYBOARD
+		EDITOR_KEYBOARD,
+		LIFE_BAR
 	};
 
 	class BaseComponent

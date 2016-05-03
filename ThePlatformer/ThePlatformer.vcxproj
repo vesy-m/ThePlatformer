@@ -183,6 +183,7 @@ copy /Y "$(ProjectDir)\lib\lib-x64\devil-1.7.8\bin\*" "$(OutDir)\"</Command>
     <ClCompile Include="CircleCollider.cpp" />
     <ClCompile Include="CollisionMessage.cpp" />
     <ClCompile Include="DamageMessage.cpp" />
+    <ClCompile Include="LifeBarComponent.cpp" />
     <ClCompile Include="TimerComponent.cpp" />
     <ClCompile Include="debugManager.cpp" />
     <ClCompile Include="EditorCaseSelectorComponent.cpp" />
@@ -248,6 +249,7 @@ copy /Y "$(ProjectDir)\lib\lib-x64\devil-1.7.8\bin\*" "$(OutDir)\"</Command>
     <ClInclude Include="FireMessage.h" />
     <ClInclude Include="JSONParser.h" />
     <ClInclude Include="KeyboardInputComponent.h" />
+    <ClInclude Include="LifeBarComponent.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="MenuControllerMessage.h" />
     <ClInclude Include="Message.h" />
