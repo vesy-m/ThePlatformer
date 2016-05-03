@@ -29,6 +29,7 @@ namespace GameSystems {
 		listPlayers = std::vector<GameObjects::BaseGameObject *>();
 		this->nbPlayerReady = 0;
 		this->countObjects = 0;
+		this->waitAMoment = false;
 	}
 
 	ObjectFactory::~ObjectFactory()
@@ -293,6 +294,9 @@ namespace GameSystems {
 		this->buildMenu(fileParser.getJSONValue(), currentMenuFileName);
 		this->stateGame = gameState::MENU;
 		systemNeedReinit = true;
+		if (this->currentMenu.fileName == "./config/menus/megaman_win_menu.json" || this->currentMenu.fileName == "./config/menus/metalslug_win_menu.json") {
+			waitAMoment = true;
+		}
 	}
 
 	void ObjectFactory::LoadLevelEditor() {
@@ -385,11 +389,11 @@ namespace GameSystems {
 		this->nbPlayerReady += nb;
 		if (this->mapPlayersController.size() > 1 && this->nbPlayerReady == this->mapPlayersController.size())
 			this->LoadMenuFileAsCurrent("./config/menus/choose_level_menu.json");
-		/*else if (this->mapPlayersController.size() == 1 && this->nbPlayerReady == this->mapPlayersController.size()) {
+		else if (this->mapPlayersController.size() == 1 && this->nbPlayerReady == this->mapPlayersController.size()) {
 			this->orderPlayerController.push_back(6);
 			this->mapPlayersController[6] = "./config/players/player1.json";
 			this->LoadMenuFileAsCurrent("./config/menus/choose_level_menu.json");
-		}*/
+		}
 	}
 
 	void ObjectFactory::changeSelectedButtonMenu(int idButton) {

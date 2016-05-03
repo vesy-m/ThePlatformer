@@ -7,6 +7,7 @@
 #include "JSONParser.h"
 #include "ObjectFactory.h"
 
+
 namespace GameEngine {
 
 	bool Core::gameLoop = true;
@@ -30,6 +31,7 @@ namespace GameEngine {
 		//long long list[4];
 		int i = 0;
 		int nbLoop = 0;
+		int framNb = 0;
 		while (Core::gameLoop) {
 			//auto oneLoop = std::chrono::high_resolution_clock::now();
 			std::list<GameSystems::BaseSystem *> listSystems = GameSystems::ObjectFactory::getInstance().getSystems();
@@ -46,6 +48,17 @@ namespace GameEngine {
 			GameSystems::ObjectFactory::getInstance().cleanupObjects();
 			//loopAverTime = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now() - oneLoop).count();
 			this->m_manager->WaitFPS(FRAME_PER_SECOND);
+			if (framNb == 2) {
+				Sleep(1000);
+				framNb = 0;
+			}
+			if (framNb == 1) {
+				framNb++;
+			}
+			if (GameSystems::ObjectFactory::getInstance().waitAMoment == true) {
+				framNb = 1;
+				GameSystems::ObjectFactory::getInstance().waitAMoment = false;
+			}
 			//if (nbLoop >= 60) {
 			/*if (loopAverTime > 20000) {
 				std::cout << "---------------------------------------------------" << std::endl;

@@ -60,6 +60,7 @@ namespace GameSystems {
 		int getPlayerId(GameObjects::BaseGameObject*);
 		GameObjects::BaseGameObject *isPLayersAlive();
 		int idWinPlayer;
+		bool waitAMoment;
 		//----
 	private:
 		ObjectFactory();
