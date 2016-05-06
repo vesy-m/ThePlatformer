@@ -8,7 +8,7 @@
 		"x" : 400,
 		"y" : 480,
 		"sprite" : "./assets/sprite/menu/NoButton.png",
-		"menu" : "./config/menus/megaman_win_menu.json",
+		"menu" : "./config/menus/player_win_menu_3.json",
 		"menunav" : [1, -1, 2, -1, -1]
 	},
 	"button" : {

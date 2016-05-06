@@ -321,7 +321,9 @@ namespace GameSystems {
 		this->buildMenu(fileParser.getJSONValue(), currentMenuFileName);
 		this->stateGame = gameState::MENU;
 		systemNeedReinit = true;
-		if (this->currentMenu.fileName == "./config/menus/megaman_win_menu.json" || this->currentMenu.fileName == "./config/menus/metalslug_win_menu.json") {
+		if (this->currentMenu.fileName == "./config/menus/player_win_menu_1.json"
+			|| this->currentMenu.fileName == "./config/menus/player_win_menu_2.json"
+			|| this->currentMenu.fileName == "./config/menus/player_win_menu_3.json") {
 			waitAMoment = true;
 		}
 	}
@@ -487,14 +489,18 @@ namespace GameSystems {
 		
 		this->idWinPlayer = this->getPlayerId(winPlayer);
 		listPlayers.clear();
-		if (winPlayer->getName().find("megaman") != std::string::npos) {
+		if (winPlayer->getName().find("baseballPlayer") != std::string::npos) {
 			GameSystems::GraphicsSystem::Camera::getInstance().reInit();
-			GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/megaman_win_menu.json");
+			GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/player_win_menu_1.json");
+			GameSystems::AudioSystem::_menuVictory = true;
+		} else if (winPlayer->getName().find("footballPlayer") != std::string::npos) {
+			GameSystems::GraphicsSystem::Camera::getInstance().reInit();
+			GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/player_win_menu_2.json");
 			GameSystems::AudioSystem::_menuVictory = true;
 		}
 		else {
 			GameSystems::GraphicsSystem::Camera::getInstance().reInit();
-			GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/metalslug_win_menu.json");
+			GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/player_win_menu_3.json");
 			GameSystems::AudioSystem::_menuVictory = true;
 		}
 	}
