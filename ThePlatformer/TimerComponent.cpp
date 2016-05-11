@@ -79,6 +79,7 @@ namespace GameComponents {
 	{
 		this->composition->setInvicible(false);
 		this->composition->sendMessage(new GameMessage::Message(GameMessage::STOP_BLOCK));
+		this->composition->sendMessage(new GameMessage::Message(GameMessage::ATTACK3_RELEASED));
 	}
 
 	void TimerComponent::stopDash()

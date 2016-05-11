@@ -48,16 +48,16 @@ namespace GameComponents {
 						}
 						break;
 					case INPUT_TYPE::ATTACK3:
-						if (attack_3 == 0) {
-							if (this->composition->getName().find("megaman") != std::string::npos) {
+//						if (attack_3 == 0) {
+							if (this->composition->getName().find("baseballPlayer") != std::string::npos) {
 								this->composition->sendMessage(new GameMessage::Message(GameMessage::ATTACK3_RELEASED));
-								attack_3 = 1500;
+								attack_3 = this->composition->getAttack3Value();
 							}
-							else {
+							else if (attack_3 == 0) {
 								this->composition->sendMessage(new GameMessage::Message(GameMessage::ATTACK3));
 								attack_3 = this->composition->getAttack3Value();
 							}
-						}
+//						}
 						break;
 					default:
 						break;

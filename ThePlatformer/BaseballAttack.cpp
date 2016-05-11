@@ -83,7 +83,6 @@ namespace GameComponents {
 		if (isAtt3)
 			return;
 		if (this->composition->getInvicible()) return;
-
 		GameComponents::TimerComponent *timer = reinterpret_cast<GameComponents::TimerComponent*>(getComposition()->getComponent(GameComponents::MECHANIC));
 		if (!timer) timer = new GameComponents::TimerComponent(this->composition);
 		timer->Init();
