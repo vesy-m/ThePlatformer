@@ -72,7 +72,7 @@ namespace GameComponents {
 			if (std::string("block").compare(currentAnim) != 0) {
 				currentFrame = 0;
 				prevAnim = currentAnim;
-				if (prevAnim == "walk") {
+				if (prevAnim == "walk" || prevAnim == "shoot") {
 					prevAnim = "default";
 				}
 				currentAnim = "block";

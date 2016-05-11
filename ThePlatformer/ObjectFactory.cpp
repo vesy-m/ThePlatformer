@@ -426,11 +426,14 @@ namespace GameSystems {
 		this->nbPlayerReady += nb;
 		if (this->mapPlayersController.size() > 1 && this->nbPlayerReady == this->mapPlayersController.size())
 			this->LoadMenuFileAsCurrent("./config/menus/choose_level_menu.json");
-		else if (this->mapPlayersController.size() == 1 && this->nbPlayerReady == this->mapPlayersController.size()) {
+		/*else if (this->mapPlayersController.size() == 1 && this->nbPlayerReady == this->mapPlayersController.size()) {
 			this->orderPlayerController.push_back(6);
 			this->mapPlayersController[6] = "./config/players/player1.json";
 			this->LoadMenuFileAsCurrent("./config/menus/choose_level_menu.json");
-		}
+			this->orderPlayerController.push_back(7);
+			this->mapPlayersController[7] = "./config/players/player1.json";
+			this->LoadMenuFileAsCurrent("./config/menus/choose_level_menu.json");
+		}*/
 	}
 
 	void ObjectFactory::changeSelectedButtonMenu(int idButton) {
