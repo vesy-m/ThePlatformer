@@ -77,7 +77,6 @@ namespace GameComponents
 		timer->Init();
 		timer->setTimerType(GameObjects::DASH);
 		timer->setTime(350);
-		this->composition->setInvicible(true);
 		timer->startTimer();
 	}
 

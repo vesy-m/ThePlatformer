@@ -148,12 +148,12 @@ namespace GameComponents {
 							// Destroy projectiles on collision
 							if (typeB == GameObjects::PROJECTILE)
 								otherObject->composition->destroy(true);
-							else if (typeB == GameObjects::PROJECTILE_BREAK && typeA != GameObjects::PLAYER)
-							{
-								this->composition->destroy(true);
-								if (typeA != GameObjects::PLAYER_ATTACK)
-									otherObject->composition->destroy(true);
-							}
+							//else if (typeB == GameObjects::PROJECTILE_BREAK && typeA != GameObjects::PLAYER)
+							//{
+							//	this->composition->destroy(true);
+							//	if (typeA != GameObjects::PLAYER_ATTACK)
+							//		otherObject->composition->destroy(true);
+							//}
 							else if (typeA == GameObjects::PROJECTILE)
 								this->composition->destroy(true);
 							else if (typeA == GameObjects::PROJECTILE_BREAK && typeB != GameObjects::PLAYER)
@@ -163,14 +163,18 @@ namespace GameComponents {
 									otherObject->composition->destroy(true);
 							}
 							if ((typeA == GameObjects::PROJECTILE && typeB == GameObjects::PLAYER) ||
-								(typeA == GameObjects::PROJECTILE_BREAK && typeB == GameObjects::PLAYER))
+								(typeA == GameObjects::PROJECTILE_BREAK && typeB == GameObjects::PLAYER) ||
+								(typeA == GameObjects::PROJECTILE && typeB == GameObjects::PLAYER_ATTACK) ||
+								(typeA == GameObjects::PROJECTILE_BREAK && typeB == GameObjects::PLAYER_ATTACK))
 							{
 								otherObject->composition->sendMessage(new GameMessage::DamageMessage(GameMessage::DamageMessage::PROJECTILE, this->composition->getPower()));
 								if (typeA == GameObjects::PROJECTILE_BREAK)
 									this->composition->destroy(true);
 							}
 							else if ((typeA == GameObjects::PLAYER && typeB == GameObjects::PROJECTILE) ||
-									 (typeA == GameObjects::PLAYER && typeB == GameObjects::PROJECTILE_BREAK))
+									 (typeA == GameObjects::PLAYER && typeB == GameObjects::PROJECTILE_BREAK) ||
+									 (typeA == GameObjects::PLAYER_ATTACK && typeB == GameObjects::PROJECTILE) ||
+									 (typeA == GameObjects::PLAYER_ATTACK && typeB == GameObjects::PROJECTILE_BREAK))
 							{
 								this->sendMessage(new GameMessage::DamageMessage(GameMessage::DamageMessage::PROJECTILE, otherObject->composition->getPower()));
 								if (typeB == GameObjects::PROJECTILE_BREAK)
@@ -182,8 +186,12 @@ namespace GameComponents {
 								continue;
 								//this->composition->sendMessage(new GameMessage::Message(GameMessage::STOP_DASH));
 							}
-							else if (typeA == GameObjects::PLAYER_BLOCK && typeB == GameObjects::PLAYER_ATTACK) {
-								std::cout << "TEST" << std::endl;
+							else if ((typeA == GameObjects::PLAYER_BLOCK && typeB == GameObjects::PLAYER_ATTACK) ||
+									 (typeA == GameObjects::PLAYER_ATTACK && typeB == GameObjects::PROJECTILE) ||
+									 (typeA == GameObjects::PLAYER_ATTACK && typeB == GameObjects::PROJECTILE_BREAK) ||
+									 (typeA == GameObjects::PROJECTILE && typeB == GameObjects::PLAYER_ATTACK) ||
+									 (typeA == GameObjects::PROJECTILE_BREAK && typeB == GameObjects::PLAYER_ATTACK))
+							{
 								continue;
 							}
 							//else if (otherObject->composition->getType() == GameObjects::PLAYER_ATTACK && this->composition->getType() == GameObjects::PLAYER)
