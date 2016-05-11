@@ -38,9 +38,12 @@ namespace GameComponents {
 				deathTime();
 				break;
 			case GameObjects::BLOCK:
-				invincibleTime();
+				blockInvincibleTime();
 				break;
 			case GameObjects::DASH:
+				stopDash();
+				break;
+			case GameObjects::DASH_DAMAGE:
 				stopDash();
 				break;
 			}
@@ -75,11 +78,16 @@ namespace GameComponents {
 		this->composition->destroy(true);
 	}
 
-	void TimerComponent::invincibleTime()
+	void TimerComponent::blockInvincibleTime()
 	{
 		this->composition->setInvicible(false);
 		this->composition->sendMessage(new GameMessage::Message(GameMessage::STOP_BLOCK));
 		this->composition->sendMessage(new GameMessage::Message(GameMessage::ATTACK3_RELEASED));
+	}
+
+	void TimerComponent::dashDamageTimeBehaviour()
+	{
+		this->composition->setInvicible(false);
 	}
 
 	void TimerComponent::stopDash()

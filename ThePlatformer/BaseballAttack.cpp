@@ -89,6 +89,7 @@ namespace GameComponents {
 		timer->setTimerType(GameObjects::BLOCK);
 		timer->setTime(1000);
 		this->composition->setInvicible(true);
+		this->composition->setType(GameObjects::PLAYER_BLOCK);
 		this->composition->sendMessage(new GameMessage::Message(GameMessage::BLOCK));
 		timer->startTimer();
 		isAtt3 = true;
@@ -100,6 +101,7 @@ namespace GameComponents {
 		assert(timer != NULL);
 		timer->stopTimer();
 		this->composition->setInvicible(false);
+		this->composition->setType(GameObjects::PLAYER);
 		this->composition->sendMessage(new GameMessage::Message(GameMessage::STOP_BLOCK));
 		isAtt3 = false;
 	}

@@ -90,7 +90,7 @@ namespace GameComponents {
 		case GameMessage::JUMP:
 			if (forces.y == (gravity.y / (1.0f / mass)) * (-1.0f) && !isDash)
 			{
-				velocity.y = -42.0f;
+				velocity.y = -45.0f;
 				onGround = false;
 				stopLeft = false;
 				stopRight = false;
@@ -143,8 +143,8 @@ namespace GameComponents {
 			lastCollisionVelocity = this->velocity;
 			this->velocity = collision->velocity;
 			this->position += collision->position;
-			this->composition->setX((int)position.x);
-			this->composition->setY((int)position.y);
+			this->composition->setX(round(position.x));
+			this->composition->setY(round(position.y));
 			float res = (forces.y * (1.0f / mass)) + gravity.y;
 			if (forces.y > 0 && collision->normal.y < 0.0f)
 			{
@@ -195,8 +195,8 @@ namespace GameComponents {
 		if (position.y >= 1000.0f)
 			this->composition->destroy(true);
 
-		composition->setX((int) position.x);
-		composition->setY((int) position.y);
+		composition->setX(round(position.x));
+		composition->setY(round(position.y));
 
 		//if (this->getComposition()->getName().find("metalslug") != std::string::npos)
 		//{

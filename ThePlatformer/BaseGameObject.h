@@ -33,7 +33,9 @@ namespace GameObjects {
 		PLAYER,
 		PROJECTILE,
 		PROJECTILE_BREAK,
-		PLAYER_ATTACK
+		PLAYER_ATTACK,
+		PLAYER_BLOCK
+
 	};
 
 	enum ProjectileType {
@@ -47,7 +49,8 @@ namespace GameObjects {
 		BLOCK,
 		DROP,
 		RUGBY_BALL,
-		DASH
+		DASH,
+		DASH_DAMAGE
 	};
 
 	class BaseGameObject

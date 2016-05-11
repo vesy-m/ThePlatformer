@@ -351,6 +351,15 @@ namespace GameObjects {
 
 		this->life -= damageMsg->damage;
 
+		if (damageMsg->damageType == GameMessage::DamageMessage::DASH) {
+			GameComponents::TimerComponent* timer = new GameComponents::TimerComponent(this);
+			timer->Init();
+			timer->setTimerType(GameObjects::DASH_DAMAGE);
+			timer->setTime(350);
+			this->setInvicible(true);
+			timer->startTimer();
+		}
+
 		if (this->life <= 0)
 			this->destroy(true);
 	}

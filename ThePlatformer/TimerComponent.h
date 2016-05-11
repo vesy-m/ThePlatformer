@@ -26,7 +26,8 @@ namespace GameComponents {
 		void							stopTimer();
 
 		void							deathTime();
-		void							invincibleTime();
+		void							blockInvincibleTime();
+		void							dashDamageTimeBehaviour();
 		void							stopDash();
 	private:
 		GameObjects::ProjectileType		timerType;

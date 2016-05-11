@@ -165,27 +165,33 @@ namespace GameComponents {
 							if ((typeA == GameObjects::PROJECTILE && typeB == GameObjects::PLAYER) ||
 								(typeA == GameObjects::PROJECTILE_BREAK && typeB == GameObjects::PLAYER))
 							{
-								otherObject->composition->sendMessage(new GameMessage::DamageMessage(this->composition->getPower()));
+								otherObject->composition->sendMessage(new GameMessage::DamageMessage(GameMessage::DamageMessage::PROJECTILE, this->composition->getPower()));
 								if (typeA == GameObjects::PROJECTILE_BREAK)
 									this->composition->destroy(true);
 							}
 							else if ((typeA == GameObjects::PLAYER && typeB == GameObjects::PROJECTILE) ||
 									 (typeA == GameObjects::PLAYER && typeB == GameObjects::PROJECTILE_BREAK))
 							{
-								this->sendMessage(new GameMessage::DamageMessage(otherObject->composition->getPower()));
+								this->sendMessage(new GameMessage::DamageMessage(GameMessage::DamageMessage::PROJECTILE, otherObject->composition->getPower()));
 								if (typeB == GameObjects::PROJECTILE_BREAK)
 									otherObject->composition->destroy(true);
 							}
 							else if (typeA == GameObjects::PLAYER_ATTACK && typeB == GameObjects::PLAYER)
 							{
-								otherObject->composition->sendMessage(new GameMessage::DamageMessage(this->composition->getPower()));
-								this->composition->sendMessage(new GameMessage::Message(GameMessage::STOP_DASH));
+								otherObject->composition->sendMessage(new GameMessage::DamageMessage(GameMessage::DamageMessage::DASH, this->composition->getPower()));
+								continue;
+								//this->composition->sendMessage(new GameMessage::Message(GameMessage::STOP_DASH));
+							}
+							else if (typeA == GameObjects::PLAYER_BLOCK && typeB == GameObjects::PLAYER_ATTACK) {
+								std::cout << "TEST" << std::endl;
+								continue;
 							}
 							//else if (otherObject->composition->getType() == GameObjects::PLAYER_ATTACK && this->composition->getType() == GameObjects::PLAYER)
 							//{
 							//	this->sendMessage(new GameMessage::DamageMessage(otherObject->composition->getPower()));
 							//	otherObject->composition->sendMessage(new GameMessage::Message(GameMessage::DASH_COLLISION));
 							//}
+
 							ResolveCollision(manifold);
 							collide = true;
 						}

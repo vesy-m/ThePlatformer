@@ -5,8 +5,14 @@ namespace GameMessage {
 	class DamageMessage : public Message
 	{
 	public:
-		DamageMessage(int);
+		enum DamageType {
+			DASH,
+			PROJECTILE
+		};
+
+		DamageMessage(DamageType, int);
 		~DamageMessage();
 		int damage;
+		DamageType damageType;
 	};
 }

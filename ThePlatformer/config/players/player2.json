@@ -6,7 +6,7 @@
   "height" : 50,
   "width" : 30,
   "mass" : 20,
-  "move_speed" : 1.5,
+  "move_speed" : 1.6,
   "sprite" : "./config/sprite_sheets/desc-football.json",
   "body" : true,
   "boxcollider" : true,
