@@ -118,7 +118,8 @@ namespace GameComponents {
 
 	void ButtonComponent::drawSquare(GLfloat x, GLfloat y, GLfloat width, GLfloat height) {
 		glLineWidth(3);
-		glColor3f(0.0, 1.0, 0.0);
+		//glColor3f(1.0f / 256.0f * 10.0f, 1.0f / 256.0f * 200.0f, 1.0f / 256.0f * 70.0f);
+		glColor3f(0.0f, 1.0f, 0.0f);
 		glBegin(GL_LINES);
 			//top
 			glVertex2f(x, y);

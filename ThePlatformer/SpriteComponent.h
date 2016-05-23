@@ -9,6 +9,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include "SpriteSheet.h"
 #include "ObjectFactory.h"
+#include "GraphicsSystem.h"
 #include "EditorManager.h"
 
 #define TEXTURE_LOAD_ERROR 0
@@ -26,6 +27,7 @@ namespace GameComponents {
 	class SpriteComponent : public BaseComponent
 	{
 		friend class GameSystems::ObjectFactory;
+		friend class GameSystems::GraphicsSystem;
 		friend class GameTools::EditorManager;
 	public:
 		SpriteComponent(GameObjects::BaseGameObject*, const std::string&);

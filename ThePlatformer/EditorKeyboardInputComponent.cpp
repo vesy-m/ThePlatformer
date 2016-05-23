@@ -31,12 +31,14 @@ namespace GameComponents {
 					this->composition->setX(-500);
 				}
 				else {
-					this->composition->setX(this->saveX);
+					if (this->composition->getX() == -500) {
+						this->composition->setX(this->saveX);
+					}
 					this->saveX = -32300;
 				}
 			}
 			if (event.key.code == sf::Keyboard::Escape) {
-				//GameTools::EditorManager::getInstance().clearLevel();
+				GameTools::EditorManager::getInstance().clearLevel();
 				GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/editor_level_menu.json");
 			}
 		}

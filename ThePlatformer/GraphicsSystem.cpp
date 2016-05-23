@@ -4,6 +4,10 @@
 namespace GameSystems {
 	GraphicsSystem::GraphicsSystem()
 	{
+		backgroundObj = new GameObjects::BaseGameObject();
+		backgroundObj->setX(0);
+		backgroundObj->setY(0);
+		new GameComponents::SpriteComponent(backgroundObj, "./assets/sprite/menu/skyBackground.png");
 	}
 
 	GraphicsSystem::~GraphicsSystem()
@@ -30,6 +34,9 @@ namespace GameSystems {
 		GameTools::debugManager::getInstance().time2 = 0;
 		GameTools::debugManager::getInstance().time3 = 0;
 		GameTools::debugManager::getInstance().time4 = 0;
+		if (ObjectFactory::getInstance().stateGame == ObjectFactory::gameState::MENU) {
+			backgroundObj->getComponent(GameComponents::COMPONENT_TYPE::SPRITE)->Update(dt);
+		}
 		for each (GameObjects::BaseGameObject* object in listObjects)
 		{
 			GameComponents::BaseComponent*component = object->getComponent(GameComponents::COMPONENT_TYPE::SPRITE);
@@ -74,6 +81,7 @@ namespace GameSystems {
 	void	GraphicsSystem::Init(std::list<GameObjects::BaseGameObject*>& listObjects)
 	{
 		Camera::getInstance();
+		backgroundObj->Init();
 		for each (GameObjects::BaseGameObject* object in listObjects)
 		{
 			GameComponents::BaseComponent* component = object->getComponent(GameComponents::COMPONENT_TYPE::SPRITE);

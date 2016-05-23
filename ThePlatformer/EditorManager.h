@@ -20,8 +20,8 @@ namespace GameTools {
 		int midValue = 318;
 		int HWCase = 84;
 		int maxSpace = 0;
-		int textureSize = 42;
-		int caseSelectionSize = 21;
+		float textureSize = 50.0f;
+		float caseSelectionSize = 21.0f;
 		void setSelection(int pos);
 		void createNewElement(int posX, int posY);
 		GameObjects::BaseGameObject *EditorManager::getObjectByPosition(int posX, int posY);

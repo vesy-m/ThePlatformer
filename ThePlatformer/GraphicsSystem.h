@@ -16,6 +16,8 @@ namespace GameSystems {
 		void resizeCamera();
 		void SendAMessage();
 		class Camera;
+	private:
+		GameObjects::BaseGameObject *backgroundObj;
 	};
 
 	class GraphicsSystem::Camera : public CSingletonStaticAlloc<GraphicsSystem::Camera>

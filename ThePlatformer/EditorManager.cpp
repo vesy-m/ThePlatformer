@@ -25,7 +25,7 @@ namespace GameTools {
 		new GameComponents::EditorCaseSelectorComponent(ret, this->caseSelectionSize);
 		ret->setX(0);
 		ret->setY(0);
-		ret->setScale(1.0f / (this->textureSize / this->caseSelectionSize));
+		ret->setScale(1.0f / (42.0f / this->caseSelectionSize));
 		this->addObject(ret);
 
 		WIN32_FIND_DATA ffd;
@@ -46,7 +46,7 @@ namespace GameTools {
 
 				ret->setX(0);
 				ret->setY(this->midValue + (this->HWCase * nbFileFind));
-				ret->setScale(2);
+				ret->setScale(this->HWCase / this->textureSize);
 				ret->setDepth(1);
 
 				this->addObject(ret);
@@ -76,10 +76,12 @@ namespace GameTools {
 
 	void EditorManager::clearLevel() {
 		this->editorLevelObjects.clear();
+		this->listElements.clear();
 	}
 
 	void EditorManager::LoadLevel(std::list<GameObjects::BaseGameObject*> &objects) {
 		this->editorLevelObjects.clear();
+		this->listElements.clear();
 		for each (GameObjects::BaseGameObject* obj in objects) {
 			if (obj->getName() == "") {
 				this->editorLevelObjects.push_front(obj);
@@ -158,9 +160,10 @@ namespace GameTools {
 		ss << "  " << "\"objects\" : [" << std::endl;
 		ss << "    " << "{" << std::endl;
 		ss << "      " << "\"name\" : \"debugFps\"," << std::endl;
-		ss << "      " << "\"x\" : 50," << std::endl;
-		ss << "      " << "\"y\" : 50," << std::endl;
-		ss << "      " << "\"depth\" : 3," << std::endl;
+		ss << "      " << "\"x\" : 0," << std::endl;
+		ss << "      " << "\"y\" : 0," << std::endl;
+		ss << "      " << "\"depth\" : 5," << std::endl;
+		ss << "      " << "\"sprite\" : \"./assets/sprite/background.png\"," << std::endl;
 		ss << "      " << "\"fps\" : true" << std::endl;
 		ss << "    " << "}," << std::endl;
 		for (auto it = this->listElements.begin(); it != this->listElements.end(); ++it) {
