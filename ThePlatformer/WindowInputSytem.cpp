@@ -45,6 +45,7 @@ namespace GameSystems {
 				GameSystems::AudioSystem::_pause = false;
 			else if (event.type == sf::Event::Resized)
 			{
+				window->setMouseCursorVisible(false);
 				// adjust the viewport when the window is resized
 				glViewport(0, 0, event.size.width, event.size.height);
 			}
@@ -77,12 +78,16 @@ namespace GameSystems {
 		}
 
 		if (WindowInputSytem::fullscreen != this->currentFullScreenState) {
+			window->setMouseCursorVisible(false);
 			this->currentFullScreenState = WindowInputSytem::fullscreen;
 			if (this->currentFullScreenState) {
 				window->create(sf::VideoMode::getDesktopMode(), "ThePlatformer", sf::Style::Fullscreen, sf::ContextSettings(32));
 			}
 			else
+			{
 				window->create(sf::VideoMode(1280, 720), "ThePlatformer", sf::Style::Close, sf::ContextSettings(32));
+				window->setMouseCursorVisible(false);
+			}
 		}
 
 		for each (GameObjects::BaseGameObject* object in listObjects)
@@ -108,6 +113,7 @@ namespace GameSystems {
 			this->window = new sf::Window(sf::VideoMode(1280, 720), "ThePlatformer", sf::Style::Close, sf::ContextSettings(32));
 			window->setVerticalSyncEnabled(false);
 			window->setKeyRepeatEnabled(true);
+			window->setMouseCursorVisible(false);
 		}
 		for each (GameObjects::BaseGameObject* object in listObjects)
 		{

@@ -6,12 +6,16 @@ namespace GameSystems {
 	bool AudioSystem::_menuVictory = false;
 	bool AudioSystem::_pause = false;
 	bool AudioSystem::_pauseMenu = false;
+	bool AudioSystem::_muteAll = false;
+	bool AudioSystem::_muteAmbiance = false;
 
 	AudioSystem::AudioSystem()
 	{
 		isPaused = false;
 		_isAmbiance = false;
 		_isMenu = false;
+		_isMuteAll = false;
+		_isMuteAmbiance = false;
 	}
 
 	AudioSystem::~AudioSystem()
@@ -20,6 +24,32 @@ namespace GameSystems {
 
 	int AudioSystem::Update(double dt, std::list<GameObjects::BaseGameObject*>&listObjects)
 	{
+		if (_muteAll && !_isMuteAll)
+		{
+			_isMuteAll = true;
+			GameTools::CSoundManager::getInstance().muteAll();
+		}
+		else if (!_muteAll && _isMuteAll)
+		{
+			_isMuteAll = false;
+			GameTools::CSoundManager::getInstance().unmuteAll();
+		}
+		if (_muteAmbiance && !_isMuteAmbiance)
+		{
+			_isMuteAmbiance = true;
+			if (_sound["ambiance"])
+				_sound["ambiance"]->stop();
+			if (_sound["victory"])
+				_sound["victory"]->stop();
+		}
+		else if (!_muteAmbiance && _isMuteAmbiance)
+		{
+			_isMuteAmbiance = false;
+			if (_sound["ambiance"] && _isAmbiance)
+				_sound["ambiance"]->play();
+			if (_sound["victory"] && !_isAmbiance)
+				_sound["victory"]->play();
+		}
 		if (_pause && isPaused == false) {
 			if (_sound["ambiance"])
 				_sound["ambiance"]->stop();

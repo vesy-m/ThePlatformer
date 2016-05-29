@@ -1,0 +1,13 @@
+{
+	"button" : {
+		"x" : 540,
+		"y" : 100,
+		"sprite" : "./assets/sprite/menu/levelChooseButton.png",
+	},
+	"button" : {
+		"x" : 500,
+		"y" : 670,
+		"sprite" : "./assets/sprite/menu/moveInSelectPlayer.png",
+		"function" : "backEditor"
+	}
+}

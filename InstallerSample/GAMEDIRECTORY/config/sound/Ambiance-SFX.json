@@ -2,14 +2,14 @@
 	"SFX" : [
 		{
 			"name" : "ambiance",
-			"file" : "./assets/audio/dr_wily_stage.ogg",
-			"volume" : 50,
+			"file" : "./assets/audio/Machinations.ogg",
+			"volume" : 10,
 			"loop" : 1
 		},
 		{
 			"name" : "victory",
-			"file" : "./assets/audio/tick_tock_jingle.ogg",
-			"volume" : 50,
+			"file" : "./assets/audio/Take_a_Chance.ogg",
+			"volume" : 5,
 			"loop" : 1
 		}
 	]

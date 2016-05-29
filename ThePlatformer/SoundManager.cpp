@@ -41,4 +41,20 @@ namespace GameTools
 				it->second.stop();
 		}
 	}
+
+	void CSoundManager::muteAll()
+	{
+		std::map<std::string, CSound>::iterator it;
+
+		for (it = _sound.begin(); it != _sound.end(); ++it)
+			it->second.setVolume(0.0f, false);
+	}
+
+	void CSoundManager::unmuteAll()
+	{
+		std::map<std::string, CSound>::iterator it;
+
+		for (it = _sound.begin(); it != _sound.end(); ++it)
+			it->second.setVolume(it->second.getVolume(), false);
+	}
 }

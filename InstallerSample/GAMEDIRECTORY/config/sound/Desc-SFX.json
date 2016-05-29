@@ -1,27 +1,21 @@
 {
 	"SFX" : [
 		{
-			"name" : "walk",
-			"file" : "./assets/audio/Walk.ogg",
-			"volume" : 100,
-			"loop" : 1
-		},
-		{
 			"name" : "jump",
 			"file" : "./assets/audio/Jump.ogg",
-			"volume" : 100,
+			"volume" : 5,
 			"loop" : 0
 		},
 		{
 			"name" : "fire",
 			"file" : "./assets/audio/Fire.ogg",
-			"volume" : 100,
+			"volume" : 5,
 			"loop" : 0
 		},
 		{
 			"name" : "damage",
 			"file" : "./assets/audio/Death.ogg",
-			"volume" : 100,
+			"volume" : 5,
 			"loop" : 0
 		}
 	]
