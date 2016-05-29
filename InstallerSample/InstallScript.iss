@@ -19,24 +19,24 @@ AppId={{F0364864-38EA-4B69-8FB2-1065CD7E6865}
 
 ; Standard app data stuff
 ; TODO: Search-and-Replace "GameTest" with your game name DONE
-AppName=ThePlatformer
-AppVerName=ThePlatformer Version 1.0
+AppName=UltimateSportsBattleX
+AppVerName=UltimateSportsBattleX Version 1.0
 AppPublisher=DigiPen Institute of Technology
 AppPublisherURL=http://www.digipen.edu/
 AppSupportURL=http://www.digipen.edu/
 
 ; Default path to the file storage directory.
 ; {pf} is the default program files directory set by Windows
-DefaultDirName={pf}\Epitech\ThePlatformer
+DefaultDirName={pf}\Epitech-KMU\UltimateSportsBattleX
 
 ; Start menu directory
-DefaultGroupName=Epitech\ThePlatformer
+DefaultGroupName=Epitech-KMU\UltimateSportsBattleX
 
 ; Output directory for the installer.
 OutputDir=.\INSTALLER
 
 ; Setup executable installer
-OutputBaseFilename=ThePlatformer_Setup
+OutputBaseFilename=UltimateSportsBattleX_Setup
 
 ; Path to the DigiPen EULA (Needed to pass TCRs)
 ;LicenseFile=INSTALLERFILES\DigiPen_EULA.txt
@@ -91,9 +91,9 @@ Source: .\REDIST\*; DestDir: {tmp}; Flags: ignoreversion
 ;   {group} is the start menu location that the game will install shortcuts to.
 ;   {commondesktop} is your Windows desktop directory.
 [Icons]
-Name: {group}\ThePlatformer; Filename: {app}\ThePlatformer.exe; WorkingDir: {app}; IconFilename: "{app}\Icon.ico"
-Name: {group}\{cm:UninstallProgram,ThePlatformer}; Filename: {uninstallexe}
-Name: {commondesktop}\ThePlatformer; Filename: {app}\ThePlatformer.exe; Tasks: desktopicon; WorkingDir: {app}; IconFilename: "{app}\Icon.ico"
+Name: {group}\UltimateSportsBattleX; Filename: {app}\UltimateSportsBattleX.exe; WorkingDir: {app}; IconFilename: "{app}\Icon.ico"
+Name: {group}\{cm:UninstallProgram,UltimateSportsBattleX}; Filename: {uninstallexe}; IconFilename: "{app}\Uninstall.ico"
+Name: {commondesktop}\UltimateSportsBattleX; Filename: {app}\UltimateSportsBattleX.exe; Tasks: desktopicon; WorkingDir: {app}; IconFilename: "{app}\Icon.ico" 
 
 ; List of items to execute in the installer.
 ; Note that this will run all executables in their silent versions as required by the TCRs.
@@ -104,4 +104,4 @@ Name: {commondesktop}\ThePlatformer; Filename: {app}\ThePlatformer.exe; Tasks: d
 [Run]
 ; Filename: {tmp}\vcredist_x86.exe; Parameters: /q; StatusMsg: Installing Visual C++ 2008 Redistributable...
 ; Filename: {tmp}\dxsetup.exe; Parameters: /q; StatusMsg: Installing DirectX...
-Filename: {app}\ThePlatformer.exe; Description: {cm:LaunchProgram,ThePlatformer}; Flags: nowait postinstall skipifsilent
+Filename: {app}\UltimateSportsBattleX.exe; Description: {cm:LaunchProgram,UltimateSportsBattleX}; Flags: nowait postinstall skipifsilent
