@@ -34,7 +34,13 @@ namespace GameComponents {
 		{
 			switch (this->timerType)
 			{
+			case GameObjects::TENNIS_BALL1:
+			case GameObjects::TENNIS_BALL2:
+			case GameObjects::BASE_BALL:
+			case GameObjects::RUGBY_BALL:
+			case GameObjects::DROP:
 			case GameObjects::BAT:
+			case GameObjects::TENNIS_BREAK:
 				deathTime();
 				break;
 			case GameObjects::BLOCK:

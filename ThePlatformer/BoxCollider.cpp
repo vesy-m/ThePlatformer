@@ -184,21 +184,14 @@ namespace GameComponents {
 							{
 								otherObject->composition->sendMessage(new GameMessage::DamageMessage(GameMessage::DamageMessage::DASH, this->composition->getPower()));
 								continue;
-								//this->composition->sendMessage(new GameMessage::Message(GameMessage::STOP_DASH));
 							}
 							else if ((typeA == GameObjects::PLAYER_BLOCK && typeB == GameObjects::PLAYER_ATTACK) ||
 									 (typeA == GameObjects::PLAYER_ATTACK && typeB == GameObjects::PROJECTILE) ||
 									 (typeA == GameObjects::PLAYER_ATTACK && typeB == GameObjects::PROJECTILE_BREAK) ||
 									 (typeA == GameObjects::PROJECTILE && typeB == GameObjects::PLAYER_ATTACK) ||
-									 (typeA == GameObjects::PROJECTILE_BREAK && typeB == GameObjects::PLAYER_ATTACK))
-							{
+									 (typeA == GameObjects::PROJECTILE_BREAK && typeB == GameObjects::PLAYER_ATTACK)) {
 								continue;
 							}
-							//else if (otherObject->composition->getType() == GameObjects::PLAYER_ATTACK && this->composition->getType() == GameObjects::PLAYER)
-							//{
-							//	this->sendMessage(new GameMessage::DamageMessage(otherObject->composition->getPower()));
-							//	otherObject->composition->sendMessage(new GameMessage::Message(GameMessage::DASH_COLLISION));
-							//}
 
 							ResolveCollision(manifold);
 							collide = true;

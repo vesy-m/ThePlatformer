@@ -16,6 +16,7 @@
 #include "EditorCaseSelectorComponent.h"
 #include "EditorKeyboardInputComponent.h"
 #include "LifeBarComponent.h"
+#include "AutoPlayComponent.h"
 
 namespace GameObjects {
 	BaseGameObject::BaseGameObject()
@@ -52,6 +53,7 @@ namespace GameObjects {
 		this->attack_1_value = 0;
 		this->attack_2_value = 0;
 		this->attack_3_value = 0;
+		this->jump_value = 200;
 	}
 
 	void BaseGameObject::Init(void) {
@@ -87,6 +89,7 @@ namespace GameObjects {
 		delete this->m_caseSelector;
 		delete this->m_editorKeyboard;
 		delete this->m_lifeBarComponent;
+		delete this->m_autoPlayComponent;
 	}
 
 	GameComponents::BaseComponent *BaseGameObject::getComponent(GameComponents::COMPONENT_TYPE type) {
@@ -123,6 +126,8 @@ namespace GameObjects {
 			return this->m_editorKeyboard;
 		case GameComponents::LIFE_BAR:
 			return this->m_lifeBarComponent;
+		case GameComponents::AUTO_PLAY:
+			return this->m_autoPlayComponent;
 		default:
 			return NULL;
 		}
@@ -208,6 +213,11 @@ namespace GameObjects {
 		this->m_lifeBarComponent = lifeBarComponent;
 	}
 
+	void BaseGameObject::attachComponent(GameComponents::AutoPlayComponent *autoPlayComponent)
+	{
+		this->m_autoPlayComponent = autoPlayComponent;
+	}
+
 	void BaseGameObject::sendMessage(GameMessage::Message *message)
 	{
 		if (this->m_body) this->m_body->sendMessage(message);
@@ -225,6 +235,7 @@ namespace GameObjects {
 		if (this->m_caseSelector) this->m_caseSelector->sendMessage(message);
 		if (this->m_editorKeyboard) this->m_editorKeyboard->sendMessage(message);
 		if (this->m_lifeBarComponent) this->m_lifeBarComponent->sendMessage(message);
+		if (this->m_autoPlayComponent) this->m_autoPlayComponent->sendMessage(message);
 		delete message;
 	}
 
@@ -402,6 +413,10 @@ namespace GameObjects {
 
 	float BaseGameObject::getAttack3Value(void) {
 		return (this->attack_3_value);
+	}
+
+	float BaseGameObject::getJumpValue(void) {
+		return (this->jump_value);
 	}
 
 	void BaseGameObject::setAttack1Value(float attack_1_value) {

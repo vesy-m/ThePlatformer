@@ -24,6 +24,7 @@ namespace GameComponents {
 	class EditorCaseSelectorComponent;
 	class EditorKeyboardInputComponent;
 	class LifeBarComponent;
+	class AutoPlayComponent;
 }
 
 namespace GameObjects {
@@ -76,6 +77,7 @@ namespace GameObjects {
 		void attachComponent(GameComponents::EditorCaseSelectorComponent *);
 		void attachComponent(GameComponents::EditorKeyboardInputComponent *);
 		void attachComponent(GameComponents::LifeBarComponent *);
+		void attachComponent(GameComponents::AutoPlayComponent *);
 		void sendMessage(GameMessage::Message*);
 		void setX(int x);
 		int getX();
@@ -117,6 +119,7 @@ namespace GameObjects {
 		float getAttack1Value(void);
 		float getAttack2Value(void);
 		float getAttack3Value(void);
+		float getJumpValue(void);
 
 		void setAttack1Value(float);
 		void setAttack2Value(float);
@@ -138,6 +141,7 @@ namespace GameObjects {
 		GameComponents::EditorCaseSelectorComponent *m_caseSelector;
 		GameComponents::EditorKeyboardInputComponent *m_editorKeyboard;
 		GameComponents::LifeBarComponent *m_lifeBarComponent;
+		GameComponents::AutoPlayComponent *m_autoPlayComponent;
 		int x;
 		int y;
 		int height;
@@ -159,5 +163,6 @@ namespace GameObjects {
 		float attack_1_value;
 		float attack_2_value;
 		float attack_3_value;
+		float jump_value;
 	};
 }

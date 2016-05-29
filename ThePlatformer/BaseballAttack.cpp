@@ -176,6 +176,13 @@ namespace GameComponents {
 			timer->startTimer();
 			body->setGravity(0.0f);
 		}
+		else if (type == GameObjects::BASE_BALL)
+		{
+			timer = new GameComponents::TimerComponent(projectile);
+			timer->setTimerType(type);
+			timer->setTime(450);
+			timer->startTimer();
+		}
 		GameSystems::ObjectFactory::getInstance().createProjectile(projectile);
 		return projectile;
 	}

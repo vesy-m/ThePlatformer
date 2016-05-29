@@ -10,10 +10,13 @@ namespace GameComponents {
 		float penetration = manifold->penetration;
 		float bounce = manifold->A->composition->getBounce();
 
+		if (manifold->B->getComposition()->getType() == GameObjects::PLAYER_ATTACK && manifold->A->getComposition()->getType() == GameObjects::PLAYER)
+			manifold->normal.y = 0.0f;
+
 		glm::vec2 addPos = manifold->normal * penetration;
 
 		glm::vec2 newVelocity = ((ColliderComponent*)manifold->A)->velocity;
-		if (manifold->normal.y != 0) {
+		if ((manifold->normal.y != 0)) {
 			if (newVelocity.y >= -1 && newVelocity.y <= 1) newVelocity.y = 0.0;
 			else newVelocity.y *= -bounce;
 		}
@@ -21,9 +24,6 @@ namespace GameComponents {
 			if (newVelocity.x >= -1 && newVelocity.x <= 1) newVelocity.x = 0.0;
 			else newVelocity.x *= -bounce;
 		}
-
-		/*if (newVelocity.y >= -5.0f)
-			newVelocity.y = 0.0f;*/
 
 		GameMessage::CollisionMessage *msg = new GameMessage::CollisionMessage(newVelocity, addPos, manifold->normal);
 		manifold->A->composition->sendMessage((GameMessage::Message*)msg);

@@ -88,7 +88,13 @@ namespace GameSystems {
 		for each (GameObjects::BaseGameObject* object in listObjects)
 		{
 			GameComponents::BaseComponent* component = object->getComponent(GameComponents::COMPONENT_TYPE::WINDOW);
-			if(component) component->Update(dt);
+			if (component) {
+				if (component->IsComponentActive()) component->Update(dt);
+			}
+			component = object->getComponent(GameComponents::COMPONENT_TYPE::AUTO_PLAY);
+			if (component) {
+				if (component->IsComponentActive()) component->Update(dt);
+			}
 			component = object->getComponent(GameComponents::COMPONENT_TYPE::EDITOR_KEYBOARD);
 			if (component) component->Update(dt);
 		}
