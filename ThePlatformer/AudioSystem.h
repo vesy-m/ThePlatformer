@@ -22,10 +22,14 @@ namespace GameSystems {
 		static bool				_menuVictory;
 		static bool				_pause;
 		static bool				_pauseMenu;
+		static bool				_muteAll;
+		static bool				_muteAmbiance;
 	private:
 		SoundMap				_sound;
 		bool					isPaused;
 		bool					_isAmbiance;
 		bool					_isMenu;
+		bool					_isMuteAll;
+		bool					_isMuteAmbiance;
 	};
 }
