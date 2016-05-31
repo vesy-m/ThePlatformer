@@ -30,6 +30,8 @@ namespace GameComponents {
 		this->functionMap["backLevel"] = &ButtonComponent::backLevel;
 		this->functionMap["backEditor"] = &ButtonComponent::backEditor;
 		this->functionMap["switchFullScreen"] = &ButtonComponent::switchFullScreen;
+		this->functionMap["switchSound"] = &ButtonComponent::switchSound;
+		this->functionMap["switchMusic"] = &ButtonComponent::switchMusic;
 		this->functionMap["startEditor"] = &ButtonComponent::startLevelEditor;
 		this->functionMap["loadLevelInEditor"] = &ButtonComponent::loadLevelInEditor;
 		this->functionMap["deleteLevel"] = &ButtonComponent::deleteLevel;
@@ -43,6 +45,30 @@ namespace GameComponents {
 		this->movingButton = false;
 		this->numMovingButton = 0;
 		this->sizeListMovingButton = 0;
+
+		if (this->actionName == "switchFullScreen") {
+			if (GameSystems::WindowInputSytem::fullscreen) {
+				GameSystems::ObjectFactory::getInstance().changeGameObjectSpriteComponent(this->composition, "./assets/sprite/menu/FullscreenButtonOn.png");
+			} else {
+				GameSystems::ObjectFactory::getInstance().changeGameObjectSpriteComponent(this->composition, "./assets/sprite/menu/FullscreenButtonOff.png");
+			}
+		}
+		if (this->actionName == "switchSound") {
+			if (GameSystems::WindowInputSytem::fullscreen) {
+				GameSystems::ObjectFactory::getInstance().changeGameObjectSpriteComponent(this->composition, "./assets/sprite/menu/SoundButtonOn.png");
+			}
+			else {
+				GameSystems::ObjectFactory::getInstance().changeGameObjectSpriteComponent(this->composition, "./assets/sprite/menu/SoundButtonOff.png");
+			}
+		}
+		if (this->actionName == "switchMusic") {
+			if (GameSystems::WindowInputSytem::fullscreen) {
+				GameSystems::ObjectFactory::getInstance().changeGameObjectSpriteComponent(this->composition, "./assets/sprite/menu/MusicButtonOn.png");
+			}
+			else {
+				GameSystems::ObjectFactory::getInstance().changeGameObjectSpriteComponent(this->composition, "./assets/sprite/menu/MusicButtonOff.png");
+			}
+		}
 
 	}
 
@@ -339,6 +365,32 @@ namespace GameComponents {
 	
 	void ButtonComponent::switchFullScreen() {
 		GameSystems::WindowInputSytem::fullscreen = !GameSystems::WindowInputSytem::fullscreen;
+		if (GameSystems::WindowInputSytem::fullscreen) {
+			GameSystems::ObjectFactory::getInstance().changeGameObjectSpriteComponent(this->composition, "./assets/sprite/menu/FullscreenButtonOn.png");
+		}
+		else {
+			GameSystems::ObjectFactory::getInstance().changeGameObjectSpriteComponent(this->composition, "./assets/sprite/menu/FullscreenButtonOff.png");
+		}
+	}
+
+	void ButtonComponent::switchSound() {
+		GameSystems::WindowInputSytem::fullscreen = !GameSystems::WindowInputSytem::fullscreen;
+		if (GameSystems::WindowInputSytem::fullscreen) {
+			GameSystems::ObjectFactory::getInstance().changeGameObjectSpriteComponent(this->composition, "./assets/sprite/menu/SoundButtonOn.png");
+		}
+		else {
+			GameSystems::ObjectFactory::getInstance().changeGameObjectSpriteComponent(this->composition, "./assets/sprite/menu/SoundButtonOff.png");
+		}
+	}
+
+	void ButtonComponent::switchMusic() {
+		GameSystems::WindowInputSytem::fullscreen = !GameSystems::WindowInputSytem::fullscreen;
+		if (GameSystems::WindowInputSytem::fullscreen) {
+			GameSystems::ObjectFactory::getInstance().changeGameObjectSpriteComponent(this->composition, "./assets/sprite/menu/MusicButtonOn.png");
+		}
+		else {
+			GameSystems::ObjectFactory::getInstance().changeGameObjectSpriteComponent(this->composition, "./assets/sprite/menu/MusicButtonOff.png");
+		}
 	}
 
 	void ButtonComponent::startLevelEditor() {

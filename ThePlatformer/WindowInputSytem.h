@@ -14,6 +14,7 @@ namespace GameSystems {
 		int Update(double dt, std::list<GameObjects::BaseGameObject*>&);
 		void Init(std::list<GameObjects::BaseGameObject*>&);
 		void SendAMessage();
+		void switchFullScreen();
 		static bool fullscreen;
 	private:
 		sf::Window *window;

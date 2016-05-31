@@ -6,7 +6,7 @@ namespace GameSystems {
 
 	WindowInputSytem::WindowInputSytem()
 	{
-		this->currentFullScreenState = true;
+		this->currentFullScreenState = WindowInputSytem::fullscreen;
 		this->window = NULL;
 	}
 
@@ -75,14 +75,9 @@ namespace GameSystems {
 				if (component) component->UpdateInputState(event, dt);
 			}
 		}
-
 		if (WindowInputSytem::fullscreen != this->currentFullScreenState) {
 			this->currentFullScreenState = WindowInputSytem::fullscreen;
-			if (this->currentFullScreenState) {
-				window->create(sf::VideoMode::getDesktopMode(), "ThePlatformer", sf::Style::Fullscreen, sf::ContextSettings(32));
-			}
-			else
-				window->create(sf::VideoMode(1280, 720), "ThePlatformer", sf::Style::Close, sf::ContextSettings(32));
+			switchFullScreen();
 		}
 
 		for each (GameObjects::BaseGameObject* object in listObjects)
@@ -99,7 +94,12 @@ namespace GameSystems {
 	void WindowInputSytem::Init(std::list<GameObjects::BaseGameObject*>& listObjects)
 	{
 		if (this->window == NULL) {
-			this->window = new sf::Window(sf::VideoMode(1280, 720), "ThePlatformer", sf::Style::Close, sf::ContextSettings(32));
+			if (this->currentFullScreenState) {
+				std::cout << sf::VideoMode::getDesktopMode().height << " " << sf::VideoMode::getDesktopMode().width << std::endl;
+				this->window = new sf::Window(sf::VideoMode::getDesktopMode(), "Ultimate Sports Battle X", sf::Style::Fullscreen, sf::ContextSettings(32));
+			} else {
+				this->window = new sf::Window(sf::VideoMode(1280, 720), "Ultimate Sports Battle X", sf::Style::Close, sf::ContextSettings(32));
+			}
 			window->setVerticalSyncEnabled(false);
 			window->setKeyRepeatEnabled(true);
 		}
@@ -115,5 +115,15 @@ namespace GameSystems {
 	//have to receive message in case of change in window like size...
 	void WindowInputSytem::SendAMessage()
 	{
+	}
+
+	void WindowInputSytem::switchFullScreen() {
+		if (this->currentFullScreenState) {
+			std::cout << sf::VideoMode::getDesktopMode().height << " " << sf::VideoMode::getDesktopMode().width << std::endl;
+			window->create(sf::VideoMode::getDesktopMode(), "Ultimate Sports Battle X", sf::Style::Fullscreen, sf::ContextSettings(32));
+		}
+		else {
+			window->create(sf::VideoMode(1280, 720), "Ultimate Sports Battle X", sf::Style::Close, sf::ContextSettings(32));
+		}
 	}
 }

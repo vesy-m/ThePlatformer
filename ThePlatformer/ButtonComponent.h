@@ -60,6 +60,8 @@ namespace GameComponents {
 		void backLevel();
 		void backEditor();
 		void switchFullScreen();
+		void switchSound();
+		void switchMusic();
 		void startLevelEditor();
 		void loadLevelInEditor();
 		void deleteLevel();

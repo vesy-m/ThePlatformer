@@ -20,7 +20,7 @@ namespace GameTools {
 		int midValue = 318;
 		int HWCase = 84;
 		int maxSpace = 0;
-		float textureSize = 50.0f;
+		float textureSize = 32.0f;
 		float caseSelectionSize = 21.0f;
 		void setSelection(int pos);
 		void createNewElement(int posX, int posY);
