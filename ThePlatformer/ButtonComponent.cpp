@@ -221,7 +221,7 @@ namespace GameComponents {
 			if (this->buttonState == ButtonState::CHOOSEPLAYER) {
 				this->numPlayerSelected--;
 				if (this->numPlayerSelected < 1)
-					numPlayerSelected = 3;
+					numPlayerSelected = 4;
 				createPlayer(this->idPad);
 			}
 			else if (this->buttonState == ButtonState::SELECTED && this->navDirection[0] != -1 && ButtonComponent::actionAlreadyCompute == false) {
@@ -236,7 +236,7 @@ namespace GameComponents {
 			}
 			if (this->buttonState == ButtonState::CHOOSEPLAYER) {
 				this->numPlayerSelected++;
-				if (this->numPlayerSelected > 3)
+				if (this->numPlayerSelected > 4)
 					numPlayerSelected = 1;
 				createPlayer(this->idPad);
 			}

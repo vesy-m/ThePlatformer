@@ -51,7 +51,10 @@ namespace GameObjects {
 		DROP,
 		RUGBY_BALL,
 		DASH,
-		DASH_DAMAGE
+		DASH_DAMAGE,
+		PUNCH,
+		SPECIAL_PUNCH,
+		BOXER_STANCE
 	};
 
 	class BaseGameObject

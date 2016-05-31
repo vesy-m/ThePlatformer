@@ -41,6 +41,8 @@ namespace GameComponents {
 			case GameObjects::DROP:
 			case GameObjects::BAT:
 			case GameObjects::TENNIS_BREAK:
+			case GameObjects::PUNCH:
+			case GameObjects::SPECIAL_PUNCH:
 				deathTime();
 				break;
 			case GameObjects::BLOCK:

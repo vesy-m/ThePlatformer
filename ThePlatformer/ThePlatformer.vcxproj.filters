@@ -78,9 +78,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
     <ClCompile Include="GameEngine.cpp">
       <Filter>GameEngineCore\Source</Filter>
     </ClCompile>
@@ -238,6 +235,12 @@
       <Filter>GameComponents\Source</Filter>
     </ClCompile>
     <ClCompile Include="AutoPlayComponent.cpp">
+      <Filter>GameComponents\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="BoxerAttack.cpp">
       <Filter>GameComponents\Source</Filter>
     </ClCompile>
   </ItemGroup>
@@ -417,6 +420,9 @@
       <Filter>GameComponents\Header</Filter>
     </ClInclude>
     <ClInclude Include="AutoPlayComponent.h">
+      <Filter>GameComponents\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="BoxerAttack.h">
       <Filter>GameComponents\Header</Filter>
     </ClInclude>
   </ItemGroup>

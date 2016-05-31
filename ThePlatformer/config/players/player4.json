@@ -12,9 +12,9 @@
   "boxcollider" : true,
   "vector" : "square",
   "type": 1,
-  "fire_ball" : "boxingGlove",
+  "fire_ball" : "boxe",
   "sfx": "./config/sound/Desc-SFX.json",
-  "attack_1": 400,
-  "attack_2": 150,
+  "attack_1": 150,
+  "attack_2": 400,
   "attack_3": 2000
 }

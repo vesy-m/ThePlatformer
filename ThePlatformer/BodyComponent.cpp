@@ -6,6 +6,7 @@ namespace GameComponents {
 	BodyComponent::BodyComponent(GameObjects::BaseGameObject *object) : BaseComponent(object)
 	{
 		object->attachComponent(this);
+		this->parentObject = nullptr;
 	}
 
 	BodyComponent::~BodyComponent()
@@ -19,11 +20,28 @@ namespace GameComponents {
 
 	void BodyComponent::Update(double dt)
 	{
-		//Integrate((float)((dt / 100.0f) * 2.0f));
-		//Integrate((float)((dt / 100.0f) * 1.6f));
-		//std::cout << dt<< std::endl;
+		if (this->composition->getType() == GameObjects::PROJECTILE && this->composition->getProjectileType() == GameObjects::PUNCH) {
+			if (!this->parentObject)
+				return;
+			int parentPosX = parentObject->getX();
+			int parentPosY = parentObject->getY();
 
-		Integrate((float)(dt / 100));
+			int centerX = (parentPosX + (this->parentObject->getWidth() / 2));
+			int centerY = (parentPosY + (this->parentObject->getHeight() / 2));
+			GameComponents::SpriteComponent *sprite = reinterpret_cast<GameComponents::SpriteComponent*>(this->parentObject->getComponent(GameComponents::SPRITE));
+
+			glm::vec2 direction = glm::vec2(100.0, 100.0);
+			if (sprite->revertX) direction = glm::vec2((-100 + centerX) - centerX, (centerY)-centerY);
+			else direction = glm::vec2((100 + centerX) - centerX, (centerY)-centerY);
+
+			if (direction.x <= 0)
+				this->getComposition()->setX(parentPosX - (this->parentObject->getWidth() / 2));
+			else if (direction.x > 0)
+				this->getComposition()->setX(parentPosX + (this->parentObject->getWidth() / 2) + 5);
+			this->getComposition()->setY(parentPosY + (this->parentObject->getHeight() / 2) - 15);
+		}
+		else
+			Integrate((float)(dt / 100));
 	}
 
 	void BodyComponent::Init()
@@ -57,6 +75,11 @@ namespace GameComponents {
 				velocity = dir * 50.0f;
 			}
 			else if (this->composition->getName().find("tennisPlayer") != std::string::npos) {
+				forces = dir * 400.0f;
+				maxForce = 200.0f;
+				velocity = dir * 50.0f;
+			}
+			else if (this->composition->getName().find("boxerPlayer") != std::string::npos) {
 				forces = dir * 400.0f;
 				maxForce = 200.0f;
 				velocity = dir * 50.0f;
@@ -198,12 +221,6 @@ namespace GameComponents {
 		composition->setX(round(position.x));
 		composition->setY(round(position.y));
 
-		//if (this->getComposition()->getName().find("metalslug") != std::string::npos)
-		//{
-		//	system("cls");
-		//	std::cout.precision(10);
-		//	std::cout << "velocity x =\t" << velocity.x << "\t velocity y =\t" << velocity.y <<std::endl;
-		//}
 		GameMessage::VectorMessage *vec = new GameMessage::VectorMessage(GameMessage::VELOCITY_VECTOR, velocity);
 		this->composition->sendMessage((GameMessage::Message*)vec);
 	}
@@ -248,5 +265,9 @@ namespace GameComponents {
 	int BodyComponent::getPositionY()
 	{
 		return (int) position.y;
+	}
+	void BodyComponent::setParentObject(GameObjects::BaseGameObject *parent)
+	{
+		this->parentObject = parent;
 	}
 }

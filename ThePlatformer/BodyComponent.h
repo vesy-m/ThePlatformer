@@ -35,7 +35,11 @@ namespace GameComponents {
 		int getPositionX();
 		int getPositionY();
 
+		void setParentObject(GameObjects::BaseGameObject*);
+
 	private:
+		GameObjects::BaseGameObject *parentObject;
+
 		std::ofstream m_log_file;
 		glm::vec2 position;
 		glm::vec2 velocity;

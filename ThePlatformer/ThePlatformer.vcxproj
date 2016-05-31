@@ -182,6 +182,7 @@ copy /Y "$(ProjectDir)\lib\lib-x64\devil-1.7.8\bin\*" "$(OutDir)\"</Command>
     <ClCompile Include="BaseGameObject.cpp" />
     <ClCompile Include="BodyComponent.cpp" />
     <ClCompile Include="BoxCollider.cpp" />
+    <ClCompile Include="BoxerAttack.cpp" />
     <ClCompile Include="ButtonComponent.cpp" />
     <ClCompile Include="CAAttackComponent.cpp" />
     <ClCompile Include="CircleCollider.cpp" />
@@ -231,6 +232,7 @@ copy /Y "$(ProjectDir)\lib\lib-x64\devil-1.7.8\bin\*" "$(OutDir)\"</Command>
     <ClInclude Include="AimMessage.h" />
     <ClInclude Include="AutoPlayComponent.h" />
     <ClInclude Include="BaseballAttack.h" />
+    <ClInclude Include="BoxerAttack.h" />
     <ClInclude Include="CAAttackComponent.h" />
     <ClInclude Include="AudioComponent.h" />
     <ClInclude Include="AudioSystem.h" />

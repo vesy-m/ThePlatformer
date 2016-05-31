@@ -67,6 +67,24 @@ namespace GameComponents {
 				currentAnim = "shoot";
 			}
 			break;
+		case GameMessage::PUNCH_RIGHT:
+			if (isDashing)
+				break;
+			if (std::string("punchright").compare(currentAnim) != 0) {
+				currentFrame = 0;
+				prevAnim = currentAnim;
+				currentAnim = "punchright";
+			}
+			break;
+		case GameMessage::PUNCH_LEFT:
+			if (isDashing)
+				break;
+			if (std::string("punchleft").compare(currentAnim) != 0) {
+				currentFrame = 0;
+				prevAnim = currentAnim;
+				currentAnim = "punchleft";
+			}
+			break;
 		case GameMessage::BLOCK:
 			isDashing = true;
 			if (std::string("block").compare(currentAnim) != 0) {
