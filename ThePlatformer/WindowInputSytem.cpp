@@ -45,6 +45,7 @@ namespace GameSystems {
 				GameSystems::AudioSystem::_pause = false;
 			else if (event.type == sf::Event::Resized)
 			{
+				window->setMouseCursorVisible(false);
 				// adjust the viewport when the window is resized
 				glViewport(0, 0, event.size.width, event.size.height);
 			}
@@ -83,7 +84,13 @@ namespace GameSystems {
 		for each (GameObjects::BaseGameObject* object in listObjects)
 		{
 			GameComponents::BaseComponent* component = object->getComponent(GameComponents::COMPONENT_TYPE::WINDOW);
-			if(component) component->Update(dt);
+			if (component) {
+				if (component->IsComponentActive()) component->Update(dt);
+			}
+			component = object->getComponent(GameComponents::COMPONENT_TYPE::AUTO_PLAY);
+			if (component) {
+				if (component->IsComponentActive()) component->Update(dt);
+			}
 			component = object->getComponent(GameComponents::COMPONENT_TYPE::EDITOR_KEYBOARD);
 			if (component) component->Update(dt);
 		}
@@ -102,6 +109,7 @@ namespace GameSystems {
 			}
 			window->setVerticalSyncEnabled(false);
 			window->setKeyRepeatEnabled(true);
+			window->setMouseCursorVisible(false);
 		}
 		for each (GameObjects::BaseGameObject* object in listObjects)
 		{
@@ -125,5 +133,6 @@ namespace GameSystems {
 		else {
 			window->create(sf::VideoMode(1280, 720), "Ultimate Sports Battle X", sf::Style::Close, sf::ContextSettings(32));
 		}
+		window->setMouseCursorVisible(false);
 	}
 }

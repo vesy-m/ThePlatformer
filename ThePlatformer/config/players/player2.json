@@ -16,5 +16,6 @@
   "sfx": "./config/sound/Desc-SFX.json",
   "attack_1": 300,
   "attack_2": 650,
-  "attack_3": 1000
+  "attack_3": 1000,
+  "autoplay": true
 }

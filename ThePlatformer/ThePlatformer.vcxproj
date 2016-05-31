@@ -70,6 +70,9 @@
     <CodeAnalysisRuleSet>C:\Program Files (x86)\Microsoft Visual Studio 14.0\Team Tools\Static Analysis Tools\Rule Sets\NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <RunCodeAnalysis>false</RunCodeAnalysis>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <TargetName>UltimateSportsBattleX</TargetName>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -173,6 +176,7 @@ copy /Y "$(ProjectDir)\lib\lib-x64\devil-1.7.8\bin\*" "$(OutDir)\"</Command>
     <ClCompile Include="AimMessage.cpp" />
     <ClCompile Include="AudioComponent.cpp" />
     <ClCompile Include="AudioSystem.cpp" />
+    <ClCompile Include="AutoPlayComponent.cpp" />
     <ClCompile Include="BaseballAttack.cpp" />
     <ClCompile Include="BaseComponent.cpp" />
     <ClCompile Include="BaseGameObject.cpp" />
@@ -225,6 +229,7 @@ copy /Y "$(ProjectDir)\lib\lib-x64\devil-1.7.8\bin\*" "$(OutDir)\"</Command>
   <ItemGroup>
     <ClInclude Include="AimComponent.h" />
     <ClInclude Include="AimMessage.h" />
+    <ClInclude Include="AutoPlayComponent.h" />
     <ClInclude Include="BaseballAttack.h" />
     <ClInclude Include="CAAttackComponent.h" />
     <ClInclude Include="AudioComponent.h" />

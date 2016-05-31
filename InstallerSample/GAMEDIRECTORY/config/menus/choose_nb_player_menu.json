@@ -28,5 +28,26 @@
 		"y" : 670,
 		"sprite" : "./assets/sprite/menu/moveInSelectPlayer.png",
 		"function" : "backPlayer"
+	},
+	
+	"button" : {
+		"x" : 70,
+		"y" : 10,
+		"sprite" : "./assets/sprite/menu/player1SelectionColor.png",
+	},
+	"button" : {
+		"x" : 660,
+		"y" : 10,
+		"sprite" : "./assets/sprite/menu/player2SelectionColor.png",
+	},
+	"button" : {
+		"x" : 70,
+		"y" : 340,
+		"sprite" : "./assets/sprite/menu/player3SelectionColor.png",
+	},
+	"button" : {
+		"x" : 660,
+		"y" : 340,
+		"sprite" : "./assets/sprite/menu/player4SelectionColor.png",
 	}
 }

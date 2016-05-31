@@ -1,4 +1,5 @@
 #include "InputComponent.h"
+#include "AutoPlayComponent.h"
 
 namespace GameComponents {
 
@@ -13,6 +14,7 @@ namespace GameComponents {
 		this->attack_1 = 0;
 		this->attack_2 = 0;
 		this->attack_3 = 0;
+		this->jump = 0;
 	}
 
 	InputComponent::~InputComponent()
@@ -30,7 +32,8 @@ namespace GameComponents {
 
 		this->attack_1 = (float) (this->attack_1 - dt > 0 ? this->attack_1 - dt : 0);
 		this->attack_2 = (float) (this->attack_2 - dt > 0 ? this->attack_2 - dt : 0);
-		this->attack_3 = (float) (this->attack_3 - dt > 0 ? this->attack_3 - dt : 0);
+		this->attack_3 = (float)(this->attack_3 - dt > 0 ? this->attack_3 - dt : 0);
+		this->jump = (float) (this->jump - dt > 0 ? this->jump - dt : 0);
 
 		for (auto it = this->inputState.begin(); it != this->inputState.end(); ++it)
 		{
@@ -41,7 +44,12 @@ namespace GameComponents {
 				&& it->second == true && this->inputState.at(INPUT_TYPE::LEFT) == false)
 				getComposition()->sendMessage(new GameMessage::Message(GameMessage::RIGHT));
 			else if (it->first == INPUT_TYPE::JUMP && it->second == true)
-				getComposition()->sendMessage(new GameMessage::Message(GameMessage::JUMP));
+			{
+				if (jump == 0) {
+					jump = this->composition->getJumpValue();
+					getComposition()->sendMessage(new GameMessage::Message(GameMessage::JUMP));
+				}
+			}
 			else if (it->first == INPUT_TYPE::DEBUG && it->second == true)
 			{
 				if (GameTools::debugManager::getInstance().isActivateGraphic()) GameTools::debugManager::getInstance().disableGraphic();
@@ -103,6 +111,8 @@ namespace GameComponents {
 
 	void InputComponent::ExecuteCheatCode(CHEAT_CODE_TYPE cheatType)
 	{
+		GameComponents::AutoPlayComponent *autoPlay = NULL;
+		GameComponents::InputComponent *input = NULL;
 		switch (cheatType)
 		{
 		case CHEAT_CODE_TYPE::I_WIN:
@@ -118,6 +128,11 @@ namespace GameComponents {
 				this->composition->setInvicible(true);
 			savedMessage.clear();
 			break;
+		case CHEAT_CODE_TYPE::LAUNCH_AUTO_PLAY:
+			autoPlay = reinterpret_cast<GameComponents::AutoPlayComponent*>(getComposition()->getComponent(GameComponents::AUTO_PLAY));
+			input = reinterpret_cast<GameComponents::InputComponent*>(getComposition()->getComponent(GameComponents::WINDOW));
+			autoPlay->SetActive(true);
+			input->SetActive(false);
 		default:
 			break;
 		}

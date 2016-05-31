@@ -84,6 +84,7 @@ namespace GameComponents
 	{
 		GameObjects::BaseGameObject *projectile = NULL;
 		GameComponents::BodyComponent *body = NULL;
+		GameComponents::TimerComponent *timer = NULL;
 
 		if (projectile) {
 			body = dynamic_cast<GameComponents::BodyComponent*>(projectile->getComponent(GameComponents::PHYSIC));
@@ -132,10 +133,21 @@ namespace GameComponents
 		projectile->Init();
 		assert(body != NULL);
 		body->Init(base_force, direction);
-		//if (type == GameObjects::RUGBY_BALL)
-		//{
-			body->setGravity(4.0f);
-		//}
+		body->setGravity(4.0f);
+		if (type == GameObjects::RUGBY_BALL)
+		{
+			timer = new GameComponents::TimerComponent(projectile);
+			timer->setTimerType(type);
+			timer->setTime(450);
+			timer->startTimer();
+		}
+		if (type == GameObjects::DROP)
+		{
+			timer = new GameComponents::TimerComponent(projectile);
+			timer->setTimerType(type);
+			timer->setTime(450);
+			timer->startTimer();
+		}
 		GameSystems::ObjectFactory::getInstance().createProjectile(projectile);
 		return projectile;
 	}

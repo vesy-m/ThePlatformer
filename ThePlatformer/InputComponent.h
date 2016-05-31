@@ -18,6 +18,7 @@ namespace GameComponents {
 	{
 		I_WIN,
 		INVICIBLE,
+		LAUNCH_AUTO_PLAY,
 
 		DEFAULT,
 	};
@@ -72,7 +73,7 @@ namespace GameComponents {
 		float attack_1;
 		float attack_2;
 		float attack_3;
-
+		float jump;
 
 	};
 }

@@ -1,6 +1,7 @@
 #include "TennisAttack.h"
 #include "BodyComponent.h"
 #include "BoxCollider.h"
+#include "TimerComponent.h"
 #include "VectorDebugComponent.h"
 
 namespace GameComponents
@@ -38,8 +39,8 @@ namespace GameComponents
 		GameComponents::SpriteComponent *sprite = reinterpret_cast<GameComponents::SpriteComponent*>(getComposition()->getComponent(GameComponents::SPRITE));
 
 		glm::vec2 direction = glm::vec2(100.0, 100.0);
-		if (sprite->revertX) direction = glm::vec2((-80 + centerX) - centerX, (-40 + centerY) - centerY);
-		else direction = glm::vec2((80 + centerX) - centerX, (-40 + centerY) - centerY);
+		if (sprite->revertX) direction = glm::vec2((-100 + centerX) - centerX, (centerY)-centerY);
+		else direction = glm::vec2((100 + centerX) - centerX, (centerY)-centerY);
 
 		createProjectile(getComposition(), GameObjects::TENNIS_BALL1, 1.0f, glm::normalize(direction), "./assets/sprite/tennisball.png");
 		this->composition->sendMessage(new GameMessage::Message(GameMessage::BASEBALL_SHOOT));
@@ -52,8 +53,8 @@ namespace GameComponents
 		GameComponents::SpriteComponent *sprite = reinterpret_cast<GameComponents::SpriteComponent*>(getComposition()->getComponent(GameComponents::SPRITE));
 
 		glm::vec2 direction = glm::vec2(100.0, 100.0);
-		if (sprite->revertX) direction = glm::vec2((-100 + centerX) - centerX, (centerY) - centerY);
-		else direction = glm::vec2((100 + centerX) - centerX, (centerY) - centerY);
+		if (sprite->revertX) direction = glm::vec2((-80 + centerX) - centerX, (-40 + centerY) - centerY);
+		else direction = glm::vec2((80 + centerX) - centerX, (-40 + centerY) - centerY);
 
 		createProjectile(getComposition(), GameObjects::TENNIS_BALL2, 1.0f, glm::normalize(direction), "./assets/sprite/tennisball.png");
 		this->composition->sendMessage(new GameMessage::Message(GameMessage::BASEBALL_SHOOT));
@@ -104,7 +105,7 @@ namespace GameComponents
 			projectile->setProjectileType(type);
 			switch (type)
 			{
-			case GameObjects::TENNIS_BALL1:
+			case GameObjects::TENNIS_BALL2:
 				projectile->setBounce(0.3f);
 				projectile->setMass(25.0f);
 				projectile->setHeight(int(30 * 0.50f));
@@ -114,8 +115,7 @@ namespace GameComponents
 				projectile->setX(shooter->getX() + (shooter->getWidth() / 2));
 				projectile->setY(shooter->getY() + (shooter->getHeight() / 2) - 10);
 				break;
-			case GameObjects::TENNIS_BALL2:
-				projectile->setBounce(0.3f);
+			case GameObjects::TENNIS_BALL1:
 				projectile->setBounce(0.3f);
 				projectile->setMass(25.0f);
 				projectile->setHeight(int(30 * 0.50f));
@@ -126,7 +126,6 @@ namespace GameComponents
 				projectile->setY(shooter->getY() + (shooter->getHeight() / 2) - 10);
 				break;
 			case GameObjects::TENNIS_BREAK:
-				projectile->setBounce(0.3f);
 				projectile->setBounce(0.3f);
 				projectile->setMass(25.0f);
 				projectile->setHeight(int(30 * 0.50f));
@@ -144,10 +143,29 @@ namespace GameComponents
 		projectile->Init();
 		assert(body != NULL);
 		body->Init(base_force, direction);
-		if (type == GameObjects::TENNIS_BALL2)
+		if (type == GameObjects::TENNIS_BALL1)
+		{
+			timer = new GameComponents::TimerComponent(projectile);
+			timer->setTimerType(type);
+			timer->setTime(450);
+			timer->startTimer();
 			body->setGravity(1.0f);
+		}
+		if (type == GameObjects::TENNIS_BALL2)
+		{
+			timer = new GameComponents::TimerComponent(projectile);
+			timer->setTimerType(type);
+			timer->setTime(450);
+			timer->startTimer();
+		}
 		if (type == GameObjects::TENNIS_BREAK)
+		{
+			timer = new GameComponents::TimerComponent(projectile);
+			timer->setTimerType(type);
+			timer->setTime(550);
+			timer->startTimer();
 			body->setGravity(0.0f);
+		}
 		GameSystems::ObjectFactory::getInstance().createProjectile(projectile);
 		return projectile;
 	}

@@ -20,6 +20,7 @@
 #include "TennisAttack.h"
 #include "EditorManager.h"
 #include "LifeBarComponent.h"
+#include "AutoPlayComponent.h"
 
 namespace GameSystems {
 	ObjectFactory::ObjectFactory()
@@ -58,6 +59,7 @@ namespace GameSystems {
 			else if (std::string(it->key) == "type") ret->setType((GameObjects::objectType)(int)it->value.toNumber());
 			else if (std::string(it->key) == "sprite") new GameComponents::SpriteComponent(ret, it->value.toString());
 			else if (std::string(it->key) == "fps") new GameComponents::TextComponent(ret);
+			else if (std::string(it->key) == "autoplay") new GameComponents::AutoPlayComponent(ret);
 			else if (std::string(it->key) == "body") new GameComponents::BodyComponent(ret);
 			else if (std::string(it->key) == "boxcollider") new GameComponents::BoxCollider(ret);
 			else if (std::string(it->key) == "circlecollider") new GameComponents::CircleCollider(ret);
@@ -426,14 +428,14 @@ namespace GameSystems {
 		this->nbPlayerReady += nb;
 		if (this->mapPlayersController.size() > 1 && this->nbPlayerReady == this->mapPlayersController.size())
 			this->LoadMenuFileAsCurrent("./config/menus/choose_level_menu.json");
-		/*else if (this->mapPlayersController.size() == 1 && this->nbPlayerReady == this->mapPlayersController.size()) {
+		else if (this->mapPlayersController.size() == 1 && this->nbPlayerReady == this->mapPlayersController.size()) {
 			this->orderPlayerController.push_back(6);
 			this->mapPlayersController[6] = "./config/players/player1.json";
 			this->LoadMenuFileAsCurrent("./config/menus/choose_level_menu.json");
 			this->orderPlayerController.push_back(7);
 			this->mapPlayersController[7] = "./config/players/player1.json";
 			this->LoadMenuFileAsCurrent("./config/menus/choose_level_menu.json");
-		}*/
+		}
 	}
 
 	void ObjectFactory::changeSelectedButtonMenu(int idButton) {

@@ -27,7 +27,8 @@ namespace GameComponents {
 		ELEMENT_SELECTOR,
 		CASE_SELECTOR,
 		EDITOR_KEYBOARD,
-		LIFE_BAR
+		LIFE_BAR,
+		AUTO_PLAY
 	};
 
 	class BaseComponent
@@ -39,8 +40,12 @@ namespace GameComponents {
 		virtual void Update(double) = 0;
 		virtual void Init() = 0;
 		virtual void sendMessage(GameMessage::Message*) = 0;
+
+		void SetActive(bool);
+		bool IsComponentActive();
 		GameObjects::BaseGameObject *getComposition(void) const;
 	protected:
+		bool isActive;
 		GameObjects::BaseGameObject *composition;
 	};
 }

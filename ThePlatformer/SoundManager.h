@@ -17,6 +17,8 @@ namespace GameTools
 		CSound			*getSound(std::string const &);
 		
 		void			stopAllExceptAmbiance(std::string const, std::string const);
+		void			muteAll();
+		void			unmuteAll();
 
 	private:
 		CSoundManager();
