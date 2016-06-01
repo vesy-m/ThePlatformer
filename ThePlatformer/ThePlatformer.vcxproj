@@ -291,6 +291,11 @@ copy /Y "$(ProjectDir)\lib\lib-x64\devil-1.7.8\bin\*" "$(OutDir)\"</Command>
   <ItemGroup>
     <ResourceCompile Include="ThePlatformer.rc" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\InstallerSample\GAMEDIRECTORY\Icon.ico" />
+    <Image Include="..\installersample\gamedirectory\icon2.ico" />
+    <Image Include="..\InstallerSample\GAMEDIRECTORY\Uninstall.ico" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
