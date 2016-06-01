@@ -54,7 +54,7 @@ namespace GameComponents {
 			}
 		}
 		if (this->actionName == "switchSound") {
-			if (GameSystems::WindowInputSytem::fullscreen) {
+			if (!GameSystems::AudioSystem::_muteAll) {
 				GameSystems::ObjectFactory::getInstance().changeGameObjectSpriteComponent(this->composition, "./assets/sprite/menu/SoundButtonOn.png");
 			}
 			else {
@@ -62,7 +62,7 @@ namespace GameComponents {
 			}
 		}
 		if (this->actionName == "switchMusic") {
-			if (GameSystems::WindowInputSytem::fullscreen) {
+			if (!GameSystems::AudioSystem::_muteAmbiance) {
 				GameSystems::ObjectFactory::getInstance().changeGameObjectSpriteComponent(this->composition, "./assets/sprite/menu/MusicButtonOn.png");
 			}
 			else {
@@ -374,8 +374,8 @@ namespace GameComponents {
 	}
 
 	void ButtonComponent::switchSound() {
-		GameSystems::WindowInputSytem::fullscreen = !GameSystems::WindowInputSytem::fullscreen;
-		if (GameSystems::WindowInputSytem::fullscreen) {
+		GameSystems::AudioSystem::_muteAll = !GameSystems::AudioSystem::_muteAll;
+		if (!GameSystems::AudioSystem::_muteAll) {
 			GameSystems::ObjectFactory::getInstance().changeGameObjectSpriteComponent(this->composition, "./assets/sprite/menu/SoundButtonOn.png");
 		}
 		else {
@@ -384,8 +384,8 @@ namespace GameComponents {
 	}
 
 	void ButtonComponent::switchMusic() {
-		GameSystems::WindowInputSytem::fullscreen = !GameSystems::WindowInputSytem::fullscreen;
-		if (GameSystems::WindowInputSytem::fullscreen) {
+		GameSystems::AudioSystem::_muteAmbiance = !GameSystems::AudioSystem::_muteAmbiance;
+		if (!GameSystems::AudioSystem::_muteAmbiance) {
 			GameSystems::ObjectFactory::getInstance().changeGameObjectSpriteComponent(this->composition, "./assets/sprite/menu/MusicButtonOn.png");
 		}
 		else {
