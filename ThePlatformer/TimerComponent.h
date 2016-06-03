@@ -29,6 +29,7 @@ namespace GameComponents {
 		void							blockInvincibleTime();
 		void							dashDamageTimeBehaviour();
 		void							stopDash();
+		void							stopPowerup();
 	private:
 		GameObjects::ProjectileType		timerType;
 		double							time;

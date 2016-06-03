@@ -116,10 +116,10 @@ namespace GameComponents {
 			std::list<GameObjects::BaseGameObject*> listObjects = GameSystems::ObjectFactory::getInstance().getCurrentObjects();
 			for each(GameObjects::BaseGameObject* object in listObjects)
 			{
-				if (this->composition->getType() == GameObjects::PLAYER) {
+				if (this->composition->getType() == GameObjects::PLAYER || this->composition->getType() == GameObjects::PLAYER_BLOCK) {
 					if (object->getType() == GameObjects::PROJECTILE || object->getType() == GameObjects::PROJECTILE_BREAK/* && object->getName().compare(this->composition->getName()) == 0*/)
 						continue;
-					else if (object->getType() == GameObjects::PLAYER)
+					else if (object->getType() == GameObjects::PLAYER || object->getType() == GameObjects::PLAYER_BLOCK)
 						continue;
 				}
 
@@ -145,15 +145,8 @@ namespace GameComponents {
 						{
 							if (typeA == GameObjects::PROJECTILE)
 								std::cout << "PROJECTILE COLLISION" << std::endl;
-							// Destroy projectiles on collision
 							if (typeB == GameObjects::PROJECTILE)
 								otherObject->composition->destroy(true);
-							//else if (typeB == GameObjects::PROJECTILE_BREAK && typeA != GameObjects::PLAYER)
-							//{
-							//	this->composition->destroy(true);
-							//	if (typeA != GameObjects::PLAYER_ATTACK)
-							//		otherObject->composition->destroy(true);
-							//}
 							else if (typeA == GameObjects::PROJECTILE)
 								this->composition->destroy(true);
 							else if (typeA == GameObjects::PROJECTILE_BREAK && typeB != GameObjects::PLAYER)
@@ -177,8 +170,9 @@ namespace GameComponents {
 									 (typeA == GameObjects::PLAYER_ATTACK && typeB == GameObjects::PROJECTILE_BREAK))
 							{
 								this->sendMessage(new GameMessage::DamageMessage(GameMessage::DamageMessage::PROJECTILE, otherObject->composition->getPower()));
-								if (typeB == GameObjects::PROJECTILE_BREAK)
+								if (typeB == GameObjects::PROJECTILE || typeB == GameObjects::PROJECTILE_BREAK)
 									otherObject->composition->destroy(true);
+								continue;
 							}
 							else if (typeA == GameObjects::PLAYER_ATTACK && typeB == GameObjects::PLAYER)
 							{

@@ -63,7 +63,21 @@ namespace GameComponents {
 
 	void BoxerAttack::Attack3()
 	{
+		glm::vec2 direction = glm::vec2(0.0, 0.0);
 
+		GameComponents::TimerComponent *timer = reinterpret_cast<GameComponents::TimerComponent*>(getComposition()->getComponent(GameComponents::MECHANIC));
+		if (!timer)
+			timer = new GameComponents::TimerComponent(this->composition);
+		timer->Init();
+		timer->setTimerType(GameObjects::BOXER_POWERUP);
+		timer->setTime(4000);
+		timer->startTimer();
+
+		this->composition->setPowerupDefense(2);
+		this->composition->setPowerupDamage(2);
+
+		createProjectile(getComposition(), GameObjects::BOXER_POWERUP_AURA, 0.0f, glm::normalize(direction), "./config/sprite_sheets/desc-aura.json");
+		//this->composition->sendMessage(new GameMessage::Message(GameMessage::PUNCH_RIGHT));
 	}
 
 	GameObjects::BaseGameObject * BoxerAttack::createProjectile(GameObjects::BaseGameObject *shooter, GameObjects::ProjectileType const type, float base_force, glm::vec2 direction, std::string spriteStr)
@@ -81,11 +95,12 @@ namespace GameComponents {
 			assert(projectile != NULL);
 			if (!spriteStr.empty())
 				sprite = new GameComponents::SpriteComponent(projectile, spriteStr);
-			new GameComponents::BoxCollider(projectile);
+			if (type != GameObjects::BOXER_POWERUP_AURA)
+				new GameComponents::BoxCollider(projectile);
 			new GameComponents::VectorDebugComponent(projectile, "square");
 			body = new GameComponents::BodyComponent(projectile);
 
-			if (direction.x <= 0 && sprite)
+			if (direction.x < 0 && sprite)
 				sprite->revertX = true;
 			projectile->setName(shooter->getName());
 			projectile->setDepth(0);
@@ -99,7 +114,7 @@ namespace GameComponents {
 				projectile->setHeight(int(30 * 0.50f));
 				projectile->setWidth(int(60 * 0.50f));
 				projectile->setScale(0.0f);
-				projectile->setPower(15);
+				projectile->setPower(20 * this->composition->getPowerupDamage());
 				if (direction.x <= 0)
 					projectile->setX(shooter->getX() - (shooter->getWidth() / 2));
 				else if (direction.x > 0)
@@ -112,16 +127,23 @@ namespace GameComponents {
 				projectile->setHeight(int(40 * 0.50f));
 				projectile->setWidth(int(40 * 0.50f));
 				projectile->setScale(0.25f);
-				projectile->setPower(15);
+				projectile->setPower(10 * this->composition->getPowerupDamage());
 				if (direction.x <= 0)
 					projectile->setX(shooter->getX() - (shooter->getWidth() / 2));
 				else if (direction.x > 0)
 					projectile->setX(shooter->getX() + (shooter->getWidth() / 2));
 				projectile->setY(shooter->getY() + (shooter->getHeight() / 2) - 10);
 				break;
-			//case GameObjects::TENNIS_BREAK:
-
-			//	break;
+			case GameObjects::BOXER_POWERUP_AURA:
+				projectile->setBounce(0.0f);
+				projectile->setMass(25.0f);
+				projectile->setHeight(int(50));
+				projectile->setWidth(int(30));
+				projectile->setScale(1.0f);
+				projectile->setPower(10 * this->composition->getPowerupDamage());
+				projectile->setX(shooter->getX());
+				projectile->setY(shooter->getY());
+				break;
 			default:
 				break;
 			}
@@ -146,10 +168,15 @@ namespace GameComponents {
 			timer->startTimer();
 			body->setGravity(0.0f);
 		}
-		//if (type == GameObjects::TENNIS_BREAK)
-		//{
-
-		//}
+		if (type == GameObjects::BOXER_POWERUP_AURA)
+		{
+			timer = new GameComponents::TimerComponent(projectile);
+			timer->setTimerType(type);
+			timer->setTime(4000);
+			timer->startTimer();
+			body->setGravity(0.0f);
+			body->setParentObject(this->getComposition());
+		}
 		GameSystems::ObjectFactory::getInstance().createProjectile(projectile);
 		return projectile;
 	}

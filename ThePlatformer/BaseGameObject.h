@@ -54,7 +54,8 @@ namespace GameObjects {
 		DASH_DAMAGE,
 		PUNCH,
 		SPECIAL_PUNCH,
-		BOXER_STANCE
+		BOXER_POWERUP,
+		BOXER_POWERUP_AURA
 	};
 
 	class BaseGameObject
@@ -124,6 +125,11 @@ namespace GameObjects {
 		float getAttack3Value(void);
 		float getJumpValue(void);
 
+		int getPowerupDamage(void);
+		int getPowerupDefense(void);
+		void setPowerupDamage(int);
+		void setPowerupDefense(int);
+
 		void setAttack1Value(float);
 		void setAttack2Value(float);
 		void setAttack3Value(float);
@@ -162,6 +168,9 @@ namespace GameObjects {
 		bool invicible;
 		int life;
 		int power = 0;
+
+		int powerupDamage;
+		int powerupDefense;
 
 		float attack_1_value;
 		float attack_2_value;

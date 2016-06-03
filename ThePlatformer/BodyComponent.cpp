@@ -40,6 +40,15 @@ namespace GameComponents {
 				this->getComposition()->setX(parentPosX + (this->parentObject->getWidth() / 2) + 5);
 			this->getComposition()->setY(parentPosY + (this->parentObject->getHeight() / 2) - 15);
 		}
+		else if (this->composition->getType() == GameObjects::PROJECTILE && this->composition->getProjectileType() == GameObjects::BOXER_POWERUP_AURA) {
+			if (!this->parentObject)
+				return;
+			int parentPosX = parentObject->getX();
+			int parentPosY = parentObject->getY();
+
+			this->getComposition()->setX(parentPosX);
+			this->getComposition()->setY(parentPosY);
+		}
 		else
 			Integrate((float)(dt / 100));
 	}
