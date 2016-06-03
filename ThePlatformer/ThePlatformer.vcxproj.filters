@@ -441,5 +441,20 @@
     <Image Include="..\InstallerSample\GAMEDIRECTORY\Uninstall.ico">
       <Filter>Fichiers de ressources</Filter>
     </Image>
+    <Image Include="InstallerSample\GAMEDIRECTORY\Icon.ico">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="InstallerSample\GAMEDIRECTORY\Uninstall.ico">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="GAMEDIRECTORY\Icon.ico">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="gamedirectory\icon3.ico">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="icon1.ico">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
   </ItemGroup>
 </Project>
