@@ -12,7 +12,7 @@ namespace GameComponents {
 		this->attack_1 = 0;
 		this->attack_2 = 0;
 		this->attack_3 = 0;
-		srand(time(NULL));
+		srand((unsigned int)time(NULL));
 	}
 
 	AutoPlayComponent::~AutoPlayComponent()

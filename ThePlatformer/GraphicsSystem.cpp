@@ -75,7 +75,7 @@ namespace GameSystems {
 		if (ObjectFactory::getInstance().listDotRound.size() > 0) {
 			xPart = (Camera::getInstance().cameraEndX - Camera::getInstance().cameraStartX) / (ObjectFactory::getInstance().listDotRound.size());
 		}
-		for (int i = 0; i < ObjectFactory::getInstance().listDotRound.size(); i = i + 2)
+		for (size_t i = 0; i < ObjectFactory::getInstance().listDotRound.size(); i = i + 2)
 		{
 			int XCoord = Camera::getInstance().cameraStartX + (xPart * (i + 1) - 50);
 			int YCoord = Camera::getInstance().cameraStartY + 20;

@@ -117,7 +117,7 @@ namespace GameComponents
 				projectile->setMass(25.0f);
 				projectile->setHeight(int(30 * 0.50f));
 				projectile->setWidth(int(30 * 0.50f));
-				projectile->setScale(0.035);
+				projectile->setScale(0.035f);
 				projectile->setPower(25);
 				break;
 			case GameObjects::DASH:

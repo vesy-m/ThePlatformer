@@ -175,8 +175,8 @@ namespace GameComponents {
 			lastCollisionVelocity = this->velocity;
 			this->velocity = collision->velocity;
 			this->position += collision->position;
-			this->composition->setX(round(position.x));
-			this->composition->setY(round(position.y));
+			this->composition->setX((int)round(position.x));
+			this->composition->setY((int)round(position.y));
 			float res = (forces.y * (1.0f / mass)) + gravity.y;
 			if (forces.y > 0 && collision->normal.y < 0.0f)
 			{
@@ -227,8 +227,8 @@ namespace GameComponents {
 		if (position.y >= 1000.0f)
 			this->composition->destroy(true);
 
-		composition->setX(round(position.x));
-		composition->setY(round(position.y));
+		composition->setX((int)round(position.x));
+		composition->setY((int)round(position.y));
 
 		GameMessage::VectorMessage *vec = new GameMessage::VectorMessage(GameMessage::VELOCITY_VECTOR, velocity);
 		this->composition->sendMessage((GameMessage::Message*)vec);
