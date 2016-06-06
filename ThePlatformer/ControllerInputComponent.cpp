@@ -89,7 +89,7 @@ namespace GameComponents {
 
 	bool ControllerInputComponent::DetectAxisInput(sf::Event event, int button)
 	{
-		if (event.joystickMove.axis == sf::Joystick::X && button >= 50 && button <= 53) return true;
+		if ((event.joystickMove.axis == sf::Joystick::X || event.joystickMove.axis == sf::Joystick::PovX) && button >= 50 && button <= 53) return true;
 		else if (event.joystickMove.axis == sf::Joystick::U) {
 			aimAxisX = event.joystickMove.position;
 			return false;

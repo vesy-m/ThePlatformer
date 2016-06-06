@@ -131,7 +131,7 @@ namespace GameComponents {
 		case CHEAT_CODE_TYPE::LAUNCH_AUTO_PLAY:
 			autoPlay = reinterpret_cast<GameComponents::AutoPlayComponent*>(getComposition()->getComponent(GameComponents::AUTO_PLAY));
 			input = reinterpret_cast<GameComponents::InputComponent*>(getComposition()->getComponent(GameComponents::WINDOW));
-			autoPlay->SetActive(true);
+			//autoPlay->SetActive(true);
 			input->SetActive(false);
 		default:
 			break;

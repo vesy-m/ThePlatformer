@@ -14,7 +14,8 @@
   "type": 1,
   "fire_ball" : "boxe",
   "sfx": "./config/sound/Desc-SFX.json",
-  "attack_1": 150,
+  "attack_1": 160,
   "attack_2": 400,
-  "attack_3": 2000
+  "attack_3": 8000,
+  "autoplay": true  
 }

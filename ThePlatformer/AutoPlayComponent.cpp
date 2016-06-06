@@ -48,7 +48,7 @@ namespace GameComponents {
 		float distance = glm::length(vectorNearPlayer);
 
 
-		if (distance >= 300) {
+		if (distance >= 250) {
 			if ((currentPosition.x < nearPlayerPosition.x))
 				message = GameMessage::RIGHT;
 			else if ((currentPosition.x > nearPlayerPosition.x))
