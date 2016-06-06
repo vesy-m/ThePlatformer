@@ -338,6 +338,7 @@ namespace GameComponents {
 	void ButtonComponent::restartLevel()
 	{
 		std::cout << "resume" << std::endl;
+		GameSystems::ObjectFactory::getInstance().clearRound();
 		GameSystems::ObjectFactory::getInstance().LoadLevelFileAsCurrent(GameSystems::ObjectFactory::getInstance().currentLevelFileName);
 	}
 

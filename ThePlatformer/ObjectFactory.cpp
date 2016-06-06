@@ -33,6 +33,7 @@ namespace GameSystems {
 		this->nbPlayerReady = 0;
 		this->countObjects = 0;
 		this->waitAMoment = false;
+		clearRound();
 	}
 
 	ObjectFactory::~ObjectFactory()
@@ -313,6 +314,30 @@ namespace GameSystems {
 			newPlayer->setX(add * i);
 			this->currentLevel.putObjectDepthOrdered(newPlayer);
 			listPlayers.push_back(newPlayer);
+			int XCoord = add * i - 50;
+			for (int round = 0; round < 2; round++) {
+				GameObjects::BaseGameObject* dotRound = new GameObjects::BaseGameObject();
+				std::string pathFile;
+				if (round == 0 && roundWin[i - 1] >= 1) {
+					pathFile += "./assets/sprite/dotRoundFull";
+				}
+				else if (round == 1 && roundWin[i - 1] == 2) {
+					pathFile += "./assets/sprite/dotRoundFull";
+				}
+				else {
+					pathFile += "./assets/sprite/dotRoundEmpty";
+				}
+				pathFile += std::to_string(i);
+				pathFile += ".png";
+				new GameComponents::SpriteComponent(dotRound, pathFile);
+				dotRound->setY(-50);
+				dotRound->setX(XCoord);
+				dotRound->setDepth(0);
+				dotRound->setScale(0.1f);
+				this->currentLevel.putObjectDepthOrdered(dotRound);
+				listDotRound.push_back(dotRound);
+				XCoord += 75;
+			}
 			i++;
 		}
 	}
@@ -330,6 +355,14 @@ namespace GameSystems {
 			|| this->currentMenu.fileName == "./config/menus/player_win_menu_3.json") {
 			waitAMoment = true;
 		}
+	}
+
+	void ObjectFactory::clearRound() {
+		roundWin[0] = 0;
+		roundWin[1] = 0;
+		roundWin[2] = 0;
+		roundWin[3] = 0;
+		listDotRound.clear();
 	}
 
 	void ObjectFactory::LoadLevelEditor() {
@@ -431,9 +464,6 @@ namespace GameSystems {
 		if (this->mapPlayersController.size() > 1 && this->nbPlayerReady == this->mapPlayersController.size())
 			this->LoadMenuFileAsCurrent("./config/menus/choose_level_menu.json");
 		else if (this->mapPlayersController.size() == 1 && this->nbPlayerReady == this->mapPlayersController.size()) {
-			this->orderPlayerController.push_back(6);
-			this->mapPlayersController[6] = "./config/players/player1.json";
-			this->LoadMenuFileAsCurrent("./config/menus/choose_level_menu.json");
 			this->orderPlayerController.push_back(7);
 			this->mapPlayersController[7] = "./config/players/player1.json";
 			this->LoadMenuFileAsCurrent("./config/menus/choose_level_menu.json");
@@ -469,6 +499,7 @@ namespace GameSystems {
 		this->orderPlayerController.clear();
 		this->listPlayers.clear();
 		this->nbPlayerReady = 0;
+		clearRound();
 	}
 
 	void ObjectFactory::returnPrevMenuOrResumeLevel() {
@@ -493,6 +524,16 @@ namespace GameSystems {
 
 		if (winPlayer == nullptr)
 			return;
+
+		int idWinner = getPlayerId(winPlayer);
+		roundWin[idWinner] ++;
+
+		if (roundWin[idWinner] < 2) {
+			listPlayers.clear();
+			listDotRound.clear();
+			LoadLevelFileAsCurrent(currentLevelFileName);
+			return;
+		}
 		
 		this->idWinPlayer = this->getPlayerId(winPlayer);
 		listPlayers.clear();
@@ -515,6 +556,7 @@ namespace GameSystems {
 			GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/player_win_menu_4.json");
 			GameSystems::AudioSystem::_menuVictory = true;
 		}
+		clearRound();
 	}
 
 	int			ObjectFactory::getPlayerId(GameObjects::BaseGameObject * player) {

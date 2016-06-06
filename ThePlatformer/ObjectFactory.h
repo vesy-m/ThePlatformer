@@ -38,6 +38,7 @@ namespace GameSystems {
 		GameEngine::Core::Level &getCurrentLevel();
 		void LoadLevelFileAsCurrent(const std::string&);
 		void LoadMenuFileAsCurrent(const std::string&);
+		void clearRound();
 		void LoadLevelEditor();
 		void LoadLevelEditorWithLevel(std::string levelPath);
 		void cleanupObjects(void);
@@ -63,6 +64,8 @@ namespace GameSystems {
 		GameObjects::BaseGameObject *isPLayersAlive();
 		int idWinPlayer;
 		bool waitAMoment;
+		int roundWin[4];
+		std::vector<GameObjects::BaseGameObject *> listDotRound;
 		//----
 	private:
 		ObjectFactory();
