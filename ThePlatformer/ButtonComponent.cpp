@@ -140,6 +140,14 @@ namespace GameComponents {
 		float width = (float)this->composition->getWidth();
 		if (this->buttonState == ButtonState::SELECTED)
 			drawSquare(x, y, width, height);
+		if (this->actionName == "switchMusic") {
+			if (!GameSystems::AudioSystem::_muteAmbiance) {
+				GameSystems::ObjectFactory::getInstance().changeGameObjectSpriteComponent(this->composition, "./assets/sprite/menu/MusicButtonOn.png");
+			}
+			else {
+				GameSystems::ObjectFactory::getInstance().changeGameObjectSpriteComponent(this->composition, "./assets/sprite/menu/MusicButtonOff.png");
+			}
+		}
 	}
 
 	void ButtonComponent::drawSquare(GLfloat x, GLfloat y, GLfloat width, GLfloat height) {

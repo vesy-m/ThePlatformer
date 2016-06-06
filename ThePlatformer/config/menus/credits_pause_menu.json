@@ -5,7 +5,7 @@
 		"sprite" : "./assets/sprite/menu/credits.png",
 	},
 	"button" : {
-		"x" : 1000,
+		"x" : 540,
 		"y" : 600,
 		"sprite" : "./assets/sprite/menu/returnButton.png",
 		"menu" : "./config/menus/pause_menu.json",
