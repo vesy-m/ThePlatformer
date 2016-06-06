@@ -339,6 +339,7 @@ namespace GameComponents {
 	{
 		std::cout << "resume" << std::endl;
 		GameSystems::ObjectFactory::getInstance().clearRound();
+		GameSystems::ObjectFactory::getInstance().listPlayers.clear();
 		GameSystems::ObjectFactory::getInstance().LoadLevelFileAsCurrent(GameSystems::ObjectFactory::getInstance().currentLevelFileName);
 	}
 
