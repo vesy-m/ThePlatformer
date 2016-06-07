@@ -34,6 +34,7 @@ namespace GameSystems {
 		this->countObjects = 0;
 		this->waitAMoment = false;
 		clearRound();
+		this->to_wait = 0;
 	}
 
 	ObjectFactory::~ObjectFactory()
@@ -195,6 +196,14 @@ namespace GameSystems {
 	void ObjectFactory::buildLevel(GameTools::JsonValue &value) {
 		assert(value.getTag() == GameTools::JSON_OBJECT);
 		GameEngine::Core::Level newLevel = GameEngine::Core::Level();
+
+		auto object = new GameObjects::BaseGameObject();
+		object->setName("readyimg");
+		object->setX((1280 - 500) / 2);
+		object->setY((768 - 200) / 2);
+		new GameComponents::SpriteComponent(object, "./assets/sprite/ready.png");
+		newLevel.putObjectDepthOrdered(object);
+
 		for (auto i : value) {
 			if (std::string(i->key) == "objects") {
 				auto arr = i->value;
@@ -206,6 +215,7 @@ namespace GameSystems {
 			}
 		}
 		currentLevel = newLevel;
+		this->to_wait = 3000;
 	}
 
 	void ObjectFactory::buildMenu(GameTools::JsonValue &value, std::string &currentMenuFileName) {
@@ -307,8 +317,10 @@ namespace GameSystems {
 			std::string value = this->mapPlayersController[idController];
 			GameSystems::JSONParser fileParser(value);
 			GameObjects::BaseGameObject* newPlayer = parseObject(fileParser.getJSONValue());
-			if (idController == 8) new GameComponents::KeyboardInputComponent(newPlayer, "./config/controllers/input_keyboard1.json");
-			else new GameComponents::ControllerInputComponent(newPlayer, "./config/controllers/input_controller1.json", idController);
+			GameComponents::InputComponent *component = nullptr;
+			if (idController == 8) component = new GameComponents::KeyboardInputComponent(newPlayer, "./config/controllers/input_keyboard1.json");
+			else component = new GameComponents::ControllerInputComponent(newPlayer, "./config/controllers/input_controller1.json", idController);
+			component->SetActive(false);
 			new GameComponents::LifeBarComponent(newPlayer, i - 1);
 			newPlayer->setY(100);
 			newPlayer->setX(add * i);
@@ -340,6 +352,7 @@ namespace GameSystems {
 			}
 			i++;
 		}
+		
 	}
 
 	void ObjectFactory::LoadMenuFileAsCurrent(const std::string &filename) {

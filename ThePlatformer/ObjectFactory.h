@@ -68,6 +68,7 @@ namespace GameSystems {
 		std::vector<GameObjects::BaseGameObject *> listDotRound;
 		std::vector<GameObjects::BaseGameObject*> listPlayers;
 		//----
+		int to_wait;
 	private:
 		ObjectFactory();
 		ObjectFactory(ObjectFactory const&) = delete;
