@@ -63,6 +63,7 @@ namespace GameSystems {
 		GameObjects::BaseGameObject *isPLayersAlive();
 		int idWinPlayer;
 		bool waitAMoment;
+		int to_wait;
 		//----
 	private:
 		ObjectFactory();
@@ -84,6 +85,5 @@ namespace GameSystems {
 		int countObjects;
 		std::map<int, std::string> mapPlayersController;
 		std::vector<int> orderPlayerController;
-
 	};
 }

@@ -33,6 +33,7 @@ namespace GameSystems {
 		this->nbPlayerReady = 0;
 		this->countObjects = 0;
 		this->waitAMoment = false;
+		this->to_wait = 0;
 	}
 
 	ObjectFactory::~ObjectFactory()
@@ -64,8 +65,14 @@ namespace GameSystems {
 			else if (std::string(it->key) == "body") new GameComponents::BodyComponent(ret);
 			else if (std::string(it->key) == "boxcollider") new GameComponents::BoxCollider(ret);
 			else if (std::string(it->key) == "circlecollider") new GameComponents::CircleCollider(ret);
-			else if (std::string(it->key) == "controller") new GameComponents::ControllerInputComponent(ret, it->value.toString());
-			else if (std::string(it->key) == "keyboard") new GameComponents::KeyboardInputComponent(ret, it->value.toString());
+			else if (std::string(it->key) == "controller") {
+				auto component = new GameComponents::ControllerInputComponent(ret, it->value.toString());
+				component->SetActive(false);
+			}
+			else if (std::string(it->key) == "keyboard") {
+				auto component = new GameComponents::KeyboardInputComponent(ret, it->value.toString());
+				component->SetActive(false);
+			}
 			else if (std::string(it->key) == "vector") new GameComponents::VectorDebugComponent(ret, it->value.toString());
 			else if (std::string(it->key) == "fire_ball" && std::string(it->value.toString()) == "baseball") new GameComponents::BaseballAttack(ret);
 			else if (std::string(it->key) == "fire_ball" && std::string(it->value.toString()) == "rugby") new GameComponents::RugbyManAttack(ret);
@@ -194,16 +201,26 @@ namespace GameSystems {
 	void ObjectFactory::buildLevel(GameTools::JsonValue &value) {
 		assert(value.getTag() == GameTools::JSON_OBJECT);
 		GameEngine::Core::Level newLevel = GameEngine::Core::Level();
+
+		auto obj = new GameObjects::BaseGameObject();
+		obj->setName("readyimg");
+		new GameComponents::SpriteComponent(obj, "./assets/sprite/ready.png");
+		newLevel.putObjectDepthOrdered(obj);
+
+		obj->setX((1280 - 500) / 2);
+		obj->setY((720 - 200) / 2);
+
 		for (auto i : value) {
 			if (std::string(i->key) == "objects") {
 				auto arr = i->value;
 				assert(arr.getTag() == GameTools::JSON_ARRAY);
 				for (auto j : arr) {
-					auto obj = parseObject(j->value);
+					obj = parseObject(j->value);
 					if (obj != NULL) newLevel.putObjectDepthOrdered(obj);
 				}
 			}
 		}
+
 		currentLevel = newLevel;
 	}
 
@@ -306,15 +323,18 @@ namespace GameSystems {
 			std::string value = this->mapPlayersController[idController];
 			GameSystems::JSONParser fileParser(value);
 			GameObjects::BaseGameObject* newPlayer = parseObject(fileParser.getJSONValue());
-			if (idController == 8) new GameComponents::KeyboardInputComponent(newPlayer, "./config/controllers/input_keyboard1.json");
-			else new GameComponents::ControllerInputComponent(newPlayer, "./config/controllers/input_controller1.json", idController);
+			GameComponents::InputComponent *component = nullptr;
+			if (idController == 8) component = new GameComponents::KeyboardInputComponent(newPlayer, "./config/controllers/input_keyboard1.json");
+			else component = new GameComponents::ControllerInputComponent(newPlayer, "./config/controllers/input_controller1.json", idController);
 			new GameComponents::LifeBarComponent(newPlayer, i - 1);
+			component->SetActive(false);
 			newPlayer->setY(100);
 			newPlayer->setX(add * i);
 			this->currentLevel.putObjectDepthOrdered(newPlayer);
 			listPlayers.push_back(newPlayer);
 			i++;
 		}
+		this->to_wait = 2000;
 	}
 
 	void ObjectFactory::LoadMenuFileAsCurrent(const std::string &filename) {

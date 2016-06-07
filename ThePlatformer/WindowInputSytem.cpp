@@ -16,6 +16,26 @@ namespace GameSystems {
 	
 	int WindowInputSytem::Update(double dt, std::list<GameObjects::BaseGameObject*>& listObjects)
 	{
+		if (ObjectFactory::getInstance().to_wait > 0) {
+			ObjectFactory::getInstance().to_wait -= dt;
+			if (ObjectFactory::getInstance().to_wait < 0) {
+				ObjectFactory::getInstance().to_wait = 0;
+				for (auto it = listObjects.begin(); it != listObjects.end(); ++it) {
+					if ((*it)->getName() == "readyimg") {
+						auto component = (*it)->getComponent(GameComponents::SPRITE);
+						delete component;
+						(*it)->attachComponent((GameComponents::SpriteComponent *)nullptr);
+					}
+					else {
+						auto component = dynamic_cast<GameComponents::InputComponent*> ((*it)->getComponent(GameComponents::WINDOW));
+						if (component != nullptr) {
+							component->SetActive(true);
+						}
+					}
+				}
+			}
+		}
+
 		sf::Event event;
 		bool changeSize = false;
 
@@ -71,9 +91,9 @@ namespace GameSystems {
 			for each (GameObjects::BaseGameObject* object in listObjects)
 			{
 				GameComponents::InputComponent *component = reinterpret_cast<GameComponents::InputComponent*>(object->getComponent(GameComponents::COMPONENT_TYPE::WINDOW));
-				if (component) component->UpdateInputState(event, dt);
+				if (component && component->IsComponentActive()) component->UpdateInputState(event, dt);
 				component = reinterpret_cast<GameComponents::InputComponent*>(object->getComponent(GameComponents::COMPONENT_TYPE::EDITOR_KEYBOARD));
-				if (component) component->UpdateInputState(event, dt);
+				if (component && component->IsComponentActive()) component->UpdateInputState(event, dt);
 			}
 		}
 		if (WindowInputSytem::fullscreen != this->currentFullScreenState) {
