@@ -386,7 +386,7 @@ namespace GameObjects {
 		}
 
 		if (this->life <= 0)
-			this->destroy(true);
+			GameSystems::ObjectFactory::getInstance().killPlayerByObject(this);
 	}
 
 	int BaseGameObject::getPower()

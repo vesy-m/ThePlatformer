@@ -36,6 +36,15 @@ namespace GameSystems {
 		this->waitAMoment = false;
 		clearRound();
 		this->to_wait = 0;
+		for (int i = 0; i < 4; i++) {
+			GameObjects::BaseGameObject *skull = new GameObjects::BaseGameObject();
+			new GameComponents::SpriteComponent(skull, "./assets/sprite/skull.png");
+			skull->setDepth(0);
+			skull->setScale(0.1f);
+			skull->setY(-50);
+			skull->Init();
+			this->listSkull.push_back(skull);
+		}
 	}
 
 	ObjectFactory::~ObjectFactory()
@@ -354,7 +363,7 @@ namespace GameSystems {
 			}
 			i++;
 		}
-		
+
 	}
 
 	void ObjectFactory::LoadMenuFileAsCurrent(const std::string &filename) {
@@ -377,6 +386,13 @@ namespace GameSystems {
 		roundWin[1] = 0;
 		roundWin[2] = 0;
 		roundWin[3] = 0;
+		playerIsDead[0] = false;
+		playerIsDead[1] = false;
+		playerIsDead[2] = false;
+		playerIsDead[3] = false;
+		for each (GameObjects::BaseGameObject *skull in listSkull) {
+			skull->setY(-50);
+		}
 		listDotRound.clear();
 	}
 
@@ -403,6 +419,17 @@ namespace GameSystems {
 		for (auto it = this->old_objects.begin(); it != this->old_objects.end(); ++it)
 			if ((*it)->getDepth() <= depth) return (void) this->old_objects.insert(it, obj);
 		this->old_objects.push_back(obj);
+	}
+
+	void ObjectFactory::killPlayerByObject(GameObjects::BaseGameObject * player) {
+		if (player->getType() == GameObjects::objectType::PLAYER
+			|| player->getType() == GameObjects::objectType::PLAYER_ATTACK 
+			|| player->getType() == GameObjects::objectType::PLAYER_BLOCK) {
+			player->destroy(true);
+			int idPlayer = getPlayerId(player);
+			playerIsDead[idPlayer] = true;
+		}
+		
 	}
 
 	void ObjectFactory::cleanupObjects(void) {
@@ -482,6 +509,8 @@ namespace GameSystems {
 		else if (this->mapPlayersController.size() == 1 && this->nbPlayerReady == this->mapPlayersController.size()) {
 			this->orderPlayerController.push_back(7);
 			this->mapPlayersController[7] = "./config/players/player1.json";
+			this->orderPlayerController.push_back(6);
+			this->mapPlayersController[6] = "./config/players/player1.json";
 			this->LoadMenuFileAsCurrent("./config/menus/choose_level_menu.json");
 		}
 	}
@@ -529,7 +558,7 @@ namespace GameSystems {
 	{
 		for (auto player : listPlayers)
 			if (name.compare(player->getName()) != 0)
-				player->destroy(true);
+				killPlayerByObject(player);
 	}
 
 	void ObjectFactory::checkWinCondition()
@@ -547,6 +576,13 @@ namespace GameSystems {
 		if (roundWin[idWinner] < 2) {
 			listPlayers.clear();
 			listDotRound.clear();
+			playerIsDead[0] = false;
+			playerIsDead[1] = false;
+			playerIsDead[2] = false;
+			playerIsDead[3] = false;
+			for each (GameObjects::BaseGameObject *skull in listSkull) {
+				skull->setY(-50);
+			}
 			LoadLevelFileAsCurrent(currentLevelFileName);
 			return;
 		}
@@ -583,16 +619,22 @@ namespace GameSystems {
 
 	GameObjects::BaseGameObject * ObjectFactory::isPLayersAlive()
 	{
-		bool winCondition = false;
-		GameObjects::BaseGameObject *tmpObj = nullptr;
+		GameObjects::BaseGameObject *winner = nullptr;
+		int id = 0;
+		int nbAlive = 0;
 		for (auto player : listPlayers) {
-			if (!player->destroy() && !winCondition) {
-				tmpObj = player;
-				winCondition = true;
+			if (playerIsDead[id] == false) {
+				winner = player;
+				nbAlive++;
 			}
-			else if (!player->destroy() && winCondition)
-				return nullptr;
+			id++;
 		}
-		return tmpObj;
+		if (nbAlive == 0) {
+			return listPlayers.at(0);
+		}
+		if (nbAlive == 1) {
+			return winner;
+		}
+		return nullptr;
 	}
 }

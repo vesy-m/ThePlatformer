@@ -75,16 +75,27 @@ namespace GameSystems {
 		if (ObjectFactory::getInstance().listDotRound.size() > 0) {
 			xPart = (Camera::getInstance().cameraEndX - Camera::getInstance().cameraStartX) / (ObjectFactory::getInstance().listDotRound.size());
 		}
+		int id = 0;
 		for (size_t i = 0; i < ObjectFactory::getInstance().listDotRound.size(); i = i + 2)
 		{
 			int XCoord = Camera::getInstance().cameraStartX + (xPart * (i + 1) - 50);
 			int YCoord = Camera::getInstance().cameraStartY + 20;
 			ObjectFactory::getInstance().listDotRound[i]->setX(XCoord);
 			ObjectFactory::getInstance().listDotRound[i]->setY(YCoord);
+			if (ObjectFactory::getInstance().playerIsDead[id]) {
+				ObjectFactory::getInstance().listSkull.at(id)->setX(XCoord + 50);
+				ObjectFactory::getInstance().listSkull.at(id)->setY(YCoord + 20);
+				GameComponents::BaseComponent*component = ObjectFactory::getInstance().listSkull.at(id)->getComponent(GameComponents::COMPONENT_TYPE::SPRITE);
+				if (component) {
+					component->Update(dt);
+				}
+			}
 			XCoord += 75;
 			ObjectFactory::getInstance().listDotRound[i + 1]->setX(XCoord);
 			ObjectFactory::getInstance().listDotRound[i + 1]->setY(YCoord);
+			id++;
 		}
+
 
 		glMatrixMode(GL_PROJECTION);
 		glPopMatrix();
