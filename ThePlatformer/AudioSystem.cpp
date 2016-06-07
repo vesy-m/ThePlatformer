@@ -31,29 +31,38 @@ namespace GameSystems {
 				_sound["victory"]->stop();
 			isPaused = true;
 		}
-		if (!_pause && isPaused && !GameTools::CSoundManager::getInstance().isMute()) {
-			if (_sound["ambiance"] && _isAmbiance)
-				_sound["ambiance"]->play();
-			if (_sound["victory"] && !_isAmbiance)
-				_sound["victory"]->play();
+		if (!_pause && isPaused) {
+			if (!GameTools::CSoundManager::getInstance().isMute())
+			{
+				if (_sound["ambiance"] && _isAmbiance)
+					_sound["ambiance"]->play();
+				if (_sound["victory"] && !_isAmbiance)
+					_sound["victory"]->play();
+			}
 			isPaused = false;
 		}
 		if (_pauseMenu && !_isMenu)
 		{
-			GameTools::CSoundManager::getInstance().stopAllExceptAmbiance(_sound["ambiance"]->getFileName(), _sound["victory"]->getFileName());
-			if (_sound["ambiance"])
-				_sound["ambiance"]->setVolume(5, false);
-			if (_sound["victory"])
-				_sound["victory"]->setVolume(5, false);
+			if (!GameTools::CSoundManager::getInstance().isMute())
+			{
+				GameTools::CSoundManager::getInstance().stopAllExceptAmbiance(_sound["ambiance"]->getFileName(), _sound["victory"]->getFileName());
+				if (_sound["ambiance"])
+					_sound["ambiance"]->setVolume(5, false);
+				if (_sound["victory"])
+					_sound["victory"]->setVolume(5, false);
+			}
 			_isMenu = true;
 		}
-		if (!_pauseMenu && _isMenu && !GameTools::CSoundManager::getInstance().isMute())
+		if (!_pauseMenu && _isMenu)
 		{
-			GameTools::CSoundManager::getInstance().stopAllExceptAmbiance(_sound["ambiance"]->getFileName(), _sound["victory"]->getFileName());
-			if (_sound["ambiance"])
-				_sound["ambiance"]->setVolume(_sound["ambiance"]->getVolume());
-			if (_sound["victory"])
-				_sound["victory"]->setVolume(_sound["victory"]->getVolume());
+			if (!GameTools::CSoundManager::getInstance().isMute())
+			{
+				GameTools::CSoundManager::getInstance().stopAllExceptAmbiance(_sound["ambiance"]->getFileName(), _sound["victory"]->getFileName());
+				if (_sound["ambiance"])
+					_sound["ambiance"]->setVolume(_sound["ambiance"]->getVolume());
+				if (_sound["victory"])
+					_sound["victory"]->setVolume(_sound["victory"]->getVolume());
+			}
 			_isMenu = false;
 		}
 		std::list<GameObjects::BaseGameObject*>::iterator it;
@@ -76,12 +85,12 @@ namespace GameSystems {
 		if (_muteAmbiance && !_isMuteAmbiance)
 		{
 			_isMuteAmbiance = true;
-			GameTools::CSoundManager::getInstance().muteMusic(_sound["ambiance"]->getFileName());
+			GameTools::CSoundManager::getInstance().muteMusic(_sound["ambiance"]->getFileName(), _sound["victory"]->getFileName());
 		}
 		else if (!_muteAmbiance && _isMuteAmbiance && !_muteAll)
 		{
 			_isMuteAmbiance = false;
-			GameTools::CSoundManager::getInstance().unmuteMusic(_sound["ambiance"]->getFileName());
+			GameTools::CSoundManager::getInstance().unmuteMusic(_sound["ambiance"]->getFileName(), _sound["victory"]->getFileName());
 		}
 		return 0;
 	}
@@ -136,22 +145,28 @@ namespace GameSystems {
 		}
 		if (_menuVictory)
 		{
-			if (_sound["ambiance"])
-				_sound["ambiance"]->stop();
-			if (_sound["victory"])
-				_sound["victory"]->play();
+			if (!GameTools::CSoundManager::getInstance().isMute())
+			{
+				if (_sound["ambiance"])
+					_sound["ambiance"]->stop();
+				if (_sound["victory"])
+					_sound["victory"]->play();
+			}
 			_menuVictory = false;
 			_isAmbiance = false;
 		}
 		else if (!_isAmbiance)
 		{
-			if (_sound["victory"])
-				_sound["victory"]->stop();
-			if (_sound["ambiance"])
-				_sound["ambiance"]->play();
+			if (!GameTools::CSoundManager::getInstance().isMute())
+			{
+				if (_sound["victory"])
+					_sound["victory"]->stop();
+				if (_sound["ambiance"])
+					_sound["ambiance"]->play();
+			}
 			_isAmbiance = true;
 		}
-		if (_pauseMenu)
+		if (_pauseMenu && !GameTools::CSoundManager::getInstance().isMute())
 		{
 			GameTools::CSoundManager::getInstance().stopAllExceptAmbiance(_sound["ambiance"]->getFileName(), _sound["victory"]->getFileName());
 			if (_sound["ambiance"])
@@ -159,7 +174,7 @@ namespace GameSystems {
 			if (_sound["victory"])
 				_sound["victory"]->setVolume(5, false);
 		}
-		if (!_pauseMenu)
+		if (!_pauseMenu && !GameTools::CSoundManager::getInstance().isMute())
 		{
 			GameTools::CSoundManager::getInstance().stopAllExceptAmbiance(_sound["ambiance"]->getFileName(), _sound["victory"]->getFileName());
 			if (_sound["ambiance"])
@@ -172,9 +187,9 @@ namespace GameSystems {
 		else if (!_muteAll)
 			GameTools::CSoundManager::getInstance().unmuteAll();
 		if (_muteAmbiance)
-			GameTools::CSoundManager::getInstance().muteMusic(_sound["ambiance"]->getFileName());
+			GameTools::CSoundManager::getInstance().muteMusic(_sound["ambiance"]->getFileName(), _sound["victory"]->getFileName());
 		else if (!_muteAmbiance && !_muteAll)
-			GameTools::CSoundManager::getInstance().unmuteMusic(_sound["ambiance"]->getFileName());
+			GameTools::CSoundManager::getInstance().unmuteMusic(_sound["ambiance"]->getFileName(), _sound["victory"]->getFileName());
 		_isMuteAmbiance = false;
 		_isMuteAll = false;
 	}

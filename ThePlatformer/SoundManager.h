@@ -20,8 +20,8 @@ namespace GameTools
 		void			stopAllExceptAmbiance(std::string const, std::string const);
 		void			muteAll();
 		void			unmuteAll();
-		void			muteMusic(std::string const ambiance);
-		void			unmuteMusic(std::string const ambiance);
+		void			muteMusic(std::string const ambiance, std::string const win);
+		void			unmuteMusic(std::string const ambiance, std::string const win);
 		bool			isMute() const;
 
 	private:
