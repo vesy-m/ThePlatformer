@@ -215,6 +215,7 @@ namespace GameSystems {
 			}
 		}
 		currentLevel = newLevel;
+		this->to_wait = 3000;
 	}
 
 	void ObjectFactory::buildMenu(GameTools::JsonValue &value, std::string &currentMenuFileName) {
@@ -351,7 +352,7 @@ namespace GameSystems {
 			}
 			i++;
 		}
-		this->to_wait = 3000;
+		
 	}
 
 	void ObjectFactory::LoadMenuFileAsCurrent(const std::string &filename) {
