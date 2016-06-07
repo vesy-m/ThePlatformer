@@ -141,11 +141,16 @@ namespace GameComponents {
 		if (this->buttonState == ButtonState::SELECTED)
 			drawSquare(x, y, width, height);
 		if (this->actionName == "switchMusic") {
-			if (!GameSystems::AudioSystem::_muteAmbiance) {
-				GameSystems::ObjectFactory::getInstance().changeGameObjectSpriteComponent(this->composition, "./assets/sprite/menu/MusicButtonOn.png");
+			if (GameSystems::AudioSystem::_muteAll) {
+				GameSystems::ObjectFactory::getInstance().changeGameObjectSpriteComponent(this->composition, "./assets/sprite/menu/MusicButtonDisable.png");
 			}
 			else {
-				GameSystems::ObjectFactory::getInstance().changeGameObjectSpriteComponent(this->composition, "./assets/sprite/menu/MusicButtonOff.png");
+				if (!GameSystems::AudioSystem::_muteAmbiance) {
+					GameSystems::ObjectFactory::getInstance().changeGameObjectSpriteComponent(this->composition, "./assets/sprite/menu/MusicButtonOn.png");
+				}
+				else {
+					GameSystems::ObjectFactory::getInstance().changeGameObjectSpriteComponent(this->composition, "./assets/sprite/menu/MusicButtonOff.png");
+				}
 			}
 		}
 	}
@@ -388,14 +393,19 @@ namespace GameComponents {
 		if (GameSystems::AudioSystem::_muteAll) {
 			GameSystems::ObjectFactory::getInstance().changeGameObjectSpriteComponent(this->composition, "./assets/sprite/menu/SoundButtonOn.png");
 			GameSystems::AudioSystem::_muteAll = false;
+			GameSystems::AudioSystem::_muteAmbiance = false;
 		}
 		else {
 			GameSystems::ObjectFactory::getInstance().changeGameObjectSpriteComponent(this->composition, "./assets/sprite/menu/SoundButtonOff.png");
 			GameSystems::AudioSystem::_muteAll = true;
+			GameSystems::AudioSystem::_muteAmbiance = true;
 		}
 	}
 
 	void ButtonComponent::switchMusic() {
+		if (GameSystems::AudioSystem::_muteAll) {
+			return;
+		}
 		GameSystems::AudioSystem::_muteAmbiance = !GameSystems::AudioSystem::_muteAmbiance;
 		if (!GameSystems::AudioSystem::_muteAmbiance) {
 			GameSystems::ObjectFactory::getInstance().changeGameObjectSpriteComponent(this->composition, "./assets/sprite/menu/MusicButtonOn.png");
