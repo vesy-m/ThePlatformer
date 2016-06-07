@@ -243,6 +243,9 @@
     <ClCompile Include="BoxerAttack.cpp">
       <Filter>GameComponents\Source</Filter>
     </ClCompile>
+    <ClCompile Include="InGameBannerComponent.cpp">
+      <Filter>GameComponents\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameEngine.h">
@@ -423,6 +426,9 @@
       <Filter>GameComponents\Header</Filter>
     </ClInclude>
     <ClInclude Include="BoxerAttack.h">
+      <Filter>GameComponents\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="InGameBannerComponent.h">
       <Filter>GameComponents\Header</Filter>
     </ClInclude>
   </ItemGroup>

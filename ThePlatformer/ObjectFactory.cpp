@@ -22,6 +22,7 @@
 #include "EditorManager.h"
 #include "LifeBarComponent.h"
 #include "AutoPlayComponent.h"
+#include "InGameBannerComponent.h"
 
 namespace GameSystems {
 	ObjectFactory::ObjectFactory()
@@ -125,63 +126,7 @@ namespace GameSystems {
 		return projectile;
 			}
 
-	GameObjects::BaseGameObject *ObjectFactory::createProjectile(GameObjects::BaseGameObject *projectile/*, unsigned int x, unsigned int y, float base_force, glm::vec2 direction, std::string const &sprite, bool gravity*/) {
-		//GameObjects::BaseGameObject *projectile = NULL;
-		//GameComponents::BodyComponent *body = NULL;
-		//if (this->old_objects.size() == 0) {
-		//	new GameComponents::SpriteComponent(projectile, sprite);
-		//	body = dynamic_cast<GameComponents::BodyComponent*>(projectile->getComponent(GameComponents::PHYSIC));
-			//projectile = new GameObjects::BaseGameObject();
-			//projectile->setName(shooter->getName());
-			//projectile->setDepth(0);
-			//projectile->setType(GameObjects::objectType::PROJECTILE);
-			//projectile->setBounce(0.3f);
-
-			//if (std::string("tennis").compare(shooter->getProjectileType()) == 0) {
-			//	projectile->setMass(25.0f);
-			//	shooter->setCooldown(1500.0f);
-			//	projectile->setHeight(int(30 * 0.50f));
-			//	projectile->setWidth(int(30 * 0.50f));
-			//	projectile->setScale(0.50f);
-			//	projectile->setPower(20);
-			//	new GameComponents::SpriteComponent(projectile, "./assets/sprite/tennis_ball.png");
-			//}
-			//else if (std::string("soccer").compare(shooter->getProjectileType()) == 0) {
-			//	projectile->setMass(100.0f);
-			//	shooter->setCooldown(2500.0f);
-			//	projectile->setHeight(int(30 * 0.50f));
-			//	projectile->setWidth(int(30 * 0.50f));
-			//	projectile->setScale(0.50f);
-			//	projectile->setPower(50);
-			//	new GameComponents::SpriteComponent(projectile, "./assets/sprite/soccer_ball.png");
-//			}
-			//else {
-			//	shooter->setCooldown(2500.0f);
-			//	projectile->setHeight(int(76 * 0.25f));
-			//	projectile->setWidth(int(150 * 0.25f));
-			//	projectile->setScale(0.25f);
-			//	projectile->setPower(40);
-			//	new GameComponents::SpriteComponent(projectile, "./assets/sprite/minecraft_arrow.png");
-//			}
-
-		//	new GameComponents::BoxCollider(projectile);
-		//	new GameComponents::VectorDebugComponent(projectile, "square");
-		//}
-		//else {
-		//	projectile = dynamic_cast<GameObjects::BaseGameObject*>(this->old_objects.front());
-		//	assert(projectile != NULL);
-		//	this->old_objects.pop_front();
-		//	projectile->destroy(false);
-		//	body = dynamic_cast<GameComponents::BodyComponent*>(projectile->getComponent(GameComponents::PHYSIC));
-		//}
-		//assert(projectile != NULL);
-		//assert(body != NULL);
-		//projectile->setX(x);
-		//projectile->setY(y);
-		//projectile->Init();
-		//body->Init(base_force, direction);
-		//if (!gravity)
-		//	body->setGravity(0);
+	GameObjects::BaseGameObject *ObjectFactory::createProjectile(GameObjects::BaseGameObject *projectile) {
 		this->currentLevel.putObjectDepthOrdered(projectile);
 		return (projectile);
 	}
@@ -208,9 +153,10 @@ namespace GameSystems {
 
 		auto object = new GameObjects::BaseGameObject();
 		object->setName("readyimg");
-		object->setX((1280 - 500) / 2);
-		object->setY((768 - 200) / 2);
-		new GameComponents::SpriteComponent(object, "./assets/sprite/ready.png");
+		object->setX(0);
+		object->setY(0);
+		new GameComponents::SpriteComponent(object, "./assets/sprite/ready2.png");
+		new GameComponents::InGameBannerComponent(object, GameComponents::START_GAME, 2000);
 		newLevel.putObjectDepthOrdered(object);
 
 		for (auto i : value) {
@@ -224,7 +170,6 @@ namespace GameSystems {
 			}
 		}
 		currentLevel = newLevel;
-		this->to_wait = 3000;
 	}
 
 	void ObjectFactory::buildMenu(GameTools::JsonValue &value, std::string &currentMenuFileName) {

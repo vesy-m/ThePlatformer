@@ -17,6 +17,7 @@
 #include "EditorKeyboardInputComponent.h"
 #include "LifeBarComponent.h"
 #include "AutoPlayComponent.h"
+#include "InGameBannerComponent.h"
 
 namespace GameObjects {
 	BaseGameObject::BaseGameObject()
@@ -50,6 +51,8 @@ namespace GameObjects {
 		this->m_caseSelector = NULL;
 		this->m_editorKeyboard = NULL;
 		this->m_lifeBarComponent = NULL;
+		this->m_autoPlayComponent = NULL;
+		this->m_inGameBannerComponent = NULL;
 		this->attack_1_value = 0;
 		this->attack_2_value = 0;
 		this->attack_3_value = 0;
@@ -92,6 +95,7 @@ namespace GameObjects {
 		delete this->m_editorKeyboard;
 		delete this->m_lifeBarComponent;
 		delete this->m_autoPlayComponent;
+		delete this->m_inGameBannerComponent;
 	}
 
 	GameComponents::BaseComponent *BaseGameObject::getComponent(GameComponents::COMPONENT_TYPE type) {
@@ -130,6 +134,8 @@ namespace GameObjects {
 			return this->m_lifeBarComponent;
 		case GameComponents::AUTO_PLAY:
 			return this->m_autoPlayComponent;
+		case GameComponents::BANNER:
+			return this->m_inGameBannerComponent;
 		default:
 			return NULL;
 		}
@@ -220,6 +226,11 @@ namespace GameObjects {
 		this->m_autoPlayComponent = autoPlayComponent;
 	}
 
+	void BaseGameObject::attachComponent(GameComponents::InGameBannerComponent *inGameBannerComponent)
+	{
+		this->m_inGameBannerComponent = inGameBannerComponent;
+	}
+
 	void BaseGameObject::sendMessage(GameMessage::Message *message)
 	{
 		if (this->m_body) this->m_body->sendMessage(message);
@@ -238,6 +249,7 @@ namespace GameObjects {
 		if (this->m_editorKeyboard) this->m_editorKeyboard->sendMessage(message);
 		if (this->m_lifeBarComponent) this->m_lifeBarComponent->sendMessage(message);
 		if (this->m_autoPlayComponent) this->m_autoPlayComponent->sendMessage(message);
+		if (this->m_inGameBannerComponent) this->m_inGameBannerComponent->sendMessage(message);
 		delete message;
 	}
 
