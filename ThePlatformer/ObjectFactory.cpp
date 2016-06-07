@@ -39,7 +39,7 @@ namespace GameSystems {
 			GameObjects::BaseGameObject *skull = new GameObjects::BaseGameObject();
 			new GameComponents::SpriteComponent(skull, "./assets/sprite/skull.png");
 			skull->setDepth(0);
-			skull->setScale(0.1f);
+			skull->setScale(0.15f);
 			skull->setY(-50);
 			skull->Init();
 			this->listSkull.push_back(skull);

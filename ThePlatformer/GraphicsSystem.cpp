@@ -82,8 +82,8 @@ namespace GameSystems {
 			int YCoord = Camera::getInstance().cameraStartY + 20;
 			ObjectFactory::getInstance().listDotRound[i]->setX(XCoord);
 			ObjectFactory::getInstance().listDotRound[i]->setY(YCoord);
-			if (ObjectFactory::getInstance().playerIsDead[id]) {
-				ObjectFactory::getInstance().listSkull.at(id)->setX(XCoord + 50);
+			if (ObjectFactory::getInstance().playerIsDead[id] && ObjectFactory::getInstance().stateGame == ObjectFactory::gameState::LEVEL) {
+				ObjectFactory::getInstance().listSkull.at(id)->setX(XCoord + 45);
 				ObjectFactory::getInstance().listSkull.at(id)->setY(YCoord + 20);
 				GameComponents::BaseComponent*component = ObjectFactory::getInstance().listSkull.at(id)->getComponent(GameComponents::COMPONENT_TYPE::SPRITE);
 				if (component) {
