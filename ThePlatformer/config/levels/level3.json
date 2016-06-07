@@ -1,0 +1,12 @@
+{
+  "objects" : [
+    {
+      "name" : "debugFps",
+      "x" : 0,
+      "y" : 0,
+      "depth" : 5,
+      "sprite" : "./assets/sprite/background.png",
+      "fps" : true
+    },
+  ]
+}
