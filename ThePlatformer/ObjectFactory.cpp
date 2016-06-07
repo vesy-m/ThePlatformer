@@ -392,14 +392,15 @@ namespace GameSystems {
 
 	void ObjectFactory::cleanupObjects(void) {
 		std::list<GameObjects::BaseGameObject*> &list = this->currentLevel.getObjects();
+		std::cout << "Size before : "<< list.size() << std::endl;
 		list.erase(std::remove_if(list.begin(), list.end(), [&](auto obj) {
 			if (obj->destroy()) {
-				/*if (obj->getType() == GameObjects::PROJECTILE) this->old_objects.push_back(obj);
-				else */delete obj;
+				delete obj;
 				return true;
 			}
 			return false;
 		}), list.end());
+		std::cout << "Size after : " << list.size() << std::endl;
 	}
 
 	std::list<GameObjects::BaseGameObject*>& ObjectFactory::getCurrentObjects()
