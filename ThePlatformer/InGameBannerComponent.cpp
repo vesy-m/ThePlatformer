@@ -24,10 +24,6 @@ namespace GameComponents {
 		this->savedTime += dt;
 
 		if (bannerType == GameComponents::START_GAME && this->savedTime >= this->time / 2) {
-			//GameComponents::SpriteComponent *sprite = reinterpret_cast<GameComponents::SpriteComponent*>(getComposition()->getComponent(GameComponents::SPRITE));
-			//if (!sprite)
-			//	return;
-			//sprite->
 			GameSystems::ObjectFactory::getInstance().changeGameObjectSpriteComponent(getComposition(), "./assets/sprite/fight.png");
 		}
 

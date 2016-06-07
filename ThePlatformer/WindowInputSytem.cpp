@@ -16,26 +16,6 @@ namespace GameSystems {
 	
 	int WindowInputSytem::Update(double dt, std::list<GameObjects::BaseGameObject*>& listObjects)
 	{
-		//if (ObjectFactory::getInstance().to_wait > 0) {
-		//	ObjectFactory::getInstance().to_wait -= dt;
-		//	if (ObjectFactory::getInstance().to_wait < 0) {
-		//		ObjectFactory::getInstance().to_wait = 0;
-		//		for (auto it = listObjects.begin(); it != listObjects.end(); ++it) {
-		//			if ((*it)->getName() == "readyimg") {
-		//				auto component = (*it)->getComponent(GameComponents::SPRITE);
-		//				delete component;
-		//				(*it)->attachComponent((GameComponents::SpriteComponent *)nullptr);
-		//			}
-		//			else {
-		//				auto component = dynamic_cast<GameComponents::InputComponent*> ((*it)->getComponent(GameComponents::WINDOW));
-		//				if (component != nullptr) {
-		//					component->SetActive(true);
-		//				}
-		//			}
-		//		}
-		//	}
-		//}
-
 		sf::Event event;
 		bool changeSize = false;
 
