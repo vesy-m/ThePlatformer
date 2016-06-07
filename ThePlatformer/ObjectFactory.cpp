@@ -22,6 +22,7 @@
 #include "EditorManager.h"
 #include "LifeBarComponent.h"
 #include "AutoPlayComponent.h"
+#include "InGameBannerComponent.h"
 
 namespace GameSystems {
 	ObjectFactory::ObjectFactory()
@@ -199,9 +200,10 @@ namespace GameSystems {
 
 		auto object = new GameObjects::BaseGameObject();
 		object->setName("readyimg");
-		object->setX((1280 - 500) / 2);
-		object->setY((768 - 200) / 2);
-		new GameComponents::SpriteComponent(object, "./assets/sprite/ready.png");
+		object->setX(0);
+		object->setY(0);
+		new GameComponents::SpriteComponent(object, "./assets/sprite/ready2.png");
+		new GameComponents::InGameBannerComponent(object, GameComponents::START_GAME, 2000);
 		newLevel.putObjectDepthOrdered(object);
 
 		for (auto i : value) {
@@ -215,7 +217,7 @@ namespace GameSystems {
 			}
 		}
 		currentLevel = newLevel;
-		this->to_wait = 3000;
+		//this->to_wait = 3000;
 	}
 
 	void ObjectFactory::buildMenu(GameTools::JsonValue &value, std::string &currentMenuFileName) {
@@ -405,7 +407,7 @@ namespace GameSystems {
 
 	void ObjectFactory::cleanupObjects(void) {
 		std::list<GameObjects::BaseGameObject*> &list = this->currentLevel.getObjects();
-		std::cout << "Size before : "<< list.size() << std::endl;
+		//std::cout << "Size before : "<< list.size() << std::endl;
 		list.erase(std::remove_if(list.begin(), list.end(), [&](auto obj) {
 			if (obj->destroy()) {
 				delete obj;
@@ -413,7 +415,7 @@ namespace GameSystems {
 			}
 			return false;
 		}), list.end());
-		std::cout << "Size after : " << list.size() << std::endl;
+		//std::cout << "Size after : " << list.size() << std::endl;
 	}
 
 	std::list<GameObjects::BaseGameObject*>& ObjectFactory::getCurrentObjects()

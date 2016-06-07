@@ -25,6 +25,7 @@ namespace GameComponents {
 	class EditorKeyboardInputComponent;
 	class LifeBarComponent;
 	class AutoPlayComponent;
+	class InGameBannerComponent;
 }
 
 namespace GameObjects {
@@ -82,6 +83,7 @@ namespace GameObjects {
 		void attachComponent(GameComponents::EditorKeyboardInputComponent *);
 		void attachComponent(GameComponents::LifeBarComponent *);
 		void attachComponent(GameComponents::AutoPlayComponent *);
+		void attachComponent(GameComponents::InGameBannerComponent *);
 		void sendMessage(GameMessage::Message*);
 		void setX(int x);
 		int getX();
@@ -151,6 +153,7 @@ namespace GameObjects {
 		GameComponents::EditorKeyboardInputComponent *m_editorKeyboard;
 		GameComponents::LifeBarComponent *m_lifeBarComponent;
 		GameComponents::AutoPlayComponent *m_autoPlayComponent;
+		GameComponents::InGameBannerComponent *m_inGameBannerComponent;
 		int x;
 		int y;
 		int height;

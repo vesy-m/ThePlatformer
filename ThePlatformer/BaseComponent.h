@@ -28,7 +28,8 @@ namespace GameComponents {
 		CASE_SELECTOR,
 		EDITOR_KEYBOARD,
 		LIFE_BAR,
-		AUTO_PLAY
+		AUTO_PLAY,
+		BANNER
 	};
 
 	class BaseComponent
