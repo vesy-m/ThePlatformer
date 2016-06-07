@@ -1,0 +1,15 @@
+{
+	"button" : {
+		"x" : 0,
+		"y" : 0,
+		"sprite" : "./assets/sprite/menu/credits.png",
+	},
+	"button" : {
+		"x" : 540,
+		"y" : 600,
+		"sprite" : "./assets/sprite/menu/returnButton.png",
+		"menu" : "./config/menus/main_menu.json",
+		"menunav" : [1, -1, -1, -1, -1]
+	}
+
+}

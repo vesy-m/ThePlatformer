@@ -384,12 +384,14 @@ namespace GameComponents {
 	}
 
 	void ButtonComponent::switchSound() {
-		GameSystems::AudioSystem::_muteAll = !GameSystems::AudioSystem::_muteAll;
-		if (!GameSystems::AudioSystem::_muteAll) {
+//		GameSystems::AudioSystem::_muteAll = !GameSystems::AudioSystem::_muteAll;
+		if (GameSystems::AudioSystem::_muteAll) {
 			GameSystems::ObjectFactory::getInstance().changeGameObjectSpriteComponent(this->composition, "./assets/sprite/menu/SoundButtonOn.png");
+			GameSystems::AudioSystem::_muteAll = false;
 		}
 		else {
 			GameSystems::ObjectFactory::getInstance().changeGameObjectSpriteComponent(this->composition, "./assets/sprite/menu/SoundButtonOff.png");
+			GameSystems::AudioSystem::_muteAll = true;
 		}
 	}
 

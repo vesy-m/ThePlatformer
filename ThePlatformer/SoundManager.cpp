@@ -57,4 +57,32 @@ namespace GameTools
 		for (it = _sound.begin(); it != _sound.end(); ++it)
 			it->second.setVolume(it->second.getVolume(), false);
 	}
+	void CSoundManager::muteMusic(std::string const ambiance)
+	{
+		std::map<std::string, CSound>::iterator it;
+
+		for (it = _sound.begin(); it != _sound.end(); ++it)
+		{
+			if (it->first == ambiance)
+				it->second.setVolume(0.0f, false);
+		}
+	}
+
+	void CSoundManager::unmuteMusic(std::string const ambiance)
+	{
+		std::map<std::string, CSound>::iterator it;
+
+		for (it = _sound.begin(); it != _sound.end(); ++it)
+		{
+			if (it->first == ambiance)
+				it->second.setVolume(it->second.getVolume(), false);
+		}
+	}
+	
+	bool CSoundManager::isMute() const
+	{
+		if (GameSystems::AudioSystem::_muteAll || GameSystems::AudioSystem::_muteAmbiance)
+			return true;
+		return false;
+	}
 }

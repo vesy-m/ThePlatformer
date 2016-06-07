@@ -1,37 +1,58 @@
 {
 	"button" : {
-		"x" : 540,
-		"y" : 150,
+		"x" : 327,
+		"y" : 144,
 		"sprite" : "./assets/sprite/menu/resumeButton.png",
 		"function" : "resumeToLevel",
-		"menunav" : [1, -1, -1, 4, 1]
+		"menunav" : [1, -1, 4, -1, 1]
 	},
 	"button" : {
-		"x" : 540,
-		"y" : 250,
+		"x" : 327,
+		"y" : 288,
 		"sprite" : "./assets/sprite/menu/howToPlayButton.png",
 		"menu" : "./config/menus/how_to_play_menu.json",
-		"menunav" : [0, -1, -1, 0, 2]
+		"menunav" : [0, -1, 5, 0, 2]
 	},
 	"button" : {
-		"x" : 540,
-		"y" : 350,
+		"x" : 327,
+		"y" : 432,
 		"sprite" : "./assets/sprite/menu/settingsButton.png",
 		"menu" : "./config/menus/param_pause_menu.json",
-		"menunav" : [0, -1, -1, 1, 3]
+		"menunav" : [0, -1, 6, 1, 3]
 	},
 	"button" : {
-		"x" : 540,
-		"y" : 450,
+		"x" : 327,
+		"y" : 576,
+		"sprite" : "./assets/sprite/menu/creditsButton.png",
+		"menu" : "./config/menus/credits_pause_menu.json",
+		"menunav" : [0, -1, 7, 2, 4]
+	},
+	"button" : {
+		"x" : 753,
+		"y" : 144,
+		"sprite" : "./assets/sprite/menu/restartButton.png",
+		"menu" : "./config/menus/pause_return_restart_level.json",
+		"menunav" : [0, 0, -1, 3, 5]
+	},
+	"button" : {
+		"x" : 753,
+		"y" : 288,
+		"sprite" : "./assets/sprite/menu/changePlayerMenuButton.png",
+		"menu" : "./config/menus/pause_return_select_perso.json",
+		"menunav" : [0, 1, -1, 4, 6]
+	},
+	"button" : {
+		"x" : 753,
+		"y" : 432,
 		"sprite" : "./assets/sprite/menu/returnMenuButton.png",
 		"menu" : "./config/menus/pause_return_main_menu.json",
-		"menunav" : [0, -1, -1, 2, 4]
+		"menunav" : [0, 2, -1, 5, 7]
 	},
 	"button" : {
-		"x" : 540,
-		"y" : 550,
+		"x" : 753,
+		"y" : 576,
 		"sprite" : "./assets/sprite/menu/QuitGameButton.png",
 		"menu" : "./config/menus/quit_menu.json",
-		"menunav" : [0, -1, -1, 3, 0]
+		"menunav" : [0, 3, -1, 6, -1]
 	}
 }

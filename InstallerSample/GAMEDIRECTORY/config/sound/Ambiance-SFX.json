@@ -3,13 +3,13 @@
 		{
 			"name" : "ambiance",
 			"file" : "./assets/audio/Machinations.ogg",
-			"volume" : 10,
+			"volume" : 20,
 			"loop" : 1
 		},
 		{
 			"name" : "victory",
 			"file" : "./assets/audio/Take_a_Chance.ogg",
-			"volume" : 5,
+			"volume" : 10,
 			"loop" : 1
 		}
 	]

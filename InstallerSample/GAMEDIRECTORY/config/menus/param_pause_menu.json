@@ -1,16 +1,30 @@
 {
 	"button" : {
 		"x" : 540,
-		"y" : 215,
-		"sprite" : "./assets/sprite/menu/fullscreenButton.png",
+		"y" : 144,
+		"sprite" : "./assets/sprite/menu/FullscreenButtonOn.png",
 		"function" : "switchFullScreen",
-		"menunav" : [1, -1, -1, 1, 1]
+		"menunav" : [1, -1, -1, 3, 1]
 	},
 	"button" : {
 		"x" : 540,
-		"y" : 455,
+		"y" : 288,
+		"sprite" : "./assets/sprite/menu/SoundButtonOn.png",
+		"function" : "switchSound",
+		"menunav" : [0, -1, -1, 0, 2]
+	},
+	"button" : {
+		"x" : 540,
+		"y" : 432,
+		"sprite" : "./assets/sprite/menu/MusicButtonOn.png",
+		"function" : "switchMusic",
+		"menunav" : [0, -1, -1, 1, 3]
+	},
+	"button" : {
+		"x" : 540,
+		"y" : 576,
 		"sprite" : "./assets/sprite/menu/returnButton.png",
 		"menu" : "./config/menus/pause_menu.json",
-		"menunav" : [0, -1, -1, 0, 0]
+		"menunav" : [0, -1, -1, 2, 0]
 	}
 }
