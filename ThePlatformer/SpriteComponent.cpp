@@ -73,6 +73,9 @@ namespace GameComponents {
 			if (std::string("punchright").compare(currentAnim) != 0) {
 				currentFrame = 0;
 				prevAnim = currentAnim;
+				if (prevAnim == "punchleft") {
+					prevAnim = "default";
+				}
 				currentAnim = "punchright";
 			}
 			break;
@@ -82,6 +85,9 @@ namespace GameComponents {
 			if (std::string("punchleft").compare(currentAnim) != 0) {
 				currentFrame = 0;
 				prevAnim = currentAnim;
+				if (prevAnim == "punchright") {
+					prevAnim = "default";
+				}
 				currentAnim = "punchleft";
 			}
 			break;
@@ -106,7 +112,7 @@ namespace GameComponents {
 		case GameMessage::LEFT:
 			if (isDashing)
 				break;
-			if ((std::string("walk").compare(currentAnim) != 0 || revertX != true) && std::string("jump").compare(currentAnim) != 0 && std::string("shoot").compare(currentAnim) != 0) {
+			if ((std::string("walk").compare(currentAnim) != 0 || revertX != true) && std::string("jump").compare(currentAnim) != 0 && std::string("shoot").compare(currentAnim) != 0 && std::string("punchright").compare(currentAnim) != 0 && std::string("punchleft").compare(currentAnim) != 0) {
 				currentFrame = 0;
 				prevAnim = currentAnim;
 				currentAnim = "walk";
@@ -118,7 +124,7 @@ namespace GameComponents {
 		case GameMessage::RIGHT:
 			if (isDashing)
 				break;
-			if ((std::string("walk").compare(currentAnim) != 0 || revertX != false) && std::string("jump").compare(currentAnim) != 0 && std::string("shoot").compare(currentAnim) != 0) {
+			if ((std::string("walk").compare(currentAnim) != 0 || revertX != false) && std::string("jump").compare(currentAnim) != 0 && std::string("shoot").compare(currentAnim) != 0 && std::string("punchright").compare(currentAnim) != 0 && std::string("punchleft").compare(currentAnim) != 0) {
 				currentFrame = 0;
 				prevAnim = currentAnim;
 				currentAnim = "walk";
