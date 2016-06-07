@@ -28,11 +28,11 @@ int main()
 		GameSystems::GraphicsSystem *graphics = new GameSystems::GraphicsSystem();
 		GameSystems::PhysicsSystem *physics = new GameSystems::PhysicsSystem();
 		GameSystems::AudioSystem *audio = new GameSystems::AudioSystem();
-
-		core.Add((GameSystems::BaseSystem *)winInput);
-		core.Add((GameSystems::BaseSystem *)physics);
+		sf::Context context;
 		core.Add((GameSystems::BaseSystem *)graphics);
+		core.Add((GameSystems::BaseSystem *)physics);
 		core.Add((GameSystems::BaseSystem *)audio);
+		core.Add((GameSystems::BaseSystem *)winInput);
 		GameSystems::ObjectFactory::getInstance().LoadMenuFileAsCurrent("./config/menus/start_menu.json");
 
 		//start
