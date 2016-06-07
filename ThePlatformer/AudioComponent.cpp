@@ -127,7 +127,7 @@ namespace GameComponents
 				_sound[_currentSFX]->play();
 			break;
 		case GameMessage::PLAY_SOUND:
-			if (_sound["ambiance"])
+			if (_sound["ambiance"] && !GameTools::CSoundManager::getInstance().isMute())
 				_sound["ambiance"]->play();
 			break;
 		case GameMessage::STOP_SOUND:

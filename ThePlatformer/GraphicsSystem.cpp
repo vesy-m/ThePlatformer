@@ -71,6 +71,21 @@ namespace GameSystems {
 				component->Update(dt);
 			}
 		}
+		int xPart = 0;
+		if (ObjectFactory::getInstance().listDotRound.size() > 0) {
+			xPart = (Camera::getInstance().cameraEndX - Camera::getInstance().cameraStartX) / (ObjectFactory::getInstance().listDotRound.size());
+		}
+		for (size_t i = 0; i < ObjectFactory::getInstance().listDotRound.size(); i = i + 2)
+		{
+			int XCoord = Camera::getInstance().cameraStartX + (xPart * (i + 1) - 50);
+			int YCoord = Camera::getInstance().cameraStartY + 20;
+			ObjectFactory::getInstance().listDotRound[i]->setX(XCoord);
+			ObjectFactory::getInstance().listDotRound[i]->setY(YCoord);
+			XCoord += 75;
+			ObjectFactory::getInstance().listDotRound[i + 1]->setX(XCoord);
+			ObjectFactory::getInstance().listDotRound[i + 1]->setY(YCoord);
+		}
+
 		glMatrixMode(GL_PROJECTION);
 		glPopMatrix();
 		glMatrixMode(GL_MODELVIEW);
@@ -164,6 +179,12 @@ namespace GameSystems {
 				Camera::getInstance().setX(Camera::getInstance().cameraStartX - (Camera::getInstance().cameraEndX - screenWidth));
 			if (Camera::getInstance().cameraEndY > screenHeight)
 				Camera::getInstance().setY(Camera::getInstance().cameraStartY - (Camera::getInstance().cameraEndY - screenHeight));
+		}
+		else {
+			Camera::getInstance().cameraStartX = 0;
+			Camera::getInstance().setWidth(1280);
+			Camera::getInstance().cameraStartY = 0;
+			Camera::getInstance().setHeight(720);
 		}
 
 	}

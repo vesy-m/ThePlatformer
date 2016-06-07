@@ -43,6 +43,7 @@ namespace GameComponents {
 			case GameObjects::TENNIS_BREAK:
 			case GameObjects::PUNCH:
 			case GameObjects::SPECIAL_PUNCH:
+			case GameObjects::BOXER_POWERUP_AURA:
 				deathTime();
 				break;
 			case GameObjects::BLOCK:
@@ -53,6 +54,9 @@ namespace GameComponents {
 				break;
 			case GameObjects::DASH_DAMAGE:
 				stopDash();
+				break;
+			case GameObjects::BOXER_POWERUP:
+				stopPowerup();
 				break;
 			}
 			this->timing = false;
@@ -102,6 +106,12 @@ namespace GameComponents {
 	{
 		this->composition->sendMessage(new GameMessage::Message(GameMessage::STOP_DASH));
 		this->composition->setInvicible(false);
+	}
+
+	void TimerComponent::stopPowerup()
+	{
+		this->composition->setPowerupDamage(1);
+		this->composition->setPowerupDefense(1);
 	}
 
 }

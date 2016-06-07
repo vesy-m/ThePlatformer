@@ -2,7 +2,7 @@
 	"button" : {
 		"x" : 540,
 		"y" : 100,
-		"sprite" : "./assets/sprite/menu/metalslug_win.png"
+		"sprite" : "./assets/sprite/menu/playerWin4.png"
 	},
 	"button" : {
 		"x" : 600,
@@ -20,7 +20,7 @@
 		"x" : 540,
 		"y" : 550,
 		"sprite" : "./assets/sprite/menu/returnMenuButton.png",
-		"menu" : "./config/menus/metalslug_win_return_main_menu.json",
+		"menu" : "./config/menus/player_win_return_main_menu_4.json",
 		"menunav" : [0, -1, -1, 2, 2]
 	}
 }

@@ -54,6 +54,8 @@ namespace GameObjects {
 		this->attack_2_value = 0;
 		this->attack_3_value = 0;
 		this->jump_value = 200;
+		this->powerupDamage = 1;
+		this->powerupDefense = 1;
 	}
 
 	void BaseGameObject::Init(void) {
@@ -360,7 +362,7 @@ namespace GameObjects {
 		if (invicible)
 			return;
 
-		this->life -= damageMsg->damage;
+		this->life -= (int) std::round(damageMsg->damage / this->powerupDefense);
 
 		if (damageMsg->damageType == GameMessage::DamageMessage::DASH) {
 			GameComponents::TimerComponent* timer = new GameComponents::TimerComponent(this);
@@ -417,6 +419,30 @@ namespace GameObjects {
 
 	float BaseGameObject::getJumpValue(void) {
 		return (this->jump_value);
+	}
+
+	int BaseGameObject::getPowerupDamage(void)
+	{
+		return this->powerupDamage;
+	}
+
+	int BaseGameObject::getPowerupDefense(void)
+	{
+		return this->powerupDefense;
+	}
+
+	void BaseGameObject::setPowerupDamage(int mult)
+	{
+		if (mult == 0)
+			mult = 1;
+		this->powerupDamage = mult;
+	}
+
+	void BaseGameObject::setPowerupDefense(int mult)
+	{
+		if (mult == 0)
+			mult = 1;
+		this->powerupDefense = mult;
 	}
 
 	void BaseGameObject::setAttack1Value(float attack_1_value) {

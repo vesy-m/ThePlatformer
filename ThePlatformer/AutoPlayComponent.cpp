@@ -12,7 +12,7 @@ namespace GameComponents {
 		this->attack_1 = 0;
 		this->attack_2 = 0;
 		this->attack_3 = 0;
-		srand(time(NULL));
+		srand((unsigned int)time(NULL));
 	}
 
 	AutoPlayComponent::~AutoPlayComponent()
@@ -48,7 +48,7 @@ namespace GameComponents {
 		float distance = glm::length(vectorNearPlayer);
 
 
-		if (distance >= 300) {
+		if (distance >= 250) {
 			if ((currentPosition.x < nearPlayerPosition.x))
 				message = GameMessage::RIGHT;
 			else if ((currentPosition.x > nearPlayerPosition.x))

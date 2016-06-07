@@ -1,5 +1,5 @@
 {
-  "name" : "megaman",
+  "name" : "baseballPlayer",
   "x" : 330,
   "y" : 0,
   "depth" : 2,
@@ -7,15 +7,15 @@
   "width" : 30,
   "mass" : 20,
   "sprite" : "./config/sprite_sheets/desc-baseball.json",
-  "move_speed" : 1.5,
+  "move_speed" : 1.6,
   "body" : true,
   "boxcollider" : true,
   "vector" : "square",
   "type": 1,
   "fire_ball" : "baseball",
-  "fps":  true,
   "sfx": "./config/sound/Desc-SFX.json",
   "attack_1": 200,
   "attack_2": 500,
-  "attack_3": 1000
+  "attack_3": 1000,
+  "autoplay": true
 }

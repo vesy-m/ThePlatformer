@@ -1,0 +1,19 @@
+{
+	"file": "./assets/sprite/spritesheet-aura.png",
+    "name": "aura",
+	"position": "BottomCenter",
+    "anim": [
+    	{
+    		"name": "default",
+	        "time": 15,
+	        "ymin": 0,
+	        "ymax": 88,
+	        "images": [
+				[0, 86],
+				[87, 174],
+				[175, 262],
+				[263, 350]
+	        ]
+    	}
+    ]
+}

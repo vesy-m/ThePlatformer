@@ -2,20 +2,20 @@
 	"button" : {
 		"x" : 150,
 		"y" : 240,
-		"sprite" : "./assets/sprite/menu/reallyGoToMenu.png"
+		"sprite" : "./assets/sprite/menu/reallyChangePlayer.png"
 	},
 	"button" : {
 		"x" : 400,
 		"y" : 480,
 		"sprite" : "./assets/sprite/menu/NoButton.png",
-		"menu" : "./config/menus/metalslug_win_menu.json",
+		"menu" : "./config/menus/pause_menu.json",
 		"menunav" : [1, -1, 2, -1, -1]
 	},
 	"button" : {
 		"x" : 800,
 		"y" : 480,
 		"sprite" : "./assets/sprite/menu/YesButton.png",
-		"menu" : "./config/menus/main_menu.json",
+		"menu" : "./config/menus/choose_nb_player_menu.json",
 		"menunav" : [0, 1, -1, -1, -1]
 	}
 }

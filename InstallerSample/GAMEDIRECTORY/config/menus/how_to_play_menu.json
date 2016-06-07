@@ -12,7 +12,7 @@
 	"button" : {
 		"x" : 540,
 		"y" : 550,
-		"sprite" : "./assets/sprite/menu/returnMenuButton.png",
+		"sprite" : "./assets/sprite/menu/returnButton.png",
 		"menu" : "./config/menus/pause_menu.json",
 		"menunav" : [1, -1, -1, -1, -1]
 	}

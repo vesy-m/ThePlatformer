@@ -140,6 +140,19 @@ namespace GameComponents {
 		float width = (float)this->composition->getWidth();
 		if (this->buttonState == ButtonState::SELECTED)
 			drawSquare(x, y, width, height);
+		if (this->actionName == "switchMusic") {
+			if (GameSystems::AudioSystem::_muteAll) {
+				GameSystems::ObjectFactory::getInstance().changeGameObjectSpriteComponent(this->composition, "./assets/sprite/menu/MusicButtonDisable.png");
+			}
+			else {
+				if (!GameSystems::AudioSystem::_muteAmbiance) {
+					GameSystems::ObjectFactory::getInstance().changeGameObjectSpriteComponent(this->composition, "./assets/sprite/menu/MusicButtonOn.png");
+				}
+				else {
+					GameSystems::ObjectFactory::getInstance().changeGameObjectSpriteComponent(this->composition, "./assets/sprite/menu/MusicButtonOff.png");
+				}
+			}
+		}
 	}
 
 	void ButtonComponent::drawSquare(GLfloat x, GLfloat y, GLfloat width, GLfloat height) {
@@ -338,6 +351,8 @@ namespace GameComponents {
 	void ButtonComponent::restartLevel()
 	{
 		std::cout << "resume" << std::endl;
+		GameSystems::ObjectFactory::getInstance().clearRound();
+		GameSystems::ObjectFactory::getInstance().listPlayers.clear();
 		GameSystems::ObjectFactory::getInstance().LoadLevelFileAsCurrent(GameSystems::ObjectFactory::getInstance().currentLevelFileName);
 	}
 
@@ -374,16 +389,23 @@ namespace GameComponents {
 	}
 
 	void ButtonComponent::switchSound() {
-		GameSystems::AudioSystem::_muteAll = !GameSystems::AudioSystem::_muteAll;
-		if (!GameSystems::AudioSystem::_muteAll) {
+//		GameSystems::AudioSystem::_muteAll = !GameSystems::AudioSystem::_muteAll;
+		if (GameSystems::AudioSystem::_muteAll) {
 			GameSystems::ObjectFactory::getInstance().changeGameObjectSpriteComponent(this->composition, "./assets/sprite/menu/SoundButtonOn.png");
+			GameSystems::AudioSystem::_muteAll = false;
+			GameSystems::AudioSystem::_muteAmbiance = false;
 		}
 		else {
 			GameSystems::ObjectFactory::getInstance().changeGameObjectSpriteComponent(this->composition, "./assets/sprite/menu/SoundButtonOff.png");
+			GameSystems::AudioSystem::_muteAll = true;
+			GameSystems::AudioSystem::_muteAmbiance = true;
 		}
 	}
 
 	void ButtonComponent::switchMusic() {
+		if (GameSystems::AudioSystem::_muteAll) {
+			return;
+		}
 		GameSystems::AudioSystem::_muteAmbiance = !GameSystems::AudioSystem::_muteAmbiance;
 		if (!GameSystems::AudioSystem::_muteAmbiance) {
 			GameSystems::ObjectFactory::getInstance().changeGameObjectSpriteComponent(this->composition, "./assets/sprite/menu/MusicButtonOn.png");

@@ -24,6 +24,54 @@ namespace GameSystems {
 
 	int AudioSystem::Update(double dt, std::list<GameObjects::BaseGameObject*>&listObjects)
 	{
+		if (_pause && isPaused == false) {
+			if (_sound["ambiance"])
+				_sound["ambiance"]->stop();
+			if (_sound["victory"])
+				_sound["victory"]->stop();
+			isPaused = true;
+		}
+		if (!_pause && isPaused) {
+			if (!GameTools::CSoundManager::getInstance().isMute())
+			{
+				if (_sound["ambiance"] && _isAmbiance)
+					_sound["ambiance"]->play();
+				if (_sound["victory"] && !_isAmbiance)
+					_sound["victory"]->play();
+			}
+			isPaused = false;
+		}
+		if (_pauseMenu && !_isMenu)
+		{
+			if (!GameTools::CSoundManager::getInstance().isMute())
+			{
+				GameTools::CSoundManager::getInstance().stopAllExceptAmbiance(_sound["ambiance"]->getFileName(), _sound["victory"]->getFileName());
+				if (_sound["ambiance"])
+					_sound["ambiance"]->setVolume(5, false);
+				if (_sound["victory"])
+					_sound["victory"]->setVolume(5, false);
+			}
+			_isMenu = true;
+		}
+		if (!_pauseMenu && _isMenu)
+		{
+			if (!GameTools::CSoundManager::getInstance().isMute())
+			{
+				GameTools::CSoundManager::getInstance().stopAllExceptAmbiance(_sound["ambiance"]->getFileName(), _sound["victory"]->getFileName());
+				if (_sound["ambiance"])
+					_sound["ambiance"]->setVolume(_sound["ambiance"]->getVolume());
+				if (_sound["victory"])
+					_sound["victory"]->setVolume(_sound["victory"]->getVolume());
+			}
+			_isMenu = false;
+		}
+		std::list<GameObjects::BaseGameObject*>::iterator it;
+		for (it = listObjects.begin(); it != listObjects.end(); ++it)
+		{
+			GameComponents::BaseComponent *component = (*it)->getComponent(GameComponents::COMPONENT_TYPE::SOUND);
+			if (component)
+				component->Update(dt);
+		}
 		if (_muteAll && !_isMuteAll)
 		{
 			_isMuteAll = true;
@@ -37,57 +85,12 @@ namespace GameSystems {
 		if (_muteAmbiance && !_isMuteAmbiance)
 		{
 			_isMuteAmbiance = true;
-			if (_sound["ambiance"])
-				_sound["ambiance"]->setVolume(0.0f, false);
-			if (_sound["victory"])
-				_sound["victory"]->setVolume(0.0f, false);;
+			GameTools::CSoundManager::getInstance().muteMusic(_sound["ambiance"]->getFileName(), _sound["victory"]->getFileName());
 		}
-		else if (!_muteAmbiance && _isMuteAmbiance)
+		else if (!_muteAmbiance && _isMuteAmbiance && !_muteAll)
 		{
 			_isMuteAmbiance = false;
-			if (_sound["ambiance"] && _isAmbiance)
-				_sound["ambiance"]->setVolume(_sound["ambiance"]->getVolume(), false);
-			if (_sound["victory"] && !_isAmbiance)
-				_sound["victory"]->setVolume(_sound["ambiance"]->getVolume(), false);
-		}
-		if (_pause && isPaused == false) {
-			if (_sound["ambiance"])
-				_sound["ambiance"]->stop();
-			if (_sound["victory"])
-				_sound["victory"]->stop();
-			isPaused = true;
-		}
-		if (!_pause && isPaused) {
-			if (_sound["ambiance"] && _isAmbiance)
-				_sound["ambiance"]->play();
-			if (_sound["victory"] && !_isAmbiance)
-				_sound["victory"]->play();
-			isPaused = false;
-		}
-		if (_pauseMenu && !_isMenu)
-		{
-			GameTools::CSoundManager::getInstance().stopAllExceptAmbiance(_sound["ambiance"]->getFileName(), _sound["victory"]->getFileName());
-			if (_sound["ambiance"])
-				_sound["ambiance"]->setVolume(5, false);
-			if (_sound["victory"])
-				_sound["victory"]->setVolume(5, false);
-			_isMenu = true;
-		}
-		if (!_pauseMenu && _isMenu)
-		{
-			GameTools::CSoundManager::getInstance().stopAllExceptAmbiance(_sound["ambiance"]->getFileName(), _sound["victory"]->getFileName());
-			if (_sound["ambiance"])
-				_sound["ambiance"]->setVolume(_sound["ambiance"]->getVolume());
-			if (_sound["victory"])
-				_sound["victory"]->setVolume(_sound["victory"]->getVolume());
-			_isMenu = false;
-		}
-		std::list<GameObjects::BaseGameObject*>::iterator it;
-		for (it = listObjects.begin(); it != listObjects.end(); ++it)
-		{
-			GameComponents::BaseComponent *component = (*it)->getComponent(GameComponents::COMPONENT_TYPE::SOUND);
-			if (component)
-				component->Update(dt);
+			GameTools::CSoundManager::getInstance().unmuteMusic(_sound["ambiance"]->getFileName(), _sound["victory"]->getFileName());
 		}
 		return 0;
 	}
@@ -142,22 +145,28 @@ namespace GameSystems {
 		}
 		if (_menuVictory)
 		{
-			if (_sound["ambiance"])
-				_sound["ambiance"]->stop();
-			if (_sound["victory"])
-				_sound["victory"]->play();
+			if (!GameTools::CSoundManager::getInstance().isMute())
+			{
+				if (_sound["ambiance"])
+					_sound["ambiance"]->stop();
+				if (_sound["victory"])
+					_sound["victory"]->play();
+			}
 			_menuVictory = false;
 			_isAmbiance = false;
 		}
 		else if (!_isAmbiance)
 		{
-			if (_sound["victory"])
-				_sound["victory"]->stop();
-			if (_sound["ambiance"])
-				_sound["ambiance"]->play();
+			if (!GameTools::CSoundManager::getInstance().isMute())
+			{
+				if (_sound["victory"])
+					_sound["victory"]->stop();
+				if (_sound["ambiance"])
+					_sound["ambiance"]->play();
+			}
 			_isAmbiance = true;
 		}
-		if (_pauseMenu)
+		if (_pauseMenu && !GameTools::CSoundManager::getInstance().isMute())
 		{
 			GameTools::CSoundManager::getInstance().stopAllExceptAmbiance(_sound["ambiance"]->getFileName(), _sound["victory"]->getFileName());
 			if (_sound["ambiance"])
@@ -165,7 +174,7 @@ namespace GameSystems {
 			if (_sound["victory"])
 				_sound["victory"]->setVolume(5, false);
 		}
-		if (!_pauseMenu)
+		if (!_pauseMenu && !GameTools::CSoundManager::getInstance().isMute())
 		{
 			GameTools::CSoundManager::getInstance().stopAllExceptAmbiance(_sound["ambiance"]->getFileName(), _sound["victory"]->getFileName());
 			if (_sound["ambiance"])
@@ -178,19 +187,11 @@ namespace GameSystems {
 		else if (!_muteAll)
 			GameTools::CSoundManager::getInstance().unmuteAll();
 		if (_muteAmbiance)
-		{
-			if (_sound["ambiance"])
-				_sound["ambiance"]->setVolume(0.0f, false);
-			if (_sound["victory"])
-				_sound["victory"]->setVolume(0.0f, false);;
-		}
-		else if (!_muteAmbiance)
-		{
-			if (_sound["ambiance"] && _isAmbiance)
-				_sound["ambiance"]->setVolume(_sound["ambiance"]->getVolume(), false);
-			if (_sound["victory"] && !_isAmbiance)
-				_sound["victory"]->setVolume(_sound["ambiance"]->getVolume(), false);
-		}
+			GameTools::CSoundManager::getInstance().muteMusic(_sound["ambiance"]->getFileName(), _sound["victory"]->getFileName());
+		else if (!_muteAmbiance && !_muteAll)
+			GameTools::CSoundManager::getInstance().unmuteMusic(_sound["ambiance"]->getFileName(), _sound["victory"]->getFileName());
+		_isMuteAmbiance = false;
+		_isMuteAll = false;
 	}
 
 	void AudioSystem::SendAMessage() {}

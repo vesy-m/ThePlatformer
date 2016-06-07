@@ -5,6 +5,7 @@
 #include <exception>
 
 #include "Sound.h"
+#include "AudioSystem.h"
 #include "Singleton.h"
 
 namespace GameTools
@@ -19,6 +20,9 @@ namespace GameTools
 		void			stopAllExceptAmbiance(std::string const, std::string const);
 		void			muteAll();
 		void			unmuteAll();
+		void			muteMusic(std::string const ambiance, std::string const win);
+		void			unmuteMusic(std::string const ambiance, std::string const win);
+		bool			isMute() const;
 
 	private:
 		CSoundManager();

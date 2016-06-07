@@ -40,6 +40,15 @@ namespace GameComponents {
 				this->getComposition()->setX(parentPosX + (this->parentObject->getWidth() / 2) + 5);
 			this->getComposition()->setY(parentPosY + (this->parentObject->getHeight() / 2) - 15);
 		}
+		else if (this->composition->getType() == GameObjects::PROJECTILE && this->composition->getProjectileType() == GameObjects::BOXER_POWERUP_AURA) {
+			if (!this->parentObject)
+				return;
+			int parentPosX = parentObject->getX();
+			int parentPosY = parentObject->getY();
+
+			this->getComposition()->setX(parentPosX);
+			this->getComposition()->setY(parentPosY);
+		}
 		else
 			Integrate((float)(dt / 100));
 	}
@@ -166,8 +175,8 @@ namespace GameComponents {
 			lastCollisionVelocity = this->velocity;
 			this->velocity = collision->velocity;
 			this->position += collision->position;
-			this->composition->setX(round(position.x));
-			this->composition->setY(round(position.y));
+			this->composition->setX((int)round(position.x));
+			this->composition->setY((int)round(position.y));
 			float res = (forces.y * (1.0f / mass)) + gravity.y;
 			if (forces.y > 0 && collision->normal.y < 0.0f)
 			{
@@ -218,8 +227,8 @@ namespace GameComponents {
 		if (position.y >= 1000.0f)
 			this->composition->destroy(true);
 
-		composition->setX(round(position.x));
-		composition->setY(round(position.y));
+		composition->setX((int)round(position.x));
+		composition->setY((int)round(position.y));
 
 		GameMessage::VectorMessage *vec = new GameMessage::VectorMessage(GameMessage::VELOCITY_VECTOR, velocity);
 		this->composition->sendMessage((GameMessage::Message*)vec);

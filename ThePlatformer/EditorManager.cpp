@@ -22,7 +22,7 @@ namespace GameTools {
 		new GameComponents::SpriteComponent(ret, "./assets/levels_sprite/selection.png");
 		new GameComponents::EditorKeyboardInputComponent(ret, true);
 		new GameComponents::MouseComponent(ret, true);
-		new GameComponents::EditorCaseSelectorComponent(ret, this->caseSelectionSize);
+		new GameComponents::EditorCaseSelectorComponent(ret, (int)this->caseSelectionSize);
 		ret->setX(0);
 		ret->setY(0);
 		ret->setScale(1.0f / (42.0f / this->caseSelectionSize));

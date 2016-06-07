@@ -99,7 +99,9 @@ namespace GameComponents {
 	void BaseballAttack::Attack3Released()
 	{
 		GameComponents::TimerComponent *timer = reinterpret_cast<GameComponents::TimerComponent*>(getComposition()->getComponent(GameComponents::MECHANIC));
-		assert(timer != NULL);
+		if (!timer)
+			return;
+		//assert(timer != NULL);
 		timer->stopTimer();
 		this->composition->setInvicible(false);
 		this->composition->setType(GameObjects::PLAYER);
