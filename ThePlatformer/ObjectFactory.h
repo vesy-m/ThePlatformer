@@ -65,10 +65,14 @@ namespace GameSystems {
 		int idWinPlayer;
 		bool waitAMoment;
 		int roundWin[4];
+		bool playerIsDead[4];
 		std::vector<GameObjects::BaseGameObject *> listDotRound;
+		std::vector<GameObjects::BaseGameObject *> listSkull;
 		std::vector<GameObjects::BaseGameObject*> listPlayers;
 		//----
 		int to_wait;
+		void killPlayerByObject(GameObjects::BaseGameObject * player);
+
 	private:
 		ObjectFactory();
 		ObjectFactory(ObjectFactory const&) = delete;

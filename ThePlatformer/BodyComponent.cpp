@@ -225,7 +225,7 @@ namespace GameComponents {
 		if (onGround == false && (forces.y <= maxForce)) forces = forces + gravity;
 
 		if (position.y >= 1000.0f)
-			this->composition->destroy(true);
+			GameSystems::ObjectFactory::getInstance().killPlayerByObject(this->composition);
 
 		composition->setX((int)round(position.x));
 		composition->setY((int)round(position.y));
