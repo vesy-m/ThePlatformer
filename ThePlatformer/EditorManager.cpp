@@ -10,6 +10,7 @@
 #include <strsafe.h>
 #pragma comment(lib, "User32.lib")
 #include <il.h>
+#include <ilu.h>
 #include <SFML\OpenGL.hpp>
 #include <sys/stat.h>
 
@@ -230,6 +231,10 @@ namespace GameTools {
 		printf("Your image was texxed\n");
 
 		printf("Now width=%d,  height=%d,  bpp=%d\n", ilGetInteger(IL_IMAGE_WIDTH), ilGetInteger(IL_IMAGE_HEIGHT), ilGetInteger(IL_IMAGE_BPP));
+
+		if (screenWidth != 1280 || screenHeight != 720) {
+			iluScale(1280, 720, 0);
+		}
 
 		ilEnable(IL_FILE_OVERWRITE);
 

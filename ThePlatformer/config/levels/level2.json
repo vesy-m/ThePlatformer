@@ -2,10 +2,10 @@
   "objects" : [
     {
       "name" : "debugFps",
-	  "x" : 0,
+      "x" : 0,
       "y" : 0,
       "depth" : 5,
-	  "sprite" : "./assets/sprite/background.png",
+      "sprite" : "./assets/sprite/background.png",
       "fps" : true
     },
     {
@@ -983,7 +983,7 @@
     {
       "x" : 336,
       "y" : 420,
-      "sprite" : "./assets/levels_sprite/element_sprite/grass.png",
+      "sprite" : "./assets/levels_sprite/element_sprite/grassLeft.png",
       "scale" : 0.65625,
       "depth" : 3,
       "vector" : "square",
@@ -1253,7 +1253,7 @@
     {
       "x" : 420,
       "y" : 420,
-      "sprite" : "./assets/levels_sprite/element_sprite/grass.png",
+      "sprite" : "./assets/levels_sprite/element_sprite/grassRight.png",
       "scale" : 0.65625,
       "depth" : 3,
       "vector" : "square",
@@ -1307,7 +1307,7 @@
     {
       "x" : 441,
       "y" : 546,
-      "sprite" : "./assets/levels_sprite/element_sprite/grass.png",
+      "sprite" : "./assets/levels_sprite/element_sprite/grassLeft.png",
       "scale" : 0.65625,
       "depth" : 3,
       "vector" : "square",
@@ -1523,7 +1523,7 @@
     {
       "x" : 525,
       "y" : 546,
-      "sprite" : "./assets/levels_sprite/element_sprite/grass.png",
+      "sprite" : "./assets/levels_sprite/element_sprite/grassRight.png",
       "scale" : 0.65625,
       "depth" : 3,
       "vector" : "square",
@@ -1577,7 +1577,7 @@
     {
       "x" : 546,
       "y" : 294,
-      "sprite" : "./assets/levels_sprite/element_sprite/grass.png",
+      "sprite" : "./assets/levels_sprite/element_sprite/grassLeft.png",
       "scale" : 0.65625,
       "depth" : 3,
       "vector" : "square",
@@ -1586,7 +1586,7 @@
     {
       "x" : 546,
       "y" : 462,
-      "sprite" : "./assets/levels_sprite/element_sprite/grass.png",
+      "sprite" : "./assets/levels_sprite/element_sprite/grassLeft.png",
       "scale" : 0.65625,
       "depth" : 3,
       "vector" : "square",
@@ -1766,7 +1766,7 @@
     {
       "x" : 609,
       "y" : 294,
-      "sprite" : "./assets/levels_sprite/element_sprite/grass.png",
+      "sprite" : "./assets/levels_sprite/element_sprite/grassRight.png",
       "scale" : 0.65625,
       "depth" : 3,
       "vector" : "square",
@@ -1891,8 +1891,17 @@
     },
     {
       "x" : 651,
-      "y" : 630,
+      "y" : 609,
       "sprite" : "./assets/levels_sprite/element_sprite/grass.png",
+      "scale" : 0.65625,
+      "depth" : 3,
+      "vector" : "square",
+      "boxcollider" : true
+    },
+    {
+      "x" : 651,
+      "y" : 630,
+      "sprite" : "./assets/levels_sprite/element_sprite/earth.png",
       "scale" : 0.65625,
       "depth" : 3,
       "vector" : "square",
@@ -1937,7 +1946,7 @@
     {
       "x" : 672,
       "y" : 378,
-      "sprite" : "./assets/levels_sprite/element_sprite/grass.png",
+      "sprite" : "./assets/levels_sprite/element_sprite/grassLeft.png",
       "scale" : 0.65625,
       "depth" : 3,
       "vector" : "square",
@@ -1946,6 +1955,15 @@
     {
       "x" : 672,
       "y" : 483,
+      "sprite" : "./assets/levels_sprite/element_sprite/grassBlock.png",
+      "scale" : 0.65625,
+      "depth" : 3,
+      "vector" : "square",
+      "boxcollider" : true
+    },
+    {
+      "x" : 672,
+      "y" : 588,
       "sprite" : "./assets/levels_sprite/element_sprite/grass.png",
       "scale" : 0.65625,
       "depth" : 3,
@@ -1954,8 +1972,17 @@
     },
     {
       "x" : 672,
+      "y" : 609,
+      "sprite" : "./assets/levels_sprite/element_sprite/earth.png",
+      "scale" : 0.65625,
+      "depth" : 3,
+      "vector" : "square",
+      "boxcollider" : true
+    },
+    {
+      "x" : 672,
       "y" : 630,
-      "sprite" : "./assets/levels_sprite/element_sprite/grass.png",
+      "sprite" : "./assets/levels_sprite/element_sprite/earth.png",
       "scale" : 0.65625,
       "depth" : 3,
       "vector" : "square",
@@ -2008,8 +2035,35 @@
     },
     {
       "x" : 693,
-      "y" : 630,
+      "y" : 567,
       "sprite" : "./assets/levels_sprite/element_sprite/grass.png",
+      "scale" : 0.65625,
+      "depth" : 3,
+      "vector" : "square",
+      "boxcollider" : true
+    },
+    {
+      "x" : 693,
+      "y" : 588,
+      "sprite" : "./assets/levels_sprite/element_sprite/earth.png",
+      "scale" : 0.65625,
+      "depth" : 3,
+      "vector" : "square",
+      "boxcollider" : true
+    },
+    {
+      "x" : 693,
+      "y" : 609,
+      "sprite" : "./assets/levels_sprite/element_sprite/earth.png",
+      "scale" : 0.65625,
+      "depth" : 3,
+      "vector" : "square",
+      "boxcollider" : true
+    },
+    {
+      "x" : 693,
+      "y" : 630,
+      "sprite" : "./assets/levels_sprite/element_sprite/earth.png",
       "scale" : 0.65625,
       "depth" : 3,
       "vector" : "square",
@@ -2062,8 +2116,35 @@
     },
     {
       "x" : 714,
-      "y" : 630,
+      "y" : 567,
       "sprite" : "./assets/levels_sprite/element_sprite/grass.png",
+      "scale" : 0.65625,
+      "depth" : 3,
+      "vector" : "square",
+      "boxcollider" : true
+    },
+    {
+      "x" : 714,
+      "y" : 588,
+      "sprite" : "./assets/levels_sprite/element_sprite/earth.png",
+      "scale" : 0.65625,
+      "depth" : 3,
+      "vector" : "square",
+      "boxcollider" : true
+    },
+    {
+      "x" : 714,
+      "y" : 609,
+      "sprite" : "./assets/levels_sprite/element_sprite/earth.png",
+      "scale" : 0.65625,
+      "depth" : 3,
+      "vector" : "square",
+      "boxcollider" : true
+    },
+    {
+      "x" : 714,
+      "y" : 630,
+      "sprite" : "./assets/levels_sprite/element_sprite/earth.png",
       "scale" : 0.65625,
       "depth" : 3,
       "vector" : "square",
@@ -2117,7 +2198,7 @@
     {
       "x" : 735,
       "y" : 567,
-      "sprite" : "./assets/levels_sprite/element_sprite/earth.png",
+      "sprite" : "./assets/levels_sprite/element_sprite/grass.png",
       "scale" : 0.65625,
       "depth" : 3,
       "vector" : "square",
@@ -2153,7 +2234,7 @@
     {
       "x" : 735,
       "y" : 651,
-      "sprite" : "./assets/levels_sprite/element_sprite/rock.png",
+      "sprite" : "./assets/levels_sprite/element_sprite/earth.png",
       "scale" : 0.65625,
       "depth" : 3,
       "vector" : "square",
@@ -2197,8 +2278,35 @@
     },
     {
       "x" : 756,
-      "y" : 630,
+      "y" : 567,
       "sprite" : "./assets/levels_sprite/element_sprite/grass.png",
+      "scale" : 0.65625,
+      "depth" : 3,
+      "vector" : "square",
+      "boxcollider" : true
+    },
+    {
+      "x" : 756,
+      "y" : 588,
+      "sprite" : "./assets/levels_sprite/element_sprite/earth.png",
+      "scale" : 0.65625,
+      "depth" : 3,
+      "vector" : "square",
+      "boxcollider" : true
+    },
+    {
+      "x" : 756,
+      "y" : 609,
+      "sprite" : "./assets/levels_sprite/element_sprite/earth.png",
+      "scale" : 0.65625,
+      "depth" : 3,
+      "vector" : "square",
+      "boxcollider" : true
+    },
+    {
+      "x" : 756,
+      "y" : 630,
+      "sprite" : "./assets/levels_sprite/element_sprite/earth.png",
       "scale" : 0.65625,
       "depth" : 3,
       "vector" : "square",
@@ -2251,8 +2359,26 @@
     },
     {
       "x" : 777,
-      "y" : 630,
+      "y" : 588,
       "sprite" : "./assets/levels_sprite/element_sprite/grass.png",
+      "scale" : 0.65625,
+      "depth" : 3,
+      "vector" : "square",
+      "boxcollider" : true
+    },
+    {
+      "x" : 777,
+      "y" : 609,
+      "sprite" : "./assets/levels_sprite/element_sprite/earth.png",
+      "scale" : 0.65625,
+      "depth" : 3,
+      "vector" : "square",
+      "boxcollider" : true
+    },
+    {
+      "x" : 777,
+      "y" : 630,
+      "sprite" : "./assets/levels_sprite/element_sprite/earth.png",
       "scale" : 0.65625,
       "depth" : 3,
       "vector" : "square",
@@ -2305,8 +2431,17 @@
     },
     {
       "x" : 798,
-      "y" : 630,
+      "y" : 609,
       "sprite" : "./assets/levels_sprite/element_sprite/grass.png",
+      "scale" : 0.65625,
+      "depth" : 3,
+      "vector" : "square",
+      "boxcollider" : true
+    },
+    {
+      "x" : 798,
+      "y" : 630,
+      "sprite" : "./assets/levels_sprite/element_sprite/earth.png",
       "scale" : 0.65625,
       "depth" : 3,
       "vector" : "square",
@@ -2459,7 +2594,7 @@
     {
       "x" : 861,
       "y" : 357,
-      "sprite" : "./assets/levels_sprite/element_sprite/grass.png",
+      "sprite" : "./assets/levels_sprite/element_sprite/grassRight.png",
       "scale" : 0.65625,
       "depth" : 3,
       "vector" : "square",
@@ -2666,7 +2801,7 @@
     {
       "x" : 945,
       "y" : 441,
-      "sprite" : "./assets/levels_sprite/element_sprite/grass.png",
+      "sprite" : "./assets/levels_sprite/element_sprite/grassLeft.png",
       "scale" : 0.65625,
       "depth" : 3,
       "vector" : "square",
@@ -2927,7 +3062,7 @@
     {
       "x" : 1029,
       "y" : 525,
-      "sprite" : "./assets/levels_sprite/element_sprite/grass.png",
+      "sprite" : "./assets/levels_sprite/element_sprite/grassLeft.png",
       "scale" : 0.65625,
       "depth" : 3,
       "vector" : "square",
@@ -2990,7 +3125,7 @@
     {
       "x" : 1050,
       "y" : 441,
-      "sprite" : "./assets/levels_sprite/element_sprite/grass.png",
+      "sprite" : "./assets/levels_sprite/element_sprite/grassRight.png",
       "scale" : 0.65625,
       "depth" : 3,
       "vector" : "square",
@@ -3061,15 +3196,6 @@
     },
     {
       "x" : 1071,
-      "y" : 441,
-      "sprite" : "./assets/levels_sprite/element_sprite/grass.png",
-      "scale" : 0.65625,
-      "depth" : 3,
-      "vector" : "square",
-      "boxcollider" : true
-    },
-    {
-      "x" : 1071,
       "y" : 525,
       "sprite" : "./assets/levels_sprite/element_sprite/grass.png",
       "scale" : 0.65625,
@@ -3126,15 +3252,6 @@
       "x" : 1071,
       "y" : 714,
       "sprite" : "./assets/levels_sprite/element_sprite/rock.png",
-      "scale" : 0.65625,
-      "depth" : 3,
-      "vector" : "square",
-      "boxcollider" : true
-    },
-    {
-      "x" : 1092,
-      "y" : 441,
-      "sprite" : "./assets/levels_sprite/element_sprite/grass.png",
       "scale" : 0.65625,
       "depth" : 3,
       "vector" : "square",
@@ -3214,8 +3331,17 @@
     },
     {
       "x" : 1113,
-      "y" : 630,
+      "y" : 609,
       "sprite" : "./assets/levels_sprite/element_sprite/grass.png",
+      "scale" : 0.65625,
+      "depth" : 3,
+      "vector" : "square",
+      "boxcollider" : true
+    },
+    {
+      "x" : 1113,
+      "y" : 630,
+      "sprite" : "./assets/levels_sprite/element_sprite/earth.png",
       "scale" : 0.65625,
       "depth" : 3,
       "vector" : "square",
@@ -3260,6 +3386,15 @@
     {
       "x" : 1134,
       "y" : 525,
+      "sprite" : "./assets/levels_sprite/element_sprite/grassRight.png",
+      "scale" : 0.65625,
+      "depth" : 3,
+      "vector" : "square",
+      "boxcollider" : true
+    },
+    {
+      "x" : 1134,
+      "y" : 609,
       "sprite" : "./assets/levels_sprite/element_sprite/grass.png",
       "scale" : 0.65625,
       "depth" : 3,
@@ -3269,7 +3404,7 @@
     {
       "x" : 1134,
       "y" : 630,
-      "sprite" : "./assets/levels_sprite/element_sprite/grass.png",
+      "sprite" : "./assets/levels_sprite/element_sprite/earth.png",
       "scale" : 0.65625,
       "depth" : 3,
       "vector" : "square",
@@ -3313,7 +3448,7 @@
     },
     {
       "x" : 1155,
-      "y" : 525,
+      "y" : 609,
       "sprite" : "./assets/levels_sprite/element_sprite/grass.png",
       "scale" : 0.65625,
       "depth" : 3,
@@ -3323,7 +3458,7 @@
     {
       "x" : 1155,
       "y" : 630,
-      "sprite" : "./assets/levels_sprite/element_sprite/grass.png",
+      "sprite" : "./assets/levels_sprite/element_sprite/earth.png",
       "scale" : 0.65625,
       "depth" : 3,
       "vector" : "square",
@@ -3367,8 +3502,17 @@
     },
     {
       "x" : 1176,
-      "y" : 630,
+      "y" : 609,
       "sprite" : "./assets/levels_sprite/element_sprite/grass.png",
+      "scale" : 0.65625,
+      "depth" : 3,
+      "vector" : "square",
+      "boxcollider" : true
+    },
+    {
+      "x" : 1176,
+      "y" : 630,
+      "sprite" : "./assets/levels_sprite/element_sprite/earth.png",
       "scale" : 0.65625,
       "depth" : 3,
       "vector" : "square",
