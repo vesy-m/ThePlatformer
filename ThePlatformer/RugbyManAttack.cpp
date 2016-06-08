@@ -70,7 +70,7 @@ namespace GameComponents
 		else
 			this->composition->sendMessage(new GameMessage::Message(GameMessage::RIGHT_DASH));
 		this->composition->setType(GameObjects::PLAYER_ATTACK);
-		this->composition->setPower(30);
+		this->composition->setPower(36);
 		GameComponents::TimerComponent *timer = reinterpret_cast<GameComponents::TimerComponent*>(getComposition()->getComponent(GameComponents::MECHANIC));
 		if (!timer)
 			timer = new GameComponents::TimerComponent(this->composition);
@@ -138,14 +138,14 @@ namespace GameComponents
 		{
 			timer = new GameComponents::TimerComponent(projectile);
 			timer->setTimerType(type);
-			timer->setTime(450);
+			timer->setTime(600);
 			timer->startTimer();
 		}
 		if (type == GameObjects::DROP)
 		{
 			timer = new GameComponents::TimerComponent(projectile);
 			timer->setTimerType(type);
-			timer->setTime(450);
+			timer->setTime(600);
 			timer->startTimer();
 		}
 		GameSystems::ObjectFactory::getInstance().createProjectile(projectile);

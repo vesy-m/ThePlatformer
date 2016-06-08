@@ -374,7 +374,7 @@ namespace GameObjects {
 		if (invicible)
 			return;
 
-		this->life -= (int) std::round(damageMsg->damage / this->powerupDefense);
+		this->life -= (int) std::round((float)damageMsg->damage * this->powerupDefense);
 
 		if (damageMsg->damageType == GameMessage::DamageMessage::DASH) {
 			GameComponents::TimerComponent* timer = new GameComponents::TimerComponent(this);

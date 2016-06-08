@@ -73,8 +73,8 @@ namespace GameComponents {
 		timer->setTime(4000);
 		timer->startTimer();
 
-		this->composition->setPowerupDefense(2);
-		this->composition->setPowerupDamage(2);
+		this->composition->setPowerupDefense(1.5);
+		this->composition->setPowerupDamage(1.5);
 
 		createProjectile(getComposition(), GameObjects::BOXER_POWERUP_AURA, 0.0f, glm::normalize(direction), "./config/sprite_sheets/desc-aura.json");
 		//this->composition->sendMessage(new GameMessage::Message(GameMessage::PUNCH_RIGHT));
@@ -114,7 +114,7 @@ namespace GameComponents {
 				projectile->setHeight(int(30 * 0.50f));
 				projectile->setWidth(int(60 * 0.50f));
 				projectile->setScale(0.0f);
-				projectile->setPower(20 * this->composition->getPowerupDamage());
+				projectile->setPower((int)std::round(18 * (float)this->composition->getPowerupDamage()));
 				if (direction.x <= 0)
 					projectile->setX(shooter->getX() - (shooter->getWidth() / 2));
 				else if (direction.x > 0)
@@ -127,7 +127,7 @@ namespace GameComponents {
 				projectile->setHeight(int(40 * 0.50f));
 				projectile->setWidth(int(40 * 0.50f));
 				projectile->setScale(0.25f);
-				projectile->setPower(10 * this->composition->getPowerupDamage());
+				projectile->setPower((int)std::round(12 * (float)this->composition->getPowerupDamage()));
 				if (direction.x <= 0)
 					projectile->setX(shooter->getX() - (shooter->getWidth() / 2));
 				else if (direction.x > 0)

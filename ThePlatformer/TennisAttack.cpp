@@ -111,7 +111,7 @@ namespace GameComponents
 				projectile->setHeight(int(30 * 0.50f));
 				projectile->setWidth(int(30 * 0.50f));
 				projectile->setScale(0.03f);
-				projectile->setPower(15);
+				projectile->setPower(18);
 				projectile->setX(shooter->getX() + (shooter->getWidth() / 2));
 				projectile->setY(shooter->getY() + (shooter->getHeight() / 2) - 10);
 				break;
@@ -121,7 +121,7 @@ namespace GameComponents
 				projectile->setHeight(int(30 * 0.50f));
 				projectile->setWidth(int(30 * 0.50f));
 				projectile->setScale(0.03f);
-				projectile->setPower(3);
+				projectile->setPower(12);
 				projectile->setX(shooter->getX() + (shooter->getWidth() / 2));
 				projectile->setY(shooter->getY() + (shooter->getHeight() / 2) - 10);
 				break;
@@ -131,7 +131,7 @@ namespace GameComponents
 				projectile->setHeight(int(30 * 0.50f));
 				projectile->setWidth(int(30 * 0.50f));
 				projectile->setScale(0.1f);
-				projectile->setPower(35);
+				projectile->setPower(40);
 				projectile->setX(shooter->getX() + (shooter->getWidth() / 2));
 				projectile->setY(shooter->getY() + (shooter->getHeight() / 2) - 10);
 				projectile->setType(GameObjects::objectType::PROJECTILE_BREAK);

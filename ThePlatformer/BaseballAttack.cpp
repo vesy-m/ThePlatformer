@@ -88,7 +88,7 @@ namespace GameComponents {
 		if (!timer) timer = new GameComponents::TimerComponent(this->composition);
 		timer->Init();
 		timer->setTimerType(GameObjects::BLOCK);
-		timer->setTime(1000);
+		timer->setTime(1500);
 		this->composition->setInvicible(true);
 		this->composition->setType(GameObjects::PLAYER_BLOCK);
 		this->composition->sendMessage(new GameMessage::Message(GameMessage::BLOCK));
@@ -141,7 +141,7 @@ namespace GameComponents {
 				projectile->setHeight(int(30 * 0.50f));
 				projectile->setWidth(int(30 * 0.50f));
 				projectile->setScale(0.05f);
-				projectile->setPower(10);
+				projectile->setPower(12);
 				projectile->setX(shooter->getX() + (shooter->getWidth() / 2));
 				projectile->setY(shooter->getY() + (shooter->getHeight() / 2) - 10);
 				break;
@@ -182,7 +182,7 @@ namespace GameComponents {
 		{
 			timer = new GameComponents::TimerComponent(projectile);
 			timer->setTimerType(type);
-			timer->setTime(450);
+			timer->setTime(600);
 			timer->startTimer();
 		}
 		GameSystems::ObjectFactory::getInstance().createProjectile(projectile);
