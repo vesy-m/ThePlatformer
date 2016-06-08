@@ -272,6 +272,11 @@ namespace GameSystems {
 			GameSystems::JSONParser fileParser(value);
 			GameObjects::BaseGameObject* newPlayer = parseObject(fileParser.getJSONValue());
 			GameComponents::InputComponent *component = nullptr;
+			//if (idController == 7 || idController == 6)
+			//{
+			//	newPlayer->getComponent(GameComponents::AUTO_PLAY)->SetActive(true);
+			//}
+
 			if (idController == 8) component = new GameComponents::KeyboardInputComponent(newPlayer, "./config/controllers/input_keyboard1.json");
 			else component = new GameComponents::ControllerInputComponent(newPlayer, "./config/controllers/input_controller1.json", idController);
 			component->SetActive(false);
@@ -453,7 +458,7 @@ namespace GameSystems {
 			this->orderPlayerController.push_back(7);
 			this->mapPlayersController[7] = "./config/players/player1.json";
 			this->orderPlayerController.push_back(6);
-			this->mapPlayersController[6] = "./config/players/player1.json";
+			this->mapPlayersController[6] = "./config/players/player2.json";
 			this->LoadMenuFileAsCurrent("./config/menus/choose_level_menu.json");
 		}
 	}

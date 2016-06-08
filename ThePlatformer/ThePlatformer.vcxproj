@@ -264,6 +264,7 @@ copy /Y "$(ProjectDir)\lib\lib-x64\devil-1.7.8\bin\*" "$(OutDir)\"</Command>
     <ClInclude Include="MenuControllerMessage.h" />
     <ClInclude Include="Message.h" />
     <ClInclude Include="MouseClickComponent.h" />
+    <ClInclude Include="resource1.h" />
     <ClInclude Include="RugbyManAttack.h" />
     <ClInclude Include="MouseComponent.h" />
     <ClInclude Include="MouseMessageClick.h" />
@@ -291,17 +292,11 @@ copy /Y "$(ProjectDir)\lib\lib-x64\devil-1.7.8\bin\*" "$(OutDir)\"</Command>
     <ClInclude Include="WindowInputSytem.h" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="ThePlatformer.rc" />
+    <Image Include="..\InstallerSample\GAMEDIRECTORY\Icon.ico" />
+    <Image Include="..\InstallerSample\GAMEDIRECTORY\Uninstall.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\InstallerSample\GAMEDIRECTORY\Icon.ico" />
-    <Image Include="..\installersample\gamedirectory\icon2.ico" />
-    <Image Include="..\InstallerSample\GAMEDIRECTORY\Uninstall.ico" />
-    <Image Include="GAMEDIRECTORY\Icon.ico" />
-    <Image Include="gamedirectory\icon3.ico" />
-    <Image Include="icon1.ico" />
-    <Image Include="InstallerSample\GAMEDIRECTORY\Icon.ico" />
-    <Image Include="InstallerSample\GAMEDIRECTORY\Uninstall.ico" />
+    <ResourceCompile Include="ThePlatformer1.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

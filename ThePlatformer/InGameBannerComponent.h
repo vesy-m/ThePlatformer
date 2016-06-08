@@ -2,6 +2,7 @@
 #include "BaseGameObject.h"
 #include "Message.h"
 #include "ObjectFactory.h"
+#include "AutoPlayComponent.h"
 #include "InputComponent.h"
 
 namespace GameComponents {

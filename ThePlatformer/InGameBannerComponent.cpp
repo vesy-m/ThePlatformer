@@ -33,9 +33,13 @@ namespace GameComponents {
 			for (auto player : listPlayers)
 			{
 				auto component = dynamic_cast<GameComponents::InputComponent*> (player->getComponent(GameComponents::WINDOW));
+				auto autoPlay = dynamic_cast<GameComponents::AutoPlayComponent*> (player->getComponent(GameComponents::AUTO_PLAY));
+				int idCtrl = component->idController;
 				if (component) {
 					component->SetActive(true);
 				}
+				if (idCtrl == 6 || idCtrl == 7)
+					autoPlay->SetActive(true);
 			}
 			getComposition()->destroy(true);
 		}

@@ -60,6 +60,7 @@ namespace GameComponents {
 		float getSavedDt();
 		float getMaxElapsedTime();
 
+		int	idController;
 	protected:
 		std::map<INPUT_TYPE, bool> inputState;
 		std::map<CHEAT_CODE_TYPE, std::vector<int>> cheatCodeMap;
@@ -74,6 +75,5 @@ namespace GameComponents {
 		float attack_2;
 		float attack_3;
 		float jump;
-
 	};
 }

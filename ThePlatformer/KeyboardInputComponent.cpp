@@ -7,6 +7,7 @@ namespace GameComponents {
 	KeyboardInputComponent::KeyboardInputComponent(GameObjects::BaseGameObject *object, std::string inputFilename) : InputComponent(object)
 	{
 		this->inputFilename = inputFilename;
+		this->idController = 8;
 	}
 
 
