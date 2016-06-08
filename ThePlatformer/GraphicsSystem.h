@@ -3,6 +3,7 @@
 #include "BaseSystem.h"
 #include <SFML\OpenGL.hpp>
 #include "Singleton.h"
+#define GL_CLAMP_TO_EDGE 0x812F
 
 namespace GameSystems {
 	class GraphicsSystem : public BaseSystem

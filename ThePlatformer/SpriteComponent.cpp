@@ -182,6 +182,8 @@ namespace GameComponents {
 		GLint posY = this->composition->getY() + (this->composition->getHeight() / 2);
 
 		glEnable(GL_TEXTURE_2D);
+		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
 		if (sheet->isAnimated()) {
 			GameTools::SpriteAnimation anim = sheet->getAnim(this->currentAnim);
