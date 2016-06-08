@@ -7,6 +7,7 @@ namespace GameComponents {
 	{
 		this->filename = filename;
 		this->controllerNumber = idController;
+		this->idController = idController;
 	}
 
 
