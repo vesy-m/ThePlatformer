@@ -95,7 +95,7 @@ namespace GameComponents {
 			else if (event.joystickButton.button == 7) { idMessage = GameMessage::START_MENU; }
 			else if (event.joystickButton.button == 1) { idMessage = GameMessage::B_MENU; }
 		} else if (event.type == sf::Event::JoystickMoved) {
-			std::cout << event.joystickMove.axis << " " << event.joystickMove.position << std::endl;
+			//std::cout << event.joystickMove.axis << " " << event.joystickMove.position << std::endl;
 			if (event.joystickMove.axis == 5 || event.joystickMove.axis == 0 || event.joystickMove.axis == 6)
 			{
 				if (event.joystickMove.position == -100) { idMessage = GameMessage::LEFTMENU; }
