@@ -1,37 +1,30 @@
 {
 	"button" : {
 		"x" : 540,
-		"y" : 120,
+		"y" : 144,
 		"sprite" : "./assets/sprite/menu/playButton.png",
 		"menu" : "./config/menus/choose_nb_player_menu.json",
-		"menunav" : [1, -1, -1, 4, 1]
+		"menunav" : [1, -1, -1, 3, 1]
 	},
 	"button" : {
 		"x" : 540,
-		"y" : 240,
+		"y" : 288,
 		"sprite" : "./assets/sprite/menu/settingsButton.png",
 		"menu" : "./config/menus/param_main_menu.json",
 		"menunav" : [0, -1, -1, 0, 2]
 	},
 	"button" : {
 		"x" : 540,
-		"y" : 360,
+		"y" : 432,
 		"sprite" : "./assets/sprite/menu/creditsButton.png",
 		"menu" : "./config/menus/credits_main_menu.json",
 		"menunav" : [0, -1, -1, 1, 3]
 	},
 	"button" : {
 		"x" : 540,
-		"y" : 480,
+		"y" : 576,
 		"sprite" : "./assets/sprite/menu/QuitGameButton.png",
 		"menu" : "./config/menus/quit_menu.json",
-		"menunav" : [0, -1, -1, 2, 4]
-	},
-	"button" : {
-		"x" : 540,
-		"y" : 600,
-		"sprite" : "./assets/sprite/menu/levelEditorButton.png",
-		"menu" : "./config/menus/editor_level_menu.json",
-		"menunav" : [0, -1, -1, 3, 0]
+		"menunav" : [0, -1, -1, 2, 0]
 	}
 }
