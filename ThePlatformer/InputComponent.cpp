@@ -132,6 +132,7 @@ namespace GameComponents {
 			autoPlay = reinterpret_cast<GameComponents::AutoPlayComponent*>(getComposition()->getComponent(GameComponents::AUTO_PLAY));
 			input = reinterpret_cast<GameComponents::InputComponent*>(getComposition()->getComponent(GameComponents::WINDOW));
 			input->SetActive(false);
+			autoPlay->SetActive(true);
 		default:
 			break;
 		}
