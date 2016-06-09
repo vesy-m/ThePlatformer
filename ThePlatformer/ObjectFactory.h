@@ -58,7 +58,7 @@ namespace GameSystems {
 		void changeSelectedButtonMenu(GameObjects::BaseGameObject*);
 		void clearPlayers();
 		void returnPrevMenuOrResumeLevel();
-		void winTheGame(std::string);
+		void winTheGame(GameObjects::BaseGameObject*);
 		void checkWinCondition();
 		int getPlayerId(GameObjects::BaseGameObject*);
 		GameObjects::BaseGameObject *isPLayersAlive();

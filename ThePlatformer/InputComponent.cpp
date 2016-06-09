@@ -117,7 +117,7 @@ namespace GameComponents {
 		{
 		case CHEAT_CODE_TYPE::I_WIN:
 			std::cout << "CHEAT CODE ACTIVATED: I WIN" << std::endl;
-			GameSystems::ObjectFactory::getInstance().winTheGame(this->composition->getName());
+			GameSystems::ObjectFactory::getInstance().winTheGame(this->composition);
 			savedMessage.clear();
 			break;
 		case CHEAT_CODE_TYPE::INVICIBLE:

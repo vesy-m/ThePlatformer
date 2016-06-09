@@ -502,10 +502,10 @@ namespace GameSystems {
 			this->LoadMenuFileAsCurrent(this->currentMenu.prevMenu);
 	}
 
-	void ObjectFactory::winTheGame(std::string name)
+	void ObjectFactory::winTheGame(GameObjects::BaseGameObject *winner)
 	{
 		for (auto player : listPlayers)
-			if (name.compare(player->getName()) != 0)
+			if (player != winner)
 				killPlayerByObject(player);
 	}
 
