@@ -29,7 +29,7 @@ namespace GameSystems {
 
 		~ObjectFactory();
 		GameObjects::BaseGameObject *parseObject(GameTools::JsonValue&);
-		GameObjects::BaseGameObject *createProjectile(GameObjects::BaseGameObject*); /*, unsigned int, unsigned int, float, glm::vec2, std::string const &sprite, bool*/
+		GameObjects::BaseGameObject *createProjectile(GameObjects::BaseGameObject*);
 		std::list<GameObjects::BaseGameObject*> createListObjectFromLevel(GameTools::JsonValue & value);
 		GameObjects::BaseGameObject *ObjectFactory::getUsableProjectile(GameObjects::ProjectileType);
 		static void attachObject(GameObjects::BaseGameObject*);

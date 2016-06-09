@@ -12,16 +12,12 @@
 #include "ObjectFactory.h"
 #include "SoundManager.h"
 #include "AudioSystem.h"
-//#define _CRTDBG_MAP_ALLOC
-//#include <stdlib.h>
-//#include <crtdbg.h>
 
 
 int main()
 {
 	try
 	{
-		//_CrtSetBreakAlloc(5335);
 		GameEngine::Core core = GameEngine::Core();
 		//systems
 		GameSystems::WindowInputSytem *winInput = new GameSystems::WindowInputSytem();
@@ -43,6 +39,5 @@ int main()
 	{
 		MessageBox(NULL, e.what(), "Error", 0);
 	}
-	//_CrtDumpMemoryLeaks();
     return (0);
 }

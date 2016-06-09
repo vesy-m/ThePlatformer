@@ -42,29 +42,17 @@ namespace GameComponents {
 
 			if (y_overlap >= 0)
 			{
-				//if (this->getComposition()->getName().find("metalslug") != std::string::npos)
-				//{
-				//	std::cout << x_overlap << " "<< y_overlap << std::endl;
-				//}
 				if (x_overlap < y_overlap)
 				{
 					if (n.x < 0)
 					{
 						manifold->normal = glm::vec2(1, 0);
 						manifold->penetration = ((positionB.x + manifold->B->getComposition()->getWidth()) - positionA.x) + 1;
-						//if (this->getComposition()->getName().find("metalslug") != std::string::npos)
-						//{
-						//	std::cout << "RIGHT COLLISION" << std::endl;
-						//}
 					}
 					else
 					{
 						manifold->normal = glm::vec2(-1, 0);
 						manifold->penetration = ((positionA.x + manifold->A->getComposition()->getWidth()) - positionB.x) + 1;
-						//if (this->getComposition()->getName().find("metalslug") != std::string::npos)
-						//{
-						//	std::cout << "LEFT COLLISION" << std::endl;
-						//}
 					}
 					return true;
 				}
@@ -74,19 +62,11 @@ namespace GameComponents {
 					{
 						manifold->normal = glm::vec2(0, 1);
 						manifold->penetration = ((positionB.y + manifold->B->getComposition()->getHeight()) - positionA.y) + 1;
-						//if (this->getComposition()->getName().find("metalslug") != std::string::npos)
-						//{
-						//	std::cout << "DOWN COLLISION" << std::endl;
-						//}
 					}
 					else
 					{
 						manifold->normal = glm::vec2(0, -1);
 						manifold->penetration = (positionA.y + manifold->A->getComposition()->getHeight()) - positionB.y;
-						//if (this->getComposition()->getName().find("metalslug") != std::string::npos)
-						//{
-						//	std::cout << "UP COLLISION" << std::endl;
-						//}
 					}
 					return true;
 				}
@@ -117,7 +97,7 @@ namespace GameComponents {
 			for each(GameObjects::BaseGameObject* object in listObjects)
 			{
 				if (this->composition->getType() == GameObjects::PLAYER || this->composition->getType() == GameObjects::PLAYER_BLOCK) {
-					if (object->getType() == GameObjects::PROJECTILE || object->getType() == GameObjects::PROJECTILE_BREAK/* && object->getName().compare(this->composition->getName()) == 0*/)
+					if (object->getType() == GameObjects::PROJECTILE || object->getType() == GameObjects::PROJECTILE_BREAK)
 						continue;
 					else if (object->getType() == GameObjects::PLAYER || object->getType() == GameObjects::PLAYER_BLOCK)
 						continue;

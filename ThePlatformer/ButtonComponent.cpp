@@ -106,7 +106,6 @@ namespace GameComponents {
 	{
 		int i = -1;
 		for (int it = 0; it < size; it++) {
-//			std::cout << values[it] << " ";
 			if (i == -1) {
 				if (values[it] == 1)
 					this->toggleSelected(true);
@@ -157,7 +156,6 @@ namespace GameComponents {
 
 	void ButtonComponent::drawSquare(GLfloat x, GLfloat y, GLfloat width, GLfloat height) {
 		glLineWidth(3);
-		//glColor3f(1.0f / 256.0f * 10.0f, 1.0f / 256.0f * 200.0f, 1.0f / 256.0f * 70.0f);
 		glColor3f(0.0f, 1.0f, 0.0f);
 		glBegin(GL_LINES);
 			//top
@@ -389,7 +387,6 @@ namespace GameComponents {
 	}
 
 	void ButtonComponent::switchSound() {
-//		GameSystems::AudioSystem::_muteAll = !GameSystems::AudioSystem::_muteAll;
 		if (GameSystems::AudioSystem::_muteAll) {
 			GameSystems::ObjectFactory::getInstance().changeGameObjectSpriteComponent(this->composition, "./assets/sprite/menu/SoundButtonOn.png");
 			GameSystems::AudioSystem::_muteAll = false;

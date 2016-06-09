@@ -20,34 +20,11 @@ namespace GameComponents {
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) {
 			this->composition->sendMessage(new GameMessage::MouseMessageClick(0, 0, false, true));
 		}
-		/*
-		if (event.type == sf::Event::MouseButtonPressed)
-		{
-			if (event.mouseButton.button == sf::Mouse::Left || event.mouseButton.button == sf::Mouse::Right)
-			{
-				bool leftClick = false;
-				bool rightClick = false;
-				int mousex = event.mouseButton.x;
-				int mousey = event.mouseButton.y;
-				this->RelativeCoordToWin(mousex, mousey);
-
-				if (event.mouseButton.button == sf::Mouse::Left) {
-					std::cout << "left-click " << mousex << " " << mousey << std::endl;
-					leftClick = true;
-				}
-				if (event.mouseButton.button == sf::Mouse::Right) {
-					std::cout << "right-click " << mousex << " " << mousey << std::endl;
-					rightClick = true;
-				}
-				this->composition->sendMessage(new GameMessage::MouseMessageClick(mousex, mousey, leftClick, rightClick));
-			}
-		}*/
 		if (this->haveToListenMove && event.type == sf::Event::MouseMoved) {
 			int mousex = event.mouseMove.x;
 			int mousey = event.mouseMove.y;
 			this->RelativeCoordToWin(mousex, mousey);
 			
-			//std::cout << mousex << " " << mousey << std::endl;
 			this->composition->sendMessage(new GameMessage::MouseMessageMove(mousex, mousey));
 		}
 		if (event.type == sf::Event::MouseWheelScrolled && event.mouseWheelScroll.wheel == sf::Mouse::VerticalWheel) {
@@ -55,7 +32,6 @@ namespace GameComponents {
 			int mousey = event.mouseWheelScroll.y;
 			this->RelativeCoordToWin(mousex, mousey);
 
-			//std::cout << event.mouseWheelScroll.delta << std::endl;
 			this->composition->sendMessage(new GameMessage::MouseMessageWheel(mousex, mousey, (int)event.mouseWheelScroll.delta));
 		}
 	}

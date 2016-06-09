@@ -77,7 +77,6 @@ namespace GameComponents {
 		this->composition->setPowerupDamage(1.5);
 
 		createProjectile(getComposition(), GameObjects::BOXER_POWERUP_AURA, 0.0f, glm::normalize(direction), "./config/sprite_sheets/desc-aura.json");
-		//this->composition->sendMessage(new GameMessage::Message(GameMessage::PUNCH_RIGHT));
 	}
 
 	GameObjects::BaseGameObject * BoxerAttack::createProjectile(GameObjects::BaseGameObject *shooter, GameObjects::ProjectileType const type, float base_force, glm::vec2 direction, std::string spriteStr)

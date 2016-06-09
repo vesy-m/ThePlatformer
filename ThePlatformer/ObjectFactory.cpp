@@ -67,7 +67,6 @@ namespace GameSystems {
 			else if (std::string(it->key) == "rotate") ret->setRotate((int) it->value.toNumber());
 			else if (std::string(it->key) == "width") ret->setWidth((int) it->value.toNumber());
 			else if (std::string(it->key) == "height") ret->setHeight((int) it->value.toNumber());
-			//else if (std::string(it->key) == "projectile_type") ret->setProjectileType(it->value.toString());
 			else if (std::string(it->key) == "name") ret->setName(std::string(it->value.toString() + std::to_string(countObjects++)));
 			else if (std::string(it->key) == "type") ret->setType((GameObjects::objectType)(int)it->value.toNumber());
 			else if (std::string(it->key) == "sprite") new GameComponents::SpriteComponent(ret, it->value.toString());
@@ -99,8 +98,6 @@ namespace GameSystems {
 				ret->setAttack2Value((float)it->value.toNumber());
 			else if (std::string(it->key) == "attack_3")
 				ret->setAttack3Value((float)it->value.toNumber());
-
-			//else if (std::string(it->key) == "aim") new GameComponents::AimComponent(ret, it->value.toString());
 		}
 		return (ret);
 	}
@@ -237,7 +234,6 @@ namespace GameSystems {
 						prevNb = -1;
 					}
 					if (nbFileFind == 0) {
-						//{ifSelectedAtStart, LeftButtonPlace, RightButtonPlace, TopButtonPlace, BottomButtonPlace, levelPlaceInList, NbLevelsInList}
 						int value[7] = {1, prevNb, nextNb, -1, -1, nbFileFind, nbFiles};
 						buttonComponent->setNav(value, 7);
 					}
@@ -272,10 +268,6 @@ namespace GameSystems {
 			GameSystems::JSONParser fileParser(value);
 			GameObjects::BaseGameObject* newPlayer = parseObject(fileParser.getJSONValue());
 			GameComponents::InputComponent *component = nullptr;
-			//if (idController == 7 || idController == 6)
-			//{
-			//	newPlayer->getComponent(GameComponents::AUTO_PLAY)->SetActive(true);
-			//}
 
 			if (idController == 8) component = new GameComponents::KeyboardInputComponent(newPlayer, "./config/controllers/input_keyboard1.json");
 			else component = new GameComponents::ControllerInputComponent(newPlayer, "./config/controllers/input_controller1.json", idController);
@@ -382,7 +374,6 @@ namespace GameSystems {
 
 	void ObjectFactory::cleanupObjects(void) {
 		std::list<GameObjects::BaseGameObject*> &list = this->currentLevel.getObjects();
-		//std::cout << "Size before : "<< list.size() << std::endl;
 		list.erase(std::remove_if(list.begin(), list.end(), [&](auto obj) {
 			if (obj->destroy()) {
 				delete obj;
@@ -390,7 +381,6 @@ namespace GameSystems {
 			}
 			return false;
 		}), list.end());
-		//std::cout << "Size after : " << list.size() << std::endl;
 	}
 
 	std::list<GameObjects::BaseGameObject*>& ObjectFactory::getCurrentObjects()

@@ -50,11 +50,6 @@ namespace GameComponents {
 		if (sprite->revertX) direction = glm::vec2((-100 + centerX) - centerX, (-70 + centerY) - centerY);
 		else direction = glm::vec2((100 + centerX) - centerX, (-70 + centerY) - centerY);
 
-		//GameObjects::BaseGameObject *arrow = GameSystems::ObjectFactory::getInstance().createProjectile(getComposition(), getComposition()->getX(),
-		//	getComposition()->getY(), /*this->getDuration()*/ 1.0f, glm::normalize(direction), GameSystems::ObjectFactory::SOCCER_BALL);
-		//GameObjects::BaseGameObject *arrow = GameSystems::ObjectFactory::getInstance().createProjectile(createProjectile(getComposition(), ATTACK1, 1.0f, glm::normalize(direction)), getComposition()->getX(),
-		//	getComposition()->getY(), 1.0f, glm::normalize(direction), "./assets/sprite/tennis_ball.png", true);
-
 		createProjectile(getComposition(), GameObjects::BASE_BALL, 1.0f, glm::normalize(direction), "./assets/sprite/baseball.png");
 		this->composition->sendMessage(new GameMessage::Message(GameMessage::BASEBALL_SHOOT));
 	}
@@ -69,11 +64,6 @@ namespace GameComponents {
 		if (sprite->revertX) direction = glm::vec2((-100 + centerX) - centerX, (centerY) - centerY);
 		else direction = glm::vec2((100 + centerX) - centerX, (centerY) - centerY);
 		revert = sprite->revertX;
-
-		//GameObjects::BaseGameObject *arrow = GameSystems::ObjectFactory::getInstance().createProjectile(getComposition(), getComposition()->getX(),
-		//	getComposition()->getY(), /*this->getDuration()*/ 1.0f, glm::normalize(direction), GameSystems::ObjectFactory::SOCCER_BALL);
-		/*GameObjects::BaseGameObject *arrow = GameSystems::ObjectFactory::getInstance().createProjectile(createProjectile(getComposition(), ATTACK1, 1.0f, glm::normalize(direction)), getComposition()->getX(),
-			getComposition()->getY(), 1.0f, glm::normalize(direction), "./assets/sprite/bat.png", false);*/
 
 		createProjectile(getComposition(), GameObjects::BAT, 1.0f, glm::normalize(direction), "./assets/sprite/bat.png");
 		this->composition->sendMessage(new GameMessage::Message(GameMessage::BASEBALL_SHOOT));
@@ -101,7 +91,6 @@ namespace GameComponents {
 		GameComponents::TimerComponent *timer = reinterpret_cast<GameComponents::TimerComponent*>(getComposition()->getComponent(GameComponents::MECHANIC));
 		if (!timer)
 			return;
-		//assert(timer != NULL);
 		timer->stopTimer();
 		this->composition->setInvicible(false);
 		this->composition->setType(GameObjects::PLAYER);
@@ -111,7 +100,7 @@ namespace GameComponents {
 
 	GameObjects::BaseGameObject *BaseballAttack::createProjectile(GameObjects::BaseGameObject *shooter, GameObjects::ProjectileType const type, float base_force, glm::vec2 direction, std::string spriteStr)
 	{
-		GameObjects::BaseGameObject *projectile = NULL;/*GameSystems::ObjectFactory::getInstance().getUsableProjectile(type);*/
+		GameObjects::BaseGameObject *projectile = NULL;
 		GameComponents::BodyComponent *body = NULL;
 		GameComponents::SpriteComponent *sprite = NULL;
 		GameComponents::TimerComponent *timer = NULL;

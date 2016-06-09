@@ -62,7 +62,6 @@ namespace GameComponents {
 		int i;
 		int lineAmount = 100; //# of triangles used to draw circle
 
-							  //GLfloat radius = 0.8f; //radius
 		GLfloat twicePi = 2.0f * glm::pi<float>();
 
 		glBegin(GL_LINE_LOOP);

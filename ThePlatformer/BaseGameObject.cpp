@@ -255,10 +255,6 @@ namespace GameObjects {
 
 	void BaseGameObject::setX(int x)
 	{
-		/*
-		if (x < 0) this->x = 1;
-		else if (x + this->getWidth() >= 1280) this->x = 1280 - this->getWidth();
-		else this->x = x;*/
 		this->x = x;
 
 	}

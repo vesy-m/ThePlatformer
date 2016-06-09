@@ -21,7 +21,6 @@ namespace GameEngine {
 	double TimeManager::GetCurrentTimer(void) {
 		auto now = std::chrono::system_clock::now();
 		std::chrono::duration<double> end = now - this->m_start;
-		//std::chrono::milliseconds ms = std::chrono::duration_cast<std::chrono::milliseconds>(now - this->m_start);
 		return (end.count() * 1000);
 	}
 

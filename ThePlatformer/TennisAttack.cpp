@@ -71,10 +71,6 @@ namespace GameComponents
 		if (sprite->revertX) direction = glm::vec2((-100 + centerX) - centerX, (-70 + centerY) - centerY);
 		else direction = glm::vec2((100 + centerX) - centerX, (-70 + centerY) - centerY);
 
-		//glm::vec2 direction = glm::vec2(100.0, 100.0);
-		//if (sprite->revertX) direction = glm::vec2((-100 + centerX) - centerX, (centerY) - centerY);
-		//else direction = glm::vec2((100 + centerX) - centerX, (centerY) - centerY);
-
 		createProjectile(getComposition(), GameObjects::TENNIS_BREAK, 1.0f, glm::normalize(direction), "./assets/sprite/tennisballRed.png");
 		this->composition->sendMessage(new GameMessage::Message(GameMessage::BASEBALL_SHOOT));
 	}

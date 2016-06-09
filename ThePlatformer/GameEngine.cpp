@@ -27,26 +27,20 @@ namespace GameEngine {
 	}
 
 	void Core::MainLoop(void) {
-		//long long loopAverTime = 0;
-		//long long list[4];
 		int i = 0;
 		int nbLoop = 0;
 		int framNb = 0;
 		while (Core::gameLoop) {
-			//auto oneLoop = std::chrono::high_resolution_clock::now();
 			std::list<GameSystems::BaseSystem *> listSystems = GameSystems::ObjectFactory::getInstance().getSystems();
 			std::list<GameObjects::BaseGameObject * > listCurrentObjects = GameSystems::ObjectFactory::getInstance().getCurrentObjects();
 			this->m_manager->StartTimer();
 			i = 0;
 			for each (GameSystems::BaseSystem *system in listSystems) {
-				//auto sysDuration = std::chrono::high_resolution_clock::now(); 
 				if (system->Update(this->m_manager->GetLastTime(), listCurrentObjects) == 1) return;
-				//list[i] = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now() - sysDuration).count();
 				i++;
 			}
 			GameSystems::ObjectFactory::getInstance().checkWinCondition();
 			GameSystems::ObjectFactory::getInstance().cleanupObjects();
-			//loopAverTime = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now() - oneLoop).count();
 			this->m_manager->WaitFPS(FRAME_PER_SECOND);
 			if (framNb == 2) {
 				Sleep(1000);
@@ -59,29 +53,6 @@ namespace GameEngine {
 				framNb = 1;
 				GameSystems::ObjectFactory::getInstance().waitAMoment = false;
 			}
-			//if (nbLoop >= 60) {
-			/*if (loopAverTime > 20000) {
-				std::cout << "---------------------------------------------------" << std::endl;
-				//std::cout << "Loop Time : " << std::setw(13) << loopAverTime / nbLoop << std::endl;
-				std::cout << "Loop Time : " << std::setw(13) << loopAverTime << std::endl;
-				loopAverTime = 0;
-				long long add = 0;
-				for (i = 0; i < 4; i++)
-				{
-					//std::cout << "system : " << std::setw(16) << list[i] / nbLoop << std::endl;
-					//add += list[i] / nbLoop;
-					std::cout << "system : " << std::setw(16) << list[i] << std::endl;
-					add += list[i];
-					list[i] = 0;
-				}
-				std::cout << "Addition Sys : " << std::setw(10) << add << std::endl;
-				std::cout << "Sprite :       " << std::setw(10) << GameTools::debugManager::getInstance().time1 << std::endl;
-				std::cout << "debug  :       " << std::setw(10) << GameTools::debugManager::getInstance().time2 << std::endl;
-				std::cout << "text   :       " << std::setw(10) << GameTools::debugManager::getInstance().time3 << std::endl;
-				std::cout << "time 1 :       " << std::setw(10) << GameTools::debugManager::getInstance().time4 << std::endl;
-				nbLoop = -1;
-			}
-			nbLoop++;*/
 		}
 	}
 

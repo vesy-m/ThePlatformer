@@ -35,12 +35,8 @@ namespace GameComponents {
 		switch (message->id)
 		{
 		case GameMessage::MOUSE_MOVE:
-			//std::cout << "------------------------" << std::endl;
-			//std::cout << ((GameMessage::MouseMessageMove*)message)->positionX << std::endl;
 			newPosX = ((GameMessage::MouseMessageMove*)message)->positionX / this->caseSize;
-			//std::cout << newPosX << std::endl;
 			newPosX *= this->caseSize;
-			//std::cout << newPosX << std::endl;
 			newPosY = ((GameMessage::MouseMessageMove*)message)->positionY / this->caseSize;
 			newPosY *= this->caseSize;
 			this->composition->setX(newPosX);

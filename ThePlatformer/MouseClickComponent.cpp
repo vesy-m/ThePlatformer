@@ -32,41 +32,6 @@ namespace GameComponents {
 
 	void MouseClickComponent::UpdateInputState(sf::Event event, double dt)
 	{
-		/*
-		if (event.type == sf::Event::MouseButtonReleased)
-		{
-			if (event.mouseButton.button == sf::Mouse::Left)
-			{
-				GLint iViewport[4];
-				glGetIntegerv(GL_VIEWPORT, iViewport);
-				int screenWidth = iViewport[0] + iViewport[2];
-				int screenHeight = iViewport[1] + iViewport[3];
-				int resolutionWidth = GameSystems::GraphicsSystem::Camera::getInstance().resolutionWidth;
-				int resolutionHeight = GameSystems::GraphicsSystem::Camera::getInstance().resolutionHeight;
-				int mousex = event.mouseButton.x * resolutionWidth / screenWidth;
-				int mousey = event.mouseButton.y * resolutionHeight / screenHeight;
-
-				if (this->composition->getX() < mousex && mousex < this->composition->getX() + this->composition->getWidth() &&
-					this->composition->getY() < mousey && mousey < this->composition->getY() + this->composition->getHeight()) {
-					this->composition->sendMessage(new GameMessage::Message(GameMessage::CLICKON));
-				}
-			}
-		}
-		if (event.type == sf::Event::MouseMoved) {
-			GLint iViewport[4];
-			glGetIntegerv(GL_VIEWPORT, iViewport);
-			int screenWidth = iViewport[0] + iViewport[2];
-			int screenHeight = iViewport[1] + iViewport[3];
-			int resolutionWidth = GameSystems::GraphicsSystem::Camera::getInstance().resolutionWidth;
-			int resolutionHeight = GameSystems::GraphicsSystem::Camera::getInstance().resolutionHeight;
-			int mousex = event.mouseMove.x * resolutionWidth / screenWidth;
-			int mousey = event.mouseMove.y * resolutionHeight / screenHeight;
-
-			if (this->composition->getX() < mousex && mousex < this->composition->getX() + this->composition->getWidth() &&
-				this->composition->getY() < mousey && mousey < this->composition->getY() + this->composition->getHeight()) {
-				GameSystems::ObjectFactory::getInstance().changeSelectedButtonMenu(this->composition);
-			}
-		}*/
 		if (this->listeningMode == 1) {
 			if (this->idPadSelected == -1) {
 				// while no pad selected
@@ -95,7 +60,6 @@ namespace GameComponents {
 			else if (event.joystickButton.button == 7) { idMessage = GameMessage::START_MENU; }
 			else if (event.joystickButton.button == 1) { idMessage = GameMessage::B_MENU; }
 		} else if (event.type == sf::Event::JoystickMoved) {
-			//std::cout << event.joystickMove.axis << " " << event.joystickMove.position << std::endl;
 			if (event.joystickMove.axis == 5 || event.joystickMove.axis == 0 || event.joystickMove.axis == 6)
 			{
 				if (event.joystickMove.position == -100) { idMessage = GameMessage::LEFTMENU; }
