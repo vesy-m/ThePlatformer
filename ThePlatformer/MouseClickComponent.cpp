@@ -95,17 +95,19 @@ namespace GameComponents {
 			else if (event.joystickButton.button == 7) { idMessage = GameMessage::START_MENU; }
 			else if (event.joystickButton.button == 1) { idMessage = GameMessage::B_MENU; }
 		} else if (event.type == sf::Event::JoystickMoved) {
-			if (event.joystickMove.axis == 6 || event.joystickMove.axis == 0 || event.joystickMove.axis == 4)
+			std::cout << event.joystickMove.axis << " " << event.joystickMove.position << std::endl;
+			if (event.joystickMove.axis == 5 || event.joystickMove.axis == 0 || event.joystickMove.axis == 6)
 			{
 				if (event.joystickMove.position == -100) { idMessage = GameMessage::LEFTMENU; }
 				else if (event.joystickMove.position == 100) { idMessage = GameMessage::RIGHTMENU; }
 			}
-			else if (event.joystickMove.axis == 7 || event.joystickMove.axis == 1 || event.joystickMove.axis == 3)
+			else if (event.joystickMove.axis == 4 || event.joystickMove.axis == 1 || event.joystickMove.axis == 7)
 			{
+				//dpad up down is inverted
 				int multiplicator = 1;
-				if (event.joystickMove.axis == 1 || event.joystickMove.axis == 3) multiplicator = -1;
-				if (event.joystickMove.position == 100 * multiplicator) { idMessage = GameMessage::UPMENU; }
-				else if (event.joystickMove.position == -100 * multiplicator) { idMessage = GameMessage::DOWNMENU; }
+				if (event.joystickMove.axis == 7) multiplicator = -1;
+				if (event.joystickMove.position == -100 * multiplicator) { idMessage = GameMessage::UPMENU; }
+				else if (event.joystickMove.position == 100 * multiplicator) { idMessage = GameMessage::DOWNMENU; }
 			}
 		} else if (event.type == sf::Event::KeyReleased){
 			if (event.key.code == sf::Keyboard::Return) { idMessage = GameMessage::ENTERMENU; } 
