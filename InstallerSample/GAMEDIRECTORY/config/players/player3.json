@@ -14,7 +14,7 @@
   "type": 1,
   "fire_ball" : "tennis",
   "sfx": "./config/sound/Desc-SFX.json",
-  "attack_1": 170,
+  "attack_1": 210,
   "attack_2": 400,
   "attack_3": 2000,
   "autoplay": true

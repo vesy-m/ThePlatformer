@@ -14,8 +14,8 @@
   "type": 1,
   "fire_ball" : "baseball",
   "sfx": "./config/sound/Desc-SFX.json",
-  "attack_1": 200,
+  "attack_1": 210,
   "attack_2": 500,
-  "attack_3": 1000,
+  "attack_3": 1500,
   "autoplay": true
 }

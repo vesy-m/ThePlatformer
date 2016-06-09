@@ -456,7 +456,7 @@ namespace GameSystems {
 			this->LoadMenuFileAsCurrent("./config/menus/choose_level_menu.json");
 		else if (this->mapPlayersController.size() == 1 && this->nbPlayerReady == this->mapPlayersController.size()) {
 			this->orderPlayerController.push_back(7);
-			this->mapPlayersController[7] = "./config/players/player3.json";
+			this->mapPlayersController[7] = "./config/players/player1.json";
 			this->orderPlayerController.push_back(6);
 			this->mapPlayersController[6] = "./config/players/player2.json";
 			this->LoadMenuFileAsCurrent("./config/menus/choose_level_menu.json");
