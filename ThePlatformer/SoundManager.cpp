@@ -55,7 +55,7 @@ namespace GameTools
 		std::map<std::string, CSound>::iterator it;
 
 		for (it = _sound.begin(); it != _sound.end(); ++it)
-			it->second.setVolume(it->second.getVolume(), false);
+			it->second.setVolume(5, false);
 	}
 	void CSoundManager::muteMusic(std::string const ambiance, std::string const win)
 	{
@@ -75,7 +75,7 @@ namespace GameTools
 		for (it = _sound.begin(); it != _sound.end(); ++it)
 		{
 			if (it->first == ambiance)
-				it->second.setVolume(it->second.getVolume(), false);
+				it->second.setVolume(5, false);
 		}
 	}
 	

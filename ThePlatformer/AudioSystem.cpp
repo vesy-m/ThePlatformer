@@ -184,14 +184,12 @@ namespace GameSystems {
 		}
 		if (_muteAll)
 			GameTools::CSoundManager::getInstance().muteAll();
-		else if (!_muteAll)
+		else if (!_muteAll && !_pauseMenu && _isMuteAll)
 			GameTools::CSoundManager::getInstance().unmuteAll();
 		if (_muteAmbiance)
 			GameTools::CSoundManager::getInstance().muteMusic(_sound["ambiance"]->getFileName(), _sound["victory"]->getFileName());
-		else if (!_muteAmbiance && !_muteAll)
+		else if (!_muteAmbiance && !_muteAll && !_pauseMenu && _isMuteAmbiance)
 			GameTools::CSoundManager::getInstance().unmuteMusic(_sound["ambiance"]->getFileName(), _sound["victory"]->getFileName());
-		_isMuteAmbiance = false;
-		_isMuteAll = false;
 	}
 
 	void AudioSystem::SendAMessage() {}
